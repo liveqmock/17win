@@ -41,14 +41,15 @@
 								<TD height=32 align="right">
 									<span class="yell_font">欢迎您！</span>
 
-									<A href="login.asp" target="_top">登陆</A> |
-									<A href="register.asp" target="_top"> 注册</A> |
+									<A href="system/login.jsp" target="_top">登陆</A> |
+									<A href="system/register.jsp" target="_top"> 注册</A> |
 
 									<A href="user/index.jsp" target="_top"> 个人中心 </A>|
 									<A href="#" title=添加到收藏夹
 										onclick="window.external.addFavorite('http://www.2000w.net','淘宝刷信誉')">收藏本站</A>
-									|
+									<!-- xgj|
 									<A href="help/link.asp" target="_top">广告服务</A>
+									 -->
 								</TD>
 							</TR>
 							<TR>

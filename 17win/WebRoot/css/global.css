@@ -1,0 +1,394 @@
+TEXTAREA {
+	FONT-SIZE: 100%; FONT-FAMILY: inherit
+}
+SELECT {
+	FONT-SIZE: 100%; FONT-FAMILY: inherit
+}
+BODY {
+	FONT-SIZE: 12px; COLOR: #686868; FONT-FAMILY: Arial
+}
+A {
+	COLOR: #0142fe; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #0142fe; TEXT-DECORATION: underline
+}
+.clearing {
+	CLEAR: both; DISPLAY: block; FONT-SIZE: 0px; VISIBILITY: hidden; OVERFLOW: hidden; LINE-HEIGHT: 0; HEIGHT: 0px
+}
+.wrap_body {
+	MARGIN: 10px auto; WIDTH: 950px
+}
+
+.marginb10 {
+	MARGIN-BOTTOM: 10px
+}
+.main_right {
+	FLOAT: left;
+	WIDTH: 240px
+}
+.tbk_container {
+	PADDING-BOTTOM: 20px; MARGIN: auto; OVERFLOW: hidden; WIDTH: 950px; BACKGROUND-COLOR: #eff8ff; TEXT-ALIGN: left
+}
+.tbk_nav {
+	BACKGROUND-IMAGE: url(../img/tbk_nav_bg2.gif); BACKGROUND-REPEAT: no-repeat; HEIGHT: 37px
+}
+.tbk_nav UL LI {
+	BACKGROUND-IMAGE: url(../img/tbk_nav_bg2.gif); BACKGROUND-REPEAT: no-repeat; HEIGHT: 37px
+}
+.tbk_nav UL LI A {
+	BACKGROUND-IMAGE: url(../img/tbk_nav_bg2.gif); BACKGROUND-REPEAT: no-repeat; HEIGHT: 37px
+}
+.tbk_nav UL LI A SPAN {
+	BACKGROUND-IMAGE: url(../img/tbk_nav_bg2.gif);
+	BACKGROUND-REPEAT: no-repeat;
+	HEIGHT: 37px
+}
+.tbk_nav UL LI A:hover {
+	BACKGROUND-IMAGE: url(../img/tbk_nav_bg2.gif); BACKGROUND-REPEAT: no-repeat; HEIGHT: 37px
+}
+.tbk_nav {
+	BACKGROUND-POSITION: 0px 0px; BACKGROUND-REPEAT: repeat-x
+}
+.tbk_nav UL {
+	MARGIN: 0px auto; WIDTH: 950px
+}
+.tbk_nav UL LI {
+	PADDING-RIGHT: 5px; BACKGROUND-POSITION: right -50px; FLOAT: left; LINE-HEIGHT: 37px; POSITION: relative
+}
+.tbk_nav UL LI.firstnavli {
+	WIDTH: 115px
+}
+.tbk_nav UL LI.tbk_nav_last {
+	BACKGROUND: none transparent scroll repeat 0% 0%
+}
+.tbk_nav UL LI A {
+	DISPLAY: block; FLOAT: left
+}
+.tbk_nav UL LI A SPAN {
+	PADDING-RIGHT: 20px; DISPLAY: block; PADDING-LEFT: 20px; FONT-WEIGHT: bold; FONT-SIZE: 14px; FLOAT: left; PADDING-BOTTOM: 0px; CURSOR: pointer; COLOR: #fff; LINE-HEIGHT: 37px; PADDING-TOP: 0px; HEIGHT: 37px
+}
+.tbk_nav UL LI.cur A {
+	BACKGROUND-POSITION: 0px -134px; PADDING-LEFT: 5px; CURSOR: pointer; TEXT-DECORATION: none
+}
+.tbk_nav UL LI A:hover {
+	BACKGROUND-POSITION: 0px -134px; PADDING-LEFT: 5px; CURSOR: pointer; TEXT-DECORATION: none
+}
+.tbk_nav UL LI.cur A SPAN {
+	PADDING-RIGHT: 20px; BACKGROUND-POSITION: right -134px; PADDING-LEFT: 15px; PADDING-BOTTOM: 0px; CURSOR: pointer; COLOR: #771000; PADDING-TOP: 0px
+}
+.tbk_nav UL LI A:hover SPAN {
+	PADDING-RIGHT: 20px; BACKGROUND-POSITION: right -134px; PADDING-LEFT: 15px; PADDING-BOTTOM: 0px; CURSOR: pointer; COLOR: #771000; PADDING-TOP: 0px
+}
+.tbk_nav UL LI.cur A {
+	BACKGROUND-POSITION: 0px -90px
+}
+.tbk_nav UL LI.cur A SPAN {
+	BACKGROUND-POSITION: right -90px
+}
+.tbk_new {
+	Z-INDEX: 20; RIGHT: -3px; BACKGROUND: url(../img/icon/new.gif) no-repeat; WIDTH: 18px; POSITION: absolute; TOP: 0px; HEIGHT: 22px
+}
+#header {
+	MARGIN: auto;
+	WIDTH: 916px;
+	HEIGHT: 58px
+}
+#header .logo_tk {
+	BACKGROUND: #fff; FLOAT: left; WIDTH: 300px; HEIGHT: 58px
+}
+#header .logo_tk A {
+	DISPLAY: block;
+	BACKGROUND: url() no-repeat center 50%;
+	MARGIN: 0px 0px 0px 1px;
+	WIDTH: 291px;
+	HEIGHT: 42px
+}
+#header .logo_tk A SPAN {
+	DISPLAY: none
+}
+DIV#navigation_tk {
+	BACKGROUND: url(../img/taoke_bg.png)
+}
+DIV#navigation_tk .lc {
+	BACKGROUND: url(../img/taoke_bg.png)
+}
+DIV#navigation_tk .rc {
+	BACKGROUND: url(../img/taoke_bg.png)
+}
+DIV#navigation_tk .mc LI.current A {
+	BACKGROUND: url(../img/taoke_bg.png)
+}
+DIV#navigation_tk .mc LI.current A SPAN {
+	BACKGROUND: url(../img/taoke_bg.png)
+}
+DIV.filters-taoke .lc .bottom-batch {
+	BACKGROUND: url(../img/taoke_bg.png)
+}
+DIV.filters-taoke .lc .top-batch {
+	BACKGROUND: url(../img/taoke_bg.png)
+}
+DIV#tk_nav UL LI A:hover {
+	BACKGROUND: url(../img/taoke_sale_bg.png)
+}
+DIV#tk_nav UL LI A:hover SPAN {
+	BACKGROUND: url(../img/taoke_sale_bg.png)
+}
+DIV#tk_nav {
+	BACKGROUND: url(../img/taoke_sale_bg.png)
+}
+DIV#tk_nav LI.current A {
+	BACKGROUND: url(../img/taoke_sale_bg.png)
+}
+DIV#tk_nav LI.current A SPAN {
+	BACKGROUND: url(../img/taoke_sale_bg.png)
+}
+DIV#navigation_tk .mc LI {
+	BACKGROUND: url(../img/taoke_sale_bg.png)
+}
+DIV#navigation_tk .mc LI A:hover {
+	BACKGROUND: url(../img/taoke_sale_bg.png)
+}
+DIV#navigation_tk .mc LI A:hover SPAN {
+	BACKGROUND: url(../img/taoke_sale_bg.png)
+}
+.tk-small-button {
+	BACKGROUND: url(../img/taoke_sale_bg.png)
+}
+.tk-small-button1 {
+	BACKGROUND: url(../img/taoke_sale_bg.png)
+}
+#quick_links {
+	MARGIN: 0px 0px 0px 43px; BORDER-BOTTOM: #e0e0e0 1px solid; HEIGHT: 22px
+}
+#quick_links UL {
+	FLOAT: right
+}
+#quick_links LI {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 7px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 4px 0px 0px; BORDER-LEFT: #e0e0e0 1px solid; LINE-HEIGHT: 16px; PADDING-TOP: 0px; FONT-FAMILY: simsun
+}
+#quick_links LI A:link {
+	COLOR: #0245dc
+}
+#quick_links LI A:visited {
+	COLOR: #0245dc
+}
+#quick_links LI A:hover {
+	COLOR: #ff5500
+}
+#quick_links LI.myalimama {
+	MARGIN: 3px 0px 0px
+}
+#quick_links LI.myalimama A {
+	DISPLAY: block; FLOAT: left; CURSOR: pointer; BACKGROUND-REPEAT: no-repeat
+}
+#quick_links LI.myalimama A SPAN {
+	DISPLAY: block; FLOAT: left; CURSOR: pointer; BACKGROUND-REPEAT: no-repeat
+}
+#quick_links LI.myalimama A SPAN I {
+	DISPLAY: block; FLOAT: left; CURSOR: pointer; BACKGROUND-REPEAT: no-repeat
+}
+#top_nav_bar LI A {
+	DISPLAY: block; FLOAT: left; CURSOR: pointer; BACKGROUND-REPEAT: no-repeat
+}
+#top_nav_bar LI A SPAN {
+	DISPLAY: block; FLOAT: left; CURSOR: pointer; BACKGROUND-REPEAT: no-repeat
+}
+#quick_links LI.myalimama A SPAN I {
+	BACKGROUND: url(../img/bag.gif) no-repeat left center; MARGIN: 0px 2px 0px 0px; WIDTH: 16px; HEIGHT: 16px
+}
+#quick_links LI.myalimama A {
+	PADDING-RIGHT: 4px; BACKGROUND-POSITION: right -69px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px
+}
+#quick_links LI.myalimama A SPAN {
+	PADDING-RIGHT: 4px; BACKGROUND-POSITION: left -69px; PADDING-LEFT: 8px; PADDING-BOTTOM: 0px; LINE-HEIGHT: 17px; PADDING-TOP: 0px; HEIGHT: 17px
+}
+#quick_links LI.today {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; COLOR: #666; BORDER-BOTTOM: 0px
+}
+#quick_links LI.member {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; COLOR: #666; BORDER-BOTTOM: 0px
+}
+#quick_links LI.myalimama {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; COLOR: #666; BORDER-BOTTOM: 0px
+}
+#top_nav_bar_quick LI A {
+	BACKGROUND-IMAGE: url(../img/new_header_bg2.gif)
+}
+#top_nav_bar_quick LI A SPAN {
+	BACKGROUND-IMAGE: url(../img/new_header_bg2.gif)
+}
+#top_nav_bar_quick LI.down I.downi {
+	BACKGROUND-IMAGE: url(../img/new_header_bg2.gif)
+}
+#top_nav_bar_quick .down_div .down_bl {
+	BACKGROUND-IMAGE: url(../img/new_header_bg2.gif)
+}
+#top_nav_bar_quick .down_div .down_br {
+	BACKGROUND-IMAGE: url(../img/new_header_bg2.gif)
+}
+#top_nav_bar_quick .down_div .down_up {
+	BACKGROUND-IMAGE: url(../img/new_header_bg2.gif)
+}
+#top_nav_bar_quick LI.new I.newi {
+	BACKGROUND-IMAGE: url(../img/new_header_bg2.gif)
+}
+#top_nav_bar_quick UL {
+	FONT-SIZE: 12px; FLOAT: right; MARGIN: 8px 0px -11px 4px; COLOR: #4b6486
+}
+#top_nav_bar_quick LI {
+	FLOAT: left; MARGIN: 0px 2px; CURSOR: pointer
+}
+#top_nav_bar_quick LI A {
+	PADDING-RIGHT: 5px; BACKGROUND-POSITION: right -240px; PADDING-LEFT: 0px; FLOAT: left; PADDING-BOTTOM: 0px; COLOR: #4b6486; PADDING-TOP: 0px
+}
+#top_nav_bar_quick LI A:hover {
+	BACKGROUND-POSITION: right -280px; COLOR: #3164aa; TEXT-DECORATION: none
+}
+#top_nav_bar_quick LI A SPAN {
+	PADDING-RIGHT: 5px; BACKGROUND-POSITION: left -240px; DISPLAY: block; PADDING-LEFT: 10px; FLOAT: left; PADDING-BOTTOM: 0px; CURSOR: pointer; COLOR: #4b6486; LINE-HEIGHT: 27px; PADDING-TOP: 0px; HEIGHT: 27px
+}
+#top_nav_bar_quick LI A:hover SPAN {
+	BACKGROUND-POSITION: left -280px; COLOR: #3164aa
+}
+#top_nav_bar_quick LI.down {
+	POSITION: relative
+}
+#top_nav_bar_quick LI.down I.downi {
+	BACKGROUND-POSITION: -170px -210px; MARGIN-TOP: 8px; DISPLAY: block; FLOAT: left; MARGIN-LEFT: -2px; WIDTH: 11px; HEIGHT: 11px
+}
+#top_nav_bar_quick .down_div {
+	PADDING-RIGHT: 0px; DISPLAY: none; PADDING-LEFT: 0px; Z-INDEX: 10; LEFT: 0px; PADDING-BOTTOM: 0px; WIDTH: 120px; PADDING-TOP: 0px; POSITION: absolute; TOP: 21px
+}
+#top_nav_bar_quick .down_div .down_body {
+	BORDER-RIGHT: #b4c5d6 1px solid; BORDER-TOP: #b4c5d6 1px solid; BORDER-LEFT: #b4c5d6 1px solid; BORDER-BOTTOM: #b4c5d6 0px solid; BACKGROUND-COLOR: #fff
+}
+#top_nav_bar_quick .down_div .down_foot {
+	MARGIN: 0px 5px; OVERFLOW: hidden; LINE-HEIGHT: 0; BORDER-BOTTOM: #b4c5d6 1px solid; HEIGHT: 4px; BACKGROUND-COLOR: #fff
+}
+#top_nav_bar_quick .down_div .down_up {
+	BACKGROUND-POSITION: -170px -200px; DISPLAY: block; LEFT: 62px; FLOAT: left; OVERFLOW: hidden; WIDTH: 7px; POSITION: absolute; TOP: -3px; HEIGHT: 4px
+}
+#top_nav_bar_quick .down_div .down_bl {
+	BACKGROUND-POSITION: -150px -200px; DISPLAY: block; LEFT: -5px; FLOAT: left; OVERFLOW: hidden; WIDTH: 5px; BOTTOM: 0px; LINE-HEIGHT: 0; POSITION: relative; HEIGHT: 5px
+}
+#top_nav_bar_quick .down_div .down_br {
+	BACKGROUND-POSITION: -150px -210px; DISPLAY: block; RIGHT: -5px; FLOAT: right; WIDTH: 5px; BOTTOM: 0px; LINE-HEIGHT: 0; POSITION: relative; HEIGHT: 5px
+}
+#top_nav_bar_quick .down_div UL {
+	FLOAT: none; MARGIN: 0px 3px
+}
+#top_nav_bar_quick .down_div LI {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 2px; FLOAT: none; PADDING-BOTTOM: 2px; PADDING-TOP: 4px
+}
+#top_nav_bar_quick .down_div LI A {
+	PADDING-RIGHT: 2px; FONT-SIZE: 12px; FLOAT: none; BACKGROUND-IMAGE: none
+}
+#top_nav_bar_quick .down_div LI.downfirst {
+	BORDER-TOP-WIDTH: 0px
+}
+#footer {
+	PADDING-RIGHT: 0pt; PADDING-LEFT: 0pt; BACKGROUND: none transparent scroll repeat 0% 0%; FILTER: progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='scale', src="../img/1199944129517.png"); PADDING-BOTTOM: 0pt; MARGIN: 16px auto; WIDTH: 100%; PADDING-TOP: 1px; TEXT-ALIGN: center
+}
+#footer UL.bottom-nav {
+	DISPLAY: block; MARGIN: 15px auto 0pt; WIDTH: 370px; HEIGHT: 20px
+}
+#footer UL.ali-family {
+	DISPLAY: block; MARGIN: 15px auto 0pt; WIDTH: 370px; HEIGHT: 20px
+}
+#footer UL.bottom-nav {
+	MARGIN: 25px auto 0pt
+}
+#footer UL.ali-family {
+	MARGIN: 5px auto 10px; WIDTH: 740px
+}
+#footer UL.bottom-nav LI {
+	DISPLAY: block; FLOAT: left; MARGIN: 0pt 7px
+}
+#footer UL.ali-family LI {
+	DISPLAY: block; FLOAT: left; MARGIN: 0pt 7px
+}
+#footer A:link {
+	TEXT-DECORATION: none
+}
+#footer A:visited {
+	TEXT-DECORATION: none
+}
+#footer A:hover {
+	TEXT-DECORATION: underline
+}
+#ServerNum {
+	COLOR: #fff
+}
+
+
+
+A {
+	COLOR: #003278; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #ff6600; TEXT-DECORATION: underline
+}
+.cf {
+	DISPLAY: block; ZOOM: 1
+}
+.cf:unknown {
+	CLEAR: both; DISPLAY: block; VISIBILITY: hidden; HEIGHT: 0px; content: "."
+}
+.top {
+	MARGIN: 0px auto; WIDTH: 952px; HEIGHT: 48px
+}
+.top H1 {
+	FLOAT: left
+}
+.top H2 {
+	FLOAT: left
+}
+.top SPAN {
+	FLOAT: left
+}
+.top H1 {
+	BORDER-RIGHT: #ededed 1px solid; WIDTH: 188px
+}
+.top .cxtlogo {
+	PADDING-LEFT: 8px; BORDER-LEFT: #c8c8c8 1px solid; MARGIN-RIGHT: 8px
+}
+.top #cxt-memo {
+	DISPLAY: block; PADDING-TOP: 24px
+}
+.top .phone {
+	FLOAT: right; WIDTH: 234px; COLOR: #5b5b5b
+}
+.top .phone .desc {
+	FLOAT: right
+}
+.top .phone .phonenum {
+	DISPLAY: block; BACKGROUND: url(../img/serv_index_nore.png) #fff -420px 0px; WIDTH: 234px; TEXT-INDENT: -2048px; HEIGHT: 36px
+}
+.topnav {
+	MARGIN-TOP: 8px; BACKGROUND: url(../img/topnav_bg.gif) repeat-x; HEIGHT: 38px
+}
+.topul {
+	PADDING-LEFT: 38px; MARGIN: auto; WIDTH: 950px
+}
+.topul LI {
+	MARGIN-TOP: 4px; PADDING-LEFT: 4px; FONT-WEIGHT: bold; FONT-SIZE: 14px; BACKGROUND: url(../img/tl.jpg) no-repeat; FLOAT: left; WIDTH: 98px; LINE-HEIGHT: 34px; HEIGHT: 34px; TEXT-ALIGN: center
+}
+.topul LI A {
+	DISPLAY: block
+}
+.topul LI SPAN {
+	DISPLAY: block
+}
+.topul LI.c SPAN {
+	BACKGROUND: url(../img/tc.gif) no-repeat
+}
+.topul LI.n A {
+	BACKGROUND: url(../img/tn.gif) no-repeat; COLOR: #fff; TEXT-DECORATION: none
+}
+.topul LI.n A:hover {
+	BACKGROUND: url(../img/tc.gif) no-repeat; COLOR: #000
+}
+ li {
+list-style-type:none
+}

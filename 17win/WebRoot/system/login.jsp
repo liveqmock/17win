@@ -130,7 +130,7 @@
 										<BR>
 										<IMG src="images/jieducm_b0.gif">
 										<TT> 第一步：<b><A
-												href="http://www.2000w.net/register.asp">注册</A> </b>为本站会员，登陆系统。</TT>
+												href="system/register.jsp">注册</A> </b>为本站会员，登陆系统。</TT>
 										<BR>
 										<IMG src="images/jieducm_b1.gif">
 										<TT>第二步：到刷钻中心接任务,接一个任务系统会自动为你增加发布点。</TT>

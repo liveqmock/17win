@@ -9,8 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "TB_PROVINCE")
+
 public class ProvinceEntity extends BaseEntity {
 	// 名字
 	@Column(name = "NAME_", length = 20, nullable = false)

@@ -1,16 +1,14 @@
 package net.win.entity;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 /**
  * 用户
  * 
@@ -44,9 +42,6 @@ public class UserEntity extends BaseEntity {
 	// 手机
 	@Column(name = "TELPHONE_", unique = true, columnDefinition = "CHAR(11)", nullable = false)
 	private String telephone;
-	// 性别
-	@Column(name = "SEX_", columnDefinition = "CHAR(1)", nullable = false)
-	private String sex;
 	// 可以兑换发布点的积分
 	@Column(name = "CONVERT_SCORE_", nullable = false)
 	private Integer convertScore;
@@ -62,227 +57,240 @@ public class UserEntity extends BaseEntity {
 	// 当前级别(一心，还是一钻)
 	@Column(name = "LEVEL_", nullable = false)
 	private String level;
-	// 是否激活
-	@Column(name = "ACTIVATE_", nullable = false)
-	private Boolean activate;
+	// 状态(0，没激活，1激活，2被冻结,3xxxxx)
+	@Column(name = "STATUS_", nullable = false)
+	private Boolean status;
 	/**
 	 * 可选选项
 	 */
-	// 昵称
-	@Column(name = "NICKNAME_", length = 20)
-	private String nickname;
-	// 店铺地址
-	@Column(name = "SHOP_", length = 50)
-	private String shop;
 	// 旺旺
 	@Column(name = "WW_", length = 24)
 	private String ww;
-	// 密码问题
-	@Column(name = "PW_QUESTION_", length = 20)
-	private String pwQuestion;
-	// 密码问题
-	@Column(name = "PW_ANSWER_", length = 20)
-	private String pwAnswer;
-	// // 省
-	// // 市
-	// // 县
-	// // 地址（收货地址）
-	// private String address;
+	// 省
+	// 城市
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "RPOVINCE_ID_")
+	private ProvinceEntity province;
+	// 市
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "CITY_ID_")
+	private CityEntity city;
+	// 县
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "PREFECTURES_ID_")
+	private PrefectureEntity prefecture;
+
+	// 淘宝信息
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "TAOBAOUSER_ID_")
+	private TaobaoUserEntity taobaoUser;
+
+	// 拍拍信息
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "PAIPAI_ID_")
+	private PaipaiUserEntity paipaiUser;
+
+	// 有啊信息
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "YOUAUSER_ID_")
+	private YouaUserEntity youaUser;
+
 	/**
 	 * 关联关系
 	 * 
 	 * @return
 	 */
-	// 角色
-	private RoleEntity role = new RoleEntity();
-	// 介绍人
-	private UserEntity referee;
-	// 推广
-	private Set<UserEntity> promoteUsers = new HashSet<UserEntity>(0);
-	// 信誉任务模板
-	private Set<CreditTaskTemplateEntity> creditTaskTemplates = new HashSet<CreditTaskTemplateEntity>(
-			0);
-	// 流量任务模板
-	private Set<FlowTaskTemplateEntity> flowTaskTemplates = new HashSet<FlowTaskTemplateEntity>(
-			0);
-	// 收藏任务模板
-	private Set<CollectTaskTemplateEntity> collectTaskTemplates = new HashSet<CollectTaskTemplateEntity>(
-			0);
-	// 真实地址模板
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "TB_USER_RECEIVEREAL_TP", joinColumns = {@JoinColumn(name = "USER_ID_", nullable = false)}, inverseJoinColumns = {@JoinColumn(name = "RECEIVEREALINFO_ID_", nullable = false)})
-	private Set<ReceiveRealInfoEntity> receiveRealInfos = new HashSet<ReceiveRealInfoEntity>(
-			0);
-	// 虚拟地址模板
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "TB_USER_RECEIVEVIRTUAL_TP", joinColumns = {@JoinColumn(name = "USER_ID_", nullable = false)}, inverseJoinColumns = {@JoinColumn(name = "RECEIVEVIRTUALINFO_ID_", nullable = false)})
-	private Set<ReceiveVirtualInfoEntity> receiveVirtualInfos = new HashSet<ReceiveVirtualInfoEntity>(
-			0);
-
+	// // 角色
+	// private RoleEntity role = new RoleEntity();
+	// // 介绍人
+	// private UserEntity referee;
+	// // 推广
+	// private Set<UserEntity> promoteUsers = new HashSet<UserEntity>(0);
+	// // 信誉任务模板
+	// private Set<CreditTaskTemplateEntity> creditTaskTemplates = new
+	// HashSet<CreditTaskTemplateEntity>(
+	// 0);
+	// // 流量任务模板
+	// private Set<FlowTaskTemplateEntity> flowTaskTemplates = new
+	// HashSet<FlowTaskTemplateEntity>(
+	// 0);
+	// // 收藏任务模板
+	// private Set<CollectTaskTemplateEntity> collectTaskTemplates = new
+	// HashSet<CollectTaskTemplateEntity>(
+	// 0);
+	// // 真实地址模板
+	// @ManyToMany(fetch = FetchType.LAZY)
+	// @JoinTable(name = "TB_USER_RECEIVEREAL_TP", joinColumns =
+	// {@JoinColumn(name = "USER_ID_", nullable = false)}, inverseJoinColumns =
+	// {@JoinColumn(name = "RECEIVEREALINFO_ID_", nullable = false)})
+	// private Set<ReceiveRealInfoEntity> receiveRealInfos = new
+	// HashSet<ReceiveRealInfoEntity>(
+	// 0);
+	// // 虚拟地址模板
+	// @ManyToMany(fetch = FetchType.LAZY)
+	// @JoinTable(name = "TB_USER_RECEIVEVIRTUAL_TP", joinColumns =
+	// {@JoinColumn(name = "USER_ID_", nullable = false)}, inverseJoinColumns =
+	// {@JoinColumn(name = "RECEIVEVIRTUALINFO_ID_", nullable = false)})
+	// private Set<ReceiveVirtualInfoEntity> receiveVirtualInfos = new
+	// HashSet<ReceiveVirtualInfoEntity>(
+	// 0);
 	public String getUsername() {
 		return username;
 	}
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
 	public String getLoginPassword() {
 		return loginPassword;
 	}
+
 	public void setLoginPassword(String loginPassword) {
 		this.loginPassword = loginPassword;
 	}
+
 	public String getOpertationCode() {
 		return opertationCode;
 	}
+
 	public void setOpertationCode(String opertationCode) {
 		this.opertationCode = opertationCode;
 	}
+
 	public String getQq() {
 		return qq;
 	}
+
 	public void setQq(String qq) {
 		this.qq = qq;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public String getTelephone() {
 		return telephone;
 	}
+
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
-	public String getSex() {
-		return sex;
-	}
-	public void setSex(String sex) {
-		this.sex = sex;
-	}
+
 	public Date getRegisterTime() {
 		return registerTime;
 	}
+
 	public void setRegisterTime(Date registerTime) {
 		this.registerTime = registerTime;
 	}
+
 	public Date getLastLoginTime() {
 		return lastLoginTime;
 	}
+
 	public void setLastLoginTime(Date lastLoginTime) {
 		this.lastLoginTime = lastLoginTime;
 	}
-	public String getNickname() {
-		return nickname;
-	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
-	public String getShop() {
-		return shop;
-	}
-	public void setShop(String shop) {
-		this.shop = shop;
-	}
+
 	public String getWw() {
 		return ww;
 	}
+
 	public void setWw(String ww) {
 		this.ww = ww;
 	}
-	public String getPwQuestion() {
-		return pwQuestion;
-	}
-	public void setPwQuestion(String pwQuestion) {
-		this.pwQuestion = pwQuestion;
-	}
-	public String getPwAnswer() {
-		return pwAnswer;
-	}
-	public void setPwAnswer(String pwAnswer) {
-		this.pwAnswer = pwAnswer;
-	}
+
 	public Float getReleaseDot() {
 		return releaseDot;
 	}
+
 	public void setReleaseDot(Float releaseDot) {
 		this.releaseDot = releaseDot;
 	}
-	public RoleEntity getRole() {
-		return role;
-	}
-	public void setRole(RoleEntity role) {
-		this.role = role;
-	}
-	public Set<UserEntity> getPromoteUsers() {
-		return promoteUsers;
-	}
-	public void setPromoteUsers(Set<UserEntity> promoteUsers) {
-		this.promoteUsers = promoteUsers;
-	}
+
 	public String getLevel() {
 		return level;
 	}
+
 	public void setLevel(String level) {
 		this.level = level;
 	}
-	public Boolean getActivate() {
-		return activate;
-	}
-	public void setActivate(Boolean activate) {
-		this.activate = activate;
-	}
+
 	public Integer getConvertScore() {
 		return convertScore;
 	}
+
 	public void setConvertScore(Integer convertScore) {
 		this.convertScore = convertScore;
 	}
+
 	public Integer getUpgradeScore() {
 		return upgradeScore;
 	}
+
 	public void setUpgradeScore(Integer upgradeScore) {
 		this.upgradeScore = upgradeScore;
 	}
-	public Set<ReceiveRealInfoEntity> getReceiveRealInfos() {
-		return receiveRealInfos;
+
+	public ProvinceEntity getProvince() {
+		return province;
 	}
-	public void setReceiveRealInfos(Set<ReceiveRealInfoEntity> receiveRealInfos) {
-		this.receiveRealInfos = receiveRealInfos;
+
+	public void setProvince(ProvinceEntity province) {
+		this.province = province;
 	}
-	public Set<CreditTaskTemplateEntity> getCreditTaskTemplates() {
-		return creditTaskTemplates;
+
+	public CityEntity getCity() {
+		return city;
 	}
-	public void setCreditTaskTemplates(
-			Set<CreditTaskTemplateEntity> creditTaskTemplates) {
-		this.creditTaskTemplates = creditTaskTemplates;
+
+	public void setCity(CityEntity city) {
+		this.city = city;
 	}
-	public Set<FlowTaskTemplateEntity> getFlowTaskTemplates() {
-		return flowTaskTemplates;
+
+	public PrefectureEntity getPrefecture() {
+		return prefecture;
 	}
-	public void setFlowTaskTemplates(
-			Set<FlowTaskTemplateEntity> flowTaskTemplates) {
-		this.flowTaskTemplates = flowTaskTemplates;
+
+	public void setPrefecture(PrefectureEntity prefecture) {
+		this.prefecture = prefecture;
 	}
-	public Set<CollectTaskTemplateEntity> getCollectTaskTemplates() {
-		return collectTaskTemplates;
+
+	public Boolean getStatus() {
+		return status;
 	}
-	public void setCollectTaskTemplates(
-			Set<CollectTaskTemplateEntity> collectTaskTemplates) {
-		this.collectTaskTemplates = collectTaskTemplates;
+
+	public void setStatus(Boolean status) {
+		this.status = status;
 	}
-	public UserEntity getReferee() {
-		return referee;
+
+	public TaobaoUserEntity getTaobaoUser() {
+		return taobaoUser;
 	}
-	public void setReferee(UserEntity referee) {
-		this.referee = referee;
+
+	public void setTaobaoUser(TaobaoUserEntity taobaoUser) {
+		this.taobaoUser = taobaoUser;
 	}
-	public Set<ReceiveVirtualInfoEntity> getReceiveVirtualInfos() {
-		return receiveVirtualInfos;
+
+	public PaipaiUserEntity getPaipaiUser() {
+		return paipaiUser;
 	}
-	public void setReceiveVirtualInfos(
-			Set<ReceiveVirtualInfoEntity> receiveVirtualInfos) {
-		this.receiveVirtualInfos = receiveVirtualInfos;
+
+	public void setPaipaiUser(PaipaiUserEntity paipaiUser) {
+		this.paipaiUser = paipaiUser;
+	}
+
+	public YouaUserEntity getYouaUser() {
+		return youaUser;
+	}
+
+	public void setYouaUser(YouaUserEntity youaUser) {
+		this.youaUser = youaUser;
 	}
 }
