@@ -8,7 +8,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
- * 县
+ * 县 区
  * 
  * @author xgj
  * 
@@ -23,15 +23,19 @@ public class PrefectureEntity extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "CITY_ID_", nullable = false)
 	private CityEntity city;
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public CityEntity getCity() {
 		return city;
 	}
+
 	public void setCity(CityEntity city) {
 		this.city = city;
 	}

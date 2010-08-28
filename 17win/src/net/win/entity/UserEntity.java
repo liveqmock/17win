@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -67,31 +68,30 @@ public class UserEntity extends BaseEntity {
 	@Column(name = "WW_", length = 24)
 	private String ww;
 	// 省
-	// 城市
-	@OneToMany(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "RPOVINCE_ID_")
 	private ProvinceEntity province;
 	// 市
-	@OneToMany(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "CITY_ID_")
 	private CityEntity city;
 	// 县
-	@OneToMany(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "PREFECTURES_ID_")
 	private PrefectureEntity prefecture;
 
 	// 淘宝信息
-	@OneToMany(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "TAOBAOUSER_ID_")
 	private TaobaoUserEntity taobaoUser;
 
 	// 拍拍信息
-	@OneToMany(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "PAIPAI_ID_")
 	private PaipaiUserEntity paipaiUser;
 
 	// 有啊信息
-	@OneToMany(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "YOUAUSER_ID_")
 	private YouaUserEntity youaUser;
 

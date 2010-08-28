@@ -43,4 +43,12 @@ public class CityEntity extends BaseEntity {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public Set<PrefectureEntity> getPrefectures() {
+		return prefectures;
+	}
+
+	public void setPrefectures(Set<PrefectureEntity> prefectures) {
+		this.prefectures = prefectures;
+	}
 }

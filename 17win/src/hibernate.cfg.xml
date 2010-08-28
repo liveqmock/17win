@@ -8,13 +8,14 @@
 			true
 		</property>
 		<property name="hibernate.connection.driver_class">
-			com.microsoft.jdbc.sqlserver.SQLServerDriver
+			net.sourceforge.jtds.jdbc.Driver
 		</property>
 
 		<property name="hibernate.connection.url">
-			jdbc:microsoft:sqlserver://localhost:1433;DatabaseName=17windb;SelectMethod=Cursor
+			jdbc:jtds:sqlserver://localhost:1433/17windb;
+			<!--jdbc:microsoft:sqlserver://localhost:1433;DatabaseName=17windb;SelectMethod=Cursor
+			-->
 		</property>
-
 		<property name="hibernate.connection.username">sa</property>
 		<property name="hibernate.connection.password"></property>
 		<!-- 方言  	-->

@@ -4,8 +4,9 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 	<!-- 配置启动 -->
- 
-
+	<listener>
+		<listener-class>net.win.Win17Listener</listener-class>
+	</listener>
 
 	<!-- 修改Spring配置文件的路径 -->
 	<context-param>
@@ -44,7 +45,7 @@
 	</context-param>
 	<context-param>
 		<param-name>log4jConfigLocation</param-name>
-		<param-value>WEB-INF/classes/log4j.properties</param-value>
+		<param-value>WEB-INF/classes/Log4j.properties</param-value>
 	</context-param>
 	<context-param>
 		<param-name>log4jRefreshInterval</param-name>
