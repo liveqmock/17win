@@ -1,0 +1,217 @@
+﻿@charset "utf-8";
+/*header*/
+.header{margin:0px auto;width:980px;height:172px;text-align:left;position:relative;margin-bottom:10px;z-index:999;}
+.header .logo{left:16px;bottom:88px;width:153px;height:54px;}/*rework by123 080908 for height*/
+.header .logo a{width:153px;height:54px;text-indent: -9999px;}
+.header .topNav{
+	position:absolute;
+	right:1px;
+	bottom:116px;
+	display:inline;
+	width:500px;
+}/*rework by123 080908 for bottom*/
+.header .topNav li{height:22px;line-height:22px;float:right;margin:5px;display:block;}
+.header .topNav li a{display:block;}
+.header .topNav .help{background:url(http://images.5173.com/5173/Images/common/head_Bg.gif) no-repeat -280px -48px;text-indent:18px;}
+.header .topNav .sup{background:url(http://images.5173.com/5173/Images/common/head_Bg.gif) no-repeat -154px -49px;text-indent:22px;}
+.header .topNav .nav{background:url(http://images.5173.com/5173/Images/common/head_Bg.gif) no-repeat right 0px;}
+.header .topNav .nav a{background:url(http://images.5173.com/5173/Images/common/head_Bg.gif) no-repeat left 0px;display:block;float:left;padding-left:13px;width:48px;padding-top:1px;}
+.header .topNav .my{background:url(http://images.5173.com/5173/Images/common/head_Bg.gif) no-repeat right 0px;}
+.header .topNav .my a{background:url(http://images.5173.com/5173/Images/common/head_Bg.gif) no-repeat 0px -51px;display:block;float:left;padding-left:19px;padding-top:1px;width:58px;}
+.quicklogin{ position:absolute;bottom:110px;right:12px;}/*rework by123 080908 for bottom*/
+.headQuicklogin{float:right;}
+.headQuicklogin .welcome{display:inline;margin-right:15px;color:#666666;float:left;}
+.headQuicklogin .welcome .name{float:left;width:70px;height:14px;overflow:hidden;color: #ff8040}
+.headQuicklogin .login{display:inline;float:left;}
+.headQuicklogin .login a{ color:#0033CC;}
+.headQuicklogin .login a:hover{ color:#FF6600;}
+/*加盟ICO*/
+.header .jiameng{position:absolute;bottom:35px;right:245px; display:none}
+/*==========================================================*/
+.header .jiameng_v20{position:absolute;bottom:35px;right:245px; display:none}/*rework by123 080915 for display*/
+/*==========================================================*/
+.header .rexian{position:absolute;bottom:32px;right:47px; display:none}/*rework by123 080915 for display*/
+.header .helpPic{position:absolute;bottom:4px;right:33px;}
+/*搜索*/
+.header .headSearch{position:absolute;bottom:0px;left:0px;width:100%;height:66px;background:url(http://images.5173.com/5173/Images/common/head_Bg.gif) repeat-x 0px -78px;}
+.header .headSearch .searchLeft{position:absolute;left:0px;top:0px;background:url(http://images.5173.com/5173/Images/common/head_Bg.gif) no-repeat 0px -149px;width:61px;height:66px;}
+.header .headSearch .searchRight{position:absolute;right:0px;top:0px;background:url(http://images.5173.com/5173/Images/common/head_Bg.gif) no-repeat right -149px;width:43px;height:66px;}
+.header .headSearch .searchBox{position:absolute;left:66px;top:0px;height:23px;padding-top:8px;width:700px;z-index:100;}
+.header .headSearch .searchBox .selectBoxLine2{float:left;width:65px;height:21px;line-height:21px;overflow:hidden;background:url(http://images.5173.com/5173/Images/common/head_search_bg1.gif);color:#000000;text-align:left;text-indent:10px;margin-right:5px;cursor:hand;padding-right:15px;}
+/*==========================================================*/
+.header .headSearch .searchBox_v20 .selectBoxLine2_v20{float:left;width:107px;height:21px;line-height:21px;overflow:hidden;background:url(http://images.5173.com/5173/Images/common/pic_headerSelect_bg.gif) left top;color:#000000;text-align:left;text-indent:10px;margin-right:5px;cursor:hand;padding-right:15px;}/*rework by123 080915 for background*/
+/*==========================================================*/
+.header .headSearch .searchBox .selectBoxLine3{float:left;width:85px;height:21px;line-height:21px;overflow:hidden;background:url(http://images.5173.com/5173/Images/common/head_search_bg3.gif);color:#000000;text-align:left;text-indent:10px;margin-right:5px;cursor:hand;padding-right:15px;}
+.header .headSearch .searchBox .gameSelect{display:inline;float:left;margin-right:8px;}
+.header .headSearch .searchBox .searchInput{border:1px #cccccc solid;width:200px;}
+.hotGames{position:absolute;left:65px;top:40px;height:26px;line-height:26px;width:700px;overflow:hidden;}
+.header .headSearch .hotGames a{padding:0px 5px;}
+.header .headSearch .hotGames h5{float:left;font-weight:bold;}
+
+/*导航*/
+.header .headMenu a:link{color:#333333;}
+.header .headMenu a:visited{color:#333333;}
+.header .headMenu{position:absolute;top:-31px;left:175px; width:800px;height:33px;overflow:hidden;}
+
+
+.header .headMenu li{float:left;height:33px;line-height:33px;background:url(http://images.5173.com/5173/Images/common/head_Bg.gif) repeat-x left -259px; font-size:14px;}              /*修改08-12-8 zhangbp*/
+.header .headMenu li a{float:left;height:33px;line-height:33px;background:url(http://images.5173.com/5173/Images/common/head_Bg.gif) no-repeat right -259px;padding:0px 11px 0px 5px;} /*修改08-12-8 zhangbp*/
+.header .headMenu .onHome{background:url(http://images.5173.com/5173/Images/common/head_Bg.gif) no-repeat right -222px;width:80px;}
+.header .headMenu .onHome a{background:url(http://images.5173.com/5173/Images/common/head_Bg.gif) no-repeat left -222px;float:left;color:#ffffff;font-size:14px;font-weight:bold;padding:0px 25px;}
+.header .headMenu .bbs a{float:left;height:33px;line-height:33px;background:url(http://images.5173.com/5173/Images/common/head_Bg.gif) no-repeat right -294px;padding:0px 15px 0px 10px;}
+/*搜索下拉列表*/
+.headSearchBox2{border:1px #C8D5DB solid;text-align:left;color:#203E7B;background:#F8F6C5;z-index: 9999999; }
+.headSearchBoxGame{width:760px;position: absolute;left:0px;top:30px;}
+.headSearchBoxQu{width:570px;position: absolute;left:165px;top:30px;}
+.headSearchBoxFu{width:570px;position: absolute;left:249px;top:30px;}
+.headSearchBox2 .selectTitle{height:14px;text-align:left;line-height:14px;padding:7px 0px;}
+.headSearchBox2 .selectTitle .tsTitle{padding-left:30px;color:#660000;}
+.headSearchBox2 .conbox{padding:0px 0px 10px 0px;}
+.headSearchBox2 h1{background:#FFF5FB;border:1px #CCD3DB solid;height:11px;padding:5px;}
+.headSearchBox2 h1 a{margin:0px 5px;color:#09266A;text-decoration:underline;}
+.headSearchBox2 .seaMenu{padding:10px 20px 0px 20px;}
+.headSearchBox2 .seaMenu li{float:left;text-align:center;cursor:hand;top:1px;position:relative;margin:0px 3px;}
+.headSearchBox2 .seaMenu .seaMenu_on{width:70px;height:21px;background:#FFFAC6;border-left:1px #CBD4DB solid;border-right:1px #CBD4DB solid;border-top:2px #FF6600 solid;line-height:21px;font-weight:bold;color:#ff6600;}
+.headSearchBox2 .seaMenu .seaMenu_off{width:70px;height:21px;background:#FFF4F8;border:1px #CBD4DB solid;line-height:21px;}
+.headSearchBox2 .seaListBox{border-top:1px #ADD0E6 solid;border-bottom:1px #ADD0E6 solid;padding:5px 0px 10px 0px;line-height:20px;}
+.headSearchBox2  .ulBg{width:760px;background:url(http://images.5173.com/5173/Images/common/seaListBox_li.gif);clear:both;}
+.headSearchBox2 .seaListBox ul{margin:0px;padding:0px;list-style-type:none;}
+.headSearchBox2 .seaListBox li{float:left;width:84px;text-align:left;height:20px;line-height:20px;overflow:hidden;}
+.headSearchBox2 .seaListBox li a{display:block;text-indent:10px;}
+.headSearchBox2 .seaListBox li a:link{color:#333333;}
+.headSearchBox2 .seaListBox li a:visited{color:#333333;}
+.headSearchBox2 .seaListBox li a:hover{color:#ffffff;background:#FF6600;}
+.headSearchBox2 .seaMenuBottom{padding:0px 20px 0px 20px;}
+.headSearchBox2 .seaMenuBottom li{float:left;text-align:center;cursor:hand;top:-1px;position:relative;margin:0px 3px;}
+.headSearchBox2 .seaMenuBottom .seaMenu_on{width:70px;height:21px;background:#FFFAC6;border-left:1px #CBD4DB solid;border-right:1px #CBD4DB solid;border-bottom:2px #FF6600 solid;line-height:21px;font-weight:bold;color:#ff6600;}
+.headSearchBox2 .seaMenuBottom .seaMenu_off{width:70px;height:21px;background:#FFF4F8;border:1px #CBD4DB solid;line-height:21px;}
+.headSearchBox2 .seaListBoxq{border-top:1px #ADD0E6 solid;padding:5px 0px 0px 0px;line-height:20px;}
+.headSearchBox2  .ulBgq{width:570px;background:url(http://images.5173.com/5173/Images/common/seaListBoxq_li.gif);clear:both;}
+.headSearchBox2 .seaListBoxq ul{margin:0px;padding:0px;list-style-type:none;}
+.headSearchBox2 .seaListBoxq li{float:left;width:190px;text-align:left;height:20px;line-height:20px;overflow:hidden;}
+.headSearchBox2 .seaListBoxq li a{display:block;text-indent:10px;}
+.headSearchBox2 .seaListBoxq li a:link{color:#333333;}
+.headSearchBox2 .seaListBoxq li a:visited{color:#333333;}
+.headSearchBox2 .seaListBoxq li a:hover{color:#ffffff;background:#FF6600;}
+.SearchFormLeft, .SearchFormMiddle, .SearchFormRight{height:21px;float:left;}
+.SearchFormMiddle{background-image:url(http://images.5173.com/5173/Images/common/head_search_bg2.gif);height:21px;background-repeat: repeat-x;background-position: center top;
+}
+.InputBox{border:0px;font-size:12px;width:120px;color:#999999;padding-top:2px;}
+.SearchFormSubmit{height:21px;float:left;margin-left:10px;}
+.header .headSearch .searchBox .searchTsBox{float:left;position:relative}
+.header .headSearch .searchBox .searchTs{border:1px #8EC2DF solid;color:#0099CC;line-height:20px;background:#ffffff;padding:5px;position:absolute;top:22px;left:125px;width:200px;}
+.header .headSearch .searchBox .searchTs a:link{color:#ff6600;}
+.header .headSearch .searchBox .searchTs a:visited{color:#ff6600;}
+
+/*==================================================================================*/
+.header .headSearch .hotGames a:hover{ color:#fee727;}
+.SearchFormSubmit .btnSubmit{ width:66px; height:23px; line-height:23px; color:#FFFFFF; background:url(http://images.5173.com/5173/Images/common/search_smit.gif); border:0; font-size:12px; font-weight:bolder}
+/*==================================================================================*/
+
+
+/*add by123 080911*/
+.header .newNavPiao{ left:195px;/*修改08-12-8 zhangbp*/ top:57px; z-index:300; position:absolute; width:760px; height:30px; background:url(http://images.5173.com/5173/Images/common/icon_piao2008.gif) no-repeat}
+
+.header .firstPage{
+	left:5px;
+	position:absolute;
+	top:90px;
+	width: 148px;
+}
+.header .firstPage a{ color:#038bd9; padding-right:1em;}/*rework color by FuYun 080923*/
+.header .firstPage a:hover{ text-decoration:none}
+/*add by123 080911*/
+
+/*add by dengping 首页版本不一致处理*/
+.header .headSearch .searchBox_v20{position:absolute;left:66px;top:0px;height:23px;padding-top:8px;width:900px;z-index:100;}/*rework width byFuYun 080924*/
+.header .headSearch .searchBox_v20 .selectBoxLine2{float:left;width:65px;height:21px;line-height:21px;overflow:hidden;background:url(http://images.5173.com/5173/Images/common/head_search_bg1.gif);color:#000000;text-align:left;text-indent:10px;margin-right:5px;cursor:hand;padding-right:15px;}
+.header .headSearch .searchBox_v20 .selectBoxLine2_v20{float:left;width:107px;height:21px;line-height:21px;overflow:hidden;background:url(http://images.5173.com/5173/Images/common/pic_headerSelect_bg.gif) left top;color:#000000;text-align:left;text-indent:10px;margin-right:5px;cursor:hand;padding-right:15px;}/*add byFuYun 080924*/
+.header .headSearch .searchBox_v20 .searchInput{border:1px #cccccc solid;}
+.header .headSearch .searchBox_v20 .gameSelect{display:inline;float:left;margin-right:8px; }
+.hotGames{
+	position:absolute;
+	left:92px;
+	top:40px;
+	height:26px;
+	line-height:26px;
+	width:700px;
+	overflow:hidden;
+}
+.header .headSearch .searchBox_v20 .searchTsBox{float:left;position:relative;}
+.header .headSearch .searchBox_v20 .searchTs{border:1px #8EC2DF solid;color:#0099CC;line-height:20px;background:#ffffff;padding:5px;position:absolute;top:22px;left:125px;width:200px;}
+.header .headSearch .searchBox_v20 .searchTs a:link{color:#ff6600;}
+.header .headSearch .searchBox_v20 .searchTs a:visited{color:#ff6600;}
+.InputBox_v20{border:0px;font-size:12px;width:200px;color:#999999;padding-top:2px;}/*rework width byFuYun 080924*/
+.AllBiz_v20{width:120px;}/*rework width byFuYun 080924*/
+.SearchFormRight{ margin-right:5px;}/*add byFuYun 080924*/
+
+.header .headSearch .searchBox_v20 .AllgoodsSelect{width:90px; overflow:hidden;}  /*处理首页下拉列表框的宽度 by zhangbp 08-12-22*/
+
+
+/*搜索改成单字母标签08.10.07 Bydengping*/
+.headSearchBox2 .seaMenu2{padding:10px 20px 0px 20px;}
+.headSearchBox2 .seaMenu2 li{float:left;text-align:center;cursor:hand;top:1px;position:relative;margin:0px 2px;}
+.headSearchBox2 .seaMenu2 .seaMenu_on{padding:0px 5px;height:21px;background:#FFFAC6;border-left:1px #CBD4DB solid;border-right:1px #CBD4DB solid;border-top:2px #FF6600 solid;line-height:21px;font-weight:bold;color:#ff6600;}
+.headSearchBox2 .seaMenu2 .seaMenu_off{padding:0px 5px;height:21px;background:#FFF4F8;border:1px #CBD4DB solid;line-height:21px;}
+/*搜索下拉列表*/
+.headSearchBox4{border:1px #9FC1E6 solid;text-align:left;color:#203E7B;background:#ffffff;z-index: 9999999; }
+.headSearchBoxGame2{width:740px;position: absolute;left:0px;top:30px;padding:5px 10px 10px 10px;}
+.headSearchBoxQu2{width:570px;position: absolute;left:165px;top:30px;padding:5px 10px 10px 10px;}
+.headSearchBoxFu2{width:570px;position: absolute;left:249px;top:30px;padding:5px 10px 10px 10px;}
+.headSearchBox4 .selectTitle{height:19px;text-align:left;line-height:19px;padding:5px 0px 7px 0px;border-bottom:1px #cccccc solid;}
+.headSearchBox4 .selectTitle .tsName{float:left;font-size:14px;font-weight:bold;color:#333333;}
+.headSearchBox4 .selectTitle .tsTitle{float:left;padding-left:20px;color:#999999;}
+.headSearchBox4 .conbox{padding:0px 0px 10px 0px;}
+.headSearchBox4 h1{height:11px;padding:10px 5px 12px 5px;color:#666666;}
+.headSearchBox4 h1 a{margin:0px 5px;color:#004FE0;text-decoration:none;}
+.headSearchBox4 .seaListBoxq{border-top:1px #ADD0E6 solid;padding:5px 0px 0px 0px;line-height:20px;}
+.headSearchBox4 .seaListBoxq ul{margin:0px;padding:0px;list-style-type:none;}
+.headSearchBox4 .seaListBoxq li{float:left;width:170px;text-align:left;height:20px;line-height:20px;overflow:hidden;color:#333333;background:url(http://images.5173.com/5173/Images/common/ico6.gif) no-repeat 10px 5px;padding-left:15px;}
+.headSearchBox4 .seaListBoxq li a{text-indent:10px;}
+.headSearchBox4 .seaListBoxq li a:link{color:#333333;}
+.headSearchBox4 .seaListBoxq li a:visited{color:#333333;}
+.headSearchBox4 .seaListBoxq li a:hover{color:#ff6600;}
+.headSearchBox4 .homeGameList{width:739px;border:1px #cccccc solid;font-size:12px;margin:0px auto;}
+.headSearchBox4 .homeGameListTop{
+	height:29px;
+	width:739px;
+	font-family: Arial, Helvetica, sans-serif;
+	background-image: url(http://images.5173.com/5173/Images/common/gameListTitleBg.gif);
+	background-repeat: repeat-x;
+	background-position: center top;
+}
+.headSearchBox4 .homeGameListTop ul{margin:0px;padding:0px;}
+.headSearchBox4 .homeGameListTop li{float:left;line-height:29px;font-size:12px;font-weight:bold;text-align:center;color:#333333;margin:0px;padding:0px;cursor: hand;}
+.headSearchBox4 .homeGameListTop .list2_On{width:70px;height:35px;background:url(http://images.5173.com/5173/Images/common/gameListHome2.gif) no-repeat;color:#ffffff;}
+.headSearchBox4 .homeGameListTop .list_On{width:22px;height:35px;background:url(http://images.5173.com/5173/Images/common/gameListOn2.gif) no-repeat;color:#ffffff;}
+.headSearchBox4 .homeGameListTop .list_Off{width:22px;border-bottom:1px #cccccc solid;border-left:1px #cccccc solid;}
+.headSearchBox4 .homeGameListTop .list2_Off{width:70px;border-bottom:1px #cccccc solid;}
+.headSearchBox4 .homeGameListTop .rightLine{border-right:1px #cccccc solid;}
+.headSearchBox4 .homeGameListBox{width:700px;padding:10px 20px;text-align:left;}
+.headSearchBox4 .homeGameListBox li{float:left;width:120px;height:26px;text-align:left;background:url(http://images.5173.com/5173/Images/common/ico6.gif) no-repeat 5px 1px;padding-left:15px;}
+.headSearchBox4 .homeGameListBox .orange a:link{color:#ff6600;}
+.headSearchBox4 .homeGameListBox .orange a:visited{color:#ff6600;}
+.headSearchBox4 .homeGameListBox .orange a:hover{color:#ff0000;}
+.headSearchBox4 .homeGameListBox li a{color:#333333;text-decoration:none;}
+.headSearchBox4 .homeGameListBox li a:hover{color:#ff6600;text-decoration:underline;}
+.headSearchBox4 .homeGameListBottom{height:24px;padding:10px 0px 5px 15px;width:720px;}
+.headSearchBox4 .homeGameListBottom li{float:left;width:62px;height:24px;line-height:24px;background:url(http://images.5173.com/5173/Images/common/gameListBottom.gif) no-repeat;margin-right:10px;text-align:center;color:#0066CC;cursor:hand;}
+.headSearchBox4 .homeGameListBottom li a{display:block;}
+/*11.11徐佩需求 by dengping*/
+.header .headSearch .searchBox_v20 .selectBoxLine2_v30{float:left;width:145px;height:21px;line-height:21px;overflow:hidden;background:url(http://images.5173.com/5173/Images/common/head_search_bg5.gif) no-repeat;color:#000000;text-align:left;text-indent:10px;margin-right:5px;cursor:hand;padding-right:15px;}
+.header .headSearch .searchBox_v20 .selectBoxLine2_v31{float:left;width:145px;height:21px;line-height:21px;overflow:hidden;background:url(http://images.5173.com/5173/Images/common/head_search_bg6.gif) no-repeat;color:#4582BD;text-align:left;text-indent:10px;margin-right:5px;cursor:hand;padding-right:15px;font-weight:bold;}
+.headSearchBox5{border:1px #9FC1E6 solid;text-align:left;background:#ffffff;z-index: 9999999;}
+.headSearchBoxGame5{width:160px;height:440px;overflow:auto;position: absolute;left:0px;top:30px;padding:0px;}
+.headSearchBoxQu5{width:160px;position: absolute;left:242px;top:30px;padding:0px;}
+.headSearchBoxFu5{width:160px;position: absolute;left:408px;top:30px;padding:0px;}
+.headSearchBox5 ul{padding:5px;}
+.headSearchBox5 li{width:130px;height:20px;font-size:14px;text-align:left;line-height:20px;text-indent:20px;overflow:hidden;}
+.headSearchBox5 li.gameTitle{text-indent:0px;}
+.headSearchBox5 .hot {color:#FF6600;}
+.headSearchBox5 .hot a:link{color:#FF6600;text-decoration:none;}
+.headSearchBox5 .hot a:visited{color:#FF6600;text-decoration:none;}
+.headSearchBox5 .hot a:hover{color:#FF9900;text-decoration:none;}
+.headSearchBox5 a:link{color:#333333;text-decoration:none;}
+.headSearchBox5 a:visited{color:#333333;text-decoration:none;}
+.headSearchBox5 a:hover{color:#ff5500;text-decoration:none;}
+.headSearchBox5 .blueBg{background:#E7F7FF;}

@@ -1,0 +1,219 @@
+BODY {
+	FONT-SIZE: 12px; COLOR: #333333
+}
+TD {
+	FONT-SIZE: 12px; COLOR: #333333
+}
+TH {
+	FONT-SIZE: 12px; COLOR: #333333
+}
+BODY {
+	MARGIN: 0px; BACKGROUND-COLOR: #ffffff
+}
+A:link {
+	COLOR: #666666; TEXT-DECORATION: none
+}
+A:visited {
+	COLOR: #666666; TEXT-DECORATION: none
+}
+A:active {
+	COLOR: #666666; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #ff3300; TEXT-DECORATION: none
+}
+OL {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+UL {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+FORM {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+.Colorlans {
+	PADDING-LEFT: 30px; COLOR: #009cf7
+}
+.Colorlans IMG {
+	BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px
+}
+.K_munu {
+	MARGIN-TOP: 10px; FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #ffffff; LINE-HEIGHT: 40px
+}
+.K_munu A:link {
+	COLOR: #ffffff; TEXT-DECORATION: none
+}
+.K_munu A:visited {
+	COLOR: #ffffff; TEXT-DECORATION: none
+}
+.K_munu A:active {
+	COLOR: #ffffff; TEXT-DECORATION: none
+}
+.K_munu A:hover {
+	COLOR: #ffff00; TEXT-DECORATION: underline
+}
+.K_ToolsC {
+	FLOAT: left; WIDTH: 940px; LINE-HEIGHT: 28px
+}
+.K_ToolsC UL {
+	MARGIN-TOP: 7px; FLOAT: left; COLOR: #009cf7; LINE-HEIGHT: 20px; TEXT-ALIGN: left
+}
+.K_ToolsC OL {
+	FLOAT: right; WIDTH: 150px; TEXT-ALIGN: right
+}
+.K_ToolsC OL A {
+	DISPLAY: inline-block; BACKGROUND: url(Top_8.gif) repeat-x; MARGIN-LEFT: 5px; WIDTH: 70px; COLOR: #ffffff; TEXT-ALIGN: center
+}
+.K_ToolsC A:link {
+	COLOR: #ffffff
+}
+.K_ToolsC A:visited {
+	COLOR: #ffffff
+}
+.K_ToolsC A:active {
+	COLOR: #ffffff
+}
+K_ToolsC A:hover {
+	COLOR: #ffffff
+}
+.K_ToolsC B {
+	COLOR: red
+}
+.K_mttitle {
+	FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #ffffff; TEXT-ALIGN: center
+}
+.K_mtcontent {
+	BORDER-TOP-WIDTH: 1px; BORDER-RIGHT: #72c2ed 1px solid; BORDER-LEFT: #72c2ed 1px solid; BORDER-TOP-COLOR: #72c2ed; BORDER-BOTTOM: #72c2ed 1px solid
+}
+.K_inpug {
+	BORDER-RIGHT: #7b9cbd 1px solid; BORDER-TOP: #7b9cbd 1px solid; BACKGROUND: #d7efff; BORDER-LEFT: #7b9cbd 1px solid; BORDER-BOTTOM: #7b9cbd 1px solid
+}
+.K_inpuga {
+	BORDER-RIGHT: #7b9cbd 1px solid; BORDER-TOP: #7b9cbd 1px solid; BACKGROUND: #bbe3ff; BORDER-LEFT: #7b9cbd 1px solid; BORDER-BOTTOM: #7b9cbd 1px solid
+}
+.Bootz {
+	MARGIN-TOP: 10px; BACKGROUND: url(Top_18.gif) repeat-x; FLOAT: left; WIDTH: 100%; HEIGHT: 90px
+}
+.LeftNews A {
+	PADDING-LEFT: 15px; BACKGROUND: url(Top_20.gif) no-repeat left 50%
+}
+.LeftNews TD {
+	BACKGROUND: url(Top_19.gif) repeat-x 50% bottom; LINE-HEIGHT: 25px
+}
+.Regttkk {
+	BORDER-RIGHT: #72c2ed 1px solid; BORDER-TOP: #72c2ed 1px solid; BORDER-LEFT: #72c2ed 1px solid; WIDTH: 960px; LINE-HEIGHT: 22px; BORDER-BOTTOM: #72c2ed 1px solid
+}
+.Index_rw {
+	BORDER-RIGHT: #637a63 1px solid; COLOR: #637a63
+}
+.Index_rw2 {
+	COLOR: #637a63
+}
+.index_tt {
+	FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #000000
+}
+#DIV_Cont_kjTop {
+	BACKGROUND: url(Div_4.gif) repeat-x; FLOAT: left; HEIGHT: 44px
+}
+#DIV_Cont_kjTop UL {
+	PADDING-RIGHT: 10px; PADDING-LEFT: 10px; FONT-WEIGHT: bold; FONT-SIZE: 14px; BACKGROUND: url(Div_2.gif) repeat-x; FLOAT: left; PADDING-BOTTOM: 0px; COLOR: #ffffff; LINE-HEIGHT: 30px; PADDING-TOP: 0px; HEIGHT: 44px
+}
+#DIV_Cont_kjTop IMG {
+	FLOAT: left
+}
+#DIV_Cont_kjTop OL {
+	BACKGROUND: url(Div_5.gif) no-repeat right 50%; FLOAT: right; WIDTH: 44px; LINE-HEIGHT: 29px; HEIGHT: 44px; TEXT-ALIGN: center
+}
+#QQ_List {
+	Z-INDEX: 1; OVERFLOW: hidden; WIDTH: 103px; POSITION: absolute; TOP: 0px; BACKGROUND-COLOR: #ffffff
+}
+#QQ_List DIV {
+	FLOAT: left
+}
+#QQ_List .QQ_top {
+	BACKGROUND: url(QQ_Top.gif); WIDTH: 103px; HEIGHT: 44px; TEXT-ALIGN: right
+}
+#QQ_List .QQ_top IMG {
+	MARGIN: 2px; CURSOR: pointer
+}
+.QQ_Cont {
+	BACKGROUND: url(QQ_bg.gif) repeat-y; WIDTH: 103px
+}
+.QQ_Cont OL {
+	BACKGROUND: url(QQ_navbg.gif) no-repeat; TEXT-ALIGN: center
+}
+.QQ_Cont OL {
+	MARGIN: 5px 0px 5px 4px; LINE-HEIGHT: 19px
+}
+.QQ_Cont UL {
+	MARGIN: 5px 0px 5px 4px; LINE-HEIGHT: 19px
+}
+.QQ_Cont UL LI {
+	FLOAT: left; MARGIN: 5px 0px; WIDTH: 95px; LIST-STYLE-TYPE: none
+}
+.lslink A:link {
+	COLOR: #006699; TEXT-DECORATION: none
+}
+.lslink A:visited {
+	COLOR: #006699; TEXT-DECORATION: none
+}
+.lslink A:active {
+	COLOR: #006699; TEXT-DECORATION: none
+}
+.lslink A:hover {
+	COLOR: #ff3300; TEXT-DECORATION: underline
+}
+.B_Title_C LI {
+	FLOAT: left; WIDTH: 150px; HEIGHT: 20px; TEXT-ALIGN: center
+}
+.c {
+	FONT-WEIGHT: bold
+}
+.userlogin {
+	BACKGROUND: url(Login_3.gif) no-repeat 50% bottom; TEXT-ALIGN: left
+}
+.userlogin SPAN {
+	DISPLAY: inline-block; WIDTH: 125px; LINE-HEIGHT: 30px; TEXT-ALIGN: right
+}
+.userlogin INPUT {
+	BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BACKGROUND: none transparent scroll repeat 0% 0%; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px
+}
+.userlogin TT {
+	DISPLAY: inline-block; PADDING-LEFT: 5px; LINE-HEIGHT: 20px; HEIGHT: 20px
+}
+.userlogin B {
+	DISPLAY: inline-block; PADDING-LEFT: 5px; LINE-HEIGHT: 20px; HEIGHT: 20px
+}
+.userlogin TT {
+	BACKGROUND: url(Login_4.gif) no-repeat; WIDTH: 155px
+}
+.userlogin B {
+	BACKGROUND: url(Login_5.gif) no-repeat; WIDTH: 76px
+}
+.userlogin B INPUT {
+	WIDTH: 60px
+}
+.userlogin TT INPUT {
+	WIDTH: 140px
+}
+.userlogin DIV INPUT {
+	BORDER-RIGHT: #51739b 1px solid; BORDER-TOP: #51739b 1px solid; BACKGROUND: url(Login_6.gif) repeat-x; BORDER-LEFT: #51739b 1px solid; COLOR: #ffffff; LINE-HEIGHT: 16px; BORDER-BOTTOM: #51739b 1px solid
+}
+.riglogin {
+	PADDING-LEFT: 20px
+}
+.riglogin B {
+	FONT-SIZE: 18px; COLOR: #ff6600
+}
+.riglogin TT {
+	FONT-WEIGHT: bold; COLOR: #ff6600
+}
+.username {
+	BORDER-RIGHT: #67bbee 1px solid; BACKGROUND-POSITION: 1px 2px; BORDER-TOP: #67bbee 1px solid; PADDING-LEFT: 20px; FONT-SIZE: 12px; BACKGROUND-IMAGE: url(../images/username.gif); BORDER-LEFT: #67bbee 1px solid; WIDTH: 90px; PADDING-TOP: 4px; BORDER-BOTTOM: #67bbee 1px solid; BACKGROUND-REPEAT: no-repeat; HEIGHT: 18px; BACKGROUND-COLOR: #d6e8f5
+}
+.password {
+	BORDER-RIGHT: #67bbee 1px solid; BACKGROUND-POSITION: 1px 2px; BORDER-TOP: #67bbee 1px solid; PADDING-LEFT: 20px; FONT-SIZE: 12px; BACKGROUND-IMAGE: url(../images/password.gif); BORDER-LEFT: #67bbee 1px solid; WIDTH: 90px; PADDING-TOP: 4px; BORDER-BOTTOM: #67bbee 1px solid; BACKGROUND-REPEAT: no-repeat; HEIGHT: 18px; BACKGROUND-COLOR: #d6e8f5
+}
+.code {
+	BORDER-RIGHT: #67bbee 1px solid; BACKGROUND-POSITION: 1px 2px; BORDER-TOP: #67bbee 1px solid; PADDING-LEFT: 0px; FONT-SIZE: 13px; BORDER-LEFT: #67bbee 1px solid; WIDTH: 90px; PADDING-TOP: 4px; BORDER-BOTTOM: #67bbee 1px solid; BACKGROUND-REPEAT: no-repeat; HEIGHT: 18px; BACKGROUND-COLOR: #d6e8f5
+}
