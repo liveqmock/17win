@@ -6,7 +6,7 @@
 		<s:include value="../common/header.jsp"></s:include>
 		<LINK href="css/top.css" type=text/css rel=stylesheet>
 		<LINK href="css/index.css" type=text/css rel=stylesheet>
-		<LINK href="css/css.css" type=text/css rel=stylesheet>
+		<LINK href="css/Css.css" type=text/css rel=stylesheet>
 		<LINK href="css/top_bottom.css" type=text/css rel=stylesheet>
 		<SCRIPT src="js/jieducm_pupu.js" type="text/javascript"></SCRIPT>
 	</HEAD>
@@ -236,51 +236,51 @@
 				</DIV>
 				<DIV class=block>
 					<DIV class=block_top>
-						网站推广排行榜
+						网站积分排行榜
 					</DIV>
 					<DIV class=block_contenter>
 						<DIV class=grid_box>
 
-							<UL id=ex1>
+							<UL id=dx1>
 
 								<LI>
-									<SPAN>ejianqin</SPAN>推广人数：38
+									<SPAN>baobao</SPAN>积分：45600
 								</LI>
 
 								<LI>
-									<SPAN>13472291000</SPAN>推广人数：34
+									<SPAN>zhzh</SPAN>积分：8028
 								</LI>
 
 								<LI>
-									<SPAN>0610</SPAN>推广人数：28
+									<SPAN>张三丰</SPAN>积分：7265
 								</LI>
 
 								<LI>
-									<SPAN>262605736</SPAN>推广人数：25
+									<SPAN>dxl016</SPAN>积分：4582
 								</LI>
 
 								<LI>
-									<SPAN>ke288</SPAN>推广人数：12
+									<SPAN>469711796</SPAN>积分：4343
 								</LI>
 
 								<LI>
-									<SPAN>小梦惠</SPAN>推广人数：12
+									<SPAN>meimeng</SPAN>积分：4203
 								</LI>
 
 								<LI>
-									<SPAN>ainidexu</SPAN>推广人数：10
+									<SPAN>892570</SPAN>积分：4105
 								</LI>
 
 								<LI>
-									<SPAN>婷婷千色坊</SPAN>推广人数：10
+									<SPAN>ainidexu</SPAN>积分：3964
 								</LI>
 
 								<LI>
-									<SPAN>cuichuyan</SPAN>推广人数：8
+									<SPAN>dukoer</SPAN>积分：3925
 								</LI>
 
 								<LI>
-									<SPAN>一夜皇冠</SPAN>推广人数：8
+									<SPAN>Terry.H</SPAN>积分：3730
 								</LI>
 
 							</UL>
@@ -290,54 +290,52 @@
 				</DIV>
 				<DIV class=block>
 					<DIV class=block_top>
-						充值排行榜
+						网站积分排行榜
 					</DIV>
 					<DIV class=block_contenter>
 						<DIV class=grid_box>
 
-							<UL id=fx1>
-
+							<UL id=dx1>
 
 								<LI>
-									<SPAN>张三丰</SPAN>金额：￥48000
+									<SPAN>baobao</SPAN>积分：45600
 								</LI>
 
 								<LI>
-									<SPAN>zhzh</SPAN>金额：￥43800
+									<SPAN>zhzh</SPAN>积分：8028
 								</LI>
 
 								<LI>
-									<SPAN>ws7888</SPAN>金额：￥5250
+									<SPAN>张三丰</SPAN>积分：7265
 								</LI>
 
 								<LI>
-									<SPAN>胡金海</SPAN>金额：￥4300
+									<SPAN>dxl016</SPAN>积分：4582
 								</LI>
 
 								<LI>
-									<SPAN>long8599</SPAN>金额：￥4100
+									<SPAN>469711796</SPAN>积分：4343
 								</LI>
 
 								<LI>
-									<SPAN>超级美少女</SPAN>金额：￥4100
+									<SPAN>meimeng</SPAN>积分：4203
 								</LI>
 
 								<LI>
-									<SPAN>linxz881055</SPAN>金额：￥3050
+									<SPAN>892570</SPAN>积分：4105
 								</LI>
 
 								<LI>
-									<SPAN>AAAAA</SPAN>金额：￥2100
+									<SPAN>ainidexu</SPAN>积分：3964
 								</LI>
 
 								<LI>
-									<SPAN>反恐精英</SPAN>金额：￥2050
+									<SPAN>dukoer</SPAN>积分：3925
 								</LI>
 
 								<LI>
-									<SPAN>yvhcel11</SPAN>金额：￥1900
+									<SPAN>Terry.H</SPAN>积分：3730
 								</LI>
-
 							</UL>
 						</DIV>
 						<DIV class=block_bottom></DIV>
