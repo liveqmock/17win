@@ -1,0 +1,61 @@
+
+.pp8 {
+	MARGIN-TOP: 10px; PADDING-LEFT: 20px; BACKGROUND: url(../images/task_bg_01.jpg) repeat-x center 50%; COLOR: #000000; LINE-HEIGHT: 30px; BORDER-BOTTOM: #999999 1px solid; HEIGHT: 30px
+}
+.pp9 {
+	CLEAR: right; BORDER-RIGHT: #8fc2d1 1px solid; BORDER-TOP: #8fc2d1 1px solid; FLOAT: right; BORDER-LEFT: #8fc2d1 1px solid; WIDTH: 740px; BORDER-BOTTOM: #8fc2d1 1px solid; BACKGROUND-COLOR: #ffffff
+}
+.pp9 UL {
+	MARGIN-BOTTOM: 10px; BORDER-BOTTOM: #f2f2f2 1px solid
+}
+.pp9 LI {
+	LIST-STYLE-TYPE: none; HEIGHT: 28px
+}
+.pp9 LI SPAN {
+	COLOR: red
+}
+.index_freid {
+	FONT-WEIGHT: bold; FLOAT: left; COLOR: #0086e3; LINE-HEIGHT: 40px; HEIGHT: 40px
+}
+.index_freid_link {
+	CLEAR: right; FLOAT: left; LINE-HEIGHT: 40px; HEIGHT: 40px
+}
+.index_freid_link A:link {
+	FONT-SIZE: 12px; COLOR: #acacac; TEXT-DECORATION: none
+}
+.index_freid_link A:visited {
+	FONT-SIZE: 12px; COLOR: #acacac; TEXT-DECORATION: none
+}
+.index_freid_link A:hover {
+	COLOR: #3399cc; TEXT-DECORATION: underline
+}
+.index_freid_bottom {
+	MARGIN-TOP: 15px; FONT-SIZE: 12px; COLOR: #666666; LINE-HEIGHT: 200%; HEIGHT: 80px
+}
+.index_freid_bottom A:link {
+	FONT-SIZE: 12px; COLOR: #666666; TEXT-DECORATION: none
+}
+.index_freid_bottom A:visited {
+	FONT-SIZE: 12px; COLOR: #666666; TEXT-DECORATION: none
+}
+.index_freid_bottom A:hover {
+	COLOR: #3399cc; TEXT-DECORATION: underline
+}
+.zhucekuang {
+	BORDER-RIGHT: #3f80d8 1px dashed; BORDER-TOP: #3f80d8 1px dashed; BORDER-LEFT: #3f80d8 1px dashed; WIDTH: 150px; COLOR: #57a014; BORDER-BOTTOM: #3f80d8 1px dashed; HEIGHT: 17px
+}
+.biaozhu {
+	FONT-SIZE: 12px; COLOR: #999999
+}
+.bt {
+	COLOR: #ff0000
+}
+.inputtext {
+	FONT-WEIGHT: bolder; WIDTH: 150px; HEIGHT: 35px; TEXT-ALIGN: right
+}
+.prostate {
+	RIGHT: 0px; POSITION: fixed; TOP: 0px
+}
+#alertFram {
+	LEFT: 50%; POSITION: fixed; TOP: 50%
+}

@@ -1,0 +1,127 @@
+<%@ page language="java"   pageEncoding="UTF-8"%>
+<br />
+<TABLE class="Regttkk2" cellSpacing=0 cellPadding=5 width="910"
+	align=center border=0>
+	<TBODY>
+		<TR align=left>
+			<TD>
+				<a href='http://www.2000w.net' target='_blank' title=拍拍刷信誉><IMG
+						title=拍拍刷信誉 height=55 src=images/jieducm_04.gif width=109 border=0>
+				</A>
+			</TD>
+			<TD>
+				<a href='http://www.2000w.net' target='_blank' title=拍拍刷信誉><IMG
+						title=拍拍刷信誉 height=55 src=images/jieducm_03.gif width=109 border=0>
+				</A>
+			</TD>
+			<TD>
+				<a href='http://www.2000w.net' target='_blank' title=刷钻网><IMG
+						title=刷钻网 height=55 src=images/jieducm_05.gif width=109 border=0>
+				</A>
+			</TD>
+			<TD>
+				<a href='http://www.2000w.net' target='_blank' title=淘宝互刷><IMG
+						title=淘宝互刷 height=55 src=images/jieducm_06.gif width=109 border=0>
+				</A>
+			</TD>
+			<TD>
+				<a href='http://www.2000w.net' target='_blank' title=传媒><IMG
+						title=传媒 height=55 src=images/jieducm_011.gif width=109 border=0>
+				</A>
+			</TD>
+			<TD>
+				<a href='http://www.2000w.net' target='_blank' title=传媒><IMG
+						title=传媒 height=55 src=images/jieducm_022.gif width=109 border=0>
+				</A>
+			</TD>
+		</TR>
+	</TBODY>
+</TABLE>
+
+<TABLE class="Regttkk2" cellSpacing=0 cellPadding=5 width="910"
+	align=center border=0>
+	<TBODY>
+		<TR align=left>
+			<TD>
+				<a href='http://www.sunwukong.cn/' target='_blank' title=孙悟空>[孙悟空]
+				</A>
+			</TD>
+			<TD>
+				<a href='http://www.at-lib.com' target='_blank' title=分类目录>[分类目录]
+				</A>
+			</TD>
+			<TD>
+				<a href='http://www.all-list.cn' target='_blank' title=中文分类目录>[中文分类目录]
+				</A>
+			</TD>
+			<TD>
+				<a href='http://www.2000w.net' target='_blank' title=淘宝刷信誉>[淘宝刷信誉]
+				</A>
+			</TD>
+			<TD>
+				<a href='http://www.2000w.net' target='_blank' title=淘宝刷钻>[淘宝刷钻]
+				</A>
+			</TD>
+			<TD>
+				<a href='http://www.2000w.net' target='_blank' title=刷钻平台>[刷钻平台]
+				</A>
+			</TD>
+			<TD>
+				<a href='http://www.tenpay.com/' target='_blank' title=互刷平台>[互刷平台]
+				</A>
+			</TD>
+			<TD>
+				<a href='http://www.2000w.net' target='_blank' title=免费刷钻>[免费刷钻]
+				</A>
+			</TD>
+			<TD>
+				<a href='http://www.paipai.com/' target='_blank' title=拍拍网>[拍拍网]
+				</A>
+			</TD>
+		</TR>
+	</TBODY>
+</TABLE>
+<br>
+<TABLE cellSpacing=0 cellPadding=0 width=940 align=center border=0>
+	<tr>
+		<td height="32" align="middle" colspan="3">
+			<div align="center">
+				<script language="javascript">Ofty="Left"</script>
+
+				<script src="../js/Foot.js" language="javascript"></script>
+				<a href="../help/about.asp">关于我们</a> |
+				<a href="../help/pay_introduce.asp">汇款方式</a> |
+				<a href="../help/link.asp">友情链接</a> |
+				<a href="../help/lianxi.asp">联系我们</a> |
+				<a href="../help/viewreturn.asp">建议留言</a> |
+				<a href="../help/">帮助中心</a> |
+				<a href="#">版权声明</a> |
+				<a href="#">服务条款</a>
+			</div>
+		</td>
+	</tr>
+
+	<TR>
+		<TD align=right width=190 height=50>
+			<div align="right">
+				<IMG height=39 src="images/jieducm_110.gif" width=92>
+			</div>
+		</TD>
+		<TD align=middle width=539>
+			<div align="center">
+				CopyRight 2009-2010, jieducm.cn, Inc. All Rights Reserved
+				豫ICP备05329849号
+				<br />
+				本站服务导航:
+				<a href="http://www.2000w.net/" target="_blank">淘宝刷信誉</a>|
+				<a href="http://www.2000w.net/" target="_blank">刷钻平台</a>|
+				<a href="http://www.2000w.net/" target="_blank">淘宝刷钻</a>|
+			</div>
+		</TD>
+		<TD width=211>
+			<div align="left">
+				<IMG height=31 src="images/jieducm_jb.gif" width=96>
+			</div>
+		</TD>
+	</TR>
+</TABLE>

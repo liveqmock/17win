@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
 <table width="100%" border="0" cellpadding="0" cellspacing="0"
 	background="images/index_top_bg.jpg">
 	<tr>
@@ -113,7 +114,8 @@
 			<LI class=white>
 				<A class="li0 " href="user/login.asp" id="a4" onmouseover="Mea(4);"
 					onMouseOut="setAuto()">流量互刷</A>
-			<br></LI>
+				<br>
+			</LI>
 			<LI class=white>
 				<A class="li0 " href="user/md5_pay.asp" id="a5"
 					onmouseover="Mea(5);" onMouseOut="setAuto()">收藏互刷</A>

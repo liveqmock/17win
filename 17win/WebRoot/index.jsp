@@ -1,8 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
-
-<HTML lang=en>
+<HTML  >
 	<HEAD>
 		<title>淘宝刷信誉 -淘宝刷钻 _刷钻平台_互刷平台_免费刷钻首选灵谷刷客平台</title>
 		<META http-equiv=Content-Type content="text/html; charset=gb2312">
@@ -525,23 +524,23 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 				</TD>
 				<TD>
 					<a href='http://www.2000w.net' target='_blank' title=刷钻网><IMG
-							title=刷钻网 height=55 src=images/jieducm_05.gif width=109
-							border=0> </A>
+							title=刷钻网 height=55 src=images/jieducm_05.gif width=109 border=0>
+					</A>
 				</TD>
 				<TD>
 					<a href='http://www.2000w.net' target='_blank' title=淘宝互刷><IMG
-							title=淘宝互刷 height=55 src=images/jieducm_06.gif width=109
-							border=0> </A>
+							title=淘宝互刷 height=55 src=images/jieducm_06.gif width=109 border=0>
+					</A>
 				</TD>
 				<TD>
 					<a href='http://www.2000w.net' target='_blank' title=传媒><IMG
-							title=传媒 height=55 src=images/jieducm_011.gif width=109
-							border=0> </A>
+							title=传媒 height=55 src=images/jieducm_011.gif width=109 border=0>
+					</A>
 				</TD>
 				<TD>
 					<a href='http://www.2000w.net' target='_blank' title=传媒><IMG
-							title=传媒 height=55 src=images/jieducm_022.gif width=109
-							border=0> </A>
+							title=传媒 height=55 src=images/jieducm_022.gif width=109 border=0>
+					</A>
 				</TD>
 			</TR>
 		</TABLE>
@@ -594,16 +593,22 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 		</TABLE>
 		<br>
 		<TABLE cellSpacing=0 cellPadding=0 width=940 align=center border=0>
-
-			<TR>
-				<TD align=middle colSpan=3 height=32>
+			<tr>
+				<td height="32" align="middle" colspan="3">
 					<div align="center">
-						<SCRIPT language=javascript>Ofty="Foot"</SCRIPT>
-
-						<SCRIPT language=javascript src="js/Foot.js"></SCRIPT>
+						<script language="javascript">Ofty="Left"</script>
+						<script src="../js/Foot.js" language="javascript"></script>
+						<a href="../help/about.asp">关于我们</a> |
+						<a href="../help/pay_introduce.asp">汇款方式</a> |
+						<a href="../help/link.asp">友情链接</a> |
+						<a href="../help/lianxi.asp">联系我们</a> |
+						<a href="../help/viewreturn.asp">建议留言</a> |
+						<a href="../help/">帮助中心</a> |
+						<a href="#">版权声明</a> |
+						<a href="#">服务条款</a>
 					</div>
-				</TD>
-			</TR>
+				</td>
+			</tr>
 			<TR>
 				<TD align=right width=190 height=50>
 					<div align="right">
@@ -627,7 +632,7 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 					</div>
 				</TD>
 			</TR>
-			
+
 		</TABLE>
 	</BODY>
 </HTML>

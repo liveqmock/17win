@@ -1,0 +1,73 @@
+BODY {
+	FONT-SIZE: 12px; COLOR: #333333;MARGIN: 0px; BACKGROUND-COLOR: #ffffff
+}
+ul,li{ margin:0px; padding:0px; list-style:none}
+TD {
+	FONT-SIZE: 12px; COLOR: #333333
+}
+TH {
+	FONT-SIZE: 12px; COLOR: #333333
+}
+
+
+
+A {
+	COLOR:#666666; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #f60; TEXT-DECORATION: none
+}
+.white a{ color:#FFFFFF}
+.white a:hover {color:#f60;text-decoration: none;font-weight:bold}
+
+.bleak a:link { color:#000;text-decoration: none;}
+.bleak a:visited { color:#000;text-decoration: none;}
+.bleak a:hover {color:#f60;text-decoration: none;}
+.bleak a:active {color:#f60;text-decoration: none;}
+
+.lan a:link { color:#539BED;text-decoration: none;}
+.lan a:visited { color:#539BED;text-decoration: none;}
+.lan a:hover {color:#539BED;text-decoration: none;}
+.lan  a:active {color:#539BED;text-decoration: none;}
+
+.lan{ color:#539BED}
+
+
+.wenzi{ line-height:28px;}
+
+.margin-bottom{ margin-bottom:8px;}
+.yell_font{ color:#FF6600; font-weight:bold}
+.yell_fon_14t{ color:#FF9900; font-weight:bold; font-size:14px;}
+.hei_fon_14t{ color:000; font-weight:bold; font-size:14px;}
+
+
+.text_center{ text-align:center;}
+#list{ width:960px; background-image:url(images/list.jpg)}
+#list ul{ font-size:13px; font-weight:bold; height:40px; line-height:40px; }
+#list li{ float:left; width:94px; }
+.li0{ float:left; width:94px; text-align:left; text-align:center; height:40px; text-align:center }
+.li1{ background-image:url(images/title1.jpg);width:106px; height:40px; float:left;  color:#FF9900; text-align:center}
+.white_font{ font-weight:bold; color:#FFFFFF; padding-left:45px;}
+.border_hui{ border:#D0DBE3 1px solid}
+.border_hui A {
+	PADDING-LEFT: 15px; BACKGROUND: url(/Images/Top_20.gif) no-repeat left 50%
+}
+.border_hui TD {
+	BACKGROUND: url(/Images/Top_19.gif) repeat-x 50% bottom; LINE-HEIGHT: 27px
+}
+.border_xt{ border-bottom:#6BBFEC 1px dashed; }
+.lin{background-image:url(images/pic.jpg); background-position: 5px 8px;background-repeat:no-repeat; padding-left:20px; line-height:28px;}
+.lin0{background-image:url(images/pic002.jpg); background-position: 5px 8px;background-repeat:no-repeat; padding-left:20px; line-height:28px;}
+.foot_font{ text-align:center; border-top:#6CBFEC 1px solid; line-height:23px; width:100%}
+
+.table_bg{ background-image:url(images/cat_bg.jpg); background-repeat:repeat-x;}
+.border_hui3{ border-left:1px solid #D0DBE3;border-right:1px solid #D0DBE3;border-bottom:1px solid #D0DBE3}
+.white14{ color:#FFFFFF; font-size:14px;}
+.admin_bg{ height:22px;  padding-left:10px; color:#FFFFFF; font-weight:bold; }
+.padding_left{ padding-left:5px;}
+.wenzi1{ line-height:20px; padding:8px;}
+.red_wenzi{ color:#FF0000}
+
+.margin5{ margin-bottom:5px;}
+.border_bottom_lan{ border-bottom:#0099CC 1px dashed}
+.button{BORDER-RIGHT:#3399CC 1px solid; PADDING-RIGHT: 10px; BORDER-TOP:#0099FF 1px solid; PADDING-LEFT: 10px; BACKGROUND:#3399CC; MARGIN-BOTTOM: 8px; PADDING-BOTTOM: 0px; BORDER-LEFT:#0099FF 1px solid; COLOR: #fff; PADDING-TOP: 0px; BORDER-BOTTOM: #3399Cc 1px solid}

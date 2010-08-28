@@ -1,0 +1,31 @@
+/* CSS Document */
+
+body,td,th {
+	font-size: 12px;
+}
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+.white_zi{ color:#FFFFFF}
+.union_line{ line-height:35px;}
+.da_h_zi{font-size: 50px;
+	font-family: "ºÚÌå";
+	color: #FF9900; padding-top:35px;}
+	
+	
+.white_14 a:link { font-size:14px; font-weight:bold;
+color: #FFFFFF;
+}
+.white_14 a:visited {
+	color: #FFFFFF;font-size:14px; font-weight:bold;
+}
+.white_14 a:hover {
+	color: #FFFFFF;font-size:14px; font-weight:bold;
+}
+.white_14 a:active {
+	color: #FFFFFF;font-size:14px; font-weight:bold;
+}
+.button{BORDER-RIGHT:#3399CC 1px solid; PADDING-RIGHT: 10px; BORDER-TOP: #fed9ae 1px solid; PADDING-LEFT: 10px; BACKGROUND:#3399CC; MARGIN-BOTTOM: 8px; PADDING-BOTTOM: 0px; BORDER-LEFT: #fed9ae 1px solid; COLOR: #fff; PADDING-TOP: 0px; BORDER-BOTTOM: #3399Cc 1px solid}
