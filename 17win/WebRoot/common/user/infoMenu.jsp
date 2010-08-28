@@ -82,56 +82,60 @@
 										class=LeftNews>
 										<tr>
 											<td height=20>
-												<A href="../user/Center_Userlock.asp">绑定手机 </A>
+												<A href="user/bindPhone.jsp">绑定手机 </A>
 											</td>
 										</tr>
 										<tr>
 											<td height=20>
-												<A href="../user/guest_info.asp">修改资料</A>
+												<A href="user/updateInfo.jsp">修改资料</A>
 											</td>
 										</tr>
 										<tr>
 											<td height=20>
-												<a href="../user/SetPassword.asp">密码/操作码</a>
+												<a href="user/updatePW.jsp">密码/操作码</a>
 											</td>
 										</tr>
 										<tr>
 
 											<td height=20>
-												<A href="../union/index.asp" target="_blank">我要推广</A>
+												<A href="spread/index.jsp" target="_blank">我要推广</A>
 											</td>
 										</tr>
 										<tr>
 											<td height=20>
-												<A href="../user/promotion.asp">我的推广</A>
+												<A href="user/mySpread.jsp">我的推广</A>
 											</td>
 										</tr>
 										<tr>
 											<td height=20>
-												<a href="../user/ListTop.asp">刷客排行</a>
+												<a href="system/shuakeRank.jsp">刷客排行</a>
 											</td>
 
 										</tr>
+
+										<!-- xgj
 										<tr>
 											<td height=20>
-												<A href="../user/user.asp">站内信</A>
+												<A href="user/user.asp">站内信</A>
 											</td>
 										</tr>
-
+ -->
 
 										<tr>
 											<td height=20>
-												<a href="../user/login.asp"><font color="#FF0000">加入VIP</font>
+												<a href="user/vip.jsp"><font color="#FF0000">加入VIP</font>
 												</a>
 											</td>
 										</tr>
+										<!-- xgj 
 										<tr>
 
 											<td height=20>
 												<A onclick="return confirm('确定退出操作吗？');"
-													href="../user/exit.asp"> <FONT color=red>安全退出</FONT> </A>
+													href="user/exit.asp"> <FONT color=red>安全退出</FONT> </A>
 											</td>
 										</tr>
+										-->
 									</table>
 								</div>
 							</td>
@@ -158,35 +162,35 @@
 										<tr>
 
 											<td height=20>
-												<a href="../user/md5_pay.asp">帐号充值</a>
+												<a href="user/paid.jsp">帐号充值</a>
 											</td>
 										</tr>
 										<tr>
 											<td height=20>
-												<a href="../user/MoneyOrPush.asp">我要兑换</a>
+												<a href="user/exchange.jsp">我要兑换</a>
 											</td>
 										</tr>
 
 										<tr>
 											<td height=20>
-												<a href="../user/mai.asp">购买发布点</a>
+												<a href="user/buyDot.jsp">购买发布点</a>
 											</td>
 
 										</tr>
 										<tr>
 											<td height=20>
-												<a href="../user/ReMoney.asp">我要提现</a>
+												<a href="user/withdrawals.jsp">我要提现</a>
 											</td>
 										</tr>
 										<tr>
 											<td height=20>
-												<a href="../user/remoneylist.asp">提现记录</a>
+												<a href="user/withdrawalsLog.jsp">提现记录</a>
 											</td>
 										</tr>
 										<tr>
 
 											<td height=20>
-												<a href="../user/record.asp">操作记录</a>
+												<a href="user/operationLog.jsp">操作记录</a>
 											</td>
 										</tr>
 									</table>
@@ -194,6 +198,7 @@
 							</td>
 						</tr>
 					</table>
+					<!--  xgj
 					<table cellpadding=0 cellspacing=0 width=158 align=center>
 						<tr>
 
@@ -236,6 +241,8 @@
 							</td>
 						</tr>
 					</table>
+					
+					-->
 					<table cellpadding=0 cellspacing=0 width=158 align=center>
 						<tr>
 							<td height=25 class="menu_title"
@@ -256,36 +263,37 @@
 										class=LeftNews>
 										<tr>
 											<td height=20>
-												<a href="../user/tousu.asp">我要申诉</a>
+												<a href="user/appeal.jsp">我要申诉</a>
 											</td>
 										</tr>
 										<tr>
 											<td height=20>
-												<a href="../user/complaintre.asp">我受到的申诉</a>
+												<a href="user/appealTome.jsp">我受到的申诉</a>
 											</td>
 										</tr>
 
 										<tr>
 											<td height=20>
-												<a href="../user/complaintmy.asp">我的申诉</a><font
+												<a href="user/myAppeal.jsp">我的申诉</a><font color="#0000FF">&nbsp;</font>
+											</td>
+										</tr>
+										<!-- xgj -->
+										<tr>
+											<td height=20>
+												<a href="user/officalBlackList.jsp">官方黑名单</a><font
 													color="#0000FF">&nbsp;</font>
 											</td>
 										</tr>
 										<tr>
 											<td height=20>
-												<a href="../user/complainth.asp">官方黑名单</a><font
+												<a href="user/myBlackList.jsp">我的黑名单</a><font
 													color="#0000FF">&nbsp;</font>
-											</td>
-										</tr>
-										<tr>
-											<td height=20>
-												<a href="../user/name.asp">我的黑名单</a><font color="#0000FF">&nbsp;</font>
 											</td>
 
 										</tr>
 										<tr>
 											<td height=20>
-												<a href="../user/comp.asp">官方奖罚</a><font color="#0000FF">&nbsp;</font>
+												<a href="user/officalRP.jsp">官方奖罚</a><font color="#0000FF">&nbsp;</font>
 											</td>
 										</tr>
 									</table>

@@ -81,7 +81,7 @@
 
 										<td width="18%">
 											<div align="center" class="white_14">
-												<a href="tuiguang.asp">推广代码</a>
+												<a href="spread/code.jsp">推广代码</a>
 											</div>
 										</td>
 										<td width="1%">
