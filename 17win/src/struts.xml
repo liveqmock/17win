@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+
+<struts>
+	<!-- 设置属性 -->
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	<constant name="struts.objectFactory" value="spring" />
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.configuration.xm.reload" value="true" />
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<constant name="struts.i18n.reload" value="true" />
+	<constant name="struts.multipart.maxSize" value="10485760"></constant>
+
+	<!-- 17win默认 -->
+	<package name="17win-default" extends="json-default">
+		<interceptors>
+			<interceptor name="exceptionInterceptor"
+				class="net.win.ExceptionInterceptor">
+			</interceptor>
+			<interceptor name="interceptor2"
+				class="net.win.Interceptor2">
+			</interceptor>
+			<interceptor-stack name="17winStack">
+				<interceptor-ref name="json"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="exceptionInterceptor"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="17winStack"></default-interceptor-ref>
+		<global-results>
+			<result name="json" type="json"></result>
+			<result name="error">/error.jsp</result>
+		</global-results>
+	</package>
+
+</struts>

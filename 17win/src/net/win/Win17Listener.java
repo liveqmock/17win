@@ -5,7 +5,7 @@ import javax.servlet.ServletContextListener;
 
 import org.apache.commons.beanutils.ConvertUtils;
 
-public class VhostListener implements ServletContextListener {
+public class Win17Listener implements ServletContextListener {
 	public void contextDestroyed(ServletContextEvent arg0) {
 	}
 

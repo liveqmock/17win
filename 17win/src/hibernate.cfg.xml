@@ -8,22 +8,18 @@
 			true
 		</property>
 		<property name="hibernate.connection.driver_class">
-			com.mysql.jdbc.Driver
-		</property>
-		<!-- 
-			<property name="hibernate.connection.url">
-			jdbc:hsqldb:F:\project\openfire\RmProject\target\openfire\embedded-db\openfire
-			</property>
-		-->
-		<property name="hibernate.connection.url">
-			jdbc:mysql://localhost:3306/vhostDB
+			com.microsoft.jdbc.sqlserver.SQLServerDriver
 		</property>
 
-		<property name="hibernate.connection.username">root</property>
-		<property name="hibernate.connection.password">123456</property>
+		<property name="hibernate.connection.url">
+			jdbc:microsoft:sqlserver://localhost:1433;DatabaseName=17windb;SelectMethod=Cursor
+		</property>
+
+		<property name="hibernate.connection.username">sa</property>
+		<property name="hibernate.connection.password"></property>
 		<!-- 方言  	-->
 		<property name="hibernate.dialect">
-			org.hibernate.dialect.MySQLDialect
+			org.hibernate.dialect.SQLServerDialect
 		</property>
 
 		<property name="hibernate.connection.charSet">UTF-8</property>
@@ -88,13 +84,14 @@
 		-->
 
 		<!-- 配置信息 -->
-		<mapping package="com.rooyeetone.vhost.entity" />
-		<mapping class="com.rooyeetone.vhost.entity.TbBaseEntity" />
-		<mapping class="com.rooyeetone.vhost.entity.TbUserEntity" />
-		<mapping class="com.rooyeetone.vhost.entity.TbCompanyEntity" />
-		<mapping class="com.rooyeetone.vhost.entity.TbCityEntity" />
-		<mapping class="com.rooyeetone.vhost.entity.TbProvinceEntity" />
-		<mapping class="com.rooyeetone.vhost.entity.TbTrade1Entity" />
-		<mapping class="com.rooyeetone.vhost.entity.TbTrade2Entity" />
+		<mapping package="net.win.entity" />
+		<mapping class="net.win.entity.BaseEntity" />
+		<mapping class="net.win.entity.UserEntity" />
+		<mapping class="net.win.entity.CityEntity" />
+		<mapping class="net.win.entity.PrefectureEntity" />
+		<mapping class="net.win.entity.ProvinceEntity" />
+		<mapping class="net.win.entity.TaobaoUserEntity" />
+		<mapping class="net.win.entity.PaipaiUserEntity" />
+		<mapping class="net.win.entity.YouaUserEntity" />
 	</session-factory>
 </hibernate-configuration>
