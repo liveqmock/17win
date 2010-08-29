@@ -1,7 +1,7 @@
 package net.win.entity;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,14 +10,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="TB_PROVINCE")
+@Table(name = "TB_PROVINCE")
 public class ProvinceEntity extends BaseEntity {
 	// 名字
 	@Column(name = "NAME_", length = 20, nullable = false)
 	private String name;
 	// 城市
 	@OneToMany(mappedBy = "province", fetch = FetchType.LAZY)
-	private Set<CityEntity> cities = new HashSet<CityEntity>();
+	private List<CityEntity> cities = new ArrayList<CityEntity>();
+
 	public String getName() {
 		return name;
 	}
@@ -26,11 +27,11 @@ public class ProvinceEntity extends BaseEntity {
 		this.name = name;
 	}
 
-	public Set<CityEntity> getCities() {
+	public List<CityEntity> getCities() {
 		return cities;
 	}
 
-	public void setCities(Set<CityEntity> cities) {
+	public void setCities(List<CityEntity> cities) {
 		this.cities = cities;
 	}
 

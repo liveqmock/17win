@@ -23,9 +23,9 @@
 			org.hibernate.dialect.SQLServerDialect
 		</property>
 
-		<property name="hibernate.connection.charSet">UTF-8</property>
+		<property name="hibernate.connection.charSet">GBK</property>
 		<property name="hibernate.connection.characterEncoding">
-			UTF-8
+		GBK
 		</property>
 		<!--
 			防止出现MySql过夜错误 <property name="hibernate.connection.release_mode">
@@ -89,7 +89,7 @@
 		<mapping class="net.win.entity.BaseEntity" />
 		<mapping class="net.win.entity.UserEntity" />
 		<mapping class="net.win.entity.CityEntity" />
-		<mapping class="net.win.entity.PrefectureEntity" />
+		<mapping class="net.win.entity.AreaEntity" />
 		<mapping class="net.win.entity.ProvinceEntity" />
 		<mapping class="net.win.entity.TaobaoUserEntity" />
 		<mapping class="net.win.entity.PaipaiUserEntity" />

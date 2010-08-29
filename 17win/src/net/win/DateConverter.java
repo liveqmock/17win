@@ -2,12 +2,17 @@ package net.win;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.apache.commons.beanutils.Converter;
+
 @SuppressWarnings("unchecked")
 public class DateConverter implements Converter {
 
 	public Object convert(Class arg0, Object arg1) {
+		if (arg1 instanceof Date) {
+			return arg1;
+		}
 		String p = (String) arg1;
 		if (p == null || p.trim().length() == 0) {
 			return null;

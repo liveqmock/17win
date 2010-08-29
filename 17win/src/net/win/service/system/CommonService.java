@@ -1,17 +1,24 @@
 package net.win.service.system;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import net.win.BaseService;
+import net.win.dao.AreaDAO;
 import net.win.dao.CityDAO;
-import net.win.dao.PrefectureDAO;
 import net.win.dao.ProvinceDAO;
 import net.win.dao.UserDAO;
+import net.win.entity.AreaEntity;
+import net.win.entity.CityEntity;
+import net.win.entity.ProvinceEntity;
+import net.win.vo.CommonVO;
 
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 
 @SuppressWarnings("unused")
-@Service("userService")
+@Service("commonService")
 public class CommonService extends BaseService {
 	@Resource
 	private UserDAO userDAO;
@@ -20,9 +27,36 @@ public class CommonService extends BaseService {
 	@Resource
 	private CityDAO cityDAO;
 	@Resource
-	private PrefectureDAO prefectureDAO;
-	
-	public String register( ) throws Exception {
+	private AreaDAO areaDAO;
+
+	/**
+	 * 初始化注册
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String initRegister(CommonVO commonVO) throws Exception {
+		List<ProvinceEntity> provinces = provinceDAO.listAll();
+		List<CityEntity> cities = provinces.get(0).getCities();
+		List<AreaEntity> areas = cities.get(0).getAreas();
+		Hibernate.initialize(provinces);
+		Hibernate.initialize(cities);
+		Hibernate.initialize(areas);
+		commonVO.setAreas(areas);
+		commonVO.setProvinces(provinces);
+		commonVO.setCities(cities);
+		return "initRegister";
+	}
+
+	/**
+	 * 注册
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String register(CommonVO commonVO) throws Exception {
+
 		return SUCCESS;
 	}
+
 }

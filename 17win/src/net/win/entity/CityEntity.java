@@ -1,6 +1,8 @@
 package net.win.entity;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -10,8 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.apache.struts2.json.annotations.JSON;
 
 @Entity
 @Table(name = "TB_CITY")
@@ -26,7 +26,7 @@ public class CityEntity extends BaseEntity {
 
 	// 县区
 	@OneToMany(mappedBy = "city", fetch = FetchType.LAZY)
-	private Set<PrefectureEntity> prefectures = new HashSet<PrefectureEntity>();
+	private List<AreaEntity> areas = new ArrayList<AreaEntity>();
 
 	public ProvinceEntity getProvince() {
 		return province;
@@ -44,11 +44,12 @@ public class CityEntity extends BaseEntity {
 		this.name = name;
 	}
 
-	public Set<PrefectureEntity> getPrefectures() {
-		return prefectures;
+	public List<AreaEntity> getAreas() {
+		return areas;
 	}
 
-	public void setPrefectures(Set<PrefectureEntity> prefectures) {
-		this.prefectures = prefectures;
+	public void setAreas(List<AreaEntity> areas) {
+		this.areas = areas;
 	}
+
 }

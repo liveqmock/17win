@@ -14,8 +14,8 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name = "TBP_PREFECTURE")
-public class PrefectureEntity extends BaseEntity {
+@Table(name = "TB_AREA")
+public class AreaEntity extends BaseEntity {
 	// 名字
 	@Column(name = "NAME_", length = 20, nullable = false)
 	private String name;

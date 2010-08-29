@@ -1,6 +1,7 @@
 package net.win.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,7 +24,7 @@ public class UserEntity extends BaseEntity {
 	 * 基本信息
 	 */
 	// 用户名
-	@Column(name = "USERNAME_", length = 20, unique = true, nullable = false)
+	@Column(name = "USERNAME_", length = 12, unique = true, nullable = false)
 	private String username;
 	// 登陆密码
 	@Column(name = "LOGIN_PASSWORD_", columnDefinition = "CHAR(24)", nullable = false)
@@ -77,8 +78,8 @@ public class UserEntity extends BaseEntity {
 	private CityEntity city;
 	// 县
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "PREFECTURES_ID_")
-	private PrefectureEntity prefecture;
+	@JoinColumn(name = "AREA_ID_")
+	private AreaEntity area;
 
 	// 淘宝信息
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -95,6 +96,31 @@ public class UserEntity extends BaseEntity {
 	@JoinColumn(name = "YOUAUSER_ID_")
 	private YouaUserEntity youaUser;
 
+	 // 介绍人
+	@ManyToOne(targetEntity = UserEntity.class, fetch = FetchType.LAZY)
+	@JoinColumn(name = "REFEREE_ID_")
+	private UserEntity referee;
+
+	// // 我的介绍人
+	@OneToMany(targetEntity = UserEntity.class, mappedBy = "referee")
+	private List<UserEntity> myReferees;
+
+	public UserEntity getReferee() {
+		return referee;
+	}
+
+	public void setReferee(UserEntity referee) {
+		this.referee = referee;
+	}
+
+	public List<UserEntity> getMyReferees() {
+		return myReferees;
+	}
+
+	public void setMyReferees(List<UserEntity> myReferees) {
+		this.myReferees = myReferees;
+	}
+
 	/**
 	 * 关联关系
 	 * 
@@ -102,8 +128,6 @@ public class UserEntity extends BaseEntity {
 	 */
 	// // 角色
 	// private RoleEntity role = new RoleEntity();
-	// // 介绍人
-	// private UserEntity referee;
 	// // 推广
 	// private Set<UserEntity> promoteUsers = new HashSet<UserEntity>(0);
 	// // 信誉任务模板
@@ -254,12 +278,12 @@ public class UserEntity extends BaseEntity {
 		this.city = city;
 	}
 
-	public PrefectureEntity getPrefecture() {
-		return prefecture;
+	public AreaEntity getArea() {
+		return area;
 	}
 
-	public void setPrefecture(PrefectureEntity prefecture) {
-		this.prefecture = prefecture;
+	public void setArea(AreaEntity area) {
+		this.area = area;
 	}
 
 	public Boolean getStatus() {

@@ -8,7 +8,12 @@
 			rel=Stylesheet>
 		<LINK href="css/login.css" type=text/css rel=stylesheet>
 		<LINK href="css/top_bottom.css" type=text/css rel=stylesheet>
-		<SCRIPT src="js/jieducm_pupu.js" type=text/javascript></SCRIPT>
+		<SCRIPT src="system/register.js" type=text/javascript></SCRIPT>
+		<STYLE type="text/css">
+td {
+	valign: top;
+}
+</STYLE>
 	</HEAD>
 	<BODY>
 		<s:include value="../common/title.jsp"></s:include>
@@ -37,8 +42,8 @@
 				<TR>
 
 					<TD class=K_mtcontent align=left colSpan=6>
-						<FORM name="form" id="form" onSubmit="return save_onclick()"
-							method=post>
+						<s:form action="systemManager/common!register.php" theme="simple"
+							onsubmit="return validateForm()">
 							<input name="zhuce" type="hidden" value="ok" />
 							<table width="900" border="0" align="center" cellpadding="0"
 								cellspacing="0">
@@ -47,284 +52,349 @@
 										<span class="font14b2">新用户免费注册-轻松注册10秒钟搞定</span>
 										<br />
 										请填写以下信息，
-										<font color="#FF0000">*</font>为必填内容,<font color="#FF0000">注意：淘宝，有啊，拍拍信息必须填写一个</font>
+										<font color="#FF0000">*</font>为必填内容,
+										<font color="#FF0000">注意：淘宝，有啊，拍拍信息必须填写一个</font>
 										<br />
 										请认真仔细的填写以下信息，真实的个人信息有助于给你使用的服务带来更多的保障以及便捷！
 									</td>
 
 								</tr>
 								<tr>
-									<td width="146" height="40" align="right" class="font12h">
+									<td width="146" height="40" align="right" class="font12h"
+										valign="top">
 										用户名：
 									</td>
 									<td width="230">
-										<input name="UserID" type="text" id="UserID"
-											onBlur="name_chk(this)" size="30" maxlength="12">
+										<s:textfield name="commonVO.userEntity.username" size="30"
+											cssStyle="width:210px" id="username" maxlength="12"></s:textfield>
+										<br />
+										<span id="c0"><font color="#FF0000">*</font>4-12个字符的字母或者数字</span>
 									</td>
-									<td width="524">
-										<span id="c0"><font color="#FF0000">*</font>4-12个字符字母数字</span>
-										<script id="tname"></script>
+									<td width="524" nowrap="nowrap" valign="top">
+
+
 									</td>
 
 								</tr>
 								<tr>
-									<td height="40" align="right" class="font12h">
+									<td height="40" align="right" class="font12h" valign="top">
 										登录密码：
 									</td>
 									<td>
-										<input name="password" type="password" id="password" size="30"
-											style="width: 213px;" />
+										<s:password id="password" name="commonVO.userEntity.password"
+											size="30" cssStyle="width:210px"></s:password>
+										<br />
+										<font color="#FF0000">*</font>登录时需要使用密码，可以是6至20位字符
 									</td>
-									<td>
-										<font color="#FF0000">*</font>登录时需要使用密码，可以是6至16位数字或字母
+									<td valign="top">
+
 									</td>
 								</tr>
 								<tr>
 
-									<td height="40" align="right">
+									<td height="40" align="right" valign="top">
 										<span class="font12h">确认登录密码：</span>
 									</td>
 									<td>
-										<input name="password2" type="password" id="password2"
-											size="30" style="width: 213px;" />
-									</td>
-									<td>
+										<input type="password" id="rePassword" size="30"
+											style="width: 210px">
+										<br />
 										<font color="#FF0000">*</font>重复上面的密码
 									</td>
+									<td valign="top">
+
+									</td>
 								</tr>
 
 								<tr>
-									<td height="40" align="right" class="font12h">
-										Q&nbsp;Q:
-									</td>
-
-									<td>
-										<input name="QQ" type="text" id="QQ" size="30"
-											onKeyUp="if(isNaN(value))execCommand('undo')"
-											onBlur="xiechuemail()" />
-									</td>
-									<td>
-										<font color="#FF0000">*</font>刷宝时必用
-									</td>
-								</tr>
-								<tr>
-									<td height="40" align="right" class="font12h">
-										旺旺:
-									</td>
-
-									<td>
-										<input name="QQ" type="text" id="QQ" size="30"
-											onKeyUp="if(isNaN(value))execCommand('undo')"
-											onBlur="xiechuemail()" />
-									</td>
-									<td>
-										<font color="#FF0000">注意：不要用旺旺发送任何关于刷信誉的内容</font>
-									</td>
-								</tr>
-								<tr>
-									<td height="40" align="right" class="font12h">
-										电子邮箱：
-									</td>
-									<td>
-										<input name="Email" type="text" id="Email" size="30" />
-									</td>
-									<td>
-										<font color="#FF0000">*</font>取回密码使用！
-									</td>
-
-								</tr>
-								<tr>
-									<td height="40" align="right" class="font12h">
+									<td height="40" align="right" class="font12h" valign="top">
 										操作密码：
 									</td>
 									<td>
-										<span class="font12h"> <input name="czm"
-												type="password" id="czm" size="30" style="width: 213px;" />
-										</span>
+										<s:password id="opertationCode"
+											name="commonVO.userEntity.opertationCode" size="30"
+											cssStyle="width:210px"></s:password>
+										<br />
+										<font color="#FF0000">*</font>互刷时必用 6-20位！
 									</td>
-									<td>
-										<font color="#FF0000">*</font>互刷时必用 6-16位！
+									<td valign="top">
+
 									</td>
 
 								</tr>
 								<tr>
-									<td height="40" align="right" class="font12h">
+									<td height="40" align="right" class="font12h" valign="top">
 										确认操作密码：
 									</td>
 									<td align="left" class="red-bcolor">
-										<span class="font12h"> <input name="czm2"
-												type="password" id="czm2" size="30" style="width: 213px;" />
-										</span>
+										<input type="password" id="reOperationCode" size="30"
+											style="width: 210px" />
+										<br />
+										<font color="#FF0000">*</font>重复上面的操作密码
+									</td>
+									<td valign="top">
+
+									</td>
+
+								</tr>
+
+								<tr>
+									<td height="40" align="right" class="font12h" valign="top">
+										Q&nbsp;Q：
+									</td>
+
+									<td>
+										<s:textfield name="commonVO.userEntity.qq" id="qq" size="30"
+											cssStyle="width:210px"></s:textfield>
+										<br />
+										<font color="#FF0000">*</font>刷信誉时必用
+									</td>
+									<td valign="top">
+
+									</td>
+								</tr>
+								<tr>
+									<td height="40" align="right" class="font12h" valign="top">
+										旺旺：
+									</td>
+
+									<td>
+										<s:textfield id="ww" name="commonVO.userEntity.ww" size="30"
+											cssStyle="width:210px"></s:textfield>
+										<br />
+										<font color="#FF0000">注意：非必须，不要用旺旺发送任何关于刷信誉的内容</font>
+									</td>
+									<td valign="top">
+
+									</td>
+								</tr>
+								<tr>
+									<td height="40" align="right" class="font12h" valign="top">
+										电子邮箱：
 									</td>
 									<td>
-										<font color="#FF0000">*</font>重复上面的操作密码
+										<s:textfield id="email" name="commonVO.userEntity.email"
+											size="30" cssStyle="width:210px"></s:textfield>
+										<br />
+										<font color="#FF0000">*</font>取回密码使用！
+									</td>
+									<td valign="top">
+
 									</td>
 
 								</tr>
 								<tr>
-									<td height="40" align="right" class="font12h">
+									<td height="40" align="right" class="font12h" nowrap="nowrap"
+										valign="top">
 										淘宝店铺地址：
 									</td>
 									<td align="left" class="red-bcolor">
-										<input name="czm2" type="password" id="czm2" size="30"
-											style="width: 213px;" />
-									</td>
-									<td>
+										<s:textfield id="taobaoShopURL"
+											name="commonVO.userEntity.taobaoUser.shopURL" size="30"
+											cssStyle="width:300px"></s:textfield>
+										<br />
 										<font color="#FF0000"></font>您的淘宝店铺
+									</td>
+									<td valign="top">
+
 									</td>
 								</tr>
 								<tr>
-									<td height="40" align="right" class="font12h">
+									<td height="40" align="right" class="font12h" valign="top">
 										淘宝账号：
 									</td>
 									<td align="left" class="red-bcolor">
-										<input name="czm2" type="password" id="czm2" size="30"
-											style="width: 213px;" />
+										<s:textfield id="taobaoSeller"
+											name="commonVO.userEntity.taobaoUser.seller" size="30"
+											cssStyle="width:210px"></s:textfield>
+										<br />
+										<font color="#FF0000"></font>淘宝账号
 									</td>
-									<td>
-										<font color="#FF0000"></font>系统自动获取
+									<td valign="top">
+
 									</td>
 								</tr>
 								<tr>
-									<td height="40" align="right" class="font12h">
+									<td height="40" align="right" class="font12h" valign="top">
 										淘宝小号账号：
 									</td>
 									<td align="left" class="red-bcolor">
-										<input name="czm2" type="password" id="czm2" size="30"
-											style="width: 213px;" />
-									</td>
-									<td>
+										<s:textfield id="taobaoBuyer"
+											name="commonVO.userEntity.taobaoUser.buyer" size="30"
+											cssStyle="width:210px"></s:textfield>
+										<br />
 										<font color="#FF0000"></font>购买别人物品的淘宝账号，该必须是黄钻级别以下（如被查出立即封号）
+									</td>
+									<td valign="top">
+
 									</td>
 								</tr>
 								<tr>
-									<td height="40" align="right" class="font12h">
+									<td height="40" align="right" class="font12h" valign="top">
 										拍拍店铺地址：
 									</td>
 									<td align="left" class="red-bcolor">
-										<input name="czm2" type="password" id="czm2" size="30"
-											style="width: 213px;" />
-									</td>
-									<td>
+										<s:textfield id="paipaiShopURL"
+											name="commonVO.userEntity.paipaiUser.shopURL" size="30"
+											cssStyle="width:300px"></s:textfield>
+										<br />
 										<font color="#FF0000"></font>您的拍拍店铺
+									</td>
+									<td valign="top">
+
 									</td>
 								</tr>
 								<tr>
-									<td height="40" align="right" class="font12h">
+									<td height="40" align="right" class="font12h" valign="top">
 										拍拍账号：
 									</td>
 									<td align="left" class="red-bcolor">
-										<input name="czm2" type="password" id="czm2" size="30"
-											style="width: 213px;" />
+										<s:textfield id="paipaiSeller"
+											name="commonVO.userEntity.paipaiUser.seller" size="30"
+											cssStyle="width:210px"></s:textfield>
+										<br />
+										<font color="#FF0000"></font>拍拍账号
 									</td>
-									<td>
-										<font color="#FF0000"></font>系统自动获取
+									<td valign="top">
+
 									</td>
 								</tr>
 								<tr>
-									<td height="40" align="right" class="font12h">
+									<td height="40" align="right" class="font12h" valign="top">
 										拍拍小号账号：
 									</td>
 									<td align="left" class="red-bcolor">
-										<input name="czm2" type="password" id="czm2" size="30"
-											style="width: 213px;" />
-									</td>
-									<td>
+										<s:textfield id="paopaoBuyer"
+											name="commonVO.userEntity.paipaiUser.buyer" size="30"
+											cssStyle="width:210px"></s:textfield>
+										<br />
 										<font color="#FF0000"></font>购买别人物品的拍拍账号，该必须是黄钻级别以下（如被查出立即封号）
+									</td>
+									<td valign="top">
+
 									</td>
 								</tr>
 								<tr>
-									<td height="40" align="right" class="font12h">
+									<td height="40" align="right" class="font12h" valign="top">
 										有啊店铺地址：
 									</td>
 									<td align="left" class="red-bcolor">
-										<input name="czm2" type="password" id="czm2" size="30"
-											style="width: 213px;" />
-									</td>
-									<td>
+										<s:textfield id="youaShopURL"
+											name="commonVO.userEntity.youaUser.shopURL" size="30"
+											cssStyle="width:300px"></s:textfield>
+										<br />
 										<font color="#FF0000"></font>您的有啊店铺
+									</td>
+									<td valign="top">
+
 									</td>
 								</tr>
 								<tr>
-									<td height="40" align="right" class="font12h">
+									<td height="40" align="right" class="font12h" valign="top">
 										有啊账号：
 									</td>
 									<td align="left" class="red-bcolor">
-										<input name="czm2" type="password" id="czm2" size="30"
-											style="width: 213px;" />
+										<s:textfield id="youaSeller"
+											name="commonVO.userEntity.youaUser.seller" size="30"
+											cssStyle="width:210px"></s:textfield>
+										<br />
+										<font color="#FF0000"></font>拍拍账号
 									</td>
-									<td>
-										<font color="#FF0000"></font>系统自动获取
+									<td valign="top">
+
 									</td>
 								</tr>
 								<tr>
-									<td height="40" align="right" class="font12h">
+									<td height="40" align="right" class="font12h" valign="top">
 										有啊小号账号：
 									</td>
 									<td align="left" class="red-bcolor">
-										<input name="czm2" type="password" id="czm2" size="30"
-											style="width: 213px;" />
+										<s:textfield id="youabuter"
+											name="commonVO.userEntity.youaUser.buyer" size="30"
+											cssStyle="width:210px"></s:textfield>
+										<br />
+										购买别人物品的有啊账号，该必须是黄钻级别以下（如被查出立即封号）
 									</td>
-									<td>
-										购买别人物品的有啊账号，该必须是黄钻级别以下（如被查出立即封号） 
+									<td valign="top">
+
 									</td>
 								</tr>
 
 								<tr>
-									<td height="40" align="right" class="font12h">
+									<td height="40" align="right" class="font12h" valign="top">
 										手机号码：
 									</td>
 									<td align="left" class="red-bcolor">
-										<input name="phone" type="text" id="phone" size="30"
-											onKeyUp="if(isNaN(value))execCommand('undo')" />
-									</td>
-									<td>
+										<s:textfield id="telephone"
+											name="commonVO.userEntity.telephone" size="30"
+											cssStyle="width:210px"></s:textfield>
+										<br />
 										<font color="#FF0000">*</font>可凭手机找回密码
+									</td>
+									<td valign="top">
+
 									</td>
 								</tr>
 
 								<tr>
-									<td height="40" align="right" class="font12h">
+									<td height="40" align="right" class="font12h" valign="top">
 										选择发货地：
 									</td>
 									<td align="left" class="red-bcolor">
-										<select></select>
-										<select></select>
-										<select></select>
-									</td>
-									<td>
+
+										<s:select id="provinceID"
+											name="commonVO.userEntity.province.id"
+											list="commonVO.provinces" listKey="id" listValue="name"></s:select>
+										省
+										<s:select id="cityID" name="commonVO.userEntity.city.id"
+											list="commonVO.cities" listKey="id" listValue="name"></s:select>
+										市
+										<s:select id="areaID" name="commonVO.userEntity.area.id"
+											list="commonVO.areas" listKey="id" listValue="name"></s:select>
+										县/区&nbsp;&nbsp;
+										<br />
 										<font color="#FF0000"></font>当发送的是
 										<font color="#FF0000">24小时</font>以内的
-										<font color="#FF0000">实物任务</font>时，系统可以根据这个地址，生成一个同地区的随机地址。更大的提高真实性！
+										<font color="#FF0000">实物任务</font>时，
+										系统可以根据这个地址，生成一个同地区的收货地址。更大的提高真实性！
+									</td>
+									<td valign="top">
+
 									</td>
 								</tr>
 
 
 								<tr>
 
-									<td height="40" align="right" class="font12h">
+									<td height="40" align="right" class="font12h" valign="top">
 										推荐人：
 									</td>
 									<td>
-										<input name="tjr" type="text" id="tjr" value="" size="30" />
-									</td>
-									<td>
+										<s:textfield id="refeereeName"
+											name="commonVO.userEntity.referee.username" size="30"
+											cssStyle="width:210px"></s:textfield>
+										<br />
 										没有可留空！对于被推荐人，没有任务损失，推荐人得到积分奖励
+									</td>
+									<td valign="top">
+
 									</td>
 								</tr>
 								<tr>
-									<td height="40" align="right" class="font12h">
+									<td height="40" align="right" class="font12h" valign="top">
 										验证码：
 									</td>
 									<td align="left" class="red-bcolor">
-
-										<INPUT id=CheckCode maxLength=6 name=CheckCode
-											onKeyUp="if(isNaN(value))execCommand('undo')">
-										<img src="jieducm_code.asp" alt="验证码"
-											onClick="this.src='jieducm_code.asp?rnd=' + Math.random();" />
-									</td>
-									<td>
+										<s:textfield id="ww" name="commonVO.verificationCode"
+											id="verificationCode" size="30" cssStyle="width:60px"></s:textfield>
+										<img src="systemManager/verificationCode.php"
+											onclick="changeValidateCode(this)" title="点击图片刷新验证码"
+											style="cursor: pointer;" />
+										<br />
 										<font color="#FF0000">*</font>为防止恶意注册请输入验证码
+									</td>
+									<td valign="top">
+
 									</td>
 								</tr>
 								<tr>
@@ -459,19 +529,14 @@
 									</td>
 								</tr>
 								<tr>
-									<td height="40" align="right" class="font12h">
-										&nbsp;
-									</td>
-									<td align="center" class="red-bcolor">
-									</td>
-									<td>
-										<INPUT
+									<td colspan="3" align="center">
+										<INPUT  id="sumbitBtn"
 											style="FONT-WEIGHT: bold; WIDTH: 120px; CURSOR: pointer; COLOR: #000000; HEIGHT: 26px"
-											type=submit value="同意协议(10)">
+										 timeId="10" disabled="true"	type="submit" value="同意协议(10)">
 									</td>
 								</tr>
 							</table>
-						</form>
+						</s:form>
 
 					</TD>
 				</TR>

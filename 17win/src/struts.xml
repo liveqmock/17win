@@ -13,7 +13,7 @@
 	<constant name="struts.i18n.encoding" value="UTF-8" />
 	<constant name="struts.i18n.reload" value="true" />
 	<constant name="struts.multipart.maxSize" value="10485760"></constant>
-
+	<constant name="struts.action.extension" value="php" />
 	<!-- 17win默认 -->
 	<package name="17win-default" extends="json-default">
 		<interceptors>

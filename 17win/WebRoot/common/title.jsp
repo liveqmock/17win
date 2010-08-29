@@ -42,7 +42,7 @@
 									<span class="yell_font">欢迎您！</span>
 
 									<A href="system/login.jsp" target="_top">登陆</A> |
-									<A href="system/register.jsp" target="_top"> 注册</A> |
+									<A href="systemManager/common!initRegister.php" target="_top"> 注册</A> |
 
 									<A href="user/index.jsp" target="_top"> 个人中心 </A>|
 									<A href="#" title=添加到收藏夹
@@ -119,24 +119,24 @@
 				<br>
 			</LI>
 			<LI class=white>
-				<A class="li0 " href="credit/task.jsp" id="a5"
-					onmouseover="Mea(5);" onMouseOut="setAuto()">收藏互刷</A>
+				<A class="li0 " href="credit/task.jsp" id="a5" onmouseover="Mea(5);"
+					onMouseOut="setAuto()">收藏互刷</A>
 			</LI>
 			<LI class=white>
 				<A class="li0 " href="user/exchange.jsp" id="a6"
 					onmouseover="Mea(6);" onMouseOut="setAuto()">赠送兑换</A>
 			</LI>
 			<LI class=white>
-				<A class="li0 " href="spread/index.jsp" id="a7" onmouseover="Mea(7);"
-					onMouseOut="setAuto()">推广赚钱</A>
+				<A class="li0 " href="spread/index.jsp" id="a7"
+					onmouseover="Mea(7);" onMouseOut="setAuto()">推广赚钱</A>
 			</LI>
 			<LI class=white>
 				<A class="li0 " href="user/vip.jsp" id="a8" onmouseover="Mea(8);"
 					onMouseOut="setAuto()">加入VIP</A>
 			</LI>
 			<LI class=white>
-				<A class="li0 " href="system/newer.jsp" id="a9" onmouseover="Mea(9);"
-					onMouseOut="setAuto()">新手入门</A>
+				<A class="li0 " href="system/newer.jsp" id="a9"
+					onmouseover="Mea(9);" onMouseOut="setAuto()">新手入门</A>
 			</LI>
 		</UL>
 	</DIV>
