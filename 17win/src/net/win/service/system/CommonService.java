@@ -37,14 +37,8 @@ public class CommonService extends BaseService {
 	 */
 	public String initRegister(CommonVO commonVO) throws Exception {
 		List<ProvinceEntity> provinces = provinceDAO.listAll();
-		List<CityEntity> cities = provinces.get(0).getCities();
-		List<AreaEntity> areas = cities.get(0).getAreas();
 		Hibernate.initialize(provinces);
-		Hibernate.initialize(cities);
-		Hibernate.initialize(areas);
-		commonVO.setAreas(areas);
 		commonVO.setProvinces(provinces);
-		commonVO.setCities(cities);
 		return "initRegister";
 	}
 

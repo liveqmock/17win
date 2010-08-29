@@ -20,9 +20,6 @@
 			<interceptor name="exceptionInterceptor"
 				class="net.win.ExceptionInterceptor">
 			</interceptor>
-			<interceptor name="interceptor2"
-				class="net.win.Interceptor2">
-			</interceptor>
 			<interceptor-stack name="17winStack">
 				<interceptor-ref name="json"></interceptor-ref>
 				<interceptor-ref name="defaultStack"></interceptor-ref>

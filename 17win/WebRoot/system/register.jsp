@@ -8,6 +8,7 @@
 			rel=Stylesheet>
 		<LINK href="css/login.css" type=text/css rel=stylesheet>
 		<LINK href="css/top_bottom.css" type=text/css rel=stylesheet>
+		<SCRIPT src="js/ajax.js" type=text/javascript></SCRIPT>
 		<SCRIPT src="system/register.js" type=text/javascript></SCRIPT>
 		<STYLE type="text/css">
 td {
@@ -60,17 +61,16 @@ td {
 
 								</tr>
 								<tr>
-									<td width="146" height="40" align="right" class="font12h"
-										valign="top">
+									<td align="right" class="font12h" valign="top">
 										用户名：
 									</td>
-									<td width="230">
+									<td>
 										<s:textfield name="commonVO.userEntity.username" size="30"
 											cssStyle="width:210px" id="username" maxlength="12"></s:textfield>
 										<br />
 										<span id="c0"><font color="#FF0000">*</font>4-12个字符的字母或者数字</span>
 									</td>
-									<td width="524" nowrap="nowrap" valign="top">
+									<td nowrap="nowrap" valign="top">
 
 
 									</td>
@@ -340,23 +340,28 @@ td {
 									<td height="40" align="right" class="font12h" valign="top">
 										选择发货地：
 									</td>
-									<td align="left" class="red-bcolor">
-
+									<td align="left" class="red-bcolor" nowrap="nowrap">
 										<s:select id="provinceID"
 											name="commonVO.userEntity.province.id"
-											list="commonVO.provinces" listKey="id" listValue="name"></s:select>
+											list="commonVO.provinces" listKey="id" listValue="name"
+											headerKey="" headerValue="--请选择--">
+										</s:select>
 										省
 										<s:select id="cityID" name="commonVO.userEntity.city.id"
-											list="commonVO.cities" listKey="id" listValue="name"></s:select>
+											list="commonVO.cities" listKey="id" listValue="name"
+											headerKey="" headerValue="请选择">
+										</s:select>
 										市
 										<s:select id="areaID" name="commonVO.userEntity.area.id"
-											list="commonVO.areas" listKey="id" listValue="name"></s:select>
+											list="commonVO.areas" listKey="id" listValue="name"
+											headerKey="" headerValue="请选择">
+										</s:select>
 										县/区&nbsp;&nbsp;
 										<br />
-										<font color="#FF0000"></font>当发送的是
-										<font color="#FF0000">24小时</font>以内的
-										<font color="#FF0000">实物任务</font>时，
-										系统可以根据这个地址，生成一个同地区的收货地址。更大的提高真实性！
+										<pre><font color="#FF0000"></font>当发送的是<font color="#FF0000">24小时</font>以内的<font color="#FF0000">实物任务</font>时，
+系统可以根据这个地址，生成一个同地区的收货地址.
+更大的提高真实性！
+										</pre>
 									</td>
 									<td valign="top">
 
@@ -530,9 +535,9 @@ td {
 								</tr>
 								<tr>
 									<td colspan="3" align="center">
-										<INPUT  id="sumbitBtn"
+										<INPUT id="sumbitBtn"
 											style="FONT-WEIGHT: bold; WIDTH: 120px; CURSOR: pointer; COLOR: #000000; HEIGHT: 26px"
-										 timeId="10" disabled="true"	type="submit" value="同意协议(10)">
+											timeId="10" disabled="true" type="submit" value="同意协议(10)">
 									</td>
 								</tr>
 							</table>

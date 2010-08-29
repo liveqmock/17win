@@ -8,9 +8,10 @@ import net.win.utils.RandomNumUtil;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
+import org.springframework.stereotype.Controller;
 
 import com.opensymphony.xwork2.ActionContext;
-
+@Controller
 @Namespace("/systemManager")
 @Result(name = "stream", type = "stream", params = { "contentType",
 		"image/jpeg", "inputName", "inputStream" })

@@ -1,4 +1,4 @@
-package net.win;
+package net.win.action.system;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 
+import net.win.BaseAction;
 import net.win.dao.AreaDAO;
 import net.win.dao.CityDAO;
 import net.win.dao.ProvinceDAO;
@@ -14,6 +15,7 @@ import net.win.entity.CityEntity;
 import net.win.entity.ProvinceEntity;
 
 import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Actions;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.springframework.context.annotation.Scope;
@@ -47,7 +49,8 @@ public class AjaxAction extends BaseAction {
 	 * 
 	 * @return
 	 */
-	private List<Address> addresses = new ArrayList<Address>();
+	private List<Address> cityList = new ArrayList<Address>();
+	private List<Address> areaList = new ArrayList<Address>();
 
 	@Action("/ajax")
 	public String execute() throws Exception {
@@ -64,22 +67,32 @@ public class AjaxAction extends BaseAction {
 			for (CityEntity cityEntity : cities) {
 				address = new Address();
 				BeanUtils.copyProperties(address, cityEntity);
-				addresses.add(address);
+				cityList.add(address);
 			}
+			// List<AreaEntity> areas = cities.get(0).getAreas();
+			// for (AreaEntity areaEntity : areas) {
+			// address = new Address();
+			// BeanUtils.copyProperties(address, areaEntity);
+			// areaList.add(address);
+			//			}
 		} else {
 			CityEntity cityEntity = cityDAO.load(addressID);
 			List<AreaEntity> areas = cityEntity.getAreas();
 			for (AreaEntity areaEntity : areas) {
 				address = new Address();
 				BeanUtils.copyProperties(address, areaEntity);
-				addresses.add(address);
+				areaList.add(address);
 			}
 		}
 		return JSON;
 	}
 
-	public List<Address> getAddresses() {
-		return addresses;
+	public List<Address> getCityList() {
+		return cityList;
+	}
+
+	public List<Address> getAreaList() {
+		return areaList;
 	}
 
 	public void setAddressID(Long addressID) {

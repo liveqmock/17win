@@ -1,5 +1,6 @@
 package net.win.vo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.win.BaseVO;
@@ -19,9 +20,9 @@ public class CommonVO extends BaseVO {
 	/**
 	 * 显示数据
 	 */
-	private List<ProvinceEntity> provinces;
-	private List<CityEntity> cities;
-	private List<AreaEntity> areas;
+	private List<ProvinceEntity> provinces=new ArrayList<ProvinceEntity>();
+	private List<CityEntity> cities=new ArrayList<CityEntity>();
+	private List<AreaEntity> areas=new ArrayList<AreaEntity>();
 
 	public UserEntity getUserEntity() {
 		return userEntity;
