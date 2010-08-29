@@ -1,6 +1,6 @@
 //得到city
 function getCities(pid, selectCityId, selectAreaId) {
-	$.post("ajaxManager/ajax!address.php", {addressType:"1", addressID:pid}, function (data) {
+	$.post("ajaxManager/ajax!address.php", {type:"1", id:pid}, function (data) {
 		var selectCity = $("#" + selectCityId);
 		var selectArea = $("#" + selectAreaId);
 		selectCity.empty();
@@ -17,7 +17,7 @@ function getCities(pid, selectCityId, selectAreaId) {
 }
 //得到area
 function getAreas(cid, selectAreaId) {
-	$.post("ajaxManager/ajax!address.php", {addressType:"2", addressID:cid}, function (data) {
+	$.post("ajaxManager/ajax!address.php", {type:"2", id:cid}, function (data) {
 		var selectArea = $("#" + selectAreaId);
 		selectArea.empty();
 		var option = $("<option>--\u8bf7\u9009\u62e9--</option>");
@@ -28,6 +28,12 @@ function getAreas(cid, selectAreaId) {
 			option = $("<option></option>", {value:areas[i].id, text:areas[i].name});
 			selectArea.append(option);
 		}
+	}, "json");
+}
+//根据店铺得到seller
+function getSeller(url, type, textID) {
+	VhostAop.divAOP.ajax("ajaxManager/ajax!seller.php", {type:type, url:url}, function (data) {
+		$("#" + textID).val(data.seller);
 	}, "json");
 }
 

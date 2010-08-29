@@ -1,10 +1,6 @@
 
 var n=0;
 var showNum = document.getElementById("num");
-function killErrors() {
-return true;
-}
-window.onerror = killErrors;
 
 function Mea(value){
 	n=value;

@@ -14,7 +14,7 @@
 <meta content="淘宝刷信誉,淘宝刷钻,刷钻平台,互刷平台,免费刷钻" name="keywords" />
 <script type="text/javascript" src="js/jquery-1.4.2.min.js">
 </script>
-<script type="text/javascript" src="js/jieducm_pupu.js">
-</script>
 <script type="text/javascript" src="js/validater.js">
+</script>
+<script type="text/javascript" src="js/jieducm_pupu.js">
 </script>

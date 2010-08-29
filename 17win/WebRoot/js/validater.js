@@ -120,4 +120,9 @@ Validater.isTelphone = function (str) {
 	var reg = /^(13[0-9]|15[1|0|3|6|7|8|9]|18[8|9])\d{8}$/;
 	return reg.test(str);
 };
+//验证淘宝店铺地址
+Validater.isTaobaoShop=function(str){
+	var regName = new RegExp("^http:[/\\\\]{2}\\w+\\-*\\w+\\.taobao\\.com[/\\\\]?$");
+	return regName.test(str);
+}
 

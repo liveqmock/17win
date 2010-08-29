@@ -12,6 +12,8 @@ import net.win.dao.UserDAO;
 import net.win.entity.AreaEntity;
 import net.win.entity.CityEntity;
 import net.win.entity.ProvinceEntity;
+import net.win.entity.UserEntity;
+import net.win.utils.Constant;
 import net.win.vo.CommonVO;
 
 import org.hibernate.Hibernate;
@@ -49,8 +51,12 @@ public class CommonService extends BaseService {
 	 * @throws Exception
 	 */
 	public String register(CommonVO commonVO) throws Exception {
-
+		String vcode = (String) getBySession(Constant.VERIFY_CODE);
+		if(!vcode.equals(commonVO.getVerificationCode())){
+			putAlertMsg("验证码不正确");
+			return INPUT;
+		}
+		UserEntity userEntity = commonVO.getUserEntity();
 		return SUCCESS;
 	}
-
 }

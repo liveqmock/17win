@@ -3,6 +3,7 @@ package net.win.action.system;
 import java.io.ByteArrayInputStream;
 
 import net.win.BaseAction;
+import net.win.utils.Constant;
 import net.win.utils.RandomNumUtil;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -11,6 +12,7 @@ import org.apache.struts2.convention.annotation.Result;
 import org.springframework.stereotype.Controller;
 
 import com.opensymphony.xwork2.ActionContext;
+
 @Controller
 @Namespace("/systemManager")
 @Result(name = "stream", type = "stream", params = { "contentType",
@@ -26,7 +28,8 @@ public class RandomAction extends BaseAction {
 	public String execute() throws Exception {
 		RandomNumUtil rdnu = RandomNumUtil.Instance();
 		this.setInputStream(rdnu.getImage());// 取得带有随机字符串的图片
-		ActionContext.getContext().getSession().put("random", rdnu.getString());// 取得随机字符串放入HttpSession
+		ActionContext.getContext().getSession().put(Constant.VERIFY_CODE,
+				rdnu.getString());// 取得随机字符串放入HttpSession
 		return STREAM;
 	}
 

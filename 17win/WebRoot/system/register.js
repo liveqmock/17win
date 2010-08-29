@@ -11,8 +11,18 @@ $(document).ready(function() {
 	timer = setInterval(changeSutmitBtn, 1000);
 	// 用户名
 	$("#username").bind("blur", function() {
+		var obj = this;
 		if (Validater.isUsername($(this).val())) {
-			validateSuccess(this);
+			VhostAop.divAOP.ajax("ajaxManager/ajax!userExists.php", {
+						username : $(obj).val()
+					}, function(data) {
+						if (data.bool) {
+							validateSuccess(obj);
+						} else {
+							validateError(obj, "用户名已经存在");
+						}
+					});
+
 		} else {
 			validateError(
 					this,
@@ -77,7 +87,7 @@ $(document).ready(function() {
 			submitFlag = false;
 		}
 	});
-	// QQ
+	// email
 	$("#email").bind("blur", function() {
 				if (Validater.isEmail($(this).val())) {
 					validateSuccess(this);
@@ -97,6 +107,19 @@ $(document).ready(function() {
 					submitFlag = false;
 				}
 			});
+	// 验证淘宝
+	$("#taobaoShopURL").bind("blur", function() {
+				if (Validater.trim($(this).val()) == "") {
+					return;
+				}
+				if (Validater.isTaobaoShop($(this).val())) {
+					validateSuccess(this);
+					getSeller($(this).val(), "1", "taobaoSeller");
+				} else {
+					validateError(this, "淘宝地址格式不正确");
+					submitFlag = false;
+				}
+			});
 	// 验证码
 	$("#verificationCode").bind("blur", function() {
 				if ($(this).val().length == 6) {
@@ -106,6 +129,7 @@ $(document).ready(function() {
 					submitFlag = false;
 				}
 			});
+
 	// 选择省的事件
 	$("#provinceID").bind("change", function() {
 		if ($(this).val() == "") {

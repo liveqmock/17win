@@ -9,6 +9,9 @@ public abstract class Constant {
 	public static final String MSG = "msg";
 	//
 	public static final String RTP_I18N_LANGUAGE = "language";
+	
+	// 验证码
+	public static final String VERIFY_CODE = "verifyCode";
 
 	// https的URL
 	public static final String HTTPS_URL = "https://192.168.0.181:8443";

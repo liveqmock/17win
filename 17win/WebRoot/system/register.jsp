@@ -8,6 +8,7 @@
 			rel=Stylesheet>
 		<LINK href="css/login.css" type=text/css rel=stylesheet>
 		<LINK href="css/top_bottom.css" type=text/css rel=stylesheet>
+		<SCRIPT src="js/aop.js" type=text/javascript></SCRIPT>
 		<SCRIPT src="js/ajax.js" type=text/javascript></SCRIPT>
 		<SCRIPT src="system/register.js" type=text/javascript></SCRIPT>
 		<STYLE type="text/css">
@@ -193,7 +194,7 @@ td {
 											name="commonVO.userEntity.taobaoUser.shopURL" size="30"
 											cssStyle="width:300px"></s:textfield>
 										<br />
-										<font color="#FF0000"></font>您的淘宝店铺
+										 您的淘宝店铺:<font color="#FF0000">如:http://xxxxx.taobao.com</font>
 									</td>
 									<td valign="top">
 
@@ -204,11 +205,11 @@ td {
 										淘宝账号：
 									</td>
 									<td align="left" class="red-bcolor">
-										<s:textfield id="taobaoSeller"
+										<s:textfield id="taobaoSeller"  readonly="true"
 											name="commonVO.userEntity.taobaoUser.seller" size="30"
 											cssStyle="width:210px"></s:textfield>
 										<br />
-										<font color="#FF0000"></font>淘宝账号
+										<font color="#FF0000"></font>系统自动获取
 									</td>
 									<td valign="top">
 

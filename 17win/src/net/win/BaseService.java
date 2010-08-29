@@ -22,8 +22,8 @@ public class BaseService {
 	 * @param name
 	 * @param value
 	 */
-	protected void putByRequest(String name, Object value) {
-		ServletActionContext.getRequest().setAttribute(name, value);
+	protected void putByRequest(String key, Object value) {
+		ServletActionContext.getRequest().setAttribute(key, value);
 	}
 
 	/**
@@ -32,8 +32,8 @@ public class BaseService {
 	 * @param name
 	 * @param value
 	 */
-	protected void putBySession(String name, Object value) {
-		ServletActionContext.getRequest().setAttribute(name, value);
+	protected void putBySession(String key, Object value) {
+		ServletActionContext.getRequest().setAttribute(key, value);
 	}
 
 	/**
@@ -45,5 +45,25 @@ public class BaseService {
 	protected void putAlertMsg(String message) throws Exception {
 		message = "<script>alert('" + message + "');</script>";
 		putByRequest(Constant.MSG, message);
+	}
+
+	/**
+	 * 从request取出数据
+	 * 
+	 * @param name
+	 * @param value
+	 */
+	protected Object getByRequest(String key) {
+		return ServletActionContext.getRequest().getAttribute(key);
+	}
+
+	/**
+	 * 从session取出数据
+	 * 
+	 * @param name
+	 * @param value
+	 */
+	protected Object getBySession(String key) {
+		return ServletActionContext.getRequest().getAttribute(key);
 	}
 }
