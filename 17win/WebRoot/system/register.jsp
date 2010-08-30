@@ -18,74 +18,70 @@ td {
 </STYLE>
 	</HEAD>
 	<BODY>
-		<s:include value="../common/title.jsp"></s:include>
-		<TABLE cellSpacing=0 cellPadding=0 width=960 align=center border=0>
-			<TBODY>
-
-				<TR>
-					<TD width=20 height=32>
-						<IMG src="images/Top_10.gif">
-					</TD>
-					<TD align=right width=21 background=images/Top_11.gif>
-						<IMG height=32 src="images/Top_9.gif" width=10>
-					</TD>
-					<TD class=K_mttitle align=middle width=120
-						background=images/Top_12.gif>
-						会员注册
-					</TD>
-					<TD align=left width=47 background=images/Top_11.gif>
-						<IMG height=32 src="images/Top_13.gif" width=10>
-					</TD>
-					<TD align=left width=728 background=images/Top_11.gif></TD>
-					<TD align=right width=24 background=images/Top_11.gif>
-						<IMG height=32 src="images/Top_14.gif" width=6>
-					</TD>
-				</TR>
-				<TR>
-
-					<TD class=K_mtcontent align=left colSpan=6>
-						<s:form action="systemManager/common!register.php" theme="simple"
-							onsubmit="return validateForm()">
-							<input name="zhuce" type="hidden" value="ok" />
-							<table width="900" border="0" align="center" cellpadding="0"
-								cellspacing="0">
+		<s:form action="userManager/base!register.php" theme="simple"
+			onsubmit="return validateForm()">
+			<s:include value="../common/title.jsp"></s:include>
+			<TABLE cellSpacing=0 cellPadding=0 width=960 align=center border=0>
+				<TBODY>
+					<TR>
+						<TD width=20 height=32>
+							<IMG src="images/Top_10.gif">
+						</TD>
+						<TD align=right width=21 background=images/Top_11.gif>
+							<IMG height=32 src="images/Top_9.gif" width=10>
+						</TD>
+						<TD class=K_mttitle align=middle width=120
+							background=images/Top_12.gif>
+							会员注册
+						</TD>
+						<TD align=left width=47 background=images/Top_11.gif>
+							<IMG height=32 src="images/Top_13.gif" width=10>
+						</TD>
+						<TD align=left width=728 background=images/Top_11.gif></TD>
+						<TD align=right width=24 background=images/Top_11.gif>
+							<IMG height=32 src="images/Top_14.gif" width=6>
+						</TD>
+					</TR>
+					<TR>
+						<TD class="K_mtcontent" align=left colSpan=6>
+							<table style="width: 900px" border="0" align="center"
+								cellpadding="0" cellspacing="0">
 								<tr>
 									<td height="100" colspan="3">
 										<span class="font14b2">新用户免费注册-轻松注册10秒钟搞定</span>
 										<br />
 										请填写以下信息，
-										<font color="#FF0000">*</font>为必填内容,
-										<font color="#FF0000">注意：淘宝，有啊，拍拍信息必须填写一个</font>
+										<font color="#FF0000">*</font>为必填内容
 										<br />
 										请认真仔细的填写以下信息，真实的个人信息有助于给你使用的服务带来更多的保障以及便捷！
 									</td>
-
 								</tr>
 								<tr>
-									<td align="right" class="font12h" valign="top">
+									<td align="right" class="font12h" valign="top" width="300">
 										用户名：
+										<font color="#FF0000">*</font>&nbsp;
 									</td>
 									<td>
-										<s:textfield name="commonVO.userEntity.username" size="30"
+										<s:textfield name="userVO.userEntity.username" size="30"
 											cssStyle="width:210px" id="username" maxlength="12"></s:textfield>
 										<br />
-										<span id="c0"><font color="#FF0000">*</font>4-12个字符的字母或者数字</span>
+										<span id="c0">4-12个字符的字母或者数字</span>
 									</td>
-									<td nowrap="nowrap" valign="top">
-
-
+									<td nowrap="nowrap" valign="top" width="400">
 									</td>
 
 								</tr>
 								<tr>
 									<td height="40" align="right" class="font12h" valign="top">
 										登录密码：
+										<font color="#FF0000">*&nbsp;</font>
 									</td>
 									<td>
-										<s:password id="password" name="commonVO.userEntity.password"
-											size="30" cssStyle="width:210px"></s:password>
+										<s:password id="password"
+											name="userVO.userEntity.loginPassword" size="30"
+											cssStyle="width:210px"></s:password>
 										<br />
-										<font color="#FF0000">*</font>登录时需要使用密码，可以是6至20位字符
+										登录时需要使用密码，可以是6至20位字符
 									</td>
 									<td valign="top">
 
@@ -93,14 +89,15 @@ td {
 								</tr>
 								<tr>
 
-									<td height="40" align="right" valign="top">
-										<span class="font12h">确认登录密码：</span>
+									<td height="40" align="right" class="font12h" valign="top">
+										确认登陆密码
+										<font color="#FF0000">*&nbsp;</font>
 									</td>
 									<td>
 										<input type="password" id="rePassword" size="30"
 											style="width: 210px">
 										<br />
-										<font color="#FF0000">*</font>重复上面的密码
+										重复上面的密码
 									</td>
 									<td valign="top">
 
@@ -110,13 +107,14 @@ td {
 								<tr>
 									<td height="40" align="right" class="font12h" valign="top">
 										操作密码：
+										<font color="#FF0000">*&nbsp;</font>
 									</td>
 									<td>
 										<s:password id="opertationCode"
-											name="commonVO.userEntity.opertationCode" size="30"
+											name="userVO.userEntity.opertationCode" size="30"
 											cssStyle="width:210px"></s:password>
 										<br />
-										<font color="#FF0000">*</font>互刷时必用 6-20位！
+										互刷时必用 6-20位！
 									</td>
 									<td valign="top">
 
@@ -126,12 +124,13 @@ td {
 								<tr>
 									<td height="40" align="right" class="font12h" valign="top">
 										确认操作密码：
+										<font color="#FF0000">*&nbsp;</font>
 									</td>
 									<td align="left" class="red-bcolor">
 										<input type="password" id="reOperationCode" size="30"
 											style="width: 210px" />
 										<br />
-										<font color="#FF0000">*</font>重复上面的操作密码
+										重复上面的操作密码
 									</td>
 									<td valign="top">
 
@@ -142,13 +141,30 @@ td {
 								<tr>
 									<td height="40" align="right" class="font12h" valign="top">
 										Q&nbsp;Q：
+										<font color="#FF0000">*&nbsp;</font>
 									</td>
 
 									<td>
-										<s:textfield name="commonVO.userEntity.qq" id="qq" size="30"
+										<s:textfield name="userVO.userEntity.qq" id="qq" size="30"
 											cssStyle="width:210px"></s:textfield>
 										<br />
-										<font color="#FF0000">*</font>刷信誉时必用
+										刷信誉时必用
+									</td>
+									<td valign="top">
+
+									</td>
+								</tr>
+
+								<tr>
+									<td height="40" align="right" class="font12h" valign="top">
+										手机号码：
+										<font color="#FF0000">*&nbsp;</font>
+									</td>
+									<td align="left" class="red-bcolor">
+										<s:textfield id="telephone" name="userVO.userEntity.telephone"
+											size="30" cssStyle="width:210px"></s:textfield>
+										<br />
+										可凭手机找回密码
 									</td>
 									<td valign="top">
 
@@ -156,11 +172,27 @@ td {
 								</tr>
 								<tr>
 									<td height="40" align="right" class="font12h" valign="top">
+										电子邮箱：
+										<font color="#FF0000">*&nbsp;</font>
+									</td>
+									<td>
+										<s:textfield id="email" name="userVO.userEntity.email"
+											size="30" cssStyle="width:210px"></s:textfield>
+										<br />
+										取回密码使用！
+									</td>
+									<td valign="top">
+
+									</td>
+
+								</tr>
+								<tr>
+									<td height="40" align="right" class="font12h" valign="top">
 										旺旺：
 									</td>
 
 									<td>
-										<s:textfield id="ww" name="commonVO.userEntity.ww" size="30"
+										<s:textfield id="ww" name="userVO.userEntity.ww" size="30"
 											cssStyle="width:210px"></s:textfield>
 										<br />
 										<font color="#FF0000">注意：非必须，不要用旺旺发送任何关于刷信誉的内容</font>
@@ -170,31 +202,17 @@ td {
 									</td>
 								</tr>
 								<tr>
-									<td height="40" align="right" class="font12h" valign="top">
-										电子邮箱：
-									</td>
-									<td>
-										<s:textfield id="email" name="commonVO.userEntity.email"
-											size="30" cssStyle="width:210px"></s:textfield>
-										<br />
-										<font color="#FF0000">*</font>取回密码使用！
-									</td>
-									<td valign="top">
-
-									</td>
-
-								</tr>
-								<tr>
 									<td height="40" align="right" class="font12h" nowrap="nowrap"
 										valign="top">
 										淘宝店铺地址：
 									</td>
 									<td align="left" class="red-bcolor">
 										<s:textfield id="taobaoShopURL"
-											name="commonVO.userEntity.taobaoUser.shopURL" size="30"
+											name="userVO.userEntity.taobaoUser.shopURL" size="30"
 											cssStyle="width:300px"></s:textfield>
 										<br />
-										 您的淘宝店铺:<font color="#FF0000">如:http://xxxxx.taobao.com</font>
+										您的淘宝店铺:
+										<font color="#FF0000">如:http://xxxxx.taobao.com</font>
 									</td>
 									<td valign="top">
 
@@ -205,8 +223,8 @@ td {
 										淘宝账号：
 									</td>
 									<td align="left" class="red-bcolor">
-										<s:textfield id="taobaoSeller"  readonly="true"
-											name="commonVO.userEntity.taobaoUser.seller" size="30"
+										<s:textfield id="taobaoSeller" readonly="true"
+											name="userVO.userEntity.taobaoUser.seller" size="30"
 											cssStyle="width:210px"></s:textfield>
 										<br />
 										<font color="#FF0000"></font>系统自动获取
@@ -221,7 +239,7 @@ td {
 									</td>
 									<td align="left" class="red-bcolor">
 										<s:textfield id="taobaoBuyer"
-											name="commonVO.userEntity.taobaoUser.buyer" size="30"
+											name="userVO.userEntity.taobaoUser.buyer" size="30"
 											cssStyle="width:210px"></s:textfield>
 										<br />
 										<font color="#FF0000"></font>购买别人物品的淘宝账号，该必须是黄钻级别以下（如被查出立即封号）
@@ -236,7 +254,7 @@ td {
 									</td>
 									<td align="left" class="red-bcolor">
 										<s:textfield id="paipaiShopURL"
-											name="commonVO.userEntity.paipaiUser.shopURL" size="30"
+											name="userVO.userEntity.paipaiUser.shopURL" size="30"
 											cssStyle="width:300px"></s:textfield>
 										<br />
 										<font color="#FF0000"></font>您的拍拍店铺
@@ -251,7 +269,7 @@ td {
 									</td>
 									<td align="left" class="red-bcolor">
 										<s:textfield id="paipaiSeller"
-											name="commonVO.userEntity.paipaiUser.seller" size="30"
+											name="userVO.userEntity.paipaiUser.seller" size="30"
 											cssStyle="width:210px"></s:textfield>
 										<br />
 										<font color="#FF0000"></font>拍拍账号
@@ -266,7 +284,7 @@ td {
 									</td>
 									<td align="left" class="red-bcolor">
 										<s:textfield id="paopaoBuyer"
-											name="commonVO.userEntity.paipaiUser.buyer" size="30"
+											name="userVO.userEntity.paipaiUser.buyer" size="30"
 											cssStyle="width:210px"></s:textfield>
 										<br />
 										<font color="#FF0000"></font>购买别人物品的拍拍账号，该必须是黄钻级别以下（如被查出立即封号）
@@ -281,7 +299,7 @@ td {
 									</td>
 									<td align="left" class="red-bcolor">
 										<s:textfield id="youaShopURL"
-											name="commonVO.userEntity.youaUser.shopURL" size="30"
+											name="userVO.userEntity.youaUser.shopURL" size="30"
 											cssStyle="width:300px"></s:textfield>
 										<br />
 										<font color="#FF0000"></font>您的有啊店铺
@@ -296,7 +314,7 @@ td {
 									</td>
 									<td align="left" class="red-bcolor">
 										<s:textfield id="youaSeller"
-											name="commonVO.userEntity.youaUser.seller" size="30"
+											name="userVO.userEntity.youaUser.seller" size="30"
 											cssStyle="width:210px"></s:textfield>
 										<br />
 										<font color="#FF0000"></font>拍拍账号
@@ -311,7 +329,7 @@ td {
 									</td>
 									<td align="left" class="red-bcolor">
 										<s:textfield id="youabuter"
-											name="commonVO.userEntity.youaUser.buyer" size="30"
+											name="userVO.userEntity.youaUser.buyer" size="30"
 											cssStyle="width:210px"></s:textfield>
 										<br />
 										购买别人物品的有啊账号，该必须是黄钻级别以下（如被查出立即封号）
@@ -321,48 +339,33 @@ td {
 									</td>
 								</tr>
 
-								<tr>
-									<td height="40" align="right" class="font12h" valign="top">
-										手机号码：
-									</td>
-									<td align="left" class="red-bcolor">
-										<s:textfield id="telephone"
-											name="commonVO.userEntity.telephone" size="30"
-											cssStyle="width:210px"></s:textfield>
-										<br />
-										<font color="#FF0000">*</font>可凭手机找回密码
-									</td>
-									<td valign="top">
 
-									</td>
-								</tr>
 
 								<tr>
-									<td height="40" align="right" class="font12h" valign="top">
+									<td height="40" align="right" class="font12h">
 										选择发货地：
 									</td>
 									<td align="left" class="red-bcolor" nowrap="nowrap">
-										<s:select id="provinceID"
-											name="commonVO.userEntity.province.id"
-											list="commonVO.provinces" listKey="id" listValue="name"
+										<s:select id="provinceID" name="userVO.userEntity.province.id"
+											list="userVO.provinces" listKey="id" listValue="name"
 											headerKey="" headerValue="--请选择--">
 										</s:select>
 										省
-										<s:select id="cityID" name="commonVO.userEntity.city.id"
-											list="commonVO.cities" listKey="id" listValue="name"
+										<s:select id="cityID" name="userVO.userEntity.city.id"
+											list="userVO.cities" listKey="id" listValue="name"
 											headerKey="" headerValue="请选择">
 										</s:select>
 										市
-										<s:select id="areaID" name="commonVO.userEntity.area.id"
-											list="commonVO.areas" listKey="id" listValue="name"
+										<s:select id="areaID" name="userVO.userEntity.area.id"
+											list="userVO.areas" listKey="id" listValue="name"
 											headerKey="" headerValue="请选择">
 										</s:select>
 										县/区&nbsp;&nbsp;
 										<br />
-										<pre><font color="#FF0000"></font>当发送的是<font color="#FF0000">24小时</font>以内的<font color="#FF0000">实物任务</font>时，
+										<!-- 	<font color="#FF0000"></font>当发送的是<font color="#FF0000">24小时</font>以内的<font
+												color="#FF0000">实物任务</font>时，
 系统可以根据这个地址，生成一个同地区的收货地址.
-更大的提高真实性！
-										</pre>
+更大的提高真实性！ -->
 									</td>
 									<td valign="top">
 
@@ -377,7 +380,7 @@ td {
 									</td>
 									<td>
 										<s:textfield id="refeereeName"
-											name="commonVO.userEntity.referee.username" size="30"
+											name="userVO.userEntity.referee.username" size="30"
 											cssStyle="width:210px"></s:textfield>
 										<br />
 										没有可留空！对于被推荐人，没有任务损失，推荐人得到积分奖励
@@ -389,15 +392,17 @@ td {
 								<tr>
 									<td height="40" align="right" class="font12h" valign="top">
 										验证码：
+										<font color="#FF0000">*&nbsp;</font>
 									</td>
-									<td align="left" class="red-bcolor">
-										<s:textfield id="ww" name="commonVO.verificationCode"
-											id="verificationCode" size="30" cssStyle="width:60px"></s:textfield>
-										<img src="systemManager/verificationCode.php"
+									<td align="left" class="red-bcolor" valign="top">
+										<s:textfield id="ww" name="userVO.verificationCode"
+											maxlength="4" id="verificationCode" size="30"
+											cssStyle="width:60px"></s:textfield>
+										<img src="verify/verificationCode.php"
 											onclick="changeValidateCode(this)" title="点击图片刷新验证码"
 											style="cursor: pointer;" />
 										<br />
-										<font color="#FF0000">*</font>为防止恶意注册请输入验证码
+										为防止恶意注册请输入验证码
 									</td>
 									<td valign="top">
 
@@ -542,11 +547,14 @@ td {
 									</td>
 								</tr>
 							</table>
-						</s:form>
 
-					</TD>
-				</TR>
-			</TBODY>
+
+						</TD>
+					</TR>
+				</TBODY>
+			</TABLE>
 			<s:include value="../common/footKuan.jsp"></s:include>
+		</s:form>
+		<s:property value="#request.msg" escape="false" />
 	</BODY>
 </HTML>

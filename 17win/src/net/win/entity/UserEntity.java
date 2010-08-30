@@ -37,7 +37,7 @@ public class UserEntity extends BaseEntity {
 	private String qq;
 	// 发布点
 	@Column(name = "RELEASE_DOT_", nullable = false)
-	private Float releaseDot;
+	private Double releaseDot;
 	// 电子邮箱
 	@Column(name = "EMAIL_", length = 24, nullable = false)
 	private String email;
@@ -53,21 +53,22 @@ public class UserEntity extends BaseEntity {
 	// 注册时间
 	@Column(name = "REGISTERTIME_", nullable = false)
 	private Date registerTime;
-	// 最后一次登陆时间
-	@Column(name = "LASTLOGINTIME_")
-	private Date lastLoginTime;
 	// 当前级别(一心，还是一钻)
-	@Column(name = "LEVEL_", nullable = false)
+	@Column(name = "LEVEL_", length = 2, nullable = false)
 	private String level;
 	// 状态(0，没激活，1激活，2被冻结,3xxxxx)
-	@Column(name = "STATUS_", nullable = false)
-	private Boolean status;
+	@Column(name = "STATUS_", columnDefinition = "CHAR(1)", nullable = false)
+	private String status;
+
 	/**
 	 * 可选选项
 	 */
 	// 旺旺
 	@Column(name = "WW_", length = 24)
 	private String ww;
+	// 最后一次登陆时间
+	@Column(name = "LASTLOGINTIME_")
+	private Date lastLoginTime;
 	// 省
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "RPOVINCE_ID_")
@@ -96,7 +97,7 @@ public class UserEntity extends BaseEntity {
 	@JoinColumn(name = "YOUAUSER_ID_")
 	private YouaUserEntity youaUser;
 
-	 // 介绍人
+	// 介绍人
 	@ManyToOne(targetEntity = UserEntity.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "REFEREE_ID_")
 	private UserEntity referee;
@@ -230,11 +231,11 @@ public class UserEntity extends BaseEntity {
 		this.ww = ww;
 	}
 
-	public Float getReleaseDot() {
+	public Double getReleaseDot() {
 		return releaseDot;
 	}
 
-	public void setReleaseDot(Float releaseDot) {
+	public void setReleaseDot(Double releaseDot) {
 		this.releaseDot = releaseDot;
 	}
 
@@ -286,11 +287,11 @@ public class UserEntity extends BaseEntity {
 		this.area = area;
 	}
 
-	public Boolean getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(Boolean status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 

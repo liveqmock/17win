@@ -32,6 +32,7 @@ a.yellow-bcolor:hover{font-size:12px; color:#FF6600; text-decoration:underline;}
 .font12l a{font-size:12px; color:#000d74; font-weight:bold; text-decoration:none;}
 .font12l a:hover{font-size:12px; color:#000d74; font-weight:bold; text-decoration:underline;}
 
+.font14h{font-size:14px; color:#333333; font-weight:bold;}
 .font14b{font-size:14px; color:#333333; font-weight:bold;}
 .font14b2{font-size:14px; color:#ff0000; font-weight:bold;}
 .font14b3{font-size:14px; color:#8b9700; font-weight:bold;}
@@ -52,19 +53,19 @@ a.yellow-bcolor:hover{font-size:12px; color:#FF6600; text-decoration:underline;}
 .border-yz2{ border:#2fc0ec solid 1px;}
 .border-yz2b{ border-bottom:#2fc0ec dashed 1px;}
 
-/*ѡ�1*/
+/*ѡ�1*/
 #Tab1{
 width:240px;
 margin:0px;
 padding:0px;
 margin:0;}
-/*ѡ�2*/
+/*ѡ�2*/
 #Tab2{
 width:240px;
 margin:6px 0 0 0;
 padding:0px;
 }
-/*�˵�class*/
+/*�˵�class*/
 .Menubox {
 width:100%;
 background:url(../images/paihang-01.gif);

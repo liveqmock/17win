@@ -14,7 +14,7 @@ import org.springframework.stereotype.Controller;
 import com.opensymphony.xwork2.ActionContext;
 
 @Controller
-@Namespace("/systemManager")
+@Namespace("/verify")
 @Result(name = "stream", type = "stream", params = { "contentType",
 		"image/jpeg", "inputName", "inputStream" })
 public class RandomAction extends BaseAction {

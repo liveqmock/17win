@@ -1,5 +1,6 @@
 package net.win;
 
+import net.win.entity.BaseEntity;
 import net.win.utils.Constant;
 
 import org.apache.struts2.ServletActionContext;
@@ -64,6 +65,10 @@ public class BaseService {
 	 * @param value
 	 */
 	protected Object getBySession(String key) {
-		return ServletActionContext.getRequest().getAttribute(key);
+		return ServletActionContext.getRequest().getSession().getAttribute(key);
+	}
+
+	protected Boolean nullID(BaseEntity base) {
+		return base.getId() == null;
 	}
 }

@@ -3,7 +3,7 @@ function changeValidateCode(obj) {
 	var timenow = new Date().getTime();
 	// 每次请求需要一个不同的参数，否则可能会返回同样的验证码
 	// 这和浏览器的缓存机制有关系，也可以把页面设置为不缓存，这样就不用这个参数了。
-	obj.src = "systemManager/verificationCode.php?time=" + timenow;
+	obj.src = "verify/verificationCode.php?time=" + timenow;
 }
 var submitFlag = true;
 var timer;
@@ -26,7 +26,7 @@ $(document).ready(function() {
 		} else {
 			validateError(
 					this,
-					"\u7528\u6237\u540d\u5fc5\u987b\u662f\u53c8\u6570\u5b57\u6216\u5219\u5b57\u7b26\u7ec4\u6210\u76846-12\u4f4d\u5b57\u7b26\u4e32");
+					"\u7528\u6237\u540d\u5fc5\u987b\u662f\u53c8\u6570\u5b57\u6216\u5219\u5b57\u7b26\u7ec4\u6210\u76844-12\u4f4d\u5b57\u7b26\u4e32");
 			submitFlag = false;
 		}
 	});
@@ -122,7 +122,7 @@ $(document).ready(function() {
 			});
 	// 验证码
 	$("#verificationCode").bind("blur", function() {
-				if ($(this).val().length == 6) {
+				if ($(this).val().length == 4) {
 					validateSuccess(this);
 				} else {
 					validateError(this, "\u9a8c\u8bc1\u7801\u4e0d\u6b63\u786e");

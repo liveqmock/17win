@@ -22,45 +22,5 @@ import org.springframework.stereotype.Controller;
 		@Result(name = "success", location = "/user/index.jsp") })
 @Namespace("/systemManager")
 public class CommonAction extends BaseAction {
-	@Resource
-	private CommonService commonService;
-
-	private CommonVO commonVO = new CommonVO();
-
-	public CommonVO getCommonVO() {
-		return commonVO;
-	}
-
-	public void setCommonVO(CommonVO commonVO) {
-		this.commonVO = commonVO;
-	}
-
-	@Action("/common")
-	public String execute() throws Exception {
-		// TODO Auto-generated method stub
-		return INPUT;
-	}
-
-	/**
-	 * 注册
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	@Action("/register")
-	public String register() throws Exception {
-		return commonService.register(commonVO);
-	}
-
-	/**
-	 * 注册
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	@Action("/initRegister")
-	public String initRegister() throws Exception {
-		return commonService.initRegister(commonVO);
-	}
 
 }

@@ -13,20 +13,7 @@ VhostAop.AjaxDivHandler = function(url, arg, callback) {
 
 VhostAop.divAOP.init = function() {
 	try {
-		var loading_Div = $("<div>", {
-					id : "rtpLoadingDiv",
-					css : {
-						position : "absolute",
-						top : "50%",
-						left : "50px",
-						margin : "-200px",
-						zIndex : "1000",
-						height : "400px",
-						width : "300px",
-						display : "none"
-					}
-				});
-		loading_Div.append($("<img src='images/loading.gif'/>"));
+		var loading_Div = $("<div id='rtpLoadingDiv' style='position:absolute;top:50%;left:50%;margin:0px;z-index:1000;width:200px;height:30px;'><img src='images/loading.gif'/></div>");
 		var bg_Div = $("<div>", {
 					id : "rtpBgDiv",
 					css : {
@@ -35,7 +22,7 @@ VhostAop.divAOP.init = function() {
 						left : "0px",
 						top : "0px",
 						position : "absolute",
-						background : "#999",
+						background : "#FFFFFF",
 						zIndex : "999",
 						opacity : "0.5",
 						filter : "alpha(opacity=50)",

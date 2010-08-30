@@ -3,83 +3,105 @@ package net.win;
 import java.util.Date;
 
 public class UserLoginInfo {
-	//ID
+	/**
+	 * 基本信息
+	 */
 	private Long id;
 	// 用户名
 	private String username;
-	// 域名
-	private String domainName;
-	// 最后一次登陆时间
-	private Date lastLoginTime;
+	// QQ
+	private String qq;
+	// 发布点
+	private Float releaseDot;
 	// 手机
 	private String telephone;
-	// 电子邮箱
-	private String email;
-	// 性别 1,男,2女
-	private String sex;
-	// //公司电话
-	private String companyTEL;
-	// 公司电话，分机
-	private String companyTELExt;
-	// 管理员
-	private Boolean admin = false;
+	// 可以兑换发布点的积分
+	private Integer convertScore;
+	// 升级用的积分，不能兑换发布点
+	private Integer upgradeScore;
+	// 最后一次登陆时间
+	private Date lastLoginTime;
+	// 当前级别(一心，还是一钻)
+	private String level;
+	// 操作码激活状态
+	private Boolean operationCodeStatus = false;
+
 	public String getUsername() {
 		return username;
 	}
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public String getDomainName() {
-		return domainName;
+
+	public String getQq() {
+		return qq;
 	}
-	public void setDomainName(String domainName) {
-		this.domainName = domainName;
+
+	public void setQq(String qq) {
+		this.qq = qq;
 	}
-	public Date getLastLoginTime() {
-		return lastLoginTime;
+
+	public Float getReleaseDot() {
+		return releaseDot;
 	}
-	public void setLastLoginTime(Date lastLoginTime) {
-		this.lastLoginTime = lastLoginTime;
+
+	public void setReleaseDot(Float releaseDot) {
+		this.releaseDot = releaseDot;
 	}
+
 	public String getTelephone() {
 		return telephone;
 	}
+
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
-	public String getEmail() {
-		return email;
+
+	public Integer getConvertScore() {
+		return convertScore;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+
+	public void setConvertScore(Integer convertScore) {
+		this.convertScore = convertScore;
 	}
-	public String getSex() {
-		return sex;
+
+	public Integer getUpgradeScore() {
+		return upgradeScore;
 	}
-	public void setSex(String sex) {
-		this.sex = sex;
+
+	public void setUpgradeScore(Integer upgradeScore) {
+		this.upgradeScore = upgradeScore;
 	}
-	public String getCompanyTEL() {
-		return companyTEL;
+
+	public Date getLastLoginTime() {
+		return lastLoginTime;
 	}
-	public void setCompanyTEL(String companyTEL) {
-		this.companyTEL = companyTEL;
+
+	public void setLastLoginTime(Date lastLoginTime) {
+		this.lastLoginTime = lastLoginTime;
 	}
-	public String getCompanyTELExt() {
-		return companyTELExt;
+
+	public String getLevel() {
+		return level;
 	}
-	public void setCompanyTELExt(String companyTELExt) {
-		this.companyTELExt = companyTELExt;
+
+	public void setLevel(String level) {
+		this.level = level;
 	}
-	public Boolean getAdmin() {
-		return admin;
+
+	public Boolean getOperationCodeStatus() {
+		return operationCodeStatus;
 	}
-	public void setAdmin(Boolean admin) {
-		this.admin = admin;
+
+	public void setOperationCodeStatus(Boolean operationCodeStatus) {
+		this.operationCodeStatus = operationCodeStatus;
 	}
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}

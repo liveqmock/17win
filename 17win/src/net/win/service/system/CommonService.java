@@ -22,41 +22,5 @@ import org.springframework.stereotype.Service;
 @SuppressWarnings("unused")
 @Service("commonService")
 public class CommonService extends BaseService {
-	@Resource
-	private UserDAO userDAO;
-	@Resource
-	private ProvinceDAO provinceDAO;
-	@Resource
-	private CityDAO cityDAO;
-	@Resource
-	private AreaDAO areaDAO;
-
-	/**
-	 * 初始化注册
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	public String initRegister(CommonVO commonVO) throws Exception {
-		List<ProvinceEntity> provinces = provinceDAO.listAll();
-		Hibernate.initialize(provinces);
-		commonVO.setProvinces(provinces);
-		return "initRegister";
-	}
-
-	/**
-	 * 注册
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	public String register(CommonVO commonVO) throws Exception {
-		String vcode = (String) getBySession(Constant.VERIFY_CODE);
-		if(!vcode.equals(commonVO.getVerificationCode())){
-			putAlertMsg("验证码不正确");
-			return INPUT;
-		}
-		UserEntity userEntity = commonVO.getUserEntity();
-		return SUCCESS;
-	}
+	
 }

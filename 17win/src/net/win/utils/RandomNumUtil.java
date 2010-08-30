@@ -41,7 +41,7 @@ public class RandomNumUtil {
 
 	private void init() {
 		// 在内存中创建图象
-		int width = 85, height = 20;
+		int width = 60, height = 20;
 		BufferedImage image = new BufferedImage(width, height,
 				BufferedImage.TYPE_INT_RGB);
 		// 获取图形上下文
@@ -64,7 +64,7 @@ public class RandomNumUtil {
 		}
 		// 取随机产生的认证码(6位数字)
 		String sRand = "";
-		for (int i = 0; i < 6; i++) {
+		for (int i = 0; i < 4; i++) {
 			String rand = String.valueOf(random.nextInt(10));
 			sRand += rand;
 			// 将认证码显示到图象中

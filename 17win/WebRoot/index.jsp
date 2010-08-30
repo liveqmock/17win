@@ -634,5 +634,6 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 			</TR>
 
 		</TABLE>
+		<s:property value="#request.msg"/>
 	</BODY>
 </HTML>

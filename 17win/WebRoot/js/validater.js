@@ -15,7 +15,7 @@ Validater.isNull = function (obj) {
 
 // 判断用户名
 Validater.isUsername = function (str) {
-	return str.match(/^[\d\w]{6,12}$/);
+	return str.match(/^[\d\w]{4,12}$/);
 };
 // 判断密码
 Validater.isPassword = function (str) {
