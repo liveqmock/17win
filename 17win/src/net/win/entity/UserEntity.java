@@ -59,6 +59,9 @@ public class UserEntity extends BaseEntity {
 	// 状态(0，没激活，1激活，2被冻结,3xxxxx)
 	@Column(name = "STATUS_", columnDefinition = "CHAR(1)", nullable = false)
 	private String status;
+	// 钱
+	@Column(name = "MONEY_", nullable = false)
+	private Double money;
 
 	/**
 	 * 可选选项
@@ -318,4 +321,13 @@ public class UserEntity extends BaseEntity {
 	public void setYouaUser(YouaUserEntity youaUser) {
 		this.youaUser = youaUser;
 	}
+
+	public Double getMoney() {
+		return money;
+	}
+
+	public void setMoney(Double money) {
+		this.money = money;
+	}
+
 }

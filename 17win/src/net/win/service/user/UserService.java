@@ -104,6 +104,8 @@ public class UserService extends BaseService {
 		userEntity.setLevel("000");
 		// 状态，没激活
 		userEntity.setStatus("0");
+		// 钱
+		userEntity.setMoney(0.0);
 
 		// 设置关系
 		if (nullID(userEntity.getProvince())) {

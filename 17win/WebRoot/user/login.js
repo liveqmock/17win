@@ -9,6 +9,8 @@ var submitFlag = true;
 var timer;
 $(document).ready(function() {
 	$("#verificationCode").val("");
+	 $("#findPW").dialog({autoOpen:false,draggable:false,hide:'slide',modal:true,resizable:false,show:'slide' });
+	 $("#findPWBtn").button();
 	// 用户名
 	$("#username").bind("blur", function() {
 		var obj = this;
@@ -39,7 +41,11 @@ $(document).ready(function() {
 					submitFlag = false;
 				}
 			});
-
+	//弹出找回密码层
+	$("#findPWA").bind("click",function(){
+		 $("#findPW").dialog("open");
+		
+	});
 });
 function validateForm() {
 	submitFlag = true;

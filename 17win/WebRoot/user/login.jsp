@@ -7,7 +7,11 @@
 		<LINK href="css/login.css" type="text/css" rel="stylesheet">
 		<LINK href="css/top_bottom.css" type="text/css" rel="stylesheet">
 		<LINK href="css/Css.css" type="text/css" rel="stylesheet">
+		<link href="css/excite-bike/jquery-ui-1.8.4.custom.css"
+			rel="stylesheet" type="text/css" />
+
 		<SCRIPT src="js/jieducm_pupu.js" type="text/javascript"></SCRIPT>
+		<SCRIPT src="js/jquery-ui-1.8.4.custom.min.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="user/login.js" type="text/javascript"></SCRIPT>
 	</HEAD>
 	<BODY>
@@ -71,7 +75,7 @@
 													</td>
 													<td bgcolor="#FFFFFF">
 														<div align="left">
-															<tt> <s:password id="password"  maxlength="20"
+															<tt> <s:password id="password" maxlength="20"
 																	name="userVO.userEntity.loginPassword" size="30"
 																	cssStyle="width:180px"></s:password> </tt>
 														</div>
@@ -96,9 +100,8 @@
 												<tr>
 													<td colspan="2" bgcolor="#FFFFFF">
 														<label>
-															<a
-																onClick="javascript:window.open('getpwd.asp','shouchang','width=450,height=300');"
-																href="#"><img src="images/forgetpw.gif" width="12"
+															<a  id="findPWA"
+																href="javascript:void(0);"><img src="images/forgetpw.gif" width="12"  
 																	height="13" border="0">&nbsp;找回密码</a>&nbsp;
 															<a href="userManager/base!initRegister.php">&nbsp;&nbsp;&nbsp;<img
 																	style="cursor: pointer;" src="images/register.gif"
@@ -148,6 +151,29 @@
 			</TABLE>
 			<s:include value="../common/footKuan.jsp"></s:include>
 		</s:form>
+		<div id="findPW" title="找回密码">
+			<s:form action="userManager/base!login.php" theme="simple"
+				onsubmit="return validateForm()">
+				<table border="0" cellpadding="0" cellspacing="0">
+					<tr>
+						<td>
+							输入用户名:
+						</td>
+						<td>
+							<input type="text" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="button" id="findPWBtn" value="提交" />
+						</td>
+						<td>
+						</td>
+
+					</tr>
+				</table>
+			</s:form>
+		</div>
 		<s:property value="#request.msg" escape="false" />
 	</BODY>
 </HTML>
