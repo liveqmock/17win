@@ -22,6 +22,7 @@ import org.hibernate.Hibernate;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 import com.sun.org.apache.commons.beanutils.BeanUtils;
 
@@ -38,6 +39,8 @@ public class UserService extends BaseService {
 	private AreaDAO areaDAO;
 	@Resource
 	private JavaMailSender mailSender;
+	@Resource
+	private FreeMarkerConfigurer freeMarkerCfj;
 
 	/**
 	 * 手机激活
@@ -66,7 +69,7 @@ public class UserService extends BaseService {
 	}
 
 	/**
-	 * 注册
+	 * 登陆
 	 * 
 	 * @return
 	 * @throws Exception
@@ -161,7 +164,7 @@ public class UserService extends BaseService {
 			userEntity.setReferee(null);
 		}
 		userDAO.save(userEntity);
-		MailUtils.sendRegisterMail(mailSender, userEntity.getUsername(),
+		MailUtils.sendRegisterMail(mailSender,freeMarkerCfj, userEntity.getUsername(),
 				userEntity.getEmail());
 		putDIV("注册成功,马上激活吧！");
 		return "registerSuccess";

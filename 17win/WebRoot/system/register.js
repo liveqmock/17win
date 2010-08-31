@@ -89,8 +89,18 @@ $(document).ready(function() {
 	});
 	// email
 	$("#email").bind("blur", function() {
+				var obj = this;
 				if (Validater.isEmail($(this).val())) {
-					validateSuccess(this);
+					VhostAop.divAOP.ajax("ajaxManager/ajax!emailExists.php", {
+								email : $(obj).val()
+							}, function(data) {
+								if (data.bool) {
+									validateSuccess(obj);
+								} else {
+									validateError(obj, "该邮箱已经注册过");
+								}
+							});
+
 				} else {
 					validateError(this,
 							"\u90ae\u7bb1\u683c\u5f0f\u4e0d\u6b63\u786e");
@@ -99,8 +109,17 @@ $(document).ready(function() {
 			});
 	// 手机号码
 	$("#telephone").bind("blur", function() {
+				var obj = this;
 				if (Validater.isTelphone($(this).val())) {
-					validateSuccess(this);
+					VhostAop.divAOP.ajax("ajaxManager/ajax!phoneExists.php", {
+								telephone : $(obj).val()
+							}, function(data) {
+								if (data.bool) {
+									validateSuccess(obj);
+								} else {
+									validateError(obj, "该手机号码已经注册过");
+								}
+							});
 				} else {
 					validateError(this,
 							"\u624b\u673a\u53f7\u7801\u4e0d\u6b63\u786e");

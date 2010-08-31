@@ -58,7 +58,10 @@ public class AjaxAction extends BaseAction {
 	private String url;
 	//
 	private String username;
-
+	//
+	private String telephone;
+	//
+	private String email;
 	/**
 	 * 返回的数据
 	 * 
@@ -85,7 +88,6 @@ public class AjaxAction extends BaseAction {
 	 * @return
 	 * @throws Exception
 	 */
-	@Action("/address")
 	public String address() throws Exception {
 		Address address;
 		if ("1".equals(type)) {
@@ -120,7 +122,6 @@ public class AjaxAction extends BaseAction {
 	 * @return
 	 * @throws Exception
 	 */
-	@Action("/validateUser")
 	public String userExists() throws Exception {
 		Long id = (Long) userDAO
 				.uniqueResultObject(
@@ -131,12 +132,40 @@ public class AjaxAction extends BaseAction {
 	}
 
 	/**
+	 * 验证手机
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String phoneExists() throws Exception {
+		Long id = (Long) userDAO
+				.uniqueResultObject(
+						"select id from UserEntity  as _u where  _u.telephone=:telephone",
+						"telephone", telephone);
+		bool = id == null;
+		return JSON;
+	}
+
+	/**
+	 * 验证email
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String emailExists() throws Exception {
+		Long id = (Long) userDAO.uniqueResultObject(
+				"select id from UserEntity  as _u where  _u.email=:email",
+				"email", email);
+		bool = id == null;
+		return JSON;
+	}
+
+	/**
 	 * 店铺账号
 	 * 
 	 * @return
 	 * @throws Exception
 	 */
-	@Action("/seller")
 	public String seller() throws Exception {
 		HttpClient httpClient = new DefaultHttpClient();
 		HttpPost httRequest = new HttpPost(url);
@@ -228,6 +257,14 @@ public class AjaxAction extends BaseAction {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }
