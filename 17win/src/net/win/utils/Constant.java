@@ -4,7 +4,7 @@ public abstract class Constant {
 	private Constant() {
 	}
 	// 登陆用户的信息
-	public static final String USER_LOGIN_INFO = "USER_LOGIN_INFO";
+	public static final String USER_LOGIN_INFO = "userLogin";
 	//
 	public static final String RTP_I18N_LANGUAGE = "language";
 	

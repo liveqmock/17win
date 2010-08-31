@@ -22,10 +22,13 @@ public class UserLoginInfo {
 	// 最后一次登陆时间
 	private Date lastLoginTime;
 	// 当前级别(一心，还是一钻)
-	private String level;
+	private Integer level;
 	// 操作码激活状态
 	private Boolean operationCodeStatus = false;
-
+	// 状态
+	private String status;
+	//钱
+	private Double money;
 	public String getUsername() {
 		return username;
 	}
@@ -82,12 +85,20 @@ public class UserLoginInfo {
 		this.lastLoginTime = lastLoginTime;
 	}
 
-	public String getLevel() {
+	public Integer getLevel() {
 		return level;
 	}
 
-	public void setLevel(String level) {
+	public void setLevel(Integer level) {
 		this.level = level;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public Boolean getOperationCodeStatus() {
@@ -104,5 +115,13 @@ public class UserLoginInfo {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Double getMoney() {
+		return money;
+	}
+
+	public void setMoney(Double money) {
+		this.money = money;
 	}
 }

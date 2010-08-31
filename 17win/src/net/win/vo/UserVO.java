@@ -20,10 +20,33 @@ public class UserVO extends BaseVO {
 	/**
 	 * 显示数据
 	 */
-	private List<ProvinceEntity> provinces=new ArrayList<ProvinceEntity>();
-	private List<CityEntity> cities=new ArrayList<CityEntity>();
-	private List<AreaEntity> areas=new ArrayList<AreaEntity>();
+	private List<ProvinceEntity> provinces = new ArrayList<ProvinceEntity>();
+	private List<CityEntity> cities = new ArrayList<CityEntity>();
+	private List<AreaEntity> areas = new ArrayList<AreaEntity>();
+	
 
+	/*
+	 * 买家操作
+	 */
+	// 等我付款
+	private Integer paiedMeCount=0;
+	// 等卖家发货
+	private Integer dispatch=0;
+	// 等我好评
+	private Integer evaluatedCount=0;
+	/*
+	 * 卖家操作
+	 */
+	// 等待接手
+	private Integer acceptCount=0;
+	// 等等待审核
+	private Integer verifyCount=0;
+	// 等待我发货
+	private Integer dispatchedCount=0;
+	// 等待买家确认
+	private Integer affirmCount=0;
+	// 等待我核查好评
+	private Integer checkEcaluateCount=0;
 	public UserEntity getUserEntity() {
 		return userEntity;
 	}
@@ -62,6 +85,70 @@ public class UserVO extends BaseVO {
 
 	public void setVerificationCode(String verificationCode) {
 		this.verificationCode = verificationCode;
+	}
+
+	public Integer getPaiedMeCount() {
+		return paiedMeCount;
+	}
+
+	public void setPaiedMeCount(Integer paiedMeCount) {
+		this.paiedMeCount = paiedMeCount;
+	}
+
+	public Integer getDispatch() {
+		return dispatch;
+	}
+
+	public void setDispatch(Integer dispatch) {
+		this.dispatch = dispatch;
+	}
+
+	public Integer getEvaluatedCount() {
+		return evaluatedCount;
+	}
+
+	public void setEvaluatedCount(Integer evaluatedCount) {
+		this.evaluatedCount = evaluatedCount;
+	}
+
+	public Integer getAcceptCount() {
+		return acceptCount;
+	}
+
+	public void setAcceptCount(Integer acceptCount) {
+		this.acceptCount = acceptCount;
+	}
+
+	public Integer getVerifyCount() {
+		return verifyCount;
+	}
+
+	public void setVerifyCount(Integer verifyCount) {
+		this.verifyCount = verifyCount;
+	}
+
+	public Integer getDispatchedCount() {
+		return dispatchedCount;
+	}
+
+	public void setDispatchedCount(Integer dispatchedCount) {
+		this.dispatchedCount = dispatchedCount;
+	}
+
+	public Integer getAffirmCount() {
+		return affirmCount;
+	}
+
+	public void setAffirmCount(Integer affirmCount) {
+		this.affirmCount = affirmCount;
+	}
+
+	public Integer getCheckEcaluateCount() {
+		return checkEcaluateCount;
+	}
+
+	public void setCheckEcaluateCount(Integer checkEcaluateCount) {
+		this.checkEcaluateCount = checkEcaluateCount;
 	}
 
 }

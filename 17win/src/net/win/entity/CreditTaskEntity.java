@@ -40,7 +40,7 @@ public class CreditTaskEntity extends BaseEntity {
 	// 接手时间
 	@Column(name = "START_DATE", nullable = false)
 	private Date startDate;
-	// 状态 (x:付款，x:确认款，x:好评等)
+	// 状态 ([1:等待我付款,2:等待卖家发货,3:等待卖家发货](买家),[4:等待接手,5:等待接手,6:等待我发货,7:等待买家确认8:等待我核查好评](卖家))
 	@Column(name = "STATUS", columnDefinition = "CHAR(1)", nullable = false)
 	private String status;
 	// 商品地址

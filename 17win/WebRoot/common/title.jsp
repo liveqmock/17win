@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <table width="100%" border="0" cellpadding="0" cellspacing="0"
 	background="images/index_top_bg.jpg">
 	<tr>
@@ -39,8 +39,8 @@
 						<TABLE cellSpacing=0 cellPadding=0 width=535 align=right border=0>
 							<TR>
 								<TD height=32 align="right">
+									
 									<span class="yell_font">欢迎您！</span>
-
 									<A href="user/login.jsp" target="_top">登陆</A> |
 									<A href="userManager/base!initRegister.php" target="_top"> 注册</A> |
 

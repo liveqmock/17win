@@ -1,4 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <td width="140" valign="top">
 	<table width="100%" border="0" cellpadding="0" cellspacing="0">
 		<tr>
@@ -32,29 +33,42 @@
 										<tr>
 											<td height=20>
 												会员：
-												<font color="#ff0000">xgj1988</font> 您好
+												<font color="#ff0000">${userLogin.username}</font> 您好
 											</td>
 										</tr>
 										<tr>
 											<td height=20>
 												您拥有：
-												<font color=#ff0000> 30.45</font> 元
+												<font color=#ff0000><s:property
+														value="#session.userLogin.money"></s:property>
+												</font> 元
 											</td>
 										</tr>
 
 										<tr>
 											<td height=20>
 												发布点：
-												<font color=#ff0000> 2.8</font> 点
+												<font color=#ff0000> <s:property
+														value="#session.userLogin.releaseDot"></s:property> </font> 点
 											</td>
 										</tr>
 										<tr>
 											<td height=20>
 												积 分：
-												<font color=#ff0000>290</font>点
+												<font color=#ff0000> <s:property
+														value="#session.userLogin.convertScore"></s:property>
+												</font>点
 											</td>
 										</tr>
-
+										<tr>
+											<td height=20>
+												状态：
+												<s:if test="#session.userLogin.status==0">
+													<font color=#ff0000>没有激活</font>
+												</s:if>
+												
+											</td>
+										</tr>
 									</table>
 								</div>
 

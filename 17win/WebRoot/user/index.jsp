@@ -93,9 +93,9 @@ img {
 														你好：
 													</td>
 
-													<td width="23%" align="left" class="borderc">
-														<Font color="#FF0000">xgj1988</Font> &nbsp;(
-														<font color=red>还没有加入部落</font>)
+													<td width="10%" align="left" class="borderc">
+														<Font color="#FF0000"><s:property
+																value="#session.userLogin.username"></s:property> </Font>
 													</td>
 													<td width="63%" align="left" class="borderc">
 														&nbsp;
@@ -109,7 +109,7 @@ img {
 													</td>
 													<td colspan="2" align="left" class="borderc">
 														你上次登陆的时间是：
-														<font color="#FF0000">2010-8-21 13:11:52</font>，如果你在这个时间没有登陆过，请联系客服。
+														<font color="#FF0000"></font>，如果你在这个时间没有登陆过，请联系客服。
 													</td>
 
 												</tr>
@@ -120,8 +120,11 @@ img {
 													<td colspan="2" align="left" class="borderc">
 														<IMG src="images/c8.gif">
 														你的存款：
-														<font color="#FF0000"> 30.45</font> 元； 发布点：
-														<font color="#FF0000"> 2.8 </font>点； 刷客积分：
+														<font color="#FF0000"><s:property
+																value="#session.userLogin.money"></s:property> </font> 元； 发布点：
+														<font color="#FF0000"><s:property
+																value="#session.userLogin.releaseDot"></s:property> </font>点；
+														刷客积分：
 														<img src="images/xin2.gif" alt="刷客经验积分：290">
 
 													</td>
@@ -137,7 +140,7 @@ img {
 														<a href="record.asp">查看交易记录</a>
 													</td>
 												</tr>
-
+												<!-- 
 												<tr>
 
 													<td height="55" align="center" class="borderc">
@@ -161,23 +164,39 @@ img {
 														<A href="complaintre.asp"><font color="#FF0000">0</font>个</A>被申诉，请尽快处理
 													</td>
 												</tr>
+												 -->
 												<tr>
 													<td height="55" align="center" class="borderc">
 														&nbsp;
 													</td>
 													<td colspan="2" align="left" class="borderc">
 														买家操作： 等待我付款（
-														<font color="#FF0000">0</font>） 等待卖家发货（
-														<font color="#FF0000">0</font>） 等待我收货好评（
-														<font color="#FF0000">3</font>）
+														<font color="#FF0000"><s:property
+																value="userVO.paiedMeCount"></s:property>
+														</font>） 等待卖家发货（
+														<font color="#FF0000"><s:property
+																value="userVO.dispatch"></s:property>
+														</font>） 等待我收货好评（
+														<font color="#FF0000"><s:property
+																value="userVO.evaluatedCount"></s:property>
+														</font>）
 														<br />
 
 														卖家操作： 等待接手（
-														<font color="#FF0000">0 </font>）等待审核（
-														<font color="#FF0000"> 0 </font>） 等待我发货（
-														<font color="#FF0000"> 0</font>） 等待买家确认（
-														<font color="#FF0000">1</font>） 等待我核查好评（
-														<font color="#FF0000">0</font>）
+														<font color="#FF0000"><s:property
+																value="userVO.acceptCount"></s:property> </font>）等待审核（
+														<font color="#FF0000"><s:property
+																value="userVO.verifyCount"></s:property>
+														</font>） 等待我发货（
+														<font color="#FF0000"><s:property
+																value="userVO.dispatchedCount"></s:property>
+														</font>） 等待买家确认（
+														<font color="#FF0000"><s:property
+																value="userVO.affirmCount"></s:property>
+														</font>） 等待我核查好评（
+														<font color="#FF0000"><s:property
+																value="userVO.checkEcaluateCount"></s:property>
+														</font>）
 													</td>
 
 												</tr>

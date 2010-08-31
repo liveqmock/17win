@@ -85,12 +85,12 @@ public class UserService extends BaseService {
 										.getLoginPassword()) });
 		if (userEntity == null) {
 			putAlertMsg("用户名或密码错误");
+			userVO.setVerificationCode(null);
 			return "inputLogin";
 		} else {
 			UserLoginInfo userLoginInfo = new UserLoginInfo();
 			BeanUtils.copyProperties(userLoginInfo, userEntity);
-			putBySession(Constant.USER_LOGIN_INFO, userLoginInfo);
-			userVO.setVerificationCode(null);
+			putLoginUser( userLoginInfo);
 			return "loginSuccess";
 		}
 	}

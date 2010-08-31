@@ -38,7 +38,28 @@ public class BaseService {
 	 * @param value
 	 */
 	protected void putBySession(String key, Object value) {
-		ServletActionContext.getRequest().setAttribute(key, value);
+		ServletActionContext.getRequest().getSession().setAttribute(key, value);
+	}
+
+	/**
+	 * 存放用户
+	 * 
+	 * @param name
+	 * @param value
+	 */
+	protected void putLoginUser(Object value) {
+		ServletActionContext.getRequest().getSession().setAttribute(
+				Constant.USER_LOGIN_INFO, value);
+	}
+
+	/**
+	 * 存放用户
+	 * 
+	 * @param name
+	 * @param value
+	 */
+	protected UserLoginInfo getLoginUser() {
+		return (UserLoginInfo) getBySession(Constant.USER_LOGIN_INFO);
 	}
 
 	/**
@@ -51,6 +72,7 @@ public class BaseService {
 		message = "<script>alert('" + message + "');</script>";
 		putByRequest(MSG, message);
 	}
+
 	/**
 	 * 显示DIV
 	 * 
