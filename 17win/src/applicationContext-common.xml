@@ -66,4 +66,25 @@
 		让Spring通过自动扫描来查询和管理Bean 有了这一句上面的<context:annotation-config/>可以注释掉
 	-->
 	<context:component-scan base-package="net.win" />
+
+	<!-- 邮件发送实现 -->
+	<bean id="mailSender"
+		class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.qq.com" />
+		<property name="port" value="25" />
+		<property name="username" value="30756500@qq.com" />
+		<property name="password" value="8868829xgj" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!--②异步线程执行器-->
+	<bean id="taskExecutor"
+		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<property name="corePoolSize" value="10" />
+		<property name="maxPoolSize" value="30" />
+	</bean>
 </beans>

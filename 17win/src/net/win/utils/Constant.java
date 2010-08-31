@@ -12,6 +12,9 @@ public abstract class Constant {
 	
 	// 验证码
 	public static final String VERIFY_CODE = "verifyCode";
+	
+	// EMAIL的发送地址
+	public static final String FROM_EMAIL = "30756500@qq.com";
 
 	// https的URL
 	public static final String HTTPS_URL = "https://192.168.0.181:8443";
