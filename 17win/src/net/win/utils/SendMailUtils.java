@@ -19,7 +19,7 @@ public final class SendMailUtils {
 	private static Configuration cfg = new Configuration();
 	static {
 		try {
-			cfg.setDirectoryForTemplateLoading(new File(winUtils
+			cfg.setDirectoryForTemplateLoading(new File(WinUtils
 					.getClassesPath()));
 		} catch (IOException e) {
 			LoggerUtils.error(e);

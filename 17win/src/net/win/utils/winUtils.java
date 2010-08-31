@@ -4,7 +4,7 @@ import java.io.File;
 
 import org.apache.struts2.ServletActionContext;
 
-public class winUtils {
+public class WinUtils {
 	/**
 	 * 得到根目录
 	 * 
