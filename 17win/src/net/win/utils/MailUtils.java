@@ -61,4 +61,36 @@ public final class MailUtils {
 
 	}
 
+	/**
+	 * 发送找密码的邮件
+	 * 
+	 * @param args
+	 */
+
+	public static void sendPasswordMail(JavaMailSender mailSender,
+			String username, String email) throws Exception {
+		SimpleMailMessage mail = new SimpleMailMessage();
+		Template tpl = cfg.getTemplate("findPassword.ftl");
+		Map result = new HashMap();
+		result.put("content", "内容");
+		String htmlText = FreeMarkerTemplateUtils.processTemplateIntoString(
+				tpl, result);// 加入map到模板中 对应${content}
+		//		
+		// mail.setFrom(Constant.FROM_EMAIL);
+		// mail.setTo(email);
+		// mail.setSubject(username + "欢迎您加入www.17win.com(一起赢)平台");
+		// mail.setText(htmlText);
+		//
+		// mailSender.send(mail);
+		MimeMessage msg = mailSender.createMimeMessage();
+		// false表示非marltipart,UTF-8为字符编码
+		MimeMessageHelper helper = new MimeMessageHelper(msg, false, "UTF-8");
+		helper.setSubject(username + "欢迎您加入www.17win.com(一起赢)平台");
+		helper.setFrom(Constant.FROM_EMAIL);
+		helper.setTo(email);
+		helper.setText(htmlText, true);// 设置为true表示发送的是HTML
+		mailSender.send(msg);
+
+	}
+
 }

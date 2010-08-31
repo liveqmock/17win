@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
 /**
@@ -52,6 +53,7 @@ public final class StringUtils {
 			MessageDigest md5 = MessageDigest.getInstance("MD5");
 			BASE64Encoder base64en = new BASE64Encoder();
 			String newstr = base64en.encode(md5.digest(str.getBytes("utf-8")));
+
 			return newstr;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -86,8 +88,11 @@ public final class StringUtils {
 		} else
 			return null;
 	}
-	public static void main(String[] args) {
-		System.out.println(processPwd("123"));
-	}
+	public static void main(String[] args) throws Exception{
+		String s = processPwd("123");
+		BASE64Decoder decoder = new BASE64Decoder();
+		decoder.decodeBuffer(s);
+		MessageDigest md5 = MessageDigest.getInstance("MD5");
 
+	}
 }

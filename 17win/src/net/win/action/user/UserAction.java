@@ -1,8 +1,11 @@
 package net.win.action.user;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import net.win.BaseAction;
+import net.win.entity.ProvinceEntity;
 import net.win.service.user.UserService;
 import net.win.vo.UserVO;
 
@@ -11,6 +14,7 @@ import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
+import org.hibernate.Hibernate;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -18,12 +22,12 @@ import org.springframework.stereotype.Controller;
 @Controller
 @Scope("prototype")
 @ParentPackage("17win-default")
-@Results( {
+@Results({
 		@Result(name = "input", location = "/system/register.jsp"),
 		@Result(name = "inputLogin", location = "/user/login.jsp"),
 		@Result(name = "loginSuccess", type = "redirect", location = "/user/index.jsp"),
 		@Result(name = "initRegister", location = "/system/register.jsp"),
-		@Result(name = "registerSuccess", location = "/user/login.jsp") })
+		@Result(name = "registerSuccess", location = "/user/login.jsp")})
 @Namespace("/userManager")
 public class UserAction extends BaseAction {
 	@Resource
@@ -45,6 +49,15 @@ public class UserAction extends BaseAction {
 		return INPUT;
 	}
 
+	/**
+	 * 手机激活
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String activateAccount() throws Exception {
+		return userService.activateAccount(userVO);
+	}
 	/**
 	 * 登陆
 	 * 
@@ -73,5 +86,15 @@ public class UserAction extends BaseAction {
 	 */
 	public String initRegister() throws Exception {
 		return userService.initRegister(userVO);
+	}
+
+	/**
+	 * 查找密码
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String findPassword() throws Exception {
+		return userService.findPassword(userVO);
 	}
 }

@@ -38,6 +38,30 @@ public class UserService extends BaseService {
 	private AreaDAO areaDAO;
 	@Resource
 	private JavaMailSender mailSender;
+	/**
+	 * 手机激活
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String activateAccount(UserVO userVO) throws Exception {
+		List<ProvinceEntity> provinces = provinceDAO.listAll();
+		Hibernate.initialize(provinces);
+		userVO.setProvinces(provinces);
+		return "initRegister";
+	}
+	/**
+	 * 查找密码
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String findPassword(UserVO userVO) throws Exception {
+		List<ProvinceEntity> provinces = provinceDAO.listAll();
+		Hibernate.initialize(provinces);
+		userVO.setProvinces(provinces);
+		return "initRegister";
+	}
 
 	/**
 	 * 注册
