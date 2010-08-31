@@ -4,7 +4,13 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 /**
  * 信誉任务
  * 
@@ -14,31 +20,46 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "TB_CREDITTASK")
 public class CreditTaskEntity extends BaseEntity {
+	// 类型 ( 1:淘宝，2：拍拍，3有啊)
+	@Column(name = "TYPE_", columnDefinition = "CHAR(1)", nullable = false)
+	private String type;
 	// 发布人
-	@Column(name = "RELEASE_PERSON_", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = UserEntity.class)
+	@JoinColumn(name = "RELEASE_PERSON_")
 	private UserEntity releasePerson;
+	// 接收人
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = UserEntity.class)
+	@JoinColumn(name = "RECEIVE_PERSON_")
+	private UserEntity receivePerson;
 	// 发布点
 	@Column(name = "RELEASE_DOT_", nullable = false)
 	private Float releaseDot;
 	// 价格
-	private Float money;
+	@Column(name = "MONEY_", nullable = false)
+	private Double money;
 	// 接手时间
+	@Column(name = "START_DATE", nullable = false)
 	private Date startDate;
-	// 接收人
-	private UserEntity receivePerson;
-	// 状态
+	// 状态 (x:付款，x:确认款，x:好评等)
+	@Column(name = "STATUS", columnDefinition = "CHAR(1)", nullable = false)
 	private String status;
 	// 商品地址
+	@Column(name = "ITEM_URL_", length = 50, nullable = false)
 	private String itemUrl;
 	// 是否修改价格
+	@Column(name = "UPDATE_PRICE_", nullable = false)
 	private Boolean updatePrice;
-	// 动态评分
+	// 动态评分(x:默认好评，x:全部5分 ...)
+	@Column(name = "GRADE_", columnDefinition = "CHAR(1)", nullable = false)
 	private String grade;
-	// 收货时间类型[0:自定义,1:立即，2:24小时,3:48小时,4：72小时]
-	private String receiveType;
-	// 间隔几个小时
-	private Integer intervalTime;
+	// 间隔几个小时(x*24[勾选]或则X[自定义])
+	@Column(name = "INTERVAL_HOUR_", nullable = false)
+	private Integer intervalHour;
+	// 运货单号
+	@Column(name = "WAYBILL_", length = 30)
+	private String waybill;
 	// 定时任务时间(不能小于开始时间)
+	@Column(name = "TIMEING_TIME_")
 	private Date timeingTime;
 	public Float getReleaseDot() {
 		return releaseDot;
@@ -52,10 +73,11 @@ public class CreditTaskEntity extends BaseEntity {
 	public void setReleasePerson(UserEntity releasePerson) {
 		this.releasePerson = releasePerson;
 	}
-	public Float getMoney() {
+
+	public Double getMoney() {
 		return money;
 	}
-	public void setMoney(Float money) {
+	public void setMoney(Double money) {
 		this.money = money;
 	}
 	public Date getStartDate() {
@@ -94,23 +116,29 @@ public class CreditTaskEntity extends BaseEntity {
 	public void setGrade(String grade) {
 		this.grade = grade;
 	}
-	public String getReceiveType() {
-		return receiveType;
-	}
-	public void setReceiveType(String receiveType) {
-		this.receiveType = receiveType;
-	}
-	public Integer getIntervalTime() {
-		return intervalTime;
-	}
-	public void setIntervalTime(Integer intervalTime) {
-		this.intervalTime = intervalTime;
-	}
 	public Date getTimeingTime() {
 		return timeingTime;
 	}
 	public void setTimeingTime(Date timeingTime) {
 		this.timeingTime = timeingTime;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public String getWaybill() {
+		return waybill;
+	}
+	public void setWaybill(String waybill) {
+		this.waybill = waybill;
+	}
+	public Integer getIntervalHour() {
+		return intervalHour;
+	}
+	public void setIntervalHour(Integer intervalHour) {
+		this.intervalHour = intervalHour;
 	}
 
 }

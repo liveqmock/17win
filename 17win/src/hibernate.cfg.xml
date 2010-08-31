@@ -25,7 +25,7 @@
 
 		<property name="hibernate.connection.charSet">GBK</property>
 		<property name="hibernate.connection.characterEncoding">
-		GBK
+			GBK
 		</property>
 		<!--
 			防止出现MySql过夜错误 <property name="hibernate.connection.release_mode">
@@ -94,5 +94,6 @@
 		<mapping class="net.win.entity.TaobaoUserEntity" />
 		<mapping class="net.win.entity.PaipaiUserEntity" />
 		<mapping class="net.win.entity.YouaUserEntity" />
+		<mapping class="net.win.entity.CreditTaskEntity" />
 	</session-factory>
 </hibernate-configuration>

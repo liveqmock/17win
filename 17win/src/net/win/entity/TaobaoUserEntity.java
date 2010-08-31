@@ -2,17 +2,20 @@ package net.win.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 /**
  * 淘宝用户信息
+ * 
  * @author xgj
- *
+ * 
  */
 @Entity
 @Table(name = "TB_TAOBAOUSER")
 public class TaobaoUserEntity extends BaseEntity {
 	// 卖家号
-	// 用户名
 	@Column(name = "SELLER_", length = 20, unique = true, nullable = false)
 	private String seller;
 	// 购买号
@@ -21,6 +24,17 @@ public class TaobaoUserEntity extends BaseEntity {
 	// 店铺地址
 	@Column(name = "SHOPURL_", length = 50, unique = true, nullable = false)
 	private String shopURL;
+	// 用户
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "USER_ID_")
+	private UserEntity user;
+	public UserEntity getUser() {
+		return user;
+	}
+
+	public void setUser(UserEntity user) {
+		this.user = user;
+	}
 
 	public String getSeller() {
 		return seller;

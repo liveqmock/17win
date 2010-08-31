@@ -9,7 +9,11 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 /**
  * 用户
@@ -39,7 +43,7 @@ public class UserEntity extends BaseEntity {
 	@Column(name = "RELEASE_DOT_", nullable = false)
 	private Double releaseDot;
 	// 电子邮箱
-	@Column(name = "EMAIL_", length = 24, nullable = false)
+	@Column(name = "EMAIL_", length = 24,unique=true, nullable = false)
 	private String email;
 	// 手机
 	@Column(name = "TELPHONE_", unique = true, columnDefinition = "CHAR(11)", nullable = false)
@@ -72,6 +76,34 @@ public class UserEntity extends BaseEntity {
 	// 最后一次登陆时间
 	@Column(name = "LASTLOGINTIME_")
 	private Date lastLoginTime;
+	// 淘宝信息
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "TAOBAOUSER_ID_")
+	@Cascade(CascadeType.ALL)
+	private TaobaoUserEntity taobaoUser;
+
+	// 拍拍信息
+	@OneToOne(fetch = FetchType.LAZY)
+	@Cascade(CascadeType.ALL)
+	@JoinColumn(name = "PAIPAIUSER_ID_")
+	private PaipaiUserEntity paipaiUser;
+
+	// 有啊信息
+	@OneToOne(fetch = FetchType.LAZY)
+	@Cascade(CascadeType.ALL)
+	@JoinColumn(name = "YOUAUSER_ID_")
+	private YouaUserEntity youaUser;
+
+	// 发布的任务
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "RELEASE_PERSON_")
+	@Cascade(CascadeType.ALL)
+	private List<CreditTaskEntity> releaseCreditTasks;
+	// 接受的任务
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "RECEIVE_PERSON_")
+	@Cascade(CascadeType.ALL)
+	private List<CreditTaskEntity> receiveCreditTasks;
 	// 省
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "RPOVINCE_ID_")
@@ -84,21 +116,6 @@ public class UserEntity extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "AREA_ID_")
 	private AreaEntity area;
-
-	// 淘宝信息
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "TAOBAOUSER_ID_")
-	private TaobaoUserEntity taobaoUser;
-
-	// 拍拍信息
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "PAIPAI_ID_")
-	private PaipaiUserEntity paipaiUser;
-
-	// 有啊信息
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "YOUAUSER_ID_")
-	private YouaUserEntity youaUser;
 
 	// 介绍人
 	@ManyToOne(targetEntity = UserEntity.class, fetch = FetchType.LAZY)
@@ -328,6 +345,21 @@ public class UserEntity extends BaseEntity {
 
 	public void setMoney(Double money) {
 		this.money = money;
+	}
+	public List<CreditTaskEntity> getReleaseCreditTasks() {
+		return releaseCreditTasks;
+	}
+
+	public void setReleaseCreditTasks(List<CreditTaskEntity> releaseCreditTasks) {
+		this.releaseCreditTasks = releaseCreditTasks;
+	}
+
+	public List<CreditTaskEntity> getReceiveCreditTasks() {
+		return receiveCreditTasks;
+	}
+
+	public void setReceiveCreditTasks(List<CreditTaskEntity> receiveCreditTasks) {
+		this.receiveCreditTasks = receiveCreditTasks;
 	}
 
 }

@@ -100,9 +100,9 @@
 												<tr>
 													<td colspan="2" bgcolor="#FFFFFF">
 														<label>
-															<a  id="findPWA"
-																href="javascript:void(0);"><img src="images/forgetpw.gif" width="12"  
-																	height="13" border="0">&nbsp;找回密码</a>&nbsp;
+															<a id="findPWA" href="javascript:void(0);"><img
+																	src="images/forgetpw.gif" width="12" height="13"
+																	border="0">&nbsp;找回密码</a>&nbsp;
 															<a href="userManager/base!initRegister.php">&nbsp;&nbsp;&nbsp;<img
 																	style="cursor: pointer;" src="images/register.gif"
 																	width="14" height="13" border="0">&nbsp;快速注册</a>
@@ -152,28 +152,40 @@
 			<s:include value="../common/footKuan.jsp"></s:include>
 		</s:form>
 		<div id="findPW" title="找回密码">
-			<s:form action="userManager/base!login.php" theme="simple"
-				onsubmit="return validateForm()">
+			<table border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td>
+						输入用户名:
+					</td>
+					<td>
+						<input type="text" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="button" id="findPWBtn" value="提交" />
+					</td>
+					<td>
+					</td>
+
+				</tr>
+			</table>
+		</div>
+		<s:if test="#request.div!=null">
+			<div id="activateDIV" title="激活账号">
 				<table border="0" cellpadding="0" cellspacing="0">
 					<tr>
 						<td>
-							输入用户名:
+							手机号码:15112355607
 						</td>
 						<td>
-							<input type="text" />
+							<input type="button" id="actioveBtn" value="获取激活码" />
 						</td>
 					</tr>
-					<tr>
-						<td>
-							<input type="button" id="findPWBtn" value="提交" />
-						</td>
-						<td>
-						</td>
 
-					</tr>
 				</table>
-			</s:form>
-		</div>
+			</div>
+		</s:if>
 		<s:property value="#request.msg" escape="false" />
 	</BODY>
 </HTML>
