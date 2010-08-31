@@ -19,7 +19,7 @@ public final class MailUtils {
 	private static Configuration cfg = new Configuration();
 	static {
 		try {
-			cfg.setDirectoryForTemplateLoading(new File(WinUtils
+			cfg.setDirectoryForTemplateLoading(new File(ContextUtils
 					.getClassesPath()));
 		} catch (IOException e) {
 			LoggerUtils.error(e);
