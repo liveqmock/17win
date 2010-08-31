@@ -38,6 +38,7 @@ public class UserService extends BaseService {
 	private AreaDAO areaDAO;
 	@Resource
 	private JavaMailSender mailSender;
+
 	/**
 	 * 手机激活
 	 * 
@@ -50,6 +51,7 @@ public class UserService extends BaseService {
 		userVO.setProvinces(provinces);
 		return "initRegister";
 	}
+
 	/**
 	 * 查找密码
 	 * 
@@ -73,11 +75,11 @@ public class UserService extends BaseService {
 		UserEntity userEntity = userDAO
 				.uniqueResult(
 						"from UserEntity  as _u where _u.username=:username and _u.loginPassword=:loginPassword",
-						new String[]{"username", "loginPassword"},
-						new Object[]{
+						new String[] { "username", "loginPassword" },
+						new Object[] {
 								userVO.getUserEntity().getUsername(),
 								StringUtils.processPwd(userVO.getUserEntity()
-										.getLoginPassword())});
+										.getLoginPassword()) });
 		if (userEntity == null) {
 			putAlertMsg("用户名或密码错误");
 			return "inputLogin";
@@ -130,7 +132,7 @@ public class UserService extends BaseService {
 		// 发布点
 		userEntity.setReleaseDot(2.0);
 		// 当前级别是0（没级别）
-		userEntity.setLevel("000");
+		userEntity.setLevel(0);
 		// 状态，没激活
 		userEntity.setStatus("0");
 		// 钱

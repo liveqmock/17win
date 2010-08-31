@@ -25,10 +25,6 @@ public class YouaUserEntity extends BaseEntity {
 	// 店铺地址
 	@Column(name = "SHOPURL_", length = 50, unique = true, nullable = false)
 	private String shopURL;
-	// 用户
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="USER_ID_")
-	private UserEntity user;
 	public String getSeller() {
 		return seller;
 	}
@@ -53,12 +49,5 @@ public class YouaUserEntity extends BaseEntity {
 		this.shopURL = shopURL;
 	}
 
-	public UserEntity getUser() {
-		return user;
-	}
-
-	public void setUser(UserEntity user) {
-		this.user = user;
-	}
 
 }

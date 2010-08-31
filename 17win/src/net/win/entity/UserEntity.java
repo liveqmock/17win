@@ -59,7 +59,7 @@ public class UserEntity extends BaseEntity {
 	private Date registerTime;
 	// 当前级别(一心，还是一钻)
 	@Column(name = "LEVEL_", length = 2, nullable = false)
-	private String level;
+	private Integer level;
 	// 状态(0，没激活，1激活，2被冻结,3xxxxx)
 	@Column(name = "STATUS_", columnDefinition = "CHAR(1)", nullable = false)
 	private String status;
@@ -259,14 +259,6 @@ public class UserEntity extends BaseEntity {
 		this.releaseDot = releaseDot;
 	}
 
-	public String getLevel() {
-		return level;
-	}
-
-	public void setLevel(String level) {
-		this.level = level;
-	}
-
 	public Integer getConvertScore() {
 		return convertScore;
 	}
@@ -360,6 +352,14 @@ public class UserEntity extends BaseEntity {
 
 	public void setReceiveCreditTasks(List<CreditTaskEntity> receiveCreditTasks) {
 		this.receiveCreditTasks = receiveCreditTasks;
+	}
+
+	public Integer getLevel() {
+		return level;
+	}
+
+	public void setLevel(Integer level) {
+		this.level = level;
 	}
 
 }
