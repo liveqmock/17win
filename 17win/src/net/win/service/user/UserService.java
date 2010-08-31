@@ -14,10 +14,13 @@ import net.win.dao.UserDAO;
 import net.win.entity.ProvinceEntity;
 import net.win.entity.UserEntity;
 import net.win.utils.Constant;
+import net.win.utils.MailUtils;
 import net.win.utils.StringUtils;
 import net.win.vo.UserVO;
 
 import org.hibernate.Hibernate;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
 
 import com.sun.org.apache.commons.beanutils.BeanUtils;
@@ -33,6 +36,8 @@ public class UserService extends BaseService {
 	private CityDAO cityDAO;
 	@Resource
 	private AreaDAO areaDAO;
+	@Resource
+	private JavaMailSender mailSender;
 
 	/**
 	 * 注册
@@ -44,11 +49,11 @@ public class UserService extends BaseService {
 		UserEntity userEntity = userDAO
 				.uniqueResult(
 						"from UserEntity  as _u where _u.username=:username and _u.loginPassword=:loginPassword",
-						new String[] { "username", "loginPassword" },
-						new Object[] {
+						new String[]{"username", "loginPassword"},
+						new Object[]{
 								userVO.getUserEntity().getUsername(),
 								StringUtils.processPwd(userVO.getUserEntity()
-										.getLoginPassword()) });
+										.getLoginPassword())});
 		if (userEntity == null) {
 			putAlertMsg("用户名或密码错误");
 			return "inputLogin";
@@ -130,7 +135,9 @@ public class UserService extends BaseService {
 			userEntity.setReferee(null);
 		}
 		userDAO.save(userEntity);
-		putAlertMsg("注册成功,请登陆！");
+		MailUtils.sendRegisterMail(mailSender, userEntity.getUsername(),
+				userEntity.getEmail());
+		putDIV("注册成功,马上激活吧！");
 		return "registerSuccess";
 	}
 }

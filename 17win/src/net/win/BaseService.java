@@ -17,6 +17,10 @@ public class BaseService {
 	protected static final String OUTEXCEL = "outexcel";
 	protected static final String DOWNLOAD = "download";
 
+	// 前台显示数据
+	private static final String MSG = "msg";
+	private static final String DIV = "div";
+
 	/**
 	 * 把数据存放在request里面
 	 * 
@@ -45,7 +49,16 @@ public class BaseService {
 	 */
 	protected void putAlertMsg(String message) throws Exception {
 		message = "<script>alert('" + message + "');</script>";
-		putByRequest(Constant.MSG, message);
+		putByRequest(MSG, message);
+	}
+	/**
+	 * 显示DIV
+	 * 
+	 * @param message
+	 * @throws Exception
+	 */
+	protected void putDIV(String message) throws Exception {
+		putByRequest(DIV, message);
 	}
 
 	/**

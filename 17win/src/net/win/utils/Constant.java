@@ -5,8 +5,6 @@ public abstract class Constant {
 	}
 	// 登陆用户的信息
 	public static final String USER_LOGIN_INFO = "USER_LOGIN_INFO";
-	// 前台显示数据
-	public static final String MSG = "msg";
 	//
 	public static final String RTP_I18N_LANGUAGE = "language";
 	

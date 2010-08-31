@@ -15,7 +15,7 @@ import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 @SuppressWarnings({"unchecked", "unused"})
-public final class SendMailUtils {
+public final class MailUtils {
 	private static Configuration cfg = new Configuration();
 	static {
 		try {
@@ -26,7 +26,7 @@ public final class SendMailUtils {
 		}
 	}
 
-	private SendMailUtils() {
+	private MailUtils() {
 	}
 	/**
 	 * 发送注册信息的邮件
@@ -43,7 +43,6 @@ public final class SendMailUtils {
 		result.put("content", "内容");
 		String htmlText = FreeMarkerTemplateUtils.processTemplateIntoString(
 				tpl, result);// 加入map到模板中 对应${content}
-
 		//		
 		// mail.setFrom(Constant.FROM_EMAIL);
 		// mail.setTo(email);
