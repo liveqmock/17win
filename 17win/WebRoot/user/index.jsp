@@ -167,40 +167,76 @@ img {
 												 -->
 												<tr>
 													<td height="55" align="center" class="borderc">
-														&nbsp;
+														信誉互刷（买家操作）
 													</td>
 													<td colspan="2" align="left" class="borderc">
-														买家操作： 等待我付款（
-														<font color="#FF0000"><s:property
-																value="userVO.paiedMeCount"></s:property>
-														</font>） 等待卖家发货（
-														<font color="#FF0000"><s:property
-																value="userVO.dispatch"></s:property>
-														</font>） 等待我收货好评（
-														<font color="#FF0000"><s:property
-																value="userVO.evaluatedCount"></s:property>
-														</font>）
-														<br />
-
-														卖家操作： 等待接手（
-														<font color="#FF0000"><s:property
-																value="userVO.acceptCount"></s:property> </font>）等待审核（
-														<font color="#FF0000"><s:property
-																value="userVO.verifyCount"></s:property>
-														</font>） 等待我发货（
-														<font color="#FF0000"><s:property
-																value="userVO.dispatchedCount"></s:property>
-														</font>） 等待买家确认（
-														<font color="#FF0000"><s:property
-																value="userVO.affirmCount"></s:property>
-														</font>） 等待我核查好评（
-														<font color="#FF0000"><s:property
-																value="userVO.checkEcaluateCount"></s:property>
-														</font>）
+														<table cellpadding="1" cellspacing="1" border="0">
+															<tr>
+																<td>
+																</td>
+																<td>
+																	等待我付款
+																</td>
+																<td>
+																	等待卖家发货
+																</td>
+																<Td>
+																	等待我收货好评
+																</Td>
+															</tr>
+														</table>
 													</td>
 
 												</tr>
+												<tr>
+													<td height="55" align="center" class="borderc">
+														信誉互刷（卖家操作）
+													</td>
+													<td colspan="2" align="left" class="borderc">
+														<table cellpadding="1" cellspacing="1" border="0">
+															<tr>
+																<td>
+																</td>
+																<td>
+																	等待接手
+																</td>
+																<td>
+																	等待审核
+																</td>
+																<Td>
+																	等待我发货
+																</Td>
+																<td>
+																	等待买家确认
+																</td>
+																<td>
+																	等待我核查好评
+																</td>
+															</tr>
+														</table>
+													</td>
 
+												</tr>
+												<tr>
+													<td height="55" align="center" class="borderc">
+														流量互刷
+													</td>
+													<td colspan="2" align="left" class="borderc">
+														平台提示：
+														<font color="#FF0000">请尽快核对货款，按卖家规定时间完成平台任务，超过规定时间12小时后，会员有权进行申诉处理！</font>
+														<br />
+													</td>
+												</tr>
+												<tr>
+													<td height="55" align="center" class="borderc">
+														收藏互刷
+													</td>
+													<td colspan="2" align="left" class="borderc">
+														平台提示：
+														<font color="#FF0000">请尽快核对货款，按卖家规定时间完成平台任务，超过规定时间12小时后，会员有权进行申诉处理！</font>
+														<br />
+													</td>
+												</tr>
 												<tr>
 													<td height="55" align="center" class="borderc">
 														&nbsp;
