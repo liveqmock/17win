@@ -21,15 +21,14 @@ import org.springframework.stereotype.Controller;
 @Scope("prototype")
 @ParentPackage("17win-default")
 @Namespace("/userManager")
-@InterceptorRefs({@InterceptorRef("token"), @InterceptorRef("tokenSession")})
-@Results({
+@Results( {
 		@Result(name = "input", location = "/user/register.jsp"),
 		@Result(name = "inputLogin", location = "/user/login.jsp"),
 		@Result(name = "loginSuccess", type = "redirect", location = "/userInfoManager/info!init.php"),
 		@Result(name = "initRegister", location = "/user/register.jsp"),
 		@Result(name = "registerSuccess", location = "/user/login.jsp"),
 		@Result(name = "initFindPassword", location = "/user/findPassword.jsp"),
-		@Result(name = "findPasswordSuccess", location = "/user/login.jsp")})
+		@Result(name = "findPasswordSuccess", location = "/user/login.jsp") })
 public class UserAction extends BaseAction {
 	@Resource
 	private UserService userService;
@@ -49,13 +48,15 @@ public class UserAction extends BaseAction {
 		// TODO Auto-generated method stub
 		return INPUT;
 	}
+
 	/**
 	 * 找回密码
 	 * 
 	 */
 	public String findPassword() throws Exception {
-		return userService.findPassword(userVO);
+		return userService.updatefindPassword(userVO);
 	}
+
 	/**
 	 * 初始化找回密码
 	 * 
@@ -63,6 +64,7 @@ public class UserAction extends BaseAction {
 	public String initFindPassword() throws Exception {
 		return userService.initFindPassword(userVO);
 	}
+
 	/**
 	 * 手机激活
 	 * 

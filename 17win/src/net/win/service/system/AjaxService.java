@@ -40,7 +40,7 @@ public class AjaxService extends BaseService {
 	 * @return
 	 * @throws Exception
 	 */
-	public Boolean findPassword(String username, String telephone)
+	public Boolean updateFindPassword(String username, String telephone)
 			throws Exception {
 		UserEntity userEntity = userDAO
 				.uniqueResult(
@@ -59,7 +59,7 @@ public class AjaxService extends BaseService {
 		String path = request.getContextPath();
 		String basePath = request.getScheme() + "://" + request.getServerName()
 				+ ":" + request.getServerPort() + path + "/";
-		String content = basePath + "/userManager/base!findPassword.php?u="
+		String content = basePath + "userManager/base!initFindPassword.php?u="
 				+ username64 + "&t=" + nowTime65;
 
 		userEntity.setStatus("3");

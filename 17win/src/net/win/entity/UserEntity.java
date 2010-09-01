@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import net.win.utils.StringUtils;
+
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
@@ -342,6 +344,7 @@ public class UserEntity extends BaseEntity {
 	public void setMoney(Double money) {
 		this.money = money;
 	}
+
 	public List<CreditTaskEntity> getReleaseCreditTasks() {
 		return releaseCreditTasks;
 	}
@@ -374,4 +377,5 @@ public class UserEntity extends BaseEntity {
 		this.lastStatus = lastStatus;
 	}
 
+ 
 }

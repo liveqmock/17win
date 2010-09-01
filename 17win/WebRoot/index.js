@@ -6,10 +6,8 @@ function changeValidateCode(obj) {
 	obj.src = "verify/verificationCode.php?time=" + timenow;
 }
 var submitFlag = true;
-var timer;
 $(document).ready(function() {
 	$("#username").focus();
-	$("#verificationCode").val("");
 	$("#findPW").dialog({
 				autoOpen : false,
 				draggable : false,
@@ -21,17 +19,6 @@ $(document).ready(function() {
 	$("#findPW").bind("dialogbeforeclose", function(event, ui) {
 				$("#usernameTelephone").val("");
 			});
-
-	if ($("#activateDIV") != null) {
-		$("#activateDIV").dialog({
-					autoOpen : true,
-					draggable : false,
-					hide : 'slide',
-					modal : true,
-					resizable : false,
-					show : 'slide'
-				});
-	}
 	$("#findPWBtn").button();
 	$("#findPWBtn").bind("click", function() {
 				if (Validater.isBlank($("#usernameTelephone").val())) {
@@ -76,7 +63,6 @@ $(document).ready(function() {
 				if ($(this).val().length == 4) {
 					validateSuccess(this);
 				} else {
-					validateError(this, "\u9a8c\u8bc1\u7801\u4e0d\u6b63\u786e");
 					submitFlag = false;
 				}
 			});
@@ -98,44 +84,22 @@ function validateForm() {
 
 // 验证成功调用的方法
 function validateSuccess(obj) {
-	var span = $("<span></span>", {
-				css : {
-					colour : "red"
-				}
-			});
 	var img = $("<img></img>", {
 				src : "images/icon_ok.gif",
 				title : "\u9a8c\u8bc1\u6210\u529f"
 			});
-	var td = $(obj).parent();
-	td.next().empty();
-	td.after(span);
+	var span = $(obj).next();
+	span.empty();
 	span.append(img);
 }
 
 // 验证失败调用的方法
 function validateError(obj, msg) {
-	var span = $("<span></span>", {
-				css : {
-					colour : "red"
-				}
-			});
 	var img = $("<img></img>", {
 				src : "images/icon_error.gif",
 				title : msg
 			});
-	var td = $(obj).parent();
-	td.next().empty();
-	td.after(span);
+	var span = $(obj).next();
+	span.empty();
 	span.append(img);
-}
-// 提交按钮的改变
-function changeSutmitBtn() {
-	var time = eval($("#sumbitBtn").attr("timeId")) - 1;
-	$("#sumbitBtn").attr("timeId", time);
-	$("#sumbitBtn").val("\u540c\u610f\u534f\u8bae(" + time + ")");
-	if (time == 0) {
-		$("#sumbitBtn").attr("disabled", false);
-		clearInterval(timer);
-	}
 }

@@ -101,7 +101,7 @@ public class AjaxAction extends BaseAction {
 	 * @throws Exception
 	 */
 	public String findPassword() throws Exception {
-		bool = ajaxService.findPassword(username, telephone);
+		bool = ajaxService.updateFindPassword(username, telephone);
 		return JSON;
 	}
 	/**

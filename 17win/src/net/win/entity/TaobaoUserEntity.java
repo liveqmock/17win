@@ -3,6 +3,11 @@ package net.win.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
+import net.win.utils.StringUtils;
+
+import freemarker.template.utility.StringUtil;
+
 /**
  * 淘宝用户信息
  * 
@@ -21,7 +26,6 @@ public class TaobaoUserEntity extends BaseEntity {
 	// 店铺地址
 	@Column(name = "SHOPURL_", length = 50, unique = true, nullable = false)
 	private String shopURL;
- 
 
 	public String getSeller() {
 		return seller;
@@ -47,4 +51,7 @@ public class TaobaoUserEntity extends BaseEntity {
 		this.shopURL = shopURL;
 	}
 
+	public Boolean isNull() {
+		return StringUtils.isBlank(seller) && StringUtils.isBlank(buyer);
+	}
 }

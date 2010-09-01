@@ -18,7 +18,12 @@ import org.springframework.stereotype.Controller;
 @Controller
 @Scope("prototype")
 @ParentPackage("17win-default")
-@Results( { @Result(name = "input", location = "/user/index.jsp") })
+@Results( { @Result(name = "input", location = "/user/index.jsp"),
+		@Result(name = "initUpdateInfo", location = "/user/updateInfo.jsp"),
+		@Result(name = "updateInfo", location = "/user/updateInfo.jsp"),
+		@Result(name = "initUpdatePassword", location = "/user/updatePW.jsp"),
+		@Result(name = "updatePassword", location = "/user/updatePW.jsp")
+})
 @Namespace("/userInfoManager")
 public class UserInfoAction extends BaseAction {
 	@Resource
@@ -34,6 +39,45 @@ public class UserInfoAction extends BaseAction {
 	public String execute() throws Exception {
 		// TODO Auto-generated method stub
 		return super.execute();
+	}
+
+	/**
+	 * 更新信息
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String updatePassword() throws Exception {
+		return userInfoService.updatePassword(userVO);
+	}
+
+	/**
+	 * 初始化更新信息
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String initUpdatePassword() throws Exception {
+		return userInfoService.updatePassword(userVO);
+	}
+	/**
+	 * 更新信息
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String updateInfo() throws Exception {
+		return userInfoService.updateInfo(userVO);
+	}
+
+	/**
+	 * 初始化更新信息
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String initUpdateInfo() throws Exception {
+		return userInfoService.initUpdateInfo(userVO);
 	}
 
 	/**

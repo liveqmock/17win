@@ -8,10 +8,10 @@
 		<LINK href="css/index.css" type="text/css" rel="stylesheet">
 		<LINK href="css/top_bottom.css" type="text/css" rel="stylesheet">
 		<LINK href="css/Css.css" type="text/css" rel="stylesheet">
-		
+
 		<LINK href="css/center.css" type="text/css" rel="stylesheet">
 		<SCRIPT src="js/jieducm_pupu.js" type="text/javascript"></SCRIPT>
-		
+
 		<style type="text/css">
 body {
 	
@@ -64,7 +64,7 @@ img {
 					<table width="910" border="0" cellspacing="0" cellpadding="0">
 						<tr>
 							<!-- xgj   user left menu-->
-								<s:include value="../common/user/infoMenu.jsp"></s:include>
+							<s:include value="../common/user/infoMenu.jsp"></s:include>
 							<!-- end xgj -->
 							<td width="15">
 								&nbsp;
@@ -107,6 +107,18 @@ img {
 
 																				<td colspan="2" align="left" class="borderc">
 																					已绑定的手机号是：*******5607
+																				</td>
+																			</tr>
+																			<tr>
+																				<td height="55" align="center" class="borderc">
+																					&nbsp;
+																				</td>
+
+																				<td colspan="2" align="left" class="borderc">
+																					新手机好嘛：
+																					<input type="text" />
+																					<input type="button" value="提交" />
+																					<font color="red">重新绑定需要50个发布点</font>
 																				</td>
 																			</tr>
 																		</TABLE>

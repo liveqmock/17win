@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java"   pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML>
@@ -10,7 +10,7 @@
 		<LINK href="css/top_bottom.css" type=text/css rel=stylesheet>
 		<SCRIPT src="js/aop.js" type=text/javascript></SCRIPT>
 		<SCRIPT src="js/ajax.js" type=text/javascript></SCRIPT>
-		<SCRIPT src="system/register.js" type=text/javascript></SCRIPT>
+		<SCRIPT src="user/register.js" type=text/javascript></SCRIPT>
 		<STYLE type="text/css">
 td {
 	valign: top;
@@ -362,7 +362,9 @@ td {
 											headerKey="" headerValue="请选择">
 										</s:select>
 										县/区&nbsp;&nbsp;
+
 										<br />
+										系统会根据此信息，自动帮你生成发货地址
 										<!-- 	<font color="#FF0000"></font>当发送的是<font color="#FF0000">24小时</font>以内的<font
 												color="#FF0000">实物任务</font>时，
 系统可以根据这个地址，生成一个同地区的收货地址.

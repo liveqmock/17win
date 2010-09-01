@@ -155,7 +155,7 @@
 		<div id="findPW" title="找回密码">
 			<table border="0" cellpadding="0" cellspacing="0">
 				<tr>
-					<td>
+					<td nowrap="nowrap">
 						用户名/手机号码:
 					</td>
 					<td>

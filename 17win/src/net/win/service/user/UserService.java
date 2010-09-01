@@ -50,13 +50,17 @@ public class UserService extends BaseService {
 	 * @param userVO
 	 * @return
 	 */
-	public String findPassword(UserVO userVO) throws Exception {
+	public String updatefindPassword(UserVO userVO) throws Exception {
 		UserEntity userEntity = userDAO.uniqueResult(
 				"from UserEntity where username=:username", "username", userVO
 						.getUserEntity().getUsername());
 		if (!"3".equals(userEntity.getStatus())) {
 			return "error";
 		} else {
+			// 如果状态是修改密码。那么就把状态换成上一次状态
+			if ("3".equals(userEntity.getStatus())) {
+				userEntity.setStatus(userEntity.getLastStatus());
+			}
 			userEntity.setStatus(userEntity.getLastStatus());
 			userEntity.setLoginPassword(StringUtils.processPwd(userVO
 					.getUserEntity().getLoginPassword()));
@@ -64,6 +68,7 @@ public class UserService extends BaseService {
 			return "findPasswordSuccess";
 		}
 	}
+
 	/**
 	 * 初始化找回密码
 	 * 
@@ -90,6 +95,7 @@ public class UserService extends BaseService {
 			}
 		}
 	}
+
 	/**
 	 * 手机激活
 	 * 
@@ -113,20 +119,16 @@ public class UserService extends BaseService {
 		UserEntity userEntity = userDAO
 				.uniqueResult(
 						"from UserEntity  as _u where _u.username=:username and _u.loginPassword=:loginPassword",
-						new String[]{"username", "loginPassword"},
-						new Object[]{
+						new String[] { "username", "loginPassword" },
+						new Object[] {
 								userVO.getUserEntity().getUsername(),
 								StringUtils.processPwd(userVO.getUserEntity()
-										.getLoginPassword())});
+										.getLoginPassword()) });
 		if (userEntity == null) {
 			putAlertMsg("用户名或密码错误");
 			userVO.setVerificationCode(null);
 			return "inputLogin";
 		} else {
-			// 如果状态是修改密码。那么就把状态换成上一次状态
-			if ("3".equals(userEntity.getStatus())) {
-				userEntity.setStatus(userEntity.getLastStatus());
-			}
 			UserLoginInfo userLoginInfo = new UserLoginInfo();
 			BeanUtils.copyProperties(userLoginInfo, userEntity);
 			putLoginUser(userLoginInfo);
@@ -191,13 +193,13 @@ public class UserService extends BaseService {
 		if (nullID(userEntity.getArea())) {
 			userEntity.setArea(null);
 		}
-		if (nullID(userEntity.getTaobaoUser())) {
+		if (userEntity.getTaobaoUser().isNull()) {
 			userEntity.setTaobaoUser(null);
 		}
-		if (nullID(userEntity.getPaipaiUser())) {
+		if (userEntity.getPaipaiUser().isNull()) {
 			userEntity.setPaipaiUser(null);
 		}
-		if (nullID(userEntity.getYouaUser())) {
+		if (userEntity.getYouaUser().isNull()) {
 			userEntity.setYouaUser(null);
 		}
 		if (nullID(userEntity.getReferee())) {

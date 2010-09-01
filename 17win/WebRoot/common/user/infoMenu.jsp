@@ -96,17 +96,12 @@
 										class=LeftNews>
 										<tr>
 											<td height=20>
-												<A href="user/bindPhone.jsp">绑定手机 </A>
+												<A href="userInfoManager/info!initUpdateInfo.php">修改资料</A>
 											</td>
 										</tr>
 										<tr>
 											<td height=20>
-												<A href="user/updateInfo.jsp">修改资料</A>
-											</td>
-										</tr>
-										<tr>
-											<td height=20>
-												<a href="user/updatePW.jsp">密码/操作码</a>
+												<a  href="userInfoManager/info!initUpdatePassword.php">密码/操作码</a>
 											</td>
 										</tr>
 										<tr>

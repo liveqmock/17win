@@ -11,7 +11,7 @@
 
 		<LINK href="css/center.css" type="text/css" rel="stylesheet">
 		<SCRIPT src="js/jieducm_pupu.js" type="text/javascript"></SCRIPT>
-
+		<SCRIPT src="user/updatePW.js" type=text/javascript></SCRIPT>
 		<style type="text/css">
 body {
 	
@@ -56,41 +56,44 @@ img {
 
 	</HEAD>
 	<BODY>
-		<s:include value="../common/title.jsp"></s:include>
-		<table width="760" border="0" align="center" cellpadding="0"
-			cellspacing="0" bgcolor="#FFFFFF">
-			<tr>
-				<td>
-					<table width="910" border="0" cellspacing="0" cellpadding="0">
-						<tr>
-							<!-- xgj   user left menu-->
-							<s:include value="../common/user/infoMenu.jsp"></s:include>
-							<!-- end xgj -->
-							<td width="15">
-								&nbsp;
-							</td>
+		<s:form action="userInfoManager/info!updatePassword.php"
+			theme="simple" onsubmit="return validateForm()">
+			<s:include value="../common/title.jsp"></s:include>
+			<table width="760" border="0" align="center" cellpadding="0"
+				cellspacing="0" bgcolor="#FFFFFF">
+				<tr>
+					<td>
+						<table width="910" border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<!-- xgj   user left menu-->
+								<s:include value="../common/user/infoMenu.jsp"></s:include>
+								<!-- end xgj -->
+								<td width="15">
+									&nbsp;
+								</td>
 
-							<!-- 要插入的 -->
-							<td valign="top">
-								<table width="100%" cellspacing="0" cellpadding="0" border="0">
-									<tbody>
-										<tr>
-											<td height="5"></td>
-										</tr>
-									</tbody>
-								</table>
-								<div class="pp9">
-									<div style="padding-bottom: 15px; width: 97%;">
-										<div class="pp7">
-											您现在的位置是：淘宝刷信誉 &gt;&gt; 会员中心 &gt;&gt; 密码/操作密码 &gt;&gt;
-										</div>
-										<div class="pp8">
-											<strong>修改资料</strong>
-										</div>
+								<!-- 要插入的 -->
+								<td valign="top">
+									<table width="100%" cellspacing="0" cellpadding="0" border="0">
+										<tbody>
+											<tr>
+												<td height="5">
+													#re
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									<div class="pp9">
+										<div style="padding-bottom: 15px; width: 97%;">
+											<div class="pp7">
+												您现在的位置是：淘宝刷信誉 &gt;&gt; 会员中心 &gt;&gt; 密码/操作密码 &gt;&gt;
+											</div>
+											<div class="pp8">
+												<strong>修改资料</strong>
+											</div>
 
 
-										<form action="" method="post" onsubmit="return save_onclick()"
-											id="form" name="form">
+
 											<table width="99%" cellspacing="0" cellpadding="0" border="0"
 												align="center">
 												<tbody>
@@ -104,11 +107,15 @@ img {
 															当前操作密码：
 														</td>
 														<td width="230">
-															<input type="password" size="30" id="czm"
-																class="text_normal" name="czm">
+															<s:password id="oldPpertationCode"
+																name="userVO.opertationCode" size="30"
+																cssStyle="width:210px"></s:password>
+															<br />
+															修改密码需要提供当前操作密码
+
 														</td>
 														<td width="524">
-															修改密码需要提供当前操作密码
+
 														</td>
 													</tr>
 													<tr>
@@ -127,10 +134,15 @@ img {
 															登录密码：
 														</td>
 														<td>
-															<input type="password" size="30" id="pwd" name="pwd">
-														</td>
-														<td>
+															<s:password id="password"
+																name="userVO.userEntity.loginPassword" size="30"
+																cssStyle="width:210px"></s:password>
+															<br />
 															留空则不修改
+														</td>
+
+														<td>
+
 														</td>
 													</tr>
 
@@ -139,8 +151,8 @@ img {
 															确认登录密码：
 														</td>
 														<td>
-															<span class="font12h"> <input type="password"
-																	size="30" id="pwd2" name="pwd2"> </span>
+															<input type="password" id="rePassword" size="30"
+																style="width: 210px">
 														</td>
 														<td>
 															&nbsp;
@@ -164,10 +176,14 @@ img {
 															操作密码：
 														</td>
 														<td align="left" class="red-bcolor">
-															<input type="password" size="30" id="eczm" name="eczm">
+															<s:password id="opertationCode"
+																name="userVO.userEntity.opertationCode" size="30"
+																cssStyle="width:210px"></s:password>
+															<br />
+															留空则不修改
 														</td>
 														<td>
-															留空则不修改
+
 														</td>
 													</tr>
 													<tr>
@@ -175,10 +191,10 @@ img {
 															确认操作密码：
 														</td>
 														<td align="left" class="red-bcolor">
-															<input type="password" size="30" id="eczm2" name="eczm2">
+															<input type="password" id="reOperationCode" size="30"
+																style="width: 210px" />
 														</td>
 														<td>
-															操作密码不允许和登录密码相同
 														</td>
 													</tr>
 													<tr>
@@ -200,16 +216,17 @@ img {
 													</tr>
 												</tbody>
 											</table>
-										</form>
+										</div>
 									</div>
-								</div>
-							</td>
-							<!-- end -->
-						</tr>
-					</table>
-				</td>
-			</tr>
-		</table>
-		<s:include value="../common/footDuan.jsp"></s:include>
+								</td>
+								<!-- end -->
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+			<s:include value="../common/footDuan.jsp"></s:include>
+		</s:form>
+		<s:property value="#request.msg" escape="false" />
 	</BODY>
 </HTML>

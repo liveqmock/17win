@@ -39,12 +39,19 @@
 						<TABLE cellSpacing=0 cellPadding=0 width=535 align=right border=0>
 							<TR>
 								<TD height=32 align="right">
-									
-									<span class="yell_font">欢迎您！</span>
-									<A href="user/login.jsp" target="_top">登陆</A> |
-									<A href="userManager/base!initRegister.php" target="_top"> 注册</A> |
 
-									<A href="user/index.jsp" target="_top"> 个人中心 </A>|
+									<span class="yell_font">欢迎您！</span>
+									<s:if test="#session.userLogin==null">
+										<A href="user/login.jsp" target="_top">登陆</A> |
+									<A href="userManager/base!initRegister.php" target="_top">
+											注册</A> |
+
+									
+									</s:if>
+									<s:else>
+										 <font color="red"><b><s:property value="#session.userLogin.username"/></b></font> |
+										<A href="user/index.jsp" target="_top"> 个人中心 </A>|
+									</s:else>
 									<A href="#" title=添加到收藏夹
 										onclick="window.external.addFavorite('http://www.2000w.net','淘宝刷信誉')">收藏本站</A>
 									<!-- xgj|
