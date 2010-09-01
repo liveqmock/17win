@@ -28,6 +28,19 @@ $(document).ready(function() {
 				});
 	}
 	$("#findPWBtn").button();
+	$("#findPWBtn").bind("click", function() {
+				VhostAop.divAOP.ajax("ajaxManager/ajax!userExists.php", {
+							username : $("#username").val(),
+							telephone : $("#username").val()
+						}, function(data) {
+							if (data.bool) {
+								alert("邮件已经发送到你的邮箱里面，请查收！");
+							} else {
+								alert("该用户名或则手机没有被注册过！");
+							}
+							$("#findPW").dialog("close");
+						});
+			});
 	// 用户名
 	$("#username").bind("blur", function() {
 		var obj = this;

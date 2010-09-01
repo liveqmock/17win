@@ -24,6 +24,8 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
+import sun.misc.BASE64Decoder;
+
 import com.sun.org.apache.commons.beanutils.BeanUtils;
 
 @SuppressWarnings("unused")
@@ -43,25 +45,58 @@ public class UserService extends BaseService {
 	private FreeMarkerConfigurer freeMarkerCfj;
 
 	/**
+	 * 初始化找回密码
+	 * 
+	 * @param userVO
+	 * @return
+	 */
+	public String findPassword(UserVO userVO) throws Exception {
+		UserEntity userEntity = userDAO.uniqueResult(
+				"from UserEntity where username=:username", "username", userVO
+						.getUserEntity().getUsername());
+		if (!"3".equals(userEntity.getStatus())) {
+			return "error";
+		} else {
+			userEntity.setStatus("1");
+			userEntity.setLoginPassword(StringUtils.processPwd(userVO
+					.getUserEntity().getLoginPassword()));
+			putAlertMsg("密码修改成功！");
+			return "findPasswordSuccess";
+		}
+	}
+	/**
+	 * 初始化找回密码
+	 * 
+	 * @param userVO
+	 * @return
+	 */
+	public String initFindPassword(UserVO userVO) throws Exception {
+		BASE64Decoder decoder = new BASE64Decoder();
+		String username = new String(decoder.decodeBuffer(getByParam("u")));
+		String time = new String(decoder.decodeBuffer(getByParam("t")));
+		String status = (String) userDAO.uniqueResultObject(
+				"select status from UserEntity where username=:username",
+				"username", username);
+		if (!"3".equals(status)) {
+			return "error";
+		} else {
+			Long oldTime = Long.parseLong(time);
+			Long newTime = System.currentTimeMillis();
+			if ((newTime - oldTime) / 1000 / 60 <= 30) {
+				userVO.getUserEntity().setUsername(username);
+				return "initFindPassword";
+			} else {
+				return "error";
+			}
+		}
+	}
+	/**
 	 * 手机激活
 	 * 
 	 * @return
 	 * @throws Exception
 	 */
 	public String activateAccount(UserVO userVO) throws Exception {
-		List<ProvinceEntity> provinces = provinceDAO.listAll();
-		Hibernate.initialize(provinces);
-		userVO.setProvinces(provinces);
-		return "initRegister";
-	}
-
-	/**
-	 * 查找密码
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	public String findPassword(UserVO userVO) throws Exception {
 		List<ProvinceEntity> provinces = provinceDAO.listAll();
 		Hibernate.initialize(provinces);
 		userVO.setProvinces(provinces);
@@ -78,11 +113,11 @@ public class UserService extends BaseService {
 		UserEntity userEntity = userDAO
 				.uniqueResult(
 						"from UserEntity  as _u where _u.username=:username and _u.loginPassword=:loginPassword",
-						new String[] { "username", "loginPassword" },
-						new Object[] {
+						new String[]{"username", "loginPassword"},
+						new Object[]{
 								userVO.getUserEntity().getUsername(),
 								StringUtils.processPwd(userVO.getUserEntity()
-										.getLoginPassword()) });
+										.getLoginPassword())});
 		if (userEntity == null) {
 			putAlertMsg("用户名或密码错误");
 			userVO.setVerificationCode(null);
@@ -90,7 +125,7 @@ public class UserService extends BaseService {
 		} else {
 			UserLoginInfo userLoginInfo = new UserLoginInfo();
 			BeanUtils.copyProperties(userLoginInfo, userEntity);
-			putLoginUser( userLoginInfo);
+			putLoginUser(userLoginInfo);
 			return "loginSuccess";
 		}
 	}
@@ -136,8 +171,10 @@ public class UserService extends BaseService {
 		userEntity.setReleaseDot(2.0);
 		// 当前级别是0（没级别）
 		userEntity.setLevel(0);
-		// 状态，没激活
-		userEntity.setStatus("0");
+		// 状态， 正常
+		userEntity.setStatus("1");
+		// 没激活
+		userEntity.setActivate(false);
 		// 钱
 		userEntity.setMoney(0.0);
 
@@ -164,8 +201,8 @@ public class UserService extends BaseService {
 			userEntity.setReferee(null);
 		}
 		userDAO.save(userEntity);
-		MailUtils.sendRegisterMail(mailSender,freeMarkerCfj, userEntity.getUsername(),
-				userEntity.getEmail());
+		MailUtils.sendRegisterMail(mailSender, freeMarkerCfj, userEntity
+				.getUsername(), userEntity.getEmail());
 		putDIV("注册成功,马上激活吧！");
 		return "registerSuccess";
 	}

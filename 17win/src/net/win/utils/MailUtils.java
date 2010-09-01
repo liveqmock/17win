@@ -17,7 +17,7 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 
-@SuppressWarnings( { "unchecked", "unused" })
+@SuppressWarnings({"unchecked", "unused"})
 public final class MailUtils {
 	private static Configuration cfg = new Configuration();
 	static {
@@ -62,27 +62,18 @@ public final class MailUtils {
 	 */
 
 	public static void sendPasswordMail(JavaMailSender mailSender,
-			FreeMarkerConfigurer configurer, String username, String email)
-			throws Exception {
-		// String htmlText = FreeMarkerTemplateUtils.processTemplateIntoString(
-		// tpl, result);// 加入map到模板中 对应${content}
-		// //
-		// // mail.setFrom(Constant.FROM_EMAIL);
-		// // mail.setTo(email);
-		// // mail.setSubject(username + "欢迎您加入www.17win.com(一起赢)平台");
-		// // mail.setText(htmlText);
-		// //
-		// // mailSender.send(mail);
-		// MimeMessage msg = mailSender.createMimeMessage();
-		// // false表示非marltipart,UTF-8为字符编码
-		// MimeMessageHelper helper = new MimeMessageHelper(msg, false,
-		// "UTF-8");
-		// helper.setSubject(username + "欢迎您加入www.17win.com(一起赢)平台");
-		// helper.setFrom(Constant.FROM_EMAIL);
-		// helper.setTo(email);
-		// helper.setText(htmlText, true);// 设置为true表示发送的是HTML
-		// mailSender.send(msg);
-
+			FreeMarkerConfigurer configurer, String username, String email,
+			String content) throws Exception {
+		MimeMessage msg = mailSender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(msg, false, "utf-8");
+		helper.setFrom(Constant.FROM_EMAIL);
+		helper.setTo(email);
+		helper.setSubject(username + ":www.17win.com(一起赢)密码找回系统");
+		HashMap map = new HashMap();
+		map.put("content", content);
+		String htmlText = getMailText(map, configurer, "findPassword.ftl");
+		helper.setText(htmlText, true);
+		mailSender.send(msg);
 	}
 
 	/**

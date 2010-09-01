@@ -155,14 +155,16 @@
 			<table border="0" cellpadding="0" cellspacing="0">
 				<tr>
 					<td>
-						输入用户名:
+						用户名/手机号码:
 					</td>
 					<td>
-						<input type="text" />
+						<input type="text" id="usernameTelephone" />
+
 					</td>
 				</tr>
 				<tr>
 					<td>
+						&nbsp;
 						<input type="button" id="findPWBtn" value="提交" />
 					</td>
 					<td>

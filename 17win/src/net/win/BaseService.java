@@ -92,6 +92,15 @@ public class BaseService {
 	protected Object getByRequest(String key) {
 		return ServletActionContext.getRequest().getAttribute(key);
 	}
+	/**
+	 * 从param取出数据
+	 * 
+	 * @param name
+	 * @param value
+	 */
+	protected String getByParam(String key) {
+		return ServletActionContext.getRequest().getParameter(key);
+	}
 
 	/**
 	 * 从session取出数据

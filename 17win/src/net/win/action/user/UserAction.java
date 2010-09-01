@@ -19,12 +19,14 @@ import org.springframework.stereotype.Controller;
 @Scope("prototype")
 @ParentPackage("17win-default")
 @Namespace("/userManager")
-@Results( {
-		@Result(name = "input", location = "/system/register.jsp"),
+@Results({
+		@Result(name = "input", location = "/user/register.jsp"),
 		@Result(name = "inputLogin", location = "/user/login.jsp"),
 		@Result(name = "loginSuccess", type = "redirect", location = "/userInfoManager/info!init.php"),
-		@Result(name = "initRegister", location = "/system/register.jsp"),
-		@Result(name = "registerSuccess", location = "/user/login.jsp") })
+		@Result(name = "initRegister", location = "/user/register.jsp"),
+		@Result(name = "registerSuccess", location = "/user/login.jsp"),
+		@Result(name = "initFindPassword", location = "/user/findPassword.jsp"),
+		@Result(name = "findPasswordSuccess", location = "/user/findPassword.jsp")})
 public class UserAction extends BaseAction {
 	@Resource
 	private UserService userService;
@@ -44,7 +46,20 @@ public class UserAction extends BaseAction {
 		// TODO Auto-generated method stub
 		return INPUT;
 	}
-
+	/**
+	 * 找回密码
+	 * 
+	 */
+	public String findPassword() throws Exception {
+		return userService.findPassword(userVO); 
+	}
+	/**
+	 * 初始化找回密码
+	 * 
+	 */
+	public String initFindPassword() throws Exception {
+		return userService.initFindPassword(userVO);
+	}
 	/**
 	 * 手机激活
 	 * 
@@ -85,13 +100,4 @@ public class UserAction extends BaseAction {
 		return userService.initRegister(userVO);
 	}
 
-	/**
-	 * 查找密码
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	public String findPassword() throws Exception {
-		return userService.findPassword(userVO);
-	}
 }

@@ -43,7 +43,7 @@ public class UserEntity extends BaseEntity {
 	@Column(name = "RELEASE_DOT_", nullable = false)
 	private Double releaseDot;
 	// 电子邮箱
-	@Column(name = "EMAIL_", length = 24,unique=true, nullable = false)
+	@Column(name = "EMAIL_", length = 24, unique = true, nullable = false)
 	private String email;
 	// 手机
 	@Column(name = "TELPHONE_", unique = true, columnDefinition = "CHAR(11)", nullable = false)
@@ -60,7 +60,10 @@ public class UserEntity extends BaseEntity {
 	// 当前级别(一心，还是一钻)
 	@Column(name = "LEVEL_", length = 2, nullable = false)
 	private Integer level;
-	// 状态(0，没激活，1激活，2被冻结,3xxxxx)
+	// 状态(true 激活,false没激活)
+	@Column(name = "ACTIVATE_", nullable = false)
+	private Boolean activate;
+	// 状态(1正常,2冻结,3找密码,)
 	@Column(name = "STATUS_", columnDefinition = "CHAR(1)", nullable = false)
 	private String status;
 	// 钱
@@ -70,6 +73,7 @@ public class UserEntity extends BaseEntity {
 	/**
 	 * 可选选项
 	 */
+
 	// 旺旺
 	@Column(name = "WW_", length = 24)
 	private String ww;
@@ -360,6 +364,14 @@ public class UserEntity extends BaseEntity {
 
 	public void setLevel(Integer level) {
 		this.level = level;
+	}
+
+	public Boolean getActivate() {
+		return activate;
+	}
+
+	public void setActivate(Boolean activate) {
+		this.activate = activate;
 	}
 
 }

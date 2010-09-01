@@ -9,6 +9,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import net.win.BaseAction;
 import net.win.dao.AreaDAO;
@@ -18,26 +19,38 @@ import net.win.dao.UserDAO;
 import net.win.entity.AreaEntity;
 import net.win.entity.CityEntity;
 import net.win.entity.ProvinceEntity;
+import net.win.entity.UserEntity;
+import net.win.service.system.AjaxService;
+import net.win.utils.MailUtils;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpServerConnection;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.springframework.context.annotation.Scope;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
+
+import sun.misc.BASE64Encoder;
 
 import com.sun.org.apache.commons.beanutils.BeanUtils;
 
-@SuppressWarnings( { "serial", "unused", "unchecked" })
+@SuppressWarnings({"serial", "unused", "unchecked"})
 @Controller
 @ParentPackage("17win-default")
 @Scope("prototype")
 @Namespace("/ajaxManager")
 public class AjaxAction extends BaseAction {
+	@Resource
+	private AjaxService ajaxService;
+
 	@Resource
 	private ProvinceDAO provinceDAO;
 	@Resource
@@ -81,7 +94,16 @@ public class AjaxAction extends BaseAction {
 		// TODO Auto-generated method stub
 		return SUCCESS;
 	}
-
+	/**
+	 * 查找密码
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String findPassword() throws Exception {
+		bool = ajaxService.findPassword(username, telephone);
+		return JSON;
+	}
 	/**
 	 * 省市县联动
 	 * 
@@ -180,7 +202,7 @@ public class AjaxAction extends BaseAction {
 			Pattern pattern = Pattern
 					.compile("data\\-nick=\"([[\u0391-\uFFE5]\\w_]+)\"");
 			Matcher matcher;
-			OUTTER: while ((line = br.readLine()) != null) {
+			OUTTER : while ((line = br.readLine()) != null) {
 				line = URLDecoder.decode(line, "UTF-8");
 				matcher = pattern.matcher(line);
 				while (matcher.find()) {
