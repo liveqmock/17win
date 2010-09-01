@@ -4,12 +4,13 @@
 <html>
 	<head>
 		<s:include value="../common/header.jsp"></s:include>
+		<SCRIPT src="user/findPassword.js" type="text/javascript"></SCRIPT>
 	</head>
 	<body>
 		<h3>
 			下次要注意哦！
 		</h3>
-		<s:form action="userManager/base!register.php" theme="simple"
+		<s:form action="userManager/base!findPassword.php" theme="simple"
 			onsubmit="return validateForm()">
 			<s:hidden name="userVO.userEntity.username"></s:hidden>
 			<table border="0" cellpadding="0" cellspacing="0">

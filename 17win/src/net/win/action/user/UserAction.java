@@ -26,7 +26,7 @@ import org.springframework.stereotype.Controller;
 		@Result(name = "initRegister", location = "/user/register.jsp"),
 		@Result(name = "registerSuccess", location = "/user/login.jsp"),
 		@Result(name = "initFindPassword", location = "/user/findPassword.jsp"),
-		@Result(name = "findPasswordSuccess", location = "/user/findPassword.jsp")})
+		@Result(name = "findPasswordSuccess", location = "/user/login.jsp")})
 public class UserAction extends BaseAction {
 	@Resource
 	private UserService userService;

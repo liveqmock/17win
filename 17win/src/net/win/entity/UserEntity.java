@@ -60,10 +60,10 @@ public class UserEntity extends BaseEntity {
 	// 当前级别(一心，还是一钻)
 	@Column(name = "LEVEL_", length = 2, nullable = false)
 	private Integer level;
-	// 状态(true 激活,false没激活)
-	@Column(name = "ACTIVATE_", nullable = false)
-	private Boolean activate;
-	// 状态(1正常,2冻结,3找密码,)
+	// 上一次状态
+	@Column(name = "LAST_STATUS_", columnDefinition = "CHAR(1)", nullable = false)
+	private String lastStatus;
+	// 状态(0,未激活，1正常,2冻结,3找密码,)
 	@Column(name = "STATUS_", columnDefinition = "CHAR(1)", nullable = false)
 	private String status;
 	// 钱
@@ -366,12 +366,12 @@ public class UserEntity extends BaseEntity {
 		this.level = level;
 	}
 
-	public Boolean getActivate() {
-		return activate;
+	public String getLastStatus() {
+		return lastStatus;
 	}
 
-	public void setActivate(Boolean activate) {
-		this.activate = activate;
+	public void setLastStatus(String lastStatus) {
+		this.lastStatus = lastStatus;
 	}
 
 }

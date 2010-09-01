@@ -63,7 +63,7 @@
 										<tr>
 											<td height=20>
 												状态：
-												<s:if test="!#session.userLogin.activate">
+												<s:if test="#session.userLogin.status==0">
 													<font color=#ff0000>没有激活</font>
 												</s:if>
 												

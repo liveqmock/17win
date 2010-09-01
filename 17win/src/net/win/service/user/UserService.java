@@ -57,7 +57,7 @@ public class UserService extends BaseService {
 		if (!"3".equals(userEntity.getStatus())) {
 			return "error";
 		} else {
-			userEntity.setStatus("1");
+			userEntity.setStatus(userEntity.getLastStatus());
 			userEntity.setLoginPassword(StringUtils.processPwd(userVO
 					.getUserEntity().getLoginPassword()));
 			putAlertMsg("密码修改成功！");
@@ -123,6 +123,10 @@ public class UserService extends BaseService {
 			userVO.setVerificationCode(null);
 			return "inputLogin";
 		} else {
+			// 如果状态是修改密码。那么就把状态换成上一次状态
+			if ("3".equals(userEntity.getStatus())) {
+				userEntity.setStatus(userEntity.getLastStatus());
+			}
 			UserLoginInfo userLoginInfo = new UserLoginInfo();
 			BeanUtils.copyProperties(userLoginInfo, userEntity);
 			putLoginUser(userLoginInfo);
@@ -171,10 +175,9 @@ public class UserService extends BaseService {
 		userEntity.setReleaseDot(2.0);
 		// 当前级别是0（没级别）
 		userEntity.setLevel(0);
-		// 状态， 正常
-		userEntity.setStatus("1");
-		// 没激活
-		userEntity.setActivate(false);
+		// 状态， 没激活
+		userEntity.setStatus("0");
+		userEntity.setLastStatus("0");
 		// 钱
 		userEntity.setMoney(0.0);
 
