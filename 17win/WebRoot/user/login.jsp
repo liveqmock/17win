@@ -17,6 +17,7 @@
 	<BODY>
 		<s:form action="userManager/base!login.php" theme="simple"
 			onsubmit="return validateForm()">
+			<s:token></s:token>
 			<s:include value="../common/title.jsp"></s:include>
 			<TABLE cellSpacing=0 cellPadding=0 width=960 align=center border=0>
 				<TBODY>

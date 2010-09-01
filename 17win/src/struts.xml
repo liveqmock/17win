@@ -14,7 +14,8 @@
 	<constant name="struts.i18n.reload" value="true" />
 	<constant name="struts.multipart.maxSize" value="10485760"></constant>
 	<constant name="struts.action.extension" value="php" />
-	<constant name="struts.custom.i18n.resources" value="formatRssource" />
+	<constant name="struts.custom.i18n.resources"
+		value="formatRssource" />
 	<!-- 17win默认 -->
 	<package name="17win-default" extends="json-default">
 		<interceptors>
@@ -31,6 +32,7 @@
 		<global-results>
 			<result name="json" type="json"></result>
 			<result name="error">/error.jsp</result>
+			<result name="invalid.token">/tokenError.jsp</result>
 		</global-results>
 	</package>
 

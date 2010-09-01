@@ -7,6 +7,8 @@ import net.win.service.user.UserService;
 import net.win.vo.UserVO;
 
 import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.InterceptorRef;
+import org.apache.struts2.convention.annotation.InterceptorRefs;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
@@ -19,6 +21,7 @@ import org.springframework.stereotype.Controller;
 @Scope("prototype")
 @ParentPackage("17win-default")
 @Namespace("/userManager")
+@InterceptorRefs({@InterceptorRef("token"), @InterceptorRef("tokenSession")})
 @Results({
 		@Result(name = "input", location = "/user/register.jsp"),
 		@Result(name = "inputLogin", location = "/user/login.jsp"),
@@ -51,7 +54,7 @@ public class UserAction extends BaseAction {
 	 * 
 	 */
 	public String findPassword() throws Exception {
-		return userService.findPassword(userVO); 
+		return userService.findPassword(userVO);
 	}
 	/**
 	 * 初始化找回密码
