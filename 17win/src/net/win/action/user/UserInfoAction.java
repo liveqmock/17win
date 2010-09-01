@@ -58,7 +58,7 @@ public class UserInfoAction extends BaseAction {
 	 * @throws Exception
 	 */
 	public String initUpdatePassword() throws Exception {
-		return userInfoService.updatePassword(userVO);
+		return userInfoService.initUpdatePassword(userVO);
 	}
 	/**
 	 * 更新信息

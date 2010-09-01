@@ -1,8 +1,13 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML>
 	<HEAD>
+		 <base href="<%=basePath%>">
 		<title>淘宝刷信誉 -淘宝刷钻 _刷钻平台_互刷平台_免费刷钻首选灵谷刷客平台</title>
 		<META http-equiv=Content-Type content="text/html; charset=gb2312">
 		<meta
@@ -10,8 +15,6 @@
 			name="description" />
 		<meta content="淘宝刷信誉,淘宝刷钻,刷钻平台,互刷平台,免费刷钻" name="keywords" />
 		<LINK href="css/Css.css" type=text/css rel=stylesheet>
-		<link rel="stylesheet" id='skin' type="text/css"
-			href="s../ymPrompt.css" />
 		<LINK href="css/top_bottom.css" type=text/css rel=stylesheet>
 		<SCRIPT src="js/jquery-1.4.2.min.js" type=text/javascript></SCRIPT>
 		<SCRIPT src="js/validater.js" type=text/javascript></SCRIPT>
@@ -27,89 +30,163 @@
 			<TABLE cellSpacing=0 cellPadding=0 width=960 align=center border=0>
 				<TR>
 					<TD vAlign=top width=270>
-						<TABLE cellSpacing=0 cellPadding=0 width=260 border=0>
-							<TR>
-								<TD width=20>
-									<IMG height=32 src="images/Top_10.gif" width=20>
-								</TD>
-								<TD width=10>
-									<IMG height=32 src="images/Top_9.gif" width=10>
-								</TD>
-								<TD class=K_mttitle width=95 background=images/Top_12.gif>
-									用户登录
-								</TD>
-								<TD width=10>
-									<IMG height=32 src="images/Top_13.gif" width=10>
-								</TD>
-								<TD width=119 background=images/Top_11.gif></TD>
-								<TD width=6>
-									<IMG height=32 src="images/Top_14.gif" width=6>
-								</TD>
-							</TR>
-							<TR>
-								<TD class=K_mtcontent
-									style="PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 10px; PADDING-TOP: 10px"
-									colSpan=6>
 
-									<TABLE class=LeftNews cellSpacing=0 cellPadding=0 width="100%"
-										border=0>
-										<TR>
-											<TD>
-												用户名：
-											</TD>
-											<TD>
-												<s:textfield name="userVO.userEntity.username" size="30"
-													tabindex="0" cssStyle="width:120px" id="username"
-													maxlength="12"></s:textfield>
-												<span> </span>
-											</TD>
+						<s:if test="#session.userLogin!=null">
+							<table width="260" cellspacing="0" cellpadding="0" border="0">
+								<tbody>
+									<tr>
+										<td width="20">
+											<img width="20" height="32" src="images/Top_10.gif">
+										</td>
+										<td width="10">
+											<img width="10" height="32" src="images/Top_9.gif">
+										</td>
+										<td width="95" background="images/Top_12.gif"
+											class="K_mttitle">
+											用户登录
+										</td>
+										<td width="10">
+											<img width="10" height="32" src="images/Top_13.gif">
+										</td>
+										<td width="119" background="images/Top_11.gif"></td>
+										<td width="6">
+											<img width="6" height="32" src="images/Top_14.gif">
+										</td>
+									</tr>
+									<tr>
+										<td colspan="6" style="padding: 10px;" class="K_mtcontent">
 
-										</TR>
-										<TR>
-											<TD>
-												密 码：
-											</TD>
-											<TD>
-												<s:password id="password" maxlength="20"
-													name="userVO.userEntity.loginPassword" size="30"
-													cssStyle="width:120px"></s:password>
-												<span> </span>
-											</TD>
+											<table width="100%" cellspacing="0" cellpadding="0"
+												border="0" class="LeftNews">
 
-										</TR>
-										<TR>
-											<TD>
-												验证码：
-											</TD>
-											<TD>
-												<s:textfield id="ww" name="userVO.verificationCode"
-													maxlength="4" id="verificationCode" size="30"
-													cssStyle="width:60px"></s:textfield>
-												<img src="verify/verificationCode.php"
-													onclick="changeValidateCode(this)" title="点击图片刷新验证码"
-													style="cursor: pointer;" />
-												<span> </span>
-											</TD>
-										</TR>
-										<TR>
-											<TD>
-												<div align="right">
-													<input name="imageField" src="images/login-q_r4_c3.gif"
-														border="0" type="image" onFocus="this.blur()" />
-												</div>
-											</TD>
-											<TD>
-												<a href="register.asp"><img
-														src="images/login-q_r4_c31.gif" hspace="5" vspace="0"
-														border="0" /> </a>&nbsp;&nbsp;
-												<a href="#" class="STYLE1"
-													onClick="javascript:window.open('getpwd.asp','shouchang','width=450,height=300');">找回密码</a>
-											</TD>
-										</TR>
-									</TABLE>
-								</TD>
-							</TR>
-						</TABLE>
+												<tbody>
+													<tr>
+														<td colspan="2">
+															会&nbsp;&nbsp;&nbsp;&nbsp;员：
+															<font color="#ff0000"><s:property value="#session.userLogin.username"></s:property></font> 您好！ 
+														</td>
+													</tr>
+													<tr>
+														<td colspan="2">
+															您拥有：
+															<font color="#ff0000"> <s:property value="#session.userLogin.money"></s:property> </font> 元 发布点：
+															<font color="#ff0000"> <s:property value="#session.userLogin.releaseDot"></s:property> </font>点
+														</td>
+													</tr>
+													<tr>
+														<td width="94">
+															<a href="userInfoManager/info!initUpdateInfo.php"><font color="#ff0000">修改个人信息</font>
+															</a>
+														</td>
+														<td width="102">
+															<a href="user/md5_pay.asp"><font color="#ff0000">帐号充值</font>
+															</a>
+														</td>
+													</tr>
+
+													<tr>
+														<td>
+															<a href="taobao/"><font color="#ff0000">免费刷钻区&nbsp;
+															</font> </a>
+														</td>
+														<td>
+															<a href="user/exit.asp"
+																onclick="return confirm('确定退出操作吗？');"><font
+																color="#ff0000"> 安全退出</font> </a>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</s:if>
+						<s:else>
+							<TABLE cellSpacing=0 cellPadding=0 width=260 border=0>
+								<TR>
+									<TD width=20>
+										<IMG height=32 src="images/Top_10.gif" width=20>
+									</TD>
+									<TD width=10>
+										<IMG height=32 src="images/Top_9.gif" width=10>
+									</TD>
+									<TD class=K_mttitle width=95 background=images/Top_12.gif>
+										用户登录
+									</TD>
+									<TD width=10>
+										<IMG height=32 src="images/Top_13.gif" width=10>
+									</TD>
+									<TD width=119 background=images/Top_11.gif></TD>
+									<TD width=6>
+										<IMG height=32 src="images/Top_14.gif" width=6>
+									</TD>
+								</TR>
+								<TR>
+									<TD class=K_mtcontent
+										style="PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 10px; PADDING-TOP: 10px"
+										colSpan=6>
+
+										<TABLE class=LeftNews cellSpacing=0 cellPadding=0 width="100%"
+											border=0>
+											<TR>
+												<TD>
+													用户名：
+												</TD>
+												<TD>
+													<s:textfield name="userVO.userEntity.username" size="30"
+														tabindex="0" cssStyle="width:120px" id="username"
+														maxlength="12"></s:textfield>
+													<span> </span>
+												</TD>
+
+											</TR>
+											<TR>
+												<TD>
+													密 码：
+												</TD>
+												<TD>
+													<s:password id="password" maxlength="20"
+														name="userVO.userEntity.loginPassword" size="30"
+														cssStyle="width:120px"></s:password>
+													<span> </span>
+												</TD>
+
+											</TR>
+											<TR>
+												<TD>
+													验证码：
+												</TD>
+												<TD>
+													<s:textfield id="ww" name="userVO.verificationCode"
+														maxlength="4" id="verificationCode" size="30"
+														cssStyle="width:60px"></s:textfield>
+													<img src="verify/verificationCode.php"
+														onclick="changeValidateCode(this)" title="点击图片刷新验证码"
+														style="cursor: pointer;" />
+													<span> </span>
+												</TD>
+											</TR>
+											<TR>
+												<TD>
+													<div align="right">
+														<input name="imageField" src="images/login-q_r4_c3.gif"
+															border="0" type="image" onFocus="this.blur()" />
+													</div>
+												</TD>
+												<TD>
+													<a href="register.asp"><img
+															src="images/login-q_r4_c31.gif" hspace="5" vspace="0"
+															border="0" /> </a>&nbsp;&nbsp;
+													<a href="#" class="STYLE1"
+														onClick="javascript:window.open('getpwd.asp','shouchang','width=450,height=300');">找回密码</a>
+												</TD>
+											</TR>
+										</TABLE>
+									</TD>
+								</TR>
+							</TABLE>
+						</s:else>
 
 						<table width=260 border=0 cellPadding=0 cellSpacing=0>
 							<tr height="3">

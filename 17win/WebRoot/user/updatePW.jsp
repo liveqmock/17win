@@ -108,7 +108,7 @@ img {
 														</td>
 														<td width="230">
 															<s:password id="oldPpertationCode"
-																name="userVO.opertationCode" size="30"
+																name="userVO.operationCode" size="30"
 																cssStyle="width:210px"></s:password>
 															<br />
 															修改密码需要提供当前操作密码

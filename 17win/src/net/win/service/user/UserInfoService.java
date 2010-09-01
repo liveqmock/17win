@@ -52,7 +52,8 @@ public class UserInfoService extends BaseService {
 		UserEntity newUserEntity = userVO.getUserEntity();
 
 		// 比较以前的操作码
-		if (userEntity.getOpertationCode().equals(userVO.getOperationCode())) {
+		if (userEntity.getOpertationCode().equals(StringUtils
+				.processPwd(userVO.getOperationCode()))) {
 			if (!StringUtils.isBlank(newUserEntity.getLoginPassword())) {
 				userEntity.setLoginPassword(StringUtils
 						.processPwd(newUserEntity.getLoginPassword()));
@@ -77,9 +78,6 @@ public class UserInfoService extends BaseService {
 	 * @throws Exception
 	 */
 	public String initUpdatePassword(UserVO userVO) throws Exception {
-		UserLoginInfo userLoginInfo = getLoginUser();
-		UserEntity userEntity = userDAO.get(userLoginInfo.getId());
-		userVO.setUserEntity(userEntity);
 		return "initUpdatePassword";
 	}
 

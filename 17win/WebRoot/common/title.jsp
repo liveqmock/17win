@@ -42,15 +42,19 @@
 
 									<span class="yell_font">欢迎您！</span>
 									<s:if test="#session.userLogin==null">
-										<A href="user/login.jsp" target="_top">登陆</A> |
+										<A href="userManager/base!initLogin.php" target="_top">登陆</A> |
 									<A href="userManager/base!initRegister.php" target="_top">
 											注册</A> |
 
 									
 									</s:if>
 									<s:else>
-										 <font color="red"><b><s:property value="#session.userLogin.username"/></b></font> |
-										<A href="user/index.jsp" target="_top"> 个人中心 </A>|
+										<font color="red"><b><s:property
+													value="#session.userLogin.username" />
+										</b>
+										</font> |
+										<A href="userInfoManager/info!init.php" target="_top">
+											个人中心 </A>|
 									</s:else>
 									<A href="#" title=添加到收藏夹
 										onclick="window.external.addFavorite('http://www.2000w.net','淘宝刷信誉')">收藏本站</A>
@@ -104,9 +108,9 @@
 	<DIV id=list>
 		<UL>
 			<LI class=white>
-				<A class="li1 white" href="index.jsp" id="a0" onmouseover="Mea(0);"
-					onMouseOut="setAuto()"><SPAN style="COLOR: #000000">首&nbsp;页</SPAN>
-				</A>
+				<A class="li1 white" href="menuManager/menu!toIndex.php" id="a0"
+					onmouseover="Mea(0);" onMouseOut="setAuto()"><SPAN
+					style="COLOR: #000000">首&nbsp;页</SPAN> </A>
 			</LI>
 			<LI class=white>
 				<A class="li0 " href="credit/task.jsp" id="a1" onmouseover="Mea(1);"

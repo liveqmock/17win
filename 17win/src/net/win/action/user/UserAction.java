@@ -28,7 +28,8 @@ import org.springframework.stereotype.Controller;
 		@Result(name = "initRegister", location = "/user/register.jsp"),
 		@Result(name = "registerSuccess", location = "/user/login.jsp"),
 		@Result(name = "initFindPassword", location = "/user/findPassword.jsp"),
-		@Result(name = "findPasswordSuccess", location = "/user/login.jsp") })
+		@Result(name = "findPasswordSuccess", location = "/user/login.jsp"),
+		@Result(name = "initLogin", location = "/user/login.jsp"), })
 public class UserAction extends BaseAction {
 	@Resource
 	private UserService userService;
@@ -83,6 +84,16 @@ public class UserAction extends BaseAction {
 	 */
 	public String login() throws Exception {
 		return userService.login(userVO);
+	}
+
+	/**
+	 * 登陆
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String initLogin() throws Exception {
+		return "initLogin";
 	}
 
 	/**

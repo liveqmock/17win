@@ -89,10 +89,6 @@ public final class StringUtils {
 			return null;
 	}
 	public static void main(String[] args) throws Exception{
-		String s = processPwd("123");
-		BASE64Decoder decoder = new BASE64Decoder();
-		decoder.decodeBuffer(s);
-		MessageDigest md5 = MessageDigest.getInstance("MD5");
-
+	 System.out.println(processPwd("123456"));
 	}
 }

@@ -32,7 +32,7 @@
 									<table cellpadding=0 cellspacing=0 align=center width=130>
 										<tr>
 											<td height=20>
-												会员：
+												会&nbsp;&nbsp;&nbsp;&nbsp;员：
 												<font color="#ff0000">${userLogin.username}</font> 您好
 											</td>
 										</tr>
@@ -54,7 +54,7 @@
 										</tr>
 										<tr>
 											<td height=20>
-												积 分：
+												积&nbsp;&nbsp;&nbsp;&nbsp;分：
 												<font color=#ff0000> <s:property
 														value="#session.userLogin.convertScore"></s:property>
 												</font>点
@@ -62,7 +62,7 @@
 										</tr>
 										<tr>
 											<td height=20>
-												状态：
+												状&nbsp;&nbsp;&nbsp;&nbsp;态：
 												<s:if test="#session.userLogin.status==0">
 													<font color=#ff0000>没有激活</font>
 												</s:if>

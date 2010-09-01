@@ -14,6 +14,10 @@ $(document).ready(function() {
 	});
 	// 确认密码密码
 	$("#rePassword").bind("blur", function() {
+		if (Validater.isBlank($(this).val())
+				&& $(this).val() == $("#password").val()) {
+			return;
+		}
 		if ($(this).val() != $("#password").val()) {
 			validateError(this, "\u4e24\u6b21\u5bc6\u7801\u4e0d\u76f8\u7b49");
 			submitFlag = false;
@@ -49,6 +53,10 @@ $(document).ready(function() {
 	});
 	// 确认操作码
 	$("#reOperationCode").bind("blur", function() {
+		if (Validater.isBlank($(this).val())
+				&& $(this).val() == $("#opertationCode").val()) {
+			return;
+		}
 		if ($(this).val() != $("#opertationCode").val()) {
 			validateError(this,
 					"\u4e24\u6b21\u64cd\u4f5c\u7801\u4e0d\u76f8\u7b49");
