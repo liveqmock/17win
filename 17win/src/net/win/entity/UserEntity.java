@@ -60,7 +60,7 @@ public class UserEntity extends BaseEntity {
 	@Column(name = "REGISTERTIME_", nullable = false)
 	private Date registerTime;
 	// 当前级别(一心，还是一钻)
-	@Column(name = "LEVEL_", length = 2, nullable = false)
+	@Column(name = "LEVEL_", nullable = false)
 	private Integer level;
 	// 上一次状态
 	@Column(name = "LAST_STATUS_", columnDefinition = "CHAR(1)", nullable = false)
@@ -82,23 +82,17 @@ public class UserEntity extends BaseEntity {
 	// 最后一次登陆时间
 	@Column(name = "LASTLOGINTIME_")
 	private Date lastLoginTime;
-	// 淘宝信息
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "TAOBAOUSER_ID_")
+	// 买家
+	@OneToMany(fetch = FetchType.LAZY)
 	@Cascade(CascadeType.ALL)
-	private TaobaoUserEntity taobaoUser;
+	@JoinColumn(name = "USER_ID_")
+	private List<BuyerEntity> buyers;
 
-	// 拍拍信息
-	@OneToOne(fetch = FetchType.LAZY)
+	// 卖家
+	@OneToMany(fetch = FetchType.LAZY)
 	@Cascade(CascadeType.ALL)
-	@JoinColumn(name = "PAIPAIUSER_ID_")
-	private PaipaiUserEntity paipaiUser;
-
-	// 有啊信息
-	@OneToOne(fetch = FetchType.LAZY)
-	@Cascade(CascadeType.ALL)
-	@JoinColumn(name = "YOUAUSER_ID_")
-	private YouaUserEntity youaUser;
+	@JoinColumn(name = "USER_ID_")
+	private List<SellerEntity> sellers;
 
 	// 发布的任务
 	@OneToMany(fetch = FetchType.LAZY)
@@ -154,7 +148,7 @@ public class UserEntity extends BaseEntity {
 	 * @return
 	 */
 	// // 角色
-	// private RoleEntity role = new RoleEntity();
+	// private VipEntity role = new VipEntity();
 	// // 推广
 	// private Set<UserEntity> promoteUsers = new HashSet<UserEntity>(0);
 	// // 信誉任务模板
@@ -313,30 +307,6 @@ public class UserEntity extends BaseEntity {
 		this.status = status;
 	}
 
-	public TaobaoUserEntity getTaobaoUser() {
-		return taobaoUser;
-	}
-
-	public void setTaobaoUser(TaobaoUserEntity taobaoUser) {
-		this.taobaoUser = taobaoUser;
-	}
-
-	public PaipaiUserEntity getPaipaiUser() {
-		return paipaiUser;
-	}
-
-	public void setPaipaiUser(PaipaiUserEntity paipaiUser) {
-		this.paipaiUser = paipaiUser;
-	}
-
-	public YouaUserEntity getYouaUser() {
-		return youaUser;
-	}
-
-	public void setYouaUser(YouaUserEntity youaUser) {
-		this.youaUser = youaUser;
-	}
-
 	public Double getMoney() {
 		return money;
 	}
@@ -377,5 +347,20 @@ public class UserEntity extends BaseEntity {
 		this.lastStatus = lastStatus;
 	}
 
- 
+	public List<BuyerEntity> getBuyers() {
+		return buyers;
+	}
+
+	public void setBuyers(List<BuyerEntity> buyers) {
+		this.buyers = buyers;
+	}
+
+	public List<SellerEntity> getSellers() {
+		return sellers;
+	}
+
+	public void setSellers(List<SellerEntity> sellers) {
+		this.sellers = sellers;
+	}
+
 }
