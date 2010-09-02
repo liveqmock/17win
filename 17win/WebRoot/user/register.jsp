@@ -1,4 +1,4 @@
-<%@ page language="java"   pageEncoding="UTF-8"%>
+<%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML>
@@ -209,8 +209,11 @@ td {
 									</td>
 									<td align="left" class="red-bcolor">
 										<s:textfield id="taobaoShopURL"
-											name="userVO.userEntity.taobaoUser.shopURL" size="30"
+											name="userVO.userEntity.sellers[0].shopURL" size="30"
 											cssStyle="width:300px"></s:textfield>
+										<input type="hidden" value="1" disabled="disabled"
+											id="taobaoSellerType"
+											name="userVO.userEntity.sellers[0].type" />
 										<br />
 										您的淘宝店铺:
 										<font color="#FF0000">如:http://xxxxx.taobao.com</font>
@@ -225,7 +228,7 @@ td {
 									</td>
 									<td align="left" class="red-bcolor">
 										<s:textfield id="taobaoSeller" readonly="true"
-											name="userVO.userEntity.taobaoUser.seller" size="30"
+											name="userVO.userEntity.sellers[0].name" size="30"
 											cssStyle="width:210px"></s:textfield>
 										<br />
 										<font color="#FF0000"></font>系统自动获取
@@ -240,8 +243,10 @@ td {
 									</td>
 									<td align="left" class="red-bcolor">
 										<s:textfield id="taobaoBuyer"
-											name="userVO.userEntity.taobaoUser.buyer" size="30"
+											name="userVO.userEntity.buyers[0].name" size="30"
 											cssStyle="width:210px"></s:textfield>
+										<input type="hidden" value="1" disabled="disabled"
+											id="taobaoBuyerType" name="userVO.userEntity.buyers[0].type" />
 										<br />
 										<font color="#FF0000"></font>购买别人物品的淘宝账号，该必须是黄钻级别以下（如被查出立即封号）
 									</td>
@@ -255,9 +260,12 @@ td {
 									</td>
 									<td align="left" class="red-bcolor">
 										<s:textfield id="paipaiShopURL"
-											name="userVO.userEntity.paipaiUser.shopURL" size="30"
+											name="userVO.userEntity.sellers[1].shopURL" size="30"
 											cssStyle="width:300px"></s:textfield>
 										<br />
+										<input type="hidden" value="2" disabled="disabled"
+											id="paipaioSellerType"
+											name="userVO.userEntity.sellers[1].type" />
 										<font color="#FF0000"></font>您的拍拍店铺
 									</td>
 									<td valign="top">
@@ -270,7 +278,7 @@ td {
 									</td>
 									<td align="left" class="red-bcolor">
 										<s:textfield id="paipaiSeller"
-											name="userVO.userEntity.paipaiUser.seller" size="30"
+											name="userVO.userEntity.sellers[1].name" size="30"
 											cssStyle="width:210px"></s:textfield>
 										<br />
 										<font color="#FF0000"></font>拍拍账号
@@ -284,9 +292,11 @@ td {
 										拍拍小号账号：
 									</td>
 									<td align="left" class="red-bcolor">
-										<s:textfield id="paopaoBuyer"
-											name="userVO.userEntity.paipaiUser.buyer" size="30"
+										<s:textfield id="paipaiBuyer"
+											name="userVO.userEntity.buyers[1].name" size="30"
 											cssStyle="width:210px"></s:textfield>
+										<input type="hidden" value="2" disabled="disabled"
+											id="paipaioBuyerType" name="userVO.userEntity.buyers[1].type" />
 										<br />
 										<font color="#FF0000"></font>购买别人物品的拍拍账号，该必须是黄钻级别以下（如被查出立即封号）
 									</td>
@@ -300,8 +310,10 @@ td {
 									</td>
 									<td align="left" class="red-bcolor">
 										<s:textfield id="youaShopURL"
-											name="userVO.userEntity.youaUser.shopURL" size="30"
+											name="userVO.userEntity.sellers[2].shopURL" size="30"
 											cssStyle="width:300px"></s:textfield>
+										<input type="hidden" value="3" disabled="disabled"
+											id="youaSellerType" name="userVO.userEntity.sellers[2].type" />
 										<br />
 										<font color="#FF0000"></font>您的有啊店铺
 									</td>
@@ -315,7 +327,7 @@ td {
 									</td>
 									<td align="left" class="red-bcolor">
 										<s:textfield id="youaSeller"
-											name="userVO.userEntity.youaUser.seller" size="30"
+											name="userVO.userEntity.sellers[2].name" size="30"
 											cssStyle="width:210px"></s:textfield>
 										<br />
 										<font color="#FF0000"></font>拍拍账号
@@ -329,9 +341,11 @@ td {
 										有啊小号账号：
 									</td>
 									<td align="left" class="red-bcolor">
-										<s:textfield id="youabuter"
-											name="userVO.userEntity.youaUser.buyer" size="30"
+										<s:textfield id="youaBuyer"
+											name="userVO.userEntity.buyers[2].name" size="30"
 											cssStyle="width:210px"></s:textfield>
+										<input type="hidden" value="3" disabled="disabled"
+											id="youaBuyerType" name="userVO.userEntity.buyers[2].type" />
 										<br />
 										购买别人物品的有啊账号，该必须是黄钻级别以下（如被查出立即封号）
 									</td>
@@ -343,7 +357,7 @@ td {
 
 
 								<tr>
-									<td height="40" align="right" class="font12h">
+									<td height="40" align="right" valign="top" class="font12h">
 										选择发货地：
 									</td>
 									<td align="left" class="red-bcolor" nowrap="nowrap">
@@ -382,9 +396,10 @@ td {
 										推荐人：
 									</td>
 									<td>
-										<s:textfield id="refeereeName"
+										<input style="width: 210px"
 											name="userVO.userEntity.referee.username" size="30"
-											cssStyle="width:210px"></s:textfield>
+											value="<s:property value="spreadUsername" />"
+											id="refeereeName" readonly="readonly">
 										<br />
 										没有可留空！对于被推荐人，没有任务损失，推荐人得到积分奖励
 									</td>

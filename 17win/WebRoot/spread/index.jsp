@@ -1,5 +1,11 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML>
 	<HEAD>
@@ -10,34 +16,40 @@
 		<LINK href="css/css.css" type=text/css rel=stylesheet>
 		<LINK href="css/top_bottom.css" type=text/css rel=stylesheet>
 		<SCRIPT src="js/jieducm_pupu.js" type="text/javascript"></SCRIPT>
+		<SCRIPT src="js/utils.js" type="text/javascript"></SCRIPT>
 		<style type="text/css">
-			.STYLE5 {
-				font-size: 25px
-			}
-			
-			.STYLE6 {
-				font-size: 14px;
-				font-weight: bold;
-			}
-		</style>
+.STYLE5 {
+	font-size: 25px
+}
+
+.STYLE6 {
+	font-size: 14px;
+	font-weight: bold;
+}
+</style>
+		<script type="text/javascript">
+		$(document).ready(function() {
+			$("#copyBtn").bind("click",function(){ 
+				copy_code($("#page_url").val());
+				alert("复制成功，请粘贴到你的QQ/QQ空间/MSN上推荐给你的好友");  });
+			});
+		</script>
 	</HEAD>
 	<BODY>
 		<s:include value="../common/title.jsp"></s:include>
 		<table width="960" border="0" align="center">
 			<tr>
-				<td width="209">
+				<td nowrap="nowrap">
 					快速获得推广链接，直接进行推广：
+					<input id="page_url" type="text" style="width: 500px"
+						value="<%=basePath%>userManager/base!initRegister.php?spreadUsername=<s:property value="#session.userLogin.username"/>" />
 				</td>
-				<td width="741">
-					<label>
-						<input name="page_url" type="text"
-							value="http://www.2000w.net/register.asp?promotion=xgj1988"
-							size="80" style="height: 20px;" />
-						<input type="submit" name="Submit"
-							style="height: 30px; width: 50px;" value="复制" />
-					</label>
+				<td align="left">
+					<input type="button" id="copyBtn" style="cursor: pointer;"
+						value="复&nbsp;&nbsp;制" />
 				</td>
-
+				<td align="left" width="200px">
+				</td>
 			</tr>
 		</table>
 		<table width="960" border="0" align="center">
@@ -55,8 +67,8 @@
 
 							<td>
 								直接联系QQ:
-								<a href="tencent://message/?uin=904555181">904555181</a>,获得更多推广经验,咨询你心中的疑惑:
-								<a href="tencent://message/?uin=30756500"><img
+								<a href="tencent://message/?uin=909219625">909219625</a>,获得更多推广经验,咨询你心中的疑惑:
+								<a href="tencent://message/?uin=909219625"><img
 										src="images/6_online.gif" width="68" height="29"
 										align="absmiddle" border="0" /> </a>
 							</td>
@@ -78,10 +90,19 @@
 												<a href="#" class="STYLE6">推广员产品</a>
 											</div>
 										</td>
-
+										<td width="1%">
+											<img src="images/tg_x.gif" width="2" height="40" />
+										</td>
 										<td width="18%">
 											<div align="center" class="white_14">
-												<a href="spread/code.jsp">推广代码</a>
+												<a href="userInfoManager/info!refereeCode.php">推广代码</a>
+											</div>
+										</td>
+
+										<!-- 
+										<td width="18%">
+											<div align="center" class="white_14">
+												<a   href="userInfoManager/info!code.php"  class="white_14">经验交流</a>
 											</div>
 										</td>
 										<td width="1%">
@@ -90,21 +111,14 @@
 
 										<td width="18%">
 											<div align="center" class="white_14">
-												<a href="tuiguang.asp" class="white_14">经验交流</a>
+												<a  href="userInfoManager/info!code.php">代码放置教程</a>
 											</div>
 										</td>
+										
 										<td width="1%">
 											<img src="images/tg_x.gif" width="2" height="40" />
 										</td>
-
-										<td width="18%">
-											<div align="center" class="white_14">
-												<a href="tuiguang.asp">代码放置教程</a>
-											</div>
-										</td>
-										<td width="1%">
-											<img src="images/tg_x.gif" width="2" height="40" />
-										</td>
+										 -->
 										<td width="18%"></td>
 
 									</tr>
@@ -316,8 +330,7 @@
 										<tr>
 											<td>
 												<a href='../news.asp?/1412.html' target="_blank"
-													title='推广会员名单'><font color=><strong>推广会员名单</strong>
-												</font> </a>
+													title='推广会员名单'><font><strong>推广会员名单</strong> </font> </a>
 											</td>
 										</tr>
 										<tr>

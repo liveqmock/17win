@@ -193,16 +193,17 @@ public class UserService extends BaseService {
 		if (nullID(userEntity.getArea())) {
 			userEntity.setArea(null);
 		}
-//		if (userEntity.getTaobaoUser().isNull()) {
-//			userEntity.setTaobaoUser(null);
-//		}
-//		if (userEntity.getPaipaiUser().isNull()) {
-//			userEntity.setPaipaiUser(null);
-//		}
-//		if (userEntity.getYouaUser().isNull()) {
-//			userEntity.setYouaUser(null);
-//		}
-		if (nullID(userEntity.getReferee())) {
+		// if (userEntity.getTaobaoUser().isNull()) {
+		// userEntity.setTaobaoUser(null);
+		// }
+		// if (userEntity.getPaipaiUser().isNull()) {
+		// userEntity.setPaipaiUser(null);
+		// }
+		// if (userEntity.getYouaUser().isNull()) {
+		// userEntity.setYouaUser(null);
+		// }
+		//推广人
+		if (StringUtils.isBlank(userEntity.getReferee().getUsername())) {
 			userEntity.setReferee(null);
 		}
 		userDAO.save(userEntity);

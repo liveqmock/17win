@@ -180,6 +180,47 @@ function validateForm() {
 	submitFlag = true;
 	$("input").blur();
 	if (submitFlag) {
+		// 淘宝卖家是否有账号
+		if (Validater.isBlank($("#taobaoSeller").val())) {
+			$("#taobaoSeller").attr("disabled", true);
+			$("#taobaoShopURL").attr("disabled", true);
+		} else {
+			$("#taobaoSellerType").attr("disabled", false);
+		}
+		// 淘宝买家是否有账号
+		if (Validater.isBlank($("#taobaoBuyer").val())) {
+			$("#taobaoBuyer").attr("disabled", true);
+		} else {
+			$("#taobaoBuyerType").attr("disabled", false);
+		}
+		// ///////
+		// 拍拍卖家是否有账号
+		if (Validater.isBlank($("#paipaiSeller").val())) {
+			$("#paipaiSeller").attr("disabled", true);
+			$("#paipaiShopURL").attr("disabled", true);
+		} else {
+			$("#paipaiSellerType").attr("disabled", false);
+		}
+		// 拍拍买家是否有账号
+		if (Validater.isBlank($("#paipaiBuyer").val())) {
+			$("#paipaiBuyer").attr("disabled", true);
+		} else {
+			$("#paipaiBuyerType").attr("disabled", false);
+		}
+		// ///////
+		// 有啊卖家是否有账号
+		if (Validater.isBlank($("#youaSeller").val())) {
+			$("#youaSeller").attr("disabled", true);
+			$("#youaShopURL").attr("disabled", true);
+		} else {
+			$("#youaSellerType").attr("disabled", false);
+		}
+		// 有啊买家是否有账号
+		if (Validater.isBlank($("#youaBuyer").val())) {
+			$("#youaBuyer").attr("disabled", true);
+		} else {
+			$("#paipaiBuyerType").attr("disabled", false);
+		}
 		return true;
 	} else {
 		alert("\u586b\u5199\u7684\u8d44\u6599\u4e0d\u6b63\u786e\uff01");

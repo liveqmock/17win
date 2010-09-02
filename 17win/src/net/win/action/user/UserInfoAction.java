@@ -22,7 +22,10 @@ import org.springframework.stereotype.Controller;
 		@Result(name = "initUpdateInfo", location = "/user/updateInfo.jsp"),
 		@Result(name = "updateInfo", location = "/user/updateInfo.jsp"),
 		@Result(name = "initUpdatePassword", location = "/user/updatePW.jsp"),
-		@Result(name = "updatePassword", location = "/user/updatePW.jsp")
+		@Result(name = "updatePassword", location = "/user/updatePW.jsp"),
+		@Result(name = "referee", location = "/spread/index.jsp"),
+		@Result(name = "refereeCode", location = "/spread/code.jsp")
+		
 })
 @Namespace("/userInfoManager")
 public class UserInfoAction extends BaseAction {
@@ -40,7 +43,26 @@ public class UserInfoAction extends BaseAction {
 		// TODO Auto-generated method stub
 		return super.execute();
 	}
-
+	
+	
+	/**
+	 * 推广
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String refereeCode() throws Exception {
+		return "refereeCode";
+	}
+	/**
+	 * 推广
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String referee() throws Exception {
+		return "referee";
+	}
 	/**
 	 * 更新信息
 	 * 

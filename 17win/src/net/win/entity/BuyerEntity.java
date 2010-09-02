@@ -13,12 +13,12 @@ public class BuyerEntity extends BaseEntity {
 	// 名字
 	@Column(name = "SELLER_", length = 20, nullable = false)
 	private String name;
-	// 类型()
+	// 类型(1淘宝,2怕拍,3有啊)
 	@Column(name = "TYPE_", columnDefinition = "CHAR(1)", nullable = false)
 	private String type;
 	// 积分
 	@Column(name = "LEVEL_", nullable = false)
-	private Integer score;
+	private Integer score=0;
 	public String getName() {
 		return name;
 	}

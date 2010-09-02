@@ -101,13 +101,18 @@
 										</tr>
 										<tr>
 											<td height=20>
+												<A href="userInfoManager/info!initUpdateInfo.php">卖号/买号</A>
+											</td>
+										</tr>
+										<tr>
+											<td height=20>
 												<a  href="userInfoManager/info!initUpdatePassword.php">密码/操作码</a>
 											</td>
 										</tr>
 										<tr>
 
 											<td height=20>
-												<A href="spread/index.jsp" target="_blank">我要推广</A>
+												<A  href="userInfoManager/info!referee.php" target="_blank">我要推广</A>
 											</td>
 										</tr>
 										<tr>

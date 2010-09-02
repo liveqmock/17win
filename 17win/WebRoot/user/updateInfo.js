@@ -1,18 +1,5 @@
 var submitFlag = true;
 $(document).ready(function() {
-	// 验证淘宝
-	$("#taobaoShopURL").bind("blur", function() {
-				if (Validater.trim($(this).val()) == "") {
-					return;
-				}
-				if (Validater.isTaobaoShop($(this).val())) {
-					validateSuccess(this);
-					getSeller($(this).val(), "1", "taobaoSeller");
-				} else {
-					validateError(this, "淘宝地址格式不正确");
-					submitFlag = false;
-				}
-			});
 	// 选择省的事件
 	$("#provinceID").bind("change", function() {
 		if ($(this).val() == "") {

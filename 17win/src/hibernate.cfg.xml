@@ -44,7 +44,7 @@
 			update 最常用的属性，也根据model类生成表,即使表结构改变了,表中的行仍然存在,不会删除以前的行
 			validate : 只会和数据库中的表进行比较,不会创建新表,但是会插入新值 
 		-->
-		<property name="hbm2ddl.auto">create</property>
+		<property name="hbm2ddl.auto">update</property>
 		<!--
 			Simple memory-only cache-->
 		<property name="hibernate.cache.provider_class">

@@ -34,6 +34,10 @@ public class UserAction extends BaseAction {
 	@Resource
 	private UserService userService;
 
+	/**
+	 * 推广用的，推广人
+	 */
+	private String spreadUsername;
 	private UserVO userVO = new UserVO();
 
 	public UserVO getUserVO() {
@@ -114,6 +118,14 @@ public class UserAction extends BaseAction {
 	 */
 	public String initRegister() throws Exception {
 		return userService.initRegister(userVO);
+	}
+
+	public String getSpreadUsername() {
+		return spreadUsername;
+	}
+
+	public void setSpreadUsername(String spreadUsername) {
+		this.spreadUsername = spreadUsername;
 	}
 
 }

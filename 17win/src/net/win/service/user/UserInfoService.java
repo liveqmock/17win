@@ -130,9 +130,6 @@ public class UserInfoService extends BaseService {
 	public String initUpdateInfo(UserVO userVO) throws Exception {
 		UserLoginInfo userLoginInfo = getLoginUser();
 		UserEntity userEntity = userDAO.get(userLoginInfo.getId());
-//		Hibernate.initialize(userEntity.getTaobaoUser());
-//		Hibernate.initialize(userEntity.getPaipaiUser());
-//		Hibernate.initialize(userEntity.getYouaUser());
 		Hibernate.initialize(userEntity.getProvince());
 		Hibernate.initialize(userEntity.getCity());
 		Hibernate.initialize(userEntity.getArea());

@@ -9,8 +9,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 /**
  * 信誉任务
  * 
@@ -27,10 +25,18 @@ public class CreditTaskEntity extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = UserEntity.class)
 	@JoinColumn(name = "RELEASE_PERSON_")
 	private UserEntity releasePerson;
+	// 发布人的卖家号
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "SELLER_ID_")
+	private SellerEntity seller;
 	// 接收人
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = UserEntity.class)
 	@JoinColumn(name = "RECEIVE_PERSON_")
 	private UserEntity receivePerson;
+	// 接收人的买家号
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "BUYER_ID_")
+	private BuyerEntity buyer;
 	// 发布点
 	@Column(name = "RELEASE_DOT_", nullable = false)
 	private Float releaseDot;
@@ -40,7 +46,8 @@ public class CreditTaskEntity extends BaseEntity {
 	// 接手时间
 	@Column(name = "START_DATE", nullable = false)
 	private Date startDate;
-	// 状态 ([1:等待我付款,2:等待卖家发货,3:等待卖家发货](买家),[4:等待接手,5:等待接手,6:等待我发货,7:等待买家确认8:等待我核查好评](卖家))
+	// 状态
+	// ([1:等待我付款,2:等待卖家发货,3:等待卖家发货](买家),[4:等待接手,5:等待接手,6:等待我发货,7:等待买家确认8:等待我核查好评](卖家))
 	@Column(name = "STATUS", columnDefinition = "CHAR(1)", nullable = false)
 	private String status;
 	// 商品地址
@@ -61,15 +68,19 @@ public class CreditTaskEntity extends BaseEntity {
 	// 定时任务时间(不能小于开始时间)
 	@Column(name = "TIMEING_TIME_")
 	private Date timeingTime;
+
 	public Float getReleaseDot() {
 		return releaseDot;
 	}
+
 	public void setReleaseDot(Float releaseDot) {
 		this.releaseDot = releaseDot;
 	}
+
 	public UserEntity getReleasePerson() {
 		return releasePerson;
 	}
+
 	public void setReleasePerson(UserEntity releasePerson) {
 		this.releasePerson = releasePerson;
 	}
@@ -77,68 +88,105 @@ public class CreditTaskEntity extends BaseEntity {
 	public Double getMoney() {
 		return money;
 	}
+
 	public void setMoney(Double money) {
 		this.money = money;
 	}
+
 	public Date getStartDate() {
 		return startDate;
 	}
+
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
+
 	public UserEntity getReceivePerson() {
 		return receivePerson;
 	}
+
 	public void setReceivePerson(UserEntity receivePerson) {
 		this.receivePerson = receivePerson;
 	}
+
 	public String getStatus() {
 		return status;
 	}
+
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
 	public String getItemUrl() {
 		return itemUrl;
 	}
+
 	public void setItemUrl(String itemUrl) {
 		this.itemUrl = itemUrl;
 	}
+
 	public Boolean getUpdatePrice() {
 		return updatePrice;
 	}
+
 	public void setUpdatePrice(Boolean updatePrice) {
 		this.updatePrice = updatePrice;
 	}
+
 	public String getGrade() {
 		return grade;
 	}
+
 	public void setGrade(String grade) {
 		this.grade = grade;
 	}
+
 	public Date getTimeingTime() {
 		return timeingTime;
 	}
+
 	public void setTimeingTime(Date timeingTime) {
 		this.timeingTime = timeingTime;
 	}
+
 	public String getType() {
 		return type;
 	}
+
 	public void setType(String type) {
 		this.type = type;
 	}
+
 	public String getWaybill() {
 		return waybill;
 	}
+
 	public void setWaybill(String waybill) {
 		this.waybill = waybill;
 	}
+
 	public Integer getIntervalHour() {
 		return intervalHour;
 	}
+
 	public void setIntervalHour(Integer intervalHour) {
 		this.intervalHour = intervalHour;
+	}
+
+	public SellerEntity getSeller() {
+		return seller;
+	}
+
+	public void setSeller(SellerEntity seller) {
+		this.seller = seller;
+	}
+
+	public BuyerEntity getBuyer() {
+		return buyer;
+	}
+
+	public void setBuyer(BuyerEntity buyer) {
+		this.buyer = buyer;
 	}
 
 }

@@ -1,5 +1,11 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML>
 	<HEAD>
@@ -10,6 +16,7 @@
 		<LINK href="css/css.css" type=text/css rel=stylesheet>
 		<LINK href="css/top_bottom.css" type=text/css rel=stylesheet>
 		<SCRIPT src="js/jieducm_pupu.js" type="text/javascript"></SCRIPT>
+			<SCRIPT src="js/utils.js" type="text/javascript"></SCRIPT>
 		<style type="text/css">
 .STYLE5 {
 	font-size: 25px
@@ -20,22 +27,30 @@
 	font-weight: bold;
 }
 </style>
+
+		<script type="text/javascript">
+		$(document).ready(function() {
+			$("input[id*=copyBtn]").bind("click",function(){ 
+				 var index=$(this).attr("id").split("_")[1];
+				copy_code($("#copyTxt"+"_"+index).val());
+				alert("复制成功，请粘贴到你的QQ/QQ空间/MSN上推荐给你的好友"); });
+			});
+		</script>
 	</HEAD>
 	<BODY>
 		<s:include value="../common/title.jsp"></s:include>
 		<table width="960" border="0" align="center">
 			<tr>
-				<td width="209">
+				<td nowrap="nowrap">
 					快速获得推广链接，直接进行推广：
+					<input id="copyTxt_0" type="text" style="width: 500px"
+						value="<%=basePath%>userManager/base!initRegister.php?spreadUsername=<s:property value="#session.userLogin.username"/>" />
 				</td>
-				<td width="741">
-					<label>
-						<input name="page_url" type="text"
-							value="http://www.2000w.net/register.asp?promotion=xgj1988"
-							size="80" style="height: 20px;" />
-						<input type="submit" name="Submit"
-							style="height: 30px; width: 50px;" value="复制" />
-					</label>
+				<td align="left">
+					<input type="button" id="copyBtn_0" style="cursor: pointer;"
+						value="复&nbsp;&nbsp;制" />
+				</td>
+				<td align="left" width="200px">
 				</td>
 
 			</tr>
@@ -60,16 +75,6 @@
 								<td bgcolor="#F0F7FB">
 									<div align="center">
 										文字推广
-									</div>
-								</td>
-								<td bgcolor="#F0F7FB">
-									<div align="center">
-										图片推广
-									</div>
-								</td>
-								<td bgcolor="#F0F7FB">
-									<div align="center">
-										邮件推广
 									</div>
 								</td>
 							</tr>
@@ -113,14 +118,13 @@
 									<td class="em"></td>
 									<td>
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<input name="Input" id="url001" style="width: 400px"
-											value="http://www.2000w.net/register.asp?promotion=xgj1988"
+										<input name="Input" id="copyTxt_1" style="width: 400px"
+											value="<%=basePath%>userManager/base!initRegister.php?spreadUsername=<s:property value="#session.userLogin.username"/>"
 											size="46" />
 									</td>
 									<td>
-										<input name="submit" type="submit" class="button"
-											onClick=JM_cc( "url001") value="复制" />
-
+										<input type="button" id="copyBtn_1" style="cursor: pointer;"
+											value="复&nbsp;&nbsp;制" />
 									</td>
 								</tr>
 								<tr>
@@ -145,26 +149,26 @@
 									<td class="em"></td>
 									<td>
 										HTML:
-										<input name="Input" id="url002" style="width: 400px"
-											value="&lt;a href='http://www.2000w.net/register.asp?promotion=xgj1988' target='_blank'&gt;xgj1988&lt;/a&gt;"
+										<input name="Input" id="copyTxt_2" style="width: 400px"
+											value="&lt;a href='<%=basePath%>userManager/base!initRegister.php?spreadUsername=<s:property value="#session.userLogin.username"/>'&lt;/a&gt;"
 											size="46" />
 										<br />
 										<br />
 										UBB:&nbsp;&nbsp;&nbsp;&nbsp;
-										<input name="Input" id="url0022" style="width: 400px"
-											value="[url=http://www.2000w.net/register.asp?promotion=xgj1988]xgj1988[/url]"
+										<input name="Input" id="copyTxt_3" style="width: 400px"
+											value="[url=<%=basePath%>userManager/base!initRegister.php?spreadUsername=<s:property value="#session.userLogin.username"/>[/url]"
 											size="46" />
 
 										<br />
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									</td>
 									<td valign="top">
-										<input name="submit" type="submit" class="button"
-											onClick=JM_cc( "url002") value="复制" />
+										<input type="button" id="copyBtn_2" style="cursor: pointer;"
+											value="复&nbsp;&nbsp;制" />
 										<br />
 										<br />
-										<input name="submit" type="submit" class="button"
-											onClick=JM_cc( "url0022") value="复制" />
+										<input type="button" id="copyBtn_3" style="cursor: pointer;"
+											value="复&nbsp;&nbsp;制" />
 									</td>
 								</tr>
 								<tr>
@@ -189,13 +193,13 @@
 									<td class="em"></td>
 									<td>
 										HTML:
-										<input name="Input" id="url003" style="width: 400px"
-											value="&lt;a href='http://www.2000w.net/register.asp?promotion=xgj1988' target='_blank'&gt;xgj1988&lt;/a&gt;"
+										<input name="Input" id="copyTxt_4" style="width: 400px"
+											value="&lt;a href='http://www.2000w.net/register.asp?promotion=xgj1988' target='_blank'&gt;xgj1988'&lt;/a&gt;"
 											size="46" />
 										<br />
 										<br />
 										UBB:&nbsp;&nbsp;&nbsp;&nbsp
-										<input name="Input" id="url0032" style="width: 400px"
+										<input name="Input" id="copyTxt_5" style="width: 400px"
 											value="[url=http://www.2000w.net/register.asp?promotion=xgj1988]xgj1988[/url]"
 											size="46" />
 										<br />
@@ -203,12 +207,12 @@
 									</td>
 
 									<td valign="top">
-										<input name="submit" type="submit" class="button"
-											onClick=JM_cc( "url003") value="复制" />
+										<input type="button" id="copyBtn_4" style="cursor: pointer;"
+											value="复&nbsp;&nbsp;制" />
 										<br />
 										<br />
-										<input name="submit" type="submit" class="button"
-											onClick=JM_cc( "url0032") value="复制" />
+										<input type="button" id="copyBtn_5" style="cursor: pointer;"
+											value="复&nbsp;&nbsp;制" />
 									</td>
 								</tr>
 							</tbody>
