@@ -14,6 +14,7 @@ import net.win.dao.ProvinceDAO;
 import net.win.dao.UserDAO;
 import net.win.entity.UserEntity;
 import net.win.utils.StringUtils;
+import net.win.utils.TotalUtils;
 import net.win.vo.UserVO;
 
 import org.hibernate.Hibernate;
@@ -52,8 +53,8 @@ public class UserInfoService extends BaseService {
 		UserEntity newUserEntity = userVO.getUserEntity();
 
 		// 比较以前的操作码
-		if (userEntity.getOpertationCode().equals(StringUtils
-				.processPwd(userVO.getOperationCode()))) {
+		if (userEntity.getOpertationCode().equals(
+				StringUtils.processPwd(userVO.getOperationCode()))) {
 			if (!StringUtils.isBlank(newUserEntity.getLoginPassword())) {
 				userEntity.setLoginPassword(StringUtils
 						.processPwd(newUserEntity.getLoginPassword()));
@@ -105,15 +106,15 @@ public class UserInfoService extends BaseService {
 		if (!nullID(oldUserEntity.getArea())) {
 			userEntity.setArea(oldUserEntity.getArea());
 		}
-//		if (!oldUserEntity.getTaobaoUser().isNull()) {
-//			userEntity.setTaobaoUser(oldUserEntity.getTaobaoUser());
-//		}
-//		if (!oldUserEntity.getPaipaiUser().isNull()) {
-//			userEntity.setPaipaiUser(oldUserEntity.getPaipaiUser());
-//		}
-//		if (!oldUserEntity.getYouaUser().isNull()) {
-//			userEntity.setYouaUser(oldUserEntity.getYouaUser());
-//		}
+		// if (!oldUserEntity.getTaobaoUser().isNull()) {
+		// userEntity.setTaobaoUser(oldUserEntity.getTaobaoUser());
+		// }
+		// if (!oldUserEntity.getPaipaiUser().isNull()) {
+		// userEntity.setPaipaiUser(oldUserEntity.getPaipaiUser());
+		// }
+		// if (!oldUserEntity.getYouaUser().isNull()) {
+		// userEntity.setYouaUser(oldUserEntity.getYouaUser());
+		// }
 		userVO.setUserEntity(userEntity);
 		putAlertMsg("更新成功!");
 		return "updateInfo";
@@ -154,8 +155,8 @@ public class UserInfoService extends BaseService {
 		/**
 		 * 买家
 		 */
-		String[][] result1 = new String[3][4];
-		String[][] result2 = new String[3][6];
+		String[][] result1 = new String[4][5];
+		String[][] result2 = new String[4][7];
 		for (String[] r : result1) {
 			Arrays.fill(r, "0");
 		}
@@ -164,6 +165,7 @@ public class UserInfoService extends BaseService {
 			result1[0][0] = "淘宝";
 			result1[1][0] = "拍拍";
 			result1[2][0] = "有啊";
+			result1[3][0] = "合计";
 		}
 		for (String[] r : result2) {
 			Arrays.fill(r, "0");
@@ -173,6 +175,7 @@ public class UserInfoService extends BaseService {
 			result2[0][0] = "淘宝";
 			result2[1][0] = "拍拍";
 			result2[2][0] = "有啊";
+			result2[3][0] = "合计";
 		}
 		if (tmpResult1.size() > 0) {
 			for (int i = 0; i < tmpResult1.size(); i++) {
@@ -263,6 +266,9 @@ public class UserInfoService extends BaseService {
 				}
 			}
 		}
+		//合并数据
+		TotalUtils.totalAllByInt(result1);
+		TotalUtils.totalAllByInt(result2);
 		putByRequest("sellTasks", result1);
 		putByRequest("buyTasks", result2);
 		return INPUT;

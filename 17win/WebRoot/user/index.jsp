@@ -89,9 +89,11 @@ img {
 												cellpadding="0" id="con_three_1">
 
 												<tr>
-													<td height="55" align="center" class="borderc">
-														<IMG src="images/c3.gif">
-														你好：
+													<td height="55" align="center" class="borderc" valign="middle">
+														<h4>
+															<IMG src="images/c3.gif">
+															你好：
+														</h4>
 													</td>
 
 													<td width="10%" align="left" class="borderc">
@@ -167,136 +169,92 @@ img {
 												</tr>
 												 -->
 												<tr>
-													<td height="55" align="center" class="borderc">
-														信誉互刷（买家操作）
+													<td height="55" align="center" class="borderc" valign="top">
+														<h4>
+															信誉互刷（买家操作）
+														</h4>
 													</td>
 													<td colspan="2" align="left" class="borderc">
-														<table cellpadding="1" cellspacing="1" border="1"
+														<table cellpadding="1" cellspacing="1" border="0px"
 															align="center" width="100%">
 															<tr align="center">
-																<th>
+																<th style="background: #D1ECF9">
 																</th>
-																<th>
+																<th style="background: #D1ECF9">
 																	等待我付款
 																</th>
-																<th>
+																<th style="background: #D1ECF9">
 																	等待卖家发货
 																</th>
-																<th>
+																<th style="background: #D1ECF9">
 																	等待我收货好评
 																</th>
-																<th>
+																<th style="background: #D1ECF9">
 																	合计
 																</th>
 															</tr>
-															<s:iterator value="#request.sellTasks" id="selltask"
-																status="status">
+															<s:iterator value="#request.sellTasks" id="selltask">
 																<tr>
-																	<s:iterator value="selltask" id="task" status="status">
-																		<td align="center"
-																			sellAID="<s:property value="#status.index"/>">
+																	<s:iterator value="selltask" id="task">
+																		<td align="center" />
 																			<s:property value="task" />
 																		</td>
 																	</s:iterator>
-																	<td align="center" totalASell="true">
-																		0
-																	</td>
 																</tr>
 															</s:iterator>
-															<tr style="font-weight: bold">
-																<td align="center">
-																	合计
-																</td>
-																<td align="center" id="sellH_1">
-																	0
-																</td>
-																<td align="center" id="sellH_2">
-																	0
-																</td>
-																<td align="center" id="sellH_3">
-																	0
-																</td>
-																<td align="center" id="sell_ALL">
-																	0
-																</td>
-															</tr>
 														</table>
 													</td>
 
 												</tr>
 												<tr>
-													<td height="55" align="center" class="borderc">
-														信誉互刷（卖家操作）
+													<td height="55" align="center" class="borderc" valign="top">
+														<h4>
+															信誉互刷（卖家操作）
+														</h4>
 													</td>
 													<td colspan="2" align="left" class="borderc">
-														<table cellpadding="1" cellspacing="1" border="1"
+														<table cellpadding="1" cellspacing="1" border="0px"
 															width="100%">
 															<tr align="center">
-																<th>
+																<th style="background: #D1ECF9">
 																</th>
-																<th>
+																<th style="background: #D1ECF9">
 																	等待接手
 																</th>
-																<th>
+																<th style="background: #D1ECF9">
 																	等待审核
 																</th>
-																<th>
+																<th style="background: #D1ECF9">
 																	等待我发货
 																</th>
-																<th>
+																<th style="background: #D1ECF9">
 																	等待买家确认
 																</th>
-																<th>
+																<th style="background: #D1ECF9">
 																	等待我核查好评
 																</th>
-																<th>
+																<th style="background: #D1ECF9">
 																	合计
 																</th>
 															</tr>
-															<s:iterator value="#request.buyTasks" id="buyTask"
-																status="status">
+															<s:iterator value="#request.buyTasks" id="buyTask">
 																<tr>
-																	<s:iterator value="buyTask" id="task"  status="status">
-																		<td align="center"  buyAID="<s:property value="#status.index"/>">
+																	<s:iterator value="buyTask" id="task">
+																		<td align="center"">
 																			<s:property value="task" />
 																		</td>
 																	</s:iterator>
-																	<td align="center"
-																	 totalABuy="true">
-																		0
-																	</td>
 																</tr>
 															</s:iterator>
-															<tr style="font-weight: bold">
-																<td align="center">
-																	合计
-																</td>
-																<td align="center" id="buyH_1">
-																	0
-																</td>
-																<td align="center" id="buylH_2">
-																	0
-																</td>
-																<td align="center" id="buyH_3">
-																	0
-																</td>
-																<td align="center" id="buyH_4">
-																	0
-																</td>
-																<td align="center" id="buyH_5">
-																	0
-																</td>
-																<td align="center" id="buy_ALL">
-																	0
-																</td>
-															</tr>
 														</table>
 													</td>
 
 												</tr>
 												<tr>
-													<td height="55" align="center" class="borderc">
-														流量互刷
+													<td height="55" align="center" class="borderc" valign="top">
+														<h4>
+															流量互刷
+														</h4>
 													</td>
 													<td colspan="2" align="left" class="borderc">
 														平台提示：
@@ -305,8 +263,10 @@ img {
 													</td>
 												</tr>
 												<tr>
-													<td height="55" align="center" class="borderc">
-														收藏互刷
+													<td height="55" align="center" class="borderc" valign="top">
+														<h4>
+															收藏互刷
+														</h4>
 													</td>
 													<td colspan="2" align="left" class="borderc">
 														平台提示：
