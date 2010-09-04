@@ -16,6 +16,7 @@ import net.win.entity.UserEntity;
 import net.win.utils.Constant;
 import net.win.utils.MailUtils;
 import net.win.utils.StringUtils;
+import net.win.utils.UserLevelUtils;
 import net.win.vo.UserVO;
 
 import org.hibernate.Hibernate;
@@ -131,6 +132,10 @@ public class UserService extends BaseService {
 		} else {
 			UserLoginInfo userLoginInfo = new UserLoginInfo();
 			BeanUtils.copyProperties(userLoginInfo, userEntity);
+			userLoginInfo.setLevel(UserLevelUtils.getLevel(userEntity
+					.getUpgradeScore()));
+			userLoginInfo.setLevelImg(UserLevelUtils.getLevelImg(userEntity
+					.getUpgradeScore()));
 			putLoginUser(userLoginInfo);
 			return "loginSuccess";
 		}
@@ -167,21 +172,6 @@ public class UserService extends BaseService {
 				.getLoginPassword()));
 		userEntity.setOpertationCode(StringUtils.processPwd(userEntity
 				.getOpertationCode()));
-		// 可以转换的积分
-		userEntity.setConvertScore(0);
-		// 升级的积分
-		userEntity.setUpgradeScore(0);
-		// 注册时间
-		userEntity.setRegisterTime(new Date());
-		// 发布点
-		userEntity.setReleaseDot(2.0);
-		// 当前级别是0（没级别）
-		userEntity.setLevel(0);
-		// 状态， 没激活
-		userEntity.setStatus("0");
-		userEntity.setLastStatus("0");
-		// 钱
-		userEntity.setMoney(0.0);
 
 		// 设置关系
 		if (nullID(userEntity.getProvince())) {
@@ -202,7 +192,7 @@ public class UserService extends BaseService {
 		// if (userEntity.getYouaUser().isNull()) {
 		// userEntity.setYouaUser(null);
 		// }
-		//推广人
+		// 推广人
 		if (StringUtils.isBlank(userEntity.getReferee().getUsername())) {
 			userEntity.setReferee(null);
 		}

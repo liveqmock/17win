@@ -117,7 +117,7 @@
 										</tr>
 										<tr>
 											<td height=20>
-												<A href="user/mySpread.jsp">我的推广</A>
+												<A href="userInfoManager/info!myRefee.php">我的推广</A>
 											</td>
 										</tr>
 										<tr>

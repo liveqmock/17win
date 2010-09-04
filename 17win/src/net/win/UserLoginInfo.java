@@ -17,18 +17,19 @@ public class UserLoginInfo {
 	private String telephone;
 	// 可以兑换发布点的积分
 	private Integer convertScore;
-	// 升级用的积分，不能兑换发布点
-	private Integer upgradeScore;
 	// 最后一次登陆时间
 	private Date lastLoginTime;
 	// 当前级别(一心，还是一钻)
 	private Integer level;
+	// 级别图片(一心，还是一钻)
+	private String levelImg;
 	// 操作码激活状态
 	private Boolean operationCodeStatus = false;
 	// 状态
 	private String status;
-	//钱
+	// 钱
 	private Double money;
+
 	public String getUsername() {
 		return username;
 	}
@@ -69,12 +70,12 @@ public class UserLoginInfo {
 		this.convertScore = convertScore;
 	}
 
-	public Integer getUpgradeScore() {
-		return upgradeScore;
+	public String getLevelImg() {
+		return levelImg;
 	}
 
-	public void setUpgradeScore(Integer upgradeScore) {
-		this.upgradeScore = upgradeScore;
+	public void setLevelImg(String levelImg) {
+		this.levelImg = levelImg;
 	}
 
 	public Date getLastLoginTime() {

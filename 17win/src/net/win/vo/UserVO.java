@@ -10,6 +10,8 @@ import net.win.entity.ProvinceEntity;
 import net.win.entity.UserEntity;
 
 public class UserVO extends BaseVO {
+	
+	
 	/**
 	 * 接受数据
 	 */

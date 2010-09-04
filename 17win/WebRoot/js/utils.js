@@ -1,3 +1,4 @@
+// firefox 复制
 function copy_code(copyText) {
 	if (window.clipboardData) {
 		window.clipboardData.setData("Text", copyText)
@@ -14,4 +15,20 @@ function copy_code(copyText) {
 				+ '" width="0" height="0" type="application/x-shockwave-flash"></embed>';
 		document.getElementById(flashcopier).innerHTML = divinfo;
 	}
+}
+
+/**
+ * 只能输入数字的文本框
+ * 
+ * @param {}
+ *            copyText
+ */
+function intText(textID) {
+	$("#" + textID).bind("keyup", function() {
+				var value = $(this).val();
+				if (!Validate.isInt(value, "+")) {
+					$(this).val(value.substring(0, value.length - 1));
+				}
+			});
+
 }

@@ -11,7 +11,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
@@ -41,7 +40,7 @@ public class UserEntity extends BaseEntity {
 	private String qq;
 	// 发布点
 	@Column(name = "RELEASE_DOT_", nullable = false)
-	private Double releaseDot;
+	private Double releaseDot = 2.0;
 	// 电子邮箱
 	@Column(name = "EMAIL_", length = 24, unique = true, nullable = false)
 	private String email;
@@ -50,26 +49,35 @@ public class UserEntity extends BaseEntity {
 	private String telephone;
 	// 可以兑换发布点的积分
 	@Column(name = "CONVERT_SCORE_", nullable = false)
-	private Integer convertScore;
+	private Integer convertScore = 0;
 	// 升级用的积分，不能兑换发布点
 	@Column(name = "UPGRADE_SCORE_", nullable = false)
-	private Integer upgradeScore;
+	private Integer upgradeScore = 0;
 	// 注册时间
 	@Column(name = "REGISTERTIME_", nullable = false)
-	private Date registerTime;
-	// 当前级别(一心，还是一钻)
-	@Column(name = "LEVEL_", nullable = false)
-	private Integer level;
+	private Date registerTime = new Date();
+
 	// 上一次状态
 	@Column(name = "LAST_STATUS_", columnDefinition = "CHAR(1)", nullable = false)
-	private String lastStatus;
+	private String lastStatus = "0";
 	// 状态(0,未激活，1正常,2冻结,3找密码,)
 	@Column(name = "STATUS_", columnDefinition = "CHAR(1)", nullable = false)
-	private String status;
+	private String status = "0";
 	// 钱
 	@Column(name = "MONEY_", nullable = false)
-	private Double money;
-
+	private Double money = 1.0D;
+	// 发布任务数
+	@Column(name = "RELEASE_TASK_COUNT_", nullable = false)
+	private Integer releaseTaskCount = 0;
+	// 接受任务数
+	@Column(name = "RECEIVE_TASK_COUNT_", nullable = false)
+	private Integer receiveTaskCount = 0;
+	// 推广积分
+	@Column(name = "SPREAD_SCORE_", nullable = false)
+	private Integer spreadScore = 0;
+	// 推广人数
+	@Column(name = "SPREAD_COUNT_", nullable = false)
+	private Integer spreadCount = 0;
 	/**
 	 * 可选选项
 	 */
@@ -329,14 +337,6 @@ public class UserEntity extends BaseEntity {
 		this.receiveCreditTasks = receiveCreditTasks;
 	}
 
-	public Integer getLevel() {
-		return level;
-	}
-
-	public void setLevel(Integer level) {
-		this.level = level;
-	}
-
 	public String getLastStatus() {
 		return lastStatus;
 	}
@@ -359,6 +359,38 @@ public class UserEntity extends BaseEntity {
 
 	public void setSellers(List<SellerEntity> sellers) {
 		this.sellers = sellers;
+	}
+
+	public Integer getReleaseTaskCount() {
+		return releaseTaskCount;
+	}
+
+	public void setReleaseTaskCount(Integer releaseTaskCount) {
+		this.releaseTaskCount = releaseTaskCount;
+	}
+
+	public Integer getReceiveTaskCount() {
+		return receiveTaskCount;
+	}
+
+	public void setReceiveTaskCount(Integer receiveTaskCount) {
+		this.receiveTaskCount = receiveTaskCount;
+	}
+
+	public Integer getSpreadScore() {
+		return spreadScore;
+	}
+
+	public void setSpreadScore(Integer spreadScore) {
+		this.spreadScore = spreadScore;
+	}
+
+	public Integer getSpreadCount() {
+		return spreadCount;
+	}
+
+	public void setSpreadCount(Integer spreadCount) {
+		this.spreadCount = spreadCount;
 	}
 
 }

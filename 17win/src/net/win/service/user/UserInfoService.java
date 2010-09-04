@@ -1,5 +1,7 @@
 package net.win.service.user;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +20,10 @@ import net.win.utils.TotalUtils;
 import net.win.vo.UserVO;
 
 import org.hibernate.Hibernate;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
@@ -39,6 +44,45 @@ public class UserInfoService extends BaseService {
 	private JavaMailSender mailSender;
 	@Resource
 	private FreeMarkerConfigurer freeMarkerCfj;
+
+	/**
+	 * 修改密码
+	 * 
+	 * @param userVO
+	 * @return
+	 * @throws Exception
+	 */
+	public String myRefee(UserVO userVO) throws Exception {
+
+		UserEntity newUserEntity = userDAO.get(getLoginUser().getId());
+
+		List<UserEntity> myReferees = newUserEntity.getMyReferees();
+		List<UserInfoVO> result1 = new ArrayList<UserInfoVO>();
+		for (UserEntity userEntity : myReferees) {
+			UserInfoVO userInfoVO = new UserInfoVO(userEntity.getUsername(),
+					userEntity.getQq(), userEntity.getReleaseTaskCount(),
+					userEntity.getReceiveTaskCount(), userEntity
+							.getRegisterTime(), userEntity.getConvertScore(),
+					userEntity.getReleaseDot());
+			result1.add(userInfoVO);
+		}
+		// 设置我的推广
+		putByRequest("myRefees", result1);
+		// 设置推广排行
+		List<UserEntity> referees = userDAO
+				.pageQuery(
+						" from UserEntity _u  order by _u.spreadCount , _u.spreadScore",
+						0, 15);
+		List<UserInfoVO> result2 = new ArrayList<UserInfoVO>();
+		for (UserEntity userEntity : referees) {
+			UserInfoVO userInfoVO = new UserInfoVO(userEntity.getUsername(),
+					userEntity.getSpreadCount(), userEntity.getSpreadScore());
+			result2.add(userInfoVO);
+		}
+		// 推广排行
+		putByRequest("referees", result2);
+		return "myRefee";
+	}
 
 	/**
 	 * 修改密码
@@ -266,7 +310,7 @@ public class UserInfoService extends BaseService {
 				}
 			}
 		}
-		//合并数据
+		// 合并数据
 		TotalUtils.totalAllByInt(result1);
 		TotalUtils.totalAllByInt(result2);
 		putByRequest("sellTasks", result1);

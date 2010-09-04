@@ -24,7 +24,8 @@ import org.springframework.stereotype.Controller;
 		@Result(name = "initUpdatePassword", location = "/user/updatePW.jsp"),
 		@Result(name = "updatePassword", location = "/user/updatePW.jsp"),
 		@Result(name = "referee", location = "/spread/index.jsp"),
-		@Result(name = "refereeCode", location = "/spread/code.jsp")
+		@Result(name = "refereeCode", location = "/spread/code.jsp"),
+		@Result(name = "myRefee", location = "/user/mySpread.jsp")
 		
 })
 @Namespace("/userInfoManager")
@@ -45,8 +46,18 @@ public class UserInfoAction extends BaseAction {
 	}
 	
 	
+	
 	/**
-	 * 推广
+	 * 我的推广
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String myRefee() throws Exception {
+		return userInfoService.myRefee(userVO);
+	}
+	/**
+	 * 推广码
 	 * 
 	 * @return
 	 * @throws Exception

@@ -61,6 +61,7 @@ public class BaseService {
 	protected UserLoginInfo getLoginUser() {
 		return (UserLoginInfo) getBySession(Constant.USER_LOGIN_INFO);
 	}
+	
 
 	/**
 	 * 前台Alert提示数据，放在request里面

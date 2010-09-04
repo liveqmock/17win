@@ -110,8 +110,7 @@ img {
 												</tr>
 											</tbody>
 										</table>
-										<form onsubmit="return save_onclick()" id="formt" name="formt"
-											method="POST" action="">
+										<s:form action="">
 											<table width="639" cellspacing="0" cellpadding="0" border="0"
 												align="center">
 												<tbody>
@@ -122,7 +121,9 @@ img {
 															</div>
 														</td>
 														<td>
-															xgj1988 你现在的发布点是：2.8
+															<s:property value="#session.userLogin.username" />
+															你现在的发布点是：
+															<s:property value="#session.userLogin.releaseDot" />
 														</td>
 													</tr>
 													<tr>
@@ -159,7 +160,7 @@ img {
 													</tr>
 												</tbody>
 											</table>
-										</form>
+										</s:form>
 										<table width="95%" cellspacing="0" cellpadding="3" border="0"
 											bgcolor="#deeefa" align="center">
 											<tbody>

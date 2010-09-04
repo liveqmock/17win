@@ -89,11 +89,12 @@ img {
 												cellpadding="0" id="con_three_1">
 
 												<tr>
-													<td height="55" align="center" class="borderc" valign="middle">
-														<h4>
+													<td height="55" align="center" class="borderc"
+														valign="middle">
+														<b>
 															<IMG src="images/c3.gif">
 															你好：
-														</h4>
+														</b>
 													</td>
 
 													<td width="10%" align="left" class="borderc">
@@ -102,7 +103,7 @@ img {
 													</td>
 													<td width="63%" align="left" class="borderc">
 														&nbsp;
-														<a href="md5_pay.asp"><img src="images/congzhi.jpg"
+														<a href="md5_pay.asp"><img src="images/congzhi.jpg"  title="我要充值"
 																width="140" height="40" border="0" /> </a>&nbsp;&nbsp;&nbsp;
 													</td>
 												</tr>
@@ -121,14 +122,16 @@ img {
 														&nbsp;
 													</td>
 													<td colspan="2" align="left" class="borderc">
-														<IMG src="images/c8.gif">
 														你的存款：
 														<font color="#FF0000"><s:property
 																value="#session.userLogin.money"></s:property> </font> 元； 发布点：
 														<font color="#FF0000"><s:property
 																value="#session.userLogin.releaseDot"></s:property> </font>点；
-														刷客积分：
-														<img src="images/xin2.gif" alt="刷客经验积分：290">
+														刷客级别：
+														<img style="cursor: pointer;"
+															src="images/<s:property value="#session.userLogin.levelImg"/>"
+															alt="您的刷客级别为：<s:property value="#session.userLogin.level"/>"
+															align="top">
 
 													</td>
 												</tr>
@@ -170,15 +173,16 @@ img {
 												 -->
 												<tr>
 													<td height="55" align="center" class="borderc" valign="top">
-														<h4>
+														<b>
 															信誉互刷（买家操作）
-														</h4>
+														</b>
 													</td>
 													<td colspan="2" align="left" class="borderc">
 														<table cellpadding="1" cellspacing="1" border="0px"
 															align="center" width="100%">
 															<tr align="center">
 																<th style="background: #D1ECF9">
+																	平台
 																</th>
 																<th style="background: #D1ECF9">
 																	等待我付款
@@ -208,15 +212,14 @@ img {
 												</tr>
 												<tr>
 													<td height="55" align="center" class="borderc" valign="top">
-														<h4>
-															信誉互刷（卖家操作）
-														</h4>
+														<b> 信誉互刷（卖家操作） </b>
 													</td>
 													<td colspan="2" align="left" class="borderc">
 														<table cellpadding="1" cellspacing="1" border="0px"
 															width="100%">
 															<tr align="center">
 																<th style="background: #D1ECF9">
+																	平台
 																</th>
 																<th style="background: #D1ECF9">
 																	等待接手
@@ -252,9 +255,9 @@ img {
 												</tr>
 												<tr>
 													<td height="55" align="center" class="borderc" valign="top">
-														<h4>
+														<b>
 															流量互刷
-														</h4>
+														</b>
 													</td>
 													<td colspan="2" align="left" class="borderc">
 														平台提示：
@@ -264,9 +267,9 @@ img {
 												</tr>
 												<tr>
 													<td height="55" align="center" class="borderc" valign="top">
-														<h4>
+														<b>
 															收藏互刷
-														</h4>
+														</b>
 													</td>
 													<td colspan="2" align="left" class="borderc">
 														平台提示：
