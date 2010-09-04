@@ -17,12 +17,15 @@ import net.win.exception.IllegalityException;
 import net.win.utils.ArithUtils;
 import net.win.utils.StringUtils;
 import net.win.utils.TotalUtils;
+import net.win.utils.UserLevelUtils;
 import net.win.vo.UserVO;
 
 import org.hibernate.Hibernate;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
+
+import com.sun.org.apache.commons.beanutils.BeanUtils;
 
 @SuppressWarnings( { "unused", "unchecked" })
 @Service("userInfoService")
@@ -39,6 +42,79 @@ public class UserInfoService extends BaseService {
 	private JavaMailSender mailSender;
 	@Resource
 	private FreeMarkerConfigurer freeMarkerCfj;
+
+	/**
+	 * 购买发布点
+	 * 
+	 * @param userVO
+	 * @return
+	 * @throws Exception
+	 */
+	public String updateBuyDot(UserVO userVO) throws Exception {
+		String flag = getByParam("flag");
+		UserEntity userEntity = getLoginUserEntity(userDAO);
+		String operaCode = userVO.getOperationCode();
+		Double releaseDot = userVO.getReleaseDot();
+		// 判断操作码
+		if (!userEntity.getOpertationCode().equals(
+				StringUtils.processPwd(operaCode))) {
+			putAlertMsg("操作码不正确");
+			return "updateBuyDot";
+		}
+		if ("1".equals(flag)) {
+			// 购买单个发布点
+			if (userEntity.getMoney() >= 0.5 * releaseDot) {
+				userEntity.setMoney(ArithUtils.sub(userEntity.getMoney(),
+						0.5 * releaseDot));
+				userEntity.setReleaseDot(ArithUtils.add(userEntity
+						.getReleaseDot(), releaseDot));
+			} else {
+				putDIV("您的钱不够支付购买" + releaseDot + "个发布点的费用，<a>点击此处充值！</a>");
+			}
+		} else if ("2".equals(flag)) {
+			// 购买皇冠卡
+			Double money = 5000d;
+			if (userEntity.getMoney() >= money) {
+				userEntity.setMoney(ArithUtils
+						.sub(userEntity.getMoney(), money));
+				userEntity.setReleaseDot(ArithUtils.add(userEntity
+						.getReleaseDot(), 100001));
+			} else {
+				putDIV("您的钱不够支付购买皇冠卡，<a>点击此处充值！</a>");
+			}
+
+		} else if ("3".equals(flag)) {
+			// 购买双钻卡
+			Double money = 275D;
+			if (userEntity.getMoney() >= money) {
+				userEntity.setMoney(ArithUtils
+						.sub(userEntity.getMoney(), money));
+				userEntity.setReleaseDot(ArithUtils.add(userEntity
+						.getReleaseDot(), 550));
+			} else {
+				putDIV("您的钱不够支付购买双钻卡，<a>点击此处充值！</a>");
+			}
+
+		} else if ("4".equals(flag)) {
+			// 购买皇一钻卡
+			Double money = 135D;
+			if (userEntity.getMoney() >= money) {
+				userEntity.setMoney(ArithUtils
+						.sub(userEntity.getMoney(), money));
+				userEntity.setReleaseDot(ArithUtils.add(userEntity
+						.getReleaseDot(), 270));
+			} else {
+				putDIV("您的钱不够支付购买一钻卡，<a>点击此处充值！</a>");
+			}
+
+		}
+		if (getByRequest("div") == null) {
+			updateUserLoginInfo(userEntity);
+			putDIV("恭喜您，充值成功！<a>点击此处</a>跳转到淘宝互刷区！");
+			putByRequest("executeFlag", "success");
+		}
+		return "updateBuyDot";
+	}
 
 	/**
 	 * 发布点兑换
@@ -107,6 +183,7 @@ public class UserInfoService extends BaseService {
 			userEntity
 					.setConvertScore(userEntity.getConvertScore() - tempScore);
 		}
+		updateUserLoginInfo(userEntity);
 		putAlertMsg("操作成功");
 		return "updateExchange";
 	}

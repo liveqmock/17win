@@ -130,13 +130,7 @@ public class UserService extends BaseService {
 			userVO.setVerificationCode(null);
 			return "inputLogin";
 		} else {
-			UserLoginInfo userLoginInfo = new UserLoginInfo();
-			BeanUtils.copyProperties(userLoginInfo, userEntity);
-			userLoginInfo.setLevel(UserLevelUtils.getLevel(userEntity
-					.getUpgradeScore()));
-			userLoginInfo.setLevelImg(UserLevelUtils.getLevelImg(userEntity
-					.getUpgradeScore()));
-			putLoginUser(userLoginInfo);
+			updateUserLoginInfo(userEntity);
 			return "loginSuccess";
 		}
 	}

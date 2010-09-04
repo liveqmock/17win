@@ -40,8 +40,7 @@
 											<td height=20>
 												您拥有：
 												<font color=#ff0000><s:property
-														value="#session.userLogin.money"></s:property>
-												</font> 元
+														value="#session.userLogin.money"></s:property> </font> 元
 											</td>
 										</tr>
 
@@ -56,8 +55,7 @@
 											<td height=20>
 												积&nbsp;&nbsp;&nbsp;&nbsp;分：
 												<font color=#ff0000> <s:property
-														value="#session.userLogin.convertScore"></s:property>
-												</font>点
+														value="#session.userLogin.convertScore"></s:property> </font>点
 											</td>
 										</tr>
 										<tr>
@@ -66,7 +64,7 @@
 												<s:if test="#session.userLogin.status==0">
 													<font color=#ff0000>没有激活</font>
 												</s:if>
-												
+
 											</td>
 										</tr>
 									</table>
@@ -106,13 +104,13 @@
 										</tr>
 										<tr>
 											<td height=20>
-												<a  href="userInfoManager/info!initUpdatePassword.php">密码/操作码</a>
+												<a href="userInfoManager/info!initUpdatePassword.php">密码/操作码</a>
 											</td>
 										</tr>
 										<tr>
 
 											<td height=20>
-												<A  href="userInfoManager/info!referee.php" target="_blank">我要推广</A>
+												<A href="userInfoManager/info!referee.php" target="_blank">我要推广</A>
 											</td>
 										</tr>
 										<tr>
@@ -181,16 +179,16 @@
 										</tr>
 										<tr>
 											<td height=20>
-												<a  href="userInfoManager/info!initExchange.php" >我要兑换</a>
+												<a href="userInfoManager/info!initBuyDot.php">购买发布点</a>
 											</td>
-										</tr>
 
+										</tr>
 										<tr>
 											<td height=20>
-												<a href="user/buyDot.jsp">购买发布点</a>
+												<a href="userInfoManager/info!initExchange.php">我要兑换</a>
 											</td>
-
 										</tr>
+
 										<tr>
 											<td height=20>
 												<a href="user/withdrawals.jsp">我要提现</a>

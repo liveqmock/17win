@@ -27,8 +27,9 @@ import org.springframework.stereotype.Controller;
 		@Result(name = "refereeCode", location = "/spread/code.jsp"),
 		@Result(name = "myRefee", location = "/user/mySpread.jsp"),
 		@Result(name = "updateExchange", location = "/user/exchange.jsp"),
-		@Result(name = "initExchange", location = "/user/exchange.jsp")
-
+		@Result(name = "initExchange", location = "/user/exchange.jsp"),
+		@Result(name = "initBuyDot", location = "/user/buyDot.jsp"),
+		@Result(name = "updateBuyDot", location = "/user/buyDot.jsp")
 })
 @Namespace("/userInfoManager")
 public class UserInfoAction extends BaseAction {
@@ -48,6 +49,26 @@ public class UserInfoAction extends BaseAction {
 	}
 
 	/**
+	 * 购买发布点
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String buyDot() throws Exception {
+		return userInfoService.updateBuyDot(userVO);
+	}
+
+	/**
+	 * 初始化购买发布点
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String initBuyDot() throws Exception {
+		return "initBuyDot";
+	}
+
+	/**
 	 * 兑换发布点
 	 * 
 	 * @return
@@ -58,7 +79,7 @@ public class UserInfoAction extends BaseAction {
 	}
 
 	/**
-	 *  
+	 * 
 	 * 
 	 * @return
 	 * @throws Exception

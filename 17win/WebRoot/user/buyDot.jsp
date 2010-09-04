@@ -10,7 +10,12 @@
 		<LINK href="css/Css.css" type="text/css" rel="stylesheet">
 
 		<LINK href="css/center.css" type="text/css" rel="stylesheet">
-		<SCRIPT src="js/jieducm_pupu.js" type="text/javascript"></SCRIPT>
+
+		<link href="css/excite-bike/jquery-ui-1.8.4.custom.css"
+			rel="stylesheet" type="text/css" />
+
+		<SCRIPT src="js/jquery-ui-1.8.4.custom.min.js" type="text/javascript"></SCRIPT>
+		<SCRIPT src="user/buyDot.js" type="text/javascript"></SCRIPT>
 
 		<style type="text/css">
 body {
@@ -109,8 +114,7 @@ img {
 														<a href="md5_pay.asp"> <img border="0"
 																src="images/pay.gif"
 																onmouseout="this.src='images/pay.gif'"
-																onmouseover="this.src ='images/pay_link.gif'">
-														</a>
+																onmouseover="this.src ='images/pay_link.gif'"> </a>
 													</div>
 												</div>
 												<div
@@ -118,29 +122,27 @@ img {
 													<div style="float: left; width: 350px;">
 														<img src="images/201081115373025060.gif">
 													</div>
-													<form onsubmit="return save_onclick()" id="form"
-														action="chongzhi.asp" method="post" name="form">
-														<input type="hidden" value="chongzhi" name="action">
+													<s:form action="userInfoManager/info!buyDot.php?flag=1"
+														theme="simple">
 														<div
 															style="float: left; width: 200px; line-height: 150%; padding-top: 20px;">
 															<span style="color: red;">拥有发布点，就可以发布自己的任务，获得好评。<br>想要轻轻松松立即到钻吗？请立即购买发布点！充多少送多少积分!</span>
 															<br>
 															<br>
 															购买数量：
-															<input name="PushNum" value="10" style="width: 30px;"
-																id="PushNum">
+															<s:textfield name="userVO.releaseDot" id="releaseDot"
+																value="10" cssStyle="width:40px"></s:textfield>
 															个/每个0.5元
 															<br>
 															操作密码：
-															<input type="password" size="10" id="code" name="code">
+															<s:password name="userVO.operationCode"
+																cssStyle="width:80px" id="operationCode_1"></s:password>
 															<br>
-
 															<input type="image" name="ImageButton1"
-																src="images/buy1.png"
-																onclick="return confirm('您确定购买发布点吗？');"
+																src="images/buy1.png" onclick="return validateForm('1');"
 																id="ImageButton1">
 														</div>
-													</form>
+													</s:form>
 												</div>
 
 												<div
@@ -148,10 +150,8 @@ img {
 													<div style="float: left; width: 350px;">
 														<img src="images/201081115334451026.jpg">
 													</div>
-													<form id="Form2" action="chongzhi.asp" method="post"
-														name="Form2">
-														<input type="hidden" value="carchong" name="action">
-														<input type="hidden" value="3" name="id">
+													<s:form action="userInfoManager/info!buyDot.php?flag=2"
+														theme="simple">
 														<div
 															style="float: left; width: 200px; line-height: 150%; padding-top: 20px;">
 															<span style="color: red;">刷出皇冠，10001个发布点
@@ -160,12 +160,16 @@ img {
 															<br>
 															皇冠卡：5000元
 															<br>
+															操作密码：
+															<s:password name="userVO.operationCode"
+																cssStyle="width:80px" id="operationCode_2"></s:password>
+															<br>
 															<input type="image" name="ImageButton2"
 																src="images/buy1.png"
-																onclick="return confirm('您确定要购买一钻卡吗？');"
+																 onclick="return validateForm('2');"
 																id="ImageButton2">
 														</div>
-													</form>
+													</s:form>
 												</div>
 
 												<div
@@ -173,10 +177,8 @@ img {
 													<div style="float: left; width: 350px;">
 														<img src="images/20108111534180865.jpg">
 													</div>
-													<form id="Form2" action="chongzhi.asp" method="post"
-														name="Form2">
-														<input type="hidden" value="carchong" name="action">
-														<input type="hidden" value="2" name="id">
+													<s:form action="userInfoManager/info!buyDot.php?flag=3"
+														theme="simple">
 														<div
 															style="float: left; width: 200px; line-height: 150%; padding-top: 20px;">
 															<span style="color: red;">刷出二钻，550个发布点，可获得550个好评
@@ -185,12 +187,16 @@ img {
 															<br>
 															二钻卡：275元
 															<br>
+															操作密码：
+															<s:password name="userVO.operationCode"
+																cssStyle="width:80px" id="operationCode_3"></s:password>
+															<br>
 															<input type="image" name="ImageButton2"
 																src="images/buy1.png"
-																onclick="return confirm('您确定要购买一钻卡吗？');"
+															 onclick="return validateForm('3');"
 																id="ImageButton2">
 														</div>
-													</form>
+													</s:form>
 												</div>
 
 												<div
@@ -198,10 +204,8 @@ img {
 													<div style="float: left; width: 350px;">
 														<img src="images/201081115344610581.jpg">
 													</div>
-													<form id="Form2" action="chongzhi.asp" method="post"
-														name="Form2">
-														<input type="hidden" value="carchong" name="action">
-														<input type="hidden" value="1" name="id">
+													<s:form action="userInfoManager/info!buyDot.php?flag=4"
+														theme="simple">
 														<div
 															style="float: left; width: 200px; line-height: 150%; padding-top: 20px;">
 															<span style="color: red;">刷出一钻，270个发布点，可获得270个好评
@@ -210,12 +214,16 @@ img {
 															<br>
 															一钻卡：135元
 															<br>
-															<input type="image" name="ImageButton2"
+															操作密码：
+															<s:password name="userVO.operationCode"
+																cssStyle="width:80px" id="operationCode_3"></s:password>
+															<br>
+															<input type="image" name="ImageButton3"
 																src="images/buy1.png"
-																onclick="return confirm('您确定要购买一钻卡吗？');"
+																 onclick="return validateForm('4');"
 																id="ImageButton2">
 														</div>
-													</form>
+													</s:form>
 												</div>
 
 
@@ -232,5 +240,25 @@ img {
 			</tr>
 		</table>
 		<s:include value="../common/footDuan.jsp"></s:include>
+
+		<s:if test="#request.div!=null">
+			<div id="showDIV"
+				title="
+		<s:if test="#request.executeFlag==success">
+	操作成功
+</s:if>
+ <s:else>
+ 	操作失败
+ </s:else>">
+				<table border="0" cellpadding="0" cellspacing="0">
+					<tr>
+						<td>
+							<s:property value="#request.div" escape="false" />
+						</td>
+					</tr>
+				</table>
+			</div>
+		</s:if>
+		<s:property value="#request.msg" escape="false" />
 	</BODY>
 </HTML>

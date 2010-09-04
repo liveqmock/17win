@@ -10,12 +10,11 @@
 		<link href="css/excite-bike/jquery-ui-1.8.4.custom.css"
 			rel="stylesheet" type="text/css" />
 
-		<SCRIPT src="js/jieducm_pupu.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="js/jquery-ui-1.8.4.custom.min.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="user/login.js" type="text/javascript"></SCRIPT>
 	</HEAD>
 	<BODY>
-		<s:form action="userManager/base!login.php" theme="simple"
+		<s:form  action="userInfoManager/info!exchange.php?flag=1" theme="simple"
 			onsubmit="return validateForm()">
 			<s:token></s:token>
 			<s:include value="../common/title.jsp"></s:include>

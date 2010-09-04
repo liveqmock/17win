@@ -4,8 +4,11 @@ import net.win.dao.UserDAO;
 import net.win.entity.BaseEntity;
 import net.win.entity.UserEntity;
 import net.win.utils.Constant;
+import net.win.utils.UserLevelUtils;
 
 import org.apache.struts2.ServletActionContext;
+
+import com.sun.org.apache.commons.beanutils.BeanUtils;
 
 public class BaseService {
 	protected static final String SUCCESS = "success";
@@ -22,6 +25,22 @@ public class BaseService {
 	// 前台显示数据
 	private static final String MSG = "msg";
 	private static final String DIV = "div";
+
+	/**
+	 * 更新用户信息
+	 * 
+	 * @param userEntity
+	 * @throws Exception
+	 */
+	protected void updateUserLoginInfo(UserEntity userEntity) throws Exception {
+		UserLoginInfo userLoginInfo = new UserLoginInfo();
+		BeanUtils.copyProperties(userLoginInfo, userEntity);
+		userLoginInfo.setLevel(UserLevelUtils.getLevel(userEntity
+				.getUpgradeScore()));
+		userLoginInfo.setLevelImg(UserLevelUtils.getLevelImg(userEntity
+				.getUpgradeScore()));
+		putLoginUser(userLoginInfo);
+	}
 
 	/**
 	 * 把数据存放在request里面
@@ -65,7 +84,8 @@ public class BaseService {
 	}
 
 	/**
-	 *  获取Login
+	 * 获取Login
+	 * 
 	 * @return
 	 */
 	protected UserEntity getLoginUserEntity(UserDAO userDAO) {

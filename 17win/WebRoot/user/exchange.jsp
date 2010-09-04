@@ -10,7 +10,6 @@
 		<LINK href="css/Css.css" type="text/css" rel="stylesheet">
 
 		<LINK href="css/center.css" type="text/css" rel="stylesheet">
-		<SCRIPT src="js/validater.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="js/utils.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="user/exchange.js" type="text/javascript"></SCRIPT>
 		<style type="text/css">
@@ -314,5 +313,6 @@ img {
 			</tr>
 		</table>
 		<s:include value="../common/footDuan.jsp"></s:include>
+		<s:property value="#request.msg" escape="false"/>
 	</BODY>
 </HTML>
