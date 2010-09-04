@@ -10,8 +10,7 @@ import net.win.entity.ProvinceEntity;
 import net.win.entity.UserEntity;
 
 public class UserVO extends BaseVO {
-	
-	
+
 	/**
 	 * 接受数据
 	 */
@@ -19,15 +18,20 @@ public class UserVO extends BaseVO {
 	private UserEntity userEntity = new UserEntity();
 	// 验证码
 	private String verificationCode;
-	//操作码
+	// 操作码
 	private String operationCode;
+	// 发布点
+	private Double releaseDot;
+	// 赠送数量
+	private Double number;
+	// 用户名
+	private String username;
 	/**
 	 * 显示数据
 	 */
 	private List<ProvinceEntity> provinces = new ArrayList<ProvinceEntity>();
 	private List<CityEntity> cities = new ArrayList<CityEntity>();
 	private List<AreaEntity> areas = new ArrayList<AreaEntity>();
-	
 
 	public UserEntity getUserEntity() {
 		return userEntity;
@@ -75,5 +79,29 @@ public class UserVO extends BaseVO {
 
 	public void setOperationCode(String operationCode) {
 		this.operationCode = operationCode;
+	}
+
+	public Double getReleaseDot() {
+		return releaseDot;
+	}
+
+	public void setReleaseDot(Double releaseDot) {
+		this.releaseDot = releaseDot;
+	}
+
+	public Double getNumber() {
+		return number;
+	}
+
+	public void setNumber(Double number) {
+		this.number = number;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 }

@@ -10,8 +10,9 @@
 		<LINK href="css/Css.css" type="text/css" rel="stylesheet">
 
 		<LINK href="css/center.css" type="text/css" rel="stylesheet">
-		<SCRIPT src="js/jieducm_pupu.js" type="text/javascript"></SCRIPT>
-
+		<SCRIPT src="js/validater.js" type="text/javascript"></SCRIPT>
+		<SCRIPT src="js/utils.js" type="text/javascript"></SCRIPT>
+		<SCRIPT src="user/exchange.js" type="text/javascript"></SCRIPT>
 		<style type="text/css">
 body {
 	
@@ -95,6 +96,7 @@ img {
 													* 兑换成功后，系统自动相应的操作。
 													<br>
 													* 您的操作记录中也会有相应的记录信息
+
 												</li>
 											</ul>
 										</div>
@@ -106,11 +108,18 @@ img {
 												<tr>
 													<td>
 														<strong>&nbsp;发布点兑换存款</strong>
+														<input type="hidden" id="dot"
+															value="<s:property value="#session.userLogin.releaseDot" />" />
+														<input type="hidden" id="score"
+															value="<s:property value="#session.userLogin.convertScore" />" />
+														<input type="hidden" id="loginUsername"
+															value="<s:property value="#session.userLogin.username" />" />
 													</td>
 												</tr>
 											</tbody>
 										</table>
-										<s:form action="">
+										<s:form action="userInfoManager/info!exchange.php?flag=1"
+											theme="simple" onsubmit="return validateForm('1')">
 											<table width="639" cellspacing="0" cellpadding="0" border="0"
 												align="center">
 												<tbody>
@@ -133,9 +142,8 @@ img {
 															</div>
 														</td>
 														<td width="505">
-															<input onkeyup="if(isNaN(value))execCommand('undo')"
-																name="ToUser" id="ToUser">
-															个发布点来兑换(每1个发布点可以兑换 0.5元,10个发布点起兑换)
+															<s:textfield name="userVO.releaseDot" id="releaseDot_1"></s:textfield>
+															个发布点来兑换金钱(每1个发布点可以兑换 0.5元,10个发布点起兑换)
 														</td>
 													</tr>
 													<tr>
@@ -145,7 +153,8 @@ img {
 															</div>
 														</td>
 														<td>
-															<input type="password" id="czm" name="czm">
+															<s:password name="userVO.operationCode"
+																id="operationCode_1"></s:password>
 														</td>
 													</tr>
 													<tr>
@@ -155,7 +164,6 @@ img {
 														<td>
 															<input type="submit" value="开始兑换" id="button"
 																name="button">
-															<input type="hidden" value="1" name="action">
 														</td>
 													</tr>
 												</tbody>
@@ -171,8 +179,8 @@ img {
 												</tr>
 											</tbody>
 										</table>
-										<form onsubmit="return save_onclick3();" method="post"
-											action="" name="form3">
+										<s:form action="userInfoManager/info!exchange.php?flag=2"
+											theme="simple" onsubmit="return validateForm('2')">
 											<div>
 												<table width="614" cellspacing="0" cellpadding="0"
 													border="0" align="center">
@@ -184,7 +192,8 @@ img {
 																</div>
 															</td>
 															<td>
-																xgj1988 你现在的发布点是：2.8
+																xgj1988 你现在的发布点是：
+																<s:property value="#session.userLogin.releaseDot" />
 															</td>
 														</tr>
 														<tr>
@@ -194,8 +203,8 @@ img {
 																</div>
 															</td>
 															<td width="480">
-																<input name="ToUser" maxlength="10" id="ToUser">
-																对方平台帐号
+																<s:textfield name="userVO.username" id="username"></s:textfield>
+																对方17win帐号
 															</td>
 														</tr>
 														<tr>
@@ -205,8 +214,8 @@ img {
 																</div>
 															</td>
 															<td>
-																<input onkeyup="if(isNaN(value))execCommand('undo')"
-																	name="GiveNum" maxlength="4" id="GiveNum">
+																<s:textfield name="userVO.releaseDot" id="releaseDot_2"></s:textfield>
+																个发布点
 															</td>
 														</tr>
 														<tr>
@@ -216,7 +225,8 @@ img {
 																</div>
 															</td>
 															<td>
-																<input type="password" id="czm" name="czm">
+																<s:password name="userVO.operationCode"
+																	id="operationCode_2"></s:password>
 															</td>
 														</tr>
 														<tr>
@@ -226,13 +236,12 @@ img {
 															<td>
 																<input type="submit" value="开始赠送" id="button"
 																	name="button">
-																<input type="hidden" value="3" name="action">
 															</td>
 														</tr>
 													</tbody>
 												</table>
 											</div>
-										</form>
+										</s:form>
 										<table width="95%" cellspacing="0" cellpadding="3" border="0"
 											bgcolor="#deeefa" align="center">
 											<tbody>
@@ -243,8 +252,8 @@ img {
 												</tr>
 											</tbody>
 										</table>
-										<form onsubmit="return save_onclick5();" method="post"
-											action="" name="form5">
+										<s:form action="userInfoManager/info!exchange.php?flag=3"
+											theme="simple" onsubmit="return validateForm('3')">
 											<div>
 												<table width="614" cellspacing="0" cellpadding="0"
 													border="0" align="center">
@@ -256,7 +265,8 @@ img {
 																</div>
 															</td>
 															<td>
-																xgj1988 你现在的积分是：290
+																xgj1988 你现在的积分是：
+																<s:property value="#session.userLogin.convertScore" />
 															</td>
 														</tr>
 														<tr>
@@ -266,8 +276,7 @@ img {
 																</div>
 															</td>
 															<td width="480">
-																<input onkeyup="if(isNaN(value))execCommand('undo')"
-																	name="ReNum1" maxlength="4" id="ReNum1">
+																<s:textfield name="userVO.releaseDot" id="releaseDot_3"></s:textfield>
 																个发布点( 每200积分可兑换1个发布点)
 															</td>
 														</tr>
@@ -278,7 +287,8 @@ img {
 																</div>
 															</td>
 															<td>
-																<input type="password" id="czm" name="czm">
+																<s:password name="userVO.operationCode"
+																	id="operationCode_3"></s:password>
 															</td>
 														</tr>
 														<tr>
@@ -286,16 +296,14 @@ img {
 																&nbsp;
 															</td>
 															<td>
-																<input type="submit" disabled="disabled" value="开始兑换"
-																	id="button" name="button">
-																<input type="hidden" value="5" name="action">
+																<input type="submit" value="开始兑换" id="button"
+																	name="button">
 															</td>
 														</tr>
 													</tbody>
 												</table>
 											</div>
-										</form>
-
+										</s:form>
 									</div>
 								</div>
 							</td>

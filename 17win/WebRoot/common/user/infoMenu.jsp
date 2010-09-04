@@ -181,7 +181,7 @@
 										</tr>
 										<tr>
 											<td height=20>
-												<a href="user/exchange.jsp">我要兑换</a>
+												<a  href="userInfoManager/info!initExchange.php" >我要兑换</a>
 											</td>
 										</tr>
 

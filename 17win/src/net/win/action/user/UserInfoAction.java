@@ -25,8 +25,10 @@ import org.springframework.stereotype.Controller;
 		@Result(name = "updatePassword", location = "/user/updatePW.jsp"),
 		@Result(name = "referee", location = "/spread/index.jsp"),
 		@Result(name = "refereeCode", location = "/spread/code.jsp"),
-		@Result(name = "myRefee", location = "/user/mySpread.jsp")
-		
+		@Result(name = "myRefee", location = "/user/mySpread.jsp"),
+		@Result(name = "updateExchange", location = "/user/exchange.jsp"),
+		@Result(name = "initExchange", location = "/user/exchange.jsp")
+
 })
 @Namespace("/userInfoManager")
 public class UserInfoAction extends BaseAction {
@@ -44,9 +46,27 @@ public class UserInfoAction extends BaseAction {
 		// TODO Auto-generated method stub
 		return super.execute();
 	}
-	
-	
-	
+
+	/**
+	 * 兑换发布点
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String exchange() throws Exception {
+		return userInfoService.updateExchange(userVO);
+	}
+
+	/**
+	 *  
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String initExchange() throws Exception {
+		return "initExchange";
+	}
+
 	/**
 	 * 我的推广
 	 * 
@@ -56,6 +76,7 @@ public class UserInfoAction extends BaseAction {
 	public String myRefee() throws Exception {
 		return userInfoService.myRefee(userVO);
 	}
+
 	/**
 	 * 推广码
 	 * 
@@ -65,6 +86,7 @@ public class UserInfoAction extends BaseAction {
 	public String refereeCode() throws Exception {
 		return "refereeCode";
 	}
+
 	/**
 	 * 推广
 	 * 
@@ -74,6 +96,7 @@ public class UserInfoAction extends BaseAction {
 	public String referee() throws Exception {
 		return "referee";
 	}
+
 	/**
 	 * 更新信息
 	 * 
@@ -93,6 +116,7 @@ public class UserInfoAction extends BaseAction {
 	public String initUpdatePassword() throws Exception {
 		return userInfoService.initUpdatePassword(userVO);
 	}
+
 	/**
 	 * 更新信息
 	 * 

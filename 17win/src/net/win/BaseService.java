@@ -1,6 +1,8 @@
 package net.win;
 
+import net.win.dao.UserDAO;
 import net.win.entity.BaseEntity;
+import net.win.entity.UserEntity;
 import net.win.utils.Constant;
 
 import org.apache.struts2.ServletActionContext;
@@ -53,7 +55,7 @@ public class BaseService {
 	}
 
 	/**
-	 * 存放用户
+	 * 
 	 * 
 	 * @param name
 	 * @param value
@@ -61,7 +63,14 @@ public class BaseService {
 	protected UserLoginInfo getLoginUser() {
 		return (UserLoginInfo) getBySession(Constant.USER_LOGIN_INFO);
 	}
-	
+
+	/**
+	 *  获取Login
+	 * @return
+	 */
+	protected UserEntity getLoginUserEntity(UserDAO userDAO) {
+		return userDAO.get(getLoginUser().getId());
+	}
 
 	/**
 	 * 前台Alert提示数据，放在request里面
@@ -93,6 +102,7 @@ public class BaseService {
 	protected Object getByRequest(String key) {
 		return ServletActionContext.getRequest().getAttribute(key);
 	}
+
 	/**
 	 * 从param取出数据
 	 * 

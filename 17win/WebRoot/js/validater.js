@@ -57,6 +57,50 @@ Validater.isInt = function(str, type) {
 	}
 	return regInt.test(str);
 };
+/**
+ * 浮点数的判断
+ * 
+ * @param type
+ *            为空 任意浮点数 '0+' 非负浮点数 '+' 正浮点数
+ * 
+ * '-0' 非正浮点数 '-' 负浮点数
+ * 
+ */
+Validater.isFloat = function(str, type) {
+	// var regInt = /^d+^/;
+	var regInt;
+	if (type == "0+") {
+		regInt = /^[1-9]\d*\\.[1-9]\d*|0$/;
+	} else {
+		if (type == "+") {
+			regInt = /^[1-9]\d*\\.[1-9]\d*$/;
+		} else {
+			if (type == "-0") {
+				regInt = /^-[1-9]\d*\\.[1-9]\d*|0$/;
+			} else {
+				if (type == "-") {
+					regInt = /^-[1-9]\d*\\.[1-9]\d*$/;
+				} else {
+					regInt = /^-?[1-9]\d*\\.[1-9]\d*$/;
+				}
+			}
+		}
+	}
+	return regInt.test(str);
+};
+/**
+ * 数值的判断
+ * 
+ * @param type
+ *            为空 任意整数 '0+' 非负数值 '+' 正数值
+ * 
+ * '-0' 非正数值'-' 负浮数值
+ * 
+ */
+Validater.isNumber = function(str, type) { 
+	return Validater.isFloat(str,type) ||  Validater.isInt(str,type);
+	 
+};
 // 判定名称，中文，英文字母下划线，数字，范围
 Validater.isName = function(str, min, max) {
 	var regName = new RegExp("^[\\w\\u4e00-\\u9fa5\\-]{" + min + "," + max

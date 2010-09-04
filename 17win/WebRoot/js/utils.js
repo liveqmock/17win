@@ -18,7 +18,7 @@ function copy_code(copyText) {
 }
 
 /**
- * 只能输入数字的文本框
+ * 只能输入整数的文本框
  * 
  * @param {}
  *            copyText
@@ -26,7 +26,42 @@ function copy_code(copyText) {
 function intText(textID) {
 	$("#" + textID).bind("keyup", function() {
 				var value = $(this).val();
-				if (!Validate.isInt(value, "+")) {
+				if (!Validater.isInt(value, "+")) {
+					$(this).val(value.substring(0, value.length - 1));
+				}
+			});
+
+}
+/**
+ * 只能输入浮点数的文本框
+ * 
+ * @param {}
+ *            copyText
+ */
+function floatText(textID) {
+	$("#" + textID).bind("keyup", function() {
+				var value = $(this).val();
+				if (!Validater.isFloat(value, "+")) {
+					$(this).val(value.substring(0, value.length - 1));
+				}
+			});
+
+}
+
+/**
+ * 只能输入数值的文本框
+ * 
+ * @param {}
+ *            copyText
+ */
+function numberText(textID) {
+	$("#" + textID).bind("keyup", function() {
+				var value = $(this).val();
+				if (!Validater.isNumber(value, "+")) {
+					var dot=value.substring(value.length - 2, value.length - 1);
+					if(dot=="."){
+						$(this).val(value.substring(0, value.length - 1)+".0");
+					}
 					$(this).val(value.substring(0, value.length - 1));
 				}
 			});

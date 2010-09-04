@@ -1,10 +1,8 @@
 package net.win.service.user;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -15,19 +13,16 @@ import net.win.dao.CityDAO;
 import net.win.dao.ProvinceDAO;
 import net.win.dao.UserDAO;
 import net.win.entity.UserEntity;
+import net.win.exception.IllegalityException;
+import net.win.utils.ArithUtils;
 import net.win.utils.StringUtils;
 import net.win.utils.TotalUtils;
 import net.win.vo.UserVO;
 
 import org.hibernate.Hibernate;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
-
-import freemarker.template.utility.StringUtil;
 
 @SuppressWarnings( { "unused", "unchecked" })
 @Service("userInfoService")
@@ -44,6 +39,77 @@ public class UserInfoService extends BaseService {
 	private JavaMailSender mailSender;
 	@Resource
 	private FreeMarkerConfigurer freeMarkerCfj;
+
+	/**
+	 * 发布点兑换
+	 * 
+	 * @param userVO
+	 * @return
+	 * @throws Exception
+	 */
+	public String updateExchange(UserVO userVO) throws Exception {
+		String flag = getByParam("flag");
+		UserEntity userEntity = getLoginUserEntity(userDAO);
+		String operaCode = userVO.getOperationCode();
+		// 判断操作码
+		if (!userEntity.getOpertationCode().equals(
+				StringUtils.processPwd(operaCode))) {
+			putAlertMsg("操作码不正确");
+			return "updateExchange";
+		}
+		if ("1".equals(flag)) {
+			// 兑换发布点
+			Double releaseDot = userVO.getReleaseDot();
+			if (releaseDot < 10 || releaseDot > userEntity.getReleaseDot()) {
+				new IllegalityException(userEntity.getUsername()
+						+ ":违法的操作，试图越过兑换发布点验证");
+			}
+			userEntity.setReleaseDot(ArithUtils.sub(userEntity.getReleaseDot(),
+					releaseDot));
+			userEntity.setMoney(ArithUtils.add(userEntity.getMoney(),
+					ArithUtils.mul(releaseDot, 0.5)));
+		} else if ("2".equals(flag)) {
+			// 赠送
+			Double releaseDot = userVO.getReleaseDot();
+			String username = userVO.getUsername();
+			UserEntity touser = userDAO.uniqueResult(
+					"fromo UserEntity where username=:username", "username",
+					username);
+			if (releaseDot > userEntity.getReleaseDot()) {
+				new IllegalityException(userEntity.getUsername()
+						+ ":违法的操作，试图越过兑换发布点验证");
+			}
+			if (username.equals(userEntity.getUsername())) {
+				new IllegalityException(userEntity.getUsername()
+						+ ":违法的操作，试图越过兑换发布点验证");
+			}
+			if (touser == null) {
+				putAlertMsg(username + "用户不存在");
+				return "updateExchange";
+			}
+			userEntity.setReleaseDot(ArithUtils.sub(touser.getReleaseDot(),
+					releaseDot));
+			touser.setReleaseDot(ArithUtils.add(touser.getMoney(), releaseDot));
+		} else if ("3".equals(flag)) {
+			// 赠送
+			Double releaseDot = userVO.getReleaseDot();
+			if (releaseDot > userEntity.getReleaseDot()) {
+				new IllegalityException(userEntity.getUsername()
+						+ ":违法的操作，试图越过兑换发布点验证");
+			}
+			if (releaseDot * 200 > userEntity.getConvertScore()) {
+				putAlertMsg("您的积分不够" + releaseDot * 200 + ",最多只能兑换"
+						+ userEntity.getConvertScore() / 200 + "个发布点");
+			}
+			userEntity.setReleaseDot(ArithUtils.add(userEntity.getReleaseDot(),
+					releaseDot));
+			Integer tempScore = ((Double) (releaseDot * 200)).intValue();
+			userEntity
+					.setConvertScore(userEntity.getConvertScore() - tempScore);
+		}
+		putAlertMsg("操作成功");
+		return "updateExchange";
+	}
 
 	/**
 	 * 修改密码
