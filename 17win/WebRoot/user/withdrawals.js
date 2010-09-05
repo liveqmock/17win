@@ -13,7 +13,7 @@ $(document).ready(function() {
 										alert("您输入的地址不正确！");
 									} else {
 										$("#realname_1").val(data.seller);
-										$("#shopType").val(type);
+										$("#shopType").val(data.type);
 									}
 								}, "json");
 					});

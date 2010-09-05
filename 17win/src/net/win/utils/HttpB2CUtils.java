@@ -18,9 +18,9 @@ public final class HttpB2CUtils {
 	}
 
 	// 地址验证
-	private static final String TAOBAO_REGEX = "http:[/\\\\]{2}\\w+\\-*\\w+\\.taobao\\.com[/\\\\]";
-	private static final String PAIPAI_REGEX = "http:[/\\\\]{2}\\w+\\-*\\w+\\.paipai\\.com[/\\\\]";
-	private static final String YOUA_REGEX = "http:[/\\\\]{2}youa.baidu\\.com[/\\\\]";
+	private static final String TAOBAO_REGEX = "http:[/\\\\]{2}\\w+\\-*\\w+\\.taobao\\.com[/\\\\]?";
+	private static final String PAIPAI_REGEX = "http:[/\\\\]{2}\\w+\\-*\\w+\\.paipai\\.com[/\\\\]?";
+	private static final String YOUA_REGEX = "http:[/\\\\]{2}youa.baidu\\.com[/\\\\]?";
 
 	// 账号获取
 	private static final String TAOBAO_USER_REGEX = "data\\-nick=\"([[\u0391-\uFFE5]\\w_]+)\"";
@@ -34,13 +34,13 @@ public final class HttpB2CUtils {
 	 * @throws Exception
 	 */
 	public static String obtainShopType(String url) throws Exception {
-		if (url.matches(TAOBAO_REGEX)) {
+		if (Pattern.compile(TAOBAO_REGEX).matcher(url).find()) {
 			return "1";
 		}
-		if (url.matches(PAIPAI_REGEX)) {
+		if (Pattern.compile(PAIPAI_REGEX).matcher(url).find()) {
 			return "2";
 		}
-		if (url.matches(YOUA_REGEX)) {
+		if (Pattern.compile(YOUA_REGEX).matcher(url).find()) {
 			return "3";
 		}
 		return "0";
