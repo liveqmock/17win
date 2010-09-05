@@ -8,9 +8,11 @@
 		<LINK href="css/index.css" type="text/css" rel="stylesheet">
 		<LINK href="css/top_bottom.css" type="text/css" rel="stylesheet">
 		<LINK href="css/Css.css" type="text/css" rel="stylesheet">
-
+		<link href="css/excite-bike/jquery-ui-1.8.4.custom.css"
+			rel="stylesheet" type="text/css" />
 		<LINK href="css/center.css" type="text/css" rel="stylesheet">
-		<SCRIPT src="js/jieducm_pupu.js" type="text/javascript"></SCRIPT>
+		<SCRIPT src="js/jquery-ui-1.8.4.custom.min.js" type="text/javascript"></SCRIPT>
+		<SCRIPT src="user/withdrawals.js" type="text/javascript"></SCRIPT>
 
 		<style type="text/css">
 body {
@@ -82,7 +84,7 @@ img {
 								<div class="pp9">
 									<div style="padding-bottom: 15px; width: 97%;">
 										<div class="pp7">
-											您现在的位置是：淘宝刷信誉 &gt;&gt; 会员中心 &gt;&gt; 申请提现 &gt;&gt;
+											您现在的位置是： 个人中心 &gt;&gt; 申请提现 &gt;&gt;
 										</div>
 										<div class="pp8">
 											<strong>申请提现</strong>
@@ -103,99 +105,184 @@ img {
 										</div>
 										<br>
 										<br>
-										<form onsubmit="return save_onclick22();" method="post"
-											action="" name="formt">
-											<div>
-												<table width="614" cellspacing="0" cellpadding="0"
-													border="0" align="center">
-													<tbody>
-														<tr>
-															<td height="35" align="left">
-																&nbsp;
-															</td>
-															<td>
-																&nbsp;
-															</td>
-														</tr>
-														<tr>
-															<td height="35" align="right">
-																&nbsp;
-															</td>
-															<td>
-																<input type="radio" checked="" value="1"
-																	onclick="javascript:location.href='remoney.asp';"
-																	name="class">
-																淘宝商品地址提现
-																<input type="radio"
-																	onclick="javascript:location.href='remoney1.asp';"
-																	value="2" name="class">
-																支付宝提现
-																<input type="radio"
-																	onclick="javascript:location.href='remoney2.asp';"
-																	value="2" name="class">
-																财富通提现
-															</td>
-														</tr>
-														<tr>
-															<td height="35" align="right">
-																提现人：
-															</td>
-															<td>
-																xgj1988
-															</td>
-														</tr>
-														<tr>
-															<td width="134" height="35" align="right">
-																提现金额：
-															</td>
-															<td width="480">
-																<input onkeyup="if(isNaN(value))execCommand('undo')"
-																	name="ReNum1" maxlength="4" id="ReNum1">
-																元
-															</td>
-														</tr>
-														<tr>
-															<td height="35" align="right">
-																掌柜：
-															</td>
-															<td>
-																<input name="ReRName1" maxlength="50" id="ReRName1">
-															</td>
-														</tr>
-														<tr>
-															<td height="35" align="right">
-																淘宝商品地址：
-															</td>
-															<td>
-																<input maxlength="255" size="35" id="ReZfb1"
-																	name="ReZfb1">
-																商品价格必须和提现金额相同，否则会撤销提现
-															</td>
-														</tr>
-														<tr>
-															<td height="35">
-																<div align="right">
+										<br>
+										<br>
+										<!-- xgj -->
+										<div>
+											<div id="tabs">
+												<ul>
+													<li>
+														<a href="#tabs-1">淘宝商品地址提现</a>
+													</li>
+													<li>
+														<a href="#tabs-2">支付宝提现</a>
+													</li>
+													<li>
+														<a href="#tabs-3">财付通提现</a>
+													</li>
+												</ul>
+												<div id="tabs-1">
+													<form>
+														<table>
+															<tr>
+																<Td align="right">
+																	提现人：
+																</Td>
+																<Td>
+																</Td>
+															</tr>
+															<tr>
+																<Td align="right">
+																	提现金额：
+																</Td>
+																<Td>
+																	<input type="text">
+																	元
+																</Td>
+															</tr>
+															<tr>
+																<Td align="right">
+																	掌柜：
+																</Td>
+																<Td>
+																	<input type="text">
+																</Td>
+															</tr>
+															<tr>
+																<Td align="right">
+																	淘宝商品地址：
+																</Td>
+																<Td>
+																	<input type="text">
+																</Td>
+															</tr>
+															<tr>
+																<Td align="right">
 																	操作密码：
-																</div>
-															</td>
-															<td>
-																<input type="password" id="czm" name="czm">
-															</td>
-														</tr>
-														<tr>
-															<td height="35">
-																&nbsp;
-															</td>
-															<td>
-																<input type="submit" value="开始提现" id="button"
-																	name="button">
-																<input type="hidden" value="ok" name="action">
-															</td>
-														</tr>
-													</tbody>
-												</table>
+																</Td>
+																<Td>
+																	<input type="text">
+																</Td>
+															</tr>
+															<tr>
+																<Td colspan="2" align="center">
+																	<input type="submit" class="buttonFlag"
+																		value="提&nbsp;&nbsp;交">
+																</Td>
+
+															</tr>
+														</table>
+													</form>
+												</div>
+												<div id="tabs-2">
+													<form>
+														<table>
+															<tr>
+																<Td align="right">
+																	提现人：
+																</Td>
+																<Td>
+																</Td>
+															</tr>
+															<tr>
+																<Td align="right">
+																	提现金额：
+																</Td>
+																<Td>
+																	<input type="text">
+																	元
+																</Td>
+															</tr>
+															<tr>
+																<Td align="right">
+																	您的真名：
+																</Td>
+																<Td>
+																	<input type="text">
+																</Td>
+															</tr>
+															<tr>
+																<Td align="right">
+																	您的支付宝账号：
+																</Td>
+																<Td>
+																	<input type="text">
+																</Td>
+															</tr>
+															<tr>
+																<Td align="right">
+																	操作密码：
+																</Td>
+																<Td>
+																	<input type="text">
+																</Td>
+															</tr>
+															<tr>
+																<Td colspan="2" align="center">
+																	<input type="submit" class="buttonFlag"
+																		value="提&nbsp;&nbsp;交">
+																</Td>
+
+															</tr>
+														</table>
+													</form>
+												</div>
+												<div id="tabs-3">
+													<form>
+														<table>
+															<tr>
+																<Td align="right">
+																	提现人：
+																</Td>
+																<Td>
+																</Td>
+															</tr>
+															<tr>
+																<Td align="right">
+																	提现金额：
+																</Td>
+																<Td>
+																	<input type="text">
+																	元
+																</Td>
+															</tr>
+															<tr>
+																<Td align="right">
+																	您的真名：
+																</Td>
+																<Td>
+																	<input type="text">
+																</Td>
+															</tr>
+															<tr>
+																<Td align="right">
+																	您的财付通账号：
+																</Td>
+																<Td>
+																	<input type="text">
+																</Td>
+															</tr>
+															<tr>
+																<Td align="right">
+																	操作密码：
+																</Td>
+																<Td>
+																	<input type="text">
+																</Td>
+															</tr>
+															<tr>
+																<Td colspan="2" align="center">
+																	<input type="submit" class="buttonFlag"
+																		value="提&nbsp;&nbsp;交">
+																</Td>
+
+															</tr>
+														</table>
+													</form>
+												</div>
 											</div>
-										</form>
+										</div>
+										<!-- end -->
 									</div>
 								</div>
 							</td>

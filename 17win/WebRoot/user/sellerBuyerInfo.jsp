@@ -84,7 +84,7 @@ img {
 									<div class="pp9">
 										<div style="padding-bottom: 15px; width: 97%;">
 											<div class="pp7">
-												您现在的位置是：淘宝刷信誉 &gt;&gt; 会员中心 &gt;&gt; 卖号/买号 &gt;&gt;
+												您现在的位置是：个人中心 &gt;&gt; 卖号/买号 &gt;&gt;
 											</div>
 											<div class="pp8">
 												<strong>卖号/买号管理</strong>
