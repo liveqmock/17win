@@ -26,7 +26,7 @@ public class WithdrawalsEntity extends BaseEntity {
 	private Date operationDate;
 	// 状态(0：申请中，1：完成,2驳回,可能因为商品价格和提取价格不同)
 	@Column(name = "STATUS_", nullable = false)
-	private String status;
+	private String status="0";
 	// 状态描述
 	@Column(name = "STATUS_DESC_", nullable = false)
 	private String statusDesc = "";

@@ -1,5 +1,7 @@
 package net.win.service.user;
 
+import java.util.Date;
+
 import javax.annotation.Resource;
 
 import net.win.BaseService;
@@ -55,6 +57,7 @@ public class WithdrawalsService extends BaseService {
 			withdrawalsEntity.setUser(userEntity);
 			withdrawalsEntity.setStatus("0");
 			withdrawalsEntity.setStatusDesc("进入提现流程");
+			withdrawalsEntity.setOperationDate(new Date());
 			withDrawalsDAO.save(withdrawalsEntity);
 
 			putAlertMsg("操作成功，您的操作已经进入提现流程，我们会马上完成您的提现然后邮件通知您！");

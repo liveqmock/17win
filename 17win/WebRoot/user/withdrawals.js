@@ -1,10 +1,21 @@
 $(document).ready(function() {
 			$("#tabs").tabs();
 			$(".buttonFlag").button();
-
-			// 验证淘宝
+			// 获取用户地址
 			$("#realIdentity_1").bind("blur", function() {
-						obtainSellerByShop($(this).val(), "realname_1");
+						VhostAop.divAOP.ajax(
+								"ajaxManager/ajax!obtainSeller.php", {
+									url : $(this).val(),
+									type : "0"
+								}, function(data) {
+									if (data.seller == null
+											|| data.seller == "") {
+										alert("您输入的地址不正确！");
+									} else {
+										$("#realname_1").val(data.seller);
+										$("#shopType").val(type);
+									}
+								}, "json");
 					});
 		});
 

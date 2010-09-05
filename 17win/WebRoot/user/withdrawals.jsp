@@ -89,9 +89,10 @@ img {
 											您现在的位置是： 个人中心 &gt;&gt; 申请提现 &gt;&gt;
 										</div>
 										<div class="pp8">
-										
+
 											<strong>申请提现</strong>
-											<input type="hidden" value="<s:property value="#session.userLogin.money"/>"
+											<input type="hidden"
+												value="<s:property value="#session.userLogin.money"/>"
 												id="money">
 										</div>
 										<div style="margin-top: 10px; line-height: 200%;">
@@ -134,6 +135,10 @@ img {
 															<tr>
 																<Td align="right">
 																	提现人：
+																	<input name="withdrawalsVO.type" type="hidden"
+																		value="1">
+																	<input name="withdrawalsVO.shopType" id="shopType" type="hidden"
+																		value="1">
 																</Td>
 																<Td>
 																	<s:property value="#session.userLogin.username" />
@@ -164,7 +169,7 @@ img {
 																	掌柜：
 																</Td>
 																<Td>
-																	<s:textfield name="withdrawalsVO.realname"
+																	<s:textfield name="withdrawalsVO.realname"  readonly="true"
 																		id="realname_1"></s:textfield>
 																	(系统自动获取)
 																</Td>
@@ -196,6 +201,8 @@ img {
 															<tr>
 																<Td align="right">
 																	提现人：
+																	<input name="withdrawalsVO.type" type="hidden"
+																		value="2">
 																</Td>
 																<Td>
 																	<s:property value="#session.userLogin.username" />
@@ -255,6 +262,8 @@ img {
 															<tr>
 																<Td align="right">
 																	提现人：
+																	<input name="withdrawalsVO.type" type="hidden"
+																		value="3">
 																</Td>
 																<Td>
 																	<s:property value="#session.userLogin.username" />

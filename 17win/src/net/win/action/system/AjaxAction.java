@@ -103,15 +103,14 @@ public class AjaxAction extends BaseAction {
 	 * @return
 	 * @throws Exception
 	 */
-	public String obtainSellerByShop() throws Exception {
-		String type = HttpB2CUtils.obtainShopType(url);
+	public String obtainSeller() throws Exception {
+		// 自动获取
 		if ("0".equals(type)) {
-			seller = HttpB2CUtils.obtainSeller(url, "1");
-			if (StringUtils.isBlank(seller)) {
-				seller = HttpB2CUtils.obtainSeller(url, "2");
-			}
-			if (StringUtils.isBlank(seller)) {
-				seller = HttpB2CUtils.obtainSeller(url, "3");
+			String shopType = HttpB2CUtils.obtainShopType(url);
+			if (!"0".equals(shopType)) {
+				seller = HttpB2CUtils.obtainSeller(url, shopType);
+			} else {
+				seller = "";
 			}
 		} else {
 			seller = HttpB2CUtils.obtainSeller(url, type);
@@ -209,18 +208,6 @@ public class AjaxAction extends BaseAction {
 		return JSON;
 	}
 
-	/**
-	 * 店铺账号
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	public String seller() throws Exception {
-		seller = HttpB2CUtils.obtainSeller(url, type);
-		return JSON;
-
-	}
-
 	public List<Address> getCityList() {
 		return cityList;
 	}
@@ -283,6 +270,10 @@ public class AjaxAction extends BaseAction {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getType() {
+		return type;
 	}
 
 }

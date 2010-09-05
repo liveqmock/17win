@@ -10,7 +10,10 @@
 		<LINK href="css/Css.css" type="text/css" rel="stylesheet">
 
 		<LINK href="css/center.css" type="text/css" rel="stylesheet">
-		<SCRIPT src="js/jieducm_pupu.js" type="text/javascript"></SCRIPT>
+
+		<LINK href="css/blue/style.css" type="text/css" rel="stylesheet">
+		<SCRIPT src="js/jquery.tablesorter.min.js" type="text/javascript"></SCRIPT>
+		<SCRIPT src="user/withdrawalsLog.js" type="text/javascript"></SCRIPT>
 
 		<style type="text/css">
 body {
@@ -88,59 +91,148 @@ img {
 											<strong>提现列表</strong>
 										</div>
 										<br>
+										<table width="100%" cellpadding="1" cellspacing="1"
+											border="0px" style="background: #DDEDFA">
+											<tr>
+												<td width="100%">
+													提现类型：
+													<select>
+														<option value="">
+															--请选择--
+														</option>
+														<option value="1">
+															店铺地址提现
+														</option>
+														<option value="2">
+															支付宝提现
+														</option>
+														<option value="3">
+															财付通提现
+														</option>
+													</select>
+													<span> &nbsp;&nbsp;&nbsp;&nbsp; 状态： <select>
+															<option value="">
+																--请选择--
+															</option>
+															<option value="0">
+																申请中
+															</option>
+															<option value="1">
+																完成
+															</option>
+															<option value="2">
+																被驳回
+															</option>
+														</select> </span> &nbsp;&nbsp;&nbsp;&nbsp; 提现金额：
+													<input type="text" style="width: 40px" />
+													至
+													<input type="text" style="width: 40px" />
+												</td>
+											</tr>
+											<tr>
+												<td width="100%">
+													操作日期：
+													<input type="text" />
+													至
+													<input type="text" />
+													&nbsp;&nbsp;&nbsp;&nbsp; 状态：
+													<select>
+														<option value="">
+															--请选择--
+														</option>
+														<option value="0">
+															申请中
+														</option>
+														<option value="1">
+															完成
+														</option>
+														<option value="2">
+															被驳回
+														</option>
+													</select>
+													&nbsp;&nbsp;&nbsp;&nbsp;
+													<input type="submit" value="查&nbsp;&nbsp;询"
+														style="cursor: pointer;">
+												</td>
+											</tr>
+										</table>
 										<br>
-										<table width="100%" cellspacing="0" cellpadding="0" border="0"
-											bgcolor="#ffffff" align="center">
+										<table id="myTable" class="tablesorter" cellpadding="1">
+											<thead>
+												<tr>
+													<th>
+														提现类型
+													</th>
+													<th>
+														平台类型
+													</th>
+													<th>
+														提现金额
+													</th>
+													<th>
+														操作日期
+													</th>
+													<th>
+														状态
+													</th>
+													<th>
+														描述
+													</th>
+													<th>
+														操作
+													</th>
+												</tr>
+											</thead>
 											<tbody>
-												<tr>
-													<td width="125" height="26" bgcolor="#fffcd2"
-														background="images/luntan03.gif" align="center"
-														class="red-bcolor border-bot">
-														<div align="center">
-															流水号
-														</div>
-													</td>
-													<td width="142" bgcolor="#fffcd2"
-														background="images/luntan03.gif" align="center"
-														class="red-bcolor  border-bot">
-														<div align="center">
-															金额
-														</div>
-													</td>
-													<td width="143" bgcolor="#fffcd2"
-														background="images/luntan03.gif" align="center"
-														class="red-bcolor  border-bot">
-														<div align="center">
-															提现接收号
-														</div>
-													</td>
-													<td width="143" bgcolor="#fffcd2"
-														background="images/luntan03.gif" align="center"
-														class="red-bcolor  border-bot">
-														<div align="center">
-															提现时间
-														</div>
-													</td>
-													<td width="94" bgcolor="#fffcd2"
-														background="images/luntan03.gif" align="center"
-														class="red-bcolor  border-bot">
-														<div align="center">
-															状态
-														</div>
-													</td>
-													<td width="111" bgcolor="#fffcd2"
-														background="images/luntan03.gif" align="center"
-														class="border-bot red-bcolor ">
-														<div align="center">
-															操作
-														</div>
-													</td>
-												</tr>
-
-												<tr>
-													<td height="35" align="center" class="border-botdashed"
-														colspan="6"></td>
-												</tr>
+												<s:if test="#request.myRefees.size()>0">
+													<tfoot>
+														<tr>
+															<th colspan="8">
+																首页&nbsp;&nbsp;上一页&nbsp;&nbsp;下一页&nbsp;&nbsp;末页
+															</th>
+														</tr>
+													</tfoot>
+													<s:iterator value="#request.myRefees" id="user">
+														<tr>
+															<td>
+																<s:property value="user.username" />
+															</td>
+															<td>
+																<a
+																	href="tencent://message/?uin=<s:property value="user.qq" />"><img
+																		border="0"
+																		src="http://wpa.qq.com/pa?p=1:<s:property value="user.qq" />:4">
+																</a>
+																<s:property value="user.qq" />
+															</td>
+															<td>
+																<s:property value="user.releaseTaskCount" />
+															</td>
+															<td>
+																<s:property value="user.receiveTaskCount" />
+															</td>
+															<td>
+																<s:property value="user.registerTime" />
+															</td>
+															<td>
+																<s:property value="user.convertScore" />
+															</td>
+															<td>
+																<s:property value="user.releaseDot" />
+															</td>
+														</tr>
+													</s:iterator>
+												</s:if>
+												<s:else>
+													<tfoot>
+														<tr>
+															<th colspan="8">
+																<A href="userInfoManager/info!referee.php"
+																	target="_blank">您当前没有推广:现在马上就去推广吧!</A>
+															</th>
+														</tr>
+													</tfoot>
+												</s:else>
 											</tbody>
 										</table>
 									</div>
