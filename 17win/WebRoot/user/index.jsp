@@ -79,8 +79,7 @@ img {
 									bgcolor="#fefcde" class="bordera">
 									<tr>
 										<td height="30" align="left" background="images/zc-bg.gif">
-											<img src="images/icon13.gif" width="15" height="15" />
-											淘宝刷信誉&gt;&gt;帐号信息：
+											&nbsp;&nbsp;个人中心：
 										</td>
 									</tr>
 									<tr>

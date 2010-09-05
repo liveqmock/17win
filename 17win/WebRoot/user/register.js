@@ -266,7 +266,7 @@ function validateError(obj, msg) {
 function changeSutmitBtn() {
 	var time = eval($("#sumbitBtn").attr("timeId")) - 1;
 	$("#sumbitBtn").attr("timeId", time);
-	$("#sumbitBtn").val("\u540c\u610f\u534f\u8bae(" + time + ")");
+	$("#sumbitBtn").val("同意协议并注册(" + time + ")");
 	if (time == 0) {
 		$("#sumbitBtn").attr("disabled", false);
 		clearInterval(timer);

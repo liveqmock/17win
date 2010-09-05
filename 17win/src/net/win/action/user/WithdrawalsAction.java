@@ -20,7 +20,8 @@ import org.springframework.stereotype.Controller;
 @ParentPackage("17win-default")
 @Results( {
 		@Result(name = "initWithdrawals", location = "/user/withdrawals.jsp"),
-		@Result(name = "loginSuccess", location = "/user/withdrawals.jsp") })
+		@Result(name = "loginSuccess", location = "/user/withdrawals.jsp"),
+		@Result(name = "withdrawalsLog", location = "/user/withdrawalsLog.jsp") })
 @Namespace("/withdrawalsManager")
 public class WithdrawalsAction extends BaseAction {
 	@Resource
@@ -39,6 +40,16 @@ public class WithdrawalsAction extends BaseAction {
 	public String execute() throws Exception {
 		// TODO Auto-generated method stub
 		return INPUT;
+	}
+
+	/**
+	 * 提现
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String withdrawalsLog() throws Exception {
+		return withdrawalsService.withdrawalsLog(withdrawalsVO);
 	}
 
 	/**

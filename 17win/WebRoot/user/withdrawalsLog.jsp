@@ -85,7 +85,7 @@ img {
 								<div class="pp9">
 									<div style="padding-bottom: 15px; width: 97%;">
 										<div class="pp7">
-											您现在的位置是：个人中心 &gt;&gt; 提现列表 &gt;&gt;
+											您现在的位置是：个人中心 &gt;&gt; 财物管理 &gt;&gt; 提现记录 &gt;&gt;
 										</div>
 										<div class="pp8">
 											<strong>提现列表</strong>
@@ -94,7 +94,7 @@ img {
 										<table width="100%" cellpadding="1" cellspacing="1"
 											border="0px" style="background: #DDEDFA">
 											<tr>
-												<td width="100%">
+												<td>
 													提现类型：
 													<select>
 														<option value="">
@@ -110,32 +110,39 @@ img {
 															财付通提现
 														</option>
 													</select>
-													<span> &nbsp;&nbsp;&nbsp;&nbsp; 状态： <select>
+													<span> &nbsp;&nbsp; 店铺类型： <select>
 															<option value="">
 																--请选择--
 															</option>
-															<option value="0">
-																申请中
-															</option>
 															<option value="1">
-																完成
+																淘宝
 															</option>
 															<option value="2">
-																被驳回
+																拍拍
 															</option>
-														</select> </span> &nbsp;&nbsp;&nbsp;&nbsp; 提现金额：
+															<option value="3">
+																有啊
+															</option>
+														</select> </span>
+												</td>
+												<td>
+													提现金额：
 													<input type="text" style="width: 40px" />
 													至
 													<input type="text" style="width: 40px" />
 												</td>
+												<td>
+												</td>
 											</tr>
 											<tr>
-												<td width="100%">
+												<td>
 													操作日期：
-													<input type="text" />
+													<input type="text" style="width: 110px" />
 													至
-													<input type="text" />
-													&nbsp;&nbsp;&nbsp;&nbsp; 状态：
+													<input type="text" style="width: 110px" />
+												</td>
+												<td>
+													状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态：
 													<select>
 														<option value="">
 															--请选择--
@@ -150,7 +157,8 @@ img {
 															被驳回
 														</option>
 													</select>
-													&nbsp;&nbsp;&nbsp;&nbsp;
+												</td>
+												<td>
 													<input type="submit" value="查&nbsp;&nbsp;询"
 														style="cursor: pointer;">
 												</td>
@@ -184,56 +192,28 @@ img {
 												</tr>
 											</thead>
 											<tbody>
-												<s:if test="#request.myRefees.size()>0">
-													<tfoot>
-														<tr>
-															<th colspan="8">
-																首页&nbsp;&nbsp;上一页&nbsp;&nbsp;下一页&nbsp;&nbsp;末页
-															</th>
-														</tr>
-													</tfoot>
-													<s:iterator value="#request.myRefees" id="user">
-														<tr>
-															<td>
-																<s:property value="user.username" />
-															</td>
-															<td>
-																<a
-																	href="tencent://message/?uin=<s:property value="user.qq" />"><img
-																		border="0"
-																		src="http://wpa.qq.com/pa?p=1:<s:property value="user.qq" />:4">
-																</a>
-																<s:property value="user.qq" />
-															</td>
-															<td>
-																<s:property value="user.releaseTaskCount" />
-															</td>
-															<td>
-																<s:property value="user.receiveTaskCount" />
-															</td>
-															<td>
-																<s:property value="user.registerTime" />
-															</td>
-															<td>
-																<s:property value="user.convertScore" />
-															</td>
-															<td>
-																<s:property value="user.releaseDot" />
-															</td>
-														</tr>
-													</s:iterator>
-												</s:if>
-												<s:else>
-													<tfoot>
-														<tr>
-															<th colspan="8">
-																<A href="userInfoManager/info!referee.php"
-																	target="_blank">您当前没有推广:现在马上就去推广吧!</A>
-															</th>
-														</tr>
-													</tfoot>
-												</s:else>
-											</tbody>
+											<tfoot>
+												<tr>
+													<th colspan="8">
+														<div style="float:left;">
+															<img src="images/page/_firstpg.gif"
+																style="cursor: pointer;" />
+															&nbsp;&nbsp;
+															<img src="images/page/_prevpg.gif"
+																style="cursor: pointer;" />
+															&nbsp;&nbsp;
+															<img src="images/page/_nextpg.gif"
+																style="cursor: pointer;" />
+															&nbsp;&nbsp;
+															<img src="images/page/_lastpg.gif"
+																style="cursor: pointer;" />
+														</div>
+														<div style="float: left;">
+															1/1 跳转到<input style="width: 40px">
+														</div>
+													</th>
+												</tr>
+											</tfoot>
 										</table>
 									</div>
 								</div>

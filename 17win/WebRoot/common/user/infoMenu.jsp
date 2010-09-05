@@ -67,6 +67,11 @@
 
 											</td>
 										</tr>
+										<tr>
+											<td nowrap="nowrap">
+												<a href="userInfoManager/info!init.php">点击此处进入个人中心</a>
+											</td>
+										</tr>
 									</table>
 								</div>
 
@@ -196,7 +201,7 @@
 										</tr>
 										<tr>
 											<td height=20>
-												<a href="user/withdrawalsLog.jsp">提现记录</a>
+												<a href="withdrawalsManager/withdrawals!withdrawalsLog.php">提现记录</a>
 											</td>
 										</tr>
 										<tr>

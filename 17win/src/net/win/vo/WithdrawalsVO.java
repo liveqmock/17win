@@ -36,6 +36,16 @@ public class WithdrawalsVO extends BaseVO {
 	// 操作码
 	private String operationCode;
 
+	/**
+	 * 其他
+	 * 
+	 * @return
+	 */
+	private Double startMoney;
+	private Double endMoney;
+	private Date startDate;
+	private Date endDate;
+
 	public String getType() {
 		return type;
 	}
@@ -107,4 +117,38 @@ public class WithdrawalsVO extends BaseVO {
 	public void setStatusDesc(String statusDesc) {
 		this.statusDesc = statusDesc;
 	}
+
+	public Double getStartMoney() {
+		return startMoney;
+	}
+
+	public void setStartMoney(Double startMoney) {
+		this.startMoney = startMoney;
+	}
+
+	public Double getEndMoney() {
+		return endMoney;
+	}
+
+	public void setEndMoney(Double endMoney) {
+		this.endMoney = endMoney;
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+	
+
 }
