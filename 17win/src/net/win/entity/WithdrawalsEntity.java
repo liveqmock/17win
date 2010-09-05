@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "TB_WITHDRAWALS_")
+@Table(name = "TB_WITHDRAWALS")
 public class WithdrawalsEntity extends BaseEntity {
 	/**
 	 * 基本信息

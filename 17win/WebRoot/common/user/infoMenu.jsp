@@ -191,7 +191,7 @@
 
 										<tr>
 											<td height=20>
-												<a href="withdrawalsManager/base!initWithdrawals.php">我要提现</a>
+												<a href="withdrawalsManager/withdrawals!initWithdrawals.php">我要提现</a>
 											</td>
 										</tr>
 										<tr>

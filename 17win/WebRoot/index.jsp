@@ -175,7 +175,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 													</div>
 												</TD>
 												<TD>
-													<a href="register.asp"><img
+													<a href="userManager/base!initRegister.php"><img
 															src="images/login-q_r4_c31.gif" hspace="5" vspace="0"
 															border="0" /> </a>&nbsp;&nbsp;
 													<a href="#" class="STYLE1"

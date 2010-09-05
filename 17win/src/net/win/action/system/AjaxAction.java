@@ -23,6 +23,7 @@ import net.win.entity.UserEntity;
 import net.win.service.system.AjaxService;
 import net.win.utils.MailUtils;
 import net.win.utils.HttpB2CUtils;
+import net.win.utils.StringUtils;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -105,7 +106,13 @@ public class AjaxAction extends BaseAction {
 	public String obtainSellerByShop() throws Exception {
 		String type = HttpB2CUtils.obtainShopType(url);
 		if ("0".equals(type)) {
-			return "";
+			seller = HttpB2CUtils.obtainSeller(url, "1");
+			if (StringUtils.isBlank(seller)) {
+				seller = HttpB2CUtils.obtainSeller(url, "2");
+			}
+			if (StringUtils.isBlank(seller)) {
+				seller = HttpB2CUtils.obtainSeller(url, "3");
+			}
 		} else {
 			seller = HttpB2CUtils.obtainSeller(url, type);
 		}

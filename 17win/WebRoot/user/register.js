@@ -131,7 +131,7 @@ $(document).ready(function() {
 				if (Validater.trim($(this).val()) == "") {
 					return;
 				}
-				if (Validater.isB2CShop($(this).val()),"1") {
+				if (Validater.isB2CShop($(this).val(),"1")) {
 					validateSuccess(this);
 					getSeller($(this).val(), "1", "taobaoSeller");
 				} else {

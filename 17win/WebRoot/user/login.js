@@ -10,6 +10,7 @@ var timer;
 $(document).ready(function() {
 	$("#username").focus();
 	$("#verificationCode").val("");
+	$("#loginBtn").button();
 	$("#findPW").dialog({
 				autoOpen : false,
 				draggable : false,

@@ -12,6 +12,8 @@
 			rel="stylesheet" type="text/css" />
 		<LINK href="css/center.css" type="text/css" rel="stylesheet">
 		<SCRIPT src="js/jquery-ui-1.8.4.custom.min.js" type="text/javascript"></SCRIPT>
+		<SCRIPT src="js/aop.js" type="text/javascript"></SCRIPT>
+		<SCRIPT src="js/ajax.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="user/withdrawals.js" type="text/javascript"></SCRIPT>
 
 		<style type="text/css">
@@ -87,8 +89,9 @@ img {
 											您现在的位置是： 个人中心 &gt;&gt; 申请提现 &gt;&gt;
 										</div>
 										<div class="pp8">
+										
 											<strong>申请提现</strong>
-											<input type="hidden" value="#session.userLogin.money"
+											<input type="hidden" value="<s:property value="#session.userLogin.money"/>"
 												id="money">
 										</div>
 										<div style="margin-top: 10px; line-height: 200%;">
@@ -124,7 +127,8 @@ img {
 													</li>
 												</ul>
 												<div id="tabs-1">
-													<s:form action="withdrawalsManager/base!withdrawals.php"
+													<s:form
+														action="withdrawalsManager/withdrawals!withdrawals.php"
 														theme="simple" onsubmit="return validateForm('1')">
 														<table>
 															<tr>
@@ -152,6 +156,7 @@ img {
 																	<s:textfield name="withdrawalsVO.realIdentity"
 																		id="realIdentity_1"></s:textfield>
 																	(淘宝，拍拍，有啊任意一个和提现金额价格相等的商品地址)
+																	<span id="errorShop"></span>
 																</Td>
 															</tr>
 															<tr>
@@ -184,7 +189,8 @@ img {
 													</s:form>
 												</div>
 												<div id="tabs-2">
-													<s:form action="withdrawalsManager/base!withdrawals.php"
+													<s:form
+														action="withdrawalsManager/withdrawals!withdrawals.php"
 														theme="simple" onsubmit="return validateForm('2')">
 														<table>
 															<tr>
@@ -242,7 +248,8 @@ img {
 													</s:form>
 												</div>
 												<div id="tabs-3">
-													<s:form action="withdrawalsManager/base!withdrawals.php"
+													<s:form
+														action="withdrawalsManager/withdrawals!withdrawals.php"
 														theme="simple" onsubmit="return validateForm('3')">
 														<table>
 															<tr>

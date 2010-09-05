@@ -1,16 +1,19 @@
-
-
 $(document).ready(function() {
 			$("#tabs").tabs();
 			$(".buttonFlag").button();
+
+			// 验证淘宝
+			$("#realIdentity_1").bind("blur", function() {
+						obtainSellerByShop($(this).val(), "realname_1");
+					});
 		});
 
 function validateForm(flag) {
 	var money = parseFloat($("#money").val());
 	var moneyTO = parseFloat($("#money_" + flag).val());
 	var operationCode = $("#operationCode_" + flag).val();
-	var realIdentity = $("#realIdentity" + flag).val();
-	var realName = $("#realName" + flag).val();
+	var realIdentity = $("#realIdentity_" + flag).val();
+	var realName = $("#realName_" + flag).val();
 	if (!Validater.isNumber(moneyTO, '+')) {
 		alert("金额必须为大于0的数值！");
 		return false;
@@ -20,7 +23,7 @@ function validateForm(flag) {
 		return false;
 	}
 	if (moneyTO > money) {
-		alert("您输入的金额大于你拥有的金额,你只拥有" + money + "！");
+		alert("您输入的金额大于你拥有的金额,你只拥有" + money + "元！");
 		return false;
 	}
 	if (Validater.isBlank(operationCode)) {
@@ -29,7 +32,7 @@ function validateForm(flag) {
 	}
 	if ("1" == flag) {
 		if (Validater.isBlank(realIdentity)) {
-			alert("淘宝地址不能为空");
+			alert("商品地址不能为空");
 			return false;
 		}
 		if (Validater.isBlank(realName)) {
@@ -53,7 +56,7 @@ function validateForm(flag) {
 		if (Validater.isBlank(realName)) {
 			alert("真实名字不能为空");
 			return false;
-		}、
+		}
 	}
 	return true;
 }

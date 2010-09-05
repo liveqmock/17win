@@ -18,10 +18,10 @@ import org.springframework.stereotype.Controller;
 @Controller
 @Scope("prototype")
 @ParentPackage("17win-default")
-@Namespace("/withdrawalsManager")
 @Results( {
 		@Result(name = "initWithdrawals", location = "/user/withdrawals.jsp"),
 		@Result(name = "loginSuccess", location = "/user/withdrawals.jsp") })
+@Namespace("/withdrawalsManager")
 public class WithdrawalsAction extends BaseAction {
 	@Resource
 	private WithdrawalsService withdrawalsService;
@@ -35,7 +35,7 @@ public class WithdrawalsAction extends BaseAction {
 		this.withdrawalsVO = withdrawalsVO;
 	}
 
-	@Action("/base")
+	@Action("/withdrawals")
 	public String execute() throws Exception {
 		// TODO Auto-generated method stub
 		return INPUT;

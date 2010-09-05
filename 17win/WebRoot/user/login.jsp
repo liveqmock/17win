@@ -14,7 +14,7 @@
 		<SCRIPT src="user/login.js" type="text/javascript"></SCRIPT>
 	</HEAD>
 	<BODY>
-		<s:form  action="userInfoManager/info!exchange.php?flag=1" theme="simple"
+		<s:form action="userManager/base!login.php" theme="simple"
 			onsubmit="return validateForm()">
 			<s:token></s:token>
 			<s:include value="../common/title.jsp"></s:include>
@@ -112,10 +112,7 @@
 
 												<tr>
 													<td colspan="2" align="center" bgcolor="#FFFFFF">
-														<INPUT
-															style="FONT-WEIGHT: bold; WIDTH: 120px; CURSOR: pointer; COLOR: #000000; HEIGHT: 26px"
-															type=submit value="登陆服务平台  "
-															name=ctl00$AllBaseContentPlaceHolder$ctl00>
+														<INPUT id="loginBtn" type=submit value="登陆服务平台"/>
 														&nbsp; &nbsp;
 													</td>
 												</tr>
