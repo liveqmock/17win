@@ -22,7 +22,7 @@ public class CreditTaskEntity extends BaseEntity {
 	@Column(name = "TYPE_", columnDefinition = "CHAR(1)", nullable = false)
 	private String type;
 	// 发布人
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = UserEntity.class)
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = UserEntity.class )
 	@JoinColumn(name = "RELEASE_PERSON_")
 	private UserEntity releasePerson;
 	// 发布人的卖家号

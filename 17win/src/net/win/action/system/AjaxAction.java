@@ -22,6 +22,7 @@ import net.win.entity.ProvinceEntity;
 import net.win.entity.UserEntity;
 import net.win.service.system.AjaxService;
 import net.win.utils.MailUtils;
+import net.win.utils.HttpB2CUtils;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -42,7 +43,7 @@ import sun.misc.BASE64Encoder;
 
 import com.sun.org.apache.commons.beanutils.BeanUtils;
 
-@SuppressWarnings({"serial", "unused", "unchecked"})
+@SuppressWarnings( { "serial", "unused", "unchecked" })
 @Controller
 @ParentPackage("17win-default")
 @Scope("prototype")
@@ -94,6 +95,24 @@ public class AjaxAction extends BaseAction {
 		// TODO Auto-generated method stub
 		return SUCCESS;
 	}
+
+	/**
+	 * 店铺账号
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String obtainSellerByShop() throws Exception {
+		String type = HttpB2CUtils.obtainShopType(url);
+		if ("0".equals(type)) {
+			return "";
+		} else {
+			seller = HttpB2CUtils.obtainSeller(url, type);
+		}
+		return JSON;
+
+	}
+
 	/**
 	 * 查找密码
 	 * 
@@ -104,6 +123,7 @@ public class AjaxAction extends BaseAction {
 		bool = ajaxService.updateFindPassword(username, telephone);
 		return JSON;
 	}
+
 	/**
 	 * 省市县联动
 	 * 
@@ -189,38 +209,7 @@ public class AjaxAction extends BaseAction {
 	 * @throws Exception
 	 */
 	public String seller() throws Exception {
-		HttpClient httpClient = new DefaultHttpClient();
-		HttpPost httRequest = new HttpPost(url);
-		HttpResponse response = httpClient.execute(httRequest);
-		HttpEntity entity = response.getEntity();
-		BufferedReader br = new BufferedReader(new InputStreamReader(entity
-				.getContent(), "UTF-8"));
-		String line;
-
-		// TB
-		if ("1".equals(type)) {
-			Pattern pattern = Pattern
-					.compile("data\\-nick=\"([[\u0391-\uFFE5]\\w_]+)\"");
-			Matcher matcher;
-			OUTTER : while ((line = br.readLine()) != null) {
-				line = URLDecoder.decode(line, "UTF-8");
-				matcher = pattern.matcher(line);
-				while (matcher.find()) {
-					seller = matcher.group(1);
-					break OUTTER;
-				}
-			}
-		}
-		// PP
-		else if ("2".equals(type)) {
-
-		}
-		// YA
-		else if ("3".equals(type)) {
-
-		}
-		httRequest.abort();
-		httpClient.getConnectionManager().shutdown();
+		seller = HttpB2CUtils.obtainSeller(url, type);
 		return JSON;
 
 	}

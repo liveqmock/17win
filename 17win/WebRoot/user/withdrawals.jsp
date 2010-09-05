@@ -88,6 +88,8 @@ img {
 										</div>
 										<div class="pp8">
 											<strong>申请提现</strong>
+											<input type="hidden" value="#session.userLogin.money"
+												id="money">
 										</div>
 										<div style="margin-top: 10px; line-height: 200%;">
 											<ul>
@@ -112,7 +114,7 @@ img {
 											<div id="tabs">
 												<ul>
 													<li>
-														<a href="#tabs-1">淘宝商品地址提现</a>
+														<a href="#tabs-1">商品地址提现</a>
 													</li>
 													<li>
 														<a href="#tabs-2">支付宝提现</a>
@@ -122,13 +124,15 @@ img {
 													</li>
 												</ul>
 												<div id="tabs-1">
-													<form>
+													<s:form action="withdrawalsManager/base!withdrawals.php"
+														theme="simple" onsubmit="return validateForm('1')">
 														<table>
 															<tr>
 																<Td align="right">
 																	提现人：
 																</Td>
 																<Td>
+																	<s:property value="#session.userLogin.username" />
 																</Td>
 															</tr>
 															<tr>
@@ -136,8 +140,18 @@ img {
 																	提现金额：
 																</Td>
 																<Td>
-																	<input type="text">
+																	<s:textfield name="withdrawalsVO.money" id="money_1"></s:textfield>
 																	元
+																</Td>
+															</tr>
+															<tr>
+																<Td align="right">
+																	商品地址：
+																</Td>
+																<Td>
+																	<s:textfield name="withdrawalsVO.realIdentity"
+																		id="realIdentity_1"></s:textfield>
+																	(淘宝，拍拍，有啊任意一个和提现金额价格相等的商品地址)
 																</Td>
 															</tr>
 															<tr>
@@ -145,15 +159,9 @@ img {
 																	掌柜：
 																</Td>
 																<Td>
-																	<input type="text">
-																</Td>
-															</tr>
-															<tr>
-																<Td align="right">
-																	淘宝商品地址：
-																</Td>
-																<Td>
-																	<input type="text">
+																	<s:textfield name="withdrawalsVO.realname"
+																		id="realname_1"></s:textfield>
+																	(系统自动获取)
 																</Td>
 															</tr>
 															<tr>
@@ -161,7 +169,8 @@ img {
 																	操作密码：
 																</Td>
 																<Td>
-																	<input type="text">
+																	<s:textfield name="withdrawalsVO.operationCode"
+																		id="operationCode_1"></s:textfield>
 																</Td>
 															</tr>
 															<tr>
@@ -172,16 +181,18 @@ img {
 
 															</tr>
 														</table>
-													</form>
+													</s:form>
 												</div>
 												<div id="tabs-2">
-													<form>
+													<s:form action="withdrawalsManager/base!withdrawals.php"
+														theme="simple" onsubmit="return validateForm('2')">
 														<table>
 															<tr>
 																<Td align="right">
 																	提现人：
 																</Td>
 																<Td>
+																	<s:property value="#session.userLogin.username" />
 																</Td>
 															</tr>
 															<tr>
@@ -189,16 +200,8 @@ img {
 																	提现金额：
 																</Td>
 																<Td>
-																	<input type="text">
+																	<s:textfield name="withdrawalsVO.money" id="money_2"></s:textfield>
 																	元
-																</Td>
-															</tr>
-															<tr>
-																<Td align="right">
-																	您的真名：
-																</Td>
-																<Td>
-																	<input type="text">
 																</Td>
 															</tr>
 															<tr>
@@ -206,44 +209,8 @@ img {
 																	您的支付宝账号：
 																</Td>
 																<Td>
-																	<input type="text">
-																</Td>
-															</tr>
-															<tr>
-																<Td align="right">
-																	操作密码：
-																</Td>
-																<Td>
-																	<input type="text">
-																</Td>
-															</tr>
-															<tr>
-																<Td colspan="2" align="center">
-																	<input type="submit" class="buttonFlag"
-																		value="提&nbsp;&nbsp;交">
-																</Td>
-
-															</tr>
-														</table>
-													</form>
-												</div>
-												<div id="tabs-3">
-													<form>
-														<table>
-															<tr>
-																<Td align="right">
-																	提现人：
-																</Td>
-																<Td>
-																</Td>
-															</tr>
-															<tr>
-																<Td align="right">
-																	提现金额：
-																</Td>
-																<Td>
-																	<input type="text">
-																	元
+																	<s:textfield name="withdrawalsVO.realIdentity"
+																		id="realIdentity_2"></s:textfield>
 																</Td>
 															</tr>
 															<tr>
@@ -251,7 +218,48 @@ img {
 																	您的真名：
 																</Td>
 																<Td>
-																	<input type="text">
+																	<s:textfield name="withdrawalsVO.realName"
+																		id="realName_2"></s:textfield>
+																</Td>
+															</tr>
+
+															<tr>
+																<Td align="right">
+																	操作密码：
+																</Td>
+																<Td>
+																	<s:textfield name="withdrawalsVO.operationCode"
+																		id="operationCode_2"></s:textfield>
+																</Td>
+															</tr>
+															<tr>
+																<Td colspan="2" align="center">
+																	<input type="submit" value="提&nbsp;&nbsp;交">
+																</Td>
+
+															</tr>
+														</table>
+													</s:form>
+												</div>
+												<div id="tabs-3">
+													<s:form action="withdrawalsManager/base!withdrawals.php"
+														theme="simple" onsubmit="return validateForm('3')">
+														<table>
+															<tr>
+																<Td align="right">
+																	提现人：
+																</Td>
+																<Td>
+																	<s:property value="#session.userLogin.username" />
+																</Td>
+															</tr>
+															<tr>
+																<Td align="right">
+																	提现金额：
+																</Td>
+																<Td>
+																	<s:textfield name="withdrawalsVO.money" id="money_3"></s:textfield>
+																	元
 																</Td>
 															</tr>
 															<tr>
@@ -259,26 +267,37 @@ img {
 																	您的财付通账号：
 																</Td>
 																<Td>
-																	<input type="text">
+																	<s:textfield name="withdrawalsVO.realIdentity"
+																		id="realIdentity_3"></s:textfield>
 																</Td>
 															</tr>
+															<tr>
+																<Td align="right">
+																	您的真名：
+																</Td>
+																<Td>
+																	<s:textfield name="withdrawalsVO.realName"
+																		id="realName_3"></s:textfield>
+																</Td>
+															</tr>
+
 															<tr>
 																<Td align="right">
 																	操作密码：
 																</Td>
 																<Td>
-																	<input type="text">
+																	<s:textfield name="withdrawalsVO.operationCode"
+																		id="operationCode_3"></s:textfield>
 																</Td>
 															</tr>
 															<tr>
 																<Td colspan="2" align="center">
-																	<input type="submit" class="buttonFlag"
-																		value="提&nbsp;&nbsp;交">
+																	<input type="submit" value="提&nbsp;&nbsp;交">
 																</Td>
 
 															</tr>
 														</table>
-													</form>
+													</s:form>
 												</div>
 											</div>
 										</div>
@@ -293,5 +312,6 @@ img {
 			</tr>
 		</table>
 		<s:include value="../common/footDuan.jsp"></s:include>
+		<s:property value="#request.msg" escape="false" />
 	</BODY>
 </HTML>

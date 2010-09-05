@@ -3,6 +3,7 @@ package net.win;
 import net.win.dao.UserDAO;
 import net.win.entity.BaseEntity;
 import net.win.entity.UserEntity;
+import net.win.exception.IllegalityException;
 import net.win.utils.Constant;
 import net.win.utils.UserLevelUtils;
 
@@ -141,6 +142,17 @@ public class BaseService {
 	 */
 	protected Object getBySession(String key) {
 		return ServletActionContext.getRequest().getSession().getAttribute(key);
+	}
+
+	/**
+	 * 抛出异常
+	 * 
+	 * @param name
+	 * @param value
+	 */
+	protected void throwIllegalityException(String msg)
+			throws IllegalityException {
+		throw new IllegalityException(msg);
 	}
 
 	protected Boolean nullID(BaseEntity base) {

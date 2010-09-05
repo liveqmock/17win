@@ -23,8 +23,8 @@ function validateForm(flag) {
 		}
 		var releaseDot = parseFloat($("#releaseDot").val());
 		var operationCode = $("#operationCode_1").val();
-		if (!Validater.isInt(releaseDot)) {
-			alert("发布点数量必须为整数！");
+		if (!Validater.isInt(releaseDot,'+')) {
+			alert("发布点数量必须为正整数！");
 			return false;
 		}
 		if (Validater.isBlank(operationCode)) {

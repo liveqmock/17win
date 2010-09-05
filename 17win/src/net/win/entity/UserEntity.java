@@ -110,6 +110,12 @@ public class UserEntity extends BaseEntity {
 	@JoinColumn(name = "RECEIVE_PERSON_")
 	@Cascade(CascadeType.ALL)
 	private List<CreditTaskEntity> receiveCreditTasks;
+
+	// 提现的记录
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "USER_ID_")
+	@Cascade(CascadeType.ALL)
+	private List<WithdrawalsEntity> withdrawalses;
 	// 省
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "RPOVINCE_ID_")
@@ -391,6 +397,14 @@ public class UserEntity extends BaseEntity {
 
 	public void setSpreadCount(Integer spreadCount) {
 		this.spreadCount = spreadCount;
+	}
+
+	public List<WithdrawalsEntity> getWithdrawalses() {
+		return withdrawalses;
+	}
+
+	public void setWithdrawalses(List<WithdrawalsEntity> withdrawalses) {
+		this.withdrawalses = withdrawalses;
 	}
 
 }

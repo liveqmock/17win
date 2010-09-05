@@ -12,13 +12,14 @@ import net.win.dao.AreaDAO;
 import net.win.dao.CityDAO;
 import net.win.dao.ProvinceDAO;
 import net.win.dao.UserDAO;
+import net.win.dao.WithDrawalsDAO;
 import net.win.entity.UserEntity;
-import net.win.exception.IllegalityException;
+import net.win.entity.WithdrawalsEntity;
 import net.win.utils.ArithUtils;
 import net.win.utils.StringUtils;
 import net.win.utils.TotalUtils;
-import net.win.utils.UserLevelUtils;
 import net.win.vo.UserVO;
+import net.win.vo.WithdrawalsVO;
 
 import org.hibernate.Hibernate;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -32,6 +33,8 @@ import com.sun.org.apache.commons.beanutils.BeanUtils;
 public class UserInfoService extends BaseService {
 	@Resource
 	private UserDAO userDAO;
+	@Resource
+	private WithDrawalsDAO withDrawalsDAO;
 	@Resource
 	private ProvinceDAO provinceDAO;
 	@Resource
@@ -58,7 +61,7 @@ public class UserInfoService extends BaseService {
 		// 判断操作码
 		if (!userEntity.getOpertationCode().equals(
 				StringUtils.processPwd(operaCode))) {
-			putAlertMsg("操作码不正确");
+			putAlertMsg("操作码不正确！");
 			return "updateBuyDot";
 		}
 		if ("1".equals(flag)) {
@@ -130,14 +133,14 @@ public class UserInfoService extends BaseService {
 		// 判断操作码
 		if (!userEntity.getOpertationCode().equals(
 				StringUtils.processPwd(operaCode))) {
-			putAlertMsg("操作码不正确");
+			putAlertMsg("操作码不正确！");
 			return "updateExchange";
 		}
 		if ("1".equals(flag)) {
 			// 兑换发布点
 			Double releaseDot = userVO.getReleaseDot();
 			if (releaseDot < 10 || releaseDot > userEntity.getReleaseDot()) {
-				new IllegalityException(userEntity.getUsername()
+				throwIllegalityException(userEntity.getUsername()
 						+ ":违法的操作，试图越过兑换发布点验证");
 			}
 			userEntity.setReleaseDot(ArithUtils.sub(userEntity.getReleaseDot(),
@@ -152,11 +155,11 @@ public class UserInfoService extends BaseService {
 					"fromo UserEntity where username=:username", "username",
 					username);
 			if (releaseDot > userEntity.getReleaseDot()) {
-				new IllegalityException(userEntity.getUsername()
+				throwIllegalityException(userEntity.getUsername()
 						+ ":违法的操作，试图越过兑换发布点验证");
 			}
 			if (username.equals(userEntity.getUsername())) {
-				new IllegalityException(userEntity.getUsername()
+				throwIllegalityException(userEntity.getUsername()
 						+ ":违法的操作，试图越过兑换发布点验证");
 			}
 			if (touser == null) {
@@ -170,7 +173,7 @@ public class UserInfoService extends BaseService {
 			// 赠送
 			Double releaseDot = userVO.getReleaseDot();
 			if (releaseDot > userEntity.getReleaseDot()) {
-				new IllegalityException(userEntity.getUsername()
+				throwIllegalityException(userEntity.getUsername()
 						+ ":违法的操作，试图越过兑换发布点验证");
 			}
 			if (releaseDot * 200 > userEntity.getConvertScore()) {
@@ -184,7 +187,7 @@ public class UserInfoService extends BaseService {
 					.setConvertScore(userEntity.getConvertScore() - tempScore);
 		}
 		updateUserLoginInfo(userEntity);
-		putAlertMsg("操作成功");
+		putAlertMsg("操作成功！");
 		return "updateExchange";
 	}
 
