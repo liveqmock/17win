@@ -24,22 +24,9 @@ public class CreditTaskEntity extends BaseEntity {
 	// 任务ID 给用户看 格式yyymmddhhmmssis
 	@Column(name = "TEST_ID_", nullable = false, unique = true)
 	private String testID;
-	// 发布人
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = UserEntity.class)
-	@JoinColumn(name = "RELEASE_PERSON_")
-	private UserEntity releasePerson;
-	// 发布人的卖家号
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "SELLER_ID_")
-	private SellerEntity seller;
-	// 接收人
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = UserEntity.class)
-	@JoinColumn(name = "RECEIVE_PERSON_")
-	private UserEntity receivePerson;
-	// 接收人的买家号
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "BUYER_ID_")
-	private BuyerEntity buyer;
+	// 接收人IP
+	@Column(name = "RECEIVE_IP_", length = 19, nullable = false)
+	private UserEntity receiveIP;
 	// 发布点
 	@Column(name = "RELEASE_DOT_", nullable = false)
 	private Float releaseDot;
@@ -72,6 +59,24 @@ public class CreditTaskEntity extends BaseEntity {
 	// 定时任务时间(不能小于开始时间)
 	@Column(name = "TIMEING_TIME_")
 	private Date timeingTime;
+	
+	
+	// 发布人
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = UserEntity.class)
+	@JoinColumn(name = "RELEASE_PERSON_")
+	private UserEntity releasePerson;
+	// 发布人的卖家号
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "SELLER_ID_")
+	private SellerEntity seller;
+	// 接收人
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = UserEntity.class)
+	@JoinColumn(name = "RECEIVE_PERSON_")
+	private UserEntity receivePerson;
+	// 接收人的买家号
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "BUYER_ID_")
+	private BuyerEntity buyer;
 
 	public Float getReleaseDot() {
 		return releaseDot;
@@ -199,6 +204,14 @@ public class CreditTaskEntity extends BaseEntity {
 
 	public void setTestID(String testID) {
 		this.testID = testID;
+	}
+
+	public UserEntity getReceiveIP() {
+		return receiveIP;
+	}
+
+	public void setReceiveIP(UserEntity receiveIP) {
+		this.receiveIP = receiveIP;
 	}
 
 }
