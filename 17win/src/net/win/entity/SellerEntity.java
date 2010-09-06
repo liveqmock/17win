@@ -2,6 +2,9 @@ package net.win.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -19,6 +22,43 @@ public class SellerEntity extends BaseEntity {
 	// 店铺地址
 	@Column(name = "SHOPURL_", length = 50, unique = true, nullable = false)
 	private String shopURL;
+	
+	// 省
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "RPOVINCE_ID_")
+	private ProvinceEntity province;
+	// 市
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "CITY_ID_")
+	private CityEntity city;
+	// 县
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "AREA_ID_")
+	private AreaEntity area;
+	public ProvinceEntity getProvince() {
+		return province;
+	}
+
+	public void setProvince(ProvinceEntity province) {
+		this.province = province;
+	}
+
+	public CityEntity getCity() {
+		return city;
+	}
+
+	public void setCity(CityEntity city) {
+		this.city = city;
+	}
+
+	public AreaEntity getArea() {
+		return area;
+	}
+
+	public void setArea(AreaEntity area) {
+		this.area = area;
+	}
+
 	public String getType() {
 		return type;
 	}

@@ -21,8 +21,11 @@ public class CreditTaskEntity extends BaseEntity {
 	// 类型 ( 1:淘宝，2：拍拍，3有啊)
 	@Column(name = "TYPE_", columnDefinition = "CHAR(1)", nullable = false)
 	private String type;
+	// 任务ID 给用户看 格式yyymmddhhmmssis
+	@Column(name = "TEST_ID_", nullable = false, unique = true)
+	private String testID;
 	// 发布人
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = UserEntity.class )
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = UserEntity.class)
 	@JoinColumn(name = "RELEASE_PERSON_")
 	private UserEntity releasePerson;
 	// 发布人的卖家号
@@ -47,7 +50,8 @@ public class CreditTaskEntity extends BaseEntity {
 	@Column(name = "START_DATE", nullable = false)
 	private Date startDate;
 	// 状态
-	// ([1:等待我付款,2:等待卖家发货,3:等待卖家发货](买家),[4:等待接手,5:等待接手,6:等待我发货,7:等待买家确认8:等待我核查好评](卖家))
+	// (0 因为申述被暂停(但是要判断12小时，不能像2000w一样不能判断)
+	// ,[1:等待我付款,2:等待卖家发货,3:等待卖家发货](买家),[4:等待接手,5:等待接手,6:等待我发货,7:等待买家确认8:等待我核查好评](卖家))
 	@Column(name = "STATUS", columnDefinition = "CHAR(1)", nullable = false)
 	private String status;
 	// 商品地址
@@ -187,6 +191,14 @@ public class CreditTaskEntity extends BaseEntity {
 
 	public void setBuyer(BuyerEntity buyer) {
 		this.buyer = buyer;
+	}
+
+	public String getTestID() {
+		return testID;
+	}
+
+	public void setTestID(String testID) {
+		this.testID = testID;
 	}
 
 }

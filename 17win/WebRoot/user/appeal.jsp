@@ -1,5 +1,11 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML>
 	<HEAD>
@@ -10,8 +16,16 @@
 		<LINK href="css/Css.css" type="text/css" rel="stylesheet">
 
 		<LINK href="css/center.css" type="text/css" rel="stylesheet">
-		<SCRIPT src="js/jieducm_pupu.js" type="text/javascript"></SCRIPT>
 
+		<script type="text/javascript"
+			src="<%=basePath%>ckeditor/ckeditor.js"></script>
+		<script src="user/appeal.js" type="text/javascript"></script>
+
+		<script type="text/javascript">
+			$(document).ready(function() {
+				 	CKEDITOR.replace("editor");
+		});
+		</script>
 		<style type="text/css">
 body {
 	
@@ -87,47 +101,37 @@ img {
 										<div class="pp8">
 											<strong>我要申诉</strong>
 										</div>
-										<form onsubmit="return save_onclick12()" action=""
-											method="post" name="formf">
-											<input type="hidden" value="ok" name="action">
-											<table width="680" cellspacing="0" cellpadding="0" border="0"
-												align="center">
+										<s:form theme="simple">
+											<table>
 												<tbody>
 													<tr>
-														<td width="110" height="40" align="center">
-															标&nbsp;&nbsp;&nbsp;题：
+														<td height="40" align="right">
+															申诉标题：
 														</td>
 														<td width="490">
-															<input type="text" size="25" id="title" name="title">
+															<input type="text">
 														</td>
 													</tr>
 													<tr>
-														<td height="40" align="center">
-															申诉原因：
+														<td height="40" align="right">
+															申述类型：
 														</td>
-														<td>
-															<select name="class">
-																<option value="买家淘宝已确认付款收货好评，平台等任务发布方好评">
-																	买家淘宝已确认付款收货好评，平台等任务发布方好评
+														<td width="490">
+															<select>
+																<option>
+																	信誉互刷
 																</option>
-																<option value="买家接了任务没有在淘宝付款">
-																	买家接了任务没有在淘宝付款
+																<option>
+																	流量互刷
 																</option>
-																<option value="买家不确认收货">
-																	买家不确认收货
+																<option>
+																	收藏互刷
 																</option>
-																<option value="卖家不发货">
-																	卖家不发货
-																</option>
-																<option value="买号不一致">
-																	买号不一致
-																</option>
-
 															</select>
 														</td>
 													</tr>
 													<tr>
-														<td height="40" align="center">
+														<td height="40" align="right">
 															被申诉人：
 														</td>
 														<td>
@@ -136,7 +140,7 @@ img {
 														</td>
 													</tr>
 													<tr>
-														<td height="40" align="center">
+														<td height="40" align="right">
 															任&nbsp;务&nbsp;ID：
 														</td>
 														<td>
@@ -144,7 +148,7 @@ img {
 														</td>
 													</tr>
 													<tr>
-														<td height="40" align="center">
+														<td height="40" align="right">
 															上传凭证：
 														</td>
 														<td>
@@ -155,11 +159,11 @@ img {
 														</td>
 													</tr>
 													<tr>
-														<td height="40" align="center">
-															申诉原因及证据：
+														<td height="40" align="right" valign="top">
+															详细描述：
 														</td>
 														<td>
-															 fckedit
+															<textarea name="editor">&lt;p&gt;Initial value.&lt;/p&gt;</textarea>
 														</td>
 													</tr>
 													<tr>
@@ -179,7 +183,7 @@ img {
 													</tr>
 												</tbody>
 											</table>
-										</form>
+										</s:form>
 									</div>
 								</div>
 							</td>

@@ -116,18 +116,6 @@ public class UserEntity extends BaseEntity {
 	@JoinColumn(name = "USER_ID_")
 	@Cascade(CascadeType.ALL)
 	private List<WithdrawalsEntity> withdrawalses;
-	// 省
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "RPOVINCE_ID_")
-	private ProvinceEntity province;
-	// 市
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "CITY_ID_")
-	private CityEntity city;
-	// 县
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "AREA_ID_")
-	private AreaEntity area;
 
 	// 介绍人
 	@ManyToOne(targetEntity = UserEntity.class, fetch = FetchType.LAZY)
@@ -287,29 +275,6 @@ public class UserEntity extends BaseEntity {
 		this.upgradeScore = upgradeScore;
 	}
 
-	public ProvinceEntity getProvince() {
-		return province;
-	}
-
-	public void setProvince(ProvinceEntity province) {
-		this.province = province;
-	}
-
-	public CityEntity getCity() {
-		return city;
-	}
-
-	public void setCity(CityEntity city) {
-		this.city = city;
-	}
-
-	public AreaEntity getArea() {
-		return area;
-	}
-
-	public void setArea(AreaEntity area) {
-		this.area = area;
-	}
 
 	public String getStatus() {
 		return status;

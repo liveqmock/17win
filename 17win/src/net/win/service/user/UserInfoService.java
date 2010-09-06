@@ -286,25 +286,6 @@ public class UserInfoService extends BaseService {
 
 		userEntity.setWw(oldUserEntity.getWw());
 
-		// 设置关系
-		if (!nullID(oldUserEntity.getProvince())) {
-			userEntity.setProvince(oldUserEntity.getProvince());
-		}
-		if (!nullID(oldUserEntity.getCity())) {
-			userEntity.setCity(oldUserEntity.getCity());
-		}
-		if (!nullID(oldUserEntity.getArea())) {
-			userEntity.setArea(oldUserEntity.getArea());
-		}
-		// if (!oldUserEntity.getTaobaoUser().isNull()) {
-		// userEntity.setTaobaoUser(oldUserEntity.getTaobaoUser());
-		// }
-		// if (!oldUserEntity.getPaipaiUser().isNull()) {
-		// userEntity.setPaipaiUser(oldUserEntity.getPaipaiUser());
-		// }
-		// if (!oldUserEntity.getYouaUser().isNull()) {
-		// userEntity.setYouaUser(oldUserEntity.getYouaUser());
-		// }
 		userVO.setUserEntity(userEntity);
 		putAlertMsg("更新成功!");
 		return "updateInfo";
@@ -321,9 +302,6 @@ public class UserInfoService extends BaseService {
 	public String initUpdateInfo(UserVO userVO) throws Exception {
 		UserLoginInfo userLoginInfo = getLoginUser();
 		UserEntity userEntity = userDAO.get(userLoginInfo.getId());
-		Hibernate.initialize(userEntity.getProvince());
-		Hibernate.initialize(userEntity.getCity());
-		Hibernate.initialize(userEntity.getArea());
 		userVO.setUserEntity(userEntity);
 		return "initUpdateInfo";
 	}
