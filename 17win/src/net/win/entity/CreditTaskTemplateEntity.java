@@ -3,6 +3,7 @@ package net.win.entity;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+
 /**
  * 信誉任务模板
  * 

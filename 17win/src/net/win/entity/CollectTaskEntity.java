@@ -2,6 +2,7 @@ package net.win.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
 /**
  * 收藏任务
  * 

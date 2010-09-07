@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+
 /**
  * 实体交易，虚拟账号的信息描述
  * 

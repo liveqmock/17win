@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+
 @Entity
 @Table(name = "TB_RECEIVEINFOTEMPLATE")
 public class ReceiveInfoTemplateEntity extends BaseEntity {

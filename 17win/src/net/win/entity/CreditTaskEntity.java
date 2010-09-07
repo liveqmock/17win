@@ -17,29 +17,17 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "TB_CREDITTASK")
-public class CreditTaskEntity extends BaseEntity {
+public class CreditTaskEntity extends TaskBaseEntity {
 	// 类型 ( 1:淘宝，2：拍拍，3有啊)
 	@Column(name = "TYPE_", columnDefinition = "CHAR(1)", nullable = false)
 	private String type;
-	// 任务ID 给用户看 格式yyymmddhhmmssis
-	@Column(name = "TEST_ID_", columnDefinition = "CHAR(1)", nullable = false, unique = true)
-	private String testID;
-	// 接收人IP
-	@Column(name = "RECEIVE_IP_", length = 19, nullable = false)
-	private UserEntity receiveIP;
-	// 发布点
-	@Column(name = "RELEASE_DOT_", nullable = false)
-	private Float releaseDot;
 	// 价格
 	@Column(name = "MONEY_", nullable = false)
 	private Double money;
-	// 接手时间
-	@Column(name = "START_DATE", nullable = false)
-	private Date startDate;
 	// 状态
-	// (0 因为申述被暂停(但是要判断12小时，不能像2000w一样不能判断)
+	// (-1因为申述被暂停(但是要判断12小时，不能像2000w一样不能判断) ,0  还没开始（定时任务有用）
 	// ,[1:等待我付款,2:等待卖家发货,3:等待卖家发货](买家),[4:等待接手,5:等待接手,6:等待我发货,7:等待买家确认8:等待我核查好评](卖家))
-	@Column(name = "STATUS", columnDefinition = "CHAR(1)", nullable = false)
+	@Column(name = "STATUS", length = 2, nullable = false)
 	private String status;
 	// 商品地址
 	@Column(name = "ITEM_URL_", length = 50, nullable = false)
@@ -60,37 +48,22 @@ public class CreditTaskEntity extends BaseEntity {
 	@Column(name = "TIMEING_TIME_")
 	private Date timeingTime;
 
-	// 发布人
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = UserEntity.class)
-	@JoinColumn(name = "RELEASE_PERSON_")
-	private UserEntity releasePerson;
 	// 发布人的卖家号
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "SELLER_ID_")
 	private SellerEntity seller;
-	// 接收人
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = UserEntity.class)
-	@JoinColumn(name = "RECEIVE_PERSON_")
-	private UserEntity receivePerson;
+
 	// 接收人的买家号
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "BUYER_ID_")
 	private BuyerEntity buyer;
 
-	public Float getReleaseDot() {
-		return releaseDot;
+	public String getType() {
+		return type;
 	}
 
-	public void setReleaseDot(Float releaseDot) {
-		this.releaseDot = releaseDot;
-	}
-
-	public UserEntity getReleasePerson() {
-		return releasePerson;
-	}
-
-	public void setReleasePerson(UserEntity releasePerson) {
-		this.releasePerson = releasePerson;
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public Double getMoney() {
@@ -99,22 +72,6 @@ public class CreditTaskEntity extends BaseEntity {
 
 	public void setMoney(Double money) {
 		this.money = money;
-	}
-
-	public Date getStartDate() {
-		return startDate;
-	}
-
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
-
-	public UserEntity getReceivePerson() {
-		return receivePerson;
-	}
-
-	public void setReceivePerson(UserEntity receivePerson) {
-		this.receivePerson = receivePerson;
 	}
 
 	public String getStatus() {
@@ -149,20 +106,12 @@ public class CreditTaskEntity extends BaseEntity {
 		this.grade = grade;
 	}
 
-	public Date getTimeingTime() {
-		return timeingTime;
+	public Integer getIntervalHour() {
+		return intervalHour;
 	}
 
-	public void setTimeingTime(Date timeingTime) {
-		this.timeingTime = timeingTime;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
+	public void setIntervalHour(Integer intervalHour) {
+		this.intervalHour = intervalHour;
 	}
 
 	public String getWaybill() {
@@ -173,12 +122,12 @@ public class CreditTaskEntity extends BaseEntity {
 		this.waybill = waybill;
 	}
 
-	public Integer getIntervalHour() {
-		return intervalHour;
+	public Date getTimeingTime() {
+		return timeingTime;
 	}
 
-	public void setIntervalHour(Integer intervalHour) {
-		this.intervalHour = intervalHour;
+	public void setTimeingTime(Date timeingTime) {
+		this.timeingTime = timeingTime;
 	}
 
 	public SellerEntity getSeller() {
@@ -195,22 +144,6 @@ public class CreditTaskEntity extends BaseEntity {
 
 	public void setBuyer(BuyerEntity buyer) {
 		this.buyer = buyer;
-	}
-
-	public String getTestID() {
-		return testID;
-	}
-
-	public void setTestID(String testID) {
-		this.testID = testID;
-	}
-
-	public UserEntity getReceiveIP() {
-		return receiveIP;
-	}
-
-	public void setReceiveIP(UserEntity receiveIP) {
-		this.receiveIP = receiveIP;
 	}
 
 }

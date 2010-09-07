@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+
 @Entity
 @Table(name = "TB_WITHDRAWALS")
 public class WithdrawalsEntity extends BaseEntity {
