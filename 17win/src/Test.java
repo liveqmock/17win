@@ -1,3 +1,6 @@
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.UUID;
 
 public class Test {
@@ -6,8 +9,6 @@ public class Test {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		UUID uuid = UUID.randomUUID();
-		System.out.println(uuid);
-
+		System.out.println(System.currentTimeMillis());
 	}
 }

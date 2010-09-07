@@ -22,7 +22,7 @@ public class CreditTaskEntity extends BaseEntity {
 	@Column(name = "TYPE_", columnDefinition = "CHAR(1)", nullable = false)
 	private String type;
 	// 任务ID 给用户看 格式yyymmddhhmmssis
-	@Column(name = "TEST_ID_", nullable = false, unique = true)
+	@Column(name = "TEST_ID_", columnDefinition = "CHAR(1)", nullable = false, unique = true)
 	private String testID;
 	// 接收人IP
 	@Column(name = "RECEIVE_IP_", length = 19, nullable = false)
@@ -59,8 +59,7 @@ public class CreditTaskEntity extends BaseEntity {
 	// 定时任务时间(不能小于开始时间)
 	@Column(name = "TIMEING_TIME_")
 	private Date timeingTime;
-	
-	
+
 	// 发布人
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = UserEntity.class)
 	@JoinColumn(name = "RELEASE_PERSON_")

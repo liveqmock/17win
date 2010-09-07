@@ -6,6 +6,7 @@ package net.win.entity;
  * @author xgj
  * 
  */
+//暂时不做
 public class JustifyEntity {
 
 }
