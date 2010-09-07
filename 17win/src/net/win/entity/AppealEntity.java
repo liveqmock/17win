@@ -19,7 +19,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "TB_APPEAL")
-public class AppealEntity {
+public class AppealEntity  extends BaseEntity{
 	// 标题
 	@Column(name = "TITLE_", length = 25, nullable = false)
 	private String title;
