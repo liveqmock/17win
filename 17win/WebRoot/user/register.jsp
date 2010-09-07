@@ -202,6 +202,7 @@ td {
 
 									</td>
 								</tr>
+								<!-- 
 								<tr>
 									<td height="40" align="right" class="font12h" nowrap="nowrap"
 										valign="top">
@@ -379,16 +380,16 @@ td {
 
 										<br />
 										系统会根据此信息，自动帮你生成发货地址
-										<!-- 	<font color="#FF0000"></font>当发送的是<font color="#FF0000">24小时</font>以内的<font
+										 	<font color="#FF0000"></font>当发送的是<font color="#FF0000">24小时</font>以内的<font
 												color="#FF0000">实物任务</font>时，
 系统可以根据这个地址，生成一个同地区的收货地址.
-更大的提高真实性！ -->
-									</td>
-									<td valign="top">
+更大的提高真实性！ 
+								</td>
+								<td valign="top">
 
-									</td>
+								</td>
 								</tr>
-
+			-->
 
 								<tr>
 

@@ -62,9 +62,18 @@
 											<td height=20>
 												状&nbsp;&nbsp;&nbsp;&nbsp;态：
 												<s:if test="#session.userLogin.status==0">
-													<font color=#ff0000>没有激活</font>
+													<font color=#ff0000><a
+														href="userInfoManager/info!initActiave.php">没激活！</a> </font>
 												</s:if>
-
+												<s:elseif test="#session.userLogin.status==1">
+													<font color=#ff0000>正常</font>
+												</s:elseif>
+												<s:elseif test="#session.userLogin.status==2">
+													<font color=#ff0000>被冻结 </font>
+												</s:elseif>
+												<s:elseif test="#session.userLogin.status==3">
+													<font color=#ff0000>找密码</font>
+												</s:elseif>
 											</td>
 										</tr>
 										<tr>
@@ -97,6 +106,11 @@
 								<div class=sec_menu style="width: 158">
 									<table cellpadding=0 cellspacing=0 align=center width=130
 										class=LeftNews>
+										<tr>
+											<td height=20>
+												<a href="userInfoManager/info!initActiave.php">账号激活</a>
+											</td>
+										</tr>
 										<tr>
 											<td height=20>
 												<A href="userInfoManager/info!initUpdateInfo.php">修改资料</A>

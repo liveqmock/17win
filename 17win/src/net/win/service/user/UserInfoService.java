@@ -53,6 +53,20 @@ public class UserInfoService extends BaseService {
 	 * @return
 	 * @throws Exception
 	 */
+	public String updateActiave(UserVO userVO) throws Exception {
+		UserEntity userEntity = getLoginUserEntity(userDAO);
+		userEntity.setStatus("1");
+		putAlertMsg("激活成功！快去体验吧！");
+		return "updateActiave";
+	}
+
+	/**
+	 * 购买发布点
+	 * 
+	 * @param userVO
+	 * @return
+	 * @throws Exception
+	 */
 	public String updateBuyDot(UserVO userVO) throws Exception {
 		String flag = getByParam("flag");
 		UserEntity userEntity = getLoginUserEntity(userDAO);

@@ -15,7 +15,7 @@ public class TaskBaseEntity extends BaseEntity {
 	private String testID;
 	// 接收人IP
 	@Column(name = "RECEIVE_IP_", length = 19, nullable = false)
-	private UserEntity receiveIP;
+	private String receiveIP;
 	// 发布点
 	@Column(name = "RELEASE_DOT_", nullable = false)
 	private Float releaseDot;
@@ -30,39 +30,51 @@ public class TaskBaseEntity extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = UserEntity.class)
 	@JoinColumn(name = "RECEIVE_PERSON_")
 	private UserEntity receivePerson;
+
 	public String getTestID() {
 		return testID;
 	}
+
 	public void setTestID(String testID) {
 		this.testID = testID;
 	}
-	public UserEntity getReceiveIP() {
+
+	public String getReceiveIP() {
 		return receiveIP;
 	}
-	public void setReceiveIP(UserEntity receiveIP) {
+
+	public void setReceiveIP(String receiveIP) {
 		this.receiveIP = receiveIP;
 	}
+
 	public Float getReleaseDot() {
 		return releaseDot;
 	}
+
 	public void setReleaseDot(Float releaseDot) {
 		this.releaseDot = releaseDot;
 	}
+
 	public Date getStartDate() {
 		return startDate;
 	}
+
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
+
 	public UserEntity getReleasePerson() {
 		return releasePerson;
 	}
+
 	public void setReleasePerson(UserEntity releasePerson) {
 		this.releasePerson = releasePerson;
 	}
+
 	public UserEntity getReceivePerson() {
 		return receivePerson;
 	}
+
 	public void setReceivePerson(UserEntity receivePerson) {
 		this.receivePerson = receivePerson;
 	}

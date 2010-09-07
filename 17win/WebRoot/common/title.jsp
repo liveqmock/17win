@@ -113,7 +113,7 @@
 					style="COLOR: #000000">首&nbsp;页</SPAN> </A>
 			</LI>
 			<LI class=white>
-				<A class="li0 " href="credit/task.jsp" id="a1" onmouseover="Mea(1);"
+				<A class="li0 " href="taskManager/task!initTask.php" id="a1" onmouseover="Mea(1);"
 					onMouseOut="setAuto()">淘宝互刷</A>
 			</LI>
 			<LI class=white>

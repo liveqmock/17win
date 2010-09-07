@@ -1,5 +1,6 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
 <html>
 	<head>
 		<s:include value="../common/header.jsp"></s:include>
@@ -50,12 +51,12 @@
 					<DIV style="FLOAT: left; OVERFLOW: hidden; WIDTH: 700px">
 						<UL id=task_nav>
 							<LI>
-								<A href="index.asp">淘宝互动区</A>
+								<A  href="taskManager/task!initTask.php">淘宝互动区</A>
 							</LI>
 							<LI>
 								<A
 									style="FONT-SIZE: 16px; BACKGROUND: url(images/task_nav_02.gif) no-repeat 50% bottom; COLOR: #ffffff"
-									href="pushmission.asp">发布任务</A>
+									href="taskManager/task!initReleaseTask.php">发布任务</A>
 							</LI>
 
 							<LI>
@@ -76,9 +77,6 @@
 						</UL>
 					</DIV>
 
-				</DIV>
-				<DIV style="CLEAR: both; WIDTH: 910px">
-					<IMG src="images/task_nav_line.gif">
 				</DIV>
 			</DIV>
 		</div>
@@ -117,209 +115,86 @@
 															<table width="680" border="0" align="center"
 																cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
 																<tr>
-																	<td height="30" colspan="3" align="left"
-																		class="font14b4">
-																		<table width="100%" border="0" cellpadding="0"
-																			cellspacing="0" align="left">
-																			<tr>
-
-																				<td class="font14b4">
-																					<div align="right">
-																						商品任务价：
-																					</div>
-																				</td>
-																				<td colspan="4">
-																					<input name=Price1 id=Price1 size="10" maxlength=6
-																						onKeyUp="if(isNaN(value))execCommand('undo')">
-																					元注：此价格是包含运费的总价格
-																					1-40元，扣一个发布点；41-100元扣两个发布点；101-200元，扣三个发布点；
-																					<br>
-																				</td>
-																			</tr>
-
-																			<tr>
-																				<td class="font14b4">
-																					&nbsp;
-																				</td>
-																				<td colspan="4">
-																					201-500元，扣四个发布点；501-1000元扣五个发布点
-																					<br>
-																				</td>
-
-																			</tr>
-																			<tr>
-																				<td class="font14b4">
-																					<div align="right">
-																						掌&nbsp; 柜&nbsp; 名：
-																					</div>
-																				</td>
-																				<td colspan="4">
-																					<label>
-																						<input type='radio' name='Shopkeeper'
-																							id='nick_name' value='xgj1988'>
-																						xgj1988
-																					</label>
-																				</td>
-																			</tr>
-
-																			<tr>
-																				<td class="font14b4">
-																					<div align="right">
-																						商品地址：
-																					</div>
-																				</td>
-																				<td colspan="4">
-																					<span class="font12l"> <input id=ProUrl1
-																							maxlength=255 name=ProUrl1 onBlur="check(this)">
-																						*自动检测宝贝地址和掌柜名是否相符</span>
-																				</td>
-																			</tr>
-																			<tr style="display: none">
-																				<td class="font14b4">
-																					任务2
-																				</td>
-
-																				<td class="font14b4">
-																					商品任务价：
-																				</td>
-																				<td>
-																					<input name=Price2 id=Price2 size="10" maxlength=3
-																						onKeyUp="if(isNaN(value))execCommand('undo')"
-																						onBlur="totalprice(this)">
-																				</td>
-																				<td class="font14b4">
-																					商品地址：
-																				</td>
-																				<td>
-																					<input id=ProUrl2 maxlength=255 name=ProUrl2
-																						onblur="check(this)">
-																				</td>
-																			</tr>
-																			<tr style="display: none">
-																				<td class="font14b4">
-																					任务3
-																				</td>
-
-																				<td class="font14b4">
-																					商品任务价：
-																				</td>
-																				<td>
-																					<input name=Price3 id=Price3 size="10" maxlength=3
-																						onKeyUp="if(isNaN(value))execCommand('undo')"
-																						onBlur="totalprice(this)">
-																				</td>
-																				<td class="font14b4">
-																					商品地址：
-																				</td>
-																				<td>
-																					<input id=ProUrl3 maxlength=255 name=ProUrl3
-																						onblur="check(this)">
-																				</td>
-																			</tr>
-																			<tr style="display: none">
-																				<td class="font14b4">
-																					任务4
-																				</td>
-
-																				<td class="font14b4">
-																					商品任务价：
-																				</td>
-																				<td>
-																					<input name=Price4 id=Price4 size="10" maxlength=3
-																						onKeyUp="if(isNaN(value))execCommand('undo')"
-																						onBlur="totalprice(this)">
-																				</td>
-																				<td class="font14b4">
-																					商品地址：
-																				</td>
-																				<td>
-																					<input id=ProUrl4 maxlength=255 name=ProUrl4
-																						onblur="check(this)">
-																				</td>
-																			</tr>
-																			<tr style="display: none">
-																				<td class="font14b4">
-																					任务5
-																				</td>
-
-																				<td class="font14b4">
-																					商品任务价：
-																				</td>
-																				<td>
-																					<input name=Price5 id=Price5 size="10" maxlength=3
-																						onKeyUp="if(isNaN(value))execCommand('undo')"
-																						onBlur="totalprice(this)">
-																				</td>
-																				<td class="font14b4">
-																					商品地址：
-																				</td>
-																				<td>
-																					<input id=ProUrl5 maxlength=255 name=ProUrl5
-																						onblur="check(this)">
-																				</td>
-																			</tr>
-
-																			<tr style="display: none">
-																				<td width="25%" class="font14b4">
-																					任务6
-																				</td>
-
-																				<td width="8%" class="font14b4">
-																					商品任务价：
-																				</td>
-																				<td width="19%">
-																					<input name=Price6 id=Price6 size="10" maxlength=3
-																						onKeyUp="if(isNaN(value))execCommand('undo')"
-																						onBlur="totalprice(this)">
-																				</td>
-																				<td width="17%" class="font14b4">
-																					商品地址：
-																				</td>
-																				<td width="31%">
-																					<input id=ProUrl6 maxlength=255 name=ProUrl6
-																						onblur="check(this)">
-																				</td>
-																			</tr>
-
-																		</table>
+																	<td class="font14b4" align="right" valign="top">
+																		任务仓库：
+																	</td>
+																	<td colspan="4">
+																		<select>
+																			<option>
+																				从任务仓库中选择
+																			</option>
+																			<option></option>
+																		</select>
+																		从任务仓库中选择任务
 																	</td>
 																</tr>
-
 																<tr>
-																	<td height="30" align="right">
-																		<span class="font14b4">价格是否相等：</span>
+																	<td colspan="5">
+																		<hr color="#DDEDFA">
 																	</td>
-																	<td>
-																		<label>
-																			<input name="isprice" type="radio" id="isprice"
-																				value="金额相等" checked>
-																			<span class="font12l"> 金额相等</span>
-																		</label>
+
+																</tr>
+																<tr>
+																	<td class="font14b4" align="right" valign="top">
+																		商品任务价：
 																	</td>
-																	<td>
+																	<td colspan="4">
+																		<input name=Price1 id=Price1 size="10" maxlength=6
+																			onKeyUp="if(isNaN(value))execCommand('undo')">
+																		元&nbsp;&nbsp;注意：此价格是包含运费的总价格
+																		1-40元，扣一个发布点；41-100元(扣2个发布点；101-200元(扣3个发布点)
+																		201-500元(扣4个发布点；501-1000元(扣5个发布点)
+																	</td>
+																</tr>
+																<tr>
+																	<td class="font14b4" align="right">
+																		掌柜名：
+																	</td>
+																	<td colspan="4">
 																		<label>
-																			<input type="radio" name="isprice" id="isprice"
-																				value="需修改价格">
-																			<span class="font12l">需修改价格</span>
+																			<input type='radio' name='Shopkeeper' id='nick_name'
+																				value='xgj1988'>
+																			xgj1988
 																		</label>
 																	</td>
 																</tr>
 
 																<tr>
-																	<td height="30" align="right">
-																		<span class="font14b4">动态评分：</span>
+																	<td class="font14b4" align="right">
+																		商品地址：
+																	</td>
+																	<td colspan="4">
+																		<span class="font12l"> <input maxlength="255">
+																			*自动检测宝贝地址和掌柜名是否相符</span>
+																	</td>
+																</tr>
+																<tr>
+																	<td class="font14b4" align="right">
+																		价格是否相等：
 																	</td>
 																	<td>
-																		<label>
-																			<input name="play" type="radio" value="全部打5分" checked>
-																			<span class="font12l">全部打5分</span>
-																		</label>
+																		<input name="isprice" type="radio" id="isprice"
+																			value="金额相等" checked>
+																		<span class="font12l"> 金额相等</span>
 																	</td>
 																	<td>
-																		<label>
-																			<input type="radio" name="play" value="全部不打分">
-																			<span class="font12l"> 全部不打分</span>
-																		</label>
+																		<input type="radio" name="isprice" id="isprice"
+																			value="需修改价格">
+																		<span class="font12l">需修改价格</span>
+																	</td>
+																</tr>
+
+																<tr>
+																	<td class="font14b4" align="right">
+																		动态评分：
+																	</td>
+																	<td>
+																		<input name="play" type="radio" value="全部打5分" checked>
+																		<span class="font12l">全部打5分</span>
+																	</td>
+																	<td>
+																		<input type="radio" name="play" value="全部不打分">
+																		<span class="font12l"> 全部不打分</span>
 																	</td>
 
 																</tr>
@@ -334,11 +209,11 @@
 																</tr>
 																<tr>
 																	<td width="129" height="30" align="right">
-																		<span class="font14b4">备注：</span>
+																		<span class="font14b4">收货时间：</span>
 																	</td>
 																	<td width="227">
 																		<label>
-																			<input name="bei" type="radio" id="bei"
+																			<input name="bei" type="radio"   checked="checked"
 																				value="马上收货好评" />
 
 																			<span class="font12l">马上收货好评</span>
@@ -347,7 +222,7 @@
 																	</td>
 																	<td width="324">
 																		<label>
-																			<input name="bei" type="radio" id="radio"
+																			<input name="bei" type="radio" 
 																				value="一天后收货好评" />
 																			<span class="font12l"> 一天后收货好评</span>
 																		</label>
@@ -400,53 +275,34 @@
 																	</td>
 																</tr>
 																<tr>
-																	<td>
-																		&nbsp;
-																	</td>
-
-																	<td colspan="2">
-																		<input name="baohu3" type="checkbox"
-																			disabled="disabled" id="baohu3" value="1" checked />
-																		自动检测宝贝地址和掌柜名
-																		<span class="red-bcolor">*什么是自动检测宝贝地址和掌柜名</span>
-																	</td>
-																</tr>
-																<tr>
-																	<td height="50">
-																		&nbsp;
+																	<td class="font14b4" align="right">
+																		任务保护：
 																	</td>
 																	<td colspan="2">
-																		<label>
-																			<input name="baohu2" type="checkbox" id="baohu2"
-																				value="1" />
-																			任务保护，接受者接你任务后，要你审核才可以看到商品地址！
-																		</label>
-																		<br />
-																		<span class="red-bcolor">什么是任务保护- &gt;</span>
+																		<input name="baohu2" type="checkbox" id="baohu2"
+																			value="1" />
+																		任务保护，接受者接你任务后，要你审核才可以看到商品地址！
 																	</td>
 
 																</tr>
 																<tr>
-																	<td height="35">
-																		<span class="font14b4">定时发布任务:</span>
+																	<td class="font14b4" align="right">
+																		定时任务：
 																	</td>
 																	<td colspan="2">
 																		<font color="#FF0000"><input type="text"
-																				onClick="SelectDate(this,'yyyy-MM-dd hh:mm:ss')"
-																				readonly size="30" name="outtime" />&nbsp;留空则不生效！</font>
+																				readonly="readonly" name="outtime" /> </font>
 																	</td>
 																</tr>
 																<tr>
-																	<td height="35">
-																		&nbsp;
+																	<td class="font14b4" align="right">
+																		 任务仓库：
 																	</td>
 																	<td colspan="2">
 
-																		<label>
-																			<input name="depot" type="checkbox" id="depot"
-																				value="1" />
-																			顺便添加到我的任务仓库
-																		</label>
+																		<input name="depot" type="checkbox" id="depot"
+																			value="1" />
+																		顺便添加到我的任务仓库
 																		<span class="red-bcolor">什么是任务仓库- &gt;</span>
 																	</td>
 																</tr>
@@ -481,6 +337,6 @@
 				</td>
 			</tr>
 		</table>
-		<s:include value="../common/foot.jsp"></s:include>
+		<s:include value="../common/footDuan.jsp"></s:include>
 	</BODY>
 </html>

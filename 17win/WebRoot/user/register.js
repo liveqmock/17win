@@ -56,7 +56,13 @@ $(document).ready(function() {
 	// 操作码
 	$("#opertationCode").bind("blur", function() {
 		if (Validater.isPassword($(this).val())) {
-			validateSuccess(this);
+			if ($(this).val() == $("#rePassword").val()) {
+				validateError(this, "操作码不能和密码相同！");
+				submitFlag = false;
+			} else {
+				validateSuccess(this);
+
+			}
 		} else {
 			validateError(this, "\u5fc5\u987b\u662f6\u81f320\u4f4d\u5b57\u7b26");
 			submitFlag = false;
@@ -126,55 +132,26 @@ $(document).ready(function() {
 					submitFlag = false;
 				}
 			});
-	// 验证淘宝
-	$("#taobaoShopURL").bind("blur", function() {
-				if (Validater.trim($(this).val()) == "") {
-					return;
-				}
-				if (Validater.isB2CShop($(this).val(),"1")) {
-					validateSuccess(this);
-					getSeller($(this).val(), "1", "taobaoSeller");
-				} else {
-					validateError(this, "淘宝地址格式不正确");
-					submitFlag = false;
-				}
-			});
-	// 验证码
-	$("#verificationCode").bind("blur", function() {
-				if ($(this).val().length == 4) {
-					validateSuccess(this);
-				} else {
-					validateError(this, "\u9a8c\u8bc1\u7801\u4e0d\u6b63\u786e");
-					submitFlag = false;
-				}
-			});
-
-	// 选择省的事件
-	$("#provinceID").bind("change", function() {
-		if ($(this).val() == "") {
-			$("#cityID").empty();
-			$("#cityID")
-					.append($("<option value=''>\u8bf7\u9009\u62e9</option>"));
-			$("#cityID").val("");
-			$("#areaID").empty();
-			$("#areaID")
-					.append($("<option value=''>\u8bf7\u9009\u62e9</option>"));
-			$("#areaID").val("");
-			return;
-		}
-		getCities($(this).val(), "cityID", "areaID");
-	});
-	// 选择市的事件
-	$("#cityID").bind("change", function() {
-		if ($(this).val() == "") {
-			$("#areaID").empty();
-			$("#areaID")
-					.append($("<option value=''>\u8bf7\u9009\u62e9</option>"));
-			$("#areaID").val("");
-			return;
-		}
-		getAreas($(this).val(), "areaID");
-	});
+		/*
+		 * // 验证淘宝 $("#taobaoShopURL").bind("blur", function() { if
+		 * (Validater.trim($(this).val()) == "") { return; } if
+		 * (Validater.isB2CShop($(this).val(),"1")) { validateSuccess(this);
+		 * getSeller($(this).val(), "1", "taobaoSeller"); } else {
+		 * validateError(this, "淘宝地址格式不正确"); submitFlag = false; } }); // 验证码
+		 * $("#verificationCode").bind("blur", function() { if
+		 * ($(this).val().length == 4) { validateSuccess(this); } else {
+		 * validateError(this, "\u9a8c\u8bc1\u7801\u4e0d\u6b63\u786e");
+		 * submitFlag = false; } }); /* 选择省的事件 $("#provinceID").bind("change",
+		 * function() { if ($(this).val() == "") { $("#cityID").empty();
+		 * $("#cityID") .append($("<option value=''>\u8bf7\u9009\u62e9</option>"));
+		 * $("#cityID").val(""); $("#areaID").empty(); $("#areaID") .append($("<option
+		 * value=''>\u8bf7\u9009\u62e9</option>")); $("#areaID").val("");
+		 * return; } getCities($(this).val(), "cityID", "areaID"); }); // 选择市的事件
+		 * $("#cityID").bind("change", function() { if ($(this).val() == "") {
+		 * $("#areaID").empty(); $("#areaID") .append($("<option
+		 * value=''>\u8bf7\u9009\u62e9</option>")); $("#areaID").val("");
+		 * return; } getAreas($(this).val(), "areaID"); });
+		 */
 });
 function validateForm() {
 	submitFlag = true;

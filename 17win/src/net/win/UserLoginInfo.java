@@ -23,7 +23,7 @@ public class UserLoginInfo {
 	private Integer level;
 	// 级别图片(一心，还是一钻)
 	private String levelImg;
-	// 操作码激活状态
+	// 操作码激活状态 true 当前会话激活， false当前会话没激活
 	private Boolean operationCodeStatus = false;
 	// 状态
 	private String status;

@@ -29,8 +29,10 @@ import org.springframework.stereotype.Controller;
 		@Result(name = "updateExchange", location = "/user/exchange.jsp"),
 		@Result(name = "initExchange", location = "/user/exchange.jsp"),
 		@Result(name = "initBuyDot", location = "/user/buyDot.jsp"),
-		@Result(name = "updateBuyDot", location = "/user/buyDot.jsp")
-})
+		@Result(name = "updateBuyDot", location = "/user/buyDot.jsp"),
+		@Result(name = "initActiave", location = "/user/activate.jsp"),
+		@Result(name = "updateActiave", location = "/user/activate.jsp")
+	})
 @Namespace("/userInfoManager")
 public class UserInfoAction extends BaseAction {
 	@Resource
@@ -46,6 +48,26 @@ public class UserInfoAction extends BaseAction {
 	public String execute() throws Exception {
 		// TODO Auto-generated method stub
 		return super.execute();
+	}
+
+	/**
+	 * 激活账号
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String actiave() throws Exception {
+		return userInfoService.updateActiave(userVO);
+	}
+
+	/**
+	 * 初始化激活账号
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String initActiave() throws Exception {
+		return "initActiave";
 	}
 
 	/**
