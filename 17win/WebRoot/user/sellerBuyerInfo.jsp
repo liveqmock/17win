@@ -205,7 +205,7 @@ img {
 															</th>
 														</tr>
 														<s:iterator value="#request.buyers.get(#type)" id="buyer">
-															<tr>
+															<tr class="buyerTr">
 																<td height="10">
 																	<input type="text" name=""
 																		value="<s:property value="#buyer.name" />">
@@ -231,7 +231,12 @@ img {
 												<tbody>
 													<tr>
 														<td width="100%" align="left" class="font12b2">
-															<font color="red">注意：为了您和他人的安全，买好在淘宝上如果是一个黄钻，请不要在使用！</font>
+															<font color="red">注意：为了您和他人的安全，买号在淘宝上如果是一个黄钻，请不要在使用！</font>
+														</td>
+													</tr>
+													<tr>
+														<td width="100%" align="center">
+															<input type="submit" value="保&nbsp;&nbsp;存" />
 														</td>
 													</tr>
 												</tbody>

@@ -3,9 +3,11 @@ $(document).ready(function() {
 	$("input[sellerFlag]").bind("click", function() {
 		var type = $(this).attr("sellerFlag");
 		var tbody = $("#sellerTable" + type);
-		var trStr = "<tr>"
+		var trStr = "<tr class='sellerTr'>"
 				+ "		<td   align='center'  > "
-				+ "  <input type='hidden' name='userVO.sellers[0].type' value='"+type+"' />  "
+				+ "  <input type='hidden' name='userVO.sellers[0].type' value='"
+				+ type
+				+ "' />  "
 				+ "	<input type='text' name='userVO.sellers[0].shopURL' >		 "
 				+ "		</td>  "
 				+ "		<td  class='address' nowrap='nowrap' align='center' >"
@@ -35,8 +37,9 @@ $(document).ready(function() {
 	$("input[buyerFlag]").bind("click", function() {
 		var type = $(this).attr("buyerFlag");
 		var tbody = $("#buyerTable" + type);
-		var trStr = "<tr> " + "	<td  align='center'  >  "
-				+ " <input type='hidden' name='userVO.buyers[0].type' value='"+type+"' /> "
+		var trStr = "<tr class='buyerTr'> " + "	<td  align='center'  >  "
+				+ " <input type='hidden' name='userVO.buyers[0].type' value='"
+				+ type + "' /> "
 				+ "		 <input type='text'  name='userVO.buyers[0].name' >  "
 				+ "    </td>  " + "	<td align='center' >  " + "		0 "
 				+ "		</td> " + "	<td   align='center' >  "
@@ -61,4 +64,21 @@ function selectCity(obj) {
 // 选择县区
 function selectArea(obj) {
 	getAreas($(obj).val(), $(obj).next().get(0));
+}
+
+// 验证
+function validateForm() {
+	var inputDom = $("tr .sellerTr").find("input");
+	var submitFlag = true;
+	inputDom.each(function() {
+				if (Validater.isBlank($(this).val())) {
+					submitFlag = false;
+					return;
+				}
+			});
+	if (!submitFlag) {
+		alert("不能为空！");
+		return false;
+	}
+	
 }
