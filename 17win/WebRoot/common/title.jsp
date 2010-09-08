@@ -45,14 +45,16 @@
 										<A href="userManager/base!initLogin.php" target="_top">登陆</A> |
 									<A href="userManager/base!initRegister.php" target="_top">
 											注册</A> |
-
-									
 									</s:if>
 									<s:else>
 										<font color="red"><b><s:property
-													value="#session.userLogin.username" />
+													value="#session.userLogin.username" /> 
+										
 										</b>
-										</font> |
+										</font> 回来 |
+											<A href="userInfoManager/info!init.php" target="_top">
+											[安全退出] </A>
+										|
 										<A href="userInfoManager/info!init.php" target="_top">
 											个人中心 </A>|
 									</s:else>
