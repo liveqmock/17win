@@ -51,10 +51,39 @@ public class UserInfoService extends BaseService {
 	 * @return
 	 * @throws Exception
 	 */
+	public String updateSellerAndBuyer(UserVO userVO) throws Exception {
+		UserEntity userEntity = getLoginUserEntity(userDAO);
+		List<SellerEntity> sellers = userVO.getSellers();
+		List<BuyerEntity> buyers = userVO.getBuyers();
+
+		userDAO.deleteBySQL("delete TB_SELLER where USER_ID_=:userId",
+				new String[]{"userId"}, new Object[]{userEntity.getId()});
+		userDAO.deleteBySQL("delete TB_BUYER where USER_ID_=:userId",
+				new String[]{"userId"}, new Object[]{userEntity.getId()});
+
+		userEntity.setSellers(sellers);
+		userEntity.setBuyers(buyers);
+		putAlertMsg("添加成功！");
+
+		putByRequest("sellers", sellers);
+		putByRequest("buyers", buyers);
+		return "updateSellerAndBuyer";
+	}
+
+	/**
+	 * 初始化买家或卖家
+	 * 
+	 * @param userVO
+	 * @return
+	 * @throws Exception
+	 */
 	public String initSellerAndBuyer(UserVO userVO) throws Exception {
 		UserEntity userEntity = getLoginUserEntity(userDAO);
 		List<SellerEntity> sellers = userEntity.getSellers();
 		List<BuyerEntity> buyers = userEntity.getBuyers();
+
+		putByRequest("sellers", sellers);
+		putByRequest("buyers", buyers);
 		// 省
 		List<ProvinceEntity> provinces = provinceDAO
 				.list("from provinceEntity");

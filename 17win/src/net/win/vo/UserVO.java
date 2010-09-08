@@ -5,8 +5,10 @@ import java.util.List;
 
 import net.win.BaseVO;
 import net.win.entity.AreaEntity;
+import net.win.entity.BuyerEntity;
 import net.win.entity.CityEntity;
 import net.win.entity.ProvinceEntity;
+import net.win.entity.SellerEntity;
 import net.win.entity.UserEntity;
 
 public class UserVO extends BaseVO {
@@ -32,6 +34,10 @@ public class UserVO extends BaseVO {
 	private List<ProvinceEntity> provinces = new ArrayList<ProvinceEntity>();
 	private List<CityEntity> cities = new ArrayList<CityEntity>();
 	private List<AreaEntity> areas = new ArrayList<AreaEntity>();
+
+	private List<SellerEntity> sellers = new ArrayList<SellerEntity>();
+
+	private List<BuyerEntity> buyers = new ArrayList<BuyerEntity>();
 
 	public UserEntity getUserEntity() {
 		return userEntity;
@@ -103,5 +109,21 @@ public class UserVO extends BaseVO {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public List<SellerEntity> getSellers() {
+		return sellers;
+	}
+
+	public void setSellers(List<SellerEntity> sellers) {
+		this.sellers = sellers;
+	}
+
+	public List<BuyerEntity> getBuyers() {
+		return buyers;
+	}
+
+	public void setBuyers(List<BuyerEntity> buyers) {
+		this.buyers = buyers;
 	}
 }

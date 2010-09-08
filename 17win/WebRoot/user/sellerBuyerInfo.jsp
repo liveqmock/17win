@@ -97,7 +97,7 @@ img {
 														<td width="16%" height="40" align="right" class="font14b2">
 															淘宝资料：
 														</td>
-														<td colspan="3">
+														<td colspan="4">
 															<hr style="color: rgb(255, 153, 51);">
 														</td>
 														<td width="20">
@@ -112,76 +112,13 @@ img {
 															淘宝店铺地址
 														</td>
 														<td height="10" colspan="">
-															淘宝账号
+															卖号发货地址
 														</td>
 														<td height="10" colspan="">
-															淘宝小号账号
+															淘宝卖号
 														</td>
 														<td height="10" colspan="">
-															操作
-														</td>
-													</tr>
-												</tbody>
-											</table>
-											<table width="99%" cellspacing="0" cellpadding="0" border="0"
-												align="center">
-												<tbody>
-													<tr>
-														<td width="16%" height="40" align="right" class="font14b2">
-															淘宝店铺：
-														</td>
-														<td colspan="3">
-															<hr style="color: rgb(255, 153, 51);">
-														</td>
-														<td width="20">
-															<input type="button" value="新增">
-														</td>
-													</tr>
-													<tr>
-														<td height="10">
-															&nbsp;
-														</td>
-														<td height="10" colspan="">
-															拍拍店铺地址
-														</td>
-														<td height="10" colspan="">
-															拍拍账号
-														</td>
-														<td height="10" colspan="">
-															拍拍小号账号
-														</td>
-														<td height="10" colspan="">
-															操作
-														</td>
-													</tr>
-												</tbody>
-											</table>
-											<table width="99%" cellspacing="0" cellpadding="0" border="0"
-												align="center">
-												<tbody>
-													<tr>
-														<td width="16%" height="40" align="right" class="font14b2">
-															有啊资料：
-														</td>
-														<td colspan="3">
-															<hr style="color: rgb(255, 153, 51);">
-														</td>
-														<td width="20">
-															<input type="button" value="新增">
-														</td>
-													</tr>
-													<tr>
-														<td height="10">
-															&nbsp;
-														</td>
-														<td height="10" colspan="">
-															有啊店铺地址
-														</td>
-														<td height="10" colspan="">
-															有啊账号
-														</td>
-														<td height="10" colspan="">
-															有啊小号账号
+															淘宝买号
 														</td>
 														<td height="10" colspan="">
 															操作

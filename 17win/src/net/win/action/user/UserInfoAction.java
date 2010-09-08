@@ -1,14 +1,8 @@
 package net.win.action.user;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import net.win.BaseAction;
-import net.win.entity.BuyerEntity;
-import net.win.entity.ProvinceEntity;
-import net.win.entity.SellerEntity;
-import net.win.entity.UserEntity;
 import net.win.service.user.UserInfoService;
 import net.win.vo.UserVO;
 
@@ -39,7 +33,8 @@ import org.springframework.stereotype.Controller;
 		@Result(name = "updateBuyDot", location = "/user/buyDot.jsp"),
 		@Result(name = "initActiave", location = "/user/activate.jsp"),
 		@Result(name = "updateActiave", location = "/user/activate.jsp"),
-		@Result(name = "initSellerAndBuyer", location = "/user/sellerBuyerInfo.jsp")
+		@Result(name = "initSellerAndBuyer", location = "/user/sellerBuyerInfo.jsp"),
+		@Result(name = "updateSellerAndBuyer", location = "/user/sellerBuyerInfo.jsp"),
 
 })
 @Namespace("/userInfoManager")
@@ -57,6 +52,17 @@ public class UserInfoAction extends BaseAction {
 	public String execute() throws Exception {
 		// TODO Auto-generated method stub
 		return super.execute();
+	}
+
+	/**
+	 * 买家或卖家
+	 * 
+	 * @param userVO
+	 * @return
+	 * @throws Exception
+	 */
+	public String updateSellerAndBuyer(UserVO userVO) throws Exception {
+		return userInfoService.updateSellerAndBuyer(userVO);
 	}
 
 	/**
