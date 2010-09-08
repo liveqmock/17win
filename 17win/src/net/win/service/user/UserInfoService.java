@@ -13,22 +13,20 @@ import net.win.dao.CityDAO;
 import net.win.dao.ProvinceDAO;
 import net.win.dao.UserDAO;
 import net.win.dao.WithDrawalsDAO;
+import net.win.entity.BuyerEntity;
+import net.win.entity.ProvinceEntity;
+import net.win.entity.SellerEntity;
 import net.win.entity.UserEntity;
-import net.win.entity.WithdrawalsEntity;
 import net.win.utils.ArithUtils;
 import net.win.utils.StringUtils;
 import net.win.utils.TotalUtils;
 import net.win.vo.UserVO;
-import net.win.vo.WithdrawalsVO;
 
-import org.hibernate.Hibernate;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
-import com.sun.org.apache.commons.beanutils.BeanUtils;
-
-@SuppressWarnings( { "unused", "unchecked" })
+@SuppressWarnings({"unused", "unchecked"})
 @Service("userInfoService")
 public class UserInfoService extends BaseService {
 	@Resource
@@ -47,7 +45,24 @@ public class UserInfoService extends BaseService {
 	private FreeMarkerConfigurer freeMarkerCfj;
 
 	/**
-	 * 购买发布点
+	 * 初始化买家或卖家
+	 * 
+	 * @param userVO
+	 * @return
+	 * @throws Exception
+	 */
+	public String initSellerAndBuyer(UserVO userVO) throws Exception {
+		UserEntity userEntity = getLoginUserEntity(userDAO);
+		List<SellerEntity> sellers = userEntity.getSellers();
+		List<BuyerEntity> buyers = userEntity.getBuyers();
+		// 省
+		List<ProvinceEntity> provinces = provinceDAO
+				.list("from provinceEntity");
+
+		return "initSellerAndBuyer";
+	}
+	/**
+	 * 激活账号
 	 * 
 	 * @param userVO
 	 * @return
@@ -272,17 +287,6 @@ public class UserInfoService extends BaseService {
 			putAlertMsg("操作码不正确,请重新输入！");
 		}
 		userVO.setUserEntity(userEntity);
-		return "initUpdatePassword";
-	}
-
-	/**
-	 * 初始化修改密码
-	 * 
-	 * @param userVO
-	 * @return
-	 * @throws Exception
-	 */
-	public String initUpdatePassword(UserVO userVO) throws Exception {
 		return "initUpdatePassword";
 	}
 
