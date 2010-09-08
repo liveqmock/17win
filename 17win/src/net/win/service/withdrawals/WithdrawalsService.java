@@ -1,4 +1,4 @@
-package net.win.service.user;
+package net.win.service.withdrawals;
 
 import java.util.ArrayList;
 import java.util.Date;

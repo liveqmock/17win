@@ -1,9 +1,9 @@
-package net.win.action.user;
+package net.win.action.withdrawals;
 
 import javax.annotation.Resource;
 
 import net.win.BaseAction;
-import net.win.service.user.WithdrawalsService;
+import net.win.service.withdrawals.WithdrawalsService;
 import net.win.vo.WithdrawalsVO;
 
 import org.apache.struts2.convention.annotation.Action;

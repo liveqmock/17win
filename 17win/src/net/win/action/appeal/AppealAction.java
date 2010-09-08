@@ -1,11 +1,11 @@
-package net.win.action.user;
+package net.win.action.appeal;
 
 import java.io.File;
 
 import javax.annotation.Resource;
 
 import net.win.BaseAction;
-import net.win.service.user.AppealService;
+import net.win.service.appeal.AppealService;
 import net.win.vo.AppealVO;
 import net.win.vo.UpLoadFileVO;
 

@@ -132,7 +132,7 @@
 
 	<!-- quartz -->
 	<!-- 要调用的工作类 -->
-	<bean id="taskQuartz" class="net.win.quartz.TaskQuartz"></bean>
+	<bean id="taskQuartz" class="net.win.service.quartz.TaskQuartz"></bean>
 	<!-- 定义调用对象和调用对象的方法 -->
 	<bean id="jobtask"
 		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
