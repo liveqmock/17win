@@ -1,4 +1,4 @@
-package net.win.quartz;
+package net.win.service.quartz;
 
 public class TaskQuartz {
 	public void work() {

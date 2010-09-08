@@ -39,16 +39,6 @@ public class CreditTaskService extends BaseService {
 	}
 
 	/**
-	 * 初始化任务
-	 * 
-	 * @param userVO
-	 * @return
-	 */
-	public String initTask(CreditTaskVO creditTaskVO) throws Exception {
-		return "initTask";
-	}
-
-	/**
 	 * 初始化发布任务
 	 * 
 	 * @param userVO
@@ -57,8 +47,19 @@ public class CreditTaskService extends BaseService {
 	public String initReleaseTask(CreditTaskVO creditTaskVO) throws Exception {
 		if (!getLoginUser().getOperationCodeStatus()) {
 			return "operationValidate";
+		} else {
+			UserEntity userEntity = getLoginUserEntity(userDAO);
+			return "initReleaseTask";
 		}
-		return "initReleaseTask";
+	}
+	/**
+	 * 初始化任务
+	 * 
+	 * @param userVO
+	 * @return
+	 */
+	public String initTask(CreditTaskVO creditTaskVO) throws Exception {
+		return "initTask";
 	}
 
 }
