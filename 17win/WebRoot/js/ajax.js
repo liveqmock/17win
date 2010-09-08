@@ -1,17 +1,16 @@
 // 得到city
-function getCities(pid, selectCityId, selectAreaId) {
+function getCities(pid, cityObj, areaObj) {
 	$.post("ajaxManager/ajax!address.php", {
 				type : "1",
 				id : pid
 			}, function(data) {
-				var selectCity = $("#" + selectCityId);
-				var selectArea = $("#" + selectAreaId);
+				var selectCity = $(cityObj);
+				var selectArea = $(areaObj);
 				selectCity.empty();
 				selectArea.empty();
-				var option = $("<option value=''>--\u8bf7\u9009\u62e9--</option>");
+				var option = $("<option value=''>--请选择--</option>");
 				selectCity.append(option);
-				selectArea
-						.append($("<option value=''>\u8bf7\u9009\u62e9</option>"));
+				selectArea.append($("<option value=''>请选择</option>"));
 				var cities = data.cityList;
 				for (var i = 0; i < cities.length; i++) {
 					option = $("<option></option>", {
@@ -23,14 +22,14 @@ function getCities(pid, selectCityId, selectAreaId) {
 			}, "json");
 }
 // 得到area
-function getAreas(cid, selectAreaId) {
+function getAreas(cid, areaObj) {
 	$.post("ajaxManager/ajax!address.php", {
 				type : "2",
 				id : cid
 			}, function(data) {
-				var selectArea = $("#" + selectAreaId);
+				var selectArea = $(areaObj);
 				selectArea.empty();
-				var option = $("<option>--\u8bf7\u9009\u62e9--</option>");
+				var option = $("<option>--请选择--</option>");
 				selectArea.append(option);
 				var cities = data.cityList;
 				var areas = data.areaList;

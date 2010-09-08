@@ -61,7 +61,7 @@ public class UserInfoAction extends BaseAction {
 	 * @return
 	 * @throws Exception
 	 */
-	public String updateSellerAndBuyer(UserVO userVO) throws Exception {
+	public String updateSellerAndBuyer( ) throws Exception {
 		return userInfoService.updateSellerAndBuyer(userVO);
 	}
 
@@ -72,7 +72,7 @@ public class UserInfoAction extends BaseAction {
 	 * @return
 	 * @throws Exception
 	 */
-	public String initSellerAndBuyer(UserVO userVO) throws Exception {
+	public String initSellerAndBuyer( ) throws Exception {
 		return userInfoService.initSellerAndBuyer(userVO);
 	}
 

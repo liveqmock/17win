@@ -118,7 +118,7 @@
 										</tr>
 										<tr>
 											<td height=20>
-												<A href="userInfoManager/info!initUpdateInfo.php">卖号/买号</A>
+												<A href="userInfoManager/info!initSellerAndBuyer.php">卖号/买号</A>
 											</td>
 										</tr>
 										<tr>

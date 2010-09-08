@@ -2,15 +2,20 @@ package net.win.service.user;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.annotation.Resource;
 
 import net.win.BaseService;
 import net.win.UserLoginInfo;
 import net.win.dao.AreaDAO;
+import net.win.dao.BuyerDAO;
 import net.win.dao.CityDAO;
 import net.win.dao.ProvinceDAO;
+import net.win.dao.SellerDAO;
 import net.win.dao.UserDAO;
 import net.win.dao.WithDrawalsDAO;
 import net.win.entity.BuyerEntity;
@@ -20,19 +25,27 @@ import net.win.entity.UserEntity;
 import net.win.utils.ArithUtils;
 import net.win.utils.StringUtils;
 import net.win.utils.TotalUtils;
+import net.win.vo.BuyerVO;
+import net.win.vo.SellerVO;
 import net.win.vo.UserVO;
 
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
-@SuppressWarnings({"unused", "unchecked"})
+import com.sun.org.apache.commons.beanutils.BeanUtils;
+
+@SuppressWarnings( { "unused", "unchecked" })
 @Service("userInfoService")
 public class UserInfoService extends BaseService {
 	@Resource
 	private UserDAO userDAO;
 	@Resource
 	private WithDrawalsDAO withDrawalsDAO;
+	@Resource
+	private SellerDAO sellerDAO;
+	@Resource
+	private BuyerDAO buyerDAO;
 	@Resource
 	private ProvinceDAO provinceDAO;
 	@Resource
@@ -45,7 +58,7 @@ public class UserInfoService extends BaseService {
 	private FreeMarkerConfigurer freeMarkerCfj;
 
 	/**
-	 * 初始化买家或卖家
+	 * 买家或卖家
 	 * 
 	 * @param userVO
 	 * @return
@@ -57,9 +70,9 @@ public class UserInfoService extends BaseService {
 		List<BuyerEntity> buyers = userVO.getBuyers();
 
 		userDAO.deleteBySQL("delete TB_SELLER where USER_ID_=:userId",
-				new String[]{"userId"}, new Object[]{userEntity.getId()});
+				new String[] { "userId" }, new Object[] { userEntity.getId() });
 		userDAO.deleteBySQL("delete TB_BUYER where USER_ID_=:userId",
-				new String[]{"userId"}, new Object[]{userEntity.getId()});
+				new String[] { "userId" }, new Object[] { userEntity.getId() });
 
 		userEntity.setSellers(sellers);
 		userEntity.setBuyers(buyers);
@@ -78,18 +91,54 @@ public class UserInfoService extends BaseService {
 	 * @throws Exception
 	 */
 	public String initSellerAndBuyer(UserVO userVO) throws Exception {
-		UserEntity userEntity = getLoginUserEntity(userDAO);
-		List<SellerEntity> sellers = userEntity.getSellers();
-		List<BuyerEntity> buyers = userEntity.getBuyers();
+		List<SellerEntity> sellers = sellerDAO.list(
+				"from SellerEntity _s where _s.user.id=:userID", "userID",
+				getLoginUser().getId());
+		List<BuyerEntity> buyers = buyerDAO.list(
+				"from BuyerEntity _b where _b.user.id=:userID", "userID",
+				getLoginUser().getId());
+		Map<String, List<SellerVO>> sellerResult = new TreeMap<String, List<SellerVO>>();
+		sellerResult.put("1", new ArrayList<SellerVO>());
+		sellerResult.put("2", new ArrayList<SellerVO>());
+		sellerResult.put("3", new ArrayList<SellerVO>());
 
-		putByRequest("sellers", sellers);
-		putByRequest("buyers", buyers);
+		Map<String, List<BuyerVO>> buyerResult = new TreeMap<String, List<BuyerVO>>();
+		buyerResult.put("1", new ArrayList<BuyerVO>());
+		buyerResult.put("2", new ArrayList<BuyerVO>());
+		buyerResult.put("3", new ArrayList<BuyerVO>());
+		// 解析
+		if (sellers.size() > 0) {
+			SellerVO sellerVO;
+			for (SellerEntity sellerEntity : sellers) {
+				sellerVO = new SellerVO();
+				List<SellerVO> list = sellerResult.get(sellerEntity.getType());
+				BeanUtils.copyProperties(sellerVO, sellerEntity);
+				sellerVO.setProvinceID(sellerEntity.getProvince().getId());
+				sellerVO.setCityID(sellerEntity.getCity().getId());
+				sellerVO.setAreaID(sellerEntity.getArea().getId());
+				list.add(sellerVO);
+			}
+		}
+
+		if (buyers.size() > 0) {
+			BuyerVO buyerVO;
+			for (BuyerEntity buyerEntity : buyers) {
+				buyerVO = new BuyerVO();
+				List<BuyerVO> list = buyerResult.get(buyerEntity.getType());
+				BeanUtils.copyProperties(buyerVO, buyerEntity);
+				list.add(buyerVO);
+			}
+		}
+
+		putByRequest("sellers", sellerResult);
+		putByRequest("buyers", buyerResult);
 		// 省
 		List<ProvinceEntity> provinces = provinceDAO
-				.list("from provinceEntity");
-
+				.list("from ProvinceEntity");
+		putByRequest("provinces", provinces);
 		return "initSellerAndBuyer";
 	}
+
 	/**
 	 * 激活账号
 	 * 

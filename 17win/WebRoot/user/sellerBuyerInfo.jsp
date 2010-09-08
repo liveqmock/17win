@@ -9,10 +9,11 @@
 		<LINK href="css/top_bottom.css" type="text/css" rel="stylesheet">
 		<LINK href="css/Css.css" type="text/css" rel="stylesheet">
 		<LINK href="css/center.css" type="text/css" rel="stylesheet">
-		<SCRIPT src="js/jieducm_pupu.js" type="text/javascript"></SCRIPT>
-		<SCRIPT src="js/aop.js" type=text/javascript></SCRIPT>
 		<SCRIPT src="js/ajax.js" type=text/javascript></SCRIPT>
-		<SCRIPT src="user/updateInfo.js" type=text/javascript></SCRIPT>
+		<SCRIPT src="js/aop.js" type=text/javascript></SCRIPT>
+		<SCRIPT src="user/sellerBuyerInfo.js" type=text/javascript></SCRIPT>
+
+
 		<style type="text/css">
 body {
 	
@@ -57,8 +58,8 @@ img {
 
 	</HEAD>
 	<BODY>
-		<s:form action="userInfoManager/info!updateInfo.php" theme="simple"
-			onsubmit="return validateForm()">
+		<s:form action="userInfoManager/info!updateSellerAndBuyer.php"
+			theme="simple" onsubmit="return validateForm()">
 			<s:include value="../common/title.jsp"></s:include>
 			<table width="760" border="0" align="center" cellpadding="0"
 				cellspacing="0" bgcolor="#FFFFFF">
@@ -88,50 +89,149 @@ img {
 											</div>
 											<div class="pp8">
 												<strong>卖号/买号管理</strong>
+												<s:select id="tempProvince" list="#request.provinces"
+													cssStyle="display:none" listKey="id" listValue="name"
+													headerKey="" headerValue="--请选择--">
+												</s:select>
 											</div>
+											<s:iterator value="#request.sellers.keys" id="type">
+												<table width="99%" cellspacing="0" cellpadding="0"
+													border="0" align="center">
+													<tbody id="sellerTable<s:property value="#type"/>">
+														<tr>
+															<td width="16%" height="40" align="right" nowrap="nowrap"
+																class="font14b2">
+																<s:set name="platformName"
+																	value="#type==1?'淘宝':#type==2?'拍拍':'有啊'"></s:set>
+																<s:property value="#platformName" />
+																卖号资料：
+															</td>
+															<td colspan="4">
+																<hr style="color: rgb(255, 153, 51);">
+															</td>
+															<td width="20">
+																<input type="button" value="新增" style="cursor: pointer;"
+																	sellerFlag="<s:property value="#type"/>">
+															</td>
+														</tr>
+														<tr style="background: #EDF6FF">
+															<th height="10" nowrap="nowrap" align="center">
+																店铺地址
+															</th>
+															<th height="10" nowrap="nowrap" align="center">
+																发货地址
+															</th>
+															<th height="10" nowrap="nowrap" align="center">
+																卖号
+															</th>
+															<th height="10" nowrap="nowrap" align="center">
+																操作
+															</th>
+														</tr>
+														<s:iterator value="#request.sellers.get(#type)"
+															id="seller">
+															<tr class="sellerTr">
+																<td height="10">
+																	<input type="text" name="userVO.sellers[0].shopURL"
+																		value="<s:property value="#seller.shopURL" />" />
+																	<input type="hidden" name="userVO.sellers[0].type"
+																		value="<s:property value="#type" />">
+																</td>
+																<td height="10" class="address">
+																	省:
+																	<s:select id="provinceID" value="#seller.province.id"
+																		name="userVO.sellers[0].province.id"
+																		list="userVO.provinces" listKey="id" listValue="name"
+																		headerKey="" headerValue="--请选择--">
+																	</s:select>
+																	市:
+																	<s:select id="cityID" name="userVO.sellers[0].city.id"
+																		value="#seller.city.id" list="userVO.cities"
+																		listKey="id" listValue="name" headerKey=""
+																		headerValue="请选择">
+																	</s:select>
+																	县:
+																	<s:select id="areaID" name="userVO.sellers[0].area.id"
+																		value="#seller.area.id" list="userVO.areas"
+																		listKey="id" listValue="name" headerKey=""
+																		headerValue="请选择">
+																	</s:select>
+																</td>
+																<td>
+																	<input type="text" name="userVO.sellers[0].name"
+																		value="<s:property value="#seller.name" />" />
+																</td>
+																<td>
+																	<a href="javascript:void(0)"
+																		onclick="deleteSeller(this)">删除</a>
+																</td>
+															</tr>
+														</s:iterator>
+													</tbody>
+												</table>
+											</s:iterator>
+											<s:iterator value="#request.buyers.keys" id="type">
+												<s:set name="platformName"
+													value="#type==1?'淘宝':#type==2?'拍拍':'有啊'"></s:set>
+												<table width="99%" cellspacing="0" cellpadding="0"
+													border="0" align="center">
+													<tbody id="buyerTable<s:property value="#type"/>">
+														<tr>
+															<td width="16%" height="40" align="right"
+																class="font14b2">
+																<s:property value="#platformName" />
+																买号资料：
 
-											<table width="99%" cellspacing="0" cellpadding="0" border="0"
-												align="center">
-												<tbody>
-													<tr>
-														<td width="16%" height="40" align="right" class="font14b2">
-															淘宝资料：
-														</td>
-														<td colspan="4">
-															<hr style="color: rgb(255, 153, 51);">
-														</td>
-														<td width="20">
-															<input type="button" value="新增">
-														</td>
-													</tr>
-													<tr>
-														<td height="10">
-															&nbsp;
-														</td>
-														<td height="10" colspan="">
-															淘宝店铺地址
-														</td>
-														<td height="10" colspan="">
-															卖号发货地址
-														</td>
-														<td height="10" colspan="">
-															淘宝卖号
-														</td>
-														<td height="10" colspan="">
-															淘宝买号
-														</td>
-														<td height="10" colspan="">
-															操作
-														</td>
-													</tr>
-												</tbody>
-											</table>
+															</td>
+															<td colspan="4">
+																<hr style="color: rgb(255, 153, 51);">
+															</td>
+															<td width="20">
+																<input type="button" value="新增"
+																	buyerFlag="<s:property value="#type"/>"
+																	style="cursor: pointer;">
+															</td>
+														</tr>
+
+														<tr style="background: #EDF6FF">
+															<th height="10" nowrap="nowrap" align="center">
+																买号
+															</th>
+															<th height="10" nowrap="nowrap" align="center">
+																买号积分
+															</th>
+															<th height="10" nowrap="nowrap" align="center">
+																操作
+															</th>
+														</tr>
+														<s:iterator value="#request.buyers.get(#type)" id="buyer">
+															<tr>
+																<td height="10">
+																	<input type="text" name=""
+																		value="<s:property value="#buyer.name" />">
+																	<input type='hidden' name='userVO.buyers[0].type'
+																		value="<s:property value="#type"/>" />
+																</td>
+																<td align="center">
+																	<s:property value="#buyer.score" />
+																</td>
+																<td align="center">
+																	<a href="javascript:void(0)"
+																		onclick="deleteBuyer(this)">删除</a>
+																</td>
+															</tr>
+														</s:iterator>
+													</tbody>
+
+												</table>
+												<hr color="#0082E0">
+											</s:iterator>
 											<table width="99%" cellspacing="0" cellpadding="0" border="0"
 												align="center">
 												<tbody>
 													<tr>
 														<td width="100%" align="left" class="font12b2">
-															<font color="red">注意：如果只增加卖家信息，那么品平台(淘宝,拍拍,有啊)小号可以不填写，反之亦然.淘宝账号高扭矩店铺地址自动获取</font>
+															<font color="red">注意：为了您和他人的安全，买好在淘宝上如果是一个黄钻，请不要在使用！</font>
 														</td>
 													</tr>
 												</tbody>

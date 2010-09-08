@@ -7,7 +7,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name = "TB_SELLER")
 /**
@@ -15,7 +14,7 @@ import javax.persistence.Table;
  */
 public class SellerEntity extends BaseEntity {
 	// 名字
-	@Column(name = "SELLER_", length = 20, nullable = false)
+	@Column(name = "NAME_", length = 20, nullable = false)
 	private String name;
 	// 类型(1淘宝,2怕拍,3有啊)
 	@Column(name = "TYPE_", columnDefinition = "CHAR(1)", nullable = false)
@@ -23,7 +22,12 @@ public class SellerEntity extends BaseEntity {
 	// 店铺地址
 	@Column(name = "SHOPURL_", length = 50, unique = true, nullable = false)
 	private String shopURL;
-	
+
+	// 所属人
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "USER_ID_")
+	private UserEntity user;
+
 	// 省
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "RPOVINCE_ID_")
@@ -36,6 +40,7 @@ public class SellerEntity extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "AREA_ID_")
 	private AreaEntity area;
+
 	public ProvinceEntity getProvince() {
 		return province;
 	}
@@ -82,6 +87,14 @@ public class SellerEntity extends BaseEntity {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public UserEntity getUser() {
+		return user;
+	}
+
+	public void setUser(UserEntity user) {
+		this.user = user;
 	}
 
 }
