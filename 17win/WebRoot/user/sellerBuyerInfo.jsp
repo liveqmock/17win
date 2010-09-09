@@ -135,6 +135,7 @@ img {
 																	<input type="text" name="userVO.sellers[0].shopURL"
 																		value="<s:property value="#seller.shopURL" />" />
 																	<input type="hidden" name="userVO.sellers[0].type"
+																		onblur="obtainSeller('<s:property value="#type" />',this)"
 																		value="<s:property value="#type" />">
 																</td>
 																<td height="10" class="address">

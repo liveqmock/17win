@@ -8,7 +8,9 @@ $(document).ready(function() {
 				+ "  <input type='hidden' name='userVO.sellers[0].type' value='"
 				+ type
 				+ "' />  "
-				+ "	<input type='text' name='userVO.sellers[0].shopURL' >		 "
+				+ "	<input type='text' name='userVO.sellers[0].shopURL'  onblur='obtainSeller(\'"
+				+ type
+				+ "\',this)' >		 "
 				+ "		</td>  "
 				+ "		<td  class='address' nowrap='nowrap' align='center' >"
 				+ "	</td> "
@@ -65,20 +67,77 @@ function selectCity(obj) {
 function selectArea(obj) {
 	getAreas($(obj).val(), $(obj).next().get(0));
 }
-
 // 验证
 function validateForm() {
-	var inputDom = $("tr .sellerTr").find("input");
+	var inputSellerDom = $("tr .sellerTr").find("input");
+	var inputBuyerDom = $("tr .buyerTr").find("input");
 	var submitFlag = true;
-	inputDom.each(function() {
+	inputSellerDom.each(function() {
 				if (Validater.isBlank($(this).val())) {
+					changeStyle(this, '0');
 					submitFlag = false;
-					return;
+				} else {
+					changeStyle(this, '1');
+				}
+			});
+	inputBuyerDom.each(function() {
+				if (Validater.isBlank($(this).val())) {
+					changeStyle(this, '0');
+					submitFlag = false;
+				} else {
+					changeStyle(this, '1');
 				}
 			});
 	if (!submitFlag) {
-		alert("不能为空！");
+		alert("数据不能为空，不需要的数据可以删除！");
 		return false;
+	} else {
+		// 重新把数据关系拉上。
+		var tr = $("tr .sellerTr");
+		var i = 0;
+		tr.each(function() {
+					var inputs = $(this).find("input,select");
+					inputs.each(function() {
+								var name = $(this).attr("name");
+								name = name.replace("0", i + "");
+								$(this).attr("name", name);
+							});
+				});
+		tr = $("tr .buyerTr");
+		tr.each(function() {
+					var inputs = $(this).find("input,select");
+					inputs.each(function() {
+								var name = $(this).attr("name");
+								name = name.replace("0", i + "");
+								$(this).attr("name", name);
+							});
+				});
+		return true;
 	}
-	
+}
+// 根据店铺地址获取到卖号
+function obtainSeller(type, obj) {
+	var input = $(obj).parent().next().next().childen("input");
+	// 获取用户地址
+	VhostAop.divAOP.ajax("ajaxManager/ajax!obtainSeller.php", {
+				url : $(this).val(),
+				type : type
+			}, function(data) {
+				if (data.seller == null || data.seller == "") {
+					changeStyle(this, '0');
+					alert("您输入的地址不正确！");
+				} else {
+					changeStyle(this, '1');
+					input.val(data.seller);
+				}
+			}, "json");
+}
+// 改变样式
+function changeStyle(obj, flag) {
+	if ("0" == flag) {
+		$(obj).css("borderColor", "red");
+		$(obj).attr("title", "错误");
+	} else {
+		$(obj).css("borderColor", "white");
+	}
 }
