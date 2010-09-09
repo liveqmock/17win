@@ -52,10 +52,10 @@
 										
 										</b>
 										</font> 回来 |
-											<A href="userInfoManager/info!init.php" target="_top">
+											<A href="userManager/base!loginOut.php" target="_self">
 											[安全退出] </A>
 										|
-										<A href="userInfoManager/info!init.php" target="_top">
+										<A href="userInfoManager/info!init.php" target="_self">
 											个人中心 </A>|
 									</s:else>
 									<A href="#" title=添加到收藏夹

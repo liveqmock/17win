@@ -13,7 +13,6 @@
 		<SCRIPT src="js/aop.js" type=text/javascript></SCRIPT>
 		<SCRIPT src="user/sellerBuyerInfo.js" type=text/javascript></SCRIPT>
 
-
 		<style type="text/css">
 body {
 	

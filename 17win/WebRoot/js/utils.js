@@ -17,6 +17,7 @@ function copy_code(copyText) {
 	}
 }
 
+
 /**
  * 只能输入整数的文本框
  * 

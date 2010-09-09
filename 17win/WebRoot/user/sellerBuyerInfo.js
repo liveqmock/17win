@@ -8,9 +8,9 @@ $(document).ready(function() {
 				+ "  <input type='hidden' name='userVO.sellers[0].type' value='"
 				+ type
 				+ "' />  "
-				+ "	<input type='text' name='userVO.sellers[0].shopURL'  onblur='obtainSeller(\'"
+				+ "	<input type='text' name='userVO.sellers[0].shopURL'  onblur=\"obtainSeller('"
 				+ type
-				+ "\',this)' >		 "
+				+ "',this)\" >		 "
 				+ "		</td>  "
 				+ "		<td  class='address' nowrap='nowrap' align='center' >"
 				+ "	</td> "
@@ -114,13 +114,14 @@ function validateForm() {
 				});
 		return true;
 	}
+	
 }
 // 根据店铺地址获取到卖号
 function obtainSeller(type, obj) {
-	var input = $(obj).parent().next().next().childen("input");
+	var input = $(obj).parent().next().next().children("input");
 	// 获取用户地址
 	VhostAop.divAOP.ajax("ajaxManager/ajax!obtainSeller.php", {
-				url : $(this).val(),
+				url : $(obj).val(),
 				type : type
 			}, function(data) {
 				if (data.seller == null || data.seller == "") {

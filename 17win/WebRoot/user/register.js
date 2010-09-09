@@ -18,8 +18,10 @@ $(document).ready(function() {
 					}, function(data) {
 						if (data.bool) {
 							validateSuccess(obj);
+							submitFlag = true;
 						} else {
 							validateError(obj, "用户名已经存在");
+							submitFlag = false;
 						}
 					});
 
@@ -32,67 +34,58 @@ $(document).ready(function() {
 	});
 	// 密码
 	$("#password").bind("blur", function() {
-		if (Validater.isPassword($(this).val())) {
-			validateSuccess(this);
-		} else {
-			validateError(this, "\u5fc5\u987b\u662f6\u81f320\u4f4d\u5b57\u7b26");
-			submitFlag = false;
-		}
-	});
+				if (Validater.isPassword($(this).val())) {
+					validateSuccess(this);
+					submitFlag = true;
+				} else {
+					validateError(this, "密码格式不正确！");
+					submitFlag = false;
+				}
+			});
 	// 确认密码密码
 	$("#rePassword").bind("blur", function() {
-		if ($(this).val() != $("#password").val()) {
-			validateError(this, "\u4e24\u6b21\u5bc6\u7801\u4e0d\u76f8\u7b49");
-			submitFlag = false;
-			return;
-		}
-		if (Validater.isPassword($(this).val())) {
-			validateSuccess(this);
-		} else {
-			validateError(this, "\u5fc5\u987b\u662f6\u81f320\u4f4d\u5b57\u7b26");
-			submitFlag = false;
-		}
-	});
+				if ($(this).val() != $("#password").val()) {
+					validateError(this, "两次密码不相等！");
+					submitFlag = false;
+				} else {
+					submitFlag = true;
+				}
+			});
 	// 操作码
 	$("#opertationCode").bind("blur", function() {
-		if (Validater.isPassword($(this).val())) {
-			if ($(this).val() == $("#rePassword").val()) {
-				validateError(this, "操作码不能和密码相同！");
-				submitFlag = false;
-			} else {
-				validateSuccess(this);
-
-			}
-		} else {
-			validateError(this, "\u5fc5\u987b\u662f6\u81f320\u4f4d\u5b57\u7b26");
-			submitFlag = false;
-		}
-	});
+				if (Validater.isPassword($(this).val())) {
+					if ($(this).val() == $("#rePassword").val()) {
+						validateError(this, "操作码不能和密码相同！");
+						submitFlag = false;
+					} else {
+						validateSuccess(this);
+						submitFlag = true;
+					}
+				} else {
+					validateError(this, "操作码格式不正确！");
+					submitFlag = false;
+				}
+			});
 	// 确认操作码
 	$("#reOperationCode").bind("blur", function() {
-		if ($(this).val() != $("#opertationCode").val()) {
-			validateError(this,
-					"\u4e24\u6b21\u64cd\u4f5c\u7801\u4e0d\u76f8\u7b49");
-			submitFlag = false;
-			return;
-		}
-		if (Validater.isPassword($(this).val())) {
-			validateSuccess(this);
-		} else {
-			validateError(this, "\u5fc5\u987b\u662f6\u81f320\u4f4d\u5b57\u7b26");
-			submitFlag = false;
-		}
-	});
+				if ($(this).val() != $("#opertationCode").val()) {
+					validateError(this, "两次操作码不相等！");
+					submitFlag = false;
+				} else {
+					submitFlag = true;
+				}
+			});
 
 	// QQ
 	$("#qq").bind("blur", function() {
-		if (Validater.isQQ($(this).val())) {
-			validateSuccess(this);
-		} else {
-			validateError(this, "QQ\u53f7\u7801\u683c\u5f0f\u4e0d\u6b63\u786e");
-			submitFlag = false;
-		}
-	});
+				if (Validater.isQQ($(this).val())) {
+					validateSuccess(this);
+					submitFlag = true;
+				} else {
+					validateError(this, "QQ号码格式不正确！");
+					submitFlag = false;
+				}
+			});
 	// email
 	$("#email").bind("blur", function() {
 				var obj = this;
@@ -102,14 +95,15 @@ $(document).ready(function() {
 							}, function(data) {
 								if (data.bool) {
 									validateSuccess(obj);
+									submitFlag = true;
 								} else {
-									validateError(obj, "该邮箱已经注册过");
+									validateError(obj, "该邮箱已经注册过！");
+									submitFlag = false;
 								}
 							});
 
 				} else {
-					validateError(this,
-							"\u90ae\u7bb1\u683c\u5f0f\u4e0d\u6b63\u786e");
+					validateError(this, "邮箱格式不正确！");
 					submitFlag = false;
 				}
 			});
@@ -122,62 +116,21 @@ $(document).ready(function() {
 							}, function(data) {
 								if (data.bool) {
 									validateSuccess(obj);
+									submitFlag = true;
 								} else {
-									validateError(obj, "该手机号码已经注册过");
+									validateError(obj, "该手机号码已经注册过！");
+									submitFlag = false;
 								}
 							});
 				} else {
-					validateError(this,
-							"\u624b\u673a\u53f7\u7801\u4e0d\u6b63\u786e");
+					validateError(this, "手机号码格式不正确！");
 					submitFlag = false;
 				}
 			});
 });
 function validateForm() {
 	submitFlag = true;
-	$("input").blur();
 	if (submitFlag) {
-		// 淘宝卖家是否有账号
-		if (Validater.isBlank($("#taobaoSeller").val())) {
-			$("#taobaoSeller").attr("disabled", true);
-			$("#taobaoShopURL").attr("disabled", true);
-		} else {
-			$("#taobaoSellerType").attr("disabled", false);
-		}
-		// 淘宝买家是否有账号
-		if (Validater.isBlank($("#taobaoBuyer").val())) {
-			$("#taobaoBuyer").attr("disabled", true);
-		} else {
-			$("#taobaoBuyerType").attr("disabled", false);
-		}
-		// ///////
-		// 拍拍卖家是否有账号
-		if (Validater.isBlank($("#paipaiSeller").val())) {
-			$("#paipaiSeller").attr("disabled", true);
-			$("#paipaiShopURL").attr("disabled", true);
-		} else {
-			$("#paipaiSellerType").attr("disabled", false);
-		}
-		// 拍拍买家是否有账号
-		if (Validater.isBlank($("#paipaiBuyer").val())) {
-			$("#paipaiBuyer").attr("disabled", true);
-		} else {
-			$("#paipaiBuyerType").attr("disabled", false);
-		}
-		// ///////
-		// 有啊卖家是否有账号
-		if (Validater.isBlank($("#youaSeller").val())) {
-			$("#youaSeller").attr("disabled", true);
-			$("#youaShopURL").attr("disabled", true);
-		} else {
-			$("#youaSellerType").attr("disabled", false);
-		}
-		// 有啊买家是否有账号
-		if (Validater.isBlank($("#youaBuyer").val())) {
-			$("#youaBuyer").attr("disabled", true);
-		} else {
-			$("#paipaiBuyerType").attr("disabled", false);
-		}
 		return true;
 	} else {
 		alert("\u586b\u5199\u7684\u8d44\u6599\u4e0d\u6b63\u786e\uff01");

@@ -35,7 +35,7 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 import com.sun.org.apache.commons.beanutils.BeanUtils;
 
-@SuppressWarnings( { "unused", "unchecked" })
+@SuppressWarnings( {  "unchecked" })
 @Service("userInfoService")
 public class UserInfoService extends BaseService {
 	@Resource
@@ -407,7 +407,6 @@ public class UserInfoService extends BaseService {
 	 */
 	public String initUserInfo(UserVO userVO) throws Exception {
 		UserLoginInfo userLoginInfo = getLoginUser();
-		UserEntity userEntity = userDAO.get(userLoginInfo.getId());
 		List<Object[]> tmpResult1 = (List<Object[]>) userDAO
 				.list(
 						" select   _rct.type,_rct.status , count(_rct.id) from  UserEntity   as _u    inner join  _u.receiveCreditTasks as _rct where   _u.id=:id group by  _rct.type, _rct.status  order by _rct.type,_rct.status",

@@ -19,6 +19,7 @@ import net.win.utils.StringUtils;
 import net.win.utils.UserLevelUtils;
 import net.win.vo.UserVO;
 
+import org.apache.struts2.ServletActionContext;
 import org.hibernate.Hibernate;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -45,6 +46,16 @@ public class UserService extends BaseService {
 	@Resource
 	private FreeMarkerConfigurer freeMarkerCfj;
 
+	/**
+	 * 注销
+	 * 
+	 * @param userVO
+	 * @return
+	 */
+	public String loginOut(UserVO userVO) throws Exception {
+		ServletActionContext.getRequest().getSession().invalidate();
+		return "loginOut";
+	}
 	/**
 	 * 初始化找回密码
 	 * 
@@ -120,11 +131,11 @@ public class UserService extends BaseService {
 		UserEntity userEntity = userDAO
 				.uniqueResult(
 						"from UserEntity  as _u where _u.username=:username and _u.loginPassword=:loginPassword",
-						new String[] { "username", "loginPassword" },
-						new Object[] {
+						new String[]{"username", "loginPassword"},
+						new Object[]{
 								userVO.getUserEntity().getUsername(),
 								StringUtils.processPwd(userVO.getUserEntity()
-										.getLoginPassword()) });
+										.getLoginPassword())});
 		if (userEntity == null) {
 			putAlertMsg("用户名或密码错误");
 			userVO.setVerificationCode(null);
@@ -142,9 +153,6 @@ public class UserService extends BaseService {
 	 * @throws Exception
 	 */
 	public String initRegister(UserVO userVO) throws Exception {
-		List<ProvinceEntity> provinces = provinceDAO.listAll();
-		Hibernate.initialize(provinces);
-		userVO.setProvinces(provinces);
 		return "initRegister";
 	}
 
