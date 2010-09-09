@@ -100,6 +100,10 @@ public final class HttpB2CUtils {
 	 */
 	public static String obtainSeller(String url, String type) throws Exception {
 		String seller = "";
+		//判断输入的url地址的类型和type是否相等
+		if (!obtainShopType(url).equals(type)) {
+			return "";
+		}
 		HttpEntity entity = getContext(url, type);
 		BufferedReader br = new BufferedReader(new InputStreamReader(entity
 				.getContent(), "UTF-8"));

@@ -53,6 +53,10 @@ img {
 	color: #ffffff;
 	font-weight: bold;
 }
+
+.errorText {
+	border: #FF0000 solid;
+}
 </style>
 
 	</HEAD>

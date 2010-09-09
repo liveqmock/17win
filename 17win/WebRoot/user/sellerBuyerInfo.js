@@ -8,14 +8,14 @@ $(document).ready(function() {
 				+ "  <input type='hidden' name='userVO.sellers[0].type' value='"
 				+ type
 				+ "' />  "
-				+ "	<input type='text' name='userVO.sellers[0].shopURL'  onblur=\"obtainSeller('"
+				+ "	<input type='text' name='userVO.sellers[0].shopURL'     onblur=\"obtainSeller('"
 				+ type
 				+ "',this)\" >		 "
 				+ "		</td>  "
 				+ "		<td  class='address' nowrap='nowrap' align='center' >"
 				+ "	</td> "
 				+ "		<td  align='center'  > "
-				+ "		 <input type='text' name='userVO.sellers[0].name'>	  "
+				+ "		 <input type='text' name='userVO.sellers[0].name' readonly='readonly'>	  "
 				+ "			</td>  "
 				+ "			<td   align='center'  >    "
 				+ "			<a href=\"javascript:void(0)\" onclick=\"deleteSeller(this"
@@ -29,9 +29,9 @@ $(document).ready(function() {
 		selectP.attr("onchange", "selectCity(this)");
 		td.append(selectP);
 		td
-				.append("市：<select onchange='selectArea(this)' name='userVO.sellers[0].city.id'><option>请选择</option></select>");
+				.append("市：<select onchange='selectArea(this)' name='userVO.sellers[0].city.id'><option value=''>请选择</option></select>");
 		td
-				.append("县：<select name='userVO.sellers[0].area.id' ><option>请选择</option></select>");
+				.append("县：<select name='userVO.sellers[0].area.id' ><option value=''>请选择</option></select>");
 		tbody.append(tr);
 
 	});
@@ -74,18 +74,18 @@ function validateForm() {
 	var submitFlag = true;
 	inputSellerDom.each(function() {
 				if (Validater.isBlank($(this).val())) {
-					changeStyle(this, '0');
+					changeStyle(this, '0','错误');
 					submitFlag = false;
 				} else {
-					changeStyle(this, '1');
+					changeStyle(this, '1','');
 				}
 			});
 	inputBuyerDom.each(function() {
 				if (Validater.isBlank($(this).val())) {
-					changeStyle(this, '0');
+					changeStyle(this, '0','错误');
 					submitFlag = false;
 				} else {
-					changeStyle(this, '1');
+					changeStyle(this, '1','');
 				}
 			});
 	if (!submitFlag) {
@@ -98,12 +98,14 @@ function validateForm() {
 		tr.each(function() {
 					var inputs = $(this).find("input,select");
 					inputs.each(function() {
-								var name = $(this).attr("name");
-								name = name.replace("0", i + "");
-								$(this).attr("name", name);
-							});
+						var name = $(this).attr("name");
+						name = name.replace("0", i + "");
+							// $(this).attr("name", name);
+						});
+					i++;
 				});
 		tr = $("tr .buyerTr");
+		i = 0
 		tr.each(function() {
 					var inputs = $(this).find("input,select");
 					inputs.each(function() {
@@ -111,10 +113,12 @@ function validateForm() {
 								name = name.replace("0", i + "");
 								$(this).attr("name", name);
 							});
+					i++;
 				});
+
 		return true;
 	}
-	
+
 }
 // 根据店铺地址获取到卖号
 function obtainSeller(type, obj) {
@@ -125,20 +129,20 @@ function obtainSeller(type, obj) {
 				type : type
 			}, function(data) {
 				if (data.seller == null || data.seller == "") {
-					changeStyle(this, '0');
-					alert("您输入的地址不正确！");
+					changeStyle(obj, '0', '您输入的地址不正确！');
 				} else {
-					changeStyle(this, '1');
+					changeStyle(obj, '1','该地址可以使用！');
 					input.val(data.seller);
+					changeStyle(input.get(0),'1','成功！');
 				}
 			}, "json");
 }
 // 改变样式
-function changeStyle(obj, flag) {
+function changeStyle(obj, flag, msg) {
 	if ("0" == flag) {
-		$(obj).css("borderColor", "red");
-		$(obj).attr("title", "错误");
+		$(obj).addClass("errorText");
 	} else {
-		$(obj).css("borderColor", "white");
+		$(obj).removeClass("errorText");
 	}
+	$(obj).attr("title", msg);
 }
