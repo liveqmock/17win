@@ -134,38 +134,39 @@ img {
 														<s:iterator value="#request.sellers.get(#type)"
 															id="seller">
 															<tr class="sellerTr">
-																<td height="10">
+																<td align='center'>
 																	<input type="text" name="userVO.sellers[0].shopURL"
+																		onfocus="beforeBlur(this)"
+																		onblur="obtainSeller('<s:property value="#type" />',this)"
 																		value="<s:property value="#seller.shopURL" />" />
 																	<input type="hidden" name="userVO.sellers[0].type"
-																		onblur="obtainSeller('<s:property value="#type" />',this)"
 																		value="<s:property value="#type" />">
 																</td>
-																<td height="10" class="address">
-																	省:
+																<td class='address' nowrap='nowrap' align='center'>
+																	省：
 																	<s:select id="provinceID" value="#seller.province.id"
 																		name="userVO.sellers[0].province.id"
 																		list="userVO.provinces" listKey="id" listValue="name"
 																		headerKey="" headerValue="--请选择--">
 																	</s:select>
-																	市:
+																	市：
 																	<s:select id="cityID" name="userVO.sellers[0].city.id"
 																		value="#seller.city.id" list="userVO.cities"
 																		listKey="id" listValue="name" headerKey=""
 																		headerValue="请选择">
 																	</s:select>
-																	县:
+																	县：
 																	<s:select id="areaID" name="userVO.sellers[0].area.id"
 																		value="#seller.area.id" list="userVO.areas"
 																		listKey="id" listValue="name" headerKey=""
 																		headerValue="请选择">
 																	</s:select>
 																</td>
-																<td>
+																<td align='center'>
 																	<input type="text" name="userVO.sellers[0].name"
 																		value="<s:property value="#seller.name" />" />
 																</td>
-																<td>
+																<td align='center'>
 																	<a href="javascript:void(0)"
 																		onclick="deleteSeller(this)">删除</a>
 																</td>
@@ -174,6 +175,7 @@ img {
 													</tbody>
 												</table>
 											</s:iterator>
+											<hr  color="#0082E0" style="height: 10px; background: #0082E0">
 											<s:iterator value="#request.buyers.keys" id="type">
 												<s:set name="platformName"
 													value="#type==1?'淘宝':#type==2?'拍拍':'有啊'"></s:set>
@@ -211,7 +213,7 @@ img {
 														<s:iterator value="#request.buyers.get(#type)" id="buyer">
 															<tr class="buyerTr">
 																<td height="10">
-																	<input type="text" name=""
+																	<input type="text"  name="userVO.buyers[0].name"  onblur="obtainBuyer(this)"
 																		value="<s:property value="#buyer.name" />">
 																	<input type='hidden' name='userVO.buyers[0].type'
 																		value="<s:property value="#type"/>" />
@@ -228,7 +230,7 @@ img {
 													</tbody>
 
 												</table>
-												<hr color="#0082E0">
+
 											</s:iterator>
 											<table width="99%" cellspacing="0" cellpadding="0" border="0"
 												align="center">

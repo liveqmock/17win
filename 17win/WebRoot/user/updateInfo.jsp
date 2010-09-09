@@ -177,40 +177,6 @@ img {
 
 																		</td>
 																	</tr>
-
-																	<tr>
-																		<td height="40" align="right" valign="top"
-																			class="font12h">
-
-																			选择发货地：
-																		</td>
-																		<td align="left" nowrap="nowrap">
-
-																			<s:select id="provinceID"
-																				name="userVO.userEntity.province.id"
-																				list="userVO.provinces" listKey="id"
-																				listValue="name" headerKey="" headerValue="--请选择--">
-																			</s:select>
-																			省
-																			<s:select id="cityID"
-																				name="userVO.userEntity.city.id"
-																				list="userVO.cities" listKey="id" listValue="name"
-																				headerKey="" headerValue="请选择">
-																			</s:select>
-																			市
-																			<s:select id="areaID"
-																				name="userVO.userEntity.area.id" list="userVO.areas"
-																				listKey="id" listValue="name" headerKey=""
-																				headerValue="请选择">
-																			</s:select>
-																			县/区&nbsp;&nbsp;
-																			<br />
-																			系统会根据此信息，自动帮你生成发货地址
-																		</td>
-																		<td valign="top">
-
-																		</td>
-																	</tr>
 																</tbody>
 															</table>
 														</td>

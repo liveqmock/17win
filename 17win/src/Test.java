@@ -9,6 +9,8 @@ public class Test {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		System.out.println(System.currentTimeMillis());
+		Test test =new Test();
+		
+		System.out.println(test);
 	}
 }

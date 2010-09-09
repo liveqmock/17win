@@ -85,7 +85,7 @@ function validateForm() {
 	if (submitFlag) {
 		return true;
 	} else {
-		alert("\u586b\u5199\u7684\u8d44\u6599\u4e0d\u6b63\u786e\uff01");
+		alert("输入的内容不正确，请检查！");
 		return false;
 	}
 }
