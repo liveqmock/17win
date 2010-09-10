@@ -11,7 +11,7 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name = "TB_RECHARGELOG")
+@Table(name = "Tb_RechargeLog")
 public class RechargeLogEntity {
 	// 类型(1 购买发布点 2 充值 3会员)
 	private String type;

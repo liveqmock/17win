@@ -22,7 +22,7 @@ import org.hibernate.annotations.CascadeType;
  * 
  */
 @Entity
-@Table(name = "TB_USER")
+@Table(name = "Tb_User")
 public class UserEntity extends BaseEntity {
 	/**
 	 * 基本信息
@@ -167,8 +167,8 @@ public class UserEntity extends BaseEntity {
 	// // 推广
 	// private Set<UserEntity> promoteUsers = new HashSet<UserEntity>(0);
 	// // 信誉任务模板
-	// private Set<CreditTaskTemplateEntity> creditTaskTemplates = new
-	// HashSet<CreditTaskTemplateEntity>(
+	// private Set<CreditTaskRepositoryEntity> creditTaskTemplates = new
+	// HashSet<CreditTaskRepositoryEntity>(
 	// 0);
 	// // 流量任务模板
 	// private Set<FlowTaskTemplateEntity> flowTaskTemplates = new

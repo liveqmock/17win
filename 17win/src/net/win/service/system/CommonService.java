@@ -42,7 +42,8 @@ public class CommonService extends BaseService {
 			putAlertMsg("操作码不正确！");
 			return "activateOperattionCode";
 		}
-		return "";
+		String preURL = getByParam("preURL");
+		getResponse().sendRedirect(preURL);
+		return null;
 	}
-
 }

@@ -18,7 +18,7 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name = "TB_APPEAL")
+@Table(name = "Tb_Appeal")
 public class AppealEntity  extends BaseEntity{
 	// 标题
 	@Column(name = "TITLE_", length = 25, nullable = false)

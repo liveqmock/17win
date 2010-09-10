@@ -30,6 +30,9 @@ public class TaskBaseEntity extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = UserEntity.class)
 	@JoinColumn(name = "RECEIVE_PERSON_")
 	private UserEntity receivePerson;
+	//描述
+	@Column(name = "DESC_")
+	private String desc;
 
 	public String getTestID() {
 		return testID;
@@ -77,6 +80,14 @@ public class TaskBaseEntity extends BaseEntity {
 
 	public void setReceivePerson(UserEntity receivePerson) {
 		this.receivePerson = receivePerson;
+	}
+
+	public String getDesc() {
+		return desc;
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
 	}
 
 }

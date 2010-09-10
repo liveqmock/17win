@@ -11,7 +11,7 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name = "TB_NOTICE")
+@Table(name = "Tb_Notice")
 public class NoticeEntity extends BaseEntity {
 
 }

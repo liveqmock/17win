@@ -11,8 +11,8 @@
 
 	</HEAD>
 	<BODY>
-		<s:form action="taskManager/task!updateUserLoginOperattionCode.php" theme="simple"
-			onsubmit="return validateForm()">
+		<s:form action="commonManager/common!activateOperattionCode.php"
+			theme="simple" onsubmit="return validateForm()">
 			<s:include value="../common/title.jsp"></s:include>
 			<div align="center">
 				<DIV
@@ -41,6 +41,8 @@
 								</P>
 								<INPUT id="code" type="password" maxLength="16"
 									name="opertationCode">
+								<input type="hidden" name="preURL"
+									value="<s:property value="#request.preURL"/>" />
 								<SPAN style="COLOR: red">* 操作密码为6-16为数字,字符！</SPAN>
 							</DIV>
 							<BR>

@@ -18,16 +18,6 @@ public final class WinUtils {
 
 	}
 
-	/**
-	 * taskId
-	 * 
-	 * @param src
-	 * @param dest
-	 * @throws Exception
-	 */
-	public static String generateTaskID() throws Exception {
-		return DateUtils.parseDate(new Date(), "yyyyMMddHHmmssS");
-	}
 
 	/**
 	 * 平台名字转换成type

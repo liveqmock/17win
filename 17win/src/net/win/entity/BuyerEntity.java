@@ -8,7 +8,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "TB_BUYER")
+@Table(name = "Tb_Buyer")
 /**
  * 买家信息
  */

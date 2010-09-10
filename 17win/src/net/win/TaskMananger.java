@@ -1,10 +1,14 @@
 package net.win;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import net.win.dao.TaskAddressDAO;
+import net.win.utils.DateUtils;
+
 /**
- * 任务管理器
+ * 任务管理器 线程安全的
  * 
  * @author xgj
  * 
@@ -18,6 +22,52 @@ public final class TaskMananger {
 
 	public static TaskMananger getInstance() {
 		return taskMananger;
+	}
+
+	/**
+	 * 生成taskID
+	 * 
+	 * @param src
+	 * @param dest
+	 * @throws Exception
+	 */
+	public synchronized String generateTaskID() throws Exception {
+		return DateUtils.parseDate(new Date(), "yyyyMMddHHmmssS");
+	}
+
+	/**
+	 * 返回随机地址
+	 * 
+	 * @param addressDAO
+	 * @return
+	 * @throws Exception
+	 */
+	public String randomObtainAddress(BaseDAO baseDAO) throws Exception {
+		Long addrssCount = (Long) baseDAO
+				.uniqueResultObject("select count(*) from  TaskAddressEntity");
+		int topIndex = (int) (Math.random() * addrssCount + 1);
+		return (String) baseDAO.pageQuery(
+				"select name from  TaskAddressEntity", topIndex, 1).get(0);
+	}
+
+	/**
+	 * 生成html地址 颜色红色
+	 * 
+	 * @param addressDAO
+	 * @return
+	 * @throws Exception
+	 */
+	public String htmlAddreeStr(Object[] address, BaseDAO baseDAO)
+			throws Exception {
+		StringBuffer result = new StringBuffer();
+		result.append("<font color='red'>");
+		result.append("地址：");
+		for (Object str : address) {
+			result.append(str + " ");
+		}
+		result.append(randomObtainAddress(baseDAO));
+		result.append("</font>");
+		return result.toString();
 	}
 
 	private Set<Long> timingTasks = new HashSet<Long>();

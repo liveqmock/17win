@@ -37,7 +37,14 @@ public class CreditTaskVO extends BaseVO {
 	private String receiveIP;
 	// 发布点
 	private Float releaseDot;
-	//
+	
+	//任务保护
+	private Boolean protect;
+	/**
+	 * 和entity无关的数据
+	 */
+	private Boolean repository;
+	private Boolean address;
 	private Long sellerID;
 
 	public String getType() {
@@ -159,5 +166,31 @@ public class CreditTaskVO extends BaseVO {
 
 	public void setRemainTime(Integer remainTime) {
 		this.remainTime = remainTime;
+	}
+
+	 
+
+	public Boolean getRepository() {
+		return repository;
+	}
+
+	public void setRepository(Boolean repository) {
+		this.repository = repository;
+	}
+
+	public Boolean getAddress() {
+		return address;
+	}
+
+	public void setAddress(Boolean address) {
+		this.address = address;
+	}
+
+	public Boolean getProtect() {
+		return protect;
+	}
+
+	public void setProtect(Boolean protect) {
+		this.protect = protect;
 	}
 }

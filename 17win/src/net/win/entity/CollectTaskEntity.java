@@ -10,7 +10,7 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name = "TB_COLLECTTASK")
+@Table(name = "Tb_CollectTask")
 public class CollectTaskEntity extends BaseEntity {
 
 }

@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "TB_PROVINCE")
+@Table(name = "Tb_Province")
 public class ProvinceEntity extends BaseEntity {
 	// 名字
 	@Column(name = "NAME_", length = 20, nullable = false)

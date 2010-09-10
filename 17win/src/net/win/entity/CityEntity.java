@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "TB_CITY")
+@Table(name = "TB_City")
 public class CityEntity extends BaseEntity {
 	// 名字
 	@Column(name = "NAME_", length = 20, nullable = false)

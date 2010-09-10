@@ -97,6 +97,8 @@
 		<mapping class="net.win.entity.BuyerEntity" />
 		<mapping class="net.win.entity.CreditTaskEntity" />
 		<mapping class="net.win.entity.WithdrawalsEntity" />
-		
+		<mapping class="net.win.entity.TaskAddressEntity" />
+		<mapping class="net.win.entity.CreditTaskRepositoryEntity" />
+
 	</session-factory>
 </hibernate-configuration>

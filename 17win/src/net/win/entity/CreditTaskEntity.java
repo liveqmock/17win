@@ -16,7 +16,7 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name = "TB_CREDITTASK")
+@Table(name = "Tb_CreditTask")
 public class CreditTaskEntity extends TaskBaseEntity {
 	// 类型 ( 1:淘宝，2：拍拍，3有啊)
 	@Column(name = "TYPE_", columnDefinition = "CHAR(1)", nullable = false)
@@ -32,6 +32,9 @@ public class CreditTaskEntity extends TaskBaseEntity {
 	// ,[1:等待我付款,2:等待卖家发货,3:等待卖家发货](买家),[4:等待接手,5:等待审核人,6:等待我发货,7:等待买家确认8:等待我核查好评](卖家))
 	@Column(name = "STATUS", length = 2, nullable = false)
 	private String status;
+	//任务保护
+	@Column(name="PROTECT_",nullable=false)
+	private Boolean protect;
 	// 商品地址
 	@Column(name = "ITEM_URL_", length = 50, nullable = false)
 	private String itemUrl;
@@ -155,6 +158,14 @@ public class CreditTaskEntity extends TaskBaseEntity {
 
 	public void setRemainTime(Integer remainTime) {
 		this.remainTime = remainTime;
+	}
+
+	public Boolean getProtect() {
+		return protect;
+	}
+
+	public void setProtect(Boolean protect) {
+		this.protect = protect;
 	}
 
 }

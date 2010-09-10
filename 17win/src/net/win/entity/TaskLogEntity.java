@@ -11,7 +11,7 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name = "TB_TASKLOG")
+@Table(name = "Tb_TaskLog")
 public class TaskLogEntity {
 	// 类型(1 淘宝 2 拍拍 3有啊 4流量 5收藏)
 	private String type;

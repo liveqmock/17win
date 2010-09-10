@@ -14,7 +14,7 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name = "TB_ROLE")
+@Table(name = "Tb_Vip")
 public class VipEntity extends BaseEntity {
 	// 名字
 	@Column(name = "NAME_", length = 20, nullable = false)
