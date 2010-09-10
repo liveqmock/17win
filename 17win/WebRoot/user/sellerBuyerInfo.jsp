@@ -56,11 +56,6 @@ img {
 
 .errorText {
 	border: #FF0000 solid;
-	width: 80px;
-}
-
-.textboxWith {
-	width: 80px;
 }
 </style>
 
@@ -140,23 +135,18 @@ img {
 															id="seller">
 															<tr class="sellerTr">
 																<td align='center'>
-																	<input type="text" name="userVO.sellers[0].shopURL"  
-																		class="textboxWith" onfocus="beforeBlur(this)"
+																	<input type="text" name="userVO.sellers[0].shopURL"
+																		onfocus="beforeBlur(this)"
 																		onblur="obtainSeller('<s:property value="#type" />',this)"
 																		value="<s:property value="#seller.shopURL" />" />
 																	<input type="hidden" name="userVO.sellers[0].type"
 																		value="<s:property value="#type" />">
 																</td>
-																<td align='center'>
-																	<input type="text" name="userVO.sellers[0].name"
-																		class="textboxWith"
-																		value="<s:property value="#seller.name" />" />
-																</td>
-																<td class='address'  nowrap="nowrap" align="center">
+																<td class='address' nowrap="nowrap" align="center">
 																	省：
 																	<s:select value="#seller.provinceID"
 																		name="userVO.sellers[0].province.id"
-																		onchange="selectArea(this)" list="#request.provinces"
+																		onchange="selectCity(this)" list="#request.provinces"
 																		listKey="id" listValue="name" headerKey=""
 																		headerValue="--请选择--">
 																	</s:select>
@@ -164,8 +154,8 @@ img {
 																	<s:if test="#seller.citys!=null">
 																		<s:select name="userVO.sellers[0].city.id"
 																			value="#seller.cityID" list="#seller.citys"
-																			onchange="selectCity(this)" listKey="id"
-																			listValue="name" headerKey="" headerValue="请选择">
+																			listKey="id" listValue="name" headerKey=""
+																			headerValue="请选择">
 																		</s:select>
 																	</s:if>
 																	<s:else>
@@ -175,12 +165,13 @@ img {
 																			</option>
 																		</select>
 																	</s:else>
+																	<!-- 
 																	县：
 																	<s:if test="#seller.areas!=null">
 																		<s:select name="userVO.sellers[0].area.id"
 																			value="#seller.areaID" list="#seller.areas"
-																			onchange="selectArea(this)" listKey="id"
-																			listValue="name" headerKey="" headerValue="请选择">
+																			listKey="id" listValue="name" headerKey=""
+																			headerValue="请选择">
 																		</s:select>
 																	</s:if>
 																	<s:else>
@@ -190,6 +181,11 @@ img {
 																			</option>
 																		</select>
 																	</s:else>
+																	 -->
+																</td>
+																<td align='center'>
+																	<input type="text" name="userVO.sellers[0].name"
+																		value="<s:property value="#seller.name" />" />
 																</td>
 																<td align="center">
 																	<a href="javascript:void(0)"
@@ -239,7 +235,7 @@ img {
 															<tr class="buyerTr">
 																<td height="10">
 																	<input type="text" name="userVO.buyers[0].name"
-																		class="textboxWith" onblur="obtainBuyer(this)"
+																		onblur="obtainBuyer(this)"
 																		value="<s:property value="#buyer.name" />">
 																	<input type='hidden' name='userVO.buyers[0].type'
 																		value="<s:property value="#type"/>" />

@@ -21,7 +21,7 @@ $(document).ready(function() {
 				+ "			<a href=\"javascript:void(0)\" onclick=\"deleteSeller(this"
 				+ ")\" >删除</a>			</td> " + "		</tr> ";
 		var tr = $(trStr);
-		var td = tr.children(".address");
+		var td = tr.children(".address"); 
 		td.append("省： ");
 		var selectP = $("#tempProvince").clone();
 		selectP.show();
@@ -31,9 +31,9 @@ $(document).ready(function() {
 				});
 		td.append(selectP);
 		td
-				.append(" 市： <select onchange='selectArea(this)' name='userVO.sellers[0].city.id'><option value=''>请选择</option></select>");
-		td
-				.append(" 县： <select name='userVO.sellers[0].area.id' ><option value=''>请选择</option></select>");
+				.append(" 市： <select   name='userVO.sellers[0].city.id'><option value=''>请选择</option></select>");
+	//	td
+	//			.append(" 县： <select name='userVO.sellers[0].area.id' ><option value=''>请选择</option></select>");
 		tbody.append(tr);
 
 	});
@@ -68,9 +68,9 @@ function selectCity(obj) {
 	getCities($(obj).val(), $(obj).next().get(0), $(obj).next().next().get(0));
 }
 // 选择县区
-function selectArea(obj) {
-	getAreas($(obj).val(), $(obj).next().get(0));
-}
+//function selectArea(obj) {
+//	getAreas($(obj).val(), $(obj).next().get(0));
+//}
 // 验证
 function validateForm() {
 	var inputSellerDom = $("tr .sellerTr").find("input");

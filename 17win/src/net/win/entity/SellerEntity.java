@@ -20,7 +20,7 @@ public class SellerEntity extends BaseEntity {
 	@Column(name = "TYPE_", columnDefinition = "CHAR(1)", nullable = false)
 	private String type;
 	// 店铺地址
-	@Column(name = "SHOPURL_", length = 50,nullable = false)
+	@Column(name = "SHOPURL_", length = 50, nullable = false)
 	private String shopURL;
 
 	// 所属人
@@ -36,10 +36,11 @@ public class SellerEntity extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "CITY_ID_")
 	private CityEntity city;
+
 	// 县
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "AREA_ID_")
-	private AreaEntity area;
+	// @ManyToOne(fetch = FetchType.LAZY)
+	// @JoinColumn(name = "AREA_ID_")
+	// private AreaEntity area;
 
 	public ProvinceEntity getProvince() {
 		return province;
@@ -55,14 +56,6 @@ public class SellerEntity extends BaseEntity {
 
 	public void setCity(CityEntity city) {
 		this.city = city;
-	}
-
-	public AreaEntity getArea() {
-		return area;
-	}
-
-	public void setArea(AreaEntity area) {
-		this.area = area;
 	}
 
 	public String getType() {

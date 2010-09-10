@@ -36,7 +36,7 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 import com.sun.org.apache.commons.beanutils.BeanUtils;
 
-@SuppressWarnings({"unchecked"})
+@SuppressWarnings( { "unchecked" })
 @Service("userInfoService")
 public class UserInfoService extends BaseService {
 	@Resource
@@ -71,9 +71,9 @@ public class UserInfoService extends BaseService {
 		List<BuyerEntity> buyers = userVO.getBuyers();
 
 		userDAO.deleteBySQL("delete TB_SELLER where USER_ID_=:userId",
-				new String[]{"userId"}, new Object[]{userEntity.getId()});
+				new String[] { "userId" }, new Object[] { userEntity.getId() });
 		userDAO.deleteBySQL("delete TB_BUYER where USER_ID_=:userId",
-				new String[]{"userId"}, new Object[]{userEntity.getId()});
+				new String[] { "userId" }, new Object[] { userEntity.getId() });
 
 		for (SellerEntity sellerEntity : sellers) {
 			if (nullID(sellerEntity.getProvince())) {
@@ -82,12 +82,15 @@ public class UserInfoService extends BaseService {
 			if (nullID(sellerEntity.getCity())) {
 				sellerEntity.setCity(null);
 			}
-			if (nullID(sellerEntity.getArea())) {
-				sellerEntity.setArea(null);
-			}
+			// if (nullID(sellerEntity.getArea())) {
+			// sellerEntity.setArea(null);
+			// }
 		}
 		userEntity.setSellers(sellers);
 		userEntity.setBuyers(buyers);
+		
+		initSellerAndBuyer(userVO);
+		
 		putAlertMsg("添加成功！");
 		return "updateSellerAndBuyer";
 	}
@@ -118,7 +121,7 @@ public class UserInfoService extends BaseService {
 		// 省
 		List<ProvinceEntity> provinces = provinceDAO
 				.list("from ProvinceEntity");
-		
+
 		putByRequest("provinces", provinces);
 		// 解析
 		if (sellers.size() > 0) {
@@ -139,15 +142,15 @@ public class UserInfoService extends BaseService {
 				if (sellerEntity.getCity() != null) {
 					// 市
 					sellerVO.setCityID(sellerEntity.getCity().getId());
-					List<AreaEntity> areas = cityDAO.list(
-							"from AreaEntity where  city.id=:id", "id",
-							sellerEntity.getCity().getId());
-					sellerVO.setAreas(areas);
+					// List<AreaEntity> areas = cityDAO.list(
+					// "from AreaEntity where city.id=:id", "id",
+					// sellerEntity.getCity().getId());
+					// sellerVO.setAreas(areas);
 				}
-				if (sellerEntity.getArea() != null) {
-					// 县
-					sellerVO.setAreaID(sellerEntity.getArea().getId());
-				}
+				// if (sellerEntity.getArea() != null) {
+				// // 县
+				// sellerVO.setAreaID(sellerEntity.getArea().getId());
+				// }
 				list.add(sellerVO);
 			}
 		}
@@ -163,11 +166,12 @@ public class UserInfoService extends BaseService {
 		}
 
 		putByRequest("sellers", sellerResult);
-		
+
 		putByRequest("buyers", buyerResult);
 
 		return "initSellerAndBuyer";
 	}
+
 	/**
 	 * 激活账号
 	 * 
