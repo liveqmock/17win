@@ -145,7 +145,13 @@ public class CreditTaskService extends BaseService {
 					BeanUtils.copyProperties(sellerVO, sellerEntity);
 					resultSellers.add(sellerVO);
 				}
+			} else {
+				putAlertMsg("您还没有绑定卖号，请先添加！");
+				return "noSellerPage";
 			}
+			String platformType = getPlatformType();
+			putPlatformByRequest(WinUtils.changeType2Platform(platformType));
+			putPlatformTypeByRequest(platformType);
 			putByRequest("sellers", resultSellers);
 			return "initReleaseTask";
 		}

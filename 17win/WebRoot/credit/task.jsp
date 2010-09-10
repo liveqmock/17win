@@ -12,73 +12,13 @@
 	</HEAD>
 	<BODY>
 		<s:include value="../common/title.jsp"></s:include>
-		<table cellspacing="0" cellpadding="0" width="910" align="center"
-			border="0">
-			<tr>
-				<td height="50">
-					<div
-						style="CLEAR: both; OVERFLOW: hidden; WIDTH: 910px; HEIGHT: 50px; BACKGROUND-COLOR: #f3f8fe">
-						<div
-							style="MARGIN: 10px 10px 0px; LINE-HEIGHT: 30px; BORDER-BOTTOM: #cccccc 1px dashed; HEIGHT: 40px">
-							<div
-								style="CLEAR: both; OVERFLOW: hidden; WIDTH: 910px; BACKGROUND-COLOR: #f3f8fe">
-								<div
-									style="MARGIN: 10px 10px 0px; LINE-HEIGHT: 30px; BORDER-BOTTOM: #cccccc 1px dashed; HEIGHT: 40px">
-									<div>
-										亲爱的会员：
-										<font color=#ff0000>xgj1988</font>&nbsp;(
-										<font color=red>还没有加入部落</font>)&nbsp;您好！您拥有存款：
-										<font color=#ff0000> 20.95</font> 元 &nbsp; 发布点：
-										<font color=#ff0000> 2.0 </font>点 &nbsp; 积分：
-										<font color=#ff0000>260</font>点
-
-										<a href="../user/user.asp"> 站内信(<FONT color=#ff0000>0</FONT>)</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</td>
-			</tr>
-		</table>
+		<s:include value="../common/task/title.jsp"></s:include>
 		<div align="center" id="partdiv">
 			<div align="center">
 				<DIV
 					style="MARGIN-TOP: 0px; BACKGROUND: #ffffff; OVERFLOW: hidden; WIDTH: 910px">
-					<DIV
-						style="CLEAR: both; MARGIN-TOP: 2px; WIDTH: 910px; HEIGHT: 25px">
-						<DIV style="FLOAT: left; OVERFLOW: hidden; WIDTH: 700px">
-							<UL id=task_nav>
-								<LI>
-									<A
-										style="FONT-SIZE: 16px; BACKGROUND: url(images/task_nav_02.gif) no-repeat 50% bottom; COLOR: #ffffff"
-										href="taskManager/task!initTask.php"><s:property
-											value="#request.platform" />互动区</A>
-								</LI>
-								<LI>
-									<A href="taskManager/task!initReleaseTask.php?platformType=<s:property value="#request.platformType"/>">发布任务</A>
-								</LI>
-								<LI>
-									<A href="ReMission.asp">已接任务</A>
-								</LI>
-								<LI>
-									<A href="MyMission.asp">已发任务</A>
-								</LI>
-								<LI>
-									<A href="MyWw.asp">绑定店铺</A>
-								</LI>
-								<LI>
-									<A href="Buyhao.asp">绑定买号</A>
-								</LI>
-								<LI>
-									<A href="MySave.asp">任务仓库</A>
-								</LI>
-							</UL>
-						</DIV>
-					</DIV>
-					<DIV style="CLEAR: both; WIDTH: 910px">
-						<IMG src="images/task_nav_line.gif">
-					</DIV>
+					 <!-- xgj navigation.jsp -->
+					 <s:include value="../common/task/navigation.jsp"></s:include>
 				</DIV>
 				<DIV style="MARGIN-TOP: 0px; BACKGROUND: #ffffff; WIDTH: 910px">
 					<DIV

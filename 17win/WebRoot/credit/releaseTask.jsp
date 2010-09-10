@@ -22,73 +22,11 @@
 		<s:form action="userManager/base!register.php" theme="simple"
 			onsubmit="return validateForm()">
 			<s:include value="../common/title.jsp"></s:include>
-
-			<table cellspacing="0" cellpadding="0" width="910" align="center"
-				border="0">
-				<tr>
-					<td height="50">
-						<div
-							style="CLEAR: both; OVERFLOW: hidden; WIDTH: 910px; HEIGHT: 50px; BACKGROUND-COLOR: #f3f8fe">
-							<div
-								style="MARGIN: 10px 10px 0px; LINE-HEIGHT: 30px; BORDER-BOTTOM: #cccccc 1px dashed; HEIGHT: 40px">
-								<div
-									style="CLEAR: both; OVERFLOW: hidden; WIDTH: 910px; BACKGROUND-COLOR: #f3f8fe">
-
-									<div
-										style="MARGIN: 10px 10px 0px; LINE-HEIGHT: 30px; BORDER-BOTTOM: #cccccc 1px dashed; HEIGHT: 40px">
-										<div>
-											亲爱的会员：
-											<font color=#ff0000>xgj1988</font>&nbsp;(
-											<font color=red>还没有加入部落</font>)&nbsp;您好！您拥有存款：
-											<font color=#ff0000> 20.95</font> 元 &nbsp; 发布点：
-											<font color=#ff0000> 2.0 </font>点 &nbsp; 积分：
-											<font color=#ff0000>260</font>点
-
-											<a href="../user/user.asp"> 站内信(<FONT color=#ff0000>0</FONT>)</a>
-										</div>
-									</div>
-								</div>
-							</div>
-
-						</div>
-					</td>
-				</tr>
-			</table>
+			<s:include value="../common/task/title.jsp"></s:include>
 			<div align="center">
 				<DIV
 					style="MARGIN-TOP: 0px; BACKGROUND: #ffffff; OVERFLOW: hidden; WIDTH: 910px">
-					<DIV
-						style="CLEAR: both; MARGIN-TOP: 2px; WIDTH: 910px; HEIGHT: 25px">
-						<DIV style="FLOAT: left; OVERFLOW: hidden; WIDTH: 700px">
-							<UL id=task_nav>
-								<LI>
-									<A href="taskManager/task!initTask.php">淘宝互动区</A>
-								</LI>
-								<LI>
-									<A
-										style="FONT-SIZE: 16px; BACKGROUND: url(images/task_nav_02.gif) no-repeat 50% bottom; COLOR: #ffffff"
-										href="taskManager/task!initReleaseTask.php">发布任务</A>
-								</LI>
-
-								<LI>
-									<A href="ReMission.asp">已接任务</A>
-								</LI>
-								<LI>
-									<A href="MyMission.asp">已发任务</A>
-								</LI>
-								<LI>
-									<A href="MyWw.asp">绑定店铺</A>
-								</LI>
-								<LI>
-									<A href="Buyhao.asp">绑定买号</A>
-								</LI>
-								<LI>
-									<A href="MySave.asp">任务仓库</A>
-								</LI>
-							</UL>
-						</DIV>
-
-					</DIV>
+					<s:include value="../common/task/navigation.jsp"></s:include>
 				</DIV>
 			</div>
 			<table width="760" border="0" align="center" cellpadding="0"
@@ -116,25 +54,16 @@
 										</tr>
 										<tr>
 											<td height="140" valign="middle">
-												<table width="680" border="0" align="center" cellpadding="0"
+												<table width="100%" border="0" align="center" cellpadding="0"
 													cellspacing="0" bgcolor="#FFFFFF">
 													<tr>
-														<td width="550">
+														<td width="100%">
 
 															<table width="680" border="0" align="center"
 																cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
 																<tr>
-																	<td class="font14b4" align="right" valign="top">
-																		任务仓库：
-																	</td>
-																	<td colspan="4">
-																		<select>
-																			<option>
-																				从任务仓库中选择
-																			</option>
-																			<option></option>
-																		</select>
-																		从任务仓库中选择任务
+																	<td colspan="5" align="center">
+																		<input value="点击此处从任务仓库中获取" type="button">
 																	</td>
 																</tr>
 																<tr>
@@ -161,7 +90,7 @@
 																	</td>
 																	<td colspan="4">
 																		<s:radio list="#request.sellers" listKey="id"
-																			listValue="name"></s:radio>
+																			name="creditTaskVO.sellerID" listValue="name"></s:radio>
 																	</td>
 																</tr>
 
@@ -217,16 +146,15 @@
 																	<td width="129" height="30" align="right">
 																		<span class="font14b4">收货时间：</span>
 																	</td>
-																	<td width="227">
+																	<td  nowrap="nowrap">
 																		<label>
 																			<input name="bei" type="radio" checked="checked"
 																				value="马上收货好评" />
-																			(扣x个发布点)
 																			<span class="font12l">马上收货好评</span>
 																		</label>
-																		<br />
+																		(扣x个发布点)
 																	</td>
-																	<td width="324">
+																	<td nowrap="nowrap">
 																		<label>
 																			<input name="bei" type="radio" value="一天后收货好评" />
 																			<span class="font12l"> 一天后收货好评</span>
@@ -238,7 +166,7 @@
 																	<td height="30">
 																		&nbsp;
 																	</td>
-																	<td>
+																	<td nowrap="nowrap">
 																		<label>
 																			<input type="radio" name="bei" id="radio2"
 																				value="二天后收货好评" />
@@ -247,7 +175,7 @@
 																		</label>
 																		(扣x*2+1个发布点)
 																	</td>
-																	<td>
+																	<td nowrap="nowrap">
 																		<label>
 																			<input type="radio" name="bei" id="radio3"
 																				value="三天后收货好评" />
@@ -263,10 +191,10 @@
 																	<td>
 																		<input type="radio" name="bei" id="radio2"
 																			value="二天后收货好评" />
-																		自定义时间
+																		<span class="font12l">自定义</span>
 																		<input type="text" style="width: 40px"
 																			disabled="disabled">
-																		时收货好评
+																		<span class="font12l">时后好评</span>
 																	</td>
 																	<td>
 																		0≤h＜24(扣x个发布点)，24≤h＜48(扣x*2个发布点)，
@@ -327,15 +255,16 @@
 																		<input name="depot" type="checkbox" id="depot"
 																			value="1" />
 																		顺便添加到我的任务仓库
-																		<span class="red-bcolor">什么是任务仓库- &gt;</span>
+																		<span class="red-bcolor">*什么是任务仓库</span>
 																	</td>
 																</tr>
 																<tr>
 																	<td class="font14b4" align="right">
-																		根据卖号地址生成收货地址：
+																		收货地址：
 																	</td>
 																	<td colspan="2">
 																		<input type="checkbox">
+																		<span class="red-bcolor">*什么是自动生成收货地址</span>
 																	</td>
 																</tr>
 																<tr>

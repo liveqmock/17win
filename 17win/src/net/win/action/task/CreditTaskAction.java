@@ -22,7 +22,10 @@ import org.springframework.stereotype.Controller;
 		@Result(name = "input", location = "/credit/task.jsp"),
 		@Result(name = "initTask", location = "/credit/task.jsp"),
 		@Result(name = "initReleaseTask", location = "/credit/releaseTask.jsp"),
-		@Result(name = "operationValidate", location = "/system/operationValidate.jsp")})
+		@Result(name = "operationValidate", location = "/system/operationValidate.jsp"),
+		@Result(name = "noSellerPage", type="redirect",  location = "/userInfoManager/info!initSellerAndBuyer.php?noSellerDirect=noSellerDirect")
+		
+})
 @Namespace("/taskManager")
 public class CreditTaskAction extends BaseAction {
 	@Resource

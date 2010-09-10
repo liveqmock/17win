@@ -166,6 +166,9 @@ public class UserInfoService extends BaseService {
 			}
 		}
 
+		if (getByParam("noSellerDirect") != null) {
+			putAlertMsg("您还没有绑定卖号，请绑定！");
+		}
 		putByRequest("sellers", sellerResult);
 
 		putByRequest("buyers", buyerResult);

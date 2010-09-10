@@ -5,7 +5,7 @@ function changeValidateCode(obj) {
 	// 这和浏览器的缓存机制有关系，也可以把页面设置为不缓存，这样就不用这个参数了。
 	obj.src = "verify/verificationCode.php?time=" + timenow;
 }
-var submitFlag = true;
+var submitFlag = false;
 var timer;
 $(document).ready(function() {
 	timer = setInterval(changeSutmitBtn, 1000);
@@ -48,6 +48,7 @@ $(document).ready(function() {
 					validateError(this, "两次密码不相等！");
 					submitFlag = false;
 				} else {
+					validateSuccess(this);
 					submitFlag = true;
 				}
 			});
@@ -72,6 +73,7 @@ $(document).ready(function() {
 					validateError(this, "两次操作码不相等！");
 					submitFlag = false;
 				} else {
+					validateSuccess(this);
 					submitFlag = true;
 				}
 			});
@@ -129,7 +131,6 @@ $(document).ready(function() {
 			});
 });
 function validateForm() {
-	submitFlag = true;
 	if (submitFlag) {
 		return true;
 	} else {

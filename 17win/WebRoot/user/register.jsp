@@ -561,7 +561,7 @@ td {
 								<tr>
 									<td colspan="3" align="center">
 										<INPUT id="sumbitBtn"
-											style="FONT-WEIGHT: bold; WIDTH: 120px; CURSOR: pointer; COLOR: #000000; HEIGHT: 26px"
+											style="FONT-WEIGHT: bold;   CURSOR: pointer;"
 											timeId="10" disabled="true" type="submit" value="同意协议并注册(10)">
 									</td>
 								</tr>
