@@ -221,7 +221,7 @@
 																		<label>
 																			<input name="bei" type="radio" checked="checked"
 																				value="马上收货好评" />
-
+																			(扣x个发布点)
 																			<span class="font12l">马上收货好评</span>
 																		</label>
 																		<br />
@@ -263,11 +263,13 @@
 																	<td>
 																		<input type="radio" name="bei" id="radio2"
 																			value="二天后收货好评" />
-																		自定义时间 (扣x*2个发布点)
+																		自定义时间
+																		<input type="text" style="width: 40px">
+																		时收货好评
 																	</td>
 																	<td>
-																		<input type="text" style="width: 40px">
-																		时后收货好评
+																		0≤h＜24(扣x个发布点)，24≤h＜48(扣x*2个发布点)，
+																		，48≤h＜72(扣x*2+1个发布点)，h≥72(扣x*2+2个发布点)
 																	</td>
 																</tr>
 																<tr>
@@ -312,7 +314,7 @@
 																			onclick="WdatePicker({'minDate':'%y-%M-%d %H:%m','alwaysUseStartDate':false,'el':'tasktimingDate','isShowClear':false,startDate:'%y-%M-%d %H:%m',dateFmt:'yyyy-MM-dd HH:mm','skin':'blue'})"
 																			src="js/My97DatePicker/skin/datePicker.gif"
 																			width="16" height="22" align="absmiddle">
-																		<input type="text" value="4" name="statu"/>
+																		<input type="hidden" value="4" name="statu" />
 																	</td>
 																</tr>
 																<tr>

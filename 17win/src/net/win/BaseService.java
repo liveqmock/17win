@@ -9,7 +9,7 @@ import net.win.entity.BaseEntity;
 import net.win.entity.UserEntity;
 import net.win.exception.IllegalityException;
 import net.win.utils.Constant;
-import net.win.utils.UserLevelUtils;
+import net.win.utils.StrategyUtils;
 
 import org.apache.struts2.ServletActionContext;
 
@@ -97,9 +97,9 @@ public class BaseService {
 	protected void updateUserLoginInfo(UserEntity userEntity) throws Exception {
 		UserLoginInfo userLoginInfo = new UserLoginInfo();
 		BeanUtils.copyProperties(userLoginInfo, userEntity);
-		userLoginInfo.setLevel(UserLevelUtils.getLevel(userEntity
+		userLoginInfo.setLevel(StrategyUtils.getLevel(userEntity
 				.getUpgradeScore()));
-		userLoginInfo.setLevelImg(UserLevelUtils.getLevelImg(userEntity
+		userLoginInfo.setLevelImg(StrategyUtils.getLevelImg(userEntity
 				.getUpgradeScore()));
 		putLoginUser(userLoginInfo);
 	}

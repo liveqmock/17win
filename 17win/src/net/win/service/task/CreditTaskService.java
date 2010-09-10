@@ -11,9 +11,11 @@ import net.win.TaskMananger;
 import net.win.UserLoginInfo;
 import net.win.dao.BuyerDAO;
 import net.win.dao.CreditTaskDAO;
+import net.win.dao.CreditTaskRepositoryDAO;
 import net.win.dao.SellerDAO;
 import net.win.dao.UserDAO;
 import net.win.entity.CreditTaskEntity;
+import net.win.entity.CreditTaskRepositoryEntity;
 import net.win.entity.SellerEntity;
 import net.win.entity.UserEntity;
 import net.win.utils.ArithUtils;
@@ -37,6 +39,8 @@ public class CreditTaskService extends BaseService {
 	private BuyerDAO buyerDAO;
 	@Resource
 	private CreditTaskDAO creditTaskDAO;
+	@Resource
+	private CreditTaskRepositoryDAO creditTaskRepositoryDAO;
 
 	/**
 	 * 发布任务
@@ -85,17 +89,22 @@ public class CreditTaskService extends BaseService {
 						.get(0), userDAO));
 			}
 		}
+		// 算发布点
+		
 		// 任务仓库
 		if (creditTaskVO.getRepository()) {
+			CreditTaskRepositoryEntity creditTaskRepository = new CreditTaskRepositoryEntity();
+			BeanUtils.copyProperties(creditTaskRepository, creditTaskVO);
+			creditTaskRepository.setUser(userEntity);
+			creditTaskRepository.setName(creditTaskVO.getRespositoryName());
+			creditTaskRepository.setSellerID(sellerID);
+			creditTaskRepositoryDAO.save(creditTaskRepository);
 		}
+
 		// 保存
 		creditTaskDAO.save(creditTaskEntity);
 		// 完成对金钱进行修改,登陆名的也需要
 		updateUserLoginInfo(userEntity);
-
-		if (creditTaskVO.getProtect()) {
-
-		}
 		// 是否是定时任务
 		if (creditTaskEntity.getStatus().equals("0")) {
 			taskMananger.addTimingTask(creditTaskEntity.getId());

@@ -1,8 +1,54 @@
 package net.win.utils;
 
-public final class UserLevelUtils {
-	private UserLevelUtils() {
+import java.util.Date;
+
+/**
+ * 策略工具。。用于生成 金额，发布点的策略工具 ,升级
+ * 
+ * @author xgj
+ * 
+ */
+public final class StrategyUtils {
+	private StrategyUtils() {
 		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * 得到信誉dot发布点
+	 * 
+	 * @param src
+	 * @param dest
+	 * @throws Exception
+	 */
+	public static Double generateCreditRDot(Double money, Integer intervalHour)
+			throws Exception {
+		double resultDot = 0;
+		// 基本发布点
+		double metaDot = 0;
+		if (money > 1 && money <= 40) {
+			metaDot = 1;
+		} else if (money > 40 && money <= 100) {
+			metaDot = 2;
+		} else if (money > 100 && money <= 200) {
+			metaDot = 3;
+		} else if (money > 200 && money <= 500) {
+			metaDot = 4;
+		} else if (money > 500) {
+			metaDot = 5;
+		}
+		// 时间
+		if (intervalHour == 0) {
+			return metaDot;
+		} else if (intervalHour > 0 && intervalHour < 24) {
+			return metaDot;
+		} else if (intervalHour >= 24 && intervalHour < 48) {
+			return metaDot * 2;
+		} else if (intervalHour >= 48 && intervalHour < 72) {
+			return metaDot * 2 + 1;
+		} else if (intervalHour >= 72) {
+			return metaDot * 2 + 2;
+		}
+		return resultDot;
 	}
 
 	/**

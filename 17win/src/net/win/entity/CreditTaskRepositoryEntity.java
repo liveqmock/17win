@@ -2,6 +2,9 @@ package net.win.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -13,6 +16,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Tb_CreditTaskReposotory")
 public class CreditTaskRepositoryEntity extends BaseEntity {
+
+	// 名字
+	@Column(name = "NAME_", length = 100, nullable = false, unique = true)
+	private String name;
 	// 类型 ( 1:淘宝，2：拍拍，3有啊)
 	@Column(name = "TYPE_", columnDefinition = "CHAR(1)", nullable = false)
 	private String type;
@@ -31,7 +38,7 @@ public class CreditTaskRepositoryEntity extends BaseEntity {
 	// 动态评分(x:默认好评，x:全部5分 ...)
 	@Column(name = "GRADE_", columnDefinition = "CHAR(1)", nullable = false)
 	private String grade;
-	// 间隔几个小时(x*24[勾选]或则X[自定义] 0为马上收货)
+	// 间隔几个小时(x*24[勾选]或则X[自定义] 0为马上收货) 收货时间
 	@Column(name = "INTERVAL_HOUR_", nullable = false)
 	private Integer intervalHour;
 
@@ -39,13 +46,22 @@ public class CreditTaskRepositoryEntity extends BaseEntity {
 	@Column(name = "SELLER_ID_", nullable = false)
 	private Long sellerID;
 
-	// 发布点
-	@Column(name = "RELEASE_DOT_", nullable = false)
-	private Float releaseDot;
+	// 是否地址
+	@Column(name = "ADDRESS_", nullable = false)
+	private Boolean address;
 
-	// 描述
-	@Column(name = "DESC_")
-	private String desc;
+	// 所属人
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = UserEntity.class)
+	@JoinColumn(name = "USER_ID_")
+	private UserEntity user;
+
+	public UserEntity getUser() {
+		return user;
+	}
+
+	public void setUser(UserEntity user) {
+		this.user = user;
+	}
 
 	public String getType() {
 		return type;
@@ -111,19 +127,20 @@ public class CreditTaskRepositoryEntity extends BaseEntity {
 		this.sellerID = sellerID;
 	}
 
-	public Float getReleaseDot() {
-		return releaseDot;
+	public String getName() {
+		return name;
 	}
 
-	public void setReleaseDot(Float releaseDot) {
-		this.releaseDot = releaseDot;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getDesc() {
-		return desc;
+	public Boolean getAddress() {
+		return address;
 	}
 
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setAddress(Boolean address) {
+		this.address = address;
 	}
+
 }

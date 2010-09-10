@@ -2,8 +2,6 @@ package net.win.vo;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-
 import net.win.BaseVO;
 
 public class CreditTaskVO extends BaseVO {
@@ -46,7 +44,8 @@ public class CreditTaskVO extends BaseVO {
 	private Boolean repository;
 	private Boolean address;
 	private Long sellerID;
-
+	//仓库名
+	private String respositoryName;
 	public String getType() {
 		return type;
 	}
@@ -192,5 +191,13 @@ public class CreditTaskVO extends BaseVO {
 
 	public void setProtect(Boolean protect) {
 		this.protect = protect;
+	}
+
+	public String getRespositoryName() {
+		return respositoryName;
+	}
+
+	public void setRespositoryName(String respositoryName) {
+		this.respositoryName = respositoryName;
 	}
 }

@@ -11,7 +11,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
@@ -123,23 +122,27 @@ public class UserEntity extends BaseEntity {
 	@JoinColumn(name = "APPEAL_USER_ID_")
 	@Cascade(CascadeType.ALL)
 	private List<AppealEntity> appeals;
-	
-	
+
 	// 我受到的申述
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "APPEALED_USER_ID_")
 	@Cascade(CascadeType.ALL)
 	private List<AppealEntity> appealeds;
-	
-	
+
 	// 介绍人
 	@ManyToOne(targetEntity = UserEntity.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "REFEREE_ID_")
 	private UserEntity referee;
 
 	// // 我的介绍人
-	@OneToMany(targetEntity = UserEntity.class, mappedBy = "referee")
+	@OneToMany(targetEntity = UserEntity.class, mappedBy = "referee", fetch = FetchType.LAZY)
 	private List<UserEntity> myReferees;
+
+	// // 我的任务模板
+	@OneToMany(targetEntity = UserEntity.class, mappedBy = "referee", fetch = FetchType.LAZY)
+	@JoinColumn(name = "USER_ID_")
+	@Cascade(CascadeType.ALL)
+	private List<CreditTaskRepositoryEntity> creditTaskRepositorys;
 
 	public UserEntity getReferee() {
 		return referee;
@@ -400,6 +403,15 @@ public class UserEntity extends BaseEntity {
 
 	public void setAppealeds(List<AppealEntity> appealeds) {
 		this.appealeds = appealeds;
+	}
+
+	public List<CreditTaskRepositoryEntity> getCreditTaskRepositorys() {
+		return creditTaskRepositorys;
+	}
+
+	public void setCreditTaskRepositorys(
+			List<CreditTaskRepositoryEntity> creditTaskRepositorys) {
+		this.creditTaskRepositorys = creditTaskRepositorys;
 	}
 
 }
