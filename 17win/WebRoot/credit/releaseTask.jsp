@@ -264,7 +264,8 @@
 																		<input type="radio" name="bei" id="radio2"
 																			value="二天后收货好评" />
 																		自定义时间
-																		<input type="text" style="width: 40px">
+																		<input type="text" style="width: 40px"
+																			disabled="disabled">
 																		时收货好评
 																	</td>
 																	<td>

@@ -20,6 +20,7 @@ import net.win.entity.SellerEntity;
 import net.win.entity.UserEntity;
 import net.win.utils.ArithUtils;
 import net.win.utils.LoggerUtils;
+import net.win.utils.StrategyUtils;
 import net.win.utils.StringUtils;
 import net.win.utils.WinUtils;
 import net.win.vo.CreditTaskVO;
@@ -55,8 +56,12 @@ public class CreditTaskService extends BaseService {
 		UserLoginInfo userLoginInfo = getLoginUser();
 		CreditTaskEntity creditTaskEntity = new CreditTaskEntity();
 		TaskMananger taskMananger = TaskMananger.getInstance();
-		// /逻辑
-		BeanUtils.copyProperties(creditTaskEntity, creditTaskVO);
+		// 把天转换成时间
+		if (creditTaskVO.getIntervalHour() == null) {
+			creditTaskVO.setIntervalHour(StrategyUtils
+					.getIntervalHourByGoodType(creditTaskVO.getGoodType()));
+			BeanUtils.copyProperties(creditTaskEntity, creditTaskVO);
+		}
 		String ip = getRequset().getRemoteAddr();
 		// 放IP
 		creditTaskEntity.setReceiveIP(ip);
@@ -90,7 +95,10 @@ public class CreditTaskService extends BaseService {
 			}
 		}
 		// 算发布点
-		
+		double dot = StrategyUtils.generateCreditRDot(creditTaskVO.getMoney(),
+				creditTaskVO.getIntervalHour());
+		userEntity.setReleaseDot(ArithUtils
+				.sub(userEntity.getReleaseDot(), dot));
 		// 任务仓库
 		if (creditTaskVO.getRepository()) {
 			CreditTaskRepositoryEntity creditTaskRepository = new CreditTaskRepositoryEntity();
@@ -100,8 +108,8 @@ public class CreditTaskService extends BaseService {
 			creditTaskRepository.setSellerID(sellerID);
 			creditTaskRepositoryDAO.save(creditTaskRepository);
 		}
-
 		// 保存
+		creditTaskEntity.setReleasePerson(userEntity);
 		creditTaskDAO.save(creditTaskEntity);
 		// 完成对金钱进行修改,登陆名的也需要
 		updateUserLoginInfo(userEntity);

@@ -26,6 +26,7 @@ import net.win.entity.UserEntity;
 import net.win.utils.ArithUtils;
 import net.win.utils.StringUtils;
 import net.win.utils.TotalUtils;
+import net.win.utils.WinUtils;
 import net.win.vo.BuyerVO;
 import net.win.vo.SellerVO;
 import net.win.vo.UserVO;
@@ -88,9 +89,9 @@ public class UserInfoService extends BaseService {
 		}
 		userEntity.setSellers(sellers);
 		userEntity.setBuyers(buyers);
-		
+
 		initSellerAndBuyer(userVO);
-		
+
 		putAlertMsg("添加成功！");
 		return "updateSellerAndBuyer";
 	}
@@ -280,8 +281,7 @@ public class UserInfoService extends BaseService {
 			// 兑换发布点
 			Double releaseDot = userVO.getReleaseDot();
 			if (releaseDot < 10 || releaseDot > userEntity.getReleaseDot()) {
-				throwIllegalityException(userEntity.getUsername()
-						+ ":违法的操作，试图越过兑换发布点验证");
+				WinUtils.throwIllegalityException("违法的操作，试图越过兑换发布点验证");
 			}
 			userEntity.setReleaseDot(ArithUtils.sub(userEntity.getReleaseDot(),
 					releaseDot));
@@ -295,12 +295,10 @@ public class UserInfoService extends BaseService {
 					"fromo UserEntity where username=:username", "username",
 					username);
 			if (releaseDot > userEntity.getReleaseDot()) {
-				throwIllegalityException(userEntity.getUsername()
-						+ ":违法的操作，试图越过兑换发布点验证");
+				WinUtils.throwIllegalityException("违法的操作，试图越过兑换发布点验证");
 			}
 			if (username.equals(userEntity.getUsername())) {
-				throwIllegalityException(userEntity.getUsername()
-						+ ":违法的操作，试图越过兑换发布点验证");
+				WinUtils.throwIllegalityException("违法的操作，试图越过兑换发布点验证");
 			}
 			if (touser == null) {
 				putAlertMsg(username + "用户不存在");
@@ -313,8 +311,7 @@ public class UserInfoService extends BaseService {
 			// 赠送
 			Double releaseDot = userVO.getReleaseDot();
 			if (releaseDot > userEntity.getReleaseDot()) {
-				throwIllegalityException(userEntity.getUsername()
-						+ ":违法的操作，试图越过兑换发布点验证");
+				WinUtils.throwIllegalityException("违法的操作，试图越过兑换发布点验证");
 			}
 			if (releaseDot * 200 > userEntity.getConvertScore()) {
 				putAlertMsg("您的积分不够" + releaseDot * 200 + ",最多只能兑换"

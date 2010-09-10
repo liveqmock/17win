@@ -2,6 +2,8 @@ package net.win.utils;
 
 import java.util.Date;
 
+import net.win.exception.IllegalityException;
+
 /**
  * 策略工具。。用于生成 金额，发布点的策略工具 ,升级
  * 
@@ -11,6 +13,30 @@ import java.util.Date;
 public final class StrategyUtils {
 	private StrategyUtils() {
 		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * 
+	 * @param goodType
+	 * @return
+	 * @throws Exception
+	 */
+	public static Integer getIntervalHourByGoodType(String goodType)
+			throws Exception {
+		if ("1".equals(goodType)) {
+			return 0;
+		}
+		if ("2".equals(goodType)) {
+			return 24;
+		}
+		if ("3".equals(goodType)) {
+			return 48;
+		}
+		if ("4".equals(goodType)) {
+			return 72;
+		}
+		WinUtils.throwIllegalityException("试图越过发布点的时间计算操作");
+		return 0;
 	}
 
 	/**
@@ -48,6 +74,7 @@ public final class StrategyUtils {
 		} else if (intervalHour >= 72) {
 			return metaDot * 2 + 2;
 		}
+		WinUtils.throwIllegalityException("试图越过刷信誉发布点计算操作");
 		return resultDot;
 	}
 

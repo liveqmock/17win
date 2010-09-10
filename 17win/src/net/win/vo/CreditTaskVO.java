@@ -44,6 +44,7 @@ public class CreditTaskVO extends BaseVO {
 	private Boolean repository;
 	private Boolean address;
 	private Long sellerID;
+	private String goodType;
 	//仓库名
 	private String respositoryName;
 	public String getType() {
@@ -199,5 +200,13 @@ public class CreditTaskVO extends BaseVO {
 
 	public void setRespositoryName(String respositoryName) {
 		this.respositoryName = respositoryName;
+	}
+
+	public String getGoodType() {
+		return goodType;
+	}
+
+	public void setGoodType(String goodType) {
+		this.goodType = goodType;
 	}
 }

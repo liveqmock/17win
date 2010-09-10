@@ -9,7 +9,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Date;
+
+import org.apache.struts2.ServletActionContext;
+
+import net.win.UserLoginInfo;
+import net.win.exception.IllegalityException;
 
 public final class WinUtils {
 	private static final int BUFFER_SIZE = 1024;
@@ -18,6 +22,19 @@ public final class WinUtils {
 
 	}
 
+	/**
+	 * 抛出异常
+	 * 
+	 * @param name
+	 * @param value
+	 */
+	public static void throwIllegalityException(String msg)
+			throws IllegalityException {
+		UserLoginInfo userLoginInfo = (UserLoginInfo) ServletActionContext
+				.getRequest().getSession().getAttribute(
+						Constant.USER_LOGIN_INFO);
+		throw new IllegalityException(userLoginInfo + ":" + msg);
+	}
 
 	/**
 	 * 平台名字转换成type

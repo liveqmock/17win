@@ -12,6 +12,7 @@ import net.win.dao.WithDrawalsDAO;
 import net.win.entity.UserEntity;
 import net.win.entity.WithdrawalsEntity;
 import net.win.utils.StringUtils;
+import net.win.utils.WinUtils;
 import net.win.vo.WithdrawalsVO;
 
 import org.apache.commons.beanutils.BeanUtils;
@@ -155,8 +156,7 @@ public class WithdrawalsService extends BaseService {
 			return "insertWithdrawals";
 		} else {
 			if (withdrawalsEntity.getMoney() < 100) {
-				throwIllegalityException(userEntity.getUsername()
-						+ ":视图越过提现大于100的操作！");
+				WinUtils.throwIllegalityException("视图越过提现大于100的操作！");
 			}
 			if (withdrawalsEntity.getMoney() > userEntity.getMoney()) {
 				putAlertMsg("提现错误！您的17win余额不够" + withdrawalsEntity.getMoney());
@@ -171,5 +171,4 @@ public class WithdrawalsService extends BaseService {
 		}
 		return "insertWithdrawals";
 	}
-
 }

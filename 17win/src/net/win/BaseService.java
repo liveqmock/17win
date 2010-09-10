@@ -205,16 +205,6 @@ public class BaseService {
 		return ServletActionContext.getRequest().getSession().getAttribute(key);
 	}
 
-	/**
-	 * 抛出异常
-	 * 
-	 * @param name
-	 * @param value
-	 */
-	protected void throwIllegalityException(String msg)
-			throws IllegalityException {
-		throw new IllegalityException(msg);
-	}
 
 	protected Boolean nullID(BaseEntity base) {
 		return base.getId() == null;
