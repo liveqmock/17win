@@ -14,6 +14,7 @@ import javax.persistence.Table;
  */
 // 名字
 public class BuyerEntity extends BaseEntity {
+	
 	@Column(name = "NAME_", length = 20, nullable = false)
 	private String name;
 	// 类型(1淘宝,2怕拍,3有啊)

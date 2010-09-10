@@ -1,5 +1,9 @@
 package net.win;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import net.win.dao.UserDAO;
 import net.win.entity.BaseEntity;
 import net.win.entity.UserEntity;
@@ -26,6 +30,63 @@ public class BaseService {
 	// 前台显示数据
 	private static final String MSG = "msg";
 	private static final String DIV = "div";
+
+	/**
+	 * 获取request
+	 */
+	protected HttpServletRequest getRequset() {
+		return ServletActionContext.getRequest();
+	}
+
+	/**
+	 * 获取平台类型
+	 * 
+	 * @return
+	 */
+	protected String getPlatformType() {
+		return getByParam("platformType");
+	}
+
+	/**
+	 * 存放平台类型
+	 * 
+	 * @return
+	 */
+	protected void putPlatformTypeByRequest(String platformType) {
+		putByRequest("platformType", platformType);
+	}
+
+	/**
+	 * 获取平台名字
+	 * 
+	 * @return
+	 */
+	protected String getPlatform() {
+		return getByParam("platform");
+	}
+
+	/**
+	 * 存放平台类型
+	 * 
+	 * @return
+	 */
+	protected void putPlatformByRequest(String platform) {
+		putByRequest("platform", platform);
+	}
+
+	/**
+	 * 获取response
+	 */
+	protected HttpServletResponse getResponse() {
+		return ServletActionContext.getResponse();
+	}
+
+	/**
+	 * 获取session
+	 */
+	protected HttpSession getSession() {
+		return ServletActionContext.getRequest().getSession();
+	}
 
 	/**
 	 * 更新用户信息

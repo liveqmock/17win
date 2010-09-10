@@ -13,9 +13,11 @@ import java.util.Date;
 
 public final class WinUtils {
 	private static final int BUFFER_SIZE = 1024;
+
 	private WinUtils() {
 
 	}
+
 	/**
 	 * taskId
 	 * 
@@ -26,6 +28,45 @@ public final class WinUtils {
 	public static String generateTaskID() throws Exception {
 		return DateUtils.parseDate(new Date(), "yyyyMMddHHmmssS");
 	}
+
+	/**
+	 * 平台名字转换成type
+	 * 
+	 * @param platform
+	 * @return
+	 */
+	public static String changePlatform2Type(String platform) {
+		if (platform.equals("淘宝")) {
+			return "1";
+		}
+		if (platform.equals("拍拍")) {
+			return "2";
+		}
+		if (platform.equals("有啊")) {
+			return "3";
+		}
+		return "1";
+	}
+
+	/**
+	 * type转换成平台名字
+	 * 
+	 * @param platform
+	 * @return
+	 */
+	public static String changeType2Platform(String platformType) {
+		if (platformType.equals("1")) {
+			return "淘宝";
+		}
+		if (platformType.equals("2")) {
+			return "拍拍";
+		}
+		if (platformType.equals("3")) {
+			return "有啊";
+		}
+		return "淘宝";
+	}
+
 	/**
 	 * 文件拷贝
 	 * 

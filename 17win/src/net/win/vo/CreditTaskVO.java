@@ -12,7 +12,8 @@ public class CreditTaskVO extends BaseVO {
 	// 价格
 	private Double money;
 	// 状态
-	// (-1因为申述被暂停(但是要判断12小时，不能像2000w一样不能判断) ,0 还没开始（定时任务有用）
+	// (-1因为申述被暂停(但是要判断12小时，不能像2000w一样不能判断) ,0 定时任务有用
+	// ,[1:等待我付款,2:等待卖家发货,3:等待卖家发货](买家),[4:等待接手,5:等待审核人,6:等待我发货,7:等待买家确认8:等待我核查好评](卖家))
 	private String status;
 	// 商品地址
 	private String itemUrl;
@@ -22,6 +23,8 @@ public class CreditTaskVO extends BaseVO {
 	private String grade;
 	// 间隔几个小时(x*24[勾选]或则X[自定义])
 	private Integer intervalHour;
+	// 剩余时间
+	private Integer remainTime;
 	// 运货单号
 	private String waybill;
 	// 定时任务时间(不能小于开始时间)
@@ -36,9 +39,6 @@ public class CreditTaskVO extends BaseVO {
 	private Float releaseDot;
 	//
 	private Long sellerID;
-	private Long buyerID;
-	private Long releasePersonID;
-	private Long receivePersonID;
 
 	public String getType() {
 		return type;
@@ -152,27 +152,12 @@ public class CreditTaskVO extends BaseVO {
 		this.sellerID = sellerID;
 	}
 
-	public Long getBuyerID() {
-		return buyerID;
+
+	public Integer getRemainTime() {
+		return remainTime;
 	}
 
-	public void setBuyerID(Long buyerID) {
-		this.buyerID = buyerID;
-	}
-
-	public Long getReleasePersonID() {
-		return releasePersonID;
-	}
-
-	public void setReleasePersonID(Long releasePersonID) {
-		this.releasePersonID = releasePersonID;
-	}
-
-	public Long getReceivePersonID() {
-		return receivePersonID;
-	}
-
-	public void setReceivePersonID(Long receivePersonID) {
-		this.receivePersonID = receivePersonID;
+	public void setRemainTime(Integer remainTime) {
+		this.remainTime = remainTime;
 	}
 }

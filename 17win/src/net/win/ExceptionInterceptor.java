@@ -1,5 +1,6 @@
 package net.win;
 
+import net.win.exception.IllegalityException;
 import net.win.utils.LoggerUtils;
 
 import com.opensymphony.xwork2.ActionInvocation;
@@ -16,6 +17,9 @@ public class ExceptionInterceptor extends AbstractInterceptor {
 		try {
 			String result = invocation.invoke();
 			return result;
+		} catch (IllegalityException e1) {
+			LoggerUtils.fatal(e1);
+			return "error";
 		} catch (Exception e) {
 			LoggerUtils.error(e);
 			return "error";

@@ -22,10 +22,9 @@ import org.springframework.stereotype.Controller;
 		@Result(name = "input", location = "/credit/task.jsp"),
 		@Result(name = "initTask", location = "/credit/task.jsp"),
 		@Result(name = "initReleaseTask", location = "/credit/releaseTask.jsp"),
-		@Result(name = "operationValidate", location = "/credit/operationValidate.jsp"),
-		@Result(name = "updateUserLoginOperattionCode", type = "redirect", location = "/taskManager/task!initReleaseTask.php") })
+		@Result(name = "operationValidate", location = "/system/operationValidate.jsp")})
 @Namespace("/taskManager")
-public class TaskAction extends BaseAction {
+public class CreditTaskAction extends BaseAction {
 	@Resource
 	private CreditTaskService creditTaskService;
 
@@ -37,15 +36,6 @@ public class TaskAction extends BaseAction {
 	}
 
 	/**
-	 * 更新操作码
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	public String updateUserLoginOperattionCode() throws Exception {
-		return creditTaskService.updateUserLoginOperattionCode(creditTaskVO);
-	}
-	/**
 	 * 初始化任务
 	 * 
 	 * @return
@@ -54,8 +44,6 @@ public class TaskAction extends BaseAction {
 	public String initTask() throws Exception {
 		return creditTaskService.initTask(creditTaskVO);
 	}
-
-
 	/**
 	 * 初始化发布任务
 	 * 

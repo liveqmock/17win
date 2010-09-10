@@ -18,9 +18,36 @@ import org.springframework.stereotype.Controller;
 @Controller
 @Scope("prototype")
 @ParentPackage("17win-default")
-@Results( { @Result(name = "initRegister", location = "/system/register.jsp"),
-		@Result(name = "success", location = "/user/index.jsp") })
-@Namespace("/systemManager")
+@Results( { @Result(name = "activateOperattionCode", location = "/system/operationValidate.jsp") })
+@Namespace("/commonManager")
 public class CommonAction extends BaseAction {
 
+	@Resource
+	private CommonService commonService;
+
+	private CommonVO commonVO = new CommonVO();
+
+	public CommonVO getCommonVO() {
+		return commonVO;
+	}
+
+	public void setCommonVO(CommonVO commonVO) {
+		this.commonVO = commonVO;
+	}
+
+	@Override
+	@Action("/common")
+	public String execute() throws Exception {
+		return super.execute();
+	}
+
+	/**
+	 * 更新操作码
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String activateOperattionCode() throws Exception {
+		return commonService.activateOperattionCode(commonVO);
+	}
 }

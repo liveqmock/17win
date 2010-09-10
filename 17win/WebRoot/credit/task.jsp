@@ -52,10 +52,11 @@
 								<LI>
 									<A
 										style="FONT-SIZE: 16px; BACKGROUND: url(images/task_nav_02.gif) no-repeat 50% bottom; COLOR: #ffffff"
-										href="taskManager/task!initTask.php">淘宝互动区</A>
+										href="taskManager/task!initTask.php"><s:property
+											value="#request.platform" />互动区</A>
 								</LI>
 								<LI>
-									<A href="taskManager/task!initReleaseTask.php">发布任务</A>
+									<A href="taskManager/task!initReleaseTask.php?platformType=<s:property value="#request.platformType"/>">发布任务</A>
 								</LI>
 								<LI>
 									<A href="ReMission.asp">已接任务</A>

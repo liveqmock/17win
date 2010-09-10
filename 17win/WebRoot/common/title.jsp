@@ -115,15 +115,15 @@
 					style="COLOR: #000000">首&nbsp;页</SPAN> </A>
 			</LI>
 			<LI class=white>
-				<A class="li0 " href="taskManager/task!initTask.php" id="a1" onmouseover="Mea(1);"
+				<A class="li0 " href="taskManager/task!initTask.php?platformType=1" id="a1" onmouseover="Mea(1);"
 					onMouseOut="setAuto()">淘宝互刷</A>
 			</LI>
 			<LI class=white>
-				<A class="li0 " href="credit/task.jsp" id="a2" onmouseover="Mea(2);"
+				<A class="li0 " href="taskManager/task!initTask.php?platformType=2" onmouseover="Mea(2);"
 					onMouseOut="setAuto()">拍拍互刷</A>
 			</LI>
 			<LI class=white>
-				<A class="li0 " href="credit/task.jsp" id="a3" onmouseover="Mea(3);"
+				<A class="li0 " href="taskManager/task!initTask.php?platformType=3" onmouseover="Mea(3);"
 					onMouseOut="setAuto()">有啊互刷</A>
 			</LI>
 			<LI class=white>

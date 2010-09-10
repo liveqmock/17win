@@ -13,6 +13,7 @@ public abstract class Constant {
 	
 	// EMAIL的发送地址
 	public static final String FROM_EMAIL = "30756500@qq.com";
+	
 
 	// https的URL
 	public static final String HTTPS_URL = "https://192.168.0.181:8443";

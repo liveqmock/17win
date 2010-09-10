@@ -7,7 +7,7 @@
 		<LINK href="css/index.css" type=text/css rel=stylesheet>
 		<LINK href="css/Css.css" type=text/css rel=stylesheet>
 		<LINK href="css/top_bottom.css" type=text/css rel=stylesheet>
-		<script src="credit/operationValidate.js" type="text/javascript"></script>
+		<script src="system/operationValidate.js" type="text/javascript"></script>
 
 	</HEAD>
 	<BODY>

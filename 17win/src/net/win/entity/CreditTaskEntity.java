@@ -24,9 +24,12 @@ public class CreditTaskEntity extends TaskBaseEntity {
 	// 价格
 	@Column(name = "MONEY_", nullable = false)
 	private Double money;
+	//所剩时间(分钟)
+	@Column(name = "REMAIN_TIME_", nullable = false)
+	private Integer remainTime=20;
 	// 状态
-	// (-1因为申述被暂停(但是要判断12小时，不能像2000w一样不能判断),99任务保护 ,0  还没开始（定时任务有用）
-	// ,[1:等待我付款,2:等待卖家发货,3:等待卖家发货](买家),[4:等待接手,5:等待接手,6:等待我发货,7:等待买家确认8:等待我核查好评](卖家))
+	// (-1因为申述被暂停(但是要判断12小时，不能像2000w一样不能判断) ,0  还没开始（定时任务有用）
+	// ,[1:等待我付款,2:等待卖家发货,3:等待卖家发货](买家),[4:等待接手,5:等待审核人,6:等待我发货,7:等待买家确认8:等待我核查好评](卖家))
 	@Column(name = "STATUS", length = 2, nullable = false)
 	private String status;
 	// 商品地址
@@ -144,6 +147,14 @@ public class CreditTaskEntity extends TaskBaseEntity {
 
 	public void setBuyer(BuyerEntity buyer) {
 		this.buyer = buyer;
+	}
+
+	public Integer getRemainTime() {
+		return remainTime;
+	}
+
+	public void setRemainTime(Integer remainTime) {
+		this.remainTime = remainTime;
 	}
 
 }

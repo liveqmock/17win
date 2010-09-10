@@ -1,6 +1,12 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
 <html>
 	<head>
 		<s:include value="../common/header.jsp"></s:include>
@@ -9,6 +15,8 @@
 		<LINK href="css/style.css" type=text/css rel=stylesheet>
 		<LINK href="css/header.css" type=text/css rel=stylesheet>
 		<LINK href="css/top_bottom.css" type=text/css rel=stylesheet>
+		<script src="<%=basePath%>js/My97DatePicker/WdatePicker.js"
+			type="text/javascript"></script>
 	</head>
 	<body>
 		<s:form action="userManager/base!register.php" theme="simple"
@@ -248,8 +256,20 @@
 																		(扣x*2+2个发布点)
 																	</td>
 																</tr>
-
-
+																<tr>
+																	<td height="30">
+																		&nbsp;
+																	</td>
+																	<td>
+																		<input type="radio" name="bei" id="radio2"
+																			value="二天后收货好评" />
+																		自定义时间 (扣x*2个发布点)
+																	</td>
+																	<td>
+																		<input type="text" style="width: 40px">
+																		时后收货好评
+																	</td>
+																</tr>
 																<tr>
 																	<td height="30">
 																		&nbsp;
@@ -264,7 +284,7 @@
 																		<span class="red-bcolor">*什么是来路保护</span>
 																		<label>
 																			<input name="baohu3" type="checkbox"
-																				disabled="disabled" id="baohu3" value="1" checked />
+																				disabled="disabled" id="baohu3" value="1" />
 																			防黄钻保护
 																		</label>
 																		*
@@ -287,8 +307,12 @@
 																		定时任务：
 																	</td>
 																	<td colspan="2">
-																		<font color="#FF0000"><input type="text"
-																				readonly="readonly" name="outtime" /> </font>
+																		<input type="text" id="tasktimingDate" />
+																		<img style="cursor: pointer;"
+																			onclick="WdatePicker({'minDate':'%y-%M-%d %H:%m','alwaysUseStartDate':false,'el':'tasktimingDate','isShowClear':false,startDate:'%y-%M-%d %H:%m',dateFmt:'yyyy-MM-dd HH:mm','skin':'blue'})"
+																			src="js/My97DatePicker/skin/datePicker.gif"
+																			width="16" height="22" align="absmiddle">
+																		<input type="text" value="4" name="statu"/>
 																	</td>
 																</tr>
 																<tr>
@@ -301,6 +325,14 @@
 																			value="1" />
 																		顺便添加到我的任务仓库
 																		<span class="red-bcolor">什么是任务仓库- &gt;</span>
+																	</td>
+																</tr>
+																<tr>
+																	<td class="font14b4" align="right">
+																		根据卖号地址生成收货地址：
+																	</td>
+																	<td colspan="2">
+																		<input type="checkbox">
 																	</td>
 																</tr>
 																<tr>
