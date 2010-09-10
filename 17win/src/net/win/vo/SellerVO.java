@@ -1,20 +1,11 @@
 package net.win.vo;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 import net.win.BaseVO;
 import net.win.entity.AreaEntity;
-import net.win.entity.BuyerEntity;
 import net.win.entity.CityEntity;
 import net.win.entity.ProvinceEntity;
-import net.win.entity.SellerEntity;
-import net.win.entity.UserEntity;
 
 public class SellerVO extends BaseVO {
 	// 名字
@@ -30,6 +21,31 @@ public class SellerVO extends BaseVO {
 	private Long cityID;
 	// 县 ID
 	private Long areaID;
+
+	List<ProvinceEntity> provinces;
+
+	List<CityEntity> citys;
+
+	List<AreaEntity> areas;
+
+	public List<ProvinceEntity> getProvinces() {
+		return provinces;
+	}
+	public void setProvinces(List<ProvinceEntity> provinces) {
+		this.provinces = provinces;
+	}
+	public List<CityEntity> getCitys() {
+		return citys;
+	}
+	public void setCitys(List<CityEntity> citys) {
+		this.citys = citys;
+	}
+	public List<AreaEntity> getAreas() {
+		return areas;
+	}
+	public void setAreas(List<AreaEntity> areas) {
+		this.areas = areas;
+	}
 	public String getName() {
 		return name;
 	}

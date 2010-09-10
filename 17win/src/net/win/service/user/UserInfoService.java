@@ -17,7 +17,9 @@ import net.win.dao.ProvinceDAO;
 import net.win.dao.SellerDAO;
 import net.win.dao.UserDAO;
 import net.win.dao.WithDrawalsDAO;
+import net.win.entity.AreaEntity;
 import net.win.entity.BuyerEntity;
+import net.win.entity.CityEntity;
 import net.win.entity.ProvinceEntity;
 import net.win.entity.SellerEntity;
 import net.win.entity.UserEntity;
@@ -34,7 +36,7 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 import com.sun.org.apache.commons.beanutils.BeanUtils;
 
-@SuppressWarnings( { "unchecked" })
+@SuppressWarnings({"unchecked"})
 @Service("userInfoService")
 public class UserInfoService extends BaseService {
 	@Resource
@@ -69,9 +71,9 @@ public class UserInfoService extends BaseService {
 		List<BuyerEntity> buyers = userVO.getBuyers();
 
 		userDAO.deleteBySQL("delete TB_SELLER where USER_ID_=:userId",
-				new String[] { "userId" }, new Object[] { userEntity.getId() });
+				new String[]{"userId"}, new Object[]{userEntity.getId()});
 		userDAO.deleteBySQL("delete TB_BUYER where USER_ID_=:userId",
-				new String[] { "userId" }, new Object[] { userEntity.getId() });
+				new String[]{"userId"}, new Object[]{userEntity.getId()});
 
 		for (SellerEntity sellerEntity : sellers) {
 			if (nullID(sellerEntity.getProvince())) {
@@ -113,6 +115,11 @@ public class UserInfoService extends BaseService {
 		buyerResult.put("1", new ArrayList<BuyerVO>());
 		buyerResult.put("2", new ArrayList<BuyerVO>());
 		buyerResult.put("3", new ArrayList<BuyerVO>());
+		// 省
+		List<ProvinceEntity> provinces = provinceDAO
+				.list("from ProvinceEntity");
+		
+		putByRequest("provinces", provinces);
 		// 解析
 		if (sellers.size() > 0) {
 			SellerVO sellerVO;
@@ -120,13 +127,25 @@ public class UserInfoService extends BaseService {
 				sellerVO = new SellerVO();
 				List<SellerVO> list = sellerResult.get(sellerEntity.getType());
 				BeanUtils.copyProperties(sellerVO, sellerEntity);
+				sellerVO.setProvinces(provinces);
 				if (sellerEntity.getProvince() != null) {
+					// 省
+					List<CityEntity> citys = cityDAO.list(
+							"from CityEntity  where province.id=:id", "id",
+							sellerEntity.getProvince().getId());
+					sellerVO.setCitys(citys);
 					sellerVO.setProvinceID(sellerEntity.getProvince().getId());
 				}
 				if (sellerEntity.getCity() != null) {
+					// 市
 					sellerVO.setCityID(sellerEntity.getCity().getId());
+					List<AreaEntity> areas = cityDAO.list(
+							"from AreaEntity where  city.id=:id", "id",
+							sellerEntity.getCity().getId());
+					sellerVO.setAreas(areas);
 				}
 				if (sellerEntity.getArea() != null) {
+					// 县
 					sellerVO.setAreaID(sellerEntity.getArea().getId());
 				}
 				list.add(sellerVO);
@@ -144,14 +163,11 @@ public class UserInfoService extends BaseService {
 		}
 
 		putByRequest("sellers", sellerResult);
+		
 		putByRequest("buyers", buyerResult);
-		// 省
-		List<ProvinceEntity> provinces = provinceDAO
-				.list("from ProvinceEntity");
-		putByRequest("provinces", provinces);
+
 		return "initSellerAndBuyer";
 	}
-
 	/**
 	 * 激活账号
 	 * 

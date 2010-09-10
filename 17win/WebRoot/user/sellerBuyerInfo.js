@@ -12,7 +12,7 @@ $(document).ready(function() {
 				+ type
 				+ "',this)\" >		 "
 				+ "		</td>  "
-				+ "		<td  class='address' nowrap='nowrap' align='center' >"
+				+ "		<td  class='address'   nowrap='nowrap' align='center' >"
 				+ "	</td> "
 				+ "		<td  align='center'  > "
 				+ "		 <input type='text' name='userVO.sellers[0].name' readonly='readonly'>	  "
@@ -26,7 +26,9 @@ $(document).ready(function() {
 		var selectP = $("#tempProvince").clone();
 		selectP.show();
 		selectP.attr("name", "userVO.sellers[0].province.id");
-		selectP.attr("onchange", "selectCity(this)");
+		selectP.bind("change", function() {
+					selectCity(this)
+				});
 		td.append(selectP);
 		td
 				.append(" 市： <select onchange='selectArea(this)' name='userVO.sellers[0].city.id'><option value=''>请选择</option></select>");
@@ -39,9 +41,11 @@ $(document).ready(function() {
 	$("input[buyerFlag]").bind("click", function() {
 		var type = $(this).attr("buyerFlag");
 		var tbody = $("#buyerTable" + type);
-		var trStr = "<tr class='buyerTr'> " + "	<td  align='center'  >  "
+		var trStr = "<tr class='buyerTr'> "
+				+ "	<td  align='center'  >  "
 				+ " <input type='hidden' name='userVO.buyers[0].type' value='"
-				+ type + "' /> "
+				+ type
+				+ "' /> "
 				+ "		 <input type='text'  onblur=\"obtainBuyer(this)\" name='userVO.buyers[0].name' >  "
 				+ "    </td>  " + "	<td align='center' >  " + "		0 "
 				+ "		</td> " + "	<td   align='center' >  "
@@ -127,9 +131,9 @@ function beforeBlur(obj) {
 // 买家失去焦点
 function obtainBuyer(obj) {
 	if (Validater.isBlank($(obj).val())) {
-		changeStyle(obj,'0','不能为空！');
+		changeStyle(obj, '0', '不能为空！');
 	} else {
-		changeStyle(obj,'1','');
+		changeStyle(obj, '1', '');
 	}
 }
 // 根据店铺地址获取到卖号
