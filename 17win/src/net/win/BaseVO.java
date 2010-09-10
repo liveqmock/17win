@@ -6,6 +6,15 @@ public class BaseVO {
 	private Integer eachPage = 20;
 	private Integer pageCount = 0;
 	private Integer dataCount = 0;
+	private Long id;
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public Integer getStart() {
 		return (nowpage - 1) * eachPage;

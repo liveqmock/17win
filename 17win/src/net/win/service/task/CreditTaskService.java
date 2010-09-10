@@ -1,14 +1,20 @@
 package net.win.service.task;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import net.win.BaseService;
 import net.win.dao.CreditTaskDAO;
 import net.win.dao.UserDAO;
+import net.win.entity.SellerEntity;
 import net.win.entity.UserEntity;
 import net.win.utils.StringUtils;
 import net.win.vo.CreditTaskVO;
+import net.win.vo.SellerVO;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Service;
 
 @SuppressWarnings("unused")
@@ -45,13 +51,28 @@ public class CreditTaskService extends BaseService {
 	 * @return
 	 */
 	public String initReleaseTask(CreditTaskVO creditTaskVO) throws Exception {
+		// 没有操作码验证就验证
+
 		if (!getLoginUser().getOperationCodeStatus()) {
 			return "operationValidate";
 		} else {
 			UserEntity userEntity = getLoginUserEntity(userDAO);
+			List<SellerEntity> sellers = userEntity.getSellers();
+			List<SellerVO> resultSellers = new ArrayList<SellerVO>(sellers
+					.size());
+			if (sellers.size() > 0) {
+				creditTaskVO.setSellerID(sellers.get(0).getId());
+				for (SellerEntity sellerEntity : sellers) {
+					SellerVO sellerVO = new SellerVO();
+					BeanUtils.copyProperties(sellerVO, sellerEntity);
+					resultSellers.add(sellerVO);
+				}
+			}
+			putByRequest("sellers", resultSellers);
 			return "initReleaseTask";
 		}
 	}
+
 	/**
 	 * 初始化任务
 	 * 

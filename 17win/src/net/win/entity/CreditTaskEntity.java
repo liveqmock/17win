@@ -25,7 +25,7 @@ public class CreditTaskEntity extends TaskBaseEntity {
 	@Column(name = "MONEY_", nullable = false)
 	private Double money;
 	// 状态
-	// (-1因为申述被暂停(但是要判断12小时，不能像2000w一样不能判断) ,0  还没开始（定时任务有用）
+	// (-1因为申述被暂停(但是要判断12小时，不能像2000w一样不能判断),99任务保护 ,0  还没开始（定时任务有用）
 	// ,[1:等待我付款,2:等待卖家发货,3:等待卖家发货](买家),[4:等待接手,5:等待接手,6:等待我发货,7:等待买家确认8:等待我核查好评](卖家))
 	@Column(name = "STATUS", length = 2, nullable = false)
 	private String status;
@@ -38,7 +38,7 @@ public class CreditTaskEntity extends TaskBaseEntity {
 	// 动态评分(x:默认好评，x:全部5分 ...)
 	@Column(name = "GRADE_", columnDefinition = "CHAR(1)", nullable = false)
 	private String grade;
-	// 间隔几个小时(x*24[勾选]或则X[自定义])
+	// 间隔几个小时(x*24[勾选]或则X[自定义] 0为马上收货)
 	@Column(name = "INTERVAL_HOUR_", nullable = false)
 	private Integer intervalHour;
 	// 运货单号

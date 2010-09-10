@@ -11,107 +11,108 @@
 		<LINK href="css/top_bottom.css" type=text/css rel=stylesheet>
 	</head>
 	<body>
-		<s:include value="../common/title.jsp"></s:include>
-		<table cellspacing="0" cellpadding="0" width="910" align="center"
-			border="0">
-			<tr>
-				<td height="50">
-					<div
-						style="CLEAR: both; OVERFLOW: hidden; WIDTH: 910px; HEIGHT: 50px; BACKGROUND-COLOR: #f3f8fe">
+		<s:form action="userManager/base!register.php" theme="simple"
+			onsubmit="return validateForm()">
+			<s:include value="../common/title.jsp"></s:include>
+
+			<table cellspacing="0" cellpadding="0" width="910" align="center"
+				border="0">
+				<tr>
+					<td height="50">
 						<div
-							style="MARGIN: 10px 10px 0px; LINE-HEIGHT: 30px; BORDER-BOTTOM: #cccccc 1px dashed; HEIGHT: 40px">
+							style="CLEAR: both; OVERFLOW: hidden; WIDTH: 910px; HEIGHT: 50px; BACKGROUND-COLOR: #f3f8fe">
 							<div
-								style="CLEAR: both; OVERFLOW: hidden; WIDTH: 910px; BACKGROUND-COLOR: #f3f8fe">
-
+								style="MARGIN: 10px 10px 0px; LINE-HEIGHT: 30px; BORDER-BOTTOM: #cccccc 1px dashed; HEIGHT: 40px">
 								<div
-									style="MARGIN: 10px 10px 0px; LINE-HEIGHT: 30px; BORDER-BOTTOM: #cccccc 1px dashed; HEIGHT: 40px">
-									<div>
-										亲爱的会员：
-										<font color=#ff0000>xgj1988</font>&nbsp;(
-										<font color=red>还没有加入部落</font>)&nbsp;您好！您拥有存款：
-										<font color=#ff0000> 20.95</font> 元 &nbsp; 发布点：
-										<font color=#ff0000> 2.0 </font>点 &nbsp; 积分：
-										<font color=#ff0000>260</font>点
+									style="CLEAR: both; OVERFLOW: hidden; WIDTH: 910px; BACKGROUND-COLOR: #f3f8fe">
 
-										<a href="../user/user.asp"> 站内信(<FONT color=#ff0000>0</FONT>)</a>
+									<div
+										style="MARGIN: 10px 10px 0px; LINE-HEIGHT: 30px; BORDER-BOTTOM: #cccccc 1px dashed; HEIGHT: 40px">
+										<div>
+											亲爱的会员：
+											<font color=#ff0000>xgj1988</font>&nbsp;(
+											<font color=red>还没有加入部落</font>)&nbsp;您好！您拥有存款：
+											<font color=#ff0000> 20.95</font> 元 &nbsp; 发布点：
+											<font color=#ff0000> 2.0 </font>点 &nbsp; 积分：
+											<font color=#ff0000>260</font>点
+
+											<a href="../user/user.asp"> 站内信(<FONT color=#ff0000>0</FONT>)</a>
+										</div>
 									</div>
 								</div>
 							</div>
+
 						</div>
-
-					</div>
-				</td>
-			</tr>
-		</table>
-		<div align="center">
-			<DIV
-				style="MARGIN-TOP: 0px; BACKGROUND: #ffffff; OVERFLOW: hidden; WIDTH: 910px">
+					</td>
+				</tr>
+			</table>
+			<div align="center">
 				<DIV
-					style="CLEAR: both; MARGIN-TOP: 2px; WIDTH: 910px; HEIGHT: 25px">
-					<DIV style="FLOAT: left; OVERFLOW: hidden; WIDTH: 700px">
-						<UL id=task_nav>
-							<LI>
-								<A  href="taskManager/task!initTask.php">淘宝互动区</A>
-							</LI>
-							<LI>
-								<A
-									style="FONT-SIZE: 16px; BACKGROUND: url(images/task_nav_02.gif) no-repeat 50% bottom; COLOR: #ffffff"
-									href="taskManager/task!initReleaseTask.php">发布任务</A>
-							</LI>
+					style="MARGIN-TOP: 0px; BACKGROUND: #ffffff; OVERFLOW: hidden; WIDTH: 910px">
+					<DIV
+						style="CLEAR: both; MARGIN-TOP: 2px; WIDTH: 910px; HEIGHT: 25px">
+						<DIV style="FLOAT: left; OVERFLOW: hidden; WIDTH: 700px">
+							<UL id=task_nav>
+								<LI>
+									<A href="taskManager/task!initTask.php">淘宝互动区</A>
+								</LI>
+								<LI>
+									<A
+										style="FONT-SIZE: 16px; BACKGROUND: url(images/task_nav_02.gif) no-repeat 50% bottom; COLOR: #ffffff"
+										href="taskManager/task!initReleaseTask.php">发布任务</A>
+								</LI>
 
-							<LI>
-								<A href="ReMission.asp">已接任务</A>
-							</LI>
-							<LI>
-								<A href="MyMission.asp">已发任务</A>
-							</LI>
-							<LI>
-								<A href="MyWw.asp">绑定店铺</A>
-							</LI>
-							<LI>
-								<A href="Buyhao.asp">绑定买号</A>
-							</LI>
-							<LI>
-								<A href="MySave.asp">任务仓库</A>
-							</LI>
-						</UL>
+								<LI>
+									<A href="ReMission.asp">已接任务</A>
+								</LI>
+								<LI>
+									<A href="MyMission.asp">已发任务</A>
+								</LI>
+								<LI>
+									<A href="MyWw.asp">绑定店铺</A>
+								</LI>
+								<LI>
+									<A href="Buyhao.asp">绑定买号</A>
+								</LI>
+								<LI>
+									<A href="MySave.asp">任务仓库</A>
+								</LI>
+							</UL>
+						</DIV>
+
 					</DIV>
-
 				</DIV>
-			</DIV>
-		</div>
-		<table width="760" border="0" align="center" cellpadding="0"
-			cellspacing="0">
-			<tr>
-				<td>
-					<table width="910" border="0" cellspacing="0" cellpadding="0">
-						<tr>
+			</div>
+			<table width="760" border="0" align="center" cellpadding="0"
+				cellspacing="0">
+				<tr>
+					<td>
+						<table width="910" border="0" cellspacing="0" cellpadding="0">
+							<tr>
 
-							<td valign="top">
-								<table width="100%" border="0" cellpadding="0" cellspacing="0">
+								<td valign="top">
+									<table width="100%" border="0" cellpadding="0" cellspacing="0">
 
-									<tr height="1">
-										<td height="5"></td>
-									</tr>
-								</table>
-								<table width="100%" border="0" cellpadding="0" cellspacing="0"
-									bgcolor="#FFFFFF" class="bordera margin6">
-									<tr>
-										<td height="30" class="border-bot">
-											&nbsp;&nbsp;&nbsp;
-											<span class="font12b">淘宝任务发布区</span>
-										</td>
+										<tr height="1">
+											<td height="5"></td>
+										</tr>
+									</table>
+									<table width="100%" border="0" cellpadding="0" cellspacing="0"
+										bgcolor="#FFFFFF" class="bordera margin6">
+										<tr>
+											<td height="30" class="border-bot">
+												&nbsp;&nbsp;&nbsp;
+												<span class="font12b">淘宝任务发布区</span>
+											</td>
 
-									</tr>
-									<tr>
-										<td height="140" valign="middle">
-											<table width="680" border="0" align="center" cellpadding="0"
-												cellspacing="0" bgcolor="#FFFFFF">
-												<tr>
-													<td width="550">
-														<FORM name=formf method=post action="jieducm_faok.asp"
-															onSubmit="return save_onclick12()">
-															<input name="fa" type="hidden" value="ok">
+										</tr>
+										<tr>
+											<td height="140" valign="middle">
+												<table width="680" border="0" align="center" cellpadding="0"
+													cellspacing="0" bgcolor="#FFFFFF">
+													<tr>
+														<td width="550">
+
 															<table width="680" border="0" align="center"
 																cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
 																<tr>
@@ -151,11 +152,8 @@
 																		掌柜名：
 																	</td>
 																	<td colspan="4">
-																		<label>
-																			<input type='radio' name='Shopkeeper' id='nick_name'
-																				value='xgj1988'>
-																			xgj1988
-																		</label>
+																		<s:radio list="#request.sellers" listKey="id"
+																			listValue="name"></s:radio>
 																	</td>
 																</tr>
 
@@ -213,7 +211,7 @@
 																	</td>
 																	<td width="227">
 																		<label>
-																			<input name="bei" type="radio"   checked="checked"
+																			<input name="bei" type="radio" checked="checked"
 																				value="马上收货好评" />
 
 																			<span class="font12l">马上收货好评</span>
@@ -222,8 +220,7 @@
 																	</td>
 																	<td width="324">
 																		<label>
-																			<input name="bei" type="radio" 
-																				value="一天后收货好评" />
+																			<input name="bei" type="radio" value="一天后收货好评" />
 																			<span class="font12l"> 一天后收货好评</span>
 																		</label>
 																		(扣x*2个发布点)
@@ -296,7 +293,7 @@
 																</tr>
 																<tr>
 																	<td class="font14b4" align="right">
-																		 任务仓库：
+																		任务仓库：
 																	</td>
 																	<td colspan="2">
 
@@ -321,22 +318,20 @@
 
 																</tr>
 															</table>
-														</FORM>
+														</td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
 
-
-													</td>
-												</tr>
-											</table>
-										</td>
-									</tr>
-								</table>
-							</td>
-						</tr>
-
-					</table>
-				</td>
-			</tr>
-		</table>
-		<s:include value="../common/footDuan.jsp"></s:include>
+						</table>
+					</td>
+				</tr>
+			</table>
+			<s:include value="../common/footDuan.jsp"></s:include>
+		</s:form>
 	</BODY>
 </html>
