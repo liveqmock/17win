@@ -10,11 +10,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import org.apache.struts2.ServletActionContext;
-
 import net.win.UserLoginInfo;
-import net.win.exception.NoPageException;
 import net.win.exception.IllegalityException;
+import net.win.exception.NoPageException;
+
+import org.apache.struts2.ServletActionContext;
 
 public final class WinUtils {
 	private static final int BUFFER_SIZE = 1024;
@@ -45,14 +45,18 @@ public final class WinUtils {
 	 */
 	public static String changePlatform2Type(String platform)
 			throws NoPageException {
-		if (platform.equals("淘宝")) {
-			return "1";
-		}
-		if (platform.equals("拍拍")) {
-			return "2";
-		}
-		if (platform.equals("有啊")) {
-			return "3";
+		try {
+			if (platform.equals("淘宝")) {
+				return "1";
+			}
+			if (platform.equals("拍拍")) {
+				return "2";
+			}
+			if (platform.equals("有啊")) {
+				return "3";
+			}
+		} catch (Exception e) {
+			throw new NoPageException(e);
 		}
 		return "1";
 	}
@@ -65,14 +69,18 @@ public final class WinUtils {
 	 */
 	public static String changeType2Platform(String platformType)
 			throws NoPageException {
-		if (platformType.equals("1")) {
-			return "淘宝";
-		}
-		if (platformType.equals("2")) {
-			return "拍拍";
-		}
-		if (platformType.equals("3")) {
-			return "有啊";
+		try {
+			if (platformType.equals("1")) {
+				return "淘宝";
+			}
+			if (platformType.equals("2")) {
+				return "拍拍";
+			}
+			if (platformType.equals("3")) {
+				return "有啊";
+			}
+		} catch (Exception e) {
+			throw new NoPageException(e);
 		}
 		return "淘宝";
 	}

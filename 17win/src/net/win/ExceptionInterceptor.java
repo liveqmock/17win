@@ -21,19 +21,20 @@ public class ExceptionInterceptor extends AbstractInterceptor {
 			String result = invocation.invoke();
 			return result;
 		} catch (NoRightsException e1) {
-			LoggerUtils.error(e1);
+			LoggerUtils.info(e1);
 			return "noRightsError";
 		} catch (NoPageException e1) {
-			LoggerUtils.error(e1);
+			LoggerUtils.info(e1);
 			return "noPageError";
 		} catch (SystemErrorException e1) {
 			LoggerUtils.error(e1);
 			return "systemError";
 		} catch (IllegalityException e1) {
+			// 视图越过系统操作的。
 			LoggerUtils.fatal(e1);
 			return "illegalityError";
-		} catch (Exception e) {
-			LoggerUtils.error(e);
+		} catch (Exception e1) {
+			LoggerUtils.error(e1);
 			return "commonError";
 		}
 
