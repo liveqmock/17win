@@ -52,12 +52,8 @@ public class CreditTaskService extends BaseService {
 	 * @return
 	 */
 	public String insertReleaseTask(CreditTaskVO creditTaskVO) throws Exception {
-		System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss S")
-				.format(creditTaskVO.getTimeingTime()));
 		// 基本数据
 		UserEntity userEntity = getLoginUserEntity(userDAO);
-		System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss S")
-				.format(creditTaskVO.getTimeingTime()));
 		UserLoginInfo userLoginInfo = getLoginUser();
 		CreditTaskEntity creditTaskEntity = new CreditTaskEntity();
 		TaskMananger taskMananger = TaskMananger.getInstance();
@@ -141,6 +137,7 @@ public class CreditTaskService extends BaseService {
 		creditTaskDAO.save(creditTaskEntity);
 		// 完成对金钱进行修改,登陆名的也需要
 		updateUserLoginInfo(userEntity);
+		putDIV("");
 		return "insertReleaseTaskSuccess";
 	}
 
@@ -222,11 +219,11 @@ public class CreditTaskService extends BaseService {
 		StringBuffer desc = new StringBuffer();
 		desc.append("描述：");
 		if (creditTaskVO.getAddress()) {
-			List<Object[]> addresses = (List<Object[]>) sellerDAO
-					.uniqueResult(
-							"select _p.name,_c.name from SellerEntity as _s left join _s.province _p left join _s.city as _c where _s.id=:id",
+			Object[] addresses = (Object[]) sellerDAO
+					.uniqueResultObject(
+							"select _p.name,_c.name from SellerEntity as _s inner join _s.province _p inner join _s.city as _c where _s.id=:id",
 							"id", sellerID);
-			if (addresses.size() > 0) {
+			if (addresses != null) {
 				for (Object str : addresses) {
 					address.append(str + " ");
 				}

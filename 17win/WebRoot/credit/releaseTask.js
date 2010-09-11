@@ -1,6 +1,16 @@
 var submitFlag = true;
 $(document).ready(function() {
+	$("#releaseDIV").dialog({
+				autoOpen : true,
+				draggable : false,
+				hide : 'slide',
+				modal : true,
+				resizable : false,
+				show : 'slide'
+			});
+	$(".btnClass").button();
 	$("#money").focus();
+
 	// 价格
 	$("#money").bind("blur", function() {
 				var currMoney = parseFloat($("#currMoney").val());
@@ -135,12 +145,19 @@ $(document).ready(function() {
 					}, "json");
 		}
 	});
+	// 删除层
+	$("#closeDIVBtn").bind("click", function() {
+				$("#releaseDIV").hide();
+			});
 });
 function validateForm() {
 	submitFlag = true;
 	$("input").blur();
 	// 验证和第一次加载都为真
 	if (submitFlag) {
+		var action = $("form").attr("action") + "?platformType="
+				+ $("#platformType").val();
+		$("form").attr("action", action);
 		return true;
 	} else {
 		alert("您填写的信息不正确，请检查！");

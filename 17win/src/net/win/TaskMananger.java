@@ -46,7 +46,7 @@ public final class TaskMananger {
 				.uniqueResultObject("select count(*) from  TaskAddressEntity");
 		int topIndex = (int) (Math.random() * addrssCount + 1);
 		return (String) baseDAO.pageQuery(
-				"select name from  TaskAddressEntity", topIndex, 1).get(0);
+				"select address from  TaskAddressEntity", 0, 1).get(0);
 	}
 
 

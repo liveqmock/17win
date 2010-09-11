@@ -11,14 +11,13 @@ import org.apache.struts2.util.StrutsTypeConverter;
 public class Struts2DateConverter extends StrutsTypeConverter {
 	/** */
 	/** 默认的日期转换格式 */
-	public static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd";
+	public static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
 	/** */
 	/** 可接受的日期格式 */
 	public static final DateFormat[] ACCEPT_DATE_FORMATS = {
 			new SimpleDateFormat(DEFAULT_DATE_FORMAT),
-			new SimpleDateFormat("yyyy-MM-dd HH:mm"),
-			new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"),
+			new SimpleDateFormat("yyyy-MM-dd"),
 			new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS") };
 
 	@SuppressWarnings("unchecked")

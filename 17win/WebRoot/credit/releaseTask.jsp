@@ -22,6 +22,9 @@
 		<LINK href="css/style.css" type=text/css rel=stylesheet>
 		<LINK href="css/header.css" type=text/css rel=stylesheet>
 		<LINK href="css/top_bottom.css" type=text/css rel=stylesheet>
+		<link href="css/excite-bike/jquery-ui-1.8.4.custom.css"
+			rel="stylesheet" type="text/css" />
+		<SCRIPT src="js/jquery-ui-1.8.4.custom.min.js" type="text/javascript"></SCRIPT>
 		<script src="<%=basePath%>js/My97DatePicker/WdatePicker.js"
 			type="text/javascript"></script>
 		<script type="text/javascript" src="js/aop.js">
@@ -94,11 +97,12 @@
 																		<s:else>
 																			<select>
 																				<option>
-																					您当前任务仓库里面没有任务
+																					点此处进入任务仓库
 																				</option>
 																			</select>
 																		</s:else>
-																		<input value="点击此处从任务仓库中获取" style="cursor: pointer;" type="button">
+																		<input value="点击此处从任务仓库中获取" style="cursor: pointer;"
+																			class="btnClass" type="button">
 																	</td>
 																</tr>
 																<tr>
@@ -118,7 +122,7 @@
 																			id="platformType" type="hidden" />
 																		<input value="#session.userLogin.money" id="currMoney"
 																			type="hidden" />
-																		<s:textfield name="creditTaskVO.money" size="10" 
+																		<s:textfield name="creditTaskVO.money" size="10"
 																			id="money" maxlength="6"
 																			onkeyup="if(isNaN(value))execCommand('undo')"></s:textfield>
 																		元(最长6位)&nbsp;&nbsp;
@@ -231,9 +235,9 @@
 																		<input name="creditTaskVO.goodTimeType" type="radio"
 																			value="5" />
 																		<span class="font12l">自定义</span>
-																		<input type="creditTaskVO.intervalHour" maxlength="3"
-																			style="width: 40px" id="intervalHour"
-																			disabled="disabled">
+																		<input type="text" maxlength="3"
+																			name="creditTaskVO.intervalHour" style="width: 40px"
+																			id="intervalHour" disabled="disabled">
 																		<span class="font12l">时后好评</span>
 																	</td>
 																	<td>
@@ -281,12 +285,11 @@
 																	</td>
 																	<td colspan="2">
 																		<s:textfield name="creditTaskVO.timeingTime"
-																			id="tasktimingDate"></s:textfield>
+																			readonly="true" id="tasktimingDate"></s:textfield>
 																		<img style="cursor: pointer;"
-																			onclick="WdatePicker({'minDate':'%y-%M-%d %H:%m','alwaysUseStartDate':false,'el':'tasktimingDate','isShowClear':false,startDate:'%y-%M-%d %H:%m',dateFmt:'yyyy-MM-dd HH:mm','skin':'blue'})"
+																			onclick="WdatePicker({'minDate':'%y-%M-%d %H:%m:%s','alwaysUseStartDate':false,'el':'tasktimingDate','isShowClear':false,startDate:'%y-%M-%d %H:%m:%s',dateFmt:'yyyy-MM-dd HH:mm:ss','skin':'blue'})"
 																			src="js/My97DatePicker/skin/datePicker.gif"
 																			width="16" height="22" align="absmiddle">
-																		<input type="hidden" value="4" name="statu" />
 																	</td>
 																</tr>
 																<tr>
@@ -326,10 +329,9 @@
 																		&nbsp;
 																	</td>
 																	<td colspan="2">
-																		<input type="submit" value="发布任务">
+																		<input type="submit" class="btnClass" value="发布任务">
 																		&nbsp;
-																		<input type="reset" name="button2" id="button2"
-																			value="重置内容">
+																		<input type="reset" class="btnClass" value="重置内容">
 																	</td>
 
 																</tr>
@@ -349,5 +351,28 @@
 			</table>
 			<s:include value="../common/footDuan.jsp"></s:include>
 		</s:form>
+		<s:if test="#request.div!=null">
+			<div id="releaseDIV" title="发布任务成功">
+				<table border="0" cellpadding="0" cellspacing="0">
+					<tr>
+						<td nowrap="nowrap" colspan="2">
+							您的任务发布已经发布成功！
+						</td>
+					</tr>
+					<tr>
+						<td align="center">
+							<a id="toTaskPage" class="btnClass"
+								href="taskManager/task!initTask.php?platformType=<s:property value="#request.platformType"/>">跳转到互动区</a>
+
+						</td>
+						<td align="center">
+							<input type="button" class="btnClass" id="closeDIVBtn"
+								value="继续发布任务" />
+						</td>
+
+					</tr>
+				</table>
+			</div>
+		</s:if>
 	</BODY>
 </html>
