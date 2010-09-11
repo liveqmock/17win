@@ -20,7 +20,7 @@ public class SellerEntity extends BaseEntity {
 	@Column(name = "TYPE_", columnDefinition = "CHAR(1)", nullable = false)
 	private String type;
 	// 店铺地址
-	@Column(name = "SHOPURL_", length = 50, nullable = false)
+	@Column(name = "SHOPURL_", length = 255, nullable = false)
 	private String shopURL;
 
 	// 所属人

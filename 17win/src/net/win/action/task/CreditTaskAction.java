@@ -23,9 +23,8 @@ import org.springframework.stereotype.Controller;
 		@Result(name = "initTask", location = "/credit/task.jsp"),
 		@Result(name = "initReleaseTask", location = "/credit/releaseTask.jsp"),
 		@Result(name = "operationValidate", location = "/system/operationValidate.jsp"),
-		@Result(name = "noSellerPage", type="redirect",  location = "/userInfoManager/info!initSellerAndBuyer.php?noSellerDirect=noSellerDirect")
-		
-})
+		@Result(name = "noSellerPage", type = "redirect", location = "/userInfoManager/info!initSellerAndBuyer.php?noSellerDirect=noSellerDirect"),
+		@Result(name = "insertReleaseTaskFail", type = "chain", location = "/taskManager/task!initReleaseTask.php") })
 @Namespace("/taskManager")
 public class CreditTaskAction extends BaseAction {
 	@Resource
@@ -39,6 +38,16 @@ public class CreditTaskAction extends BaseAction {
 	}
 
 	/**
+	 * 发布任务
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String releaseTask() throws Exception {
+		return creditTaskService.insertReleaseTask(creditTaskVO);
+	}
+
+	/**
 	 * 初始化任务
 	 * 
 	 * @return
@@ -47,6 +56,7 @@ public class CreditTaskAction extends BaseAction {
 	public String initTask() throws Exception {
 		return creditTaskService.initTask(creditTaskVO);
 	}
+
 	/**
 	 * 初始化发布任务
 	 * 

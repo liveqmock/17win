@@ -158,6 +158,7 @@ function obtainSeller(type, obj) {
 					changeStyle(obj, '0', '您输入的地址不正确！');
 				} else {
 					changeStyle(obj, '1', '该地址可以使用！');
+					$(obj).data("nowUrl", $(obj).val());
 					input.val(data.seller);
 					changeStyle(input.get(0), '1', '成功！');
 				}

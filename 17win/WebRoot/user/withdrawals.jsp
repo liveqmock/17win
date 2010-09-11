@@ -13,7 +13,7 @@
 		<LINK href="css/center.css" type="text/css" rel="stylesheet">
 		<SCRIPT src="js/jquery-ui-1.8.4.custom.min.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="js/aop.js" type="text/javascript"></SCRIPT>
-		<SCRIPT src="js/ajax.js" type="text/javascript"></SCRIPT>
+		<SCRIPT src="js/utils.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="user/withdrawals.js" type="text/javascript"></SCRIPT>
 
 		<style type="text/css">

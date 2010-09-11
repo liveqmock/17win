@@ -2,6 +2,8 @@ package net.win.vo;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+
 import net.win.BaseVO;
 
 public class CreditTaskVO extends BaseVO {
@@ -35,8 +37,12 @@ public class CreditTaskVO extends BaseVO {
 	private String receiveIP;
 	// 发布点
 	private Float releaseDot;
-	
-	//任务保护
+	// 好评时间类型
+	private String goodTimeType;
+	// 描述
+	private String desc;
+
+	// 任务保护
 	private Boolean protect;
 	/**
 	 * 和entity无关的数据
@@ -44,9 +50,9 @@ public class CreditTaskVO extends BaseVO {
 	private Boolean repository;
 	private Boolean address;
 	private Long sellerID;
-	private String goodType;
-	//仓库名
+	// 仓库名
 	private String respositoryName;
+
 	public String getType() {
 		return type;
 	}
@@ -159,7 +165,6 @@ public class CreditTaskVO extends BaseVO {
 		this.sellerID = sellerID;
 	}
 
-
 	public Integer getRemainTime() {
 		return remainTime;
 	}
@@ -167,8 +172,6 @@ public class CreditTaskVO extends BaseVO {
 	public void setRemainTime(Integer remainTime) {
 		this.remainTime = remainTime;
 	}
-
-	 
 
 	public Boolean getRepository() {
 		return repository;
@@ -202,11 +205,20 @@ public class CreditTaskVO extends BaseVO {
 		this.respositoryName = respositoryName;
 	}
 
-	public String getGoodType() {
-		return goodType;
+	public String getGoodTimeType() {
+		return goodTimeType;
 	}
 
-	public void setGoodType(String goodType) {
-		this.goodType = goodType;
+	public void setGoodTimeType(String goodTimeType) {
+		this.goodTimeType = goodTimeType;
 	}
+
+	public String getDesc() {
+		return desc;
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
+
 }

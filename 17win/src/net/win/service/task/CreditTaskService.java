@@ -19,7 +19,6 @@ import net.win.entity.CreditTaskRepositoryEntity;
 import net.win.entity.SellerEntity;
 import net.win.entity.UserEntity;
 import net.win.utils.ArithUtils;
-import net.win.utils.LoggerUtils;
 import net.win.utils.StrategyUtils;
 import net.win.utils.StringUtils;
 import net.win.utils.WinUtils;
@@ -51,17 +50,23 @@ public class CreditTaskService extends BaseService {
 	 */
 	public String insertReleaseTask(CreditTaskVO creditTaskVO) throws Exception {
 		// 基本数据
-		String platFormType = getPlatformType();
 		UserEntity userEntity = getLoginUserEntity(userDAO);
 		UserLoginInfo userLoginInfo = getLoginUser();
 		CreditTaskEntity creditTaskEntity = new CreditTaskEntity();
 		TaskMananger taskMananger = TaskMananger.getInstance();
-		// 把天转换成时间
-		if (creditTaskVO.getIntervalHour() == null) {
-			creditTaskVO.setIntervalHour(StrategyUtils
-					.getIntervalHourByGoodType(creditTaskVO.getGoodType()));
-			BeanUtils.copyProperties(creditTaskEntity, creditTaskVO);
+		
+		
+		String platFormType = getPlatformType();
+		if (StringUtils.isBlank(platFormType)) {
+			WinUtils.throwIllegalityException("视图越过发布任务的任务类型验证！");
 		}
+		// 把天转换成时间
+		if (!creditTaskVO.getGoodTimeType().equals("5")) {
+			creditTaskVO.setIntervalHour(StrategyUtils
+					.getIntervalHourByGoodType(creditTaskVO.getGoodTimeType()));
+		}
+		BeanUtils.copyProperties(creditTaskEntity, creditTaskVO);
+
 		String ip = getRequset().getRemoteAddr();
 		// 放IP
 		creditTaskEntity.setReceiveIP(ip);
@@ -74,8 +79,7 @@ public class CreditTaskService extends BaseService {
 		creditTaskEntity.setReleasePerson(userEntity);
 		// 验证
 		if (creditTaskEntity.getMoney() > userEntity.getMoney()) {
-			putDIV("您当前的余额为不够发布这个任务，点此处进行充值！");
-			LoggerUtils.fatal(userEntity.getUsername() + ":试图越过金钱验证");
+			putAlertMsg("您当前的余额为不够发布这个任务，点此处进行充值！");
 			return "insertReleaseTaskFail";
 		} else {
 			userEntity.setMoney(ArithUtils.sub(userEntity.getMoney(),
@@ -91,7 +95,8 @@ public class CreditTaskService extends BaseService {
 							"id", sellerID);
 			if (addresses.size() > 0) {
 				creditTaskEntity.setDesc(taskMananger.htmlAddreeStr(addresses
-						.get(0), userDAO));
+						.get(0), userDAO)
+						+ "<br/>简单描述：" + creditTaskEntity.getDesc());
 			}
 		}
 		// 算发布点
@@ -119,7 +124,7 @@ public class CreditTaskService extends BaseService {
 		}
 		return "insertReleaseTaskSuccess";
 	}
-
+	
 	/**
 	 * 初始化发布任务
 	 * 
@@ -139,7 +144,6 @@ public class CreditTaskService extends BaseService {
 			List<SellerVO> resultSellers = new ArrayList<SellerVO>(sellers
 					.size());
 			if (sellers.size() > 0) {
-				creditTaskVO.setSellerID(sellers.get(0).getId());
 				for (SellerEntity sellerEntity : sellers) {
 					SellerVO sellerVO = new SellerVO();
 					BeanUtils.copyProperties(sellerVO, sellerEntity);

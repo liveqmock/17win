@@ -16,10 +16,16 @@
 	<constant name="struts.action.extension" value="php" />
 	<constant name="struts.custom.i18n.resources"
 		value="formatRssource" />
+
+
 	<!-- 临时文件夹 -->
 	<constant name="struts.multipart.saveDir" value="/tmp" />
 	<!-- 17win默认 -->
 	<package name="17win-default" extends="json-default">
+		<result-types>
+			<result-type name="chain" class="net.win.ActionChainResult"
+				default="false" />
+		</result-types>
 		<interceptors>
 			<interceptor name="exceptionInterceptor"
 				class="net.win.ExceptionInterceptor">

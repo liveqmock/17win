@@ -24,26 +24,29 @@ public class CreditTaskEntity extends TaskBaseEntity {
 	// 价格
 	@Column(name = "MONEY_", nullable = false)
 	private Double money;
-	//所剩时间(分钟)
+	// 所剩时间(分钟)
 	@Column(name = "REMAIN_TIME_", nullable = false)
-	private Integer remainTime=20;
+	private Integer remainTime = 20;
 	// 状态
-	// (-1因为申述被暂停(但是要判断12小时，不能像2000w一样不能判断) ,0  还没开始（定时任务有用）
+	// (-1因为申述被暂停(但是要判断12小时，不能像2000w一样不能判断) ,0 还没开始（定时任务有用）
 	// ,[1:等待我付款,2:等待卖家发货,3:等待卖家发货](买家),[4:等待接手,5:等待审核人,6:等待我发货,7:等待买家确认8:等待我核查好评](卖家))
 	@Column(name = "STATUS", length = 2, nullable = false)
 	private String status;
-	//任务保护
-	@Column(name="PROTECT_",nullable=false)
+	// 任务保护
+	@Column(name = "PROTECT_", nullable = false)
 	private Boolean protect;
 	// 商品地址
-	@Column(name = "ITEM_URL_", length = 50, nullable = false)
+	@Column(name = "ITEM_URL_", length = 255, nullable = false)
 	private String itemUrl;
 	// 是否修改价格
 	@Column(name = "UPDATE_PRICE_", nullable = false)
 	private Boolean updatePrice;
-	// 动态评分(x:默认好评，x:全部5分 ...)
+	// 动态评分(1:全部5分，2:全部不打分 ...)
 	@Column(name = "GRADE_", columnDefinition = "CHAR(1)", nullable = false)
 	private String grade;
+	// 好评时间类型(1 马上 2:24小时 3:48小时 ，4：72小时，5 ：自定义)
+	@Column(name = "GOOD_TIME_TYPE_", columnDefinition = "CHAR(1)", nullable = false)
+	private String goodTimeType;
 	// 间隔几个小时(x*24[勾选]或则X[自定义] 0为马上收货)
 	@Column(name = "INTERVAL_HOUR_", nullable = false)
 	private Integer intervalHour;
@@ -64,7 +67,6 @@ public class CreditTaskEntity extends TaskBaseEntity {
 	@JoinColumn(name = "BUYER_ID_")
 	private BuyerEntity buyer;
 
-	
 	public String getType() {
 		return type;
 	}
@@ -169,4 +171,11 @@ public class CreditTaskEntity extends TaskBaseEntity {
 		this.protect = protect;
 	}
 
+	public String getGoodTimeType() {
+		return goodTimeType;
+	}
+
+	public void setGoodTimeType(String goodTimeType) {
+		this.goodTimeType = goodTimeType;
+	}
 }

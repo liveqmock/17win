@@ -11,7 +11,7 @@
 		<LINK href="css/center.css" type="text/css" rel="stylesheet">
 		<SCRIPT src="js/jieducm_pupu.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="js/aop.js" type=text/javascript></SCRIPT>
-		<SCRIPT src="js/ajax.js" type=text/javascript></SCRIPT>
+		<SCRIPT src="js/utils.js" type=text/javascript></SCRIPT>
 		<SCRIPT src="user/updateInfo.js" type=text/javascript></SCRIPT>
 		<style type="text/css">
 body {

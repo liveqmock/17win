@@ -9,7 +9,7 @@
 		<LINK href="css/login.css" type=text/css rel=stylesheet>
 		<LINK href="css/top_bottom.css" type=text/css rel=stylesheet>
 		<SCRIPT src="js/aop.js" type=text/javascript></SCRIPT>
-		<SCRIPT src="js/ajax.js" type=text/javascript></SCRIPT>
+		<SCRIPT src="js/utils.js" type=text/javascript></SCRIPT>
 		<SCRIPT src="user/register.js" type=text/javascript></SCRIPT>
 		<STYLE type="text/css">
 td {
