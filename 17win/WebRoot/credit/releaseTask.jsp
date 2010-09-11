@@ -83,11 +83,10 @@
 																cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
 																<tr>
 																	<td colspan="5" align="center">
-																		resultTaskReps
+																		从任务仓库中选择任务：
 																		<s:if test="#request.resultTaskReps!=null">
 																			<s:select id="resultTaskRepsId"
-																				list="#request.resultTaskReps"
-																				cssStyle="display:none" listKey="id"
+																				list="#request.resultTaskReps" listKey="id"
 																				listValue="name" headerKey=""
 																				headerValue="--请选择任务仓库--">
 																			</s:select>
@@ -99,7 +98,7 @@
 																				</option>
 																			</select>
 																		</s:else>
-																		<input value="点击此处从任务仓库中获取" type="button">
+																		<input value="点击此处从任务仓库中获取" style="cursor: pointer;" type="button">
 																	</td>
 																</tr>
 																<tr>

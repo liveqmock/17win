@@ -147,7 +147,8 @@ public class CreditTaskService extends BaseService {
 	 */
 	public String initReleaseTask(CreditTaskVO creditTaskVO) throws Exception {
 		// 没有操作码验证就验证
-		HttpServletRequest request = getRequset();
+		String platformType = getPlatformType();
+
 		if (!getLoginUser().getOperationCodeStatus()) {
 			putByRequest("preURL", getRequset().getRequestURL() + "?"
 					+ getRequset().getQueryString());
@@ -168,8 +169,13 @@ public class CreditTaskService extends BaseService {
 				return "noSellerPage";
 			}
 
-			List<CreditTaskRepositoryEntity> creditTaskResitorys = userEntity
-					.getCreditTaskRepositorys();
+		
+
+			List<CreditTaskRepositoryEntity> creditTaskResitorys = 	creditTaskRepositoryDAO
+			.list(
+					"from CreditTaskRepositoryEntity _cr where _cr.user.id=:userId and _cr.type=:type",
+					new String[] { "userId", "type" }, new Object[] {
+							userEntity.getId(), platformType });
 			List<CreditTaskRepositoryVO> resultTaskReps = new ArrayList<CreditTaskRepositoryVO>(
 					creditTaskResitorys.size());
 			CreditTaskRepositoryVO creditTaskRepositoryVO = null;
@@ -179,7 +185,7 @@ public class CreditTaskService extends BaseService {
 						creditTaskRepositoryEntity);
 				resultTaskReps.add(creditTaskRepositoryVO);
 			}
-			String platformType = getPlatformType();
+
 			putPlatformByRequest(WinUtils.changeType2Platform(platformType));
 			putPlatformTypeByRequest(platformType);
 			putByRequest("sellers", resultSellers);
