@@ -30,7 +30,12 @@
 			<interceptor name="exceptionInterceptor"
 				class="net.win.ExceptionInterceptor">
 			</interceptor>
+			<interceptor name="authorityInterceptor"
+				class="net.win.AuthorityInterceptor">
+			</interceptor>
+
 			<interceptor-stack name="17winStack">
+				<interceptor-ref name="authorityInterceptor"></interceptor-ref>
 				<interceptor-ref name="json"></interceptor-ref>
 				<interceptor-ref name="defaultStack"></interceptor-ref>
 				<interceptor-ref name="exceptionInterceptor"></interceptor-ref>
@@ -39,11 +44,19 @@
 		<default-interceptor-ref name="17winStack"></default-interceptor-ref>
 		<global-results>
 			<result name="json" type="json"></result>
-			<result name="commonError">/WEB-INF/errorPage/commonError.jsp</result>
-			<result name="systemError">/WEB-INF/errorPage/systemError.jsp</result>
-			<result name="noPageError">/WEB-INF/errorPage/noPageError.jsp</result>
-			<result name="noRightsError">/WEB-INF/errorPage/noRightsError.jsp</result>
-			<result name="illegalityError">/WEB-INF/errorPage/illegalityError.jsp</result>
+			<result name="commonError">
+				/WEB-INF/errorPage/commonError.jsp
+			</result>
+			<result name="systemError">
+				/WEB-INF/errorPage/systemError.jsp
+			</result>
+			<result name="noPageError">
+				/WEB-INF/errorPage/noPageError.jsp
+			</result>
+			<result name="noRightsError">/user/login.jsp</result>
+			<result name="illegalityError">
+				/WEB-INF/errorPage/illegalityError.jsp
+			</result>
 		</global-results>
 	</package>
 

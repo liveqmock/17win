@@ -18,7 +18,9 @@ import org.springframework.stereotype.Controller;
 @Controller
 @Scope("prototype")
 @ParentPackage("17win-default")
-@Results( { @Result(name = "activateOperattionCode", location = "/system/operationValidate.jsp") })
+@Results( { @Result(name = "activateOperattionCode", location = "/system/operationValidate.jsp")
+
+})
 @Namespace("/commonManager")
 public class CommonAction extends BaseAction {
 
@@ -50,4 +52,5 @@ public class CommonAction extends BaseAction {
 	public String activateOperattionCode() throws Exception {
 		return commonService.activateOperattionCode(commonVO);
 	}
+
 }
