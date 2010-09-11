@@ -227,6 +227,5 @@ img {
 			</table>
 			<s:include value="../common/footDuan.jsp"></s:include>
 		</s:form>
-		<s:property value="#request.msg" escape="false" />
 	</BODY>
 </HTML>

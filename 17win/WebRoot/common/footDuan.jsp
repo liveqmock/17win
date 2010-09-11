@@ -1,4 +1,5 @@
 <%@ page language="java"   pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <br />
 <TABLE class="Regttkk2" cellSpacing=0 cellPadding=5 width="910"
 	align=center border=0>
@@ -125,3 +126,4 @@
 		</TD>
 	</TR>
 </TABLE>
+<s:property value="#request.msg" escape="false" />

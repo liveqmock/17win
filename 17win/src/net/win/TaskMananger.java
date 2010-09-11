@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import net.win.dao.TaskAddressDAO;
 import net.win.utils.DateUtils;
 
 /**
@@ -23,7 +22,6 @@ public final class TaskMananger {
 	public static TaskMananger getInstance() {
 		return taskMananger;
 	}
-
 
 	/**
 	 * 生成taskID
@@ -51,25 +49,6 @@ public final class TaskMananger {
 				"select name from  TaskAddressEntity", topIndex, 1).get(0);
 	}
 
-	/**
-	 * 生成html地址 颜色红色
-	 * 
-	 * @param addressDAO
-	 * @return
-	 * @throws Exception
-	 */
-	public String htmlAddreeStr(Object[] address, BaseDAO baseDAO)
-			throws Exception {
-		StringBuffer result = new StringBuffer();
-		result.append("<font color='red'>");
-		result.append("地址：");
-		for (Object str : address) {
-			result.append(str + " ");
-		}
-		result.append(randomObtainAddress(baseDAO));
-		result.append("</font>");
-		return result.toString();
-	}
 
 	private Set<Long> timingTasks = new HashSet<Long>();
 

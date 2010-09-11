@@ -39,6 +39,5 @@
 				</tr>
 			</table>
 		</s:form>
-		<s:property value="#request.msg" escape="false" />
 	</body>
 </html>

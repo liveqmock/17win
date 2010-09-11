@@ -1,6 +1,7 @@
 package net.win.service.task;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -54,20 +55,39 @@ public class CreditTaskService extends BaseService {
 		UserLoginInfo userLoginInfo = getLoginUser();
 		CreditTaskEntity creditTaskEntity = new CreditTaskEntity();
 		TaskMananger taskMananger = TaskMananger.getInstance();
-		
-		
+
 		String platFormType = getPlatformType();
-		if (StringUtils.isBlank(platFormType)) {
-			WinUtils.throwIllegalityException("视图越过发布任务的任务类型验证！");
-		}
+		BeanUtils.copyProperties(creditTaskEntity, creditTaskVO);
+		String ip = getRequset().getRemoteAddr();
 		// 把天转换成时间
 		if (!creditTaskVO.getGoodTimeType().equals("5")) {
 			creditTaskVO.setIntervalHour(StrategyUtils
 					.getIntervalHourByGoodType(creditTaskVO.getGoodTimeType()));
 		}
-		BeanUtils.copyProperties(creditTaskEntity, creditTaskVO);
-
-		String ip = getRequset().getRemoteAddr();
+		// 算发布点
+		double dot = StrategyUtils.generateCreditRDot(creditTaskVO.getMoney(),
+				creditTaskVO.getIntervalHour());
+		// 验证
+		if (StringUtils.isBlank(platFormType)) {
+			WinUtils.throwIllegalityException("视图越过发布任务的任务类型验证！");
+			return "insertReleaseTaskFail";
+		}
+		if (creditTaskEntity.getMoney() > userEntity.getMoney()) {
+			creditTaskVO.setMoney(null);
+			putAlertMsg("您当前的余额为不够发布这个任务，点此处进行充值！");
+			return "insertReleaseTaskFail";
+		}
+		if (creditTaskVO.getMoney() < 1) {
+			putAlertMsg("不能发布小于1元的任务！");
+			return "insertReleaseTaskFail";
+		}
+		if (dot > userEntity.getReleaseDot()) {
+			putAlertMsg("您当前的发布点不够" + dot + "！");
+			return "insertReleaseTaskFail";
+		}
+		// 改变余额
+		userEntity.setMoney(ArithUtils.sub(userEntity.getMoney(),
+				creditTaskEntity.getMoney()));
 		// 放IP
 		creditTaskEntity.setReceiveIP(ip);
 		// 设置发布人，发布账号
@@ -77,31 +97,11 @@ public class CreditTaskService extends BaseService {
 		seller.setId(sellerID);
 		creditTaskEntity.setSeller(seller);
 		creditTaskEntity.setReleasePerson(userEntity);
-		// 验证
-		if (creditTaskEntity.getMoney() > userEntity.getMoney()) {
-			putAlertMsg("您当前的余额为不够发布这个任务，点此处进行充值！");
-			return "insertReleaseTaskFail";
-		} else {
-			userEntity.setMoney(ArithUtils.sub(userEntity.getMoney(),
-					creditTaskEntity.getMoney()));
-		}
+
 		// 生成testID
 		creditTaskEntity.setTestID(taskMananger.generateTaskID());
-		// 生成描述(包含地址)
-		if (creditTaskVO.getAddress()) {
-			List<Object[]> addresses = (List<Object[]>) sellerDAO
-					.uniqueResult(
-							"select _p.name,_c.name from SellerEntity as _s left join _s.province _p left join _s.city as _c where _s.id=:id",
-							"id", sellerID);
-			if (addresses.size() > 0) {
-				creditTaskEntity.setDesc(taskMananger.htmlAddreeStr(addresses
-						.get(0), userDAO)
-						+ "<br/>简单描述：" + creditTaskEntity.getDesc());
-			}
-		}
-		// 算发布点
-		double dot = StrategyUtils.generateCreditRDot(creditTaskVO.getMoney(),
-				creditTaskVO.getIntervalHour());
+		// 生成描述
+		createDesc(creditTaskVO, creditTaskEntity, taskMananger, sellerID);
 		userEntity.setReleaseDot(ArithUtils
 				.sub(userEntity.getReleaseDot(), dot));
 		// 任务仓库
@@ -113,18 +113,53 @@ public class CreditTaskService extends BaseService {
 			creditTaskRepository.setSellerID(sellerID);
 			creditTaskRepositoryDAO.save(creditTaskRepository);
 		}
+		// 是否是定时任务
+		if (creditTaskEntity.getTimeingTime() == null) {
+			creditTaskEntity.setStatus("4");
+		} else {
+			taskMananger.addTimingTask(creditTaskEntity.getId());
+			creditTaskEntity.setStatus("0");
+		}
 		// 保存
+		creditTaskEntity.setStartDate(new Date());
 		creditTaskEntity.setReleasePerson(userEntity);
+		creditTaskEntity.setType(platFormType);
 		creditTaskDAO.save(creditTaskEntity);
 		// 完成对金钱进行修改,登陆名的也需要
 		updateUserLoginInfo(userEntity);
-		// 是否是定时任务
-		if (creditTaskEntity.getStatus().equals("0")) {
-			taskMananger.addTimingTask(creditTaskEntity.getId());
-		}
 		return "insertReleaseTaskSuccess";
 	}
-	
+
+	/**
+	 * 生成desc
+	 */
+	private void createDesc(CreditTaskVO creditTaskVO,
+			CreditTaskEntity creditTaskEntity, TaskMananger taskMananger,
+			Long sellerID) throws Exception {
+		// 生成描述(包含地址)
+		StringBuffer address = new StringBuffer();
+		address.append("地址：");
+		StringBuffer desc = new StringBuffer();
+		desc.append("描述：");
+		if (creditTaskVO.getAddress()) {
+			List<Object[]> addresses = (List<Object[]>) sellerDAO
+					.uniqueResult(
+							"select _p.name,_c.name from SellerEntity as _s left join _s.province _p left join _s.city as _c where _s.id=:id",
+							"id", sellerID);
+			if (addresses.size() > 0) {
+				for (Object str : addresses) {
+					address.append(str + " ");
+				}
+				address.append(taskMananger.randomObtainAddress(userDAO));
+			}
+		}
+		desc.append(creditTaskVO.getDesc());
+
+		creditTaskEntity
+				.setDesc(address.toString() + "<br/>" + desc.toString());
+
+	}
+
 	/**
 	 * 初始化发布任务
 	 * 

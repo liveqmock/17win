@@ -574,6 +574,5 @@ td {
 			</TABLE>
 			<s:include value="../common/footKuan.jsp"></s:include>
 		</s:form>
-		<s:property value="#request.msg" escape="false" />
 	</BODY>
 </HTML>

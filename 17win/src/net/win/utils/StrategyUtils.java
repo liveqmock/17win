@@ -51,7 +51,7 @@ public final class StrategyUtils {
 		double resultDot = 0;
 		// 基本发布点
 		double metaDot = 0;
-		if (money > 1 && money <= 40) {
+		if (money >= 1 && money <= 40) {
 			metaDot = 1;
 		} else if (money > 40 && money <= 100) {
 			metaDot = 2;

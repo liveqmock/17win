@@ -259,6 +259,5 @@ img {
 				</table>
 			</div>
 		</s:if>
-		<s:property value="#request.msg" escape="false" />
 	</BODY>
 </HTML>

@@ -1,9 +1,10 @@
 var submitFlag = false;
 $(document).ready(function() {
+	$("#money").focus();
 	// 价格
 	$("#money").bind("blur", function() {
 				var currMoney = parseFloat($("#currMoney").val());
-				if (!Validater.isNumber($(this).val())) {
+				if (!Validater.isNumber($(this).val(),'+')) {
 					changeStyle(this, '0', '不是有效的数值！');
 					submitFlag = false;
 				} else {

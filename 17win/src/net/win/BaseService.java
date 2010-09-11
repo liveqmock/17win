@@ -95,7 +95,10 @@ public class BaseService {
 	 * @throws Exception
 	 */
 	protected void updateUserLoginInfo(UserEntity userEntity) throws Exception {
-		UserLoginInfo userLoginInfo = new UserLoginInfo();
+		UserLoginInfo userLoginInfo = getLoginUser();
+		if (userLoginInfo == null) {
+			userLoginInfo = new UserLoginInfo();
+		}
 		BeanUtils.copyProperties(userLoginInfo, userEntity);
 		userLoginInfo.setLevel(StrategyUtils.getLevel(userEntity
 				.getUpgradeScore()));
@@ -204,7 +207,6 @@ public class BaseService {
 	protected Object getBySession(String key) {
 		return ServletActionContext.getRequest().getSession().getAttribute(key);
 	}
-
 
 	protected Boolean nullID(BaseEntity base) {
 		return base.getId() == null;

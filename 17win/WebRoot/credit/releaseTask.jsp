@@ -276,7 +276,7 @@
 																</tr>
 																<tr>
 																	<td class="font14b4" align="right">
-																		任务仓库：
+																		放入仓库：
 																	</td>
 																	<td colspan="2">
 																		<s:checkbox name="creditTaskVO.repository"
@@ -330,7 +330,6 @@
 				</tr>
 			</table>
 			<s:include value="../common/footDuan.jsp"></s:include>
-			<s:property value="#request.msg"/>
 		</s:form>
 	</BODY>
 </html>

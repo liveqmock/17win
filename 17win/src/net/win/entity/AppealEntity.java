@@ -29,7 +29,7 @@ public class AppealEntity  extends BaseEntity{
 	private String type;
 
 	// 任务ID
-	@Column(name = "TASKID_", columnDefinition = "char(16)", nullable = false)
+	@Column(name = "TASKID_", columnDefinition = "char(17)", nullable = false)
 	private String taskID;
 
 	// 描述

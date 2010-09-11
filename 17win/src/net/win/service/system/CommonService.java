@@ -34,15 +34,16 @@ public class CommonService extends BaseService {
 	private UserDAO userDAO;
 
 	public String activateOperattionCode(CommonVO commonVO) throws Exception {
+		String preURL = getByParam("preURL");
 		UserEntity userEntity = getLoginUserEntity(userDAO);
 		if (userEntity.getOpertationCode().equals(
 				StringUtils.processPwd(getByParam("opertationCode")))) {
 			getLoginUser().setOperationCodeStatus(true);
 		} else {
 			putAlertMsg("操作码不正确！");
+			putByRequest("preURL", preURL);
 			return "activateOperattionCode";
 		}
-		String preURL = getByParam("preURL");
 		getResponse().sendRedirect(preURL);
 		return null;
 	}

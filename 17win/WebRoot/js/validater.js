@@ -68,25 +68,25 @@ Validater.isInt = function(str, type) {
  */
 Validater.isFloat = function(str, type) {
 	// var regInt = /^d+^/;
-	var regInt;
+	var regeFloat;
 	if (type == "0+") {
-		regInt = /^[1-9]\d*\\.[1-9]\d*|0$/;
+		regeFloat = /^[1-9]\d*\.[0-9]\d*|0$/;
 	} else {
 		if (type == "+") {
-			regInt = /^[1-9]\d*\\.[1-9]\d*$/;
+			regeFloat = /^[1-9]\d*\.[0-9]\d*$/;
 		} else {
 			if (type == "-0") {
-				regInt = /^-[1-9]\d*\\.[1-9]\d*|0$/;
+				regeFloat = /^-[1-9]\d*\.[0-9]\d*|0$/;
 			} else {
 				if (type == "-") {
-					regInt = /^-[1-9]\d*\\.[1-9]\d*$/;
+					regeFloat = /^-[1-9]\d*\.[0-9]\d*$/;
 				} else {
-					regInt = /^-?[1-9]\d*\\.[1-9]\d*$/;
+					regeFloat = /^-?[1-9]\d*\.[0-9]\d*$/;
 				}
 			}
 		}
 	}
-	return regInt.test(str);
+	return regeFloat.test(str);
 };
 /**
  * 数值的判断
@@ -162,32 +162,28 @@ Validater.isTelphone = function(str) {
 	var reg = /^(13[0-9]|15[1|0|3|6|7|8|9]|18[8|9])\d{8}$/;
 	return reg.test(str);
 };
-/** 验证店铺地址
- *  0 是挨个验证 1 淘宝 2拍拍 3有啊
- * @param {} str
- * @param {} type
+/**
+ * 验证店铺地址 0 是挨个验证 1 淘宝 2拍拍 3有啊
+ * 
+ * @param {}
+ *            str
+ * @param {}
+ *            type
  * @return {Boolean}
  */
 Validater.isB2CShop = function(str, type) {
 	var regName = "";
 	if ("0" == type) {
-		if (/^http:[/\\\\]{2}\\w+\\-*\\w+\\.taobao\\.com[/\\\\]?$/.test(str)) {
+		if (isB2CShop(str, '1') || isB2CShop(str, '2') || isB2CShop(str, '3')) {
 			return true;
-		} else if (/^http:[/\\\\]{2}\\w+\\-*\\w+\\.paipai\\.com[/\\\\]?$/
-				.test(str)) {
-			return true;
-		} else if (/^^http:[/\\\\]{2}youa.baidu\\.com[/\\\\]?$/.test(str)) {
-			return true;
-		} else {
-			return false;
 		}
 	}
 	if ("1" == type) {
-		regName = new RegExp("^http:[/\\\\]{2}\\w+\\-*\\w+\\.taobao\\.com[/\\\\]?$");
+		regName = /^http:[/]{2}\w+\-*\w+\.taobao\.com[/\\]?/;
 	} else if ("2" == type) {
-		regName = new RegExp("^http:[/\\\\]{2}\\w+\\-*\\w+\\.paipai\\.com[/\\\\]?$");
+		regName = /^http:[/\\]{2}\w+\-*\\w+\.paipai\.com[/\\]?/;
 	} else if ("3" == type) {
-		regName = new RegExp("^http:[/\\\\]{2}youa.baidu\\.com[/\\\\]?$");
+		regName = /^http:[/\\]{2}youa.baidu\.com[/\\]?/;
 	}
 	return regName.test(str);
 }
