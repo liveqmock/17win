@@ -23,6 +23,7 @@ import net.win.utils.ArithUtils;
 import net.win.utils.StrategyUtils;
 import net.win.utils.StringUtils;
 import net.win.utils.WinUtils;
+import net.win.vo.CreditTaskRepositoryVO;
 import net.win.vo.CreditTaskVO;
 import net.win.vo.SellerVO;
 
@@ -109,8 +110,16 @@ public class CreditTaskService extends BaseService {
 			CreditTaskRepositoryEntity creditTaskRepository = new CreditTaskRepositoryEntity();
 			BeanUtils.copyProperties(creditTaskRepository, creditTaskVO);
 			creditTaskRepository.setUser(userEntity);
-			creditTaskRepository.setName(creditTaskVO.getRespositoryName());
 			creditTaskRepository.setSellerID(sellerID);
+			creditTaskRepository.setType(platFormType);
+			creditTaskRepository
+					.setGoodTimeType(creditTaskVO.getGoodTimeType());
+			if (StringUtils.isBlank(creditTaskVO.getRespositoryName())) {
+				creditTaskRepository.setName(creditTaskEntity.getTestID());
+			} else {
+				creditTaskRepository.setName(creditTaskVO.getRespositoryName());
+
+			}
 			creditTaskRepositoryDAO.save(creditTaskRepository);
 		}
 		// 是否是定时任务
@@ -128,36 +137,6 @@ public class CreditTaskService extends BaseService {
 		// 完成对金钱进行修改,登陆名的也需要
 		updateUserLoginInfo(userEntity);
 		return "insertReleaseTaskSuccess";
-	}
-
-	/**
-	 * 生成desc
-	 */
-	private void createDesc(CreditTaskVO creditTaskVO,
-			CreditTaskEntity creditTaskEntity, TaskMananger taskMananger,
-			Long sellerID) throws Exception {
-		// 生成描述(包含地址)
-		StringBuffer address = new StringBuffer();
-		address.append("地址：");
-		StringBuffer desc = new StringBuffer();
-		desc.append("描述：");
-		if (creditTaskVO.getAddress()) {
-			List<Object[]> addresses = (List<Object[]>) sellerDAO
-					.uniqueResult(
-							"select _p.name,_c.name from SellerEntity as _s left join _s.province _p left join _s.city as _c where _s.id=:id",
-							"id", sellerID);
-			if (addresses.size() > 0) {
-				for (Object str : addresses) {
-					address.append(str + " ");
-				}
-				address.append(taskMananger.randomObtainAddress(userDAO));
-			}
-		}
-		desc.append(creditTaskVO.getDesc());
-
-		creditTaskEntity
-				.setDesc(address.toString() + "<br/>" + desc.toString());
-
 	}
 
 	/**
@@ -188,10 +167,23 @@ public class CreditTaskService extends BaseService {
 				putAlertMsg("您还没有绑定卖号，请先添加！");
 				return "noSellerPage";
 			}
+
+			List<CreditTaskRepositoryEntity> creditTaskResitorys = userEntity
+					.getCreditTaskRepositorys();
+			List<CreditTaskRepositoryVO> resultTaskReps = new ArrayList<CreditTaskRepositoryVO>(
+					creditTaskResitorys.size());
+			CreditTaskRepositoryVO creditTaskRepositoryVO = null;
+			for (CreditTaskRepositoryEntity creditTaskRepositoryEntity : creditTaskResitorys) {
+				creditTaskRepositoryVO = new CreditTaskRepositoryVO();
+				BeanUtils.copyProperties(creditTaskRepositoryVO,
+						creditTaskRepositoryEntity);
+				resultTaskReps.add(creditTaskRepositoryVO);
+			}
 			String platformType = getPlatformType();
 			putPlatformByRequest(WinUtils.changeType2Platform(platformType));
 			putPlatformTypeByRequest(platformType);
 			putByRequest("sellers", resultSellers);
+			putByRequest("resultTaskReps", resultTaskReps);
 			return "initReleaseTask";
 		}
 	}
@@ -207,5 +199,35 @@ public class CreditTaskService extends BaseService {
 		putPlatformByRequest(WinUtils.changeType2Platform(platformType));
 		putPlatformTypeByRequest(platformType);
 		return "initTask";
+	}
+
+	/**
+	 * 生成desc
+	 */
+	private void createDesc(CreditTaskVO creditTaskVO,
+			CreditTaskEntity creditTaskEntity, TaskMananger taskMananger,
+			Long sellerID) throws Exception {
+		// 生成描述(包含地址)
+		StringBuffer address = new StringBuffer();
+		address.append("地址：");
+		StringBuffer desc = new StringBuffer();
+		desc.append("描述：");
+		if (creditTaskVO.getAddress()) {
+			List<Object[]> addresses = (List<Object[]>) sellerDAO
+					.uniqueResult(
+							"select _p.name,_c.name from SellerEntity as _s left join _s.province _p left join _s.city as _c where _s.id=:id",
+							"id", sellerID);
+			if (addresses.size() > 0) {
+				for (Object str : addresses) {
+					address.append(str + " ");
+				}
+				address.append(taskMananger.randomObtainAddress(userDAO));
+			}
+		}
+		desc.append(creditTaskVO.getDesc());
+
+		creditTaskEntity
+				.setDesc(address.toString() + "<br/>" + desc.toString());
+
 	}
 }

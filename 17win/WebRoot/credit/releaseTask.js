@@ -4,7 +4,7 @@ $(document).ready(function() {
 	// 价格
 	$("#money").bind("blur", function() {
 				var currMoney = parseFloat($("#currMoney").val());
-				if (!Validater.isNumber($(this).val(),'+')) {
+				if (!Validater.isNumber($(this).val(), '+')) {
 					changeStyle(this, '0', '不是有效的数值！');
 					submitFlag = false;
 				} else {
@@ -74,10 +74,20 @@ $(document).ready(function() {
 			});
 	// 自定义时间
 	intText("intervalHour");
+
+	// 仓库
+	$("#respository").bind("click", function() {
+				if ($(this).attr("checked")) {
+					$("#respositoryName").val("");
+					$("#respositoryName").show();
+				} else {
+					$("#respositoryName").hide();
+				}
+			});
 });
 function validateForm() {
 	// 验证和第一次加载都为真
-	if (submitFlag ) {
+	if (submitFlag) {
 		return true;
 	} else {
 		alert("您填写的信息不正确，请检查！");

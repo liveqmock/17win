@@ -83,6 +83,22 @@
 																cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
 																<tr>
 																	<td colspan="5" align="center">
+																		resultTaskReps
+																		<s:if test="#request.resultTaskReps!=null">
+																			<s:select id="resultTaskRepsId"
+																				list="#request.resultTaskReps"
+																				cssStyle="display:none" listKey="id"
+																				listValue="name" headerKey=""
+																				headerValue="--请选择任务仓库--">
+																			</s:select>
+																		</s:if>
+																		<s:else>
+																			<select>
+																				<option>
+																					您当前任务仓库里面没有任务
+																				</option>
+																			</select>
+																		</s:else>
 																		<input value="点击此处从任务仓库中获取" type="button">
 																	</td>
 																</tr>
@@ -280,7 +296,10 @@
 																	</td>
 																	<td colspan="2">
 																		<s:checkbox name="creditTaskVO.repository"
-																			value="false" fieldValue="true" />
+																			id="respository" value="false" fieldValue="true" />
+																		<span style="display: none" id="respositoryName">
+																			<s:textfield name="creditTaskVO.respositoryName"
+																				id="itemUrl" maxlength="20"></s:textfield> 默认为任务ID </span>
 																		<span class="red-bcolor">*什么是任务仓库</span>
 																	</td>
 																</tr>

@@ -1,69 +1,39 @@
-package net.win.entity;
+package net.win.vo;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import net.win.BaseVO;
 
-/**
- * 信誉任务模板
- * 
- * @author xgj
- * 
- */
-@Entity
-@Table(name = "Tb_CreditTaskReposotory")
-public class CreditTaskRepositoryEntity extends BaseEntity {
+public class CreditTaskRepositoryVO extends BaseVO {
 
 	// 名字
-	@Column(name = "NAME_", length = 20, nullable = false, unique = true)
 	private String name;
 	// 类型 ( 1:淘宝，2：拍拍，3有啊)
-	@Column(name = "TYPE_", columnDefinition = "CHAR(1)", nullable = false)
 	private String type;
 	// 价格
-	@Column(name = "MONEY_", nullable = false)
 	private Double money;
 	// 任务保护
-	@Column(name = "PROTECT_", nullable = false)
 	private Boolean protect;
 	// 商品地址
-	@Column(name = "ITEM_URL_", length = 50, nullable = false)
 	private String itemUrl;
 	// 是否修改价格
-	@Column(name = "UPDATE_PRICE_", nullable = false)
 	private Boolean updatePrice;
-	// 好评时间类型(1 马上 2:24小时 3:48小时 ，4：72小时，5 ：自定义)
-	@Column(name = "GOOD_TIME_TYPE_", columnDefinition = "CHAR(1)", nullable = false)
-	private String goodTimeType;
 	// 动态评分(x:默认好评，x:全部5分 ...)
-	@Column(name = "GRADE_", columnDefinition = "CHAR(1)", nullable = false)
 	private String grade;
+	// 好评时间类型(1 马上 2:24小时 3:48小时 ，4：72小时，5 ：自定义)
+	private String goodTimeType;
 	// 间隔几个小时(x*24[勾选]或则X[自定义] 0为马上收货) 收货时间
-	@Column(name = "INTERVAL_HOUR_", nullable = false)
 	private Integer intervalHour;
-
 	// 发布人的卖家号
-	@Column(name = "SELLER_ID_", nullable = false)
 	private Long sellerID;
 
 	// 是否地址
-	@Column(name = "ADDRESS_", nullable = false)
 	private Boolean address;
 
-	// 所属人
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = UserEntity.class)
-	@JoinColumn(name = "USER_ID_")
-	private UserEntity user;
-
-	public UserEntity getUser() {
-		return user;
+	public String getName() {
+		return name;
 	}
 
-	public void setUser(UserEntity user) {
-		this.user = user;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getType() {
@@ -128,14 +98,6 @@ public class CreditTaskRepositoryEntity extends BaseEntity {
 
 	public void setSellerID(Long sellerID) {
 		this.sellerID = sellerID;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public Boolean getAddress() {
