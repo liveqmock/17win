@@ -20,10 +20,10 @@
 				<A href="MyMission.asp">已发任务</A>
 			</LI>
 			<LI>
-				<A href="MyWw.asp">绑定店铺</A>
+				<A href="userInfoManager/info!initSellerAndBuyer.php">绑定店铺</A>
 			</LI>
 			<LI>
-				<A href="Buyhao.asp">绑定买号</A>
+				<A href="userInfoManager/info!initSellerAndBuyer.php">绑定买号</A>
 			</LI>
 			<LI>
 				<A href="MySave.asp">任务仓库</A>
