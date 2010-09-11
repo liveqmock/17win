@@ -13,6 +13,7 @@ import java.io.OutputStream;
 import org.apache.struts2.ServletActionContext;
 
 import net.win.UserLoginInfo;
+import net.win.exception.NoPageException;
 import net.win.exception.IllegalityException;
 
 public final class WinUtils {
@@ -42,7 +43,8 @@ public final class WinUtils {
 	 * @param platform
 	 * @return
 	 */
-	public static String changePlatform2Type(String platform) {
+	public static String changePlatform2Type(String platform)
+			throws NoPageException {
 		if (platform.equals("淘宝")) {
 			return "1";
 		}
@@ -61,7 +63,8 @@ public final class WinUtils {
 	 * @param platform
 	 * @return
 	 */
-	public static String changeType2Platform(String platformType) {
+	public static String changeType2Platform(String platformType)
+			throws NoPageException {
 		if (platformType.equals("1")) {
 			return "淘宝";
 		}

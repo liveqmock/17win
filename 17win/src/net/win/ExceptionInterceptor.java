@@ -1,6 +1,9 @@
 package net.win;
 
 import net.win.exception.IllegalityException;
+import net.win.exception.NoPageException;
+import net.win.exception.NoRightsException;
+import net.win.exception.SystemErrorException;
 import net.win.utils.LoggerUtils;
 
 import com.opensymphony.xwork2.ActionInvocation;
@@ -17,12 +20,21 @@ public class ExceptionInterceptor extends AbstractInterceptor {
 		try {
 			String result = invocation.invoke();
 			return result;
+		} catch (NoRightsException e1) {
+			LoggerUtils.error(e1);
+			return "noRightsError";
+		} catch (NoPageException e1) {
+			LoggerUtils.error(e1);
+			return "noPageError";
+		} catch (SystemErrorException e1) {
+			LoggerUtils.error(e1);
+			return "systemError";
 		} catch (IllegalityException e1) {
 			LoggerUtils.fatal(e1);
-			return "error";
+			return "illegalityError";
 		} catch (Exception e) {
 			LoggerUtils.error(e);
-			return "error";
+			return "commonError";
 		}
 
 	}
