@@ -27,6 +27,10 @@ public class CreditTaskRepositoryVO extends BaseVO {
 
 	// 是否地址
 	private Boolean address;
+	
+	
+	//描述
+	private String desc;
 
 	public String getName() {
 		return name;
@@ -114,6 +118,14 @@ public class CreditTaskRepositoryVO extends BaseVO {
 
 	public void setGoodTimeType(String goodTimeType) {
 		this.goodTimeType = goodTimeType;
+	}
+
+	public String getDesc() {
+		return desc;
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
 	}
 
 }

@@ -1,4 +1,4 @@
-var submitFlag = false;
+var submitFlag = true;
 $(document).ready(function() {
 	$("#money").focus();
 	// 价格
@@ -9,7 +9,6 @@ $(document).ready(function() {
 					submitFlag = false;
 				} else {
 					changeStyle(this, '1', '');
-					submitFlag = true;
 				}
 			});
 
@@ -29,7 +28,6 @@ $(document).ready(function() {
 			return;
 		}
 		if ($(obj).data("nowUrl") == $(obj).val()) {
-			submitFlag = true;
 			return;
 		}
 		// 获取用户地址
@@ -54,7 +52,6 @@ $(document).ready(function() {
 							changeStyle(obj, '1', '');
 							selectRadio.attr("checked", true);
 							$(obj).data("nowUrl", $(obj).val());
-							submitFlag = true;
 						} else {
 							changeStyle(obj, '0', '输入的地址和您的卖家账号不相同！');
 							submitFlag = false;
@@ -84,8 +81,64 @@ $(document).ready(function() {
 					$("#respositoryName").hide();
 				}
 			});
+	// 选择仓库
+	$("#resultTaskRepsId").bind("change", function() {
+		var id = $(this).val();
+		if (!Validater.isBlank(id)) {
+			// 获取用户地址
+			VhostAop.divAOP.ajax(
+					"taskRepositoryManager/taskRepository!obtainTaskInfo.php",
+					{
+						"creditTaskRepositoryVO.id" : id
+					}, function(data) {
+						if (!Validater.isNull(data)
+								&& !Validater
+										.isNull(data.creditTaskRepositoryVO)) {
+							var obj = data.creditTaskRepositoryVO;
+							// 价格
+							$("#money").val(obj.money);
+							// 地址
+							$("#itemUrl").val(obj.itemUrl);
+							// 掌柜
+							$("input[name='creditTaskVO.sellerID'][value='"
+									+ obj.sellerID + "']")
+									.attr("checked", true);
+							// 价格相等
+							$("input[name='creditTaskVO.updatePrice'][value='"
+									+ obj.updatePrice + "']").attr("checked",
+									true);
+							// 动态评分
+							$("input[name='creditTaskVO.grade'][value='"
+									+ obj.grade + "']").attr("checked", true);
+							// 收货时间好评
+							$("input[name='creditTaskVO.goodTimeType'][value='"
+									+ obj.goodTimeType + "']").attr("checked",
+									true);
+							if (obj.goodTimeType == "5") {
+								// 自定义小时
+								$("#intervalHour").val(obj.intervalHour);
+							}
+							// 任务保护
+							$("input[name='creditTaskVO.protect']").attr(
+									"checked", obj.protect);
+							// 收货地址
+							$("input[name='creditTaskVO.address']").attr(
+									"checked", obj.address);
+							// 描述
+							$("input[name='creditTaskVO.desc']").val(obj.desc);
+							$("input[class='errorText']")
+									.removeClass("errorText");
+						} else {
+							alert("系统错误，请联系管理员！");
+							submitFlag = false;
+						}
+					}, "json");
+		}
+	});
 });
 function validateForm() {
+	submitFlag = true;
+	$("input").blur();
 	// 验证和第一次加载都为真
 	if (submitFlag) {
 		return true;

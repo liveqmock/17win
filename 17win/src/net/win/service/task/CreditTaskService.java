@@ -1,5 +1,6 @@
 package net.win.service.task;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -51,8 +52,12 @@ public class CreditTaskService extends BaseService {
 	 * @return
 	 */
 	public String insertReleaseTask(CreditTaskVO creditTaskVO) throws Exception {
+		System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss S")
+				.format(creditTaskVO.getTimeingTime()));
 		// 基本数据
 		UserEntity userEntity = getLoginUserEntity(userDAO);
+		System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss S")
+				.format(creditTaskVO.getTimeingTime()));
 		UserLoginInfo userLoginInfo = getLoginUser();
 		CreditTaskEntity creditTaskEntity = new CreditTaskEntity();
 		TaskMananger taskMananger = TaskMananger.getInstance();
@@ -110,7 +115,6 @@ public class CreditTaskService extends BaseService {
 			CreditTaskRepositoryEntity creditTaskRepository = new CreditTaskRepositoryEntity();
 			BeanUtils.copyProperties(creditTaskRepository, creditTaskVO);
 			creditTaskRepository.setUser(userEntity);
-			creditTaskRepository.setSellerID(sellerID);
 			creditTaskRepository.setType(platFormType);
 			creditTaskRepository
 					.setGoodTimeType(creditTaskVO.getGoodTimeType());
@@ -130,6 +134,7 @@ public class CreditTaskService extends BaseService {
 			creditTaskEntity.setStatus("0");
 		}
 		// 保存
+		creditTaskEntity.setRemainTime(20);
 		creditTaskEntity.setStartDate(new Date());
 		creditTaskEntity.setReleasePerson(userEntity);
 		creditTaskEntity.setType(platFormType);
@@ -169,13 +174,11 @@ public class CreditTaskService extends BaseService {
 				return "noSellerPage";
 			}
 
-		
-
-			List<CreditTaskRepositoryEntity> creditTaskResitorys = 	creditTaskRepositoryDAO
-			.list(
-					"from CreditTaskRepositoryEntity _cr where _cr.user.id=:userId and _cr.type=:type",
-					new String[] { "userId", "type" }, new Object[] {
-							userEntity.getId(), platformType });
+			List<CreditTaskRepositoryEntity> creditTaskResitorys = creditTaskRepositoryDAO
+					.list(
+							"from CreditTaskRepositoryEntity _cr where _cr.user.id=:userId and _cr.type=:type",
+							new String[] { "userId", "type" }, new Object[] {
+									userEntity.getId(), platformType });
 			List<CreditTaskRepositoryVO> resultTaskReps = new ArrayList<CreditTaskRepositoryVO>(
 					creditTaskResitorys.size());
 			CreditTaskRepositoryVO creditTaskRepositoryVO = null;

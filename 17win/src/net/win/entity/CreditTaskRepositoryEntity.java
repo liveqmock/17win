@@ -52,7 +52,11 @@ public class CreditTaskRepositoryEntity extends BaseEntity {
 	// 是否地址
 	@Column(name = "ADDRESS_", nullable = false)
 	private Boolean address;
-
+	
+	// 描述
+	@Column(name = "DESC_", length=255)
+	private String desc;
+	
 	// 所属人
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = UserEntity.class)
 	@JoinColumn(name = "USER_ID_")
@@ -152,6 +156,14 @@ public class CreditTaskRepositoryEntity extends BaseEntity {
 
 	public void setGoodTimeType(String goodTimeType) {
 		this.goodTimeType = goodTimeType;
+	}
+
+	public String getDesc() {
+		return desc;
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
 	}
 
 }

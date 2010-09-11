@@ -39,8 +39,6 @@ public class CreditTaskVO extends BaseVO {
 	private String goodTimeType;
 	// 描述
 	private String desc;
-	
-	
 
 	// 任务保护
 	private Boolean protect;

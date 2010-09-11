@@ -118,7 +118,7 @@
 																			id="platformType" type="hidden" />
 																		<input value="#session.userLogin.money" id="currMoney"
 																			type="hidden" />
-																		<s:textfield name="creditTaskVO.money" size="10"
+																		<s:textfield name="creditTaskVO.money" size="10" 
 																			id="money" maxlength="6"
 																			onkeyup="if(isNaN(value))execCommand('undo')"></s:textfield>
 																		元(最长6位)&nbsp;&nbsp;
