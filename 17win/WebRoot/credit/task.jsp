@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML>
@@ -36,7 +36,7 @@
 							<A href="?sort=5"><SPAN class=anniu>500元以上区</SPAN> </A>
 						</DIV>
 						<DIV style="CLEAR: right; MARGIN-TOP: 12px; FLOAT: right">
-							自定义时间
+							自定义刷新时间
 							<input type="text" value="" style="width: 40px"
 								title="不填写或则0表示不自动刷新" />
 							秒
@@ -45,8 +45,8 @@
 						</DIV>
 					</DIV>
 				</DIV>
-				<DIV style="MARGIN-TOP: 0px; BACKGROUND: #ffffff; WIDTH: 910px">
-					<DIV style="CLEAR: both; WIDTH: 930px; BACKGROUND-COLOR: #ffffff">
+				<DIV style="MARGIN-TOP: 2px; BACKGROUND: #F0F9FF; WIDTH: 910px">
+					<DIV style="CLEAR: both; WIDTH: 910px; BACKGROUND-COLOR: #F0F9FF">
 						<DIV style="CLEAR: both; WIDTH: 100%">
 							<DIV style="CLEAR: both; WIDTH: 100%; HEIGHT: 45px">
 								<DIV class=c_01 style="WIDTH: 15%">
@@ -72,36 +72,52 @@
 					</DIV>
 				</DIV>
 
-				<DIV class="tt5">
-					<TABLE style="MARGIN: 3px; background: #FFC278" cellSpacing=2
+				<DIV style="MARGIN-TOP: 4px; WIDTH: 910px;">
+					<TABLE style="MARGIN: 3px; background: #cde0ee" cellSpacing=2
 						cellPadding=0 width="100%" border=0>
 						<TBODY>
 							<TR>
-								<TD width="15%">
+								<TD width="15%" align="left">
 									201082722162223014
-									<BR>
-									2010-8-27 22:36:36
 								</TD>
 								<TD>
-								<TD align=middle width="15%">
+								<TD align="center" width="15%">
 									<SPAN style="Z-INDEX: 20; POSITION: relative"> <a
 										href="../user/send_message.asp?sendname=shengjun0911"
 										title="发送站内信息" target="_blank">shengjun0911</a> </SPAN>(
 									<font color=red>在线</font>)
-
-									<BR>
-									<img src=images/xin3.gif alt=刷客经验积分：720>
 								</TD>
-								<TD align=middle width="15%">
+								<TD align="center" width="15%">
 									平台担保
 									<img src="images/zf.gif" width="13" height="16">
 									40元
-									<br>
+								</TD>
+								<TD align="center" width="15%">
+									一天后收货好评
+								</TD>
+								<TD style="PADDING-LEFT: 50px" width="20%">
+									<B style="COLOR: red"> 等待接手人... </B>
+								</TD>
+								<TD style="PADDING-LEFT: 50px" width="20%">
+									<img src="images/online_admin.gif" align="middle">
+									<a title="接手，并完成任务可获得存款和发布点" style="CURSOR: pointer"
+										onClick="showxiao('201082722162223014','2')"> <span
+										class="anniu">接手任务</span> </a>
+								</TD>
+							</TR>
+							<TR>
+								<TD align="left">
+									2010-8-27 22:36:36
+								</TD>
+								<TD>
+								<TD align="center" width="15%">
+									<img src=images/xin3.gif alt=刷客经验积分：720>
+								</TD>
+								<TD align="center" width="15%">
+
 									金额相等
 								</TD>
-								<TD align=middle width="15%">
-									一天后收货好评
-									<BR>
+								<TD align="center" width="15%">
 									<IMG alt=延迟收货 src=images/shiwu.gif>
 									发布点2个
 								</TD>
@@ -109,10 +125,6 @@
 									<B style="COLOR: red"> 等待接手人... </B>
 								</TD>
 								<TD style="PADDING-LEFT: 50px" width="20%">
-									<img src="images/online_admin.gif">
-									<a title="接手，并完成任务可获得存款和发布点" style="CURSOR: pointer"
-										onClick="showxiao('201082722162223014','2')"> <span
-										class="anniu">接手任务</span> </a>
 								</TD>
 							</TR>
 						</TBODY>
@@ -122,31 +134,47 @@
 						cellPadding=0 width="100%" border=0>
 						<TBODY>
 							<TR>
-								<TD width="15%">
+								<TD width="15%" align="left">
 									201082722162223014
-									<BR>
-									2010-8-27 22:36:36
 								</TD>
 								<TD>
-								<TD align=middle width="15%">
+								<TD align="center" width="15%">
 									<SPAN style="Z-INDEX: 20; POSITION: relative"> <a
 										href="../user/send_message.asp?sendname=shengjun0911"
 										title="发送站内信息" target="_blank">shengjun0911</a> </SPAN>(
 									<font color=red>在线</font>)
-
-									<BR>
-									<img src=images/xin3.gif alt=刷客经验积分：720>
 								</TD>
-								<TD align=middle width="15%">
+								<TD align="center" width="15%">
 									平台担保
 									<img src="images/zf.gif" width="13" height="16">
 									40元
-									<br>
+								</TD>
+								<TD align="center" width="15%">
+									一天后收货好评
+								</TD>
+								<TD style="PADDING-LEFT: 50px" width="20%">
+									<B style="COLOR: red"> 等待接手人... </B>
+								</TD>
+								<TD style="PADDING-LEFT: 50px" width="20%">
+									<img src="images/online_admin.gif" align="middle">
+									<a title="接手，并完成任务可获得存款和发布点" style="CURSOR: pointer"
+										onClick="showxiao('201082722162223014','2')"> <span
+										class="anniu">接手任务</span> </a>
+								</TD>
+							</TR>
+							<TR>
+								<TD align="left">
+									2010-8-27 22:36:36
+								</TD>
+								<TD>
+								<TD align="center" width="15%">
+									<img src=images/xin3.gif alt=刷客经验积分：720>
+								</TD>
+								<TD align="center" width="15%">
+
 									金额相等
 								</TD>
-								<TD align=middle width="15%">
-									一天后收货好评
-									<BR>
+								<TD align="center" width="15%">
 									<IMG alt=延迟收货 src=images/shiwu.gif>
 									发布点2个
 								</TD>
@@ -154,10 +182,6 @@
 									<B style="COLOR: red"> 等待接手人... </B>
 								</TD>
 								<TD style="PADDING-LEFT: 50px" width="20%">
-									<img src="images/online_admin.gif">
-									<a title="接手，并完成任务可获得存款和发布点" style="CURSOR: pointer"
-										onClick="showxiao('201082722162223014','2')"> <span
-										class="anniu">接手任务</span> </a>
 								</TD>
 							</TR>
 						</TBODY>

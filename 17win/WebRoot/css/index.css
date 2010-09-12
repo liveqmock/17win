@@ -59,29 +59,29 @@ DD {
 	BORDER-TOP-WIDTH: 0px; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; BORDER-RIGHT-WIDTH: 0px
 }
 BODY {
-	FONT-FAMILY: "ËÎÌå"
+	FONT-FAMILY: "ï¿½ï¿½ï¿½ï¿½"
 }
 UL {
-	FONT-FAMILY: "ËÎÌå"
+	FONT-FAMILY: "ï¿½ï¿½ï¿½ï¿½"
 }
 OL {
-	FONT-FAMILY: "ËÎÌå"
+	FONT-FAMILY: "ï¿½ï¿½ï¿½ï¿½"
 
 }
 LI {
-	FONT-FAMILY: "ËÎÌå"
+	FONT-FAMILY: "ï¿½ï¿½ï¿½ï¿½"
 }
 P {
-	FONT-FAMILY: "ËÎÌå"
+	FONT-FAMILY: "ï¿½ï¿½ï¿½ï¿½"
 }
 TABLE {
-	FONT-FAMILY: "ËÎÌå"
+	FONT-FAMILY: "ï¿½ï¿½ï¿½ï¿½"
 }
 TD {
-	FONT-FAMILY: "ËÎÌå"
+	FONT-FAMILY: "ï¿½ï¿½ï¿½ï¿½"
 }
 FORM {
-	FONT-FAMILY: "ËÎÌå"
+	FONT-FAMILY: "ï¿½ï¿½ï¿½ï¿½"
 }
 TD {
 	FONT-SIZE: 12px; COLOR: #2f5fa1; FONT-FAMILY: "Times New Roman"
@@ -282,7 +282,7 @@ TEXTAREA {
 	Z-INDEX: 10; RIGHT: -6px; WIDTH: 30%; POSITION: absolute; TOP: 1px
 }
 .c_01 {
-	MARGIN-TOP: 15px; FONT-WEIGHT: bold; FONT-SIZE: 14px; FLOAT: left; COLOR: #006600; TEXT-ALIGN: center
+	MARGIN-TOP: 15px; FONT-WEIGHT: bold; FONT-SIZE: 14px; FLOAT: left; COLOR: #FF8C00; TEXT-ALIGN: center
 }
 .bbs_tou {
 	FONT-WEIGHT: bold; FONT-SIZE: 16px; BACKGROUND: #d7d7d7; COLOR: #666600; HEIGHT: 30px
@@ -465,7 +465,7 @@ LI {
 	BORDER-RIGHT: #dfdfdf 1px solid; BORDER-TOP: #dfdfdf 1px solid; MARGIN-TOP: 4px; BORDER-LEFT: #dfdfdf 1px solid; WIDTH: 910px; BORDER-BOTTOM: #dfdfdf 1px solid
 }
 .anniu {
-	BORDER-RIGHT: #2f5fa1 2px solid; BORDER-TOP: #2f5fa1 2px solid; FONT-SIZE: 12px; MARGIN: 3px; BORDER-LEFT: #2f5fa1 2px solid; COLOR: #ffffff; LINE-HEIGHT: 150%; BORDER-BOTTOM: #2f5fa1 2px solid; BACKGROUND-COLOR: #006600
+	BORDER-RIGHT: #FF8C00 2px solid; BORDER-TOP: #FF8C00 2px solid; FONT-SIZE: 12px; MARGIN: 3px; BORDER-LEFT: #FF8C00 2px solid; COLOR: #ffffff; LINE-HEIGHT: 150%; BORDER-BOTTOM: #FF8C00 2px solid; BACKGROUND-COLOR: #FF8C00
 }
 .prostate {
 	RIGHT: 0px; POSITION: fixed; TOP: 0px

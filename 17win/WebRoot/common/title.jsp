@@ -39,14 +39,14 @@
 						<TABLE cellSpacing=0 cellPadding=0 width=535 align=right border=0>
 							<TR>
 								<TD height=32 align="right">
-
-									<span class="yell_font">欢迎您！</span>
 									<s:if test="#session.userLogin==null">
+										<span class="yell_font">您还没登录！</span>
 										<A href="userManager/base!initLogin.php" target="_top">登陆</A> |
 									<A href="userManager/base!initRegister.php" target="_top">
 											注册</A> |
 									</s:if>
 									<s:else>
+										<span class="yell_font">欢迎您！</span>
 										<font color="red"><b><s:property
 													value="#session.userLogin.username" /> 
 										
