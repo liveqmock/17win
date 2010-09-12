@@ -7,6 +7,7 @@ function changeValidateCode(obj) {
 }
 var submitFlag = true;
 $(document).ready(function() {
+	$("#password").focus();
 	// 密码
 	$("#password").bind("blur", function() {
 		if (Validater.isPassword($(this).val())) {

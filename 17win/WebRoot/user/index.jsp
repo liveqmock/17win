@@ -90,20 +90,19 @@ img {
 												<tr>
 													<td height="55" align="center" class="borderc"
 														valign="middle">
-														<b>
-															<IMG src="images/c3.gif">
-															你好：
-														</b>
+														<b> <IMG src="images/c3.gif"> 你好： </b>
 													</td>
 
-													<td width="10%" align="left" class="borderc">
+													<td align="left" class="borderc" nowrap="nowrap">
 														<Font color="#FF0000"><s:property
-																value="#session.userLogin.username"></s:property>(<s:date format="yyyy-MM-dd hh:mm:ss" name="#session.userLogin.registerTime" />)</Font>
+																value="#session.userLogin.username"></s:property><b>(注册时间：<s:date
+																format="yyyy-MM-dd hh:mm:ss"
+																name="#session.userLogin.registerTime" />)</b></Font>
 													</td>
 													<td width="63%" align="left" class="borderc">
 														&nbsp;
-														<a href="md5_pay.asp"><img src="images/congzhi.jpg"  title="我要充值"
-																width="140" height="40" border="0" /> </a>&nbsp;&nbsp;&nbsp;
+														<a href="md5_pay.asp"><img src="images/congzhi.jpg"
+																title="我要充值" width="140" height="40" border="0" /> </a>&nbsp;&nbsp;&nbsp;
 													</td>
 												</tr>
 												<tr>
@@ -111,7 +110,9 @@ img {
 														&nbsp;
 													</td>
 													<td colspan="2" align="left" class="borderc">
-														你上次登陆的时间是：<s:date format="yyyy-MM-dd hh:mm:ss" name="#session.userLogin.lastLoginTime" />
+														你上次登陆的时间是：
+														<s:date format="yyyy-MM-dd hh:mm:ss"
+															name="#session.userLogin.lastLoginTime" />
 														<font color="#FF0000"></font>，如果你在这个时间没有登陆过，请联系客服。
 													</td>
 
@@ -171,10 +172,8 @@ img {
 												</tr>
 												 -->
 												<tr>
-													<td height="55" align="center" class="borderc" valign="top">
-														<b>
-															信誉互刷（买家操作）
-														</b>
+													<td height="55" align="center" class="borderc" valign="top" nowrap="nowrap">
+														<b> 信誉互刷（买家操作） </b>
 													</td>
 													<td colspan="2" align="left" class="borderc">
 														<table cellpadding="1" cellspacing="1" border="0px"
@@ -254,9 +253,7 @@ img {
 												</tr>
 												<tr>
 													<td height="55" align="center" class="borderc" valign="top">
-														<b>
-															流量互刷
-														</b>
+														<b> 流量互刷 </b>
 													</td>
 													<td colspan="2" align="left" class="borderc">
 														平台提示：
@@ -266,9 +263,7 @@ img {
 												</tr>
 												<tr>
 													<td height="55" align="center" class="borderc" valign="top">
-														<b>
-															收藏互刷
-														</b>
+														<b> 收藏互刷 </b>
 													</td>
 													<td colspan="2" align="left" class="borderc">
 														平台提示：

@@ -19,7 +19,7 @@
 						密&nbsp;&nbsp;&nbsp;&nbsp;码：
 					</td>
 					<td>
-						<s:password id="password" name="userVO.userEntity.loginPassword"
+						<s:password id="password" name="userVO.userEntity.loginPassword"  maxLength="16"
 							size="30" cssStyle="width:210px"></s:password>
 					</td>
 				</tr>
@@ -28,7 +28,10 @@
 						确认密码：
 					</td>
 					<td>
-						<input type="password" id="rePassword" size="30"
+						<input type="password" id="rePassword" size="30"   maxLength="16"
+							style="width: 210px">
+						<input type="hidden" name="preURL" size="30" value="<%="?"
+								+ request.getQueryString() %>"
 							style="width: 210px">
 					</td>
 				</tr>
@@ -38,6 +41,8 @@
 					</td>
 				</tr>
 			</table>
+			
 		</s:form>
+		<s:property value="#request.msg" escape="false"/>
 	</body>
 </html>

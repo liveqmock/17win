@@ -65,11 +65,18 @@ public class UserService extends BaseService {
 		if (!"3".equals(userEntity.getStatus())) {
 			return "error";
 		} else {
+			if (userEntity.getOpertationCode().equals(
+					StringUtils.processPwd(userVO.getUserEntity()
+							.getLoginPassword()))) {
+				getResponse().sendRedirect(
+						"base!initFindPassword.php" + getByParam("preURL")
+								+ "&error=sameCode");
+				return null;
+			}
 			// 如果状态是修改密码。那么就把状态换成上一次状态
 			if ("3".equals(userEntity.getStatus())) {
 				userEntity.setStatusAndLastStatus(userEntity.getLastStatus());
 			}
-			userEntity.setStatus(userEntity.getLastStatus());
 			userEntity.setLoginPassword(StringUtils.processPwd(userVO
 					.getUserEntity().getLoginPassword()));
 			putAlertMsg("密码修改成功！");
@@ -96,6 +103,8 @@ public class UserService extends BaseService {
 			Long oldTime = Long.parseLong(time);
 			Long newTime = System.currentTimeMillis();
 			if ((newTime - oldTime) / 1000 / 60 <= 30) {
+				if (getByParam("error") != null)
+					putAlertMsg("密码和操作码不能相同！");
 				userVO.getUserEntity().setUsername(username);
 				return "initFindPassword";
 			} else {
@@ -161,11 +170,16 @@ public class UserService extends BaseService {
 	 */
 	public String insertUser(UserVO userVO) throws Exception {
 		String vcode = (String) getBySession(Constant.VERIFY_CODE);
+		UserEntity userEntity = userVO.getUserEntity();
 		if (vcode == null || !vcode.equals(userVO.getVerificationCode())) {
 			putAlertMsg("验证码不正确！");
 			return INPUT;
 		}
-		UserEntity userEntity = userVO.getUserEntity();
+		if (userEntity.getLoginPassword()
+				.equals(userEntity.getOpertationCode())) {
+			putAlertMsg("密码和操作码不能相同！");
+			return INPUT;
+		}
 		// 改变密码
 		userEntity.setLoginPassword(StringUtils.processPwd(userEntity
 				.getLoginPassword()));

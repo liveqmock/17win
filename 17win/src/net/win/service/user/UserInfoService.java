@@ -380,9 +380,12 @@ public class UserInfoService extends BaseService {
 		UserLoginInfo userLoginInfo = getLoginUser();
 		UserEntity userEntity = userDAO.get(userLoginInfo.getId());
 		UserEntity newUserEntity = userVO.getUserEntity();
-
-		// 比较以前的操作码
-		if (userEntity.getOpertationCode().equals(
+		if (!StringUtils.isBlank(newUserEntity.getLoginPassword())
+				&& !StringUtils.isBlank(newUserEntity.getOpertationCode())
+				&& newUserEntity.getLoginPassword().equals(
+						newUserEntity.getOpertationCode())) {
+			putAlertMsg("密码和操作码不能相同！");
+		} else if (userEntity.getOpertationCode().equals(
 				StringUtils.processPwd(userVO.getOperationCode()))) {
 			if (!StringUtils.isBlank(newUserEntity.getLoginPassword())) {
 				userEntity.setLoginPassword(StringUtils
