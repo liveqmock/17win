@@ -10,13 +10,11 @@ import javax.annotation.Resource;
 
 import net.win.BaseService;
 import net.win.UserLoginInfo;
-import net.win.dao.AreaDAO;
 import net.win.dao.BuyerDAO;
 import net.win.dao.CityDAO;
 import net.win.dao.ProvinceDAO;
 import net.win.dao.SellerDAO;
 import net.win.dao.UserDAO;
-import net.win.dao.WithDrawalsDAO;
 import net.win.entity.BuyerEntity;
 import net.win.entity.CityEntity;
 import net.win.entity.ProvinceEntity;
@@ -30,9 +28,7 @@ import net.win.vo.BuyerVO;
 import net.win.vo.SellerVO;
 import net.win.vo.UserVO;
 
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 import com.sun.org.apache.commons.beanutils.BeanUtils;
 
@@ -42,8 +38,6 @@ public class UserInfoService extends BaseService {
 	@Resource
 	private UserDAO userDAO;
 	@Resource
-	private WithDrawalsDAO withDrawalsDAO;
-	@Resource
 	private SellerDAO sellerDAO;
 	@Resource
 	private BuyerDAO buyerDAO;
@@ -51,12 +45,6 @@ public class UserInfoService extends BaseService {
 	private ProvinceDAO provinceDAO;
 	@Resource
 	private CityDAO cityDAO;
-	@Resource
-	private AreaDAO areaDAO;
-	@Resource
-	private JavaMailSender mailSender;
-	@Resource
-	private FreeMarkerConfigurer freeMarkerCfj;
 
 	/**
 	 * 买家或卖家
@@ -444,7 +432,7 @@ public class UserInfoService extends BaseService {
 		UserLoginInfo userLoginInfo = getLoginUser();
 		List<Object[]> tmpResult1 = (List<Object[]>) userDAO
 				.list(
-						" select   _rct.type,_rct.status , count(_rct.id) from  UserEntity   as _u    inner join  _u.receiveCreditTasks as _rct where   _u.id=:id group by  _rct.type, _rct.status  order by _rct.type,_rct.status",
+						" select   _rct.type,_rct.status , count(_rct.id) from  UserEntity   as _u    inner join  _u.releaseCreditTasks as _rct where   _u.id=:id group by  _rct.type, _rct.status  order by _rct.type,_rct.status",
 						"id", userLoginInfo.getId());
 		List<Object[]> tmpResult2 = (List<Object[]>) userDAO
 				.list(

@@ -56,10 +56,10 @@
 											[安全退出] </A>
 										|
 										<A href="userInfoManager/info!init.php" target="_self">
-											个人中心 </A>|
+											[个人中心] </A>|
 									</s:else>
 									<A href="#" title=添加到收藏夹
-										onclick="window.external.addFavorite('http://www.2000w.net','淘宝刷信誉')">收藏本站</A>
+										onclick="window.external.addFavorite('http://www.2000w.net','淘宝刷信誉')">[收藏本站]</A>
 									<!-- xgj|
 									<A href="help/link.asp" target="_top">广告服务</A>
 									 -->

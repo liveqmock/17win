@@ -1,3 +1,7 @@
+$(document).ready(function() {
+	$("#code").focus();
+});
+
 function validateForm() {
 	// 淘宝卖家是否有账号
 	if (Validater.isPassword($("#code").val())) {

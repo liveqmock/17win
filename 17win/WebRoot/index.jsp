@@ -82,7 +82,7 @@
 													<tr>
 														<td width="94">
 															<a href="userInfoManager/info!initUpdateInfo.php"><font
-																color="#ff0000">修改个人信息</font> </a>
+																color="#ff0000">修改资料</font> </a>
 														</td>
 														<td width="102">
 															<a href="user/md5_pay.asp"><font color="#ff0000">帐号充值</font>
@@ -92,7 +92,7 @@
 
 													<tr>
 														<td>
-															<a href="taobao/"><font color="#ff0000">免费刷钻区&nbsp;
+															<a href="taobao/"><font color="#ff0000">免费刷钻&nbsp;
 															</font> </a>
 														</td>
 														<td>

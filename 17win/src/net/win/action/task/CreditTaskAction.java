@@ -26,7 +26,7 @@ import org.springframework.stereotype.Controller;
 		@Result(name = "noSellerPage", type = "redirect", location = "/userInfoManager/info!initSellerAndBuyer.php?noSellerDirect=noSellerDirect"),
 		@Result(name = "insertReleaseTaskFail", type = "chain", location = "/taskManager/task!initReleaseTask.php"),
 		@Result(name = "insertReleaseTaskSuccess", type = "chain", location = "/taskManager/task!initReleaseTask.php"),
-		@Result(name = "insertReleaseTaskSuccess", type = "chain", location = "/taskManager/task!initTask.php")
+		@Result(name = "initReleaseTaskFail", type = "chain", location = "/taskManager/task!initTask.php")
 
 })
 @Namespace("/taskManager")
