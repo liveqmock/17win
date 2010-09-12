@@ -96,8 +96,8 @@ img {
 													<td align="left" class="borderc" nowrap="nowrap">
 														<Font color="#FF0000"><s:property
 																value="#session.userLogin.username"></s:property><b>(注册时间：<s:date
-																format="yyyy-MM-dd hh:mm:ss"
-																name="#session.userLogin.registerTime" />)</b></Font>
+																	format="yyyy-MM-dd hh:mm:ss"
+																	name="#session.userLogin.registerTime" />)</b> </Font>
 													</td>
 													<td width="63%" align="left" class="borderc">
 														&nbsp;
@@ -172,7 +172,8 @@ img {
 												</tr>
 												 -->
 												<tr>
-													<td height="55" align="center" class="borderc" valign="top" nowrap="nowrap">
+													<td height="55" align="center" class="borderc" valign="top"
+														nowrap="nowrap">
 														<b> 信誉互刷（买家操作） </b>
 													</td>
 													<td colspan="2" align="left" class="borderc">
@@ -233,6 +234,9 @@ img {
 																</th>
 																<th style="background: #D1ECF9">
 																	等待我核查好评
+																</th>
+																<th style="background: #D1ECF9">
+																	定时任务
 																</th>
 																<th style="background: #D1ECF9">
 																	合计

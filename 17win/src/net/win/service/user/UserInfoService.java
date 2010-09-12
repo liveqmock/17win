@@ -442,7 +442,10 @@ public class UserInfoService extends BaseService {
 		 * 买家
 		 */
 		String[][] result1 = new String[4][5];
-		String[][] result2 = new String[4][7];
+		/**
+		 * 卖家
+		 */
+		String[][] result2 = new String[4][8];
 		for (String[] r : result1) {
 			Arrays.fill(r, "0");
 		}
@@ -471,30 +474,30 @@ public class UserInfoService extends BaseService {
 					if ("1".equals(objs[0])) {
 						// 淘宝的
 						if ("1".equals(objs[1])) {
-							result1[0][0] = objs[2] + "";
-						} else if ("2".equals(objs[1])) {
 							result1[0][1] = objs[2] + "";
-						} else if ("3".equals(objs[1])) {
+						} else if ("2".equals(objs[1])) {
 							result1[0][2] = objs[2] + "";
+						} else if ("3".equals(objs[1])) {
+							result1[0][3] = objs[2] + "";
 						}
 					} else if ("2".equals(objs[0])) {
 						// 拍拍
 						if ("1".equals(objs[1])) {
-							result1[1][0] = objs[2] + "";
-						} else if ("2".equals(objs[1])) {
 							result1[1][1] = objs[2] + "";
-						} else if ("3".equals(objs[1])) {
+						} else if ("2".equals(objs[1])) {
 							result1[1][2] = objs[2] + "";
+						} else if ("3".equals(objs[1])) {
+							result1[1][3] = objs[2] + "";
 						}
 
 					} else if ("3".equals(objs[0])) {
 						// 有啊
 						if ("1".equals(objs[1])) {
-							result1[2][0] = objs[2] + "";
-						} else if ("2".equals(objs[1])) {
 							result1[2][1] = objs[2] + "";
-						} else if ("3".equals(objs[1])) {
+						} else if ("2".equals(objs[1])) {
 							result1[2][2] = objs[2] + "";
+						} else if ("3".equals(objs[1])) {
+							result1[2][3] = objs[2] + "";
 						}
 					}
 				}
@@ -510,43 +513,49 @@ public class UserInfoService extends BaseService {
 
 					if ("1".equals(objs[0])) {
 						// 淘宝的
-						if ("1".equals(objs[1])) {
-							result1[0][0] = objs[2] + "";
-						} else if ("2".equals(objs[1])) {
-							result1[0][1] = objs[2] + "";
-						} else if ("3".equals(objs[1])) {
-							result1[0][2] = objs[2] + "";
-						} else if ("4".equals(objs[1])) {
-							result1[0][3] = objs[2] + "";
+						if ("4".equals(objs[1])) {
+							result2[0][1] = objs[2] + "";
 						} else if ("5".equals(objs[1])) {
-							result1[0][4] = objs[2] + "";
+							result2[0][2] = objs[2] + "";
+						} else if ("6".equals(objs[1])) {
+							result2[0][3] = objs[2] + "";
+						} else if ("7".equals(objs[1])) {
+							result2[0][4] = objs[2] + "";
+						} else if ("8".equals(objs[1])) {
+							result2[0][5] = objs[2] + "";
+						} else if ("0".equals(objs[1])) {
+							result2[0][6] = objs[2] + "";
 						}
 					} else if ("2".equals(objs[0])) {
 						// 拍拍
-						if ("1".equals(objs[1])) {
-							result1[1][0] = objs[2] + "";
-						} else if ("2".equals(objs[1])) {
-							result1[1][1] = objs[2] + "";
-						} else if ("3".equals(objs[1])) {
-							result1[1][2] = objs[2] + "";
-						} else if ("4".equals(objs[1])) {
-							result1[1][3] = objs[2] + "";
+						if ("4".equals(objs[1])) {
+							result2[1][1] = objs[2] + "";
 						} else if ("5".equals(objs[1])) {
-							result1[1][4] = objs[2] + "";
+							result2[1][2] = objs[2] + "";
+						} else if ("6".equals(objs[1])) {
+							result2[1][3] = objs[2] + "";
+						} else if ("7".equals(objs[1])) {
+							result2[1][4] = objs[2] + "";
+						} else if ("8".equals(objs[1])) {
+							result2[1][5] = objs[2] + "";
+						} else if ("0".equals(objs[1])) {
+							result2[1][6] = objs[2] + "";
 						}
 
 					} else if ("3".equals(objs[0])) {
 						// 有啊
-						if ("1".equals(objs[1])) {
-							result1[2][0] = objs[2] + "";
-						} else if ("2".equals(objs[1])) {
-							result1[2][1] = objs[2] + "";
-						} else if ("3".equals(objs[1])) {
-							result1[2][2] = objs[2] + "";
-						} else if ("4".equals(objs[1])) {
-							result1[2][3] = objs[2] + "";
+						if ("4".equals(objs[1])) {
+							result2[2][1] = objs[2] + "";
 						} else if ("5".equals(objs[1])) {
-							result1[2][4] = objs[2] + "";
+							result2[2][2] = objs[2] + "";
+						} else if ("6".equals(objs[1])) {
+							result2[2][3] = objs[2] + "";
+						} else if ("7".equals(objs[1])) {
+							result2[2][4] = objs[2] + "";
+						} else if ("8".equals(objs[1])) {
+							result2[2][5] = objs[2] + "";
+						} else if ("0".equals(objs[1])) {
+							result2[2][6] = objs[2] + "";
 						}
 					}
 				}

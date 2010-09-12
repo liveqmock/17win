@@ -2,8 +2,9 @@ package net.win.utils;
 
 /**
  * 球总和工具类
+ * 
  * @author xgj
- *
+ * 
  */
 public final class TotalUtils {
 	private TotalUtils() {
@@ -24,10 +25,10 @@ public final class TotalUtils {
 		// 列
 		int indexC = strs[0].length;
 
-		for (int i = 0; i < strs.length; i++) {
+		for (int i = 0; i < indexR; i++) {
 			Integer count = 0;
 			// j=1 第一行是标题，不在计算之内
-			for (int j = 1; j < indexR; j++) {
+			for (int j = 1; j < indexC; j++) {
 				count += Integer.parseInt(strs[i][j]);
 			}
 			strs[i][indexC - 1] = count + "";
@@ -51,7 +52,7 @@ public final class TotalUtils {
 		// i=1 第一行是标题，不在计算之内
 		for (int i = 1; i < indexC; i++) {
 			Integer count = 0;
-			for (int j = 0; j < strs.length; j++) {
+			for (int j = 0; j < indexR; j++) {
 				count += Integer.parseInt(strs[j][i]);
 			}
 			strs[indexR - 1][i] = count + "";
