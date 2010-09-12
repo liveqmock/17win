@@ -1,12 +1,10 @@
 package net.win.service.task;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 import net.win.BaseService;
 import net.win.TaskMananger;
@@ -20,6 +18,7 @@ import net.win.entity.CreditTaskEntity;
 import net.win.entity.CreditTaskRepositoryEntity;
 import net.win.entity.SellerEntity;
 import net.win.entity.UserEntity;
+import net.win.exception.NoPageException;
 import net.win.utils.ArithUtils;
 import net.win.utils.StrategyUtils;
 import net.win.utils.StringUtils;
@@ -77,6 +76,23 @@ public class CreditTaskService extends BaseService {
 		if (creditTaskEntity.getMoney() > userEntity.getMoney()) {
 			creditTaskVO.setMoney(null);
 			putAlertMsg("您当前的余额为不够发布这个任务，点此处进行充值！");
+			return "insertReleaseTaskFail";
+		}
+		if (!userEntity.getStatus().equals("1")) {
+			switch (Integer.parseInt(userEntity.getStatus())) {
+			case 0:
+				putAlertMsg("您当前的【状态】为【未激活状态】，请到个人中心激活！");
+				break;
+			case 2:
+				putAlertMsg("您当前的【状态】为【冻结状态】，不能发布任务！");
+				break;
+			case 3:
+				putAlertMsg("您当前的【状态】为【找密码状态】，可能有人试图盗取您的秘密，请联系管理员，不能发布任务！");
+				break;
+			default:
+				putAlertMsg("您当前的【状态】不是【正常状态】，不能发布任务！");
+				break;
+			}
 			return "insertReleaseTaskFail";
 		}
 		if (creditTaskVO.getMoney() < 1) {
@@ -150,13 +166,29 @@ public class CreditTaskService extends BaseService {
 	public String initReleaseTask(CreditTaskVO creditTaskVO) throws Exception {
 		// 没有操作码验证就验证
 		String platformType = getPlatformType();
-
 		if (!getLoginUser().getOperationCodeStatus()) {
 			putByRequest("preURL", getRequset().getRequestURL() + "?"
 					+ getRequset().getQueryString());
 			return "operationValidate";
 		} else {
 			UserEntity userEntity = getLoginUserEntity(userDAO);
+			if (!userEntity.getStatus().equals("1")) {
+				switch (Integer.parseInt(userEntity.getStatus())) {
+				case 0:
+					putAlertMsg("您当前的【状态】为【未激活状态】，请到个人中心激活！");
+					break;
+				case 2:
+					putAlertMsg("您当前的【状态】为【冻结状态】，不能发布任务！");
+					break;
+				case 3:
+					putAlertMsg("您当前的【状态】为【找密码状态】，可能有人试图盗取您的秘密，请联系管理员，不能发布任务！");
+					break;
+				default:
+					putAlertMsg("您当前的【状态】不是【正常状态】，不能发布任务！");
+					break;
+				}
+				return "initReleaseTaskFail";
+			}
 			List<SellerEntity> sellers = userEntity.getSellers();
 			List<SellerVO> resultSellers = new ArrayList<SellerVO>(sellers
 					.size());
@@ -170,7 +202,6 @@ public class CreditTaskService extends BaseService {
 				putAlertMsg("您还没有绑定卖号，请先添加！");
 				return "noSellerPage";
 			}
-
 			List<CreditTaskRepositoryEntity> creditTaskResitorys = creditTaskRepositoryDAO
 					.list(
 							"from CreditTaskRepositoryEntity _cr where _cr.user.id=:userId and _cr.type=:type",
@@ -202,6 +233,12 @@ public class CreditTaskService extends BaseService {
 	 */
 	public String initTask(CreditTaskVO creditTaskVO) throws Exception {
 		String platformType = getPlatformType();
+		if (platformType == null) {
+			platformType = getPlatformType();
+		}
+		if (platformType == null) {
+			throw new NoPageException("初始化任务，没有platformType");
+		}
 		putPlatformByRequest(WinUtils.changeType2Platform(platformType));
 		putPlatformTypeByRequest(platformType);
 		return "initTask";

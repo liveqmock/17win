@@ -19,6 +19,8 @@ public class UserLoginInfo {
 	private Integer convertScore;
 	// 最后一次登陆时间
 	private Date lastLoginTime;
+	// 注册时间
+	private Date registerTime;
 	// 当前级别(一心，还是一钻)
 	private Integer level;
 	// 级别图片(一心，还是一钻)
@@ -124,5 +126,13 @@ public class UserLoginInfo {
 
 	public void setMoney(Double money) {
 		this.money = money;
+	}
+
+	public Date getRegisterTime() {
+		return registerTime;
+	}
+
+	public void setRegisterTime(Date registerTime) {
+		this.registerTime = registerTime;
 	}
 }

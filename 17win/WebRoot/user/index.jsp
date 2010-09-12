@@ -98,7 +98,7 @@ img {
 
 													<td width="10%" align="left" class="borderc">
 														<Font color="#FF0000"><s:property
-																value="#session.userLogin.username"></s:property> </Font>
+																value="#session.userLogin.username"></s:property>(<s:date format="yyyy-MM-dd hh:mm:ss" name="#session.userLogin.registerTime" />)</Font>
 													</td>
 													<td width="63%" align="left" class="borderc">
 														&nbsp;
@@ -111,7 +111,7 @@ img {
 														&nbsp;
 													</td>
 													<td colspan="2" align="left" class="borderc">
-														你上次登陆的时间是：
+														你上次登陆的时间是：<s:date format="yyyy-MM-dd hh:mm:ss" name="#session.userLogin.lastLoginTime" />
 														<font color="#FF0000"></font>，如果你在这个时间没有登陆过，请联系客服。
 													</td>
 

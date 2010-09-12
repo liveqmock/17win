@@ -146,8 +146,10 @@
 																		掌柜名：
 																	</td>
 																	<td colspan="4">
-																		<s:radio list="#request.sellers" listKey="id"
-																			name="creditTaskVO.sellerID" listValue="name"></s:radio>
+																		<s:if test="#request.sellers!=null">
+																			<s:radio list="#request.sellers" listKey="id"
+																				name="creditTaskVO.sellerID" listValue="name"></s:radio>
+																		</s:if>
 																	</td>
 																</tr>
 																<tr>
