@@ -301,6 +301,11 @@ public class UserEntity extends BaseEntity {
 		this.status = status;
 	}
 
+	public void setStatusAndLastStatus(String status) {
+		this.lastStatus = this.status;
+		this.status = status;
+	}
+
 	public Double getMoney() {
 		return money;
 	}

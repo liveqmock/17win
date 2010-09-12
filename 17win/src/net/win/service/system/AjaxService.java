@@ -62,7 +62,7 @@ public class AjaxService extends BaseService {
 		String content = basePath + "userManager/base!initFindPassword.php?u="
 				+ username64 + "&t=" + nowTime65;
 
-		userEntity.setStatus("3");
+		userEntity.setStatusAndLastStatus("3");
 
 		MailUtils.sendPasswordMail(mailSender, freeMarkerCfj, userEntity
 				.getUsername(), userEntity.getEmail(), content);

@@ -17,7 +17,6 @@ import net.win.dao.ProvinceDAO;
 import net.win.dao.SellerDAO;
 import net.win.dao.UserDAO;
 import net.win.dao.WithDrawalsDAO;
-import net.win.entity.AreaEntity;
 import net.win.entity.BuyerEntity;
 import net.win.entity.CityEntity;
 import net.win.entity.ProvinceEntity;
@@ -185,7 +184,7 @@ public class UserInfoService extends BaseService {
 	 */
 	public String updateActiave(UserVO userVO) throws Exception {
 		UserEntity userEntity = getLoginUserEntity(userDAO);
-		userEntity.setStatus("1");
+		userEntity.setStatusAndLastStatus("1");
 		putAlertMsg("激活成功！快去体验吧！");
 		return "updateActiave";
 	}
