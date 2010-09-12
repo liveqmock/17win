@@ -93,7 +93,7 @@ K_ToolsC A:hover {
 	BORDER-RIGHT: #7b9cbd 1px solid; BORDER-TOP: #7b9cbd 1px solid; BACKGROUND: #bbe3ff; BORDER-LEFT: #7b9cbd 1px solid; BORDER-BOTTOM: #7b9cbd 1px solid
 }
 .Bootz {
-	MARGIN-TOP: 10px; BACKGROUND: url(..../images/Top_18.gif) repeat-x; FLOAT: left; WIDTH: 100%; HEIGHT: 90px
+	MARGIN-TOP: 10px; BACKGROUND: url(../images/Top_18.gif) repeat-x; FLOAT: left; WIDTH: 100%; HEIGHT: 90px
 }
 .LeftNews A {
 	PADDING-LEFT: 15px; BACKGROUND: url(../images/Top_20.gif) no-repeat left 50%

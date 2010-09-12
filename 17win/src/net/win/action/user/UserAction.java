@@ -19,7 +19,7 @@ import org.springframework.stereotype.Controller;
 @Scope("prototype")
 @ParentPackage("17win-default")
 @Namespace("/userManager")
-@Results({
+@Results( {
 		@Result(name = "input", location = "/user/register.jsp"),
 		@Result(name = "inputLogin", location = "/user/login.jsp"),
 		@Result(name = "loginSuccess", type = "redirect", location = "/userInfoManager/info!init.php"),
@@ -28,7 +28,7 @@ import org.springframework.stereotype.Controller;
 		@Result(name = "initFindPassword", location = "/user/findPassword.jsp"),
 		@Result(name = "findPasswordSuccess", location = "/user/login.jsp"),
 		@Result(name = "initLogin", location = "/user/login.jsp"),
-		@Result(name = "loginOut", type = "redirect", location = "/index.jsp")})
+		@Result(name = "loginOut", type = "redirect", location = "/index.jsp") })
 public class UserAction extends BaseAction {
 	@Resource
 	private UserService userService;
@@ -52,6 +52,7 @@ public class UserAction extends BaseAction {
 		// TODO Auto-generated method stub
 		return INPUT;
 	}
+
 	/**
 	 * 找回密码
 	 * 
@@ -93,7 +94,7 @@ public class UserAction extends BaseAction {
 	 * @throws Exception
 	 */
 	public String login() throws Exception {
-		return userService.login(userVO);
+		return userService.updateLogin(userVO);
 	}
 
 	/**

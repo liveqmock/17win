@@ -8,26 +8,31 @@ public final class ContextUtils {
 	private ContextUtils() {
 		// TODO Auto-generated constructor stub
 	}
+
 	/**
-	 * �õ���Ŀ¼
+	 * 得到跟目录
 	 * 
 	 * @return
 	 */
 	public static String getRootPath() {
-		String fileName = ServletActionContext.getRequest().getSession()
-				.getServletContext().getRealPath("/");
-		return fileName;
+		String s = getClassesPath();
+		return s.split("WEB-INF")[0];
 	}
+
 	/**
-	 * �õ�classesĿ¼
+	 * 得到classes目录
 	 * 
 	 * @return
 	 */
 	public static String getClassesPath() {
-		String fileName = ServletActionContext.getRequest().getSession()
-				.getServletContext().getRealPath("/")
-				+ "WEB-INF" + File.separator + "classes";
-		return fileName;
+		String s = Thread.currentThread().getContextClassLoader().getResource(
+				"").toString();
+		return s.split("/", 2)[1];
 	}
-
+	
+	public static void main(String[] args) {
+		String s = Thread.currentThread().getContextClassLoader().getResource(
+		"winConf.properties").toString();
+		System.out.println(s);
+	}
 }

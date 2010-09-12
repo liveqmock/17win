@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
 /**

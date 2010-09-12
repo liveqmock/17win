@@ -7,7 +7,7 @@ function changeValidateCode(obj) {
 }
 var submitFlag = true;
 $(document).ready(function() {
-	$("#username").focus();
+	//找回密码
 	$("#findPW").dialog({
 				autoOpen : false,
 				draggable : false,
@@ -37,7 +37,14 @@ $(document).ready(function() {
 							$("#findPW").dialog("close");
 						}, "json");
 			});
+	// 弹出找回密码层
+	$("#findPWA").bind("click", function() {
+				$("#findPW").dialog("open");
+			});	
+	
+			
 	// 用户名
+	$("#username").focus();
 	$("#username").bind("blur", function() {
 		var obj = this;
 		if (Validater.isUsername($(this).val())) {
@@ -65,10 +72,6 @@ $(document).ready(function() {
 				} else {
 					submitFlag = false;
 				}
-			});
-	// 弹出找回密码层
-	$("#findPWA").bind("click", function() {
-				$("#findPW").dialog("open");
 			});
 });
 function validateForm() {

@@ -1,13 +1,15 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML>
 	<HEAD>
-		 <base href="<%=basePath%>">
+		<base href="<%=basePath%>">
 		<title>淘宝刷信誉 -淘宝刷钻 _刷钻平台_互刷平台_免费刷钻首选灵谷刷客平台</title>
 		<META http-equiv=Content-Type content="text/html; charset=gb2312">
 		<meta
@@ -16,11 +18,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<meta content="淘宝刷信誉,淘宝刷钻,刷钻平台,互刷平台,免费刷钻" name="keywords" />
 		<LINK href="css/Css.css" type=text/css rel=stylesheet>
 		<LINK href="css/top_bottom.css" type=text/css rel=stylesheet>
-		<SCRIPT src="js/jquery-1.4.2.min.js" type=text/javascript></SCRIPT>
-		<SCRIPT src="js/validater.js" type=text/javascript></SCRIPT>
+		<link href="css/excite-bike/jquery-ui-1.8.4.custom.css"
+			rel="stylesheet" type="text/css" />
 		<SCRIPT src="js/jieducm_pupu.js" type=text/javascript></SCRIPT>
-		<script type="text/javascript" src="js/ymPrompt.js"></script>
+		<SCRIPT src="js/jquery-1.4.2.min.js" type=text/javascript></SCRIPT>
 		<SCRIPT src="js/jquery-ui-1.8.4.custom.min.js" type="text/javascript"></SCRIPT>
+		<SCRIPT src="js/validater.js" type=text/javascript></SCRIPT>
 		<SCRIPT src="index.js" type="text/javascript"></SCRIPT>
 	</HEAD>
 	<BODY>
@@ -63,20 +66,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 													<tr>
 														<td colspan="2">
 															会&nbsp;&nbsp;&nbsp;&nbsp;员：
-															<font color="#ff0000"><s:property value="#session.userLogin.username"></s:property></font> 您好！ 
+															<font color="#ff0000"><s:property
+																	value="#session.userLogin.username"></s:property> </font> 您好！
 														</td>
 													</tr>
 													<tr>
 														<td colspan="2">
 															您拥有：
-															<font color="#ff0000"> <s:property value="#session.userLogin.money"></s:property> </font> 元 发布点：
-															<font color="#ff0000"> <s:property value="#session.userLogin.releaseDot"></s:property> </font>点
+															<font color="#ff0000"> <s:property
+																	value="#session.userLogin.money"></s:property> </font> 元 发布点：
+															<font color="#ff0000"> <s:property
+																	value="#session.userLogin.releaseDot"></s:property> </font>点
 														</td>
 													</tr>
 													<tr>
 														<td width="94">
-															<a href="userInfoManager/info!initUpdateInfo.php"><font color="#ff0000">修改个人信息</font>
-															</a>
+															<a href="userInfoManager/info!initUpdateInfo.php"><font
+																color="#ff0000">修改个人信息</font> </a>
 														</td>
 														<td width="102">
 															<a href="user/md5_pay.asp"><font color="#ff0000">帐号充值</font>
@@ -175,11 +181,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 													</div>
 												</TD>
 												<TD>
-													<a href="userManager/base!initRegister.php"><img
-															src="images/login-q_r4_c31.gif" hspace="5" vspace="0"
-															border="0" /> </a>&nbsp;&nbsp;
-													<a href="#" class="STYLE1"
-														onClick="javascript:window.open('getpwd.asp','shouchang','width=450,height=300');">找回密码</a>
+													<div style="float: left">
+														<a href="userManager/base!initRegister.php"><img
+																src="images/login-q_r4_c31.gif" hspace="5" vspace="0"
+																border="0" /> </a>
+													</div>
+													<div style="float: right">
+														<a href="javascript:void(0);"  
+															id="findPWA" border="0">找回密码</a>
+													</div>
 												</TD>
 											</TR>
 										</TABLE>
@@ -726,6 +736,8 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 
 			</TABLE>
 		</s:form>
+		<s:property value="#request.msg" escape="false" />
+
 		<div id="findPW" title="找回密码">
 			<table border="0" cellpadding="0" cellspacing="0">
 				<tr>
@@ -748,6 +760,6 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 				</tr>
 			</table>
 		</div>
-		<s:property value="#request.msg" escape="false" />
 	</BODY>
+
 </HTML>

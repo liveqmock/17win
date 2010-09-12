@@ -1,5 +1,6 @@
 package net.win.service.user;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -50,6 +51,7 @@ public class UserService extends BaseService {
 		ServletActionContext.getRequest().getSession().invalidate();
 		return "loginOut";
 	}
+
 	/**
 	 * 初始化找回密码
 	 * 
@@ -121,20 +123,21 @@ public class UserService extends BaseService {
 	 * @return
 	 * @throws Exception
 	 */
-	public String login(UserVO userVO) throws Exception {
+	public String updateLogin(UserVO userVO) throws Exception {
 		UserEntity userEntity = userDAO
 				.uniqueResult(
 						"from UserEntity  as _u where _u.username=:username and _u.loginPassword=:loginPassword",
-						new String[]{"username", "loginPassword"},
-						new Object[]{
+						new String[] { "username", "loginPassword" },
+						new Object[] {
 								userVO.getUserEntity().getUsername(),
 								StringUtils.processPwd(userVO.getUserEntity()
-										.getLoginPassword())});
+										.getLoginPassword()) });
 		if (userEntity == null) {
 			putAlertMsg("用户名或密码错误");
 			userVO.setVerificationCode(null);
 			return "inputLogin";
 		} else {
+			userEntity.setLastLoginTime(new Date());
 			updateUserLoginInfo(userEntity);
 			return "loginSuccess";
 		}
