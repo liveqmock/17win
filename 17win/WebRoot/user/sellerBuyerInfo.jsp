@@ -92,8 +92,8 @@ img {
 											</div>
 											<div class="pp8">
 												<strong>卖号/买号管理</strong>
-												<s:select id="tempProvince" list="#request.provinces"
-													cssStyle="display:none" listKey="id" listValue="name"
+												<s:select id="tempProvince" list="#request.provinces"  
+													cssStyle="display:none;width:80px " listKey="id" listValue="name"
 													headerKey="" headerValue="--请选择--">
 												</s:select>
 											</div>
@@ -144,7 +144,7 @@ img {
 																</td>
 																<td class='address' nowrap="nowrap" align="center">
 																	省：
-																	<s:select value="#seller.provinceID"
+																	<s:select value="#seller.provinceID" cssStyle="width:80px"
 																		name="userVO.sellers[0].province.id"
 																		onchange="selectCity(this)" list="#request.provinces"
 																		listKey="id" listValue="name" headerKey=""
@@ -152,14 +152,14 @@ img {
 																	</s:select>
 																	市：
 																	<s:if test="#seller.citys!=null">
-																		<s:select name="userVO.sellers[0].city.id"
+																		<s:select name="userVO.sellers[0].city.id" cssStyle="width:80px"
 																			value="#seller.cityID" list="#seller.citys"
 																			listKey="id" listValue="name" headerKey=""
 																			headerValue="请选择">
 																		</s:select>
 																	</s:if>
 																	<s:else>
-																		<select name="userVO.sellers[0].city.id">
+																		<select name="userVO.sellers[0].city.id" style="width:80px">
 																			<option>
 																				--请选择--
 																			</option>
@@ -184,7 +184,7 @@ img {
 																	 -->
 																</td>
 																<td align='center'>
-																	<input type="text" name="userVO.sellers[0].name"
+																	<input type="text" name="userVO.sellers[0].name" 
 																		value="<s:property value="#seller.name" />" />
 																</td>
 																<td align="center">

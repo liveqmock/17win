@@ -22,6 +22,8 @@ $(document).ready(function() {
 				+ ")\" >删除</a>			</td> " + "		</tr> ";
 		var tr = $(trStr);
 		var td = tr.children(".address"); 
+		
+		style="80px"
 		td.append("省： ");
 		var selectP = $("#tempProvince").clone();
 		selectP.show();
@@ -31,7 +33,7 @@ $(document).ready(function() {
 				});
 		td.append(selectP);
 		td
-				.append(" 市： <select   name='userVO.sellers[0].city.id'><option value=''>请选择</option></select>");
+				.append(" 市： <select style='width:80px'   name='userVO.sellers[0].city.id'><option value=''>请选择</option></select>");
 	//	td
 	//			.append(" 县： <select name='userVO.sellers[0].area.id' ><option value=''>请选择</option></select>");
 		tbody.append(tr);

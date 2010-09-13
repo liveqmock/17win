@@ -19,9 +19,9 @@ public class TaskBaseEntity extends BaseEntity {
 	// 发布点
 	@Column(name = "RELEASE_DOT_", nullable = false)
 	private Float releaseDot;
-	// 接手时间
-	@Column(name = "START_DATE", nullable = false)
-	private Date startDate  ;
+	// 发布时间
+	@Column(name = "RELEASE_DATE", nullable = false)
+	private Date releaseDate  ;
 	// 发布人
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = UserEntity.class)
 	@JoinColumn(name = "RELEASE_PERSON_")
@@ -58,12 +58,14 @@ public class TaskBaseEntity extends BaseEntity {
 		this.releaseDot = releaseDot;
 	}
 
-	public Date getStartDate() {
-		return startDate;
+ 
+
+	public Date getReleaseDate() {
+		return releaseDate;
 	}
 
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
+	public void setReleaseDate(Date releaseDate) {
+		this.releaseDate = releaseDate;
 	}
 
 	public UserEntity getReleasePerson() {

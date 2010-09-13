@@ -147,7 +147,7 @@ public class CreditTaskService extends BaseService {
 		}
 		// 保存
 		creditTaskEntity.setRemainTime(20);
-		creditTaskEntity.setStartDate(new Date());
+		creditTaskEntity.setReleaseDate(new Date());
 		creditTaskEntity.setReleasePerson(userEntity);
 		creditTaskEntity.setType(platFormType);
 		creditTaskDAO.save(creditTaskEntity);
@@ -239,6 +239,13 @@ public class CreditTaskService extends BaseService {
 		if (platformType == null) {
 			throw new NoPageException("初始化任务，没有platformType");
 		}
+		List<Object[]> result = creditTaskDAO
+				.pageQuery(
+						"select _task.testID , _task.releaseDate ,_user.username,_user.upgradeScore,_task.money,_task.updatePrice,_task.goodTimeType,_task.releaseDot,_task.status ,_task.intervalHour" +
+						" from CreditTaskEntity as _task inner join _task.releasePerson as _user where (_task.status!='0' or _task.status!='-1')  and   _task.type=:platformType",
+						"platformType", platformType, creditTaskVO.getStart(),
+						creditTaskVO.getLimit());
+		putByRequest("result", result);
 		putPlatformByRequest(WinUtils.changeType2Platform(platformType));
 		putPlatformTypeByRequest(platformType);
 		return "initTask";
@@ -252,9 +259,6 @@ public class CreditTaskService extends BaseService {
 			Long sellerID) throws Exception {
 		// 生成描述(包含地址)
 		StringBuffer address = new StringBuffer();
-		address.append("地址：");
-		StringBuffer desc = new StringBuffer();
-		desc.append("描述：");
 		if (creditTaskVO.getAddress()) {
 			Object[] addresses = (Object[]) sellerDAO
 					.uniqueResultObject(
@@ -266,11 +270,7 @@ public class CreditTaskService extends BaseService {
 				}
 				address.append(taskMananger.randomObtainAddress(userDAO));
 			}
+			creditTaskEntity.setAddress(address.toString());
 		}
-		desc.append(creditTaskVO.getDesc());
-
-		creditTaskEntity
-				.setDesc(address.toString() + "<br/>" + desc.toString());
-
 	}
 }

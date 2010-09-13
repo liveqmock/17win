@@ -16,6 +16,7 @@
 	<constant name="struts.action.extension" value="php" />
 	<constant name="struts.custom.i18n.resources"
 		value="formatRssource" />
+	<constant name="struts.ognl.allowStaticMethodAccess" value="true" />
 
 
 	<!-- 临时文件夹 -->
