@@ -14,6 +14,7 @@ import net.win.dao.CreditTaskDAO;
 import net.win.dao.CreditTaskRepositoryDAO;
 import net.win.dao.SellerDAO;
 import net.win.dao.UserDAO;
+import net.win.entity.BuyerEntity;
 import net.win.entity.CreditTaskEntity;
 import net.win.entity.CreditTaskRepositoryEntity;
 import net.win.entity.SellerEntity;
@@ -23,6 +24,7 @@ import net.win.utils.ArithUtils;
 import net.win.utils.StrategyUtils;
 import net.win.utils.StringUtils;
 import net.win.utils.WinUtils;
+import net.win.vo.BuyerVO;
 import net.win.vo.CreditTaskRepositoryVO;
 import net.win.vo.CreditTaskVO;
 import net.win.vo.SellerVO;
@@ -44,6 +46,15 @@ public class CreditTaskService extends BaseService {
 	@Resource
 	private CreditTaskRepositoryDAO creditTaskRepositoryDAO;
 
+	/**
+	 * 发布任务
+	 * 
+	 * @param userVO
+	 * @return
+	 */
+	public String updateTask(CreditTaskVO creditTaskVO) throws Exception {
+		return "updateTask";
+	}
 	/**
 	 * 发布任务
 	 * 
@@ -80,18 +91,18 @@ public class CreditTaskService extends BaseService {
 		}
 		if (!userEntity.getStatus().equals("1")) {
 			switch (Integer.parseInt(userEntity.getStatus())) {
-			case 0:
-				putAlertMsg("您当前的【状态】为【未激活状态】，请到个人中心激活！");
-				break;
-			case 2:
-				putAlertMsg("您当前的【状态】为【冻结状态】，不能发布任务！");
-				break;
-			case 3:
-				putAlertMsg("您当前的【状态】为【找密码状态】，可能有人试图盗取您的秘密，请联系管理员，不能发布任务！");
-				break;
-			default:
-				putAlertMsg("您当前的【状态】不是【正常状态】，不能发布任务！");
-				break;
+				case 0 :
+					putAlertMsg("您当前的【状态】为【未激活状态】，请到个人中心激活！");
+					break;
+				case 2 :
+					putAlertMsg("您当前的【状态】为【冻结状态】，不能发布任务！");
+					break;
+				case 3 :
+					putAlertMsg("您当前的【状态】为【找密码状态】，可能有人试图盗取您的秘密，请联系管理员，不能发布任务！");
+					break;
+				default :
+					putAlertMsg("您当前的【状态】不是【正常状态】，不能发布任务！");
+					break;
 			}
 			return "insertReleaseTaskFail";
 		}
@@ -174,18 +185,18 @@ public class CreditTaskService extends BaseService {
 			UserEntity userEntity = getLoginUserEntity(userDAO);
 			if (!userEntity.getStatus().equals("1")) {
 				switch (Integer.parseInt(userEntity.getStatus())) {
-				case 0:
-					putAlertMsg("您当前的【状态】为【未激活状态】，请到个人中心激活！");
-					break;
-				case 2:
-					putAlertMsg("您当前的【状态】为【冻结状态】，不能发布任务！");
-					break;
-				case 3:
-					putAlertMsg("您当前的【状态】为【找密码状态】，可能有人试图盗取您的秘密，请联系管理员，不能发布任务！");
-					break;
-				default:
-					putAlertMsg("您当前的【状态】不是【正常状态】，不能发布任务！");
-					break;
+					case 0 :
+						putAlertMsg("您当前的【状态】为【未激活状态】，请到个人中心激活！");
+						break;
+					case 2 :
+						putAlertMsg("您当前的【状态】为【冻结状态】，不能发布任务！");
+						break;
+					case 3 :
+						putAlertMsg("您当前的【状态】为【找密码状态】，可能有人试图盗取您的秘密，请联系管理员，不能发布任务！");
+						break;
+					default :
+						putAlertMsg("您当前的【状态】不是【正常状态】，不能发布任务！");
+						break;
 				}
 				return "initReleaseTaskFail";
 			}
@@ -205,8 +216,8 @@ public class CreditTaskService extends BaseService {
 			List<CreditTaskRepositoryEntity> creditTaskResitorys = creditTaskRepositoryDAO
 					.list(
 							"from CreditTaskRepositoryEntity _cr where _cr.user.id=:userId and _cr.type=:type",
-							new String[] { "userId", "type" }, new Object[] {
-									userEntity.getId(), platformType });
+							new String[]{"userId", "type"}, new Object[]{
+									userEntity.getId(), platformType});
 			List<CreditTaskRepositoryVO> resultTaskReps = new ArrayList<CreditTaskRepositoryVO>(
 					creditTaskResitorys.size());
 			CreditTaskRepositoryVO creditTaskRepositoryVO = null;
@@ -239,13 +250,28 @@ public class CreditTaskService extends BaseService {
 		if (platformType == null) {
 			throw new NoPageException("初始化任务，没有platformType");
 		}
+		Long count = (Long) creditTaskDAO
+				.uniqueResultObject(
+						"select count(*)"
+								+ " from CreditTaskEntity as _task inner join _task.releasePerson as _user where (_task.status!='0' or _task.status!='-1')  and   _task.type=:platformType",
+						"platformType", platformType);
 		List<Object[]> result = creditTaskDAO
 				.pageQuery(
-						"select _task.testID , _task.releaseDate ,_user.username,_user.upgradeScore,_task.money,_task.updatePrice,_task.goodTimeType,_task.releaseDot,_task.status ,_task.intervalHour" +
-						" from CreditTaskEntity as _task inner join _task.releasePerson as _user where (_task.status!='0' or _task.status!='-1')  and   _task.type=:platformType",
+						"select _task.testID , _task.releaseDate ,_user.username,_user.upgradeScore,_task.money,_task.updatePrice,_task.goodTimeType,_task.releaseDot,_task.status ,_task.intervalHour"
+								+ " from CreditTaskEntity as _task inner join _task.releasePerson as _user where (_task.status!='0' or _task.status!='-1')  and   _task.type=:platformType",
 						"platformType", platformType, creditTaskVO.getStart(),
 						creditTaskVO.getLimit());
+		List<BuyerEntity> buyers = userDAO
+				.list(" from BuyerEntity  as _b where _b.user.id=:userId");
+		List<BuyerVO> resultBuyers = new ArrayList<BuyerVO>(buyers.size());
+		for (BuyerEntity buyerEntity : buyers) {
+			BuyerVO buyerVO = new BuyerVO();
+			BeanUtils.copyProperties(buyerVO, buyerEntity);
+			resultBuyers.add(buyerVO);
+		}
+		creditTaskVO.setDataCount(count.intValue());
 		putByRequest("result", result);
+		putByRequest("resultBuyers", resultBuyers);
 		putPlatformByRequest(WinUtils.changeType2Platform(platformType));
 		putPlatformTypeByRequest(platformType);
 		return "initTask";

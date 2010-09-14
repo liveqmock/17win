@@ -20,7 +20,7 @@ public class TaskBaseEntity extends BaseEntity {
 	@Column(name = "RELEASE_DOT_", nullable = false)
 	private Float releaseDot;
 	// 发布时间
-	@Column(name = "RELEASE_DATE", nullable = false)
+	@Column(name = "RELEASE_DATE" )
 	private Date releaseDate  ;
 	// 发布人
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = UserEntity.class)

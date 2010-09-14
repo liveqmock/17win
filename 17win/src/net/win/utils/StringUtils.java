@@ -77,7 +77,6 @@ public final class StringUtils {
 	 * @param strs
 	 * @return
 	 */
-
 	public static String getStringByComma(String... strs) {
 		if (null != strs && strs.length > 0) {
 			List<String> list = Arrays.asList(strs);
@@ -87,7 +86,8 @@ public final class StringUtils {
 		} else
 			return null;
 	}
-	public static void main(String[] args) throws Exception{
-	 System.out.println(processPwd("123456"));
+
+	public static void main(String[] args) throws Exception {
+		System.out.println(processPwd("123456"));
 	}
 }

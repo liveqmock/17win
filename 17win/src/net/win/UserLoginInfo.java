@@ -1,6 +1,11 @@
 package net.win;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import net.win.vo.BuyerVO;
+import net.win.vo.SellerVO;
 
 public class UserLoginInfo {
 	/**
@@ -31,7 +36,6 @@ public class UserLoginInfo {
 	private String status;
 	// 钱
 	private Double money;
-
 	public String getUsername() {
 		return username;
 	}
