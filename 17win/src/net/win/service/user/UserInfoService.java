@@ -32,7 +32,7 @@ import org.springframework.stereotype.Service;
 
 import com.sun.org.apache.commons.beanutils.BeanUtils;
 
-@SuppressWarnings( { "unchecked" })
+@SuppressWarnings({"unchecked"})
 @Service("userInfoService")
 public class UserInfoService extends BaseService {
 	@Resource
@@ -57,12 +57,28 @@ public class UserInfoService extends BaseService {
 		UserEntity userEntity = getLoginUserEntity(userDAO);
 		List<SellerEntity> sellers = userVO.getSellers();
 		List<BuyerEntity> buyers = userVO.getBuyers();
-
+		Long count = (Long) userDAO
+				.uniqueResultObject(
+						"select ccount(*) from CreditTaskEntity  as _task  where ( _task.releasePerson.id=:userId  or  _task.receivePerson.id=:userId)",
+						"userId", userEntity.getId());
+		if (count > 0) {
+			putAlertMsg("删除失败，您当前的买号或卖号正在进行任务中，不能删除！");
+			return "updateSellerAndBuyer";
+		}
+		userDAO
+				.deleteByHql(
+						"delete CreditTaskEntity as _task where _task.seller.id in (select _s.id from  UserEntity as _u inner join _u.sellers as _s  where _u.id=:userId)",
+						new String[]{"userId"},
+						new Object[]{userEntity.getId()});
+		userDAO
+				.deleteByHql(
+						"delete CreditTaskEntity as _task where _task.buyer.id in (select _b.id from  UserEntity as _u inner join _u.buyers as _b where _u.id=:userId)",
+						new String[]{"userId"},
+						new Object[]{userEntity.getId()});
 		userDAO.deleteBySQL("delete TB_SELLER where USER_ID_=:userId",
-				new String[] { "userId" }, new Object[] { userEntity.getId() });
+				new String[]{"userId"}, new Object[]{userEntity.getId()});
 		userDAO.deleteBySQL("delete TB_BUYER where USER_ID_=:userId",
-				new String[] { "userId" }, new Object[] { userEntity.getId() });
-
+				new String[]{"userId"}, new Object[]{userEntity.getId()});
 		for (SellerEntity sellerEntity : sellers) {
 			if (nullID(sellerEntity.getProvince())) {
 				sellerEntity.setProvince(null);
@@ -70,19 +86,13 @@ public class UserInfoService extends BaseService {
 			if (nullID(sellerEntity.getCity())) {
 				sellerEntity.setCity(null);
 			}
-			// if (nullID(sellerEntity.getArea())) {
-			// sellerEntity.setArea(null);
-			// }
 		}
 		userEntity.setSellers(sellers);
 		userEntity.setBuyers(buyers);
-
 		initSellerAndBuyer(userVO);
-
 		putAlertMsg("添加成功！");
 		return "updateSellerAndBuyer";
 	}
-
 	/**
 	 * 初始化买家或卖家
 	 * 
