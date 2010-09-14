@@ -55,6 +55,7 @@ public class CreditTaskService extends BaseService {
 	public String updateTask(CreditTaskVO creditTaskVO) throws Exception {
 		return "updateTask";
 	}
+
 	/**
 	 * 发布任务
 	 * 
@@ -91,18 +92,18 @@ public class CreditTaskService extends BaseService {
 		}
 		if (!userEntity.getStatus().equals("1")) {
 			switch (Integer.parseInt(userEntity.getStatus())) {
-				case 0 :
-					putAlertMsg("您当前的【状态】为【未激活状态】，请到个人中心激活！");
-					break;
-				case 2 :
-					putAlertMsg("您当前的【状态】为【冻结状态】，不能发布任务！");
-					break;
-				case 3 :
-					putAlertMsg("您当前的【状态】为【找密码状态】，可能有人试图盗取您的秘密，请联系管理员，不能发布任务！");
-					break;
-				default :
-					putAlertMsg("您当前的【状态】不是【正常状态】，不能发布任务！");
-					break;
+			case 0:
+				putAlertMsg("您当前的【状态】为【未激活状态】，请到个人中心激活！");
+				break;
+			case 2:
+				putAlertMsg("您当前的【状态】为【冻结状态】，不能发布任务！");
+				break;
+			case 3:
+				putAlertMsg("您当前的【状态】为【找密码状态】，可能有人试图盗取您的秘密，请联系管理员，不能发布任务！");
+				break;
+			default:
+				putAlertMsg("您当前的【状态】不是【正常状态】，不能发布任务！");
+				break;
 			}
 			return "insertReleaseTaskFail";
 		}
@@ -185,18 +186,18 @@ public class CreditTaskService extends BaseService {
 			UserEntity userEntity = getLoginUserEntity(userDAO);
 			if (!userEntity.getStatus().equals("1")) {
 				switch (Integer.parseInt(userEntity.getStatus())) {
-					case 0 :
-						putAlertMsg("您当前的【状态】为【未激活状态】，请到个人中心激活！");
-						break;
-					case 2 :
-						putAlertMsg("您当前的【状态】为【冻结状态】，不能发布任务！");
-						break;
-					case 3 :
-						putAlertMsg("您当前的【状态】为【找密码状态】，可能有人试图盗取您的秘密，请联系管理员，不能发布任务！");
-						break;
-					default :
-						putAlertMsg("您当前的【状态】不是【正常状态】，不能发布任务！");
-						break;
+				case 0:
+					putAlertMsg("您当前的【状态】为【未激活状态】，请到个人中心激活！");
+					break;
+				case 2:
+					putAlertMsg("您当前的【状态】为【冻结状态】，不能发布任务！");
+					break;
+				case 3:
+					putAlertMsg("您当前的【状态】为【找密码状态】，可能有人试图盗取您的秘密，请联系管理员，不能发布任务！");
+					break;
+				default:
+					putAlertMsg("您当前的【状态】不是【正常状态】，不能发布任务！");
+					break;
 				}
 				return "initReleaseTaskFail";
 			}
@@ -216,8 +217,8 @@ public class CreditTaskService extends BaseService {
 			List<CreditTaskRepositoryEntity> creditTaskResitorys = creditTaskRepositoryDAO
 					.list(
 							"from CreditTaskRepositoryEntity _cr where _cr.user.id=:userId and _cr.type=:type",
-							new String[]{"userId", "type"}, new Object[]{
-									userEntity.getId(), platformType});
+							new String[] { "userId", "type" }, new Object[] {
+									userEntity.getId(), platformType });
 			List<CreditTaskRepositoryVO> resultTaskReps = new ArrayList<CreditTaskRepositoryVO>(
 					creditTaskResitorys.size());
 			CreditTaskRepositoryVO creditTaskRepositoryVO = null;
@@ -261,8 +262,9 @@ public class CreditTaskService extends BaseService {
 								+ " from CreditTaskEntity as _task inner join _task.releasePerson as _user where (_task.status!='0' or _task.status!='-1')  and   _task.type=:platformType",
 						"platformType", platformType, creditTaskVO.getStart(),
 						creditTaskVO.getLimit());
-		List<BuyerEntity> buyers = userDAO
-				.list(" from BuyerEntity  as _b where _b.user.id=:userId");
+		List<BuyerEntity> buyers = userDAO.list(
+				" from BuyerEntity  as _b where _b.user.id=:userId", "userId",
+				getLoginUser().getId());
 		List<BuyerVO> resultBuyers = new ArrayList<BuyerVO>(buyers.size());
 		for (BuyerEntity buyerEntity : buyers) {
 			BuyerVO buyerVO = new BuyerVO();

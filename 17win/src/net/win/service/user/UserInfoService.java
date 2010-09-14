@@ -32,7 +32,7 @@ import org.springframework.stereotype.Service;
 
 import com.sun.org.apache.commons.beanutils.BeanUtils;
 
-@SuppressWarnings({"unchecked"})
+@SuppressWarnings( { "unchecked" })
 @Service("userInfoService")
 public class UserInfoService extends BaseService {
 	@Resource
@@ -47,52 +47,86 @@ public class UserInfoService extends BaseService {
 	private CityDAO cityDAO;
 
 	/**
-	 * 买家或卖家
+	 * 删除买家或卖家
 	 * 
 	 * @param userVO
 	 * @return
 	 * @throws Exception
 	 */
-	public String updateSellerAndBuyer(UserVO userVO) throws Exception {
-		UserEntity userEntity = getLoginUserEntity(userDAO);
-		List<SellerEntity> sellers = userVO.getSellers();
-		List<BuyerEntity> buyers = userVO.getBuyers();
-		Long count = (Long) userDAO
-				.uniqueResultObject(
-						"select ccount(*) from CreditTaskEntity  as _task  where ( _task.releasePerson.id=:userId  or  _task.receivePerson.id=:userId)",
-						"userId", userEntity.getId());
+	public String deleteSellerAndBuyer(UserVO userVO) throws Exception {
+		initSellerAndBuyer(userVO);
+		String type = getByParam("type");
+		String hql = "select count(*) from CreditTaskEntity  as _task  where _task.seller.id=:sellerId or _task.buyer.id=:buyId";
+		ArrayList<Long> propValue = new ArrayList<Long>();
+
+		if ("1".equals(type)) {
+			SellerEntity sellerEntity = userVO.getSeller();
+			propValue.add(sellerEntity.getId());
+			propValue.add(null);
+		} else {
+			BuyerEntity buyerEntity = userVO.getBuyer();
+			propValue.add(null);
+			propValue.add(buyerEntity.getId());
+		}
+		Long count = (Long) userDAO.uniqueResultObject(hql, new String[] {
+				"sellerId", "buyId" }, propValue.toArray(new Long[2]));
 		if (count > 0) {
-			putAlertMsg("删除失败，您当前的买号或卖号正在进行任务中，不能删除！");
+			putAlertMsg("您当前删除的账号正在任务执行中，不能删除！");
+			return "updateSellerAndBuyer";
+		} else {
+			if ("1".equals(type)) {
+				userDAO
+						.deleteByHql(
+								"delete from  CreditTaskEntity as _task where _task.seller.id=:sellerId ",
+								new String[] { "sellerId" },
+								new Object[] { userVO.getSeller().getId() });
+			} else {
+				userDAO
+						.deleteByHql(
+								"delete from  CreditTaskEntity as _task where _task.buyer.id=:buyId ",
+								new String[] { "buyId" }, new Object[] { userVO
+										.getBuyer().getId() });
+			}
+			putAlertMsg("删除成功！");
 			return "updateSellerAndBuyer";
 		}
-		userDAO
-				.deleteByHql(
-						"delete CreditTaskEntity as _task where _task.seller.id in (select _s.id from  UserEntity as _u inner join _u.sellers as _s  where _u.id=:userId)",
-						new String[]{"userId"},
-						new Object[]{userEntity.getId()});
-		userDAO
-				.deleteByHql(
-						"delete CreditTaskEntity as _task where _task.buyer.id in (select _b.id from  UserEntity as _u inner join _u.buyers as _b where _u.id=:userId)",
-						new String[]{"userId"},
-						new Object[]{userEntity.getId()});
-		userDAO.deleteBySQL("delete TB_SELLER where USER_ID_=:userId",
-				new String[]{"userId"}, new Object[]{userEntity.getId()});
-		userDAO.deleteBySQL("delete TB_BUYER where USER_ID_=:userId",
-				new String[]{"userId"}, new Object[]{userEntity.getId()});
-		for (SellerEntity sellerEntity : sellers) {
+	}
+
+	/**
+	 * 增加买家或卖家
+	 * 
+	 * @param userVO
+	 * @return
+	 * @throws Exception
+	 */
+	public String insertSellerAndBuyer(UserVO userVO) throws Exception {
+		String type = getByParam("type");
+		String platformTypeParam = getByParam("platformTypeParam");
+
+		UserEntity userEntity = getLoginUserEntity(userDAO);
+
+		if ("1".equals(type)) {
+			SellerEntity sellerEntity = userVO.getSeller();
 			if (nullID(sellerEntity.getProvince())) {
 				sellerEntity.setProvince(null);
 			}
 			if (nullID(sellerEntity.getCity())) {
 				sellerEntity.setCity(null);
 			}
+			sellerEntity.setType(platformTypeParam);
+			sellerEntity.setUser(userEntity);
+			sellerDAO.save(sellerEntity);
+		} else {
+			BuyerEntity buyerEntity = userVO.getBuyer();
+			buyerEntity.setType(platformTypeParam);
+			buyerEntity.setUser(userEntity);
+			buyerDAO.save(buyerEntity);
 		}
-		userEntity.setSellers(sellers);
-		userEntity.setBuyers(buyers);
 		initSellerAndBuyer(userVO);
 		putAlertMsg("添加成功！");
 		return "updateSellerAndBuyer";
 	}
+
 	/**
 	 * 初始化买家或卖家
 	 * 

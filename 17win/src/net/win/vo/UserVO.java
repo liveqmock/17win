@@ -35,9 +35,9 @@ public class UserVO extends BaseVO {
 	private List<CityEntity> cities = new ArrayList<CityEntity>();
 	private List<AreaEntity> areas = new ArrayList<AreaEntity>();
 
-	private List<SellerEntity> sellers = new ArrayList<SellerEntity>();
+	private SellerEntity seller =new  SellerEntity();
 
-	private List<BuyerEntity> buyers = new ArrayList<BuyerEntity>();
+	private BuyerEntity buyer =new  BuyerEntity();
 
 	public UserEntity getUserEntity() {
 		return userEntity;
@@ -111,19 +111,20 @@ public class UserVO extends BaseVO {
 		this.username = username;
 	}
 
-	public List<SellerEntity> getSellers() {
-		return sellers;
+	public SellerEntity getSeller() {
+		return seller;
 	}
 
-	public void setSellers(List<SellerEntity> sellers) {
-		this.sellers = sellers;
+	public void setSeller(SellerEntity seller) {
+		this.seller = seller;
 	}
 
-	public List<BuyerEntity> getBuyers() {
-		return buyers;
+	public BuyerEntity getBuyer() {
+		return buyer;
 	}
 
-	public void setBuyers(List<BuyerEntity> buyers) {
-		this.buyers = buyers;
+	public void setBuyer(BuyerEntity buyer) {
+		this.buyer = buyer;
 	}
+
 }

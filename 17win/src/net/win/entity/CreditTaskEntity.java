@@ -54,7 +54,7 @@ public class CreditTaskEntity extends TaskBaseEntity {
 	@Column(name = "WAYBILL_", length = 30)
 	private String waybill;
 	// 地址
-	@Column(name = "ADDRESS_")
+	@Column(name = "ADDRESS_",length=100)
 	private String address;
 	// 定时任务时间(不能小于开始时间)
 	@Column(name = "TIMEING_TIME_")

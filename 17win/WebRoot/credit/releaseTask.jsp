@@ -322,7 +322,7 @@
 																		简单描述：
 																	</td>
 																	<td colspan="2">
-																		<s:textfield maxlength="100" name="creditTaskVO.desc"
+																		<s:textfield maxlength="50" name="creditTaskVO.desc"
 																			size="70"></s:textfield>
 																	</td>
 																</tr>

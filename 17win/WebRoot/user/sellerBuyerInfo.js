@@ -1,65 +1,73 @@
+var submitFlag = true;
 $(document).ready(function() {
-	// 卖号按钮
-	$("input[sellerFlag]").bind("click", function() {
-		var type = $(this).attr("sellerFlag");
-		var tbody = $("#sellerTable" + type);
-		var trStr = "<tr class='sellerTr'>"
-				+ "		<td   align='center'  > "
-				+ "  <input type='hidden' name='userVO.sellers[0].type' value='"
-				+ type
-				+ "' />  "
-				+ "	<input type='text' name='userVO.sellers[0].shopURL'  onfocus=\"beforeBlur(this)\"     onblur=\"obtainSeller('"
-				+ type
-				+ "',this)\" >		 "
-				+ "		</td>  "
-				+ "		<td  class='address'   nowrap='nowrap' align='center' >"
-				+ "	</td> "
-				+ "		<td  align='center'  > "
-				+ "		 <input type='text' name='userVO.sellers[0].name' readonly='readonly'>	  "
-				+ "			</td>  "
-				+ "			<td   align='center'  >    "
-				+ "			<a href=\"javascript:void(0)\" onclick=\"deleteSeller(this"
-				+ ")\" >删除</a>			</td> " + "		</tr> ";
-		var tr = $(trStr);
-		var td = tr.children(".address"); 
-		
-		style="80px"
-		td.append("省： ");
-		var selectP = $("#tempProvince").clone();
-		selectP.show();
-		selectP.attr("name", "userVO.sellers[0].province.id");
-		selectP.bind("change", function() {
-					selectCity(this)
-				});
-		td.append(selectP);
-		td
-				.append(" 市： <select style='width:80px'   name='userVO.sellers[0].city.id'><option value=''>请选择</option></select>");
-	//	td
-	//			.append(" 县： <select name='userVO.sellers[0].area.id' ><option value=''>请选择</option></select>");
-		tbody.append(tr);
+			$("#addBtn").button();
+			$("#addBtn").bind("click", function() {
+						$("#addtableDIV").dialog("open");
+						$('.sellerClass').show();
+						$('.sellerClass input select').attr("disabled", true);
+						$('.buyerClass').hide();
+						$('.buyerClass input select').attr("disabled", false);
 
-	});
-	// 买号按钮
-	$("input[buyerFlag]").bind("click", function() {
-		var type = $(this).attr("buyerFlag");
-		var tbody = $("#buyerTable" + type);
-		var trStr = "<tr class='buyerTr'> "
-				+ "	<td  align='center'  >  "
-				+ " <input type='hidden' name='userVO.buyers[0].type' value='"
-				+ type
-				+ "' /> "
-				+ "		 <input type='text'  onblur=\"obtainBuyer(this)\" name='userVO.buyers[0].name' >  "
-				+ "    </td>  " + "	<td align='center' >  " + "		0 "
-				+ "		</td> " + "	<td   align='center' >  "
-				+ "		<a href=\"javascript:void(0)\" onclick=\"deleteBuyer(this"
-				+ ")\" >删除</a>			</td> " + "		</tr> ";
-		var tr = $(trStr);
-		tbody.append(trStr);
-	});
-});
+					});
+			$("#addtableDIV").dialog({
+						autoOpen : false,
+						draggable : false,
+						hide : 'slide',
+						modal : true,
+						resizable : false,
+						show : 'slide',
+						width : 400,
+						buttons : {
+							"保存" : function() {
+								if (validateForm()) {
+									$("#addForm").submit();
+								}
+							}
+						}
+					});
+			// 卖家/买号
+			$("[name='type']").bind("click", function() {
+						if ($(this).val() == "1") {
+							$('.sellerClass').show();
+							$('.buyerClass').hide();
+							$('.sellerClass input select').attr("disabled",
+									true);
+							$('.buyerClass input select').attr("disabled",
+									false);
+						} else {
+							$('.sellerClass').hide();
+							$('.buyerClass').show();
+							$('.sellerClass input select').attr("disabled",
+									false);
+							$('.buyerClass input select')
+									.attr("disabled", true);
+						}
+					});
+
+			$("[name='type']").bind("click", function() {
+						if ($(this).val() == "1") {
+							$('.sellerClass').show();
+							$('.buyerClass').hide();
+						} else {
+							$('.sellerClass').hide();
+							$('.buyerClass').show();
+						}
+					});
+
+			$("#shopURL").blur(function() {
+						obtainSeller($("#platformType").val(), this);
+
+					}
+
+			);
+
+		});
+
 // 删除seller
 function deleteSeller(obj) {
-	$(obj).parent().parent().remove();
+	if (confirm("如果这个账号不是新增账号，会导致这个账号的以前完成的交易记录也会删除掉！")) {
+		$(obj).parent("form").submit();
+	}
 }
 // 删除buyer
 function deleteBuyer(obj) {
@@ -67,64 +75,26 @@ function deleteBuyer(obj) {
 }
 // 选择市
 function selectCity(obj) {
-	getCities($(obj).val(), $(obj).next().get(0), $(obj).next().next().get(0));
+	if ($(obj).val() == "") {
+		return;
+	}
+	getCities($(obj).val(), $("#cityId").get(0));
 }
 // 选择县区
-//function selectArea(obj) {
-//	getAreas($(obj).val(), $(obj).next().get(0));
-//}
 // 验证
 function validateForm() {
-	var inputSellerDom = $("tr .sellerTr").find("input");
-	var inputBuyerDom = $("tr .buyerTr").find("input");
-	var submitFlag = true;
-	inputSellerDom.each(function() {
-				if (Validater.isBlank($(this).val())) {
-					changeStyle(this, '0', '不能为空！');
-					submitFlag = false;
-				} else {
-					changeStyle(this, '1', '');
-				}
-			});
-	inputBuyerDom.each(function() {
-				if (Validater.isBlank($(this).val())) {
-					changeStyle(this, '0', '不能为空！');
-					submitFlag = false;
-				} else {
-					changeStyle(this, '1', '');
-				}
-			});
-	if (!submitFlag) {
-		alert("数据不能为空，不需要的数据可以删除！");
-		return false;
+	if ($("[name='type']:checked").val() == "1") {
+		if (Validater.isBlank($("#sellerName").val())) {
+			alert("卖号不能为空！");
+			return false
+		}
 	} else {
-		// 重新把数据关系拉上。
-		var tr = $("tr .sellerTr");
-		var i = 0;
-		tr.each(function() {
-					var inputs = $(this).find("input,select");
-					inputs.each(function() {
-								var name = $(this).attr("name");
-								name = name.replace("0", i + "");
-								$(this).attr("name", name);
-							});
-					i++;
-				});
-		tr = $("tr .buyerTr");
-		i = 0
-		tr.each(function() {
-					var inputs = $(this).find("input,select");
-					inputs.each(function() {
-								var name = $(this).attr("name");
-								name = name.replace("0", i + "");
-								$(this).attr("name", name);
-							});
-					i++;
-				});
-
-		return true;
+		if (Validater.isBlank($("#buyerName").val())) {
+			alert("买号不能为空！");
+			return false
+		}
 	}
-
+	return true;
 }
 // 获取焦点前
 function beforeBlur(obj) {
@@ -134,6 +104,7 @@ function beforeBlur(obj) {
 function obtainBuyer(obj) {
 	if (Validater.isBlank($(obj).val())) {
 		changeStyle(obj, '0', '不能为空！');
+		submitFlag = false;
 	} else {
 		changeStyle(obj, '1', '');
 	}
@@ -143,7 +114,7 @@ function obtainSeller(type, obj) {
 	// 去掉空格
 	$(obj).val($.trim($(obj).val()));
 	// 获取seller input
-	var input = $(obj).parent().next().next().children("input");
+	var input = $("#sellerName");
 	if (Validater.isBlank($(obj).val())) {
 		changeStyle(obj, '0', '您输入的地址不正确！');
 		return;
@@ -158,6 +129,7 @@ function obtainSeller(type, obj) {
 			}, function(data) {
 				if (data.seller == null || data.seller == "") {
 					changeStyle(obj, '0', '您输入的地址不正确！');
+					submitFlag = false;
 				} else {
 					changeStyle(obj, '1', '该地址可以使用！');
 					$(obj).data("nowUrl", $(obj).val());

@@ -9,6 +9,9 @@
 		<LINK href="css/top_bottom.css" type="text/css" rel="stylesheet">
 		<LINK href="css/Css.css" type="text/css" rel="stylesheet">
 		<LINK href="css/center.css" type="text/css" rel="stylesheet">
+		<link href="css/excite-bike/jquery-ui-1.8.4.custom.css"
+			rel="stylesheet" type="text/css" />
+		<SCRIPT src="js/jquery-ui-1.8.4.custom.min.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="js/utils.js" type=text/javascript></SCRIPT>
 		<SCRIPT src="js/aop.js" type=text/javascript></SCRIPT>
 		<SCRIPT src="user/sellerBuyerInfo.js" type=text/javascript></SCRIPT>
@@ -61,223 +64,274 @@ img {
 
 	</HEAD>
 	<BODY>
-		<s:form action="userInfoManager/info!updateSellerAndBuyer.php"
-			theme="simple" onsubmit="return validateForm()">
-			<s:include value="../common/title.jsp"></s:include>
-			<table width="760" border="0" align="center" cellpadding="0"
-				cellspacing="0" bgcolor="#FFFFFF">
-				<tr>
-					<td>
-						<table width="910" border="0" cellspacing="0" cellpadding="0">
-							<tr>
-								<!-- xgj   user left menu-->
-								<s:include value="../common/user/infoMenu.jsp"></s:include>
-								<!-- end xgj -->
-								<td width="15">
-									&nbsp;
-								</td>
+		<s:include value="../common/title.jsp"></s:include>
+		<table width="760" border="0" align="center" cellpadding="0"
+			cellspacing="0" bgcolor="#FFFFFF">
+			<tr>
+				<td>
+					<table width="910" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<!-- xgj   user left menu-->
+							<s:include value="../common/user/infoMenu.jsp"></s:include>
+							<!-- end xgj -->
+							<td width="15">
+								&nbsp;
+							</td>
 
-								<td valign="top">
-									<table width="100%" cellspacing="0" cellpadding="0" border="0">
-										<tbody>
-											<tr>
-												<td height="5"></td>
-											</tr>
-										</tbody>
-									</table>
-									<div class="pp9">
-										<div style="padding-bottom: 15px; width: 97%;">
-											<div class="pp7">
-												您现在的位置是：个人中心 &gt;&gt; 卖号/买号 &gt;&gt;
-											</div>
-											<div class="pp8">
-												<strong>卖号/买号管理</strong>
-												<s:select id="tempProvince" list="#request.provinces"  
-													cssStyle="display:none;width:80px " listKey="id" listValue="name"
-													headerKey="" headerValue="--请选择--">
-												</s:select>
-											</div>
-											<s:iterator value="#request.sellers.keys" id="type">
-												<table width="100%" cellspacing="0" cellpadding="0"
-													border="0" align="center">
-													<tbody id="sellerTable<s:property value="#type"/>">
-														<tr>
-															<td width="16%" height="40" align="right" nowrap="nowrap"
-																class="font14b2">
-																<s:set name="platformName"
-																	value="#type==1?'淘宝':#type==2?'拍拍':'有啊'"></s:set>
-																<s:property value="#platformName" />
-																卖号资料：
+							<td valign="top">
+								<table width="100%" cellspacing="0" cellpadding="0" border="0">
+									<tbody>
+										<tr>
+											<td height="5"></td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="pp9">
+									<div style="padding-bottom: 15px; width: 97%;">
+										<div class="pp7">
+											您现在的位置是：个人中心 &gt;&gt; 卖号/买号 &gt;&gt;
+										</div>
+										<div class="pp8">
+											<strong>卖号/买号管理</strong>
+											<input type="button" value="新增" style="height: 25px"
+												id="addBtn">
+										</div>
+										<s:iterator value="#request.sellers.keys" id="type">
+											<table width="100%" cellspacing="0" cellpadding="0"
+												border="0" align="center">
+												<tbody id="sellerTable<s:property value="#type"/>">
+													<tr>
+														<td width="16%" height="40" align="right" nowrap="nowrap"
+															class="font14b2">
+															<s:set name="platformName"
+																value="#type==1?'淘宝':#type==2?'拍拍':'有啊'"></s:set>
+															<s:property value="#platformName" />
+															卖号资料：
+														</td>
+														<td colspan="4">
+															<hr style="color: rgb(255, 153, 51);">
+														</td>
+													</tr>
+													<tr style="background: #EDF6FF">
+														<th height="10" nowrap="nowrap" align="center">
+															店铺地址
+														</th>
+														<th height="10" nowrap="nowrap" align="center">
+															卖号
+														</th>
+														<th height="10" nowrap="nowrap" align="center">
+															发货地址
+														</th>
+														<th height="10" nowrap="nowrap" align="center">
+															操作
+														</th>
+													</tr>
+													<s:iterator value="#request.sellers.get(#type)" id="seller">
+														<tr class="sellerTr">
+															<td align='center'>
+																<s:property value="#seller.shopURL" />
 															</td>
-															<td colspan="4">
-																<hr style="color: rgb(255, 153, 51);">
+															<td align='center'>
+																<s:property value="#seller.name" />
 															</td>
-															<td width="20">
-																<input type="button" value="新增" style="cursor: pointer;"
-																	sellerFlag="<s:property value="#type"/>">
-															</td>
-														</tr>
-														<tr style="background: #EDF6FF">
-															<th height="10" nowrap="nowrap" align="center">
-																店铺地址
-															</th>
-															<th height="10" nowrap="nowrap" align="center">
-																发货地址
-															</th>
-															<th height="10" nowrap="nowrap" align="center">
-																卖号
-															</th>
-															<th height="10" nowrap="nowrap" align="center">
-																操作
-															</th>
-														</tr>
-														<s:iterator value="#request.sellers.get(#type)"
-															id="seller">
-															<tr class="sellerTr">
-																<td align='center'>
-																	<input type="text" name="userVO.sellers[0].shopURL"
-																		onfocus="beforeBlur(this)"
-																		onblur="obtainSeller('<s:property value="#type" />',this)"
-																		value="<s:property value="#seller.shopURL" />" />
-																	<input type="hidden" name="userVO.sellers[0].type"
-																		value="<s:property value="#type" />">
-																</td>
-																<td class='address' nowrap="nowrap" align="center">
-																	省：
-																	<s:select value="#seller.provinceID" cssStyle="width:80px"
-																		name="userVO.sellers[0].province.id"
-																		onchange="selectCity(this)" list="#request.provinces"
-																		listKey="id" listValue="name" headerKey=""
-																		headerValue="--请选择--">
+															<td align="center" nowrap="nowrap">
+																省：
+																<s:select value="#seller.provinceID" disabled="true"
+																	theme="simple" cssStyle="width:80px"
+																	onchange="selectCity(this)" list="#request.provinces"
+																	listKey="id" listValue="name" headerKey=""
+																	headerValue="--请选择--">
+																</s:select>
+																市：
+																<s:if test="#seller.citys!=null">
+																	<s:select disabled="true" cssStyle="width:80px"
+																		theme="simple" value="#seller.cityID"
+																		list="#seller.citys" listKey="id" listValue="name"
+																		headerKey="" headerValue="请选择">
 																	</s:select>
-																	市：
-																	<s:if test="#seller.citys!=null">
-																		<s:select name="userVO.sellers[0].city.id" cssStyle="width:80px"
-																			value="#seller.cityID" list="#seller.citys"
-																			listKey="id" listValue="name" headerKey=""
-																			headerValue="请选择">
-																		</s:select>
-																	</s:if>
-																	<s:else>
-																		<select name="userVO.sellers[0].city.id" style="width:80px">
-																			<option>
-																				--请选择--
-																			</option>
-																		</select>
-																	</s:else>
-																	<!-- 
-																	县：
-																	<s:if test="#seller.areas!=null">
-																		<s:select name="userVO.sellers[0].area.id"
-																			value="#seller.areaID" list="#seller.areas"
-																			listKey="id" listValue="name" headerKey=""
-																			headerValue="请选择">
-																		</s:select>
-																	</s:if>
-																	<s:else>
-																		<select name="userVO.sellers[0].area.id">
-																			<option>
-																				--请选择--
-																			</option>
-																		</select>
-																	</s:else>
-																	 -->
-																</td>
-																<td align='center'>
-																	<input type="text" name="userVO.sellers[0].name" 
-																		value="<s:property value="#seller.name" />" />
-																</td>
-																<td align="center">
+																</s:if>
+																<s:else>
+																	<select disabled="disabled" style="width: 80px">
+																		<option>
+																			--请选择--
+																		</option>
+																	</select>
+																</s:else>
+															</td>
+															<td align="center">
+																<s:form
+																	action="userInfoManager/info!deleteSellerAndBuyer.php"
+																	theme="simple">
+																	<input type="hidden" value="1" name="type" />
 																	<a href="javascript:void(0)"
 																		onclick="deleteSeller(this)">删除</a>
-																</td>
-															</tr>
-														</s:iterator>
-													</tbody>
-												</table>
-											</s:iterator>
-											<hr color="#0082E0" style="height: 10px; background: #0082E0">
-											<s:iterator value="#request.buyers.keys" id="type">
-												<s:set name="platformName"
-													value="#type==1?'淘宝':#type==2?'拍拍':'有啊'"></s:set>
-												<table width="99%" cellspacing="0" cellpadding="0"
-													border="0" align="center">
-													<tbody id="buyerTable<s:property value="#type"/>">
-														<tr>
-															<td width="16%" height="40" align="right"
-																class="font14b2">
-																<s:property value="#platformName" />
-																买号资料：
-
-															</td>
-															<td colspan="4">
-																<hr style="color: rgb(255, 153, 51);">
-															</td>
-															<td width="20">
-																<input type="button" value="新增"
-																	buyerFlag="<s:property value="#type"/>"
-																	style="cursor: pointer;">
+																	<input type="hidden" name="userVO.seller.id"
+																		value="<s:property value="#seller.id"/>">
+																</s:form>
 															</td>
 														</tr>
-
-														<tr style="background: #EDF6FF">
-															<th height="10" nowrap="nowrap" align="center">
-																买号
-															</th>
-															<th height="10" nowrap="nowrap" align="center">
-																买号积分
-															</th>
-															<th height="10" nowrap="nowrap" align="center">
-																操作
-															</th>
-														</tr>
-														<s:iterator value="#request.buyers.get(#type)" id="buyer">
-															<tr class="buyerTr">
-																<td height="10">
-																	<input type="text" name="userVO.buyers[0].name"
-																		onblur="obtainBuyer(this)"
-																		value="<s:property value="#buyer.name" />">
-																	<input type='hidden' name='userVO.buyers[0].type'
-																		value="<s:property value="#type"/>" />
-																</td>
-																<td align="center">
-																	<s:property value="#buyer.score" />
-																</td>
-																<td align="center">
-																	<a href="javascript:void(0)"
-																		onclick="deleteBuyer(this)">删除</a>
-																</td>
-															</tr>
-														</s:iterator>
-													</tbody>
-
-												</table>
-
-											</s:iterator>
-											<table width="99%" cellspacing="0" cellpadding="0" border="0"
-												align="center">
-												<tbody>
-													<tr>
-														<td width="100%" align="left" class="font12b2">
-															<font color="red">注意：为了您和他人的安全，买号在淘宝上如果是一个黄钻，请不要在使用！</font>
-														</td>
-													</tr>
-													<tr>
-														<td width="100%" align="center">
-															<input type="submit" value="保&nbsp;&nbsp;存" />
-														</td>
-													</tr>
+													</s:iterator>
 												</tbody>
 											</table>
-										</div>
+										</s:iterator>
+										<hr color="#0082E0" style="height: 10px; background: #0082E0">
+										<s:iterator value="#request.buyers.keys" id="type">
+											<s:set name="platformName"
+												value="#type==1?'淘宝':#type==2?'拍拍':'有啊'"></s:set>
+											<table width="99%" cellspacing="0" cellpadding="0" border="0"
+												align="center">
+												<tbody id="buyerTable<s:property value="#type"/>">
+													<tr>
+														<td width="16%" height="40" align="right" class="font14b2">
+															<s:property value="#platformName" />
+															买号资料：
+
+														</td>
+														<td colspan="4">
+															<hr style="color: rgb(255, 153, 51);">
+														</td>
+													</tr>
+
+													<tr style="background: #EDF6FF">
+														<th height="10" nowrap="nowrap" align="center">
+															买号
+														</th>
+														<th height="10" nowrap="nowrap" align="center">
+															买号积分
+														</th>
+														<th height="10" nowrap="nowrap" align="center">
+															操作
+														</th>
+													</tr>
+													<s:iterator value="#request.buyers.get(#type)" id="buyer">
+														<tr class="buyerTr">
+															<td height="10">
+																<input type="text" name="userVO.buyers[0].name"
+																	onblur="obtainBuyer(this)"
+																	value="<s:property value="#buyer.name" />">
+															</td>
+															<td align="center">
+																<s:property value="#buyer.score" />
+															</td>
+															<td align="center">
+																<s:form
+																	action="userInfoManager/info!deleteSellerAndBuyer.php"
+																	theme="simple">
+																	<input type="hidden" value="2" name="type" />
+																	<a href="javascript:void(0)"
+																		onclick="deleteSeller(this)">删除</a>
+																	<input type="hidden" name="userVO.buyer.id"
+																		value="<s:property value="#buyer.id"/>">
+																</s:form>
+															</td>
+														</tr>
+													</s:iterator>
+												</tbody>
+
+											</table>
+
+										</s:iterator>
+										<table width="99%" cellspacing="0" cellpadding="0" border="0"
+											align="center">
+											<tbody>
+												<tr>
+													<td width="100%" align="left" class="font12b2">
+														<font color="red">注意：为了您和他人的安全，买号在淘宝上如果是一个黄钻，请不要在使用！</font>
+													</td>
+												</tr>
+											</tbody>
+										</table>
 									</div>
-								</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-			</table>
-			<s:include value="../common/footDuan.jsp"></s:include>
-		</s:form>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		<div id="addtableDIV" title="卖号/买号增加">
+			<s:form action="userInfoManager/info!sellerAndBuyer.php"
+				theme="simple" id="addForm">
+				<table cellpadding="0" cellspacing="0" border="0">
+					<tr>
+						<td valign="middle">
+							类型：
+						</td>
+						<td valign="middle">
+							<span> <input type="radio" value="1" name="type"
+									checked="checked"> 卖号 <input type="radio" value="2"
+									name="type"> 买号 </span>
+						</td>
+					</tr>
+					<tr>
+						<td valign="middle">
+							平台：
+						</td>
+						<td valign="middle">
+							<select id="platformType" name="platformTypeParam">
+								<option value="1">
+									淘宝
+								</option>
+								<option value="2">
+									拍拍
+								</option>
+								<option value="3">
+									有啊
+								</option>
+							</select>
+						</td>
+					</tr>
+					<tr class="sellerClass">
+						<td valign="middle">
+							店铺地址：
+						</td>
+						<td valign="middle">
+							<input type="text" name="userVO.seller.shopURL" id="shopURL"
+								onfocus="beforeBlur(this)">
+						</td>
+					</tr>
+					<tr class="sellerClass">
+						<td valign="middle">
+							掌柜名字：
+						</td>
+						<td valign="middle">
+							<input type="text" id="sellerName" name="userVO.seller.name"
+								readonly="readonly">
+							<br />
+							（系统自动获取）
+						</td>
+					</tr>
+					<tr class="sellerClass">
+						<td valign="middle">
+							发货地址：
+						</td>
+						<td valign="middle">
+							<s:select id="tempProvince" list="#request.provinces"
+								theme="simple" id="provinceId" onchange="selectCity(this)"
+								name="userVO.seller.province.id" cssStyle="width:80px "
+								listKey="id" listValue="name" headerKey="" headerValue="--请选择--">
+							</s:select>
+							省&nbsp;
+							<select style="width: 80px" id="cityId"
+								name="userVO.seller.city.id">
+								<option value="">
+									请选择
+								</option>
+							</select>
+							市
+						</td>
+					</tr>
+					<tr style="display: none" class="buyerClass">
+						<td valign="middle">
+							买号：
+						</td>
+						<td valign="middle">
+							<input type="text" id="buyerName" name="userVO.buyer.name">
+						</td>
+					</tr>
+				</table>
+			</s:form>
+		</div>
+		<s:include value="../common/footDuan.jsp"></s:include>
 	</BODY>
 </HTML>

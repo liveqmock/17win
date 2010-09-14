@@ -80,6 +80,7 @@ img {
 									<tr>
 										<td height="30" align="left" background="images/zc-bg.gif">
 											&nbsp;&nbsp;个人中心：
+											<s:fielderror></s:fielderror>
 										</td>
 									</tr>
 									<tr>

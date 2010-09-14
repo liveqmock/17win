@@ -55,14 +55,25 @@ public class UserInfoAction extends BaseAction {
 	}
 
 	/**
-	 * 买家或卖家
+	 * 删除买家或卖家
 	 * 
 	 * @param userVO
 	 * @return
 	 * @throws Exception
 	 */
-	public String updateSellerAndBuyer() throws Exception {
-		return userInfoService.updateSellerAndBuyer(userVO);
+	public String deleteSellerAndBuyer() throws Exception {
+		return userInfoService.deleteSellerAndBuyer(userVO);
+	}
+
+	/**
+	 * 增加买家或卖家
+	 * 
+	 * @param userVO
+	 * @return
+	 * @throws Exception
+	 */
+	public String sellerAndBuyer() throws Exception {
+		return userInfoService.insertSellerAndBuyer(userVO);
 	}
 
 	/**
