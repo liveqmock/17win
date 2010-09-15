@@ -47,12 +47,17 @@ public class CreditTaskService extends BaseService {
 	private CreditTaskRepositoryDAO creditTaskRepositoryDAO;
 
 	/**
-	 * 发布任务
+	 * 更新任务
 	 * 
 	 * @param userVO
 	 * @return
 	 */
 	public String updateTask(CreditTaskVO creditTaskVO) throws Exception {
+		//判断这个发布人和接手人是不是同一个。
+		//标记+1。撤销，标记-1
+		//当是第一个标记和最后一个标记的时候要另作操作。
+		
+		
 		return "updateTask";
 	}
 
@@ -62,7 +67,8 @@ public class CreditTaskService extends BaseService {
 	 * @param userVO
 	 * @return
 	 */
-	public String insertReleaseTask(CreditTaskVO creditTaskVO) throws Exception {
+	public String insertReleaseTask(CreditTaskVO creditTaskVO)
+			throws Exception {
 		// 基本数据
 		UserEntity userEntity = getLoginUserEntity(userDAO);
 		UserLoginInfo userLoginInfo = getLoginUser();
@@ -92,18 +98,18 @@ public class CreditTaskService extends BaseService {
 		}
 		if (!userEntity.getStatus().equals("1")) {
 			switch (Integer.parseInt(userEntity.getStatus())) {
-			case 0:
-				putAlertMsg("您当前的【状态】为【未激活状态】，请到个人中心激活！");
-				break;
-			case 2:
-				putAlertMsg("您当前的【状态】为【冻结状态】，不能发布任务！");
-				break;
-			case 3:
-				putAlertMsg("您当前的【状态】为【找密码状态】，可能有人试图盗取您的秘密，请联系管理员，不能发布任务！");
-				break;
-			default:
-				putAlertMsg("您当前的【状态】不是【正常状态】，不能发布任务！");
-				break;
+				case 0 :
+					putAlertMsg("您当前的【状态】为【未激活状态】，请到个人中心激活！");
+					break;
+				case 2 :
+					putAlertMsg("您当前的【状态】为【冻结状态】，不能发布任务！");
+					break;
+				case 3 :
+					putAlertMsg("您当前的【状态】为【找密码状态】，可能有人试图盗取您的秘密，请联系管理员，不能发布任务！");
+					break;
+				default :
+					putAlertMsg("您当前的【状态】不是【正常状态】，不能发布任务！");
+					break;
 			}
 			return "insertReleaseTaskFail";
 		}
@@ -152,10 +158,14 @@ public class CreditTaskService extends BaseService {
 		}
 		// 是否是定时任务
 		if (creditTaskEntity.getTimeingTime() == null) {
-			creditTaskEntity.setStatus("4");
+			if (creditTaskEntity.getProtect()) {
+				creditTaskEntity.setStatus(TaskMananger.AUDIT_STATUS);
+			} else {
+				creditTaskEntity.setStatus(TaskMananger.STEP_ONE_STATUS);
+			}
 		} else {
 			taskMananger.addTimingTask(creditTaskEntity.getId());
-			creditTaskEntity.setStatus("0");
+			creditTaskEntity.setStatus(TaskMananger.TIMING_STATUS);
 		}
 		// 保存
 		creditTaskEntity.setRemainTime(20);
@@ -186,18 +196,18 @@ public class CreditTaskService extends BaseService {
 			UserEntity userEntity = getLoginUserEntity(userDAO);
 			if (!userEntity.getStatus().equals("1")) {
 				switch (Integer.parseInt(userEntity.getStatus())) {
-				case 0:
-					putAlertMsg("您当前的【状态】为【未激活状态】，请到个人中心激活！");
-					break;
-				case 2:
-					putAlertMsg("您当前的【状态】为【冻结状态】，不能发布任务！");
-					break;
-				case 3:
-					putAlertMsg("您当前的【状态】为【找密码状态】，可能有人试图盗取您的秘密，请联系管理员，不能发布任务！");
-					break;
-				default:
-					putAlertMsg("您当前的【状态】不是【正常状态】，不能发布任务！");
-					break;
+					case 0 :
+						putAlertMsg("您当前的【状态】为【未激活状态】，请到个人中心激活！");
+						break;
+					case 2 :
+						putAlertMsg("您当前的【状态】为【冻结状态】，不能发布任务！");
+						break;
+					case 3 :
+						putAlertMsg("您当前的【状态】为【找密码状态】，可能有人试图盗取您的秘密，请联系管理员，不能发布任务！");
+						break;
+					default :
+						putAlertMsg("您当前的【状态】不是【正常状态】，不能发布任务！");
+						break;
 				}
 				return "initReleaseTaskFail";
 			}
@@ -217,8 +227,8 @@ public class CreditTaskService extends BaseService {
 			List<CreditTaskRepositoryEntity> creditTaskResitorys = creditTaskRepositoryDAO
 					.list(
 							"from CreditTaskRepositoryEntity _cr where _cr.user.id=:userId and _cr.type=:type",
-							new String[] { "userId", "type" }, new Object[] {
-									userEntity.getId(), platformType });
+							new String[]{"userId", "type"}, new Object[]{
+									userEntity.getId(), platformType});
 			List<CreditTaskRepositoryVO> resultTaskReps = new ArrayList<CreditTaskRepositoryVO>(
 					creditTaskResitorys.size());
 			CreditTaskRepositoryVO creditTaskRepositoryVO = null;

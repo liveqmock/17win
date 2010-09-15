@@ -13,6 +13,42 @@ import net.win.utils.DateUtils;
  * 
  */
 public final class TaskMananger {
+	/**
+	 * 因为申述被暂停(
+	 */
+	public final static String ALLEGE_STATUS = "-1";
+	/**
+	 * 审核
+	 */
+	public final static String AUDIT_STATUS = "-2";
+	/**
+	 * 定时任务
+	 */
+	public final static String TIMING_STATUS = "0";
+	/**
+	 * 等待接手
+	 */
+	public final static String STEP_ONE_STATUS = "1";
+	/**
+	 * 买家接手，卖家等待买家付款
+	 */
+	public final static String STEP_TWO_STATUS = "2";
+	/**
+	 * 买家付款了。等待卖家确认发货
+	 */
+	public final static String STEP_THREE_STATUS = "3";
+	/**
+	 * 卖家发货了。等待买家确认好评
+	 */
+	public final static String STEP_FOUR_STATUS = "4";
+	/**
+	 * 买家已经确认好评。等待卖家确认好评
+	 */
+	public final static String STEP_FIVE_STATUS = "5";
+	/**
+	 * 完成
+	 */
+	public final static String STEP_SIX_STATUS = "6";
 	private static TaskMananger taskMananger = new TaskMananger();
 
 	private TaskMananger() {
@@ -48,7 +84,6 @@ public final class TaskMananger {
 		return (String) baseDAO.pageQuery(
 				"select address from  TaskAddressEntity", 0, 1).get(0);
 	}
-
 
 	private Set<Long> timingTasks = new HashSet<Long>();
 

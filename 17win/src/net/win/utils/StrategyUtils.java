@@ -1,6 +1,5 @@
 package net.win.utils;
 
-
 /**
  * 策略工具。。用于生成 金额，发布点的策略工具 ,升级
  * 
@@ -11,8 +10,23 @@ public final class StrategyUtils {
 	private StrategyUtils() {
 		// TODO Auto-generated constructor stub
 	}
-
 	/**
+	 * 根据当前task类型返回将变化的类型
+	 * 
+	 * @param goodType
+	 * @return
+	 * @throws Exception
+	 */
+	public static String getNextTaskType(String taskType)
+			throws Exception {
+		// 状态
+		// [1:等待买家付款,2:等待卖家发货,3:等待卖家好评](买家),[4:等待接手,5:等待审核人,6:等待我发货,7:等待买家确认8:等待我核查好评](卖家)，9完成)
+		//1:等待接手，2买家接手，卖家等待买家付款，3买家付款了。等待卖家确认发货，4：卖家发货了。等待买家确认好评。5：买家已经确认好评。等待卖家确认好评。6完成 ，-2审核
+		WinUtils.throwIllegalityException("试图越过状态转换操作"); 
+		return "";
+	}
+	/**
+	 * 评价类型，一天，两天，三天
 	 * 
 	 * @param goodType
 	 * @return
