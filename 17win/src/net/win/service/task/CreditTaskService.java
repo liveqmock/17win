@@ -47,18 +47,95 @@ public class CreditTaskService extends BaseService {
 	private CreditTaskRepositoryDAO creditTaskRepositoryDAO;
 
 	/**
-	 * 更新任务
+	 * 接收任务
 	 * 
 	 * @param userVO
 	 * @return
 	 */
-	public String updateTask(CreditTaskVO creditTaskVO) throws Exception {
-		//判断这个发布人和接手人是不是同一个。
-		//标记+1。撤销，标记-1
-		//当是第一个标记和最后一个标记的时候要另作操作。
-		
-		
+	public String updateReceiveTask(CreditTaskVO creditTaskVO) throws Exception {
+		CreditTaskEntity taskEntity = creditTaskDAO.get(creditTaskVO.getId());
+		taskEntity.setRemainTime(20);
+		String ip = getRequset().getRemoteAddr();
+		if (taskEntity.getStatus().equals(TaskMananger.STEP_SIX_STATUS)) {
+			WinUtils.throwIllegalityException("视图进入修改状态！");
+		}
+		// 等待接手
+		if (taskEntity.getStatus().equals(TaskMananger.STEP_ONE_STATUS)) {
+			if (taskEntity.getProtect()) {
+				// 保护，就设置为 保护状态
+				taskEntity.setStatus(TaskMananger.AUDIT_STATUS);
+			} else {
+				taskEntity.setStatus(TaskMananger.STEP_TWO_STATUS);
+			}
+		}
+		BuyerEntity buyerEntity = new BuyerEntity();
+		buyerEntity.setId(creditTaskVO.getId());
+		taskEntity.setBuyer(buyerEntity);
+		taskEntity.setReceiveIP(ip);
 		return "updateTask";
+	}
+
+	/**
+	 * 初始化已接任务
+	 * 
+	 * @param userVO
+	 * @return
+	 */
+	public String initReceivedTast(CreditTaskVO creditTaskVO) throws Exception {
+		CreditTaskEntity taskEntity = creditTaskDAO.get(creditTaskVO.getId());
+		taskEntity.setRemainTime(20);
+		String ip = getRequset().getRemoteAddr();
+		if (taskEntity.getStatus().equals(TaskMananger.STEP_SIX_STATUS)) {
+			WinUtils.throwIllegalityException("视图进入修改状态！");
+		}
+		// 等待接手
+		if (taskEntity.getStatus().equals(TaskMananger.STEP_ONE_STATUS)) {
+			if (taskEntity.getProtect()) {
+				// 保护，就设置为 保护状态
+				taskEntity.setStatus(TaskMananger.AUDIT_STATUS);
+			} else {
+				taskEntity.setStatus(TaskMananger.STEP_TWO_STATUS);
+			}
+		}
+		BuyerEntity buyerEntity = new BuyerEntity();
+		buyerEntity.setId(creditTaskVO.getId());
+		taskEntity.setBuyer(buyerEntity);
+		taskEntity.setReceiveIP(ip);
+		return "updateTask";
+	}
+
+	/**
+	 * 初始化已发任务
+	 * 
+	 * @param userVO
+	 * @return
+	 */
+	public String initReleasedTast(CreditTaskVO creditTaskVO) throws Exception {
+		// 没有操作码验证就验证
+		String platformType = getPlatformType();
+		if (!getLoginUser().getOperationCodeStatus()) {
+			putByRequest("preURL", getRequset().getRequestURL() + "?"
+					+ getRequset().getQueryString());
+			return "operationValidate";
+		} else {
+			Long count = (Long) creditTaskDAO
+					.uniqueResultObject(
+							"select _task.testID , _task.releaseDate ,_user.username,_task.money,_task.updatePrice, _seller.name, _seller.shopURL, "
+									+ "_task.goodTimeType,_task.releaseDot,_task.status ,_task.intervalHour,_task.desc,_task.address" // index=11
+									+ " from CreditTaskEntity as _task inner join _task.releasePerson as _user  inert join _task.seller as _seller where     _user.id=:userId and   _task.type=:platformType ",
+							new String[] { "userId", "platformType" },
+							new Object[] { getLoginUser().getId(), platformType });
+			List<Object[]> result = creditTaskDAO
+					.pageQuery(
+							"select _task.testID , _task.releaseDate ,_user.username,_task.money,_task.updatePrice, _seller.name, _seller.shopURL, "
+									+ "_task.goodTimeType,_task.releaseDot,_task.status ,_task.intervalHour,_task.desc,_task.address" // index=11
+									+ " from CreditTaskEntity as _task inner join _task.releasePerson as _user  inert join _task.seller as _seller where     _user.id=:userId and   _task.type=:platformType ",
+							new String[] { "userId", "platformType" },
+							new Object[] { getLoginUser().getId(), platformType },
+							creditTaskVO.getStart(), creditTaskVO.getLimit());
+			creditTaskVO.setDataCount(count.intValue());
+			return "initReleasedTast";
+		}
 	}
 
 	/**
@@ -67,8 +144,7 @@ public class CreditTaskService extends BaseService {
 	 * @param userVO
 	 * @return
 	 */
-	public String insertReleaseTask(CreditTaskVO creditTaskVO)
-			throws Exception {
+	public String insertReleaseTask(CreditTaskVO creditTaskVO) throws Exception {
 		// 基本数据
 		UserEntity userEntity = getLoginUserEntity(userDAO);
 		UserLoginInfo userLoginInfo = getLoginUser();
@@ -77,7 +153,7 @@ public class CreditTaskService extends BaseService {
 
 		String platFormType = getPlatformType();
 		BeanUtils.copyProperties(creditTaskEntity, creditTaskVO);
-		String ip = getRequset().getRemoteAddr();
+
 		// 把天转换成时间
 		if (!creditTaskVO.getGoodTimeType().equals("5")) {
 			creditTaskVO.setIntervalHour(StrategyUtils
@@ -98,18 +174,18 @@ public class CreditTaskService extends BaseService {
 		}
 		if (!userEntity.getStatus().equals("1")) {
 			switch (Integer.parseInt(userEntity.getStatus())) {
-				case 0 :
-					putAlertMsg("您当前的【状态】为【未激活状态】，请到个人中心激活！");
-					break;
-				case 2 :
-					putAlertMsg("您当前的【状态】为【冻结状态】，不能发布任务！");
-					break;
-				case 3 :
-					putAlertMsg("您当前的【状态】为【找密码状态】，可能有人试图盗取您的秘密，请联系管理员，不能发布任务！");
-					break;
-				default :
-					putAlertMsg("您当前的【状态】不是【正常状态】，不能发布任务！");
-					break;
+			case 0:
+				putAlertMsg("您当前的【状态】为【未激活状态】，请到个人中心激活！");
+				break;
+			case 2:
+				putAlertMsg("您当前的【状态】为【冻结状态】，不能发布任务！");
+				break;
+			case 3:
+				putAlertMsg("您当前的【状态】为【找密码状态】，可能有人试图盗取您的秘密，请联系管理员，不能发布任务！");
+				break;
+			default:
+				putAlertMsg("您当前的【状态】不是【正常状态】，不能发布任务！");
+				break;
 			}
 			return "insertReleaseTaskFail";
 		}
@@ -124,8 +200,6 @@ public class CreditTaskService extends BaseService {
 		// 改变余额
 		userEntity.setMoney(ArithUtils.sub(userEntity.getMoney(),
 				creditTaskEntity.getMoney()));
-		// 放IP
-		creditTaskEntity.setReceiveIP(ip);
 		// 设置发布人，发布账号
 		// Long buyerID = creditTaskVO.getBuyerID();
 		Long sellerID = creditTaskVO.getSellerID();
@@ -158,11 +232,7 @@ public class CreditTaskService extends BaseService {
 		}
 		// 是否是定时任务
 		if (creditTaskEntity.getTimeingTime() == null) {
-			if (creditTaskEntity.getProtect()) {
-				creditTaskEntity.setStatus(TaskMananger.AUDIT_STATUS);
-			} else {
-				creditTaskEntity.setStatus(TaskMananger.STEP_ONE_STATUS);
-			}
+			creditTaskEntity.setStatus(TaskMananger.STEP_ONE_STATUS);
 		} else {
 			taskMananger.addTimingTask(creditTaskEntity.getId());
 			creditTaskEntity.setStatus(TaskMananger.TIMING_STATUS);
@@ -196,18 +266,18 @@ public class CreditTaskService extends BaseService {
 			UserEntity userEntity = getLoginUserEntity(userDAO);
 			if (!userEntity.getStatus().equals("1")) {
 				switch (Integer.parseInt(userEntity.getStatus())) {
-					case 0 :
-						putAlertMsg("您当前的【状态】为【未激活状态】，请到个人中心激活！");
-						break;
-					case 2 :
-						putAlertMsg("您当前的【状态】为【冻结状态】，不能发布任务！");
-						break;
-					case 3 :
-						putAlertMsg("您当前的【状态】为【找密码状态】，可能有人试图盗取您的秘密，请联系管理员，不能发布任务！");
-						break;
-					default :
-						putAlertMsg("您当前的【状态】不是【正常状态】，不能发布任务！");
-						break;
+				case 0:
+					putAlertMsg("您当前的【状态】为【未激活状态】，请到个人中心激活！");
+					break;
+				case 2:
+					putAlertMsg("您当前的【状态】为【冻结状态】，不能发布任务！");
+					break;
+				case 3:
+					putAlertMsg("您当前的【状态】为【找密码状态】，可能有人试图盗取您的秘密，请联系管理员，不能发布任务！");
+					break;
+				default:
+					putAlertMsg("您当前的【状态】不是【正常状态】，不能发布任务！");
+					break;
 				}
 				return "initReleaseTaskFail";
 			}
@@ -227,8 +297,8 @@ public class CreditTaskService extends BaseService {
 			List<CreditTaskRepositoryEntity> creditTaskResitorys = creditTaskRepositoryDAO
 					.list(
 							"from CreditTaskRepositoryEntity _cr where _cr.user.id=:userId and _cr.type=:type",
-							new String[]{"userId", "type"}, new Object[]{
-									userEntity.getId(), platformType});
+							new String[] { "userId", "type" }, new Object[] {
+									userEntity.getId(), platformType });
 			List<CreditTaskRepositoryVO> resultTaskReps = new ArrayList<CreditTaskRepositoryVO>(
 					creditTaskResitorys.size());
 			CreditTaskRepositoryVO creditTaskRepositoryVO = null;
@@ -268,7 +338,8 @@ public class CreditTaskService extends BaseService {
 						"platformType", platformType);
 		List<Object[]> result = creditTaskDAO
 				.pageQuery(
-						"select _task.testID , _task.releaseDate ,_user.username,_user.upgradeScore,_task.money,_task.updatePrice,_task.goodTimeType,_task.releaseDot,_task.status ,_task.intervalHour"
+						"select _task.testID , _task.releaseDate ,_user.username,_user.upgradeScore,_task.money,_task.updatePrice, "
+								+ "_task.goodTimeType,_task.releaseDot,_task.status ,_task.intervalHour,_task.desc,_task.address" // index=11
 								+ " from CreditTaskEntity as _task inner join _task.releasePerson as _user where (_task.status!='0' or _task.status!='-1')  and   _task.type=:platformType",
 						"platformType", platformType, creditTaskVO.getStart(),
 						creditTaskVO.getLimit());

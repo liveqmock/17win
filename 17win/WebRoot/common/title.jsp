@@ -119,11 +119,11 @@
 					onMouseOut="setAuto()">淘宝互刷</A>
 			</LI>
 			<LI class=white>
-				<A class="li0 " href="taskManager/task!initTask.php?platformType=2" onmouseover="Mea(2);"
-					onMouseOut="setAuto()">拍拍互刷</A>
+				<A class="li0 " href="taskManager/task!initTask.php?platformType=2" id="a2" onmouseover="Mea(2);" 	
+					onMouseOut="setAuto()" >拍拍互刷</A>
 			</LI>
 			<LI class=white>
-				<A class="li0 " href="taskManager/task!initTask.php?platformType=3" onmouseover="Mea(3);"
+				<A class="li0 " href="taskManager/task!initTask.php?platformType=3"  id="a3" onmouseover="Mea(3);"
 					onMouseOut="setAuto()">有啊互刷</A>
 			</LI>
 			<LI class=white>

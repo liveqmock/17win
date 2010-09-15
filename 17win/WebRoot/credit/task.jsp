@@ -29,6 +29,7 @@
 								<IMG src="images/task_02.gif">
 							</DIV>
 							<DIV style="MARGIN-TOP: 12px; FLOAT: left; MARGIN-LEFT: 10px">
+								<A href="?sort=2"><SPAN class=anniu>全部任务</SPAN> </A>
 								<A href="?sort=2"><SPAN class=anniu>价低排列</SPAN> </A>
 								<A href="?sort=1"><SPAN class=anniu>价高排列</SPAN> </A>
 								<A href="?sort=3"><SPAN class=anniu>1-40元区</SPAN> </A>
@@ -81,7 +82,7 @@
 									style="MARGIN: 3px; background: #cde0ee"  
 								</s:if>
 								<s:else>
-									style="MARGIN: 3px; background: #FFC278"  
+									style="MARGIN: 3px; background: #FFECD5"  
 								</s:else>
 								cellSpacing="2" cellPadding="0" width="100%" border="0">
 								<TBODY>
@@ -107,25 +108,39 @@
 											<s:elseif test="#task[6]==2">一天后好评</s:elseif>
 											<s:elseif test="#task[6]==3">两天后好评</s:elseif>
 											<s:elseif test="#task[6]==4">三天后好评</s:elseif>
-											<s:elseif test="#task[6]==5">自定义好评(<s:property value="#task[10]"/>)</s:elseif>
+											<s:elseif test="#task[6]==5">自定义好评(<s:property
+													value="#task[9]" />)</s:elseif>
 
 										</TD>
-										<TD   width="20%">
-											<s:if test="#task[8]==1">等待买家付款</s:if>
-											<s:elseif test="#task[8]==2">等待卖家发货</s:elseif>
-											<s:elseif test="#task[8]==3">等待卖家好评</s:elseif>
-											<s:elseif test="#task[8]==4">等待接手人</s:elseif>
-											<s:elseif test="#task[8]==5">审核接收人</s:elseif>
-											<s:elseif test="#task[8]==6">等待卖家发货</s:elseif>
-											<s:elseif test="#task[8]==7">等待买家确认</s:elseif>
-											<s:elseif test="#task[8]==8">等待卖家核查好评</s:elseif>
-											<s:elseif test="#task[8]==9">任务已经完成</s:elseif>
+										<TD width="20%">
+											<s:if test="#task[8]==1">
+												<font color="red" style="font-weight: bold;">等待接收人...</font>
+											</s:if>
+											<s:elseif test="#task[8]==6">
+												<font color="green" style="font-weight: bold;">任务已经结束</font>
+											</s:elseif>
+											<s:else>
+												<font color="green" style="font-weight: bold;">此任务进行中...</font>
+											</s:else>
 										</TD>
 										<TD style="PADDING-LEFT: 50px" width="20%">
-											<img src="images/online_admin.gif" align="middle">
-											<a title="接手，并完成任务可获得存款和发布点" style="CURSOR: pointer"
-												onClick="showxiao('201082722162223014','2')"> <span
-												class="anniu">接手任务</span> </a>
+											<s:if test="#task[8]==1">
+												<s:if test="#task[2]==#session.userLogin.username">
+													<font color="red"> 不能接自己的任务</font>
+												</s:if>
+												<s:else>
+													<img src="images/online_admin.gif" align="middle">
+													<a title="接手，并完成任务可获得存款和发布点" style="CURSOR: pointer"
+														onClick="showxiao('201082722162223014','2')"> <span
+														class="anniu">接手任务</span> </a>
+												</s:else>
+											</s:if>
+											<s:elseif test="#task[8]==6">
+												<font color="green" style="font-weight: bold;">完成</font>
+											</s:elseif>
+											<s:else>
+												<font color="green" style="font-weight: bold;">操作中...</font>
+											</s:else>
 										</TD>
 									</TR>
 									<TR>
@@ -134,8 +149,10 @@
 										</TD>
 										<TD>
 										<TD align="center" width="15%">
-											
-											<img src="images/<s:property value="@net.win.utils.StrategyUtils@getLevelImg(#task[3])" />" alt="刷客经验积分：<s:property value="#task[3]" />">
+
+											<img
+												src="images/<s:property value="@net.win.utils.StrategyUtils@getLevelImg(#task[3])" />"
+												alt="刷客经验积分：<s:property value="#task[3]" />">
 										</TD>
 										<TD align="center" width="15%">
 											<s:if test="#task[5]">
@@ -147,12 +164,31 @@
 										</TD>
 										<TD align="center" width="15%">
 											<IMG alt=延迟收货 src=images/shiwu.gif>
-											发布点<s:property value="#task[9]"/>个
+											发布点
+											<s:property value="#task[7]" />
+											个
 										</TD>
 										<TD style="PADDING-LEFT: 50px" width="20%">
 										</TD>
 										<TD style="PADDING-LEFT: 50px" width="20%">
 										</TD>
+									</TR>
+									<TR>
+										<TD align="left" colspan="6">
+											<font color="red" style="font-weight: bold;"> 任务描述：<s:property
+													value="#task[10]" />
+											</font>
+										</TD>
+									</TR>
+
+
+									<TR>
+										<TD colspan="6" align="left">
+											<font color="red" style="font-weight: bold;"> 收货地址：<s:property
+													value="#task[11]" />
+											</font>
+										</TD>
+
 									</TR>
 								</TBODY>
 							</TABLE>

@@ -194,6 +194,9 @@ img {
 																	等待我收货好评
 																</th>
 																<th style="background: #D1ECF9">
+																	等待卖家好评
+																</th>
+																<th style="background: #D1ECF9">
 																	合计
 																</th>
 															</tr>
@@ -228,13 +231,16 @@ img {
 																	等待审核
 																</th>
 																<th style="background: #D1ECF9">
+																	等待卖家付款
+																</th>
+																<th style="background: #D1ECF9">
 																	等待我发货
 																</th>
 																<th style="background: #D1ECF9">
-																	等待买家确认
+																	等待买家确认好评
 																</th>
 																<th style="background: #D1ECF9">
-																	等待我核查好评
+																	等待我好评
 																</th>
 																<th style="background: #D1ECF9">
 																	定时任务

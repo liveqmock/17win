@@ -33,7 +33,7 @@ import org.springframework.stereotype.Service;
 
 import com.sun.org.apache.commons.beanutils.BeanUtils;
 
-@SuppressWarnings({"unchecked"})
+@SuppressWarnings( { "unchecked" })
 @Service("userInfoService")
 public class UserInfoService extends BaseService {
 	@Resource
@@ -69,8 +69,8 @@ public class UserInfoService extends BaseService {
 			propValue.add(null);
 			propValue.add(buyerEntity.getId());
 		}
-		Long count = (Long) userDAO.uniqueResultObject(hql, new String[]{
-				"sellerId", "buyId"}, propValue.toArray(new Long[2]));
+		Long count = (Long) userDAO.uniqueResultObject(hql, new String[] {
+				"sellerId", "buyId" }, propValue.toArray(new Long[2]));
 		if (count > 0) {
 			putAlertMsg("您当前删除的账号正在任务执行中，不能删除！");
 			return "updateSellerAndBuyer";
@@ -79,14 +79,14 @@ public class UserInfoService extends BaseService {
 				userDAO
 						.deleteByHql(
 								"delete from  CreditTaskEntity as _task where _task.seller.id=:sellerId ",
-								new String[]{"sellerId"}, new Object[]{userVO
-										.getSeller().getId()});
+								new String[] { "sellerId" },
+								new Object[] { userVO.getSeller().getId() });
 			} else {
 				userDAO
 						.deleteByHql(
 								"delete from  CreditTaskEntity as _task where _task.buyer.id=:buyId ",
-								new String[]{"buyId"}, new Object[]{userVO
-										.getBuyer().getId()});
+								new String[] { "buyId" }, new Object[] { userVO
+										.getBuyer().getId() });
 			}
 			putAlertMsg("删除成功！");
 			return "updateSellerAndBuyer";
@@ -490,7 +490,7 @@ public class UserInfoService extends BaseService {
 		/**
 		 * 卖家
 		 */
-		String[][] result2 = new String[4][8];
+		String[][] result2 = new String[4][9];
 		for (String[] r : result1) {
 			Arrays.fill(r, "0");
 		}
@@ -574,56 +574,61 @@ public class UserInfoService extends BaseService {
 						// 淘宝的
 						if (TaskMananger.STEP_ONE_STATUS.equals(objs[1])) {
 							result2[0][1] = objs[2] + "";// 等待接收
+						} else if (TaskMananger.AUDIT_STATUS.equals(objs[1])) {
+							result2[0][2] = objs[2] + "";// 等待审核
 						} else if (TaskMananger.STEP_TWO_STATUS.equals(objs[1])) {
-							result2[0][2] = objs[2] + "";//
+							result2[0][3] = objs[2] + ""; // 等待买家付款
 						} else if (TaskMananger.STEP_THREE_STATUS
 								.equals(objs[1])) {
-							result2[0][3] = objs[2] + "";
+							result2[0][4] = objs[2] + "";// 等待我发货
 						} else if (TaskMananger.STEP_FOUR_STATUS
 								.equals(objs[1])) {
-							result2[0][4] = objs[2] + "";
+							result2[0][5] = objs[2] + "";// 等待买家确认好评
 						} else if (TaskMananger.STEP_FIVE_STATUS
 								.equals(objs[1])) {
-							result2[0][5] = objs[2] + "";
-						} else if (TaskMananger.AUDIT_STATUS.equals(objs[1])) {
-							result2[0][6] = objs[2] + "";
+							result2[0][6] = objs[2] + "";// 等待我好评
+						} else if (TaskMananger.TIMING_STATUS.equals(objs[1])) {
+							result2[0][7] = objs[2] + "";// 定时任务
 						}
 					} else if ("2".equals(objs[0])) {
 						// 拍拍
 						if (TaskMananger.STEP_ONE_STATUS.equals(objs[1])) {
-							result2[1][1] = objs[2] + "";
+							result2[1][1] = objs[2] + "";// 等待接收
+						} else if (TaskMananger.AUDIT_STATUS.equals(objs[1])) {
+							result2[1][2] = objs[2] + "";// 等待审核
 						} else if (TaskMananger.STEP_TWO_STATUS.equals(objs[1])) {
-							result2[1][2] = objs[2] + "";
+							result2[1][3] = objs[2] + ""; // 等待买家付款
 						} else if (TaskMananger.STEP_THREE_STATUS
 								.equals(objs[1])) {
-							result2[1][3] = objs[2] + "";
+							result2[1][4] = objs[2] + "";// 等待我发货
 						} else if (TaskMananger.STEP_FOUR_STATUS
 								.equals(objs[1])) {
-							result2[1][4] = objs[2] + "";
+							result2[1][5] = objs[2] + "";// 等待买家确认好评
 						} else if (TaskMananger.STEP_FIVE_STATUS
 								.equals(objs[1])) {
-							result2[1][5] = objs[2] + "";
-						} else if (TaskMananger.AUDIT_STATUS.equals(objs[1])) {
-							result2[1][6] = objs[2] + "";
+							result2[1][6] = objs[2] + "";// 等待我好评
+						} else if (TaskMananger.TIMING_STATUS.equals(objs[1])) {
+							result2[1][7] = objs[2] + "";// 定时任务
 						}
-
 					} else if ("3".equals(objs[0])) {
 						// 有啊
 						if (TaskMananger.STEP_ONE_STATUS.equals(objs[1])) {
-							result2[2][1] = objs[2] + "";
+							result2[2][1] = objs[2] + "";// 等待接收
+						} else if (TaskMananger.AUDIT_STATUS.equals(objs[1])) {
+							result2[2][2] = objs[2] + "";// 等待审核
 						} else if (TaskMananger.STEP_TWO_STATUS.equals(objs[1])) {
-							result2[2][2] = objs[2] + "";
+							result2[2][3] = objs[2] + ""; // 等待买家付款
 						} else if (TaskMananger.STEP_THREE_STATUS
 								.equals(objs[1])) {
-							result2[2][3] = objs[2] + "";
+							result2[2][4] = objs[2] + "";// 等待我发货
 						} else if (TaskMananger.STEP_FOUR_STATUS
 								.equals(objs[1])) {
-							result2[2][4] = objs[2] + "";
+							result2[2][5] = objs[2] + "";// 等待买家确认好评
 						} else if (TaskMananger.STEP_FIVE_STATUS
 								.equals(objs[1])) {
-							result2[2][5] = objs[2] + "";
-						} else if (TaskMananger.AUDIT_STATUS.equals(objs[1])) {
-							result2[2][6] = objs[2] + "";
+							result2[2][6] = objs[2] + "";// 等待我好评
+						} else if (TaskMananger.TIMING_STATUS.equals(objs[1])) {
+							result2[2][7] = objs[2] + "";// 定时任务
 						}
 					}
 				}

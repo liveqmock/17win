@@ -29,7 +29,6 @@ public class CreditTaskEntity extends TaskBaseEntity {
 	private Integer remainTime = 20;
 	// 状态
 	// (-1因为申述被暂停(但是要判断12小时，不能像2000w一样不能判断) ,0 还没开始（定时任务有用）
-	// ,[1:等待我付款,2:等待卖家发货,3:等待卖家好评](买家),[4:等待接手,5:等待审核人,6:等待我发货,7:等待买家确认8:等待我核查好评](卖家)，9完成) 过时
 	//1:等待接手，2买家接手，卖家等待买家付款，3买家付款了。等待卖家确认发货，4：卖家发货了。等待买家确认好评。5：买家已经确认好评。等待卖家确认好评。6完成 ，-2审核
 	@Column(name = "STATUS", length = 2, nullable = false)
 	private String status;

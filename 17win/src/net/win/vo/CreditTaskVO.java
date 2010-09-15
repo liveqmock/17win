@@ -48,6 +48,7 @@ public class CreditTaskVO extends BaseVO {
 	private Boolean repository;
 	private Boolean address;
 	private Long sellerID;
+	private Long buyerID;
 	// 仓库名
 	private String respositoryName;
 
@@ -217,6 +218,14 @@ public class CreditTaskVO extends BaseVO {
 
 	public void setDesc(String desc) {
 		this.desc = desc;
+	}
+
+	public Long getBuyerID() {
+		return buyerID;
+	}
+
+	public void setBuyerID(Long buyerID) {
+		this.buyerID = buyerID;
 	}
 
 }
