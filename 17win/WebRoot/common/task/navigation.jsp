@@ -14,10 +14,10 @@
 					href="taskManager/task!initReleaseTask.php?platformType=<s:property value="#request.platformType"/>">发布任务</A>
 			</LI>
 			<LI>
-				<A href="ReMission.asp">已接任务</A>
-			</LI>
+				<A href="taskManager/task!initReleaseTask.php?platformType=<s:property value="#request.platformType"/>">已接任务</A>
+			</LI>   
 			<LI>
-				<A href="MyMission.asp">已发任务</A>
+				<A href="taskManager/task!initReleasedTast.php?platformType=<s:property value="#request.platformType"/>">已发任务</A>
 			</LI>
 			<LI>
 				<A href="MySave.asp">定时任务</A>

@@ -29,7 +29,8 @@ public class CreditTaskEntity extends TaskBaseEntity {
 	private Integer remainTime = 20;
 	// 状态
 	// (-1因为申述被暂停(但是要判断12小时，不能像2000w一样不能判断) ,0 还没开始（定时任务有用）
-	//1:等待接手，2买家接手，卖家等待买家付款，3买家付款了。等待卖家确认发货，4：卖家发货了。等待买家确认好评。5：买家已经确认好评。等待卖家确认好评。6完成 ，-2审核
+	// 1:等待接手，2买家接手，卖家等待买家付款，3买家付款了。等待卖家确认发货，4：卖家发货了。等待买家确认好评。5：买家已经确认好评。等待卖家确认好评。6完成
+	// ，-2审核
 	@Column(name = "STATUS", length = 2, nullable = false)
 	private String status;
 	// 任务保护
@@ -54,11 +55,15 @@ public class CreditTaskEntity extends TaskBaseEntity {
 	@Column(name = "WAYBILL_", length = 30)
 	private String waybill;
 	// 地址
-	@Column(name = "ADDRESS_",length=100)
+	@Column(name = "ADDRESS_", length = 100)
 	private String address;
 	// 定时任务时间(不能小于开始时间)
 	@Column(name = "TIMEING_TIME_")
 	private Date timeingTime;
+
+	// 当前操作的时间
+	@Column(name = "NOW_OPERTATION_DATE_")
+	private Date nowOpertationDate;
 
 	// 发布人的卖家号
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -188,5 +193,13 @@ public class CreditTaskEntity extends TaskBaseEntity {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public Date getNowOpertationDate() {
+		return nowOpertationDate;
+	}
+
+	public void setNowOpertationDate(Date nowOpertationDate) {
+		this.nowOpertationDate = nowOpertationDate;
 	}
 }

@@ -38,11 +38,11 @@
 							</DIV>
 							<DIV style="CLEAR: right; MARGIN-TOP: 12px; FLOAT: right">
 								自定义刷新时间
-								<input type="text" value="" style="width: 40px"
+								<input type="text" value="" style="width: 25px"
 									title="不填写或则0表示不自动刷新" />
 								秒
 								<A title=点击刷新 href="javascript:location.reload(true);"
-									class="yell_font"> <SPAN class=anniu>刷新页面 任务不断跳出</SPAN> </A>
+									class="yell_font"> <SPAN class=anniu>刷新页面</SPAN> </A>
 							</DIV>
 						</DIV>
 					</DIV>
@@ -56,19 +56,19 @@
 							</DIV>
 							<DIV
 								style="FONT-WEIGHT: bold; FONT-SIZE: 14px; FLOAT: left; WIDTH: 125px; COLOR: #006600; TEXT-ALIGN: center">
-								价格
+								发布人
 							</DIV>
 							<DIV
 								style="FONT-WEIGHT: bold; FONT-SIZE: 14px; FLOAT: left; WIDTH: 95px; COLOR: #006600; TEXT-ALIGN: center">
-								商品信息
+								任务价格
 							</DIV>
 							<DIV
 								style="FONT-WEIGHT: bold; FONT-SIZE: 14px; FLOAT: left; WIDTH: 120px; COLOR: #006600; TEXT-ALIGN: center">
-								17win号
+								商品信息
 							</DIV>
 							<DIV
-								style="FONT-WEIGHT: bold; FONT-SIZE: 14px; FLOAT: left; WIDTH:115px; COLOR: #006600; TEXT-ALIGN: center">
-								接手号
+								style="FONT-WEIGHT: bold; FONT-SIZE: 14px; FLOAT: left; WIDTH: 115px; COLOR: #006600; TEXT-ALIGN: center">
+								接收账号
 							</DIV>
 							<DIV
 								style="FONT-WEIGHT: bold; FONT-SIZE: 14px; FLOAT: left; WIDTH: 130px; COLOR: #006600; TEXT-ALIGN: center">
@@ -90,19 +90,19 @@
 										2010915238272637
 									</td>
 									<td width="125px">
+										xgj1988（
+										<font color=red>在线</font>）
+									</td>
+									<td width="130px" nowrap="nowrap">
 										<img src="images/j_z.gif" width="13" height="16">
 										35元（需改价格）
 									</td>
-									<td width="130px" nowrap="nowrap">
+									<td width="120px" align="left">
 										<input name="2010915238272637" type="test"
 											title="http://item.taobao.com/item.htm?id=7373791436"
 											id="2010915238272637" style="width: 60px"
 											value="http://item.taobao.com/item.htm?id=7373791436" />
 										<input type="button" value="GO">
-									</td>
-									<td width="120px" align="left">
-										<a href="../user/send_message.asp?sendname=有来有往"
-											title="发送站内信息" target="_blank">有来有往（<font color=red>在线</font>）</a>
 									</td>
 									<td width="115px">
 										<font color="#FF0000">爱上996</font>
@@ -112,10 +112,8 @@
 										等待卖家发货...
 									</td>
 									<td width="150px">
-										<a href="#1"
-											onClick="javascript:showDialog('你确认要进行已发货处理吗？\n认真核对支付方是否支付成功,并且你已发货处理！',1,7,'jieducm_fahou.asp?id=2010915238272637')"
-											title="认真核对支付方是否支付成功,并且你已发货处理！"> <SPAN class=anniu>我已发货</SPAN>
-										</A>
+										已经支付
+										退出
 									</td>
 								</tr>
 								<tr>
@@ -123,25 +121,22 @@
 										2010-9-15 23:19:11
 									</td>
 									<td width="115px">
-										<IMG alt=延迟收货 src=images/shiwu.gif>
-										发布点2个
+										<img src="images/xin_1.gif" alt=刷客经验积分：2779>
 									</td>
 									<td width="130px" nowrap="nowrap">
-										<font color="#FF0000">掌柜:xgj1988</font>
+										发布点2个
 									</td>
 									<td width="120px" align="left">
-										<a href="tencent://message/?uin=1317225767"><img
-												src="http://wpa.qq.com/pa?p=1:1317225767:41" border="0" />
-										</a>
+										<font color="#FF0000">掌柜:xgj1988</font>
 									</td>
 									<td width="115px">
 										<img src="images/xin_1.gif" alt=刷客经验积分：2779>
 									</td>
 									<td width="130px">
-
+										剩余X分钟
 									</td>
 									<td width="150px">
-										核实后请发货并平台处理！
+										联系对方可加时
 									</td>
 								</tr>
 								<tr>

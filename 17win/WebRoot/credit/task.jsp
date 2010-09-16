@@ -40,7 +40,7 @@
 							</DIV>
 							<DIV style="CLEAR: right; MARGIN-TOP: 12px; FLOAT: right">
 								自定义刷新时间
-								<input type="text" value="" style="width: 40px"
+								<input type="text" value="" style="width: 25px"
 									title="不填写或则0表示不自动刷新" />
 								秒
 								<A title=点击刷新 href="javascript:location.reload(true);"

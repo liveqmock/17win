@@ -26,7 +26,8 @@ import org.springframework.stereotype.Controller;
 		@Result(name = "noSellerPage", type = "redirect", location = "/userInfoManager/info!initSellerAndBuyer.php?noSellerDirect=noSellerDirect"),
 		@Result(name = "insertReleaseTaskFail", type = "chain", location = "/taskManager/task!initReleaseTask.php"),
 		@Result(name = "insertReleaseTaskSuccess", type = "chain", location = "/taskManager/task!initReleaseTask.php"),
-		@Result(name = "initReleaseTaskFail", type = "chain", location = "/taskManager/task!initTask.php")
+		@Result(name = "initReleaseTaskFail", type = "chain", location = "/taskManager/task!initTask.php"),
+		@Result(name = "initReleasedTast", location = "/credit/jyReleaseTask.jsp")
 
 })
 @Namespace("/taskManager")
@@ -39,6 +40,26 @@ public class CreditTaskAction extends BaseAction {
 	@Action("/task")
 	public String execute() throws Exception {
 		return INPUT;
+	}
+
+	/**
+	 * 初始化已发任务
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String initReleasedTast() throws Exception {
+		return creditTaskService.initReleasedTast(creditTaskVO);
+	}
+
+	/**
+	 * 初始化发布任务
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String initReleaseTask() throws Exception {
+		return creditTaskService.initReleaseTask(creditTaskVO);
 	}
 
 	/**
@@ -59,16 +80,6 @@ public class CreditTaskAction extends BaseAction {
 	 */
 	public String initTask() throws Exception {
 		return creditTaskService.initTask(creditTaskVO);
-	}
-
-	/**
-	 * 初始化发布任务
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	public String initReleaseTask() throws Exception {
-		return creditTaskService.initReleaseTask(creditTaskVO);
 	}
 
 	public CreditTaskVO getCreditTaskVO() {

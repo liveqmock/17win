@@ -83,25 +83,30 @@ public class CreditTaskService extends BaseService {
 	 */
 	public String initReceivedTast(CreditTaskVO creditTaskVO) throws Exception {
 		CreditTaskEntity taskEntity = creditTaskDAO.get(creditTaskVO.getId());
-		taskEntity.setRemainTime(20);
-		String ip = getRequset().getRemoteAddr();
-		if (taskEntity.getStatus().equals(TaskMananger.STEP_SIX_STATUS)) {
-			WinUtils.throwIllegalityException("视图进入修改状态！");
+		// 没有操作码验证就验证
+		String platformType = getPlatformType();
+		if (!getLoginUser().getOperationCodeStatus()) {
+			putByRequest("preURL", getRequset().getRequestURL() + "?"
+					+ getRequset().getQueryString());
+			return "operationValidate";
+		} else {
+			Long count = (Long) creditTaskDAO
+					.uniqueResultObject(
+							"select count(*) from CreditTaskEntity as _task inner join _task.releasePerson as _user  inert join _task.seller as _seller where     _user.id=:userId and   _task.type=:platformType ",
+							new String[] { "userId", "platformType" },
+							new Object[] { getLoginUser().getId(), platformType });
+			List<Object[]> result = creditTaskDAO
+					.pageQuery(
+							"select _task.testID , _task.releaseDate ,_task.money,_task.updatePrice ,_task.releaseDot, _seller.shopURL , _seller.name,_task.status "// 7
+									+ " _jsuser.username,_buyer.name,_jsuser.qq,_jsuser.upgradeScore" // 11
+									+ " _tasl.remainTime,_task.goodTimeType ,_task.intervalHour,_task.desc,_task.address" // index=17
+									+ " from CreditTaskEntity as _task inner join _task.releasePerson as _fbuser  inert join _task.seller as _seller left join _task.receivePerson as _jsuser left join _task.buyer as _buyer  where     _fbuser.id=:userId and   _task.type=:platformType ",
+							new String[] { "userId", "platformType" },
+							new Object[] { getLoginUser().getId(), platformType },
+							creditTaskVO.getStart(), creditTaskVO.getLimit());
+			creditTaskVO.setDataCount(count.intValue());
+			return "updateTask";
 		}
-		// 等待接手
-		if (taskEntity.getStatus().equals(TaskMananger.STEP_ONE_STATUS)) {
-			if (taskEntity.getProtect()) {
-				// 保护，就设置为 保护状态
-				taskEntity.setStatus(TaskMananger.AUDIT_STATUS);
-			} else {
-				taskEntity.setStatus(TaskMananger.STEP_TWO_STATUS);
-			}
-		}
-		BuyerEntity buyerEntity = new BuyerEntity();
-		buyerEntity.setId(creditTaskVO.getId());
-		taskEntity.setBuyer(buyerEntity);
-		taskEntity.setReceiveIP(ip);
-		return "updateTask";
 	}
 
 	/**
@@ -120,20 +125,22 @@ public class CreditTaskService extends BaseService {
 		} else {
 			Long count = (Long) creditTaskDAO
 					.uniqueResultObject(
-							"select _task.testID , _task.releaseDate ,_user.username,_task.money,_task.updatePrice, _seller.name, _seller.shopURL, "
-									+ "_task.goodTimeType,_task.releaseDot,_task.status ,_task.intervalHour,_task.desc,_task.address" // index=11
-									+ " from CreditTaskEntity as _task inner join _task.releasePerson as _user  inert join _task.seller as _seller where     _user.id=:userId and   _task.type=:platformType ",
+							"select count(*) from CreditTaskEntity as _task inner join _task.releasePerson as _user   where     _user.id=:userId and   _task.type=:platformType ",
 							new String[] { "userId", "platformType" },
 							new Object[] { getLoginUser().getId(), platformType });
 			List<Object[]> result = creditTaskDAO
 					.pageQuery(
-							"select _task.testID , _task.releaseDate ,_user.username,_task.money,_task.updatePrice, _seller.name, _seller.shopURL, "
-									+ "_task.goodTimeType,_task.releaseDot,_task.status ,_task.intervalHour,_task.desc,_task.address" // index=11
-									+ " from CreditTaskEntity as _task inner join _task.releasePerson as _user  inert join _task.seller as _seller where     _user.id=:userId and   _task.type=:platformType ",
+							"select _task.testID , _task.releaseDate ,_task.money,_task.updatePrice ,_task.releaseDot, _task.itemUrl , _seller.name,_task.status "// 7
+									+ ", _jsuser.username,_buyer.name,_jsuser.qq,_jsuser.upgradeScore" // 11
+									+ ", _task.remainTime,_task.goodTimeType ,_task.intervalHour,_task.desc,_task.address ,_task.grade " // index=17
+									+ " from CreditTaskEntity as _task inner join _task.releasePerson as _fbuser  inner join _task.seller as _seller left join _task.receivePerson as _jsuser left join _task.buyer as _buyer  where     _fbuser.id=:userId and   _task.type=:platformType ",
 							new String[] { "userId", "platformType" },
 							new Object[] { getLoginUser().getId(), platformType },
 							creditTaskVO.getStart(), creditTaskVO.getLimit());
 			creditTaskVO.setDataCount(count.intValue());
+			putPlatformByRequest(WinUtils.changeType2Platform(platformType));
+			putPlatformTypeByRequest(platformType);
+			putByRequest("result", result);
 			return "initReleasedTast";
 		}
 	}
