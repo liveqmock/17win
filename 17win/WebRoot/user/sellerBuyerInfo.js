@@ -65,7 +65,7 @@ $(document).ready(function() {
 
 // 删除seller
 function deleteSeller(obj) {
-	if (confirm("如果这个账号不是新增账号，会导致这个账号的以前完成的交易记录也会删除掉！")) {
+	if (confirm("删除这个账号的以前完成的交易记录也会删除掉！")) {
 		$(obj).parent("form").submit();
 	}
 }
@@ -106,6 +106,12 @@ function obtainBuyer(obj) {
 		changeStyle(obj, '0', '不能为空！');
 		submitFlag = false;
 	} else {
+		if ($("input[platformType='" + type + "'][buyerName='" + $(obj).val() + "']")
+				.size() > 0) {
+			changeStyle(obj, '0', '买号已经存在！');
+			alert("买号已经存在！");
+			return false;
+		}
 		changeStyle(obj, '1', '');
 	}
 }
@@ -113,14 +119,21 @@ function obtainBuyer(obj) {
 function obtainSeller(type, obj) {
 	// 去掉空格
 	$(obj).val($.trim($(obj).val()));
+	var shopURL = $(obj).val();
 	// 获取seller input
 	var input = $("#sellerName");
-	if (Validater.isBlank($(obj).val())) {
+	if (Validater.isBlank(shopURL)) {
 		changeStyle(obj, '0', '您输入的地址不正确！');
 		return;
 	}
-	if ($(obj).data("nowUrl") == $(obj).val()) {
+	if ($(obj).data("nowUrl") == shopURL) {
 		return;
+	}
+	if ($("input[platformType='" + type + "'][shopUrl='" + shopURL + "']")
+			.size() > 0) {
+		changeStyle(obj, '0', '已经存在该店铺！');
+		alert("已经存在该店铺！");
+		return false;
 	}
 	// 获取用户地址
 	VhostAop.divAOP.ajax("ajaxManager/ajax!obtainSeller.php", {
@@ -131,6 +144,12 @@ function obtainSeller(type, obj) {
 					changeStyle(obj, '0', '您输入的地址不正确！');
 					submitFlag = false;
 				} else {
+					if ($("input[platformType='" + type + "'][sellerName='"
+							+ data.seller + "']").size() > 0) {
+						changeStyle(obj, '0', '改店铺已经存在！');
+						alert("已经存在该店铺！");
+						return false;
+					}
 					changeStyle(obj, '1', '该地址可以使用！');
 					$(obj).data("nowUrl", $(obj).val());
 					input.val(data.seller);

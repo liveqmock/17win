@@ -56,10 +56,10 @@ public class UserInfoService extends BaseService {
 	 */
 	public String deleteSellerAndBuyer(UserVO userVO) throws Exception {
 		initSellerAndBuyer(userVO);
+		//type买号，卖号 1卖号。  2买号
 		String type = getByParam("type");
-		String hql = "select count(*) from CreditTaskEntity  as _task  where _task.seller.id=:sellerId or _task.buyer.id=:buyId";
+		String hql = "select count(*) from CreditTaskEntity  as _task  where _task.type<>'6' and  (_task.seller.id=:sellerId or _task.buyer.id=:buyId)";
 		ArrayList<Long> propValue = new ArrayList<Long>();
-
 		if ("1".equals(type)) {
 			SellerEntity sellerEntity = userVO.getSeller();
 			propValue.add(sellerEntity.getId());
@@ -72,24 +72,24 @@ public class UserInfoService extends BaseService {
 		Long count = (Long) userDAO.uniqueResultObject(hql, new String[] {
 				"sellerId", "buyId" }, propValue.toArray(new Long[2]));
 		if (count > 0) {
-			putAlertMsg("您当前删除的账号正在任务执行中，不能删除！");
+			putAlertMsg("您当前删除的账号可能已经执行一下操作之一(1:任务中,2:申述中,3:定时任务)，不能删除！");
 			return "updateSellerAndBuyer";
 		} else {
 			if ("1".equals(type)) {
 				userDAO
 						.deleteByHql(
-								"delete from  CreditTaskEntity as _task where _task.seller.id=:sellerId ",
+								"delete from  SellerEntity as _seller where _seller.id=:sellerId ",
 								new String[] { "sellerId" },
 								new Object[] { userVO.getSeller().getId() });
 			} else {
 				userDAO
 						.deleteByHql(
-								"delete from  CreditTaskEntity as _task where _task.buyer.id=:buyId ",
+								"delete from  SellerEntity as _buyer where _buyer.id=:buyId ",
 								new String[] { "buyId" }, new Object[] { userVO
 										.getBuyer().getId() });
 			}
 			putAlertMsg("删除成功！");
-			return "updateSellerAndBuyer";
+			return "deleteSellerAndBuyer";
 		}
 	}
 

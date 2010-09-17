@@ -7,9 +7,9 @@ import javax.servlet.http.HttpSession;
 import net.win.dao.UserDAO;
 import net.win.entity.BaseEntity;
 import net.win.entity.UserEntity;
-import net.win.exception.IllegalityException;
 import net.win.utils.Constant;
 import net.win.utils.StrategyUtils;
+import net.win.utils.StringUtils;
 
 import org.apache.struts2.ServletActionContext;
 
@@ -29,6 +29,7 @@ public class BaseService {
 
 	// 前台显示数据
 	private static final String MSG = "msg";
+	private static final String JUMP = "jump";
 	private static final String DIV = "div";
 
 	/**
@@ -44,7 +45,11 @@ public class BaseService {
 	 * @return
 	 */
 	protected String getPlatformType() {
-		return getByParam("platformType");
+		String platformType = getByParam("platformType");
+		if (StringUtils.isBlank(platformType)) {
+			platformType = (String) getByRequest("platformType");
+		}
+		return platformType;
 	}
 
 	/**
@@ -166,6 +171,16 @@ public class BaseService {
 	protected void putAlertMsg(String message) throws Exception {
 		message = "<script>alert('" + message + "');</script>";
 		putByRequest(MSG, message);
+	}
+
+	/**
+	 * 前台Alert提示数据，放在request里面
+	 * 
+	 * @param message
+	 * @throws Exception
+	 */
+	protected void putJumpPage(String page) throws Exception {
+		putByRequest(JUMP, page);
 	}
 
 	/**

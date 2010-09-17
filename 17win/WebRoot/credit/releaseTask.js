@@ -1,5 +1,30 @@
 var submitFlag = true;
 $(document).ready(function() {
+
+	// 判断是否取消任务
+	var cancelTaskId = $("#cancelFlagTaskIdHidden").val();
+	if (!Validater.isBlank(cancelTaskId)) {
+		// 评论时间
+		var cancelGTT = $("#cancelFlagGTTHidden").val();
+		// 是否改价
+		var cancelUP = $("#cancelFlagUPHidden").val();
+		// 评价类型
+		var cancelGradde = $("#cancelFlagGradeHidden").val();
+
+		$("input[name='creditTaskVO.updatePrice'][value='" + cancelUP + "']")
+				.attr("checked", true);
+		$("input[name='creditTaskVO.goodTimeType'][value='" + cancelGTT + "']")
+				.attr("checked", true);
+		$("input[name='creditTaskVO.grade'][value='" + cancelGradde + "']")
+				.attr("checked", true);
+		var hour = $("#cancelFlagHourHidden").val();
+		if (!Validater.isBlank(hour)) {
+			$("#intervalHour").attr("disabled",false);
+			$("#intervalHour").val(hour);
+		}
+
+	}
+
 	$("#releaseDIV").dialog({
 				autoOpen : true,
 				draggable : false,
@@ -126,6 +151,7 @@ $(document).ready(function() {
 									true);
 							if (obj.goodTimeType == "5") {
 								// 自定义小时
+								$("#intervalHour").attr("disabled", false);
 								$("#intervalHour").val(obj.intervalHour);
 							}
 							// 任务保护

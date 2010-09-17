@@ -101,37 +101,37 @@ img {
 												border="0" align="center">
 												<tbody id="sellerTable<s:property value="#type"/>">
 													<tr>
-														<td width="16%" height="40" align="right" nowrap="nowrap"
+														<td   colspan="3"  height="40" align="left" nowrap="nowrap"
 															class="font14b2">
 															<s:set name="platformName"
 																value="#type==1?'淘宝':#type==2?'拍拍':'有啊'"></s:set>
 															<s:property value="#platformName" />
-															卖号资料：
-														</td>
-														<td colspan="4">
-															<hr style="color: rgb(255, 153, 51);">
+															卖号资料： 
 														</td>
 													</tr>
 													<tr style="background: #EDF6FF">
-														<th height="10" nowrap="nowrap" align="center">
+														<th height="10" nowrap="nowrap" align="center" width="40%">
 															店铺地址
 														</th>
-														<th height="10" nowrap="nowrap" align="center">
+														<th height="10" nowrap="nowrap" align="center"  width="20%">
 															卖号
 														</th>
-														<th height="10" nowrap="nowrap" align="center">
+														<th height="10" nowrap="nowrap" align="center"  width="40%">
 															发货地址
-														</th>
-														<th height="10" nowrap="nowrap" align="center">
-															操作
 														</th>
 													</tr>
 													<s:iterator value="#request.sellers.get(#type)" id="seller">
 														<tr class="sellerTr">
 															<td align='center'>
+																<input type="hidden"
+																	platformType="<s:property value="#type"/>"
+																	shopUrl="<s:property value="#seller.shopURL" />" />
 																<s:property value="#seller.shopURL" />
 															</td>
 															<td align='center'>
+																<input type="hidden"
+																	platformType="<s:property value="#type"/>"
+																	sellerName="<s:property value="#seller.name" />" />
 																<s:property value="#seller.name" />
 															</td>
 															<td align="center" nowrap="nowrap">
@@ -158,17 +158,6 @@ img {
 																	</select>
 																</s:else>
 															</td>
-															<td align="center">
-																<s:form
-																	action="userInfoManager/info!deleteSellerAndBuyer.php"
-																	theme="simple">
-																	<input type="hidden" value="1" name="type" />
-																	<a href="javascript:void(0)"
-																		onclick="deleteSeller(this)">删除</a>
-																	<input type="hidden" name="userVO.seller.id"
-																		value="<s:property value="#seller.id"/>">
-																</s:form>
-															</td>
 														</tr>
 													</s:iterator>
 												</tbody>
@@ -182,47 +171,31 @@ img {
 												align="center">
 												<tbody id="buyerTable<s:property value="#type"/>">
 													<tr>
-														<td width="16%" height="40" align="right" class="font14b2">
+														<td width="16%"  colspan="2" height="40" align="left" class="font14b2">
 															<s:property value="#platformName" />
 															买号资料：
 
 														</td>
-														<td colspan="4">
-															<hr style="color: rgb(255, 153, 51);">
-														</td>
 													</tr>
 
 													<tr style="background: #EDF6FF">
-														<th height="10" nowrap="nowrap" align="center">
+														<th height="10" nowrap="nowrap" align="center" width="50%">
 															买号
 														</th>
-														<th height="10" nowrap="nowrap" align="center">
+														<th height="10" nowrap="nowrap" align="center" width="50%">
 															买号积分
-														</th>
-														<th height="10" nowrap="nowrap" align="center">
-															操作
 														</th>
 													</tr>
 													<s:iterator value="#request.buyers.get(#type)" id="buyer">
 														<tr class="buyerTr">
 															<td height="10">
-																<input type="text" name="userVO.buyers[0].name"
-																	onblur="obtainBuyer(this)"
-																	value="<s:property value="#buyer.name" />">
+																<input type="hidden"
+																	platformType="<s:property value="#type"/>"
+																	buyerName="<s:property value="buyer.name" />" />
+																<s:property value="#buyer.name" />
 															</td>
 															<td align="center">
 																<s:property value="#buyer.score" />
-															</td>
-															<td align="center">
-																<s:form
-																	action="userInfoManager/info!deleteSellerAndBuyer.php"
-																	theme="simple">
-																	<input type="hidden" value="2" name="type" />
-																	<a href="javascript:void(0)"
-																		onclick="deleteSeller(this)">删除</a>
-																	<input type="hidden" name="userVO.buyer.id"
-																		value="<s:property value="#buyer.id"/>">
-																</s:form>
 															</td>
 														</tr>
 													</s:iterator>

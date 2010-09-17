@@ -13,9 +13,6 @@ public class TaskBaseEntity extends BaseEntity {
 	// 任务ID 给用户看 格式yyymmddhhmmssis
 	@Column(name = "TESTID_", columnDefinition = "CHAR(17)", nullable = false, unique = true)
 	private String testID;
-	// 接收人IP
-	@Column(name = "RECEIVE_IP_", length = 19, nullable = false)
-	private String receiveIP;
 	// 发布点
 	@Column(name = "RELEASE_DOT_", nullable = false)
 	private Float releaseDot;
@@ -40,14 +37,6 @@ public class TaskBaseEntity extends BaseEntity {
 
 	public void setTestID(String testID) {
 		this.testID = testID;
-	}
-
-	public String getReceiveIP() {
-		return receiveIP;
-	}
-
-	public void setReceiveIP(String receiveIP) {
-		this.receiveIP = receiveIP;
 	}
 
 	public Float getReleaseDot() {

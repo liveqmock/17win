@@ -120,6 +120,27 @@
 																			value="<s:property
 						value="#request.platformType" />"
 																			id="platformType" type="hidden" />
+																		<!-- 取消重填 -->
+																		<input
+																			value="<s:property value="creditTaskVO.id"/>"
+																			id="cancelFlagTaskIdHidden" type="hidden" />
+																		<input
+																			value="<s:property value="creditTaskVO.goodTimeType"/>"
+																			id="cancelFlagGTTHidden" type="hidden" />
+																		<input
+																			value="<s:property value="creditTaskVO.updatePrice"/>"
+																			id="cancelFlagUPHidden" type="hidden" />
+																		<input
+																			value="<s:property value="creditTaskVO.grade"/>"
+																			id="cancelFlagGradeHidden" type="hidden" />
+																			<input
+																			value="<s:property value="creditTaskVO.intervalHour"/>"
+																			id="cancelFlagHourHidden" type="hidden" />
+																		<!-- end -->
+
+
+																		<input value="<s:property value="creditTaskVO.id"/>"
+																			id="cancelFlagGTTHidden" type="hidden" />
 																		<input value="#session.userLogin.money" id="currMoney"
 																			type="hidden" />
 																		<s:textfield name="creditTaskVO.money" size="10"
@@ -158,7 +179,7 @@
 																	</td>
 																	<td>
 																		<input name="creditTaskVO.updatePrice" type="radio"
-																			value="false" checked>
+																			value="false" checked="checked">
 																		<span class="font12l"> 金额相等</span>
 																	</td>
 																	<td>
@@ -174,13 +195,25 @@
 																	</td>
 																	<td>
 																		<input name="creditTaskVO.grade" type="radio"
-																			value="1" checked>
+																			value="1" checked="checked" >
 																		<span class="font12l">全部打5分</span>
 																	</td>
 																	<td>
 																		<input type="radio" name="creditTaskVO.grade"
 																			value="2">
 																		<span class="font12l"> 全部不打分</span>
+																	</td>
+
+																</tr>
+																<tr>
+																	<td class="font14b4" align="right">
+																	</td>
+																	<td>
+																		<input name="creditTaskVO.grade" type="radio"
+																			value="3" >
+																		<span class="font12l">带字5分好评</span>
+																	</td>
+																	<td>
 																	</td>
 
 																</tr>

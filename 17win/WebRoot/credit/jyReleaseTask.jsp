@@ -8,7 +8,7 @@
 		<LINK href="css/header.css" type=text/css rel=stylesheet>
 		<LINK href="css/index.css" type=text/css rel=stylesheet>
 		<LINK href="css/top_bottom.css" type="text/css" rel="stylesheet">
-		<SCRIPT src="js/jieducm_pupu.js" type="text/javascript"></SCRIPT>
+		<SCRIPT src="credit/jyReleaseTask.js" type="text/javascript"></SCRIPT>
 	</HEAD>
 	<BODY>
 		<s:include value="../common/title.jsp"></s:include>
@@ -40,6 +40,9 @@
 								自定义刷新时间
 								<input type="text" value="" style="width: 25px"
 									title="不填写或则0表示不自动刷新" />
+								<input type="hidden"
+									value="<s:property value="#request.platformType"/>"
+									id="platformType" />
 								秒
 								<A title=点击刷新 href="javascript:location.reload(true);"
 									class="yell_font"> <SPAN class=anniu>刷新页面</SPAN> </A>
@@ -68,6 +71,7 @@
 							</DIV>
 							<DIV
 								style="FONT-WEIGHT: bold; FONT-SIZE: 14px; FLOAT: left; WIDTH: 115px; COLOR: #006600; TEXT-ALIGN: center">
+								<s:property value="#request.platform" />
 								接受号
 							</DIV>
 							<DIV
@@ -82,9 +86,9 @@
 					</DIV>
 					<DIV
 						style="CLEAR: both; BORDER-RIGHT: #abbec8 1px solid; BORDER-TOP: #abbec8 1px; BORDER-LEFT: #abbec8 1px solid; WIDTH: 910px; BORDER-BOTTOM: #abbec8 1px solid; BACKGROUND-COLOR: #ffffff">
-						<DIV class=missionbg
-							style="WIDTH: 98%; PADDING-TOP: 10px; BORDER-BOTTOM: #06314a 1px dashed; HEIGHT: 90px">
-							<s:iterator value="#request.result" status="status" id="task">
+						<s:iterator value="#request.result" status="status" id="task">
+							<DIV class=missionbg
+								style="WIDTH: 98%; PADDING-TOP: 10px; BORDER-BOTTOM: #06314a 1px dashed; HEIGHT: 90px">
 								<table cellpadding="0" cellspacing="0" border="0" width="100%">
 									<tr>
 										<td width="145px" align="left" nowrap="nowrap">
@@ -96,10 +100,10 @@
 											元
 											<s:if test="#test[3]">(需改价格)</s:if>
 											<s:else>(全额相等)</s:else>
-											
+
 										</td>
 										<td width="130px" nowrap="nowrap">
-											<input name="2010915238272637" type="test"
+											<input name="2010915238272637" type="text"
 												title="<s:property value="#task[5]" />"
 												id="2010915238272637" style="width: 60px"
 												value="<s:property value="#task[5]" />" />
@@ -150,7 +154,8 @@
 										</td>
 										<td width="150px">
 											<s:if test="#task[7]==1">
-												取消重填 
+												<a
+													href="javascript:cancelTask(<s:property value="#task[18]"/>)">取消重填</a>
 											</s:if>
 											<s:elseif test="#task[7]==-2">
 												审核接收人 清理买家
@@ -184,8 +189,10 @@
 											个
 										</td>
 										<td width="130px" nowrap="nowrap">
-											<font color="#FF0000">掌柜:<s:property value="#task[6]" />
-											</font>
+											<a href="<s:property value="#task[19]" />"
+												title="前往店铺：<s:property value="#task[19]" />"> <font
+												color="#FF0000">掌柜:<s:property value="#task[6]" /> </font>
+											</a>
 										</td>
 										<td width="120px" align="left">
 											<s:if test="#task[7]<>1">
@@ -211,7 +218,10 @@
 											</s:if>
 										</td>
 										<td width="150px">
-
+											<s:if test="#task[7]==1">
+												<a
+													href="javascript:toFirstTask(<s:property value="#task[18]"/>)">刷新排前</a>
+											</s:if>
 											<s:if test="#task[7]==-2">
 												为对方加时
 											</s:if>
@@ -234,7 +244,7 @@
 											<font color="red" style="font-weight: bold;">快递单号：</font>
 										</td>
 										<td colspan="4" align="left">
-											<font color="red" style="font-weight: bold;">打分/好评： </font>
+											<font color="red" style="font-weight: bold;">打分/好评：
 											<s:if test="#task[13]==1">
 													马上好评
 												</s:if>
@@ -248,7 +258,7 @@
 												三天后好评
 											</s:elseif>
 											<s:elseif test="#task[13]==5">
-											    自定义好评(<s:property value="#task[14]" />)
+											    自定义好评(<s:property value="#task[14]" />小时)
 											</s:elseif>
 											/
 											<s:if test="#task[17]==1">
@@ -257,47 +267,63 @@
 											<s:elseif test="#task[17]==2">
 												全部不打分
 											</s:elseif>
+											<s:elseif test="#task[17]==3">
+												带字5分好评
+											</s:elseif>
+											 </font>
 										</td>
 									</tr>
 									<tr>
 										<td colspan="3" align="left">
 											<font color="red" style="font-weight: bold;">收货地址：<s:property
-													value="#task[15]" /> </font>
+													value="#task[16]" /> </font>
 										</td>
 										<td colspan="4" align="left">
 											<font color="red" style="font-weight: bold;">详细描述：<s:property
-													value="#task[16]" /> </font>
+													value="#task[15]" /> </font>
 										</td>
 									</tr>
 								</table>
-							</s:iterator>
-						</DIV>
-
-						<DIV
-							style="WIDTH: 98%; LINE-HEIGHT: 40px; PADDING-TOP: 10px; HEIGHT: 40px; TEXT-ALIGN: center">
-							共
-							<font color="blue"><b>34</b> </font> 条主题&nbsp;&nbsp;&nbsp;首页
-							上一页&nbsp;
-							<a href='mymission.asp?PageNo=2'>下一页</a>&nbsp;
-							<a href='mymission.asp?PageNo=4'>尾页</a>&nbsp;页次：
-							<strong><font color="red">1</font>/4</strong>页 &nbsp;
-							<b>10</b>条主题/页&nbsp;转到：
-							<select name='page' size='1'
-								onchange="javascript:window.location='mymission.asp?PageNo='+this.options[this.selectedIndex].value;">
-								<option value='1' selected="selected">
-									第1页
-								</option>
-								<option value='2'>
-									第2页
-								</option>
-								<option value='3'>
-									第3页
-								</option>
-								<option value='4'>
-									第4页
-								</option>
-							</select>
-						</DIV>
+							</DIV>
+						</s:iterator>
+						<s:if test="#request.result.size()==0">
+							<DIV
+								style="WIDTH: 98%; LINE-HEIGHT: 40px; PADDING-TOP: 10px; HEIGHT: 40px; TEXT-ALIGN: center">
+								您当前还没有在
+								<s:property value="#request.platform" />
+								发布区发布过任务，
+								<font color="red"><a
+									href="taskManager/task!initReleaseTask.php?platformType=1">点此进入发布任务</a>
+								</font>！
+							</DIV>
+						</s:if>
+						<s:else>
+							<DIV
+								style="WIDTH: 98%; LINE-HEIGHT: 40px; PADDING-TOP: 10px; HEIGHT: 40px; TEXT-ALIGN: center">
+								共
+								<font color="blue"><b>34</b> </font> 条主题&nbsp;&nbsp;&nbsp;首页
+								上一页&nbsp;
+								<a href='mymission.asp?PageNo=2'>下一页</a>&nbsp;
+								<a href='mymission.asp?PageNo=4'>尾页</a>&nbsp;页次：
+								<strong><font color="red">1</font>/4</strong>页 &nbsp;
+								<b>10</b>条主题/页&nbsp;转到：
+								<select name='page' size='1'
+									onchange="javascript:window.location='mymission.asp?PageNo='+this.options[this.selectedIndex].value;">
+									<option value='1' selected="selected">
+										第1页
+									</option>
+									<option value='2'>
+										第2页
+									</option>
+									<option value='3'>
+										第3页
+									</option>
+									<option value='4'>
+										第4页
+									</option>
+								</select>
+							</DIV>
+						</s:else>
 					</div>
 				</DIV>
 			</div>

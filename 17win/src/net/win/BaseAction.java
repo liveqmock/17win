@@ -14,5 +14,6 @@ public class BaseAction extends ActionSupport {
 	protected static final String APPLET = "applet";
 	protected static final String OUTEXCEL = "outexcel";
 	protected static final String DOWNLOAD = "download";
+	protected static final String JUMP = "jump";
 
 }

@@ -29,7 +29,7 @@ public class CreditTaskEntity extends TaskBaseEntity {
 	private Integer remainTime = 20;
 	// 状态
 	// (-1因为申述被暂停(但是要判断12小时，不能像2000w一样不能判断) ,0 还没开始（定时任务有用）
-	// 1:等待接手，2买家接手，卖家等待买家付款，3买家付款了。等待卖家确认发货，4：卖家发货了。等待买家确认好评。5：买家已经确认好评。等待卖家确认好评。6完成
+	// 1:等待接手，2买家接手，卖家等待买家付款，3买家已付款。等待卖家确认发货，4：卖家发货了。等待买家确认好评。5：买家已经确认好评。等待卖家确认好评。6完成
 	// ，-2审核
 	@Column(name = "STATUS", length = 2, nullable = false)
 	private String status;
@@ -42,7 +42,7 @@ public class CreditTaskEntity extends TaskBaseEntity {
 	// 是否修改价格
 	@Column(name = "UPDATE_PRICE_", nullable = false)
 	private Boolean updatePrice;
-	// 动态评分(1:全部5分，2:全部不打分 ...)
+	// 动态评分(1:全部5分，2:全部不打分 3带子好评)
 	@Column(name = "GRADE_", columnDefinition = "CHAR(1)", nullable = false)
 	private String grade;
 	// 好评时间类型(1 马上 2:24小时 3:48小时 ，4：72小时，5 ：自定义)
@@ -64,6 +64,10 @@ public class CreditTaskEntity extends TaskBaseEntity {
 	// 当前操作的时间
 	@Column(name = "NOW_OPERTATION_DATE_")
 	private Date nowOpertationDate;
+
+	// 接收人IP
+	@Column(name = "RECEIVE_IP_", length = 20)
+	private String receiveIP;
 
 	// 发布人的卖家号
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -201,5 +205,13 @@ public class CreditTaskEntity extends TaskBaseEntity {
 
 	public void setNowOpertationDate(Date nowOpertationDate) {
 		this.nowOpertationDate = nowOpertationDate;
+	}
+
+	public String getReceiveIP() {
+		return receiveIP;
+	}
+
+	public void setReceiveIP(String receiveIP) {
+		this.receiveIP = receiveIP;
 	}
 }
