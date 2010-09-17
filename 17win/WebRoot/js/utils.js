@@ -17,7 +17,6 @@ function copy_code(copyText) {
 	}
 }
 
-
 /**
  * 只能输入整数的文本框
  * 
@@ -59,17 +58,18 @@ function numberText(textID) {
 	$("#" + textID).bind("keyup", function() {
 				var value = $(this).val();
 				if (!Validater.isNumber(value, "+")) {
-					var dot=value.substring(value.length - 2, value.length - 1);
-					if(dot=="."){
-						$(this).val(value.substring(0, value.length - 1)+".0");
+					var dot = value.substring(value.length - 2, value.length
+									- 1);
+					if (dot == ".") {
+						$(this)
+								.val(value.substring(0, value.length - 1)
+										+ ".0");
 					}
 					$(this).val(value.substring(0, value.length - 1));
 				}
 			});
 
 }
-
-
 
 // 得到city
 function getCities(pid, cityObj, areaObj) {
@@ -137,4 +137,14 @@ function getSeller(url, type, textID) {
 					$("#" + textID).val(data.seller);
 				}
 			}, "json");
+}
+
+// 动态参数
+ function dynamicMsg(str) {
+	var index = arguments.length - 1;
+	for (var i = 0; i < index; i++) {
+		var reCat = new RegExp("#\\{" + i + "\\}", "g");
+		str = str.replace(reCat, arguments[i + 1]);
+	}
+	return str;
 }
