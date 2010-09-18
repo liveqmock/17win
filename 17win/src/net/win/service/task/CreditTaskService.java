@@ -1,6 +1,7 @@
 package net.win.service.task;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -56,11 +57,109 @@ public class CreditTaskService extends BaseService {
 	@Resource
 	private CreditTaskRepositoryDAO creditTaskRepositoryDAO;
 
-	/***************************************************************************
-	 * ，买家操作************* /** 刷新排前
+	/** ***************************买家操作********************************* */
+	/**
+	 * 已经支付
 	 * 
-	 * @param userVO
+	 * @param creditTaskVO
 	 * @return
+	 */
+	public String updatePayTask(CreditTaskVO creditTaskVO) throws Exception {
+		String platformType = getPlatformType();
+		UserLoginInfo loginInfo = getLoginUser();
+		Long taskId = Long.parseLong(getByParam("taskId"));
+		if (StringUtils.isBlank(platformType)) {
+			WinUtils.throwIllegalityException(getLoginUser().getUsername()
+					+ "试图越过取消重填操作！ ");
+		}
+		if (!getLoginUser().getOperationCodeStatus()) {
+			putByRequest("preURL", getRequset().getRequestURL() + "?"
+					+ getRequset().getQueryString());
+			return "operationValidate";
+		} else {
+			CreditTaskEntity creditTaskEntity = creditTaskDAO.get(taskId);
+			/**
+			 * 验证
+			 */
+			if (!TaskMananger.STEP_TWO_STATUS.equals(creditTaskEntity
+					.getStatus())) {
+				WinUtils.throwIllegalityException(getLoginUser().getUsername()
+						+ "试图越过退出任务操作！ ");
+			}
+			/**
+			 * 任务
+			 */
+			creditTaskEntity.setStatus(TaskMananger.STEP_THREE_STATUS);
+		}
+		putJumpPage("taskManager/task!initReceivedTast.php?platformType="
+				+ platformType);
+		putAlertMsg("支付成功！");
+		return JUMP;
+	}
+
+	/**
+	 * 退出任务
+	 * 
+	 * @param creditTaskVO
+	 * @return
+	 */
+	public String updateQuitTask(CreditTaskVO creditTaskVO) throws Exception {
+		String platformType = getPlatformType();
+		UserLoginInfo loginInfo = getLoginUser();
+		Long taskId = Long.parseLong(getByParam("taskId"));
+		if (StringUtils.isBlank(platformType)) {
+			WinUtils.throwIllegalityException(getLoginUser().getUsername()
+					+ "试图越过取消重填操作！ ");
+		}
+		if (!getLoginUser().getOperationCodeStatus()) {
+			putByRequest("preURL", getRequset().getRequestURL() + "?"
+					+ getRequset().getQueryString());
+			return "operationValidate";
+		} else {
+			CreditTaskEntity creditTaskEntity = creditTaskDAO.get(taskId);
+			UserEntity receiveUser = creditTaskEntity.getReceivePerson();
+			if (receiveUser.getId() != loginInfo.getId()) {
+				WinUtils.throwIllegalityException(getLoginUser().getUsername()
+						+ "试图越过退出任务操作！ ");
+			}
+			/**
+			 * 验证 如果不是付款，也不是 审核，那么就不能退出任务了。
+			 */
+			if (!TaskMananger.STEP_TWO_STATUS.equals(creditTaskEntity
+					.getStatus())
+					&& !TaskMananger.AUDIT_STATUS.equals(creditTaskEntity
+							.getStatus())) {
+				WinUtils.throwIllegalityException(getLoginUser().getUsername()
+						+ "试图越过退出任务操作！ ");
+			}
+			/**
+			 * 人
+			 */
+			receiveUser.setMoney(ArithUtils.add(receiveUser.getMoney(),
+					creditTaskEntity.getMoney()));
+			receiveUser.setReleaseDot(ArithUtils.add(receiveUser
+					.getReleaseDot(), creditTaskEntity.getReleaseDot()));
+			/**
+			 * 任务
+			 */
+			creditTaskEntity.setReceivePerson(null);
+			creditTaskEntity.setReceiveIP(null);
+			creditTaskEntity.setBuyer(null);
+			creditTaskEntity.setRemainTime(null);
+			creditTaskEntity.setReceiveDate(null);
+			creditTaskEntity.setStatus(TaskMananger.STEP_ONE_STATUS);
+			updateUserLoginInfo(receiveUser);
+		}
+		putJumpPage("taskManager/task!initReceivedTast.php?platformType="
+				+ platformType);
+		putAlertMsg("已经退出任务！");
+		return JUMP;
+	}
+
+	/*
+	 * 接受任务
+	 * 
+	 * @param userVO @return
 	 */
 	public String updateReceiveTask(CreditTaskVO creditTaskVO) throws Exception {
 		String platformType = getPlatformType();
@@ -116,21 +215,70 @@ public class CreditTaskService extends BaseService {
 		BuyerEntity buyerEntity = new BuyerEntity();
 		buyerEntity.setId(buyeId);
 		creditTask.setBuyer(buyerEntity);
+		creditTask.setRemainTime(20);
+		creditTask.setReceiveDate(new Date());
 		// 保护就到审核状态
 		if (creditTask.getProtect()) {
 			creditTask.setStatus(TaskMananger.AUDIT_STATUS);
-		}else{
+		} else {
 			creditTask.setStatus(TaskMananger.STEP_TWO_STATUS);
 		}
+
+		updateUserLoginInfo(userEntity);
 		putJumpPage("taskManager/task!initReceivedTast.php?platformType="
 				+ platformType);
-		updateUserLoginInfo(userEntity);
-		putAlertMsg("恭喜您，你已经接手了此任务！");
+		putAlertMsg("恭喜您，你已经抢到了此任务！");
 		return JUMP;
 	}
 
 	/***************************************************************************
-	 * 卖家操作************* /** 刷新排前
+	 * 卖家操作
+	 */
+	/**
+	 * 加时
+	 */
+	public String updateAddTime(CreditTaskVO creditTaskVO) throws Exception {
+		// 没有操作码验证就验证
+		String platformType = getPlatformType();
+		if (!getLoginUser().getOperationCodeStatus()) {
+			putByRequest("preURL", getRequset().getRequestURL() + "?"
+					+ getRequset().getQueryString());
+			return "operationValidate";
+		} else {
+			Long taskId = Long.parseLong(getByParam("taskId"));
+			UserEntity userEntity = userDAO.get(getLoginUser().getId());
+			CreditTaskEntity creditTask = creditTaskDAO.get(taskId);
+			// 如果发布人不是当前的登陆人就报错
+			if (!creditTask.getReleasePerson().getId().equals(
+					userEntity.getId())) {
+				WinUtils.throwIllegalityException(userEntity.getUsername()
+						+ "试图越过取消重填操作！任务ID是：" + creditTask.getTestID());
+			}
+			/**
+			 * 验证
+			 */
+			if (TaskMananger.STEP_THREE_STATUS.equals(creditTask.getStatus())) {
+				putAlertMsg("买家已经付款！");
+			} else {
+
+				Date currOperDate = creditTask.getReceiveDate();
+				Integer minuties = ((Long) ((System.currentTimeMillis() - currOperDate
+						.getTime()) / 1000 / 60)).intValue();
+				/**
+				 * 真正的逻辑 修改时间
+				 */
+				creditTask.setRemainTime(minuties + 20);
+				putAlertMsg("加时成功！");
+			}
+			putJumpPage("taskManager/task!initReleasedTast.php?platformType="
+					+ platformType);
+
+			return JUMP;
+		}
+	}
+
+	/**
+	 * 刷新排前
 	 * 
 	 * @param userVO
 	 * @return
@@ -225,6 +373,7 @@ public class CreditTaskService extends BaseService {
 	 * @param userVO
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public String initReceivedTast(CreditTaskVO creditTaskVO) throws Exception {
 		// 没有操作码验证就验证
 		String platformType = getPlatformType();
@@ -237,6 +386,47 @@ public class CreditTaskService extends BaseService {
 					+ getRequset().getQueryString());
 			return "operationValidate";
 		} else {
+			/**
+			 * 把状态为审核(-2) ，买家付款(2)的取出，设置它们的剩余时间 ，查看它们的剩余时间
+			 */
+			List<CreditTaskEntity> tasks = creditTaskDAO
+					.list(
+							"select  _task from CreditTaskEntity as _task   inner join _task.receivePerson as _user where _user.id=:userId and _task.type=:platformType and (_task.status='2' or _task.status='-2' ) ",
+							new String[] { "userId", "platformType" },
+							new Object[] { getLoginUser().getId(), platformType });
+			for (CreditTaskEntity creditTaskEntity : tasks) {
+				Date currOperDate = creditTaskEntity.getReceiveDate();
+				Integer minuties = ((Long) ((System.currentTimeMillis() - currOperDate
+						.getTime()) / 1000 / 60)).intValue();
+				// if (minuties > creditTaskEntity.getRemainTime()) {
+				// // 如果大于当前的剩余时间 就移出任务到发布任务区。
+				// UserEntity receiveUser = creditTaskEntity
+				// .getReceivePerson();
+				// /**
+				// * 人
+				// */
+				// receiveUser.setMoney(ArithUtils.add(receiveUser.getMoney(),
+				// creditTaskEntity.getMoney()));
+				// receiveUser
+				// .setReleaseDot(ArithUtils.add(receiveUser
+				// .getReleaseDot(), creditTaskEntity
+				// .getReleaseDot()));
+				// /**
+				// * 任务
+				// */
+				// creditTaskEntity.setReceivePerson(null);
+				// creditTaskEntity.setReceiveIP(null);
+				// creditTaskEntity.setBuyer(null);
+				// creditTaskEntity.setRemainTime(null);
+				// creditTaskEntity.setNowOpertationDate(null);
+				// creditTaskEntity.setStatus(TaskMananger.STEP_ONE_STATUS);
+				// } else {
+				creditTaskEntity.setRemainTime(creditTaskEntity.getRemainTime()
+						- minuties);
+			}
+			creditTaskDAO.flushSession();
+			// creditTaskDAO.clearSession();
+			// 分页查询
 			Long count = (Long) creditTaskDAO
 					.uniqueResultObject(
 							"select count(*) from CreditTaskEntity as _task inner join _task.receivePerson as _user   where     _user.id=:userId and   _task.type=:platformType ",
@@ -277,6 +467,47 @@ public class CreditTaskService extends BaseService {
 					+ getRequset().getQueryString());
 			return "operationValidate";
 		} else {
+			/**
+			 * 把状态为审核(-2) ，买家付款(2)的取出，设置它们的剩余时间 ，查看它们的剩余时间
+			 */
+			List<CreditTaskEntity> tasks = creditTaskDAO
+					.list(
+							"select  _task  from CreditTaskEntity as _task   inner join _task.releasePerson as _user where _user.id=:userId and _task.type=:platformType and (_task.status='2' or _task.status='-2' ) ",
+							new String[] { "userId", "platformType" },
+							new Object[] { getLoginUser().getId(), platformType });
+			for (CreditTaskEntity creditTaskEntity : tasks) {
+				Date currOperDate = creditTaskEntity.getReceiveDate();
+				Integer minuties = ((Long) ((System.currentTimeMillis() - currOperDate
+						.getTime()) / 1000 / 60)).intValue();
+				// if (minuties > creditTaskEntity.getRemainTime()) {
+				// // 如果大于当前的剩余时间 就移出任务到发布任务区。
+				// UserEntity receiveUser = creditTaskEntity
+				// .getReceivePerson();
+				// /**
+				// * 人
+				// */
+				// receiveUser.setMoney(ArithUtils.add(receiveUser.getMoney(),
+				// creditTaskEntity.getMoney()));
+				// receiveUser
+				// .setReleaseDot(ArithUtils.add(receiveUser
+				// .getReleaseDot(), creditTaskEntity
+				// .getReleaseDot()));
+				// /**
+				// * 任务
+				// */
+				// creditTaskEntity.setReceivePerson(null);
+				// creditTaskEntity.setReceiveIP(null);
+				// creditTaskEntity.setBuyer(null);
+				// creditTaskEntity.setRemainTime(null);
+				// creditTaskEntity.setNowOpertationDate(null);
+				// creditTaskEntity.setStatus(TaskMananger.STEP_ONE_STATUS);
+				// } else {
+				creditTaskEntity.setRemainTime(creditTaskEntity.getRemainTime()
+						- minuties);
+			}
+			creditTaskDAO.flushSession();
+			// creditTaskDAO.clearSession();
+			// 分页查询
 			Long count = (Long) creditTaskDAO
 					.uniqueResultObject(
 							"select count(*) from CreditTaskEntity as _task inner join _task.releasePerson as _user   where     _user.id=:userId and   _task.type=:platformType ",
@@ -381,7 +612,6 @@ public class CreditTaskService extends BaseService {
 		creditTaskEntity.setAddress(createAddress(creditTaskVO, taskMananger,
 				sellerID));
 		creditTaskEntity.setReleaseDot((float) dot);
-		creditTaskEntity.setRemainTime(20);
 		creditTaskEntity.setReleaseDate(new Date());
 		creditTaskEntity.setReleasePerson(userEntity);
 		creditTaskEntity.setType(platFormType);
@@ -511,7 +741,7 @@ public class CreditTaskService extends BaseService {
 		List<Object[]> result = creditTaskDAO
 				.pageQuery(
 						"select _task.testID , _task.releaseDate ,_user.username,_user.upgradeScore,_task.money,_task.updatePrice, "
-								+ "_task.goodTimeType,_task.releaseDot,_task.status ,_task.intervalHour,_task.desc,_task.address,_task.id" // index=12
+								+ "_task.goodTimeType,_task.releaseDot,_task.status ,_task.intervalHour,_task.desc,_task.address,_task.id,_task.grade" // index=13
 								+ " from CreditTaskEntity as _task inner join _task.releasePerson as _user where (_task.status!='0' or _task.status!='-1')  and   _task.type=:platformType order by   _task.releaseDate desc",
 						"platformType", platformType, creditTaskVO.getStart(),
 						creditTaskVO.getLimit());

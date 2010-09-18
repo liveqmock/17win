@@ -31,10 +31,10 @@ import org.springframework.stereotype.Controller;
 		@Result(name = "cancelTask", type = "chain", location = "/taskManager/task!initReleaseTask.php"),
 		@Result(name = "updateToFirstTask", type = "chain", location = "/taskManager/task!initReleasedTast.php"),
 		@Result(name = "initReceivedTast", location = "/credit/jyReceiveTask.jsp")
-		/**
-		 * 买家操作
-		 */
-		
+/**
+ * 买家操作
+ */
+
 })
 @Namespace("/taskManager")
 public class CreditTaskAction extends BaseAction {
@@ -47,7 +47,22 @@ public class CreditTaskAction extends BaseAction {
 	public String execute() throws Exception {
 		return INPUT;
 	}
-	/* 买家操作 */
+
+	/** ************************** 买家操作 ******************************* */
+	/**
+	 * 退出任务
+	 */
+	public String quitTask() throws Exception {
+		return creditTaskService.updateQuitTask(creditTaskVO);
+	}
+
+	/**
+	 * 已经付款
+	 */
+	public String payMoney() throws Exception {
+		return creditTaskService.updatePayTask(creditTaskVO);
+	}
+
 	/**
 	 * 接手操作
 	 * 
@@ -58,7 +73,17 @@ public class CreditTaskAction extends BaseAction {
 		return creditTaskService.updateReceiveTask(creditTaskVO);
 	}
 
-	/* 卖家操作 */
+	/** ********* 卖家操作 **************** */
+	/**
+	 * 加时
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String addTime() throws Exception {
+		return creditTaskService.updateAddTime(creditTaskVO);
+	}
+
 	/**
 	 * 任务排前
 	 * 

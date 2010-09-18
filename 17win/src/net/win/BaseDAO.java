@@ -8,6 +8,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
@@ -452,5 +453,26 @@ public abstract class BaseDAO<T> extends HibernateDaoSupport {
 		String hql = "from " + entityClass.getSimpleName();
 		Query queryObject = getSession().createQuery(hql);
 		return queryObject.list();
+	}
+
+	/**
+	 * 获取session
+	 */
+	public Session obtainSession() throws Exception {
+		return getSession();
+	}
+
+	/**
+	 * 清空session
+	 */
+	public void clearSession() throws Exception {
+		getSession().clear();
+	}
+
+	/**
+	 * 刷新session
+	 */
+	public void flushSession() throws Exception {
+		getSession().flush();
 	}
 }

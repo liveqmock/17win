@@ -55,182 +55,155 @@
 							</DIV>
 						</DIV>
 					</DIV>
-					<DIV style="MARGIN-TOP: 2px; BACKGROUND: #F0F9FF; WIDTH: 910px">
-						<DIV style="CLEAR: both; WIDTH: 910px; BACKGROUND-COLOR: #F0F9FF">
-							<DIV style="CLEAR: both; WIDTH: 100%">
-								<DIV style="CLEAR: both; WIDTH: 100%; HEIGHT: 45px">
-									<DIV class=c_01 style="WIDTH: 15%">
-										任务编号
-									</DIV>
-									<DIV class=c_01 style="WIDTH: 15%">
-										发布人
-									</DIV>
-									<DIV class=c_01 style="WIDTH: 15%">
-										任务价格
-									</DIV>
-									<DIV class=c_01 style="WIDTH: 15%">
-										评价方式
-									</DIV>
-									<DIV class=c_01 style="WIDTH: 20%">
-										任务状态
-									</DIV>
-									<DIV class=c_01 style="CLEAR: right; WIDTH: 20%">
-										操&nbsp;&nbsp;作
-									</DIV>
-								</DIV>
-							</DIV>
-						</DIV>
-					</DIV>
-
-					<DIV style="MARGIN-TOP: 4px; WIDTH: 910px;">
+					<table cellpadding="0" cellspacing="0"
+						style="CLEAR: both; BORDER-RIGHT: #abbec8 1px solid; BORDER-TOP: #abbec8 1px solid; MARGIN-TOP: 0px; BORDER-LEFT: #abbec8 1px solid; WIDTH: 910px; BORDER-BOTTOM: #abbec8 1px solid;">
+						<tr
+							style="CLEAR: both; WIDTH: 98%; LINE-HEIGHT: 35px; HEIGHT: 35px; background: #E5F7FB">
+							<td
+								style="FONT-WEIGHT: bold; FONT-SIZE: 14px; WIDTH: 145px; COLOR: #006600; TEXT-ALIGN: center">
+								<img src="images/j_z.gif" width="13" height="16" title="平台担保">
+								任务编号
+							</td>
+							<td
+								style="FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #006600; TEXT-ALIGN: center">
+								发布人
+							</td>
+							<td
+								style="FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #006600; TEXT-ALIGN: center">
+								任务价格
+							</td>
+							<td
+								style="FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #006600; TEXT-ALIGN: center">
+								打分/好评
+							</td>
+							<td
+								style="FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #006600; TEXT-ALIGN: center">
+								任务状态
+							</td>
+							<td
+								style="FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #006600; TEXT-ALIGN: center">
+								操&nbsp;&nbsp;作
+							</td>
+						</tr>
 						<s:iterator value="#request.result" status="status" id="task">
-							<TABLE
-								<s:if test="status.odd"  >
-									style="MARGIN: 3px; background: #cde0ee"  
-								</s:if>
-								<s:else>
-									style="MARGIN: 3px; background: #FFECD5"  
-								</s:else>
-								cellSpacing="2" cellPadding="0" width="100%" border="0">
-								<TBODY>
-									<TR>
-										<TD width="15%" align="left">
-											<s:property value="#task[0]" />
-										</TD>
-										<TD>
-										<TD align="center" width="15%" nowrap="nowrap">
-											<SPAN style="Z-INDEX: 20; POSITION: relative"> <a
-												href="../user/send_message.asp?sendname=shengjun0911"
-												title="发送站内信息" target="_blank"><s:property
-														value="#task[2]" /> </a> </SPAN>(
-											<font color=red>在线</font>）
-										</TD>
-										<TD align="center" width="15%">
-											<s:property value="#task[4]" />
-											元
-											<img src="images/zf.gif" width="13" height="16" title="平台担保">
-										</TD>
-										<TD align="center" width="15%">
-											<s:if test="#task[6]==1">马上好评</s:if>
-											<s:elseif test="#task[6]==2">一天后好评</s:elseif>
-											<s:elseif test="#task[6]==3">两天后好评</s:elseif>
-											<s:elseif test="#task[6]==4">三天后好评</s:elseif>
-											<s:elseif test="#task[6]==5">自定义好评(<s:property
-													value="#task[9]" />)</s:elseif>
-
-										</TD>
-										<TD width="20%">
-											<s:if test="#task[8]==1">
-												<font color="red" style="font-weight: bold;">等待接收人...</font>
-											</s:if>
-											<s:elseif test="#task[8]==6">
-												<font color="green" style="font-weight: bold;">任务已经结束</font>
-											</s:elseif>
-											<s:else>
-												<font color="green" style="font-weight: bold;">此任务进行中...</font>
-											</s:else>
-										</TD>
-										<TD style="PADDING-LEFT: 50px" width="20%">
-											<s:if test="#task[8]==1">
-												<s:if test="#task[2]==#session.userLogin.username">
-													<font color="red"> 不能接自己的任务</font>
-												</s:if>
-												<s:else>
-													<a title="接手，并完成任务可获得存款和发布点" style="CURSOR: pointer"
-														onClick="receiveTask('<s:property value="#task[12]"/>')">
-														<span class="anniu">接手任务</span> </a>
-												</s:else>
-											</s:if>
-											<s:elseif test="#task[8]==6">
-												<font color="green" style="font-weight: bold;">完成</font>
-											</s:elseif>
-											<s:else>
-												<font color="green" style="font-weight: bold;">操作中...</font>
-											</s:else>
-										</TD>
-									</TR>
-									<TR>
-										<TD align="left">
-											<s:date name="#task[1]" format="yyyy-MM-dd hh-mm-ss" />
-										</TD>
-										<TD>
-										<TD align="center" width="15%">
-
-											<img
-												src="images/<s:property value="@net.win.utils.StrategyUtils@getLevelImg(#task[3])" />"
-												alt="刷客经验积分：<s:property value="#task[3]" />">
-										</TD>
-										<TD align="center" width="15%">
-											<s:if test="#task[5]">
+							<tr>
+								<td valign="top" align="center">
+									<s:property value="#task[0]" />
+									<br>
+									<s:date name="#task[1]" format="yyyy-MM-dd hh-mm-ss" />
+								</td>
+								<td valign="top" align="center">
+									<SPAN style="Z-INDEX: 20; POSITION: relative"> <a
+										href="../user/send_message.asp?sendname=shengjun0911"
+										title="发送站内信息" target="_blank"><s:property
+												value="#task[2]" /> </a> </SPAN>(
+									<font color=red>在线</font>）
+									<br>
+									<img
+										src="images/<s:property value="@net.win.utils.StrategyUtils@getLevelImg(#task[3])" />"
+										alt="刷客经验积分：<s:property value="#task[3]" />">
+								</td>
+								<td valign="top" align="center">
+									<font color="red"><s:property value="#task[4]" /> </font> 元 (
+									<s:if test="#task[5]">
 												需改价格
-											</s:if>
-											<s:else>
+									</s:if>
+									<s:else>
 												金额相等
-											</s:else>
-										</TD>
-										<TD align="center" width="15%">
-											<IMG alt=延迟收货 src=images/shiwu.gif>
-											发布点
-											<s:property value="#task[7]" />
-											个
-										</TD>
-										<TD style="PADDING-LEFT: 50px" width="20%">
-										</TD>
-										<TD style="PADDING-LEFT: 50px" width="20%">
-										</TD>
-									</TR>
-									<TR>
-										<TD align="left" colspan="6">
-											<font color="red" style="font-weight: bold;"> 任务描述：<s:property
-													value="#task[10]" /> </font>
-										</TD>
-									</TR>
+									</s:else>
+									)
+									<br>
+									<font color="red"><s:property value="#task[7]" /> </font> 个发布点
+									<IMG alt=延迟收货 src=images/shiwu.gif>
+								</td>
+								<td valign="top" align="center">
+
+									<s:if test="#task[13]==1">全部打5分</s:if>
+									<s:elseif test="#task[13]==2">全部不打分</s:elseif>
+									<s:elseif test="#task[13]==3">带字5分好评</s:elseif>
+									<br>
+									<s:if test="#task[6]==1">马上好评</s:if>
+									<s:elseif test="#task[6]==2">一天后好评</s:elseif>
+									<s:elseif test="#task[6]==3">两天后好评</s:elseif>
+									<s:elseif test="#task[6]==4">三天后好评</s:elseif>
+									<s:elseif test="#task[6]==5">自定义好评(<s:property
+											value="#task[9]" />)</s:elseif>
 
 
-									<TR>
-										<TD colspan="6" align="left">
-											<font color="red" style="font-weight: bold;"> 收货地址：<s:property
-													value="#task[11]" /> </font>
-										</TD>
+								</td>
+								<td valign="top" align="center">
+									<s:if test="#task[8]==1">
+										<font color="red" style="font-weight: bold;">等待接收人...</font>
+									</s:if>
+									<s:elseif test="#task[8]==6">
+										<font color="green" style="font-weight: bold;">任务已经结束</font>
+									</s:elseif>
+									<s:else>
+										<font color="green" style="font-weight: bold;">此任务进行中...</font>
+									</s:else>
+								</td>
+								<td valign="top" align="center">
+									<s:if test="#task[8]==1">
+										<s:if test="#task[2]==#session.userLogin.username">
+											<font color="red"> 不能接自己的任务</font>
+										</s:if>
+										<s:else>
+											<a title="接手，并完成任务可获得存款和发布点" style="CURSOR: pointer"
+												onClick="receiveTask('<s:property value="#task[12]"/>')">
+												<span class="anniu">接手任务</span> </a>
+										</s:else>
+									</s:if>
+									<s:elseif test="#task[8]==6">
+										<font color="green" style="font-weight: bold;">完成</font>
+									</s:elseif>
+									<s:else>
+										<font color="green" style="font-weight: bold;">操作中...</font>
+									</s:else>
+								</TD>
+							</tr>
 
-									</TR>
-								</TBODY>
-							</TABLE>
+							<!-- 分隔 -->
+							<TR>
+								<TD align="left" colspan="6">
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<font color="red" style="font-weight: bold;"> 任务描述：<s:property
+											value="#task[10]" /> </font>
+								</TD>
+							</TR>
+							<tr>
+								<td colspan="7">
+									<hr width="98%"
+										style="height: 1px; border: none; border-top: 1px dashed #0066CC;">
+								</td>
+							</tr>
 						</s:iterator>
-					</DIV>
-					<DIV class="tt5">
-						共
-						<font color=blue><b>100</b> </font> 条主题&nbsp;&nbsp;&nbsp;首页
-						上一页&nbsp;
-						<a href='index.asp?PageNo=2'>下一页</a>&nbsp;
-						<a href='index.asp?PageNo=7'>尾页</a>&nbsp;页次：
-						<strong><font color="red">1</font>/7</strong>页 &nbsp;
-						<b>15</b>条主题/页&nbsp;转到：
-						<select name='page' size='1'
-							onchange="javascript:window.location='index.asp?PageNo='+this.options[this.selectedIndex].value;">
-							<option value='1'>
-								第1页
-							</option>
-							<option value='2'>
-								第2页
-							</option>
-							<option value='3'>
-								第3页
-							</option>
-							<option value='4'>
-								第4页
-							</option>
-							<option value='5'>
-								第5页
-							</option>
-							<option value='6'>
-								第6页
-							</option>
-							<option value='7'>
-								第7页
-							</option>
-						</select>
-					</div>
+						<TR>
+							<TD colspan="6">
+								共
+								<font color="blue"><b>34</b> </font> 条主题&nbsp;&nbsp;&nbsp;首页
+								上一页&nbsp;
+								<a href='mymission.asp?PageNo=2'>下一页</a>&nbsp;
+								<a href='mymission.asp?PageNo=4'>尾页</a>&nbsp;页次：
+								<strong><font color="red">1</font>/4</strong>页 &nbsp;
+								<b>10</b>条主题/页&nbsp;转到：
+								<select name='page' size='1'
+									onchange="javascript:window.location='mymission.asp?PageNo='+this.options[this.selectedIndex].value;">
+									<option value='1' selected="selected">
+										第1页
+									</option>
+									<option value='2'>
+										第2页
+									</option>
+									<option value='3'>
+										第3页
+									</option>
+									<option value='4'>
+										第4页
+									</option>
+								</select>
+							</TD>
+						</TR>
+					</table>
 				</div>
 			</div>
 		</s:form>
@@ -238,8 +211,8 @@
 		<div id="buyerDIV" title="选择接手小号">
 			<s:iterator value="#request.resultBuyers" id="buyer" status="status">
 				<s:if test="#status.index==0">
-					<input type="radio" value="<s:property value="#buyer.id" />"  
-					checked="checked"	name="buyerName" />
+					<input type="radio" value="<s:property value="#buyer.id" />"
+						checked="checked" name="buyerName" />
 				</s:if>
 				<s:else>
 					<input type="radio" value="<s:property value="#buyer.id" />"

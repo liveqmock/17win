@@ -25,7 +25,7 @@ public class CreditTaskEntity extends TaskBaseEntity {
 	@Column(name = "MONEY_", nullable = false)
 	private Double money;
 	// 所剩时间(分钟)
-	@Column(name = "REMAIN_TIME_", nullable = false)
+	@Column(name = "REMAIN_TIME_")
 	private Integer remainTime = 20;
 	// 状态
 	// (-1因为申述被暂停(但是要判断12小时，不能像2000w一样不能判断) ,0 还没开始（定时任务有用）
@@ -62,8 +62,8 @@ public class CreditTaskEntity extends TaskBaseEntity {
 	private Date timeingTime;
 
 	// 当前操作的时间
-	@Column(name = "NOW_OPERTATION_DATE_")
-	private Date nowOpertationDate;
+	@Column(name = "RECEIVE_DATE_")
+	private Date receiveDate;
 
 	// 接收人IP
 	@Column(name = "RECEIVE_IP_", length = 20)
@@ -201,14 +201,6 @@ public class CreditTaskEntity extends TaskBaseEntity {
 		this.address = address;
 	}
 
-	public Date getNowOpertationDate() {
-		return nowOpertationDate;
-	}
-
-	public void setNowOpertationDate(Date nowOpertationDate) {
-		this.nowOpertationDate = nowOpertationDate;
-	}
-
 	public String getReceiveIP() {
 		return receiveIP;
 	}
@@ -216,4 +208,14 @@ public class CreditTaskEntity extends TaskBaseEntity {
 	public void setReceiveIP(String receiveIP) {
 		this.receiveIP = receiveIP;
 	}
+
+	public Date getReceiveDate() {
+		return receiveDate;
+	}
+
+	public void setReceiveDate(Date receiveDate) {
+		this.receiveDate = receiveDate;
+	}
+
+ 
 }
