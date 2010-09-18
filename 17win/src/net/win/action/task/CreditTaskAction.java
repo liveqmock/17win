@@ -30,9 +30,11 @@ import org.springframework.stereotype.Controller;
 		@Result(name = "initReleasedTast", location = "/credit/jyReleaseTask.jsp"),
 		@Result(name = "cancelTask", type = "chain", location = "/taskManager/task!initReleaseTask.php"),
 		@Result(name = "updateToFirstTask", type = "chain", location = "/taskManager/task!initReleasedTast.php"),
-		@Result(name = "initReceivedTast",  location = "/credit/jyReceiveTask.jsp")
+		@Result(name = "initReceivedTast", location = "/credit/jyReceiveTask.jsp")
+		/**
+		 * 买家操作
+		 */
 		
-
 })
 @Namespace("/taskManager")
 public class CreditTaskAction extends BaseAction {
@@ -45,15 +47,18 @@ public class CreditTaskAction extends BaseAction {
 	public String execute() throws Exception {
 		return INPUT;
 	}
+	/* 买家操作 */
 	/**
-	 * 初始化已接任务
+	 * 接手操作
 	 * 
 	 * @return
 	 * @throws Exception
 	 */
-	public String initReceivedTast() throws Exception {
-		return creditTaskService.initReceivedTast(creditTaskVO);
+	public String receiveTask() throws Exception {
+		return creditTaskService.updateReceiveTask(creditTaskVO);
 	}
+
+	/* 卖家操作 */
 	/**
 	 * 任务排前
 	 * 
@@ -72,6 +77,16 @@ public class CreditTaskAction extends BaseAction {
 	 */
 	public String cancelTask() throws Exception {
 		return creditTaskService.updateCancelTask(creditTaskVO);
+	}
+
+	/**
+	 * 初始化已接任务
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String initReceivedTast() throws Exception {
+		return creditTaskService.initReceivedTast(creditTaskVO);
 	}
 
 	/**

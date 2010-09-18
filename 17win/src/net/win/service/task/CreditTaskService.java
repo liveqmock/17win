@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import net.win.BaseService;
 import net.win.TaskMananger;
@@ -31,10 +32,15 @@ import net.win.vo.SellerVO;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Service;
+
+import com.sun.management.jmx.JMProperties;
+
+import sun.security.krb5.internal.PAEncTSEnc;
+
 /**
  * 
  * @author xgj
- *
+ * 
  */
 @SuppressWarnings("unused")
 @Service("creditTaskService")
@@ -50,48 +56,81 @@ public class CreditTaskService extends BaseService {
 	@Resource
 	private CreditTaskRepositoryDAO creditTaskRepositoryDAO;
 
-	/**
-	 * 初始化已接任务
-	 * ******
+	/***************************************************************************
+	 * ，买家操作************* /** 刷新排前
+	 * 
 	 * @param userVO
 	 * @return
 	 */
-	public String initReceivedTast(CreditTaskVO creditTaskVO) throws Exception {
-		// 没有操作码验证就验证
+	public String updateReceiveTask(CreditTaskVO creditTaskVO) throws Exception {
 		String platformType = getPlatformType();
-		if (StringUtils.isBlank(platformType)) {
-			WinUtils.throwIllegalityException(getLoginUser().getUsername()
-					+ "试图越过取消重填操作！ ");
+
+		UserLoginInfo loginInfo = getLoginUser();
+
+		Long taskId = Long.parseLong(getByParam("taskId"));
+		CreditTaskEntity creditTask = creditTaskDAO.get(taskId);
+		Long buyeId = Long.parseLong(getByParam("buyerId"));
+		UserEntity userEntity = userDAO.get(loginInfo.getId());
+		// 验证状态
+		if (!TaskMananger.STEP_ONE_STATUS.equals(creditTask.getStatus())) {
+			WinUtils.throwIllegalityException(loginInfo.getUsername()
+					+ "试图越过接受任务操作！");
 		}
-		if (!getLoginUser().getOperationCodeStatus()) {
-			putByRequest("preURL", getRequset().getRequestURL() + "?"
-					+ getRequset().getQueryString());
-			return "operationValidate";
-		} else {
-			Long count = (Long) creditTaskDAO
-					.uniqueResultObject(
-							"select count(*) from CreditTaskEntity as _task inner join _task.receivePerson as _user   where     _user.id=:userId and   _task.type=:platformType ",
-							new String[] { "userId", "platformType" },
-							new Object[] { getLoginUser().getId(), platformType });
-			List<Object[]> result = creditTaskDAO
-					.pageQuery(
-							"select _task.testID , _task.releaseDate ,_fbuser.username,_fbuser.qq,_task.money,_task.updatePrice ,_task.releaseDot "// 6
-									+ ", _task.itemUrl , _seller.name,_seller.shopURL,_buyer.name,_jsuser.upgradeScore,_task.status" // 12
-									+ ", _task.remainTime,_task.goodTimeType ,_task.intervalHour,_task.desc,_task.address ,_task.grade,_task.id " // index=19
-									+ " from CreditTaskEntity as _task inner join _task.releasePerson as _fbuser  inner join _task.seller as _seller left join _task.receivePerson as _jsuser left join _task.buyer as _buyer  where     _jsuser.id=:userId and   _task.type=:platformType order by _task.releaseDate desc",
-							new String[] { "userId", "platformType" },
-							new Object[] { getLoginUser().getId(), platformType },
-							creditTaskVO.getStart(), creditTaskVO.getLimit());
-			creditTaskVO.setDataCount(count.intValue());
-			putPlatformByRequest(WinUtils.changeType2Platform(platformType));
-			putPlatformTypeByRequest(platformType);
-			putByRequest("result", result);
-			return "initReceivedTast";
+		/**
+		 * 判断
+		 */
+		// 金钱
+		if (userEntity.getMoney() < creditTask.getMoney()) {
+			putAlertMsg("您当前的金额不够" + creditTask.getMoney() + "元,不能接此任务！");
+			putJumpPage("taskManager/task!initTask.php?platformType="
+					+ platformType);
+			return JUMP;
 		}
+		// 发布点
+		if (userEntity.getReleaseDot() < creditTask.getReleaseDot()) {
+			putJumpPage("taskManager/task!initTask.php?platformType="
+					+ platformType);
+			putAlertMsg("您当前的发布点不够" + creditTask.getMoney() + ",不能接此任务！");
+			return JUMP;
+		}
+		if (buyeId == null) {
+			WinUtils.throwIllegalityException(loginInfo.getUsername()
+					+ "试图越过接受任务操作！");
+		}
+		/**
+		 * 改变用户属性
+		 */
+		// 金钱
+		userEntity.setMoney(ArithUtils.sub(userEntity.getMoney(), creditTask
+				.getMoney()));
+		// 发布点
+		userEntity.setReleaseDot(ArithUtils.sub(userEntity.getReleaseDot(),
+				creditTask.getReleaseDot()));
+		/**
+		 * 改变任务属性
+		 */
+		// 接收人
+		creditTask.setReceivePerson(userEntity);
+		// Ip
+		creditTask.setReceiveIP(getIpAddr());
+		BuyerEntity buyerEntity = new BuyerEntity();
+		buyerEntity.setId(buyeId);
+		creditTask.setBuyer(buyerEntity);
+		// 保护就到审核状态
+		if (creditTask.getProtect()) {
+			creditTask.setStatus(TaskMananger.AUDIT_STATUS);
+		}else{
+			creditTask.setStatus(TaskMananger.STEP_TWO_STATUS);
+		}
+		putJumpPage("taskManager/task!initReceivedTast.php?platformType="
+				+ platformType);
+		updateUserLoginInfo(userEntity);
+		putAlertMsg("恭喜您，你已经接手了此任务！");
+		return JUMP;
 	}
 
-	/**
-	 * 刷新排前
+	/***************************************************************************
+	 * 卖家操作************* /** 刷新排前
 	 * 
 	 * @param userVO
 	 * @return
@@ -175,6 +214,48 @@ public class CreditTaskService extends BaseService {
 			putAlertMsg("取消成功，金额已返回！");
 			updateUserLoginInfo(userEntity);
 			return "cancelTask";
+		}
+	}
+
+	/** ***************************** */
+
+	/**
+	 * 初始化已接任务 ******
+	 * 
+	 * @param userVO
+	 * @return
+	 */
+	public String initReceivedTast(CreditTaskVO creditTaskVO) throws Exception {
+		// 没有操作码验证就验证
+		String platformType = getPlatformType();
+		if (StringUtils.isBlank(platformType)) {
+			WinUtils.throwIllegalityException(getLoginUser().getUsername()
+					+ "试图越过取消重填操作！ ");
+		}
+		if (!getLoginUser().getOperationCodeStatus()) {
+			putByRequest("preURL", getRequset().getRequestURL() + "?"
+					+ getRequset().getQueryString());
+			return "operationValidate";
+		} else {
+			Long count = (Long) creditTaskDAO
+					.uniqueResultObject(
+							"select count(*) from CreditTaskEntity as _task inner join _task.receivePerson as _user   where     _user.id=:userId and   _task.type=:platformType ",
+							new String[] { "userId", "platformType" },
+							new Object[] { getLoginUser().getId(), platformType });
+			List<Object[]> result = creditTaskDAO
+					.pageQuery(
+							"select _task.testID , _task.releaseDate ,_fbuser.username,_fbuser.qq,_task.money,_task.updatePrice ,_task.releaseDot "// 6
+									+ ", _task.itemUrl , _seller.name,_seller.shopURL,_buyer.name,_jsuser.upgradeScore,_task.status" // 12
+									+ ", _task.remainTime,_task.goodTimeType ,_task.intervalHour,_task.desc,_task.address ,_task.grade,_task.id " // index=19
+									+ " from CreditTaskEntity as _task inner join _task.releasePerson as _fbuser  inner join _task.seller as _seller left join _task.receivePerson as _jsuser left join _task.buyer as _buyer  where     _jsuser.id=:userId and   _task.type=:platformType order by _task.releaseDate desc",
+							new String[] { "userId", "platformType" },
+							new Object[] { getLoginUser().getId(), platformType },
+							creditTaskVO.getStart(), creditTaskVO.getLimit());
+			creditTaskVO.setDataCount(count.intValue());
+			putPlatformByRequest(WinUtils.changeType2Platform(platformType));
+			putPlatformTypeByRequest(platformType);
+			putByRequest("result", result);
+			return "initReceivedTast";
 		}
 	}
 
@@ -413,11 +494,14 @@ public class CreditTaskService extends BaseService {
 	 */
 	public String initTask(CreditTaskVO creditTaskVO) throws Exception {
 		String platformType = getPlatformType();
-		if (platformType == null) {
-			platformType = getPlatformType();
+		if (!getLoginUser().getOperationCodeStatus()) {
+			putByRequest("preURL", getRequset().getRequestURL() + "?"
+					+ getRequset().getQueryString());
+			return "operationValidate";
 		}
 		if (platformType == null) {
-			throw new NoPageException("初始化任务，没有platformType");
+			WinUtils.throwIllegalityException(getLoginUser().getUsername()
+					+ "试图越过初始化任务!");
 		}
 		Long count = (Long) creditTaskDAO
 				.uniqueResultObject(
@@ -427,17 +511,20 @@ public class CreditTaskService extends BaseService {
 		List<Object[]> result = creditTaskDAO
 				.pageQuery(
 						"select _task.testID , _task.releaseDate ,_user.username,_user.upgradeScore,_task.money,_task.updatePrice, "
-								+ "_task.goodTimeType,_task.releaseDot,_task.status ,_task.intervalHour,_task.desc,_task.address" // index=11
+								+ "_task.goodTimeType,_task.releaseDot,_task.status ,_task.intervalHour,_task.desc,_task.address,_task.id" // index=12
 								+ " from CreditTaskEntity as _task inner join _task.releasePerson as _user where (_task.status!='0' or _task.status!='-1')  and   _task.type=:platformType order by   _task.releaseDate desc",
 						"platformType", platformType, creditTaskVO.getStart(),
 						creditTaskVO.getLimit());
-		List<BuyerEntity> buyers = userDAO.list(
-				" from BuyerEntity  as _b where _b.user.id=:userId  and  _b.type=:type"  ,new String[]{"userId","type"},
-				new Object[]{getLoginUser().getId(),platformType});
+		List<BuyerEntity> buyers = userDAO
+				.list(
+						" from BuyerEntity  as _b where _b.user.id=:userId  and  _b.type=:type",
+						new String[] { "userId", "type" }, new Object[] {
+								getLoginUser().getId(), platformType });
 		List<BuyerVO> resultBuyers = new ArrayList<BuyerVO>(buyers.size());
-		if(buyers.size()==0){
+		if (buyers.size() == 0) {
 			putJumpPage("userInfoManager/info!initSellerAndBuyer.php");
-			putAlertMsg("您的"+WinUtils.changeType2Platform(platformType)+"平台还没有绑定买号！");
+			putAlertMsg("您的" + WinUtils.changeType2Platform(platformType)
+					+ "平台还没有绑定买号！");
 			return JUMP;
 		}
 		for (BuyerEntity buyerEntity : buyers) {
@@ -474,5 +561,23 @@ public class CreditTaskService extends BaseService {
 		}
 		return StringUtils.isBlank(address.toString()) ? "无" : address
 				.toString();
+	}
+
+	private String getIpAddr() {
+		HttpServletRequest request = getRequset();
+		String ip = request.getHeader("x-forwarded-for");
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("Proxy-Client-IP");
+		}
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("WL-Proxy-Client-IP");
+		}
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getRemoteAddr();
+		}
+		if (ip.indexOf(",") != -1) {
+			ip = ip.split(",", 2)[0];
+		}
+		return ip;
 	}
 }

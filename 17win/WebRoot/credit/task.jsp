@@ -6,9 +6,12 @@
 		<s:include value="../common/header.jsp"></s:include>
 		<LINK href="css/Css.css" type=text/css rel=stylesheet>
 		<LINK href="css/header.css" type=text/css rel=stylesheet>
+		<link href="css/excite-bike/jquery-ui-1.8.4.custom.css"
+			rel="stylesheet" type="text/css" />
 		<LINK href="css/index.css" type=text/css rel=stylesheet>
 		<LINK href="css/top_bottom.css" type="text/css" rel="stylesheet">
-		<SCRIPT src="js/jieducm_pupu.js" type="text/javascript"></SCRIPT>
+		<SCRIPT src="js/jquery-ui-1.8.4.custom.min.js" type="text/javascript"></SCRIPT>
+		<SCRIPT src="credit/task.js" type="text/javascript"></SCRIPT>
 	</HEAD>
 	<BODY>
 		<s:include value="../common/title.jsp"></s:include>
@@ -39,9 +42,13 @@
 								<A href="?sort=5"><SPAN class=anniu>500元以上区</SPAN> </A>
 							</DIV>
 							<DIV style="CLEAR: right; MARGIN-TOP: 12px; FLOAT: right">
-								自定义刷新时间
+								刷新时间
 								<input type="text" value="" style="width: 25px"
 									title="不填写或则0表示不自动刷新" />
+								<input type="hidden"
+									value="<s:property value="#request.platformType"/>"
+									id="platformType" />
+								<input type="hidden" id="currTaskId" />
 								秒
 								<A title=点击刷新 href="javascript:location.reload(true);"
 									class="yell_font"> <SPAN class=anniu>刷新页面 任务不断跳出</SPAN> </A>
@@ -129,10 +136,9 @@
 													<font color="red"> 不能接自己的任务</font>
 												</s:if>
 												<s:else>
-													<img src="images/online_admin.gif" align="middle">
 													<a title="接手，并完成任务可获得存款和发布点" style="CURSOR: pointer"
-														onClick="showxiao('201082722162223014','2')"> <span
-														class="anniu">接手任务</span> </a>
+														onClick="receiveTask('<s:property value="#task[12]"/>')">
+														<span class="anniu">接手任务</span> </a>
 												</s:else>
 											</s:if>
 											<s:elseif test="#task[8]==6">
@@ -176,8 +182,7 @@
 									<TR>
 										<TD align="left" colspan="6">
 											<font color="red" style="font-weight: bold;"> 任务描述：<s:property
-													value="#task[10]" />
-											</font>
+													value="#task[10]" /> </font>
 										</TD>
 									</TR>
 
@@ -185,8 +190,7 @@
 									<TR>
 										<TD colspan="6" align="left">
 											<font color="red" style="font-weight: bold;"> 收货地址：<s:property
-													value="#task[11]" />
-											</font>
+													value="#task[11]" /> </font>
 										</TD>
 
 									</TR>
@@ -231,5 +235,18 @@
 			</div>
 		</s:form>
 		<s:include value="../common/footDuan.jsp"></s:include>
+		<div id="buyerDIV" title="选择接手小号">
+			<s:iterator value="#request.resultBuyers" id="buyer" status="status">
+				<s:if test="#status.index==0">
+					<input type="radio" value="<s:property value="#buyer.id" />"  
+					checked="checked"	name="buyerName" />
+				</s:if>
+				<s:else>
+					<input type="radio" value="<s:property value="#buyer.id" />"
+						name="buyerName" />
+				</s:else>
+				<s:property value="#buyer.name" />
+			</s:iterator>
+		</div>
 	</BODY>
 </HTML>
