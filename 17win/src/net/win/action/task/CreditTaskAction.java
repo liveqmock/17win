@@ -29,7 +29,9 @@ import org.springframework.stereotype.Controller;
 		@Result(name = "initReleaseTaskFail", type = "chain", location = "/taskManager/task!initTask.php"),
 		@Result(name = "initReleasedTast", location = "/credit/jyReleaseTask.jsp"),
 		@Result(name = "cancelTask", type = "chain", location = "/taskManager/task!initReleaseTask.php"),
-		@Result(name = "updateToFirstTask", type = "chain", location = "/taskManager/task!initReleasedTast.php")
+		@Result(name = "updateToFirstTask", type = "chain", location = "/taskManager/task!initReleasedTast.php"),
+		@Result(name = "initReceivedTast",  location = "/credit/jyReceiveTask.jsp")
+		
 
 })
 @Namespace("/taskManager")
@@ -43,7 +45,15 @@ public class CreditTaskAction extends BaseAction {
 	public String execute() throws Exception {
 		return INPUT;
 	}
-
+	/**
+	 * 初始化已接任务
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String initReceivedTast() throws Exception {
+		return creditTaskService.initReceivedTast(creditTaskVO);
+	}
 	/**
 	 * 任务排前
 	 * 

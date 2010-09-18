@@ -2,7 +2,10 @@ var submitFlag = true;
 $(document).ready(function() {
 			$("#addBtn").button();
 			$("#addBtn").bind("click", function() {
+						$("#addtableDIV input[type='text']").val("");
+						$("input[name='type'][value='1']").attr("checked",true);
 						$("#addtableDIV").dialog("open");
+						
 						$('.sellerClass').show();
 						$('.sellerClass input select').attr("disabled", true);
 						$('.buyerClass').hide();
@@ -45,6 +48,7 @@ $(document).ready(function() {
 					});
 
 			$("[name='type']").bind("click", function() {
+						submitFlag = true;
 						if ($(this).val() == "1") {
 							$('.sellerClass').show();
 							$('.buyerClass').hide();
@@ -83,6 +87,10 @@ function selectCity(obj) {
 // 选择县区
 // 验证
 function validateForm() {
+	if (!submitFlag) {
+		alert("填写的资料不正确！");
+		return false;
+	}
 	if ($("[name='type']:checked").val() == "1") {
 		if (Validater.isBlank($("#sellerName").val())) {
 			alert("卖号不能为空！");
@@ -102,12 +110,13 @@ function beforeBlur(obj) {
 }
 // 买家失去焦点
 function obtainBuyer(obj) {
+	var type = $("#platformType").val();
 	if (Validater.isBlank($(obj).val())) {
 		changeStyle(obj, '0', '不能为空！');
 		submitFlag = false;
 	} else {
-		if ($("input[platformType='" + type + "'][buyerName='" + $(obj).val() + "']")
-				.size() > 0) {
+		if ($("input[platformType='" + type + "'][buyerName='" + $(obj).val()
+				+ "']").size() > 0) {
 			changeStyle(obj, '0', '买号已经存在！');
 			alert("买号已经存在！");
 			return false;

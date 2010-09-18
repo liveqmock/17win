@@ -76,7 +76,7 @@ public class CreditTaskService extends BaseService {
 			List<Object[]> result = creditTaskDAO
 					.pageQuery(
 							"select _task.testID , _task.releaseDate ,_fbuser.username,_fbuser.qq,_task.money,_task.updatePrice ,_task.releaseDot "// 6
-									+ ", _task.itemUrl , _seller.name,__seller.shopURL,_buyer.name_,_jsuser.upgradeScore,_task.status" // 12
+									+ ", _task.itemUrl , _seller.name,_seller.shopURL,_buyer.name,_jsuser.upgradeScore,_task.status" // 12
 									+ ", _task.remainTime,_task.goodTimeType ,_task.intervalHour,_task.desc,_task.address ,_task.grade,_task.id " // index=19
 									+ " from CreditTaskEntity as _task inner join _task.releasePerson as _fbuser  inner join _task.seller as _seller left join _task.receivePerson as _jsuser left join _task.buyer as _buyer  where     _jsuser.id=:userId and   _task.type=:platformType order by _task.releaseDate desc",
 							new String[] { "userId", "platformType" },
@@ -86,7 +86,7 @@ public class CreditTaskService extends BaseService {
 			putPlatformByRequest(WinUtils.changeType2Platform(platformType));
 			putPlatformTypeByRequest(platformType);
 			putByRequest("result", result);
-			return "initReleasedTast";
+			return "initReceivedTast";
 		}
 	}
 
@@ -432,9 +432,14 @@ public class CreditTaskService extends BaseService {
 						"platformType", platformType, creditTaskVO.getStart(),
 						creditTaskVO.getLimit());
 		List<BuyerEntity> buyers = userDAO.list(
-				" from BuyerEntity  as _b where _b.user.id=:userId", "userId",
-				getLoginUser().getId());
+				" from BuyerEntity  as _b where _b.user.id=:userId  and  _b.type=:type"  ,new String[]{"userId","type"},
+				new Object[]{getLoginUser().getId(),platformType});
 		List<BuyerVO> resultBuyers = new ArrayList<BuyerVO>(buyers.size());
+		if(buyers.size()==0){
+			putJumpPage("userInfoManager/info!initSellerAndBuyer.php");
+			putAlertMsg("您的"+WinUtils.changeType2Platform(platformType)+"平台还没有绑定买号！");
+			return JUMP;
+		}
 		for (BuyerEntity buyerEntity : buyers) {
 			BuyerVO buyerVO = new BuyerVO();
 			BeanUtils.copyProperties(buyerVO, buyerEntity);

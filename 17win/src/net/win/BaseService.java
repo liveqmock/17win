@@ -26,10 +26,10 @@ public class BaseService {
 	protected static final String APPLET = "applet";
 	protected static final String OUTEXCEL = "outexcel";
 	protected static final String DOWNLOAD = "download";
+	protected static final String JUMP = "jump";
 
 	// 前台显示数据
 	private static final String MSG = "msg";
-	private static final String JUMP = "jump";
 	private static final String DIV = "div";
 
 	/**

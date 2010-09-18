@@ -293,7 +293,7 @@
 								<s:property value="#request.platform" />
 								发布区发布过任务，
 								<font color="red"><a
-									href="taskManager/task!initReleaseTask.php?platformType=1">点此进入发布任务</a>
+									href="taskManager/task!initReleaseTask.php?platformType=<s:property value="#request.platformType"/>">点此进入发布任务</a>
 								</font>！
 							</DIV>
 						</s:if>

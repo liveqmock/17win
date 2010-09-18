@@ -44,7 +44,7 @@
 		</interceptors>
 		<default-interceptor-ref name="17winStack"></default-interceptor-ref>
 		<global-results>
-			<result name="jump">jump.jsp</result>
+			<result name="jump">/jump.jsp</result>
 			<result name="json" type="json"></result>
 			<result name="commonError">
 				/WEB-INF/errorPage/commonError.jsp

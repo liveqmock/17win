@@ -4,11 +4,8 @@
 <html>
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-		<meta http-equiv="refresh"
-			content="0;url=<s:property value="#request.jump" />">
+		<s:property value="#request.msg" escape="false" />
+		<script language="javascript"> top.location='<s:property value="#request.jump" />';   </script>
 	</head>
-	<body>
-		<s:property value="msg" escape="false"/>
-	</body>
 </html>
 

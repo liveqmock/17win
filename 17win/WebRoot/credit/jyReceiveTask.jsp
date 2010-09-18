@@ -103,7 +103,7 @@
 											<s:else>(全额相等)</s:else>
 										</td>
 										<td width="120px" align="left">
-										 
+
 											<s:if test="#task[12]==-2">
 												需要审核，请QQ联系卖家
 											</s:if>
@@ -122,51 +122,51 @@
 											<s:if test="#task[12]==-2">
 												已接受，等待对方审核！
 											</s:if>
-											<s:else test="#task[12]==-1">
+											<s:elseif test="#task[12]==-1">
 												任务被申述中！
-											</s:else>
-											<s:else test="#task[12]==2">
+											</s:elseif>
+											<s:elseif test="#task[12]==2">
 												您已接手，等待您付款！
-											</s:else>
-											<s:else test="#task[12]==3">
+											</s:elseif>
+											<s:elseif test="#task[12]==3">
 												您已付款。等待卖家确认发货！
-											</s:else>
-											<s:else test="#task[12]==4">
+											</s:elseif>
+											<s:elseif test="#task[12]==4">
 												卖家发货了。等待您确认好评！
-											</s:else>
-											<s:else test="#task[12]==5">
+											</s:elseif>
+											<s:elseif test="#task[12]==5">
 												您已确认好评。等待卖家确认好评！
-											</s:else>
-											<s:else test="#task[12]==6">
+											</s:elseif>
+											<s:elseif test="#task[12]==6">
 												任务完成...
-											</s:else>
+											</s:elseif>
 										</td>
 										<td width="150px">
-												<s:if test="#task[12]==-2">
+											<s:if test="#task[12]==-2">
 												已经接手,等待审核
 												<br>
 												退出任务
 											</s:if>
-											<s:else test="#task[12]==-1">
+											<s:elseif test="#task[12]==-1">
 												此任务被申述中！
-											</s:else>
-											<s:else test="#task[12]==2">
+											</s:elseif>
+											<s:elseif test="#task[12]==2">
 												已经支付
 												</br>
 												退出任务
-											</s:else>
-											<s:else test="#task[12]==3">
+											</s:elseif>
+											<s:elseif test="#task[12]==3">
 												并未支付
-											</s:else>
-											<s:else test="#task[12]==4">
+											</s:elseif>
+											<s:elseif test="#task[12]==4">
 												我已评价
-											</s:else>
-											<s:else test="#task[12]==5">
+											</s:elseif>
+											<s:elseif test="#task[12]==5">
 												QQ联系对方好评，完成任务
-											</s:else>
-											<s:else test="#task[12]==6">
+											</s:elseif>
+											<s:elseif test="#task[12]==6">
 												完成
-											</s:else>
+											</s:elseif>
 										</td>
 									</tr>
 									<tr>
@@ -225,31 +225,42 @@
 								</table>
 							</DIV>
 						</s:iterator>
-						<DIV
-							style="WIDTH: 98%; LINE-HEIGHT: 40px; PADDING-TOP: 10px; HEIGHT: 40px; TEXT-ALIGN: center">
-							共
-							<font color="blue"><b>34</b> </font> 条主题&nbsp;&nbsp;&nbsp;首页
-							上一页&nbsp;
-							<a href='mymission.asp?PageNo=2'>下一页</a>&nbsp;
-							<a href='mymission.asp?PageNo=4'>尾页</a>&nbsp;页次：
-							<strong><font color=red>1</font>/4</strong>页 &nbsp;
-							<b>10</b>条主题/页&nbsp;转到：
-							<select name='page' size='1'
-								onchange="javascript:window.location='mymission.asp?PageNo='+this.options[this.selectedIndex].value;">
-								<option value='1' selected="selected">
-									第1页
-								</option>
-								<option value='2'>
-									第2页
-								</option>
-								<option value='3'>
-									第3页
-								</option>
-								<option value='4'>
-									第4页
-								</option>
-							</select>
-						</DIV>
+						<s:if test="#request.result.size()==0">
+							<DIV
+								style="WIDTH: 98%; LINE-HEIGHT: 40px; PADDING-TOP: 10px; HEIGHT: 40px; TEXT-ALIGN: center">
+								您当前还没有在<s:property value="#request.platform" />发布区接手过任务，
+								<font color="red"><a
+									href="taskManager/task!initTask.php?platformType=<s:property value="#request.platformType"/>">点此进入发布任务</a>
+								</font>！
+							</DIV>
+						</s:if>
+						<s:else>
+							<DIV
+								style="WIDTH: 98%; LINE-HEIGHT: 40px; PADDING-TOP: 10px; HEIGHT: 40px; TEXT-ALIGN: center">
+								共
+								<font color="blue"><b>34</b> </font> 条主题&nbsp;&nbsp;&nbsp;首页
+								上一页&nbsp;
+								<a href='mymission.asp?PageNo=2'>下一页</a>&nbsp;
+								<a href='mymission.asp?PageNo=4'>尾页</a>&nbsp;页次：
+								<strong><font color="red">1</font>/4</strong>页 &nbsp;
+								<b>10</b>条主题/页&nbsp;转到：
+								<select name='page' size='1'
+									onchange="javascript:window.location='mymission.asp?PageNo='+this.options[this.selectedIndex].value;">
+									<option value='1' selected="selected">
+										第1页
+									</option>
+									<option value='2'>
+										第2页
+									</option>
+									<option value='3'>
+										第3页
+									</option>
+									<option value='4'>
+										第4页
+									</option>
+								</select>
+							</DIV>
+						</s:else>
 					</div>
 				</DIV>
 			</div>

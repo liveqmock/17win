@@ -188,10 +188,10 @@ img {
 													</tr>
 													<s:iterator value="#request.buyers.get(#type)" id="buyer">
 														<tr class="buyerTr">
-															<td height="10">
+															<td height="10" align="center">
 																<input type="hidden"
 																	platformType="<s:property value="#type"/>"
-																	buyerName="<s:property value="buyer.name" />" />
+																	buyerName="<s:property value="#buyer.name" />" />
 																<s:property value="#buyer.name" />
 															</td>
 															<td align="center">
@@ -299,7 +299,7 @@ img {
 							买号：
 						</td>
 						<td valign="middle">
-							<input type="text" id="buyerName" name="userVO.buyer.name">
+							<input type="text" id="buyerName" onblur="obtainBuyer(this)" name="userVO.buyer.name">
 						</td>
 					</tr>
 				</table>

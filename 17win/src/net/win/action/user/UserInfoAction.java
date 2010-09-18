@@ -34,6 +34,7 @@ import org.springframework.stereotype.Controller;
 		@Result(name = "initActiave", location = "/user/activate.jsp"),
 		@Result(name = "updateActiave", location = "/user/activate.jsp"),
 		@Result(name = "initSellerAndBuyer", location = "/user/sellerBuyerInfo.jsp"),
+		@Result(name = "updateSellerAndBuyer",type="chain", location = "/userInfoManager/info!initSellerAndBuyer.php"),
 		@Result(name = "deleteSellerAndBuyer",type="chain", location = "/userInfoManager/info!initSellerAndBuyer.php")
 })
 @Namespace("/userInfoManager")
