@@ -137,11 +137,7 @@
 																			value="<s:property value="creditTaskVO.intervalHour"/>"
 																			id="cancelFlagHourHidden" type="hidden" />
 																		<!-- end -->
-
-
-																		<input value="<s:property value="creditTaskVO.id"/>"
-																			id="cancelFlagGTTHidden" type="hidden" />
-																		<input value="#session.userLogin.money" id="currMoney"
+																		<input value="<s:property value="#session.userLogin.money" />" id="currMoney"
 																			type="hidden" />
 																		<s:textfield name="creditTaskVO.money" size="10"
 																			id="money" maxlength="6"
@@ -345,7 +341,7 @@
 																		收货地址：
 																	</td>
 																	<td colspan="2">
-																		<s:checkbox name="creditTaskVO.address" value="false"
+																		<s:checkbox name="creditTaskVO.address"  
 																			fieldValue="true" />
 																		<span class="red-bcolor">*什么是自动生成收货地址信息（实物任务有用）</span>
 																	</td>

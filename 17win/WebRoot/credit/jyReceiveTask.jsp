@@ -82,82 +82,149 @@
 					</DIV>
 					<DIV
 						style="CLEAR: both; BORDER-RIGHT: #abbec8 1px solid; BORDER-TOP: #abbec8 1px; BORDER-LEFT: #abbec8 1px solid; WIDTH: 910px; BORDER-BOTTOM: #abbec8 1px solid; BACKGROUND-COLOR: #ffffff">
-						<DIV class=missionbg
-							style="WIDTH: 98%; PADDING-TOP: 10px; BORDER-BOTTOM: #06314a 1px dashed; HEIGHT: 90px">
-							<table cellpadding="0" cellspacing="0" border="0" width="100%">
-								<tr>
-									<td width="145px" align="left">
-										2010915238272637
-									</td>
-									<td width="125px">
-										xgj1988（
-										<font color=red>在线</font>）
-									</td>
-									<td width="130px" nowrap="nowrap">
-										<img src="images/j_z.gif" width="13" height="16">
-										35元（需改价格）
-									</td>
-									<td width="120px" align="left">
-										<input name="2010915238272637" type="test"
-											title="http://item.taobao.com/item.htm?id=7373791436"
-											id="2010915238272637" style="width: 60px"
-											value="http://item.taobao.com/item.htm?id=7373791436" />
-										<input type="button" value="GO">
-									</td>
-									<td width="115px">
-										<font color="#FF0000">爱上996</font>
-									</td>
+						<s:iterator value="#request.result" status="status" id="task">
+							<DIV class=missionbg
+								style="WIDTH: 98%; PADDING-TOP: 10px; BORDER-BOTTOM: #06314a 1px dashed; HEIGHT: 90px">
+								<table cellpadding="0" cellspacing="0" border="0" width="100%">
+									<tr>
+										<td width="145px" align="left">
+											<s:property value="#task[0]" />
+										</td>
+										<td width="125px">
+											<s:property value="#task[2]" />
+											（
+											<font color=red>在线</font>）
+										</td>
+										<td width="130px" nowrap="nowrap">
+											<img src="images/j_z.gif" width="13" height="16">
+											<s:property value="#task[4]" />
+											元
+											<s:if test="#test[5]">(需改价格)</s:if>
+											<s:else>(全额相等)</s:else>
+										</td>
+										<td width="120px" align="left">
+										 
+											<s:if test="#task[12]==-2">
+												需要审核，请QQ联系卖家
+											</s:if>
+											<s:else>
+												<input type="text" title="<s:property value="#task[7]" />"
+													style="width: 60px" value="<s:property value="#task[7]" />" />
+												<input type="button" value="GO">
+											</s:else>
+										</td>
+										<td width="115px">
+											<font color="#FF0000"><s:property value="#task[10]" />
+											</font>
+										</td>
 
-									<td width="130px">
-										等待卖家发货...
-									</td>
-									<td width="150px">
-										已经支付
-										退出
-									</td>
-								</tr>
-								<tr>
-									<td width="145px" align="left">
-										2010-9-15 23:19:11
-									</td>
-									<td width="115px">
-										<img src="images/xin_1.gif" alt=刷客经验积分：2779>
-									</td>
-									<td width="130px" nowrap="nowrap">
-										发布点2个
-									</td>
-									<td width="120px" align="left">
-										<font color="#FF0000">掌柜:xgj1988</font>
-									</td>
-									<td width="115px">
-										<img src="images/xin_1.gif" alt=刷客经验积分：2779>
-									</td>
-									<td width="130px">
-										剩余X分钟
-									</td>
-									<td width="150px">
-										联系对方可加时
-									</td>
-								</tr>
-								<tr>
-									<td colspan="3" align="left">
-										<font color="red" style="font-weight: bold;">快递单号：</font>
-									</td>
-									<td colspan="4" align="left">
-										<font color="red" style="font-weight: bold;">打分/好评：</font>
-									</td>
-								</tr>
-								<tr>
-									<td colspan="3" align="left">
-										<font color="red" style="font-weight: bold;">收货地址：</font>
-									</td>
-									<td colspan="4" align="left">
-										<font color="red" style="font-weight: bold;">详细描述：</font>
-									</td>
-								</tr>
-							</table>
-						</DIV>
-
+										<td width="130px">
+											<s:if test="#task[12]==-2">
+												已接受，等待对方审核！
+											</s:if>
+											<s:else test="#task[12]==-1">
+												任务被申述中！
+											</s:else>
+											<s:else test="#task[12]==2">
+												您已接手，等待您付款！
+											</s:else>
+											<s:else test="#task[12]==3">
+												您已付款。等待卖家确认发货！
+											</s:else>
+											<s:else test="#task[12]==4">
+												卖家发货了。等待您确认好评！
+											</s:else>
+											<s:else test="#task[12]==5">
+												您已确认好评。等待卖家确认好评！
+											</s:else>
+											<s:else test="#task[12]==6">
+												任务完成...
+											</s:else>
+										</td>
+										<td width="150px">
+												<s:if test="#task[12]==-2">
+												已经接手,等待审核
+												<br>
+												退出任务
+											</s:if>
+											<s:else test="#task[12]==-1">
+												此任务被申述中！
+											</s:else>
+											<s:else test="#task[12]==2">
+												已经支付
+												</br>
+												退出任务
+											</s:else>
+											<s:else test="#task[12]==3">
+												并未支付
+											</s:else>
+											<s:else test="#task[12]==4">
+												我已评价
+											</s:else>
+											<s:else test="#task[12]==5">
+												QQ联系对方好评，完成任务
+											</s:else>
+											<s:else test="#task[12]==6">
+												完成
+											</s:else>
+										</td>
+									</tr>
+									<tr>
+										<td width="145px" align="left">
+											<s:date name="#task[1]" format="yyyy-MM-dd hh-mm-ss" />
+										</td>
+										<td width="115px">
+											<a
+												href="tencent://message/?uin=<s:property value="#task[3]" />">
+												<img border="0"
+													src="http://wpa.qq.com/pa?p=1:<s:property value="#task[3]" />:41">
+											</a>
+											<br>
+											<img src="images/xin_1.gif" alt=刷客经验积分：2779>
+										</td>
+										<td width="130px" nowrap="nowrap">
+											发布点
+											<s:property value="#task[6]" />
+											个
+										</td>
+										<td width="120px" align="left">
+											<a href="<s:property value="#task[9]" />"
+												title="前往店铺：<s:property value="#task[9]" />"> <font
+												color="#FF0000">掌柜:<s:property value="#task[8]" /> </font>
+											</a>
+										</td>
+										<td width="115px">
+											<img
+												src="images/<s:property value="@net.win.utils.StrategyUtils@getLevelImg(#task[11])" />"
+												alt="刷客经验积分：
+													<s:property value="@net.win.utils.StrategyUtils@getLevelImg(#task[11])" />">
+										</td>
+										<td width="130px">
+											剩余X分钟
+										</td>
+										<td width="150px">
+											联系对方可加时
+										</td>
+									</tr>
+									<tr>
+										<td colspan="3" align="left">
+											<font color="red" style="font-weight: bold;">快递单号：</font>
+										</td>
+										<td colspan="4" align="left">
+											<font color="red" style="font-weight: bold;">打分/好评：</font>
+										</td>
+									</tr>
+									<tr>
+										<td colspan="3" align="left">
+											<font color="red" style="font-weight: bold;">收货地址：</font>
+										</td>
+										<td colspan="4" align="left">
+											<font color="red" style="font-weight: bold;">详细描述：</font>
+										</td>
+									</tr>
+								</table>
+							</DIV>
+						</s:iterator>
 						<DIV
 							style="WIDTH: 98%; LINE-HEIGHT: 40px; PADDING-TOP: 10px; HEIGHT: 40px; TEXT-ALIGN: center">
 							共

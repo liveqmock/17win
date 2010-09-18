@@ -31,7 +31,11 @@ import net.win.vo.SellerVO;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Service;
-
+/**
+ * 
+ * @author xgj
+ *
+ */
 @SuppressWarnings("unused")
 @Service("creditTaskService")
 public class CreditTaskService extends BaseService {
@@ -45,6 +49,46 @@ public class CreditTaskService extends BaseService {
 	private CreditTaskDAO creditTaskDAO;
 	@Resource
 	private CreditTaskRepositoryDAO creditTaskRepositoryDAO;
+
+	/**
+	 * 初始化已接任务
+	 * ******
+	 * @param userVO
+	 * @return
+	 */
+	public String initReceivedTast(CreditTaskVO creditTaskVO) throws Exception {
+		// 没有操作码验证就验证
+		String platformType = getPlatformType();
+		if (StringUtils.isBlank(platformType)) {
+			WinUtils.throwIllegalityException(getLoginUser().getUsername()
+					+ "试图越过取消重填操作！ ");
+		}
+		if (!getLoginUser().getOperationCodeStatus()) {
+			putByRequest("preURL", getRequset().getRequestURL() + "?"
+					+ getRequset().getQueryString());
+			return "operationValidate";
+		} else {
+			Long count = (Long) creditTaskDAO
+					.uniqueResultObject(
+							"select count(*) from CreditTaskEntity as _task inner join _task.receivePerson as _user   where     _user.id=:userId and   _task.type=:platformType ",
+							new String[] { "userId", "platformType" },
+							new Object[] { getLoginUser().getId(), platformType });
+			List<Object[]> result = creditTaskDAO
+					.pageQuery(
+							"select _task.testID , _task.releaseDate ,_fbuser.username,_fbuser.qq,_task.money,_task.updatePrice ,_task.releaseDot "// 6
+									+ ", _task.itemUrl , _seller.name,__seller.shopURL,_buyer.name_,_jsuser.upgradeScore,_task.status" // 12
+									+ ", _task.remainTime,_task.goodTimeType ,_task.intervalHour,_task.desc,_task.address ,_task.grade,_task.id " // index=19
+									+ " from CreditTaskEntity as _task inner join _task.releasePerson as _fbuser  inner join _task.seller as _seller left join _task.receivePerson as _jsuser left join _task.buyer as _buyer  where     _jsuser.id=:userId and   _task.type=:platformType order by _task.releaseDate desc",
+							new String[] { "userId", "platformType" },
+							new Object[] { getLoginUser().getId(), platformType },
+							creditTaskVO.getStart(), creditTaskVO.getLimit());
+			creditTaskVO.setDataCount(count.intValue());
+			putPlatformByRequest(WinUtils.changeType2Platform(platformType));
+			putPlatformTypeByRequest(platformType);
+			putByRequest("result", result);
+			return "initReleasedTast";
+		}
+	}
 
 	/**
 	 * 刷新排前
@@ -80,7 +124,7 @@ public class CreditTaskService extends BaseService {
 	}
 
 	/**
-	 * 取消充填
+	 * 取消重填
 	 * 
 	 * @param userVO
 	 * @return
@@ -114,8 +158,7 @@ public class CreditTaskService extends BaseService {
 			// 掌柜
 			creditTaskVO.setSellerID(creditTask.getSeller().getId());
 			// 地址
-			creditTaskVO.setAddress(!StringUtils.isBlank(creditTask
-					.getAddress()));
+			creditTaskVO.setAddress(!"无".equals(creditTask.getAddress()));
 			/**
 			 * 删除任务
 			 */
@@ -163,7 +206,7 @@ public class CreditTaskService extends BaseService {
 							"select _task.testID , _task.releaseDate ,_task.money,_task.updatePrice ,_task.releaseDot, _task.itemUrl , _seller.name,_task.status "// 7
 									+ ", _jsuser.username,_buyer.name,_jsuser.qq,_jsuser.upgradeScore" // 11
 									+ ", _task.remainTime,_task.goodTimeType ,_task.intervalHour,_task.desc,_task.address ,_task.grade,_task.id,_seller.shopURL " // index=19
-									+ " from CreditTaskEntity as _task inner join _task.releasePerson as _fbuser  inner join _task.seller as _seller left join _task.receivePerson as _jsuser left join _task.buyer as _buyer  where     _fbuser.id=:userId and   _task.type=:platformType order by _task.releaseDate ",
+									+ " from CreditTaskEntity as _task inner join _task.releasePerson as _fbuser  inner join _task.seller as _seller left join _task.receivePerson as _jsuser left join _task.buyer as _buyer  where     _fbuser.id=:userId and   _task.type=:platformType order by _task.releaseDate desc",
 							new String[] { "userId", "platformType" },
 							new Object[] { getLoginUser().getId(), platformType },
 							creditTaskVO.getStart(), creditTaskVO.getLimit());
@@ -385,7 +428,7 @@ public class CreditTaskService extends BaseService {
 				.pageQuery(
 						"select _task.testID , _task.releaseDate ,_user.username,_user.upgradeScore,_task.money,_task.updatePrice, "
 								+ "_task.goodTimeType,_task.releaseDot,_task.status ,_task.intervalHour,_task.desc,_task.address" // index=11
-								+ " from CreditTaskEntity as _task inner join _task.releasePerson as _user where (_task.status!='0' or _task.status!='-1')  and   _task.type=:platformType order by   _task.releaseDate",
+								+ " from CreditTaskEntity as _task inner join _task.releasePerson as _user where (_task.status!='0' or _task.status!='-1')  and   _task.type=:platformType order by   _task.releaseDate desc",
 						"platformType", platformType, creditTaskVO.getStart(),
 						creditTaskVO.getLimit());
 		List<BuyerEntity> buyers = userDAO.list(

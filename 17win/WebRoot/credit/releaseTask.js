@@ -19,7 +19,7 @@ $(document).ready(function() {
 				.attr("checked", true);
 		var hour = $("#cancelFlagHourHidden").val();
 		if (!Validater.isBlank(hour)) {
-			$("#intervalHour").attr("disabled",false);
+			$("#intervalHour").attr("disabled", false);
 			$("#intervalHour").val(hour);
 		}
 
@@ -43,7 +43,12 @@ $(document).ready(function() {
 					changeStyle(this, '0', '不是有效的数值！');
 					submitFlag = false;
 				} else {
-					changeStyle(this, '1', '');
+					if (parseFloat($(this).val()) > currMoney) {
+						changeStyle(this, '0', '您当前的金额不足' + $(this).val() + "元！");
+						submitFlag = false;
+					} else {
+						changeStyle(this, '1', '');
+					}
 				}
 			});
 

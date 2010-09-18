@@ -79,6 +79,8 @@ public class CreditTaskEntity extends TaskBaseEntity {
 	@JoinColumn(name = "BUYER_ID_")
 	private BuyerEntity buyer;
 
+	
+	
 	public String getType() {
 		return type;
 	}

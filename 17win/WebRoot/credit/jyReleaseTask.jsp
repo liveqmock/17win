@@ -154,7 +154,7 @@
 										</td>
 										<td width="150px">
 											<s:if test="#task[7]==1">
-												<a
+												<a title="可能由于你填写错误，可以重新进行填写！"
 													href="javascript:cancelTask(<s:property value="#task[18]"/>)">取消重填</a>
 											</s:if>
 											<s:elseif test="#task[7]==-2">
@@ -198,7 +198,7 @@
 											<s:if test="#task[7]<>1">
 												<a
 													href="tencent://message/?uin=<s:property value="#task[8]"/>"><img
-														src="http://wpa.qq.com/pa?p=1:1317225767:41" border="0" />
+														src="http://wpa.qq.com/pa?p=1:<s:property value="#task[8]"/>:41" border="0" />
 												</a>
 											</s:if>
 										</td>
@@ -206,8 +206,8 @@
 											<s:if test="#task[7]<>1">
 												<img
 													src="images/<s:property value="@net.win.utils.StrategyUtils@getLevelImg(#task[11])" />"
-													alt=刷客经验积分：
-													<s:property value="@net.win.utils.StrategyUtils@getLevelImg(#task[11])" />>
+													alt="刷客经验积分：
+													<s:property value="@net.win.utils.StrategyUtils@getLevelImg(#task[11])" />">
 											</s:if>
 										</td>
 										<td width="130px">
@@ -219,7 +219,7 @@
 										</td>
 										<td width="150px">
 											<s:if test="#task[7]==1">
-												<a
+												<a  title="刷新你的任务，让他排在其他任务前面！"
 													href="javascript:toFirstTask(<s:property value="#task[18]"/>)">刷新排前</a>
 											</s:if>
 											<s:if test="#task[7]==-2">
