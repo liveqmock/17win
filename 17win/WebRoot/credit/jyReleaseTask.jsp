@@ -95,7 +95,7 @@
 									<s:if test="#test[3]">(需改价格)</s:if>
 									<s:else>(全额相等)</s:else>
 									<br>
-									
+
 									<font color="red"><s:property value="#task[4]" /> </font> 个发布点
 									<IMG alt="延迟收货" src=images/shiwu.gif>
 								</td>
@@ -181,21 +181,27 @@
 											href="javascript:cancelTask(<s:property value="#task[18]"/>)">取消重填</a>
 									</s:if>
 									<s:elseif test="#task[7]==-2">
-												审核接收人 清理买家
-											</s:elseif>
+										<a title="您对该人信任之后，可以允许他接您的任务！"
+											href="javascript:clearReceiver(<s:property value="#task[18]"/>)">审核接收人</a>
+										<br>
+										<a title="如果对方没有被您审核过，可以清理买家！"
+											href="javascript:audiReceiver(<s:property value="#task[18]"/>)">清理买家</a>
+									</s:elseif>
 									<s:elseif test="#task[7]==2">
-										<a
+										<a title="为对方加时"
 											href="javascript:addTime('<s:property value="#task[18]"/>')">为他加时</a>
 									</s:elseif>
 									<s:elseif test="#task[7]==3">
-												我已发货
-											</s:elseif>
+										<a title="请您在确认后，进行发货！"
+											href="javascript:dispatch('<s:property value="#task[18]"/>')">我已发货</a>
+									</s:elseif>
 									<s:elseif test="#task[7]==4">
-												联系对方好评
+												等待对方评价
 											</s:elseif>
 									<s:elseif test="#task[7]==5">
-												确认好评
-											</s:elseif>
+										<a title="请您好评，结束任务！"
+											href="javascript:sellerEvaluate('<s:property value="#task[18]"/>')">确认好评</a>
+									</s:elseif>
 									<s:else>
 												完成
 											</s:else>

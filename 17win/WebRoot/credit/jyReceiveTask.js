@@ -1,3 +1,15 @@
+// 好评
+function buyerEvaluate(id) {
+	var platformType = $("#platformType").val();
+	window.location.href = "taskManager/task!buyerEvaluate.php?taskId=" + id
+			+ "&platformType=" + platformType;
+}
+// 撤销付款
+function rollbackPay(id) {
+	var platformType = $("#platformType").val();
+	window.location.href = "taskManager/task!rollbackPay.php?taskId=" + id
+			+ "&platformType=" + platformType;
+}
 // 付款
 function payMoney(id) {
 	var platformType = $("#platformType").val();

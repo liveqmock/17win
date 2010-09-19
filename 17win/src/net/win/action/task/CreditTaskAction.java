@@ -1,9 +1,14 @@
 package net.win.action.task;
 
+import java.util.Date;
+
 import javax.annotation.Resource;
 
 import net.win.BaseAction;
+import net.win.TaskMananger;
+import net.win.entity.CreditTaskEntity;
 import net.win.service.task.CreditTaskService;
+import net.win.utils.WinUtils;
 import net.win.vo.CreditTaskVO;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -50,10 +55,17 @@ public class CreditTaskAction extends BaseAction {
 
 	/** ************************** 买家操作 ******************************* */
 	/**
-	 * 退出任务
+	 * 好评
 	 */
-	public String quitTask() throws Exception {
-		return creditTaskService.updateQuitTask(creditTaskVO);
+	public String buyerEvaluate() throws Exception {
+		return creditTaskService.updateBuyerEvaluate(creditTaskVO);
+	}
+
+	/**
+	 * 撤销付款
+	 */
+	public String rollbackPay() throws Exception {
+		return creditTaskService.updateRollbackPay(creditTaskVO);
 	}
 
 	/**
@@ -61,6 +73,13 @@ public class CreditTaskAction extends BaseAction {
 	 */
 	public String payMoney() throws Exception {
 		return creditTaskService.updatePayTask(creditTaskVO);
+	}
+
+	/**
+	 * 退出任务
+	 */
+	public String quitTask() throws Exception {
+		return creditTaskService.updateQuitTask(creditTaskVO);
 	}
 
 	/**
@@ -74,6 +93,34 @@ public class CreditTaskAction extends BaseAction {
 	}
 
 	/** ********* 卖家操作 **************** */
+	/**
+	 * 审核买家
+	 */
+	public String audiReceiver() throws Exception {
+		return creditTaskService.updateAudiReceiver(creditTaskVO);
+	}
+
+	/**
+	 * 清理买家
+	 */
+	public String clearReceiver() throws Exception {
+		return creditTaskService.updateClearReceiver(creditTaskVO);
+	}
+
+	/**
+	 * 卖家好评
+	 */
+	public String sellerEvaluate() throws Exception {
+		return creditTaskService.updateSellerEvaluate(creditTaskVO);
+	}
+
+	/**
+	 * 卖家发货
+	 */
+	public String dispatch() throws Exception {
+		return creditTaskService.updateDispatch(creditTaskVO);
+	}
+
 	/**
 	 * 加时
 	 * 

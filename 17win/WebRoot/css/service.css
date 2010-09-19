@@ -4,7 +4,7 @@
 .service{top:110px;right:0; position:absolute;}
 .service-open{background:url(../images/service-open.png) no-repeat;width:143px;height:418px;}
 .service-close{background:url(../images/service-open.png) no-repeat;height:121px; width:31px;overflow:hidden;}
-	.service-button{width:34px;height:121px; float:left;cursor:hand;}
+	.service-button{width:34px;height:121px; float:left;cursor:pointer;}
 	.service-inside{width:103px;height:418px;float:right;}
 	.service-inside dl{padding:10px 0;}
 	.service-inside dl dt{ text-align:center; background:url(../images/dttitle.jpg) no-repeat;height:18px;line-height:18px;width:100px;margin-bottom:8px;color:#fff;}

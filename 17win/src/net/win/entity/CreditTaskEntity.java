@@ -24,7 +24,7 @@ public class CreditTaskEntity extends TaskBaseEntity {
 	// 价格
 	@Column(name = "MONEY_", nullable = false)
 	private Double money;
-	// 所剩时间(分钟)
+	// 所剩时间(分钟/小时（卖家发货）)
 	@Column(name = "REMAIN_TIME_")
 	private Integer remainTime = 20;
 	// 状态
@@ -61,9 +61,13 @@ public class CreditTaskEntity extends TaskBaseEntity {
 	@Column(name = "TIMEING_TIME_")
 	private Date timeingTime;
 
-	// 当前操作的时间
+	// 接手时间
 	@Column(name = "RECEIVE_DATE_")
 	private Date receiveDate;
+	
+	// 发货时间
+	@Column(name = "DISPATCH_DATE_")
+	private Date dispatchDate;
 
 	// 接收人IP
 	@Column(name = "RECEIVE_IP_", length = 20)
@@ -215,6 +219,14 @@ public class CreditTaskEntity extends TaskBaseEntity {
 
 	public void setReceiveDate(Date receiveDate) {
 		this.receiveDate = receiveDate;
+	}
+
+	public Date getDispatchDate() {
+		return dispatchDate;
+	}
+
+	public void setDispatchDate(Date dispatchDate) {
+		this.dispatchDate = dispatchDate;
 	}
 
  

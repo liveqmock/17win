@@ -1,3 +1,27 @@
+// 审核卖家
+function clearReceiver(id) {
+	var platformType = $("#platformType").val();
+	window.location.href = "taskManager/task!clearReceiver.php?taskId=" + id
+			+ "&platformType=" + platformType;
+}
+// 清理买家
+function audiReceiver(id) {
+	var platformType = $("#platformType").val();
+	window.location.href = "taskManager/task!audiReceiver.php?taskId=" + id
+			+ "&platformType=" + platformType;
+}
+// 好评
+function sellerEvaluate(id) {
+	var platformType = $("#platformType").val();
+	window.location.href = "taskManager/task!sellerEvaluate.php?taskId=" + id
+			+ "&platformType=" + platformType;
+}
+// 发货
+function dispatch(id) {
+	var platformType = $("#platformType").val();
+	window.location.href = "taskManager/task!dispatch.php?taskId=" + id
+			+ "&platformType=" + platformType;
+}
 // 取消重填
 function cancelTask(id) {
 	var platformType = $("#platformType").val();

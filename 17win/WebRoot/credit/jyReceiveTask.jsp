@@ -138,16 +138,16 @@
 								</td>
 								<td valign="top" align="center">
 									<s:if test="#task[12]==-2">
-												已接受，等待对方审核
+												已接受<br>等待对方审核
 												<br>
-									剩余
+												剩余
 											<font color="red"><s:property value="#task[13]" /> </font>分钟
 											</s:if>
 									<s:elseif test="#task[12]==-1">
 												任务被申述中
 											</s:elseif>
 									<s:elseif test="#task[12]==2">
-												您已接手，等待您付款
+												您已接手<br>等待您付款
 												<br>
 												剩余
 												<font color="red"><s:property value="#task[13]" /> </font>分钟
@@ -157,26 +157,28 @@
 												<br>等待卖家确认发货
 											</s:elseif>
 									<s:elseif test="#task[12]==4">
-												卖家发货了。等待您确认好评
+												卖家发货了<br>等待您确认好评
 											</s:elseif>
 									<s:elseif test="#task[12]==5">
-												您已确认好评。等待卖家确认好评
+												您已确认好评<br>等待卖家确认好评
 											</s:elseif>
 									<s:elseif test="#task[12]==6">
-												任务完成...
+												任务完成
 											</s:elseif>
 								</td>
 								<td valign="top" align="center">
 									<s:if test="#task[12]==-2">
-												已经接手,等待审核
+												已经接手<br>等待审核
 												<br>
-												退出任务
-												<br>
-												联系对方可加时
+										<a title="退出任务，并且返回金钱和发布点给您"
+											href="javascript:quitTask('<s:property value="#task[19]"/>')">退出任务</a>
+										<br>
+												可联系对方加时
 											</s:if>
 									<s:elseif test="#task[12]==-1">
 												此任务被申述中
 											</s:elseif>
+
 									<s:elseif test="#task[12]==2">
 										<a title="如果您已经付款，请确认支付"
 											href="javascript:payMoney('<s:property value="#task[19]"/>')">已经支付</a>
@@ -184,16 +186,20 @@
 										<a title="退出任务，并且返回金钱和发布点给您"
 											href="javascript:quitTask('<s:property value="#task[19]"/>')">退出任务</a>
 										<br>
-											联系对方可加时
+											可联系对方加时
 									</s:elseif>
 									<s:elseif test="#task[12]==3">
-												并未支付
-											</s:elseif>
+										<a title="撤销上次支付操作！"
+											href="javascript:rollbackPay('<s:property value="#task[19]"/>')">并未支付</a>
+									</s:elseif>
 									<s:elseif test="#task[12]==4">
-												我已评价
-											</s:elseif>
+										<a title="买家评价"
+											href="javascript:buyerEvaluate('<s:property value="#task[19]"/>')">我已评价</a>
+									</s:elseif>
 									<s:elseif test="#task[12]==5">
-												QQ联系对方好评，完成任务
+												QQ联系对方好评
+												<br>
+												完成任务
 											</s:elseif>
 									<s:elseif test="#task[12]==6">
 												完成
