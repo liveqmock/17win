@@ -101,15 +101,27 @@ public class BaseService {
 	 */
 	protected void updateUserLoginInfo(UserEntity userEntity) throws Exception {
 		UserLoginInfo userLoginInfo = getLoginUser();
-		if (userLoginInfo == null) {
-			userLoginInfo = new UserLoginInfo();
-		}
+		// ///
 		BeanUtils.copyProperties(userLoginInfo, userEntity);
 		userLoginInfo.setLevel(StrategyUtils.getLevel(userEntity
 				.getUpgradeScore()));
 		userLoginInfo.setLevelImg(StrategyUtils.getLevelImg(userEntity
 				.getUpgradeScore()));
-		putLoginUser(userLoginInfo);
+		WinContext.getInstance().putUserLoginInfo(userLoginInfo.getUsername(),
+				userLoginInfo);
+	}
+	/**
+	 * 
+	 * @param userEntity
+	 * @throws Exception
+	 */
+	protected void updateUserLoginInfo(UserEntity userEntity,UserLoginInfo userLoginInfo) throws Exception {
+		// ///
+		BeanUtils.copyProperties(userLoginInfo, userEntity);
+		userLoginInfo.setLevel(StrategyUtils.getLevel(userEntity
+				.getUpgradeScore()));
+		userLoginInfo.setLevelImg(StrategyUtils.getLevelImg(userEntity
+				.getUpgradeScore()));
 	}
 
 	/**
@@ -138,9 +150,9 @@ public class BaseService {
 	 * @param name
 	 * @param value
 	 */
-	protected void putLoginUser(Object value) {
+	protected void putLoginUser(UserLoginInfo userLoginInfo) {
 		ServletActionContext.getRequest().getSession().setAttribute(
-				Constant.USER_LOGIN_INFO, value);
+				Constant.USER_LOGIN_INFO, userLoginInfo);
 	}
 
 	/**
@@ -150,7 +162,12 @@ public class BaseService {
 	 * @param value
 	 */
 	protected UserLoginInfo getLoginUser() {
-		return (UserLoginInfo) getBySession(Constant.USER_LOGIN_INFO);
+		UserLoginInfo userLoginInfo = (UserLoginInfo) getBySession(Constant.USER_LOGIN_INFO);
+		if (userLoginInfo == null) {
+			userLoginInfo = new UserLoginInfo();
+			putLoginUser(userLoginInfo);
+		}
+		return userLoginInfo;
 	}
 
 	/**

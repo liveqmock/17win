@@ -7,6 +7,15 @@
 	<listener>
 		<listener-class>net.win.Win17Listener</listener-class>
 	</listener>
+	<listener>
+		<listener-class>net.win.HttpSessionListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>
+			net.win.HttpSessionBindingListener
+		</listener-class>
+	</listener>
+
 
 	<!-- 修改Spring配置文件的路径 -->
 	<context-param>
@@ -56,15 +65,15 @@
 			org.springframework.web.util.Log4jConfigListener
 		</listener-class>
 	</listener>
-  <servlet>
-    <servlet-name>IndexServlet</servlet-name>
-    <servlet-class>net.win.IndexServlet</servlet-class>
-  </servlet>
+	<servlet>
+		<servlet-name>IndexServlet</servlet-name>
+		<servlet-class>net.win.IndexServlet</servlet-class>
+	</servlet>
 
-  <servlet-mapping>
-    <servlet-name>IndexServlet</servlet-name>
-    <url-pattern>/index.html</url-pattern>
-  </servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>IndexServlet</servlet-name>
+		<url-pattern>/index.html</url-pattern>
+	</servlet-mapping>
 
 
 

@@ -66,12 +66,6 @@ public class UserEntity extends BaseEntity {
 	// 钱
 	@Column(name = "MONEY_", nullable = false)
 	private Double money = 1.0D;
-	// 发布任务数
-	@Column(name = "RELEASE_TASK_COUNT_", nullable = false)
-	private Integer releaseTaskCount = 0;
-	// 接受任务数
-	@Column(name = "RECEIVE_TASK_COUNT_", nullable = false)
-	private Integer receiveTaskCount = 0;
 	// 推广积分
 	@Column(name = "SPREAD_SCORE_", nullable = false)
 	private Integer spreadScore = 0;
@@ -85,6 +79,12 @@ public class UserEntity extends BaseEntity {
 	// 旺旺
 	@Column(name = "WW_", length = 24)
 	private String ww;
+	// 发布任务数
+	@Column(name = "RELEASE_TASK_COUNT_")
+	private Integer releaseTaskCount;
+	// 接受任务数
+	@Column(name = "RECEIVE_TASK_COUNT_")
+	private Integer receiveTaskCount;
 	// 最后一次登陆时间
 	@Column(name = "LASTLOGINTIME_")
 	private Date lastLoginTime;

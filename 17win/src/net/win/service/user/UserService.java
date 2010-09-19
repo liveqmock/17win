@@ -133,6 +133,12 @@ public class UserService extends BaseService {
 	 * @throws Exception
 	 */
 	public String updateLogin(UserVO userVO) throws Exception {
+		if (!userVO.getVerificationCode().equals(
+				getBySession(Constant.VERIFY_CODE))) {
+			putAlertMsg("验证码不正确！");
+			userVO.setVerificationCode(null);
+			return "inputLogin";
+		}
 		UserEntity userEntity = userDAO
 				.uniqueResult(
 						"from UserEntity  as _u where _u.username=:username and _u.loginPassword=:loginPassword",

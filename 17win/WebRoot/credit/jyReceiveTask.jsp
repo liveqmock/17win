@@ -114,7 +114,7 @@
 								</td>
 								<td align="center" valign="top">
 									<s:if test="#task[12]==-2">
-												需要审核，请QQ联系卖家
+												需要审核<br>请QQ联系卖家
 											</s:if>
 									<s:else>
 										<input type="text" title="<s:property value="#task[7]" />"
@@ -157,8 +157,13 @@
 												<br>等待卖家确认发货
 											</s:elseif>
 									<s:elseif test="#task[12]==4">
-												卖家发货了<br>等待您确认好评
-											</s:elseif>
+										<s:if test="#task[13]==0">
+													卖家已发货<br>等待您确认好评
+												</s:if>
+										<s:else>
+												<font color="red"><s:property value="#task[13]" /> </font>小时后好评
+												</s:else>
+									</s:elseif>
 									<s:elseif test="#task[12]==5">
 												您已确认好评<br>等待卖家确认好评
 											</s:elseif>
@@ -168,7 +173,7 @@
 								</td>
 								<td valign="top" align="center">
 									<s:if test="#task[12]==-2">
-												已经接手<br>等待审核
+												等待审核
 												<br>
 										<a title="退出任务，并且返回金钱和发布点给您"
 											href="javascript:quitTask('<s:property value="#task[19]"/>')">退出任务</a>
@@ -193,8 +198,13 @@
 											href="javascript:rollbackPay('<s:property value="#task[19]"/>')">并未支付</a>
 									</s:elseif>
 									<s:elseif test="#task[12]==4">
-										<a title="买家评价"
-											href="javascript:buyerEvaluate('<s:property value="#task[19]"/>')">我已评价</a>
+										<s:if test="#task[13]==0">
+											<a title="买家评价"
+												href="javascript:buyerEvaluate('<s:property value="#task[19]"/>')">我已评价</a>
+										</s:if>
+										<s:else>
+												时间还没到
+												</s:else>
 									</s:elseif>
 									<s:elseif test="#task[12]==5">
 												QQ联系对方好评

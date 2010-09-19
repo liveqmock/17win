@@ -119,10 +119,9 @@
 									</s:else>
 									<br>
 									<s:if test="#task[7]!=1">
-										<a
-											href="tencent://message/?uin=<s:property value="#task[10]"/>"><img
-												src="http://wpa.qq.com/pa?p=1:<s:property value="#task[10]"/>:41"
-												border="0" /> </a>
+										<img
+											src="images/<s:property value="@net.win.utils.StrategyUtils@getLevelImg(#task[11])" />"
+											alt="刷客经验积分：<s:property value="#task[11]" />">
 									</s:if>
 								</td>
 								<td valign="top" align="center">
@@ -135,9 +134,10 @@
 									</s:else>
 									<br>
 									<s:if test="#task[7]!=1">
-										<img
-											src="images/<s:property value="@net.win.utils.StrategyUtils@getLevelImg(#task[11])" />"
-											alt="刷客经验积分：<s:property value="#task[11]" />">
+										<a
+											href="tencent://message/?uin=<s:property value="#task[10]"/>"><img
+												src="http://wpa.qq.com/pa?p=1:<s:property value="#task[10]"/>:41"
+												border="0" /> </a>
 									</s:if>
 								</td>
 
@@ -146,18 +146,19 @@
 												等待接收人
 											</s:if>
 									<s:elseif test="#task[7]==-2">
-												等待您审核
-												<s:if test="#task[7]!=1">
+												等待您审核<br>
+										<s:if test="#task[7]!=1">
 											剩余
-											<s:property value="#task[12]" />
+											<font color="red"> <s:property value="#task[12]" /> </font>
 											分钟
 											</s:if>
 									</s:elseif>
 									<s:elseif test="#task[7]==2">
-												等待买家付款
-												<s:if test="#task[7]!=1">
+												等待买家付款<br>
+										<s:if test="#task[7]!=1">
 											剩余
-											<s:property value="#task[12]" />
+												<font color="red"> <s:property value="#task[12]" />
+											</font>
 											分钟
 											</s:if>
 									</s:elseif>
@@ -165,8 +166,13 @@
 												等待您确认发货
 											</s:elseif>
 									<s:elseif test="#task[7]==4">
-												等待买家确认好评
-											</s:elseif>
+										<s:if test="#task[12]==0">
+													等待买家确认好评
+												</s:if>
+										<s:else>
+											<font color="red"><s:property value="#task[12]" /> </font>小时后好评
+												</s:else>
+									</s:elseif>
 									<s:elseif test="#task[7]==5">
 												等待您确认好评
 											</s:elseif>
@@ -182,10 +188,13 @@
 									</s:if>
 									<s:elseif test="#task[7]==-2">
 										<a title="您对该人信任之后，可以允许他接您的任务！"
-											href="javascript:clearReceiver(<s:property value="#task[18]"/>)">审核接收人</a>
+											href="javascript:audiReceiver(<s:property value="#task[18]"/>)">审核接收人</a>
 										<br>
 										<a title="如果对方没有被您审核过，可以清理买家！"
-											href="javascript:audiReceiver(<s:property value="#task[18]"/>)">清理买家</a>
+											href="javascript:clearReceiver(<s:property value="#task[18]"/>)">清理买家</a>
+										<br>
+										<a title="为对方加时"
+											href="javascript:addTime('<s:property value="#task[18]"/>')">为他加时</a>
 									</s:elseif>
 									<s:elseif test="#task[7]==2">
 										<a title="为对方加时"
@@ -196,8 +205,13 @@
 											href="javascript:dispatch('<s:property value="#task[18]"/>')">我已发货</a>
 									</s:elseif>
 									<s:elseif test="#task[7]==4">
-												等待对方评价
-											</s:elseif>
+										<s:if test="#task[12]==0">
+													等待对方评价
+												</s:if>
+										<s:else>
+												时间还没到
+												</s:else>
+									</s:elseif>
 									<s:elseif test="#task[7]==5">
 										<a title="请您好评，结束任务！"
 											href="javascript:sellerEvaluate('<s:property value="#task[18]"/>')">确认好评</a>
