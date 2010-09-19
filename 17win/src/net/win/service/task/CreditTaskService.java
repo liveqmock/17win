@@ -23,6 +23,7 @@ import net.win.entity.CreditTaskRepositoryEntity;
 import net.win.entity.SellerEntity;
 import net.win.entity.UserEntity;
 import net.win.utils.ArithUtils;
+import net.win.utils.Constant;
 import net.win.utils.StrategyUtils;
 import net.win.utils.StringUtils;
 import net.win.utils.WinUtils;
@@ -320,6 +321,7 @@ public class CreditTaskService extends BaseService {
 			Long taskId = Long.parseLong(getByParam("taskId"));
 			CreditTaskEntity creditTask = creditTaskDAO.get(taskId);
 			UserEntity receiveUser = creditTask.getReceivePerson();
+			UserEntity releaEntity = creditTask.getReleasePerson();
 			// 如果发布人不是当前的登陆人就报错
 			if (!platformType.equals(creditTask.getType())
 					|| !creditTask.getReleasePerson().getId().equals(
@@ -332,10 +334,17 @@ public class CreditTaskService extends BaseService {
 			/**
 			 * 人
 			 */
+			//修改积分
+			releaEntity.setUpgradeScore(5);
+			releaEntity.setConvertScore(5);
+			updateUserLoginInfo(releaEntity);
 			receiveUser.setMoney(ArithUtils.add(receiveUser.getMoney(),
 					creditTask.getMoney()));
 			receiveUser.setReleaseDot(ArithUtils.add(receiveUser
 					.getReleaseDot(), creditTask.getReleaseDot()));
+			receiveUser.setUpgradeScore(5);
+			receiveUser.setConvertScore(5);
+
 			UserLoginInfo userLoginInfo = WinContext.getInstance()
 					.getUserLoginInfo(receiveUser.getUsername());
 			updateUserLoginInfo(receiveUser, userLoginInfo);
