@@ -35,7 +35,7 @@ function toFirstTask(id) {
 	var platformType = $("#platformType").val();
 	if (confirm("是否要取消任务重填任务！")) {
 		window.location.href = "taskManager/task!toFirstTask.php?taskId=" + id
-				+ "&platformType=" + platformType;;
+				+ "&platformType=" + platformType;
 	}
 }
 
@@ -43,5 +43,13 @@ function toFirstTask(id) {
 function addTime(id) {
 	var platformType = $("#platformType").val();
 	window.location.href = "taskManager/task!addTime.php?taskId=" + id
-			+ "&platformType=" + platformType;;
+			+ "&platformType=" + platformType;
 }
+
+$(document).ready(function() {
+			$("input[class='goItemButton']").click(function() {
+						var val = $(this).siblings("input").val();
+							window.open(val,"_blank");
+
+					});
+		});

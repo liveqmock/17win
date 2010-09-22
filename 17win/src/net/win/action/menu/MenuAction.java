@@ -2,6 +2,7 @@ package net.win.action.menu;
 
 import net.win.BaseAction;
 
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -31,6 +32,7 @@ public class MenuAction extends BaseAction {
 	 */
 	public String toIndex() throws Exception {
 		// TODO Auto-generated method stub
+		ServletActionContext.getRequest().setAttribute("showIndexType", "1");
 		return "indexJSP";
 	}
 

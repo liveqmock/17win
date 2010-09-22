@@ -2,8 +2,8 @@ package net.win;
 
 public class BaseVO {
 	// 分页信息
-	private Integer nowpage = 1;
-	private Integer eachPage = 20;
+	private Integer nowPage = 1;
+	private Integer eachPage = 10;
 	private Integer pageCount = 0;
 	private Integer dataCount = 0;
 	private Long id;
@@ -17,19 +17,21 @@ public class BaseVO {
 	}
 
 	public Integer getStart() {
-		return (nowpage - 1) * eachPage;
+		return (nowPage - 1) * eachPage;
 	}
 
 	public Integer getLimit() {
 		return eachPage;
 	}
 
-	public Integer getNowpage() {
-		return nowpage;
+ 
+
+	public Integer getNowPage() {
+		return nowPage;
 	}
 
-	public void setNowpage(Integer nowpage) {
-		this.nowpage = nowpage;
+	public void setNowPage(Integer nowPage) {
+		this.nowPage = nowPage;
 	}
 
 	public Integer getEachPage() {

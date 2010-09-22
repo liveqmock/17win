@@ -78,6 +78,22 @@ public class BaseService {
 	protected void putPlatformByRequest(String platform) {
 		putByRequest("platform", platform);
 	}
+	/**
+	 * 存放现实类型
+	 * 
+	 * @return
+	 */
+	protected void putTaskShowType(String showTaskType) {
+		putByRequest("showTaskType", showTaskType);
+	}
+	/**
+	 * 存放现实类型
+	 * 
+	 * @return
+	 */
+	protected void putIndexShowType(String showIndexType) {
+		putByRequest("showIndexType", showIndexType);
+	}
 
 	/**
 	 * 获取response

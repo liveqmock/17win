@@ -96,12 +96,6 @@
 									（
 									<font color=red>在线</font>）
 									<br>
-									<a
-										href="tencent://message/?uin=<s:property value="#task[3]" />">
-										<img border="0"
-											src="http://wpa.qq.com/pa?p=1:<s:property value="#task[3]" />:41">
-									</a>
-									<br>
 									<img src="images/xin_1.gif" alt=刷客经验积分：2779>
 								</td>
 								<td valign="top" align="center">
@@ -117,9 +111,10 @@
 												需要审核<br>请QQ联系卖家
 											</s:if>
 									<s:else>
-										<input type="text" title="<s:property value="#task[7]" />"
+										<input type="text" title="<s:property value="#task[7]" />" readonly="readonly"
 											style="width: 60px" value="<s:property value="#task[7]" />" />
-										<input type="button" value="GO">
+										<br>
+										<input type="button" value="GO"    style="cursor: pointer;" class="goItemButton">
 									</s:else>
 									<br>
 									<a href="<s:property value="#task[9]" />"
@@ -161,7 +156,7 @@
 													卖家已发货<br>等待您确认好评
 												</s:if>
 										<s:else>
-												<font color="red"><s:property value="#task[13]" /> </font>小时后好评
+											<font color="red"><s:property value="#task[13]" /> </font>小时后好评
 												</s:else>
 									</s:elseif>
 									<s:elseif test="#task[12]==5">
@@ -173,8 +168,8 @@
 								</td>
 								<td valign="top" align="center">
 									<s:if test="#task[12]==-2">
-												等待审核
-												<br>
+										<span class="anniu">等待审核</span>
+										<br>
 										<a title="退出任务，并且返回金钱和发布点给您"
 											href="javascript:quitTask('<s:property value="#task[19]"/>')">退出任务</a>
 										<br>
@@ -186,21 +181,25 @@
 
 									<s:elseif test="#task[12]==2">
 										<a title="如果您已经付款，请确认支付"
-											href="javascript:payMoney('<s:property value="#task[19]"/>')">已经支付</a>
-										</br>
+											href="javascript:payMoney('<s:property value="#task[19]"/>')"><span
+											class="anniu">已经支付</span> </a>
+										<br>
 										<a title="退出任务，并且返回金钱和发布点给您"
-											href="javascript:quitTask('<s:property value="#task[19]"/>')">退出任务</a>
+											href="javascript:quitTask('<s:property value="#task[19]"/>')"><span
+											class="anniu">退出任务</span> </a>
 										<br>
 											可联系对方加时
 									</s:elseif>
 									<s:elseif test="#task[12]==3">
 										<a title="撤销上次支付操作！"
-											href="javascript:rollbackPay('<s:property value="#task[19]"/>')">并未支付</a>
+											href="javascript:rollbackPay('<s:property value="#task[19]"/>')"><span
+											class="anniu">并未支付</span> </a>
 									</s:elseif>
 									<s:elseif test="#task[12]==4">
 										<s:if test="#task[13]==0">
 											<a title="买家评价"
-												href="javascript:buyerEvaluate('<s:property value="#task[19]"/>')">我已评价</a>
+												href="javascript:buyerEvaluate('<s:property value="#task[19]"/>')"><span
+												class="anniu">我已评价</span> </a>
 										</s:if>
 										<s:else>
 												时间还没到
@@ -222,8 +221,16 @@
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									<font color="red" style="font-weight: bold;">快递单号：</font>
 								</td>
-								<td colspan="4" align="left">
+								<td colspan="3" align="left">
 									<font color="red" style="font-weight: bold;">打分/好评：</font>
+								</td>
+								<td align="left" valign="top">
+									<font color="red" style="font-weight: bold;">Q&nbsp;&nbsp;Q联系：</font>
+									<a
+										href="tencent://message/?uin=<s:property value="#task[3]" />">
+										<img border="0"
+											src="http://wpa.qq.com/pa?p=1:<s:property value="#task[3]" />:41">
+									</a>
 								</td>
 							</Tr>
 							<Tr>
@@ -231,8 +238,19 @@
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									<font color="red" style="font-weight: bold;">收货地址：</font>
 								</td>
-								<td colspan="4" align="left">
+								<td colspan="3" align="left">
 									<font color="red" style="font-weight: bold;">详细描述：</font>
+								</td>
+								<td align="left" valign="top" nowrap="nowrap">
+									<font color="red" style="font-weight: bold;">旺旺联系：</font>
+									<s:if test="@net.win.utils.StringUtils@isBlank(#task[21])">发布方没提供旺旺号</s:if>
+									<s:else>
+										<a target="_blank" 
+											href="http://amos1.taobao.com/msg.ww?v=2&uid=<s:property value="#task[21]" />&s=1"><img
+												border="0"
+												src="http://amos1.taobao.com/online.ww?v=2&uid=<s:property value="#task[21]" />&s=1"
+												alt="点击这里给我发消息" /> </a>
+									</s:else>
 								</td>
 							</Tr>
 

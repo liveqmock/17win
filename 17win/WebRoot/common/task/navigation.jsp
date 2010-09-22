@@ -5,22 +5,39 @@
 		<UL id=task_nav>
 			<LI>
 				<A
+					<s:if test="#request.showTaskType==1">
 					style="FONT-SIZE: 16px; BACKGROUND: url(images/task_nav_02.gif) no-repeat 50% bottom; COLOR: #ffffff"
+					</s:if>
 					href="taskManager/task!initTask.php?platformType=<s:property value="#request.platformType"/>"><s:property
 						value="#request.platform" />互动区</A>
 			</LI>
 			<LI>
 				<A
+					<s:if test="#request.showTaskType==2">
+					style="FONT-SIZE: 16px; BACKGROUND: url(images/task_nav_02.gif) no-repeat 50% bottom; COLOR: #ffffff"
+					</s:if>
 					href="taskManager/task!initReleaseTask.php?platformType=<s:property value="#request.platformType"/>">发布任务</A>
 			</LI>
 			<LI>
-				<A href="taskManager/task!initReceivedTast.php?platformType=<s:property value="#request.platformType"/>">已接任务</A>
-			</LI>   
-			<LI>
-				<A href="taskManager/task!initReleasedTast.php?platformType=<s:property value="#request.platformType"/>">已发任务</A>
+				<A
+					<s:if test="#request.showTaskType==3">
+					style="FONT-SIZE: 16px; BACKGROUND: url(images/task_nav_02.gif) no-repeat 50% bottom; COLOR: #ffffff"
+					</s:if>
+					href="taskManager/task!initReceivedTast.php?platformType=<s:property value="#request.platformType"/>">已接任务</A>
 			</LI>
 			<LI>
-				<A href="MySave.asp">定时任务</A>
+				<A
+					<s:if test="#request.showTaskType==4">
+					style="FONT-SIZE: 16px; BACKGROUND: url(images/task_nav_02.gif) no-repeat 50% bottom; COLOR: #ffffff"
+					</s:if>
+					href="taskManager/task!initReleasedTast.php?platformType=<s:property value="#request.platformType"/>">已发任务</A>
+			</LI>
+			<LI>
+				<A
+					<s:if test="#request.showTaskType==5">
+					style="FONT-SIZE: 16px; BACKGROUND: url(images/task_nav_02.gif) no-repeat 50% bottom; COLOR: #ffffff"
+					</s:if>
+					href="MySave.asp">定时任务</A>
 			</LI>
 			<LI>
 				<A href="userInfoManager/info!initSellerAndBuyer.php">绑定店铺</A>
@@ -30,7 +47,11 @@
 			</LI>
 
 			<LI>
-				<A href="MySave.asp">任务仓库</A>
+				<A
+					<s:if test="#request.showTaskType==6">
+					style="FONT-SIZE: 16px; BACKGROUND: url(images/task_nav_02.gif) no-repeat 50% bottom; COLOR: #ffffff"
+					</s:if>
+					href="MySave.asp">任务仓库</A>
 			</LI>
 
 		</UL>

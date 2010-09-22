@@ -100,13 +100,14 @@
 									<IMG alt="延迟收货" src=images/shiwu.gif>
 								</td>
 								<td valign="top" align="center">
-									<input name="2010915238272637" type="text"
-										title="<s:property value="#task[5]" />" id="2010915238272637"
+									<input  type="text" readonly="readonly"
+										title="<s:property value="#task[5]" />"  
 										style="width: 60px" value="<s:property value="#task[5]" />" />
-									<input type="button" value="GO">
 									<br>
-									<a href="<s:property value="#task[19]" />"
-										title="前往店铺：<s:property value="#task[19]" />"> <font
+									<input type="button" value="GO"  style="cursor: pointer;" class="goItemButton">
+									<br>
+									<a href="<s:property value="#task[19]" />" 
+									 	title="前往店铺：<s:property value="#task[19]" />"> <font
 										color="#FF0000">掌柜:<s:property value="#task[6]" /> </font> </a>
 								</td>
 								<td valign="top" align="center">
@@ -116,13 +117,11 @@
 									<s:else>
 										<a href="#" title="发送站内信息" target="_blank"><s:property
 												value="#task[8]" />（<font color=red>在线</font>）</a>
-									</s:else>
-									<br>
-									<s:if test="#task[7]!=1">
+										<br>
 										<img
 											src="images/<s:property value="@net.win.utils.StrategyUtils@getLevelImg(#task[11])" />"
 											alt="刷客经验积分：<s:property value="#task[11]" />">
-									</s:if>
+									</s:else>
 								</td>
 								<td valign="top" align="center">
 									<s:if test="#task[7]==1">
@@ -132,13 +131,6 @@
 										<font color="#FF0000"><s:property value="#task[9]" />
 										</font>
 									</s:else>
-									<br>
-									<s:if test="#task[7]!=1">
-										<a
-											href="tencent://message/?uin=<s:property value="#task[10]"/>"><img
-												src="http://wpa.qq.com/pa?p=1:<s:property value="#task[10]"/>:41"
-												border="0" /> </a>
-									</s:if>
 								</td>
 
 								<td valign="top" align="center">
@@ -184,25 +176,31 @@
 								<td valign="top" align="center">
 									<s:if test="#task[7]==1">
 										<a title="可能由于你填写错误，可以重新进行填写！"
-											href="javascript:cancelTask(<s:property value="#task[18]"/>)">取消重填</a>
+											href="javascript:cancelTask(<s:property value="#task[18]"/>)"><span
+											class="anniu">取消重填</span> </a>
 									</s:if>
 									<s:elseif test="#task[7]==-2">
 										<a title="您对该人信任之后，可以允许他接您的任务！"
-											href="javascript:audiReceiver(<s:property value="#task[18]"/>)">审核接收人</a>
+											href="javascript:audiReceiver(<s:property value="#task[18]"/>)"><span
+											class="anniu">审核接收人</span> </a>
 										<br>
 										<a title="如果对方没有被您审核过，可以清理买家！"
-											href="javascript:clearReceiver(<s:property value="#task[18]"/>)">清理买家</a>
+											href="javascript:clearReceiver(<s:property value="#task[18]"/>)"><span
+											class="anniu">清理买家</span> </a>
 										<br>
 										<a title="为对方加时"
-											href="javascript:addTime('<s:property value="#task[18]"/>')">为他加时</a>
+											href="javascript:addTime('<s:property value="#task[18]"/>')"><span
+											class="anniu">为他加时</span> </a>
 									</s:elseif>
 									<s:elseif test="#task[7]==2">
 										<a title="为对方加时"
-											href="javascript:addTime('<s:property value="#task[18]"/>')">为他加时</a>
+											href="javascript:addTime('<s:property value="#task[18]"/>')"><span
+											class="anniu">为他加时</span> </a>
 									</s:elseif>
 									<s:elseif test="#task[7]==3">
 										<a title="请您在确认后，进行发货！"
-											href="javascript:dispatch('<s:property value="#task[18]"/>')">我已发货</a>
+											href="javascript:dispatch('<s:property value="#task[18]"/>')"><span
+											class="anniu">我已发货</span> </a>
 									</s:elseif>
 									<s:elseif test="#task[7]==4">
 										<s:if test="#task[12]==0">
@@ -214,7 +212,8 @@
 									</s:elseif>
 									<s:elseif test="#task[7]==5">
 										<a title="请您好评，结束任务！"
-											href="javascript:sellerEvaluate('<s:property value="#task[18]"/>')">确认好评</a>
+											href="javascript:sellerEvaluate('<s:property value="#task[18]"/>')"><span
+											class="anniu">确认好评</span> </a>
 									</s:elseif>
 									<s:else>
 												完成
@@ -226,7 +225,7 @@
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									<font color="red" style="font-weight: bold;">快递单号：</font>
 								</td>
-								<td colspan="4" valign="top" align="left">
+								<td colspan="3" valign="top" align="left">
 									<font color="red" style="font-weight: bold;">打分/好评： <s:if
 											test="#task[17]==1">
 													全部5分
@@ -246,6 +245,15 @@
 											    自定义好评(<s:property value="#task[14]" />小时)
 											</s:elseif> </font>
 								</td>
+								<td align="left" valign="top">
+									<s:if test="#task[7]!=1">
+										<font color="red" style="font-weight: bold;">Q&nbsp;&nbsp;Q联系：</font>
+										<a
+											href="tencent://message/?uin=<s:property value="#task[10]"/>"><img
+												src="http://wpa.qq.com/pa?p=1:<s:property value="#task[10]"/>:41"
+												border="0" /> </a>
+									</s:if>
+								</td>
 							</tr>
 							<tr>
 								<td colspan="3" valign="top" align="left">
@@ -253,9 +261,22 @@
 									<font color="red" style="font-weight: bold;">收货地址：<s:property
 											value="#task[16]" /> </font>
 								</td>
-								<td colspan="4" valign="top" align="left">
+								<td colspan="3" valign="top" align="left">
 									<font color="red" style="font-weight: bold;">详细描述：<s:property
 											value="#task[15]" /> </font>
+								</td>
+								<td align="left" valign="top" nowrap="nowrap">
+									<s:if test="#task[7]!=1">
+										<font color="red" style="font-weight: bold;">旺旺联系：</font>
+										<s:if test="@net.win.utils.StringUtils@isBlank(#task[21])">接手方没提供旺旺号</s:if>
+										<s:else>
+											<a target="_blank"
+												href="http://amos1.taobao.com/msg.ww?v=2&uid=<s:property value="#task[21]" />&s=1"><img
+													border="0"
+													src="http://amos1.taobao.com/online.ww?v=2&uid=<s:property value="#task[21]" />&s=1"
+													alt="点击这里给我发消息" /> </a>
+										</s:else>
+									</s:if>
 								</td>
 							</tr>
 							<tr>

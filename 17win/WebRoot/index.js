@@ -7,6 +7,7 @@ function changeValidateCode(obj) {
 }
 var submitFlag = true;
 $(document).ready(function() {
+	$("#username").focus();
 	//找回密码
 	$("#findPW").dialog({
 				autoOpen : false,

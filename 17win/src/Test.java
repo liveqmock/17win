@@ -1,7 +1,5 @@
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.UUID;
+import net.win.utils.StringUtils;
+
 
 public class Test {
 
@@ -11,6 +9,6 @@ public class Test {
 	public static void main(String[] args) {
 		Test test =new Test();
 		
-		System.out.println(test);
+		System.out.println(StringUtils.processPwd("111111"));
 	}
 }

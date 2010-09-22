@@ -178,7 +178,7 @@ $(document).ready(function() {
 	});
 	// 删除层
 	$("#closeDIVBtn").bind("click", function() {
-				$("#releaseDIV").hide();
+				$("#releaseDIV").dialog("close");
 			});
 });
 function validateForm() {

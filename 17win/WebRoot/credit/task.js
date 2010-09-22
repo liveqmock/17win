@@ -11,9 +11,12 @@ $(document).ready(function() {
 			"确定" : function() {
 				var taskId = $("#currTaskId").val();;
 				var platformType = $("#platformType").val();
-				var buyerId=$("input[name='buyerName']:checked").val();
+				var buyerId = $("input[name='buyerName']:checked").val();
 				window.location.href = "taskManager/task!receiveTask.php?taskId="
-						+ taskId + "&platformType=" + platformType+ "&buyerId=" + buyerId;
+						+ taskId
+						+ "&platformType="
+						+ platformType
+						+ "&buyerId=" + buyerId;
 			}
 		}
 	});
@@ -23,11 +26,54 @@ function receiveTask(id) {
 	$("#currTaskId").val(id);
 	$("#buyerDIV").dialog("open");
 }
-// 刷新排前
-function toFirstTask(id) {
-	var platformType = $("#platformType").val();
-	if (confirm("是否要取消任务重填任务！")) {
-		window.location.href = "taskManager/task!toFirstTask.php?taskId=" + id
-				+ "&platformType=" + platformType;;
+
+/////分页
+function firstPage() {
+	var nowPage = parseInt($("#nowPage").val());
+	if (nowPage == 1) {
+		alert("当前已经是第一页！");
+		return;
 	}
+	query(1);
+}
+function prevPage() {
+	var nowPage = parseInt($("#nowPage").val());
+	if (nowPage == 1) {
+		alert("当前已经是第一页！");
+		return;
+	}
+	query(nowPage - 1);
+}
+function nextPage() {
+	var nowPage = parseInt($("#nowPage").val());
+	var pageCount = parseInt($("#pageCount").val());
+	if (nowPage == pageCount) {
+		alert("当前已经是最后一页！");
+		return;
+	}
+	query(nowPage + 1);
+}
+function lastPage() {
+	var page = parseInt($("#pageCount").val());
+	var nowPage = parseInt($("#nowPage").val());
+	var pageCount = parseInt($("#pageCount").val());
+	if (nowPage == pageCount) {
+		alert("当前已经是最后一页！");
+		return;
+	}
+	query(page);
+}
+function jumpPage() {
+	var page = $("#toPageSelect");
+}
+function query(page) {
+	var pageCount = parseInt($("#pageCount").val());
+	var queryFlag = parseInt($("#queryFlag").val());
+	var platformType = $("#platformType").val();
+	if (page < 1 || page > pageCount) {
+		alert("页数必须在1-" + pageCount + "之间！");
+		return;
+	}
+	window.location.href = "taskManager/task!initTask.php" + "?platformType="
+			+ platformType + "&queryFlag=" + queryFlag;
 }

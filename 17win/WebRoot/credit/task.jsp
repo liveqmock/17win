@@ -179,27 +179,35 @@
 						</s:iterator>
 						<TR>
 							<TD colspan="6">
+								<input type="hidden" value="1>" id="queryFlag">
+								<input type="hidden"
+									value="<s:property
+											value="creditTaskVO.nowPage" />"
+									id="nowPage">
+								<input type="hidden"
+									value="<s:property
+										value="creditTaskVO.pageCount" />"
+									id="pageCount">
 								共
-								<font color="blue"><b>34</b> </font> 条主题&nbsp;&nbsp;&nbsp;首页
-								上一页&nbsp;
-								<a href='mymission.asp?PageNo=2'>下一页</a>&nbsp;
-								<a href='mymission.asp?PageNo=4'>尾页</a>&nbsp;页次：
-								<strong><font color="red">1</font>/4</strong>页 &nbsp;
-								<b>10</b>条主题/页&nbsp;转到：
-								<select name='page' size='1'
-									onchange="javascript:window.location='mymission.asp?PageNo='+this.options[this.selectedIndex].value;">
-									<option value='1' selected="selected">
-										第1页
-									</option>
-									<option value='2'>
-										第2页
-									</option>
-									<option value='3'>
-										第3页
-									</option>
-									<option value='4'>
-										第4页
-									</option>
+								<font color="blue"><b><s:property
+											value="creditTaskVO.dataCount" /> </b> </font> 条主题&nbsp;&nbsp;&nbsp;
+								<a href="javascript:firstPage()">首页</a>
+								<a href="javascript:prevPage()">上一页</a>&nbsp;
+								<a href="javascript:nextPage()">下一页</a>&nbsp;
+								<a href="javascript:lastPage()">尾页</a>&nbsp;页次：
+								<strong><font color="red"><s:property
+											value="creditTaskVO.nowPage" /> </font>/<s:property
+										value="creditTaskVO.pageCount" /> </strong>页 &nbsp;
+								<b><s:property value="creditTaskVO.eachPage" /> </b>条主题/页&nbsp;转到：
+								<select id='toPageSelect' size='1' onchange="jumpPage()">
+									<s:iterator begin="1" end="creditTaskVO.pageCount" step="1"
+										var="index">
+										<option value="<s:property value="#index" />">
+											第
+											<s:property value="#index" />
+											页
+										</option>
+									</s:iterator>
 								</select>
 							</TD>
 						</TR>

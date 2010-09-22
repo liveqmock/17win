@@ -26,3 +26,11 @@ function quitTask(id) {
 				+ "&platformType=" + platformType;;
 	}
 }
+
+$(document).ready(function() {
+			$("input[class='goItemButton']").click(function() {
+						var val = $(this).siblings("input").val();
+						window.open(val,"_blank");
+
+					});
+		});

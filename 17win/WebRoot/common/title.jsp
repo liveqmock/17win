@@ -48,10 +48,7 @@
 									<s:else>
 										<span class="yell_font">欢迎您！</span>
 										<font color="red"><b><s:property
-													value="#session.userLogin.username" /> 
-										
-										</b>
-										</font> 回来 |
+													value="#session.userLogin.username" /> </b> </font> 回来 |
 											<A href="userManager/base!loginOut.php" target="_self">
 											[安全退出] </A>
 										|
@@ -110,46 +107,103 @@
 	<DIV id=list>
 		<UL>
 			<LI class=white>
-				<A class="li1 white" href="menuManager/menu!toIndex.php" id="a0"
-					onmouseover="Mea(0);" onMouseOut="setAuto()"><SPAN
-					style="COLOR: #000000">首&nbsp;页</SPAN> </A>
+				<A
+					<s:if test="#request.showIndexType==1">
+					class="li1 white"  	style="COLOR: #000000"
+				</s:if>
+					<s:else>
+						class="li0 "
+				</s:else>
+					href="menuManager/menu!toIndex.php" id="a0" onmouseover="Mea(0);"
+					onMouseOut="setAuto()"><SPAN>首&nbsp;页</SPAN> </A>
 			</LI>
 			<LI class=white>
-				<A class="li0 " href="taskManager/task!initTask.php?platformType=1" id="a1" onmouseover="Mea(1);"
-					onMouseOut="setAuto()">淘宝互刷</A>
+				<A
+					<s:if test="#request.showIndexType==2">
+					class="li1 white"  	style="COLOR: #000000"
+				</s:if>
+					<s:else>
+						class="li0 "
+				</s:else>
+					href="taskManager/task!initTask.php?platformType=1" id="a1"
+					onmouseover="Mea(1);" onMouseOut="setAuto()">淘宝互刷</A>
 			</LI>
 			<LI class=white>
-				<A class="li0 " href="taskManager/task!initTask.php?platformType=2" id="a2" onmouseover="Mea(2);" 	
-					onMouseOut="setAuto()" >拍拍互刷</A>
+				<A class="li0 " href="taskManager/task!initTask.php?platformType=2"
+					id="a2" onmouseover="Mea(2);" onMouseOut="setAuto()">拍拍互刷</A>
 			</LI>
 			<LI class=white>
-				<A class="li0 " href="taskManager/task!initTask.php?platformType=3"  id="a3" onmouseover="Mea(3);"
-					onMouseOut="setAuto()">有啊互刷</A>
+				<A
+					<s:if test="#request.showIndexType==3">
+					class="li1 white"  	style="COLOR: #000000"
+				</s:if>
+					<s:else>
+						class="li0 "
+				</s:else>
+					href="taskManager/task!initTask.php?platformType=3" id="a3"
+					onmouseover="Mea(3);" onMouseOut="setAuto()">有啊互刷</A>
 			</LI>
 			<LI class=white>
-				<A class="li0 " href="credit/task.jsp" id="a4" onmouseover="Mea(4);"
-					onMouseOut="setAuto()">流量互刷</A>
+				<A
+					<s:if test="#request.showIndexType==4">
+					class="li1 white"  	style="COLOR: #000000"
+				</s:if>
+					<s:else>
+						class="li0 "
+				</s:else> href="credit/task.jsp"
+					id="a4" onmouseover="Mea(4);" onMouseOut="setAuto()">流量互刷</A>
 				<br>
 			</LI>
 			<LI class=white>
-				<A class="li0 " href="credit/task.jsp" id="a5" onmouseover="Mea(5);"
-					onMouseOut="setAuto()">收藏互刷</A>
+				<A
+					<s:if test="#request.showIndexType==5">
+					class="li1 white"  	style="COLOR: #000000"
+				</s:if>
+					<s:else>
+						class="li0 "
+				</s:else> href="credit/task.jsp"
+					id="a5" onmouseover="Mea(5);" onMouseOut="setAuto()">收藏互刷</A>
 			</LI>
 			<LI class=white>
-				<A class="li0 " href="user/exchange.jsp" id="a6"
-					onmouseover="Mea(6);" onMouseOut="setAuto()">赠送兑换</A>
+				<A
+					<s:if test="#request.showIndexType==6">
+					class="li1 white"  	style="COLOR: #000000"
+				</s:if>
+					<s:else>
+						class="li0 "
+				</s:else>
+					href="user/exchange.jsp" id="a6" onmouseover="Mea(6);"
+					onMouseOut="setAuto()">赠送兑换</A>
 			</LI>
 			<LI class=white>
-				<A class="li0 " href="spread/index.jsp" id="a7"
-					onmouseover="Mea(7);" onMouseOut="setAuto()">推广赚钱</A>
+				<A
+					<s:if test="#request.showIndexType==7">
+					class="li1 white"  	style="COLOR: #000000"
+				</s:if>
+					<s:else>
+						class="li0 "
+				</s:else> href="spread/index.jsp"
+					id="a7" onmouseover="Mea(7);" onMouseOut="setAuto()">推广赚钱</A>
 			</LI>
 			<LI class=white>
-				<A class="li0 " href="user/vip.jsp" id="a8" onmouseover="Mea(8);"
-					onMouseOut="setAuto()">加入VIP</A>
+				<A
+					<s:if test="#request.showIndexType==8">
+					class="li1 white"  	style="COLOR: #000000"
+				</s:if>
+					<s:else>
+						class="li0 "
+				</s:else> href="user/vip.jsp"
+					id="a8" onmouseover="Mea(8);" onMouseOut="setAuto()">加入VIP</A>
 			</LI>
 			<LI class=white>
-				<A class="li0 " href="system/newer.jsp" id="a9"
-					onmouseover="Mea(9);" onMouseOut="setAuto()">新手入门</A>
+				<A
+					<s:if test="#request.showIndexType==9">
+					class="li1 white"  	style="COLOR: #000000"
+				</s:if>
+					<s:else>
+						class="li0 "
+				</s:else> href="system/newer.jsp"
+					id="a9" onmouseover="Mea(9);" onMouseOut="setAuto()">新手入门</A>
 			</LI>
 		</UL>
 	</DIV>

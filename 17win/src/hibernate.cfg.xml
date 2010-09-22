@@ -12,7 +12,7 @@
 		</property>
 
 		<property name="hibernate.connection.url">
-			jdbc:jtds:sqlserver://localhost:1433/17windb;
+			jdbc:jtds:sqlserver://localhost:1433/windb;
 			<!--jdbc:microsoft:sqlserver://localhost:1433;DatabaseName=17windb;SelectMethod=Cursor
 			-->
 		</property>
@@ -99,6 +99,5 @@
 		<mapping class="net.win.entity.WithdrawalsEntity" />
 		<mapping class="net.win.entity.TaskAddressEntity" />
 		<mapping class="net.win.entity.CreditTaskRepositoryEntity" />
-
 	</session-factory>
 </hibernate-configuration>

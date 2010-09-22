@@ -23,6 +23,7 @@
 			<value>classpath:hibernate.cfg.xml</value>
 		</property>
 	</bean>
+ 
 	<!-- 配置事务管理器 -->
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
@@ -132,9 +133,11 @@
 
 	<!-- quartz -->
 	<!-- 要调用的工作类 -->
-	<bean id="taskQuartz" class="net.win.service.quartz.TaskQuartz"></bean>
+	<bean id="taskQuartz" class="net.win.service.quartz.TaskQuartz">
+	
+	</bean>
 	<!-- 定义调用对象和调用对象的方法 -->
-	<bean id="jobtask"
+	<bean id="tastStatusTask"
 		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		<!-- 调用的类 -->
 		<property name="targetObject">
@@ -142,26 +145,26 @@
 		</property>
 		<!-- 调用类中的方法 -->
 		<property name="targetMethod">
-			<value>work</value>
+			<value>tastStatus</value>
 		</property>
 	</bean>
-	<!-- 定义触发时间 -->
-	<bean id="doTime"
+	<!-- 定义触发任务状态更新，每分钟-->
+	<bean id="tastStatusTaskTime"
 		class="org.springframework.scheduling.quartz.CronTriggerBean">
 		<property name="jobDetail">
-			<ref bean="jobtask" />
+			<ref bean="tastStatusTask" />
 		</property>
 		<!-- cron表达式 -->
 		<property name="cronExpression">
-			<value>10,15,20,25,30,35,40,45,50,55 * * * * ?</value>
+			<value>0 * * * * ?</value>
 		</property>
 	</bean>
 	<!-- 总管理类 如果将lazy-init='false'那么容器启动就会执行调度程序  -->
-	<bean id="startQuertz" lazy-init="true" autowire="no"
+	<bean id="startQuertz" lazy-init="false" autowire="no"
 		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<property name="triggers">
 			<list>
-				<ref bean="doTime" />
+				<ref bean="tastStatusTaskTime" />
 			</list>
 		</property>
 	</bean>

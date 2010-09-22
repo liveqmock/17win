@@ -28,7 +28,7 @@ import org.springframework.stereotype.Controller;
 		@Result(name = "initFindPassword", location = "/user/findPassword.jsp"),
 		@Result(name = "findPasswordSuccess", location = "/user/login.jsp"),
 		@Result(name = "initLogin", location = "/user/login.jsp"),
-		@Result(name = "loginOut", type = "redirect", location = "/index.jsp") })
+		@Result(name = "loginOut", type = "redirect", location = "menuManager/menu!toIndex.php") })
 public class UserAction extends BaseAction {
 	@Resource
 	private UserService userService;
