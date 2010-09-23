@@ -33,10 +33,8 @@ function cancelTask(id) {
 // 刷新排前
 function toFirstTask(id) {
 	var platformType = $("#platformType").val();
-	if (confirm("是否要取消任务重填任务！")) {
-		window.location.href = "taskManager/task!toFirstTask.php?taskId=" + id
-				+ "&platformType=" + platformType;
-	}
+	window.location.href = "taskManager/task!toFirstTask.php?taskId=" + id
+			+ "&platformType=" + platformType;
 }
 
 // 加时
@@ -49,7 +47,7 @@ function addTime(id) {
 $(document).ready(function() {
 			$("input[class='goItemButton']").click(function() {
 						var val = $(this).siblings("input").val();
-							window.open(val,"_blank");
+						window.open(val, "_blank");
 
 					});
 		});

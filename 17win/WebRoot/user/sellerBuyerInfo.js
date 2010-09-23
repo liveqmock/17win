@@ -20,7 +20,7 @@ $(document).ready(function() {
 
 			$("#updateDIV").dialog({
 						autoOpen : false,
-						draggable : false,
+						draggable : true,
 						hide : 'slide',
 						modal : true,
 						resizable : false,
@@ -73,7 +73,6 @@ $(document).ready(function() {
 							$('.buyerClass').hide();
 						} else {
 							$('.sellerClass').hide();
-							s;
 						}
 					});
 
@@ -108,12 +107,16 @@ function validateForm() {
 	submitFlag = true;
 	if ($("[name='type']:checked").val() == "1") {
 		$(".sellerClass input[type='text']").blur();
+		if (!submitFlag || Validater.isBlank($("#sellerName").val())) {
+			alert("填写的资料不正确！");
+			return false;
+		}
 	} else {
 		$(".buyerClass input[type='text']").blur();
-	}
-	if (!submitFlag) {
-		alert("填写的资料不正确！");
-		return false;
+		if (!submitFlag) {
+			alert("填写的资料不正确！");
+			return false;
+		}
 	}
 	return true;
 }

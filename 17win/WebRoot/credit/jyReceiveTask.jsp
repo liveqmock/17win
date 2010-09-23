@@ -111,10 +111,12 @@
 												需要审核<br>请QQ联系卖家
 											</s:if>
 									<s:else>
-										<input type="text" title="<s:property value="#task[7]" />" readonly="readonly"
-											style="width: 60px" value="<s:property value="#task[7]" />" />
+										<input type="text" title="<s:property value="#task[7]" />"
+											readonly="readonly" style="width: 60px"
+											value="<s:property value="#task[7]" />" />
 										<br>
-										<input type="button" value="GO"    style="cursor: pointer;" class="goItemButton">
+										<input type="button" value="GO" style="cursor: pointer;"
+											class="goItemButton">
 									</s:else>
 									<br>
 									<a href="<s:property value="#task[9]" />"
@@ -170,7 +172,7 @@
 									<s:if test="#task[12]==-2">
 										<span class="anniu">等待审核</span>
 										<br>
-										<a title="退出任务，并且返回金钱和发布点给您"
+										<a title="退出任务"
 											href="javascript:quitTask('<s:property value="#task[19]"/>')">退出任务</a>
 										<br>
 												可联系对方加时
@@ -222,7 +224,24 @@
 									<font color="red" style="font-weight: bold;">快递单号：</font>
 								</td>
 								<td colspan="3" align="left">
-									<font color="red" style="font-weight: bold;">打分/好评：</font>
+									<font color="red" style="font-weight: bold;">打分/好评： <s:if
+											test="#task[18]==1">
+													全部5分
+												</s:if> <s:elseif test="#task[18]==2">
+												全部不打分
+											</s:elseif> <s:elseif test="#task[18]==3">
+												带字5分好评
+											</s:elseif>/<s:if test="#task[14]==1">
+													马上好评
+												</s:if> <s:elseif test="#task[14]==2">
+												一天后好评
+											</s:elseif> <s:elseif test="#task[14]==3">
+												两天后好评
+											</s:elseif> <s:elseif test="#task[14]==4">
+												三天后好评
+											</s:elseif> <s:elseif test="#task[14]==5">
+											    自定义好评(<s:property value="#task[15]" />小时)
+											</s:elseif> </font>
 								</td>
 								<td align="left" valign="top">
 									<font color="red" style="font-weight: bold;">Q&nbsp;&nbsp;Q联系：</font>
@@ -236,16 +255,18 @@
 							<Tr>
 								<td colspan="3" align="left">
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<font color="red" style="font-weight: bold;">收货地址：</font>
+									<font color="red" style="font-weight: bold;">收货地址：<s:property
+											value="#task[17]" /> </font>
 								</td>
 								<td colspan="3" align="left">
-									<font color="red" style="font-weight: bold;">详细描述：</font>
+									<font color="red" style="font-weight: bold;">详细描述：<s:property
+											value="#task[16]" /> </font>
 								</td>
 								<td align="left" valign="top" nowrap="nowrap">
 									<font color="red" style="font-weight: bold;">旺旺联系：</font>
 									<s:if test="@net.win.utils.StringUtils@isBlank(#task[21])">发布方没提供旺旺号</s:if>
 									<s:else>
-										<a target="_blank" 
+										<a target="_blank"
 											href="http://amos1.taobao.com/msg.ww?v=2&uid=<s:property value="#task[21]" />&s=1"><img
 												border="0"
 												src="http://amos1.taobao.com/online.ww?v=2&uid=<s:property value="#task[21]" />&s=1"

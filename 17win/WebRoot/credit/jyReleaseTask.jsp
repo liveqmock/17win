@@ -100,14 +100,15 @@
 									<IMG alt="延迟收货" src=images/shiwu.gif>
 								</td>
 								<td valign="top" align="center">
-									<input  type="text" readonly="readonly"
-										title="<s:property value="#task[5]" />"  
-										style="width: 60px" value="<s:property value="#task[5]" />" />
+									<input type="text" readonly="readonly"
+										title="<s:property value="#task[5]" />" style="width: 60px"
+										value="<s:property value="#task[5]" />" />
 									<br>
-									<input type="button" value="GO"  style="cursor: pointer;" class="goItemButton">
+									<input type="button" value="GO" style="cursor: pointer;"
+										class="goItemButton">
 									<br>
-									<a href="<s:property value="#task[19]" />" 
-									 	title="前往店铺：<s:property value="#task[19]" />"> <font
+									<a href="<s:property value="#task[19]" />"
+										title="前往店铺：<s:property value="#task[19]" />"> <font
 										color="#FF0000">掌柜:<s:property value="#task[6]" /> </font> </a>
 								</td>
 								<td valign="top" align="center">
@@ -178,6 +179,10 @@
 										<a title="可能由于你填写错误，可以重新进行填写！"
 											href="javascript:cancelTask(<s:property value="#task[18]"/>)"><span
 											class="anniu">取消重填</span> </a>
+										<br>
+										<a title="刷新排前可以使您的任务在发布区靠前！"
+											href="javascript:toFirstTask(<s:property value="#task[18]"/>)"><span
+											class="anniu">刷新排前</span> </a>
 									</s:if>
 									<s:elseif test="#task[7]==-2">
 										<a title="您对该人信任之后，可以允许他接您的任务！"
