@@ -1,13 +1,7 @@
 package net.win.vo;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.win.BaseVO;
-import net.win.entity.AreaEntity;
 import net.win.entity.BuyerEntity;
-import net.win.entity.CityEntity;
-import net.win.entity.ProvinceEntity;
 import net.win.entity.SellerEntity;
 import net.win.entity.UserEntity;
 
@@ -28,16 +22,10 @@ public class UserVO extends BaseVO {
 	private Double number;
 	// 用户名
 	private String username;
-	/**
-	 * 显示数据
-	 */
-	private List<ProvinceEntity> provinces = new ArrayList<ProvinceEntity>();
-	private List<CityEntity> cities = new ArrayList<CityEntity>();
-	private List<AreaEntity> areas = new ArrayList<AreaEntity>();
 
-	private SellerEntity seller =new  SellerEntity();
+	private SellerEntity seller = new SellerEntity();
 
-	private BuyerEntity buyer =new  BuyerEntity();
+	private BuyerEntity buyer = new BuyerEntity();
 
 	public UserEntity getUserEntity() {
 		return userEntity;
@@ -45,30 +33,6 @@ public class UserVO extends BaseVO {
 
 	public void setUserEntity(UserEntity userEntity) {
 		this.userEntity = userEntity;
-	}
-
-	public List<ProvinceEntity> getProvinces() {
-		return provinces;
-	}
-
-	public void setProvinces(List<ProvinceEntity> provinces) {
-		this.provinces = provinces;
-	}
-
-	public List<CityEntity> getCities() {
-		return cities;
-	}
-
-	public void setCities(List<CityEntity> cities) {
-		this.cities = cities;
-	}
-
-	public List<AreaEntity> getAreas() {
-		return areas;
-	}
-
-	public void setAreas(List<AreaEntity> areas) {
-		this.areas = areas;
 	}
 
 	public String getVerificationCode() {

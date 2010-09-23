@@ -3,6 +3,11 @@ package net.win.service.system;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import net.win.BaseService;
+import net.win.dao.UserDAO;
+import net.win.entity.UserEntity;
+import net.win.utils.MailUtils;
+
 import org.apache.struts2.ServletActionContext;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -10,22 +15,9 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 import sun.misc.BASE64Encoder;
 
-import net.win.BaseService;
-import net.win.dao.AreaDAO;
-import net.win.dao.CityDAO;
-import net.win.dao.ProvinceDAO;
-import net.win.dao.UserDAO;
-import net.win.entity.UserEntity;
-import net.win.utils.MailUtils;
 @SuppressWarnings("unused")
 @Service("ajaxService")
 public class AjaxService extends BaseService {
-	@Resource
-	private ProvinceDAO provinceDAO;
-	@Resource
-	private CityDAO cityDAO;
-	@Resource
-	private AreaDAO areaDAO;
 	@Resource
 	private UserDAO userDAO;
 
@@ -45,8 +37,8 @@ public class AjaxService extends BaseService {
 		UserEntity userEntity = userDAO
 				.uniqueResult(
 						" from UserEntity as _u where _u.username=:username  or _u.telephone =:telephone ",
-						new String[]{"username", "telephone"}, new Object[]{
-								username, telephone});
+						new String[] { "username", "telephone" }, new Object[] {
+								username, telephone });
 		if (userEntity == null) {
 			return false;
 		}

@@ -1,48 +1,20 @@
 package net.win.action.system;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 import net.win.BaseAction;
-import net.win.dao.AreaDAO;
-import net.win.dao.CityDAO;
-import net.win.dao.ProvinceDAO;
 import net.win.dao.UserDAO;
-import net.win.entity.AreaEntity;
-import net.win.entity.CityEntity;
-import net.win.entity.ProvinceEntity;
-import net.win.entity.UserEntity;
 import net.win.service.system.AjaxService;
-import net.win.utils.MailUtils;
 import net.win.utils.HttpB2CUtils;
-import net.win.utils.StringUtils;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpServerConnection;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.springframework.context.annotation.Scope;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
-
-import sun.misc.BASE64Encoder;
-
-import com.sun.org.apache.commons.beanutils.BeanUtils;
 
 @SuppressWarnings( { "serial", "unused", "unchecked" })
 @Controller
@@ -53,12 +25,7 @@ public class AjaxAction extends BaseAction {
 	@Resource
 	private AjaxService ajaxService;
 
-	@Resource
-	private ProvinceDAO provinceDAO;
-	@Resource
-	private CityDAO cityDAO;
-	@Resource
-	private AreaDAO areaDAO;
+ 
 	@Resource
 	private UserDAO userDAO;
 
@@ -151,33 +118,7 @@ public class AjaxAction extends BaseAction {
 		return JSON;
 	}
 
-	/**
-	 * 省市县联动
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	public String address() throws Exception {
-		Address address;
-		if ("1".equals(type)) {
-			ProvinceEntity provinceEntity = provinceDAO.load(id);
-			List<CityEntity> cities = provinceEntity.getCities();
-			for (CityEntity cityEntity : cities) {
-				address = new Address();
-				BeanUtils.copyProperties(address, cityEntity);
-				cityList.add(address);
-			}
-		} else {
-			CityEntity cityEntity = cityDAO.load(id);
-			List<AreaEntity> areas = cityEntity.getAreas();
-			for (AreaEntity areaEntity : areas) {
-				address = new Address();
-				BeanUtils.copyProperties(address, areaEntity);
-				areaList.add(address);
-			}
-		}
-		return JSON;
-	}
+	 
 
 	/**
 	 * 验证用户

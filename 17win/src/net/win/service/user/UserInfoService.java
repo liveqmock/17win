@@ -12,8 +12,6 @@ import net.win.BaseService;
 import net.win.TaskMananger;
 import net.win.UserLoginInfo;
 import net.win.dao.BuyerDAO;
-import net.win.dao.CityDAO;
-import net.win.dao.ProvinceDAO;
 import net.win.dao.SellerDAO;
 import net.win.dao.UserDAO;
 import net.win.entity.BuyerEntity;

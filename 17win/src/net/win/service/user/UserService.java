@@ -6,11 +6,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import net.win.BaseService;
-import net.win.dao.AreaDAO;
-import net.win.dao.CityDAO;
-import net.win.dao.ProvinceDAO;
 import net.win.dao.UserDAO;
-import net.win.entity.ProvinceEntity;
 import net.win.entity.UserEntity;
 import net.win.utils.Constant;
 import net.win.utils.MailUtils;
@@ -30,12 +26,6 @@ import sun.misc.BASE64Decoder;
 public class UserService extends BaseService {
 	@Resource
 	private UserDAO userDAO;
-	@Resource
-	private ProvinceDAO provinceDAO;
-	@Resource
-	private CityDAO cityDAO;
-	@Resource
-	private AreaDAO areaDAO;
 	@Resource
 	private JavaMailSender mailSender;
 	@Resource
@@ -120,9 +110,6 @@ public class UserService extends BaseService {
 	 * @throws Exception
 	 */
 	public String activateAccount(UserVO userVO) throws Exception {
-		List<ProvinceEntity> provinces = provinceDAO.listAll();
-		Hibernate.initialize(provinces);
-		userVO.setProvinces(provinces);
 		return "initRegister";
 	}
 
