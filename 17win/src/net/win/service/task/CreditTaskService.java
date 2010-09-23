@@ -902,6 +902,10 @@ public class CreditTaskService extends BaseService {
 		// 设置发布人，发布账号
 		// Long buyerID = creditTaskVO.getBuyerID();
 		Long sellerID = creditTaskVO.getSellerID();
+		if(sellerID==null){
+			putAlertMsg("掌柜名和商品地址不对应！");
+			return "insertReleaseTaskFail";
+		}
 		SellerEntity seller = new SellerEntity();
 		seller.setId(sellerID);
 		/**

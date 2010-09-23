@@ -8,6 +8,8 @@
 		<LINK href="css/header.css" type=text/css rel=stylesheet>
 		<LINK href="css/index.css" type=text/css rel=stylesheet>
 		<LINK href="css/top_bottom.css" type="text/css" rel="stylesheet">
+		<SCRIPT src="js/validater.js" type="text/javascript"></SCRIPT>
+		<SCRIPT src="js/utils.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="credit/jyReleaseTask.js" type="text/javascript"></SCRIPT>
 	</HEAD>
 	<BODY>
@@ -38,7 +40,7 @@
 							</DIV>
 							<DIV style="CLEAR: right; MARGIN-TOP: 12px; FLOAT: right">
 								自定义刷新时间
-								<input type="text" value="" style="width: 25px"
+								<input type="text" value="" style="width: 25px"  id="autoreFresh"
 									title="不填写或则0表示不自动刷新" />
 								<input type="hidden"
 									value="<s:property value="#request.platformType"/>"

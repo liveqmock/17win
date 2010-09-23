@@ -3,7 +3,9 @@ package net.win.service.quartz;
 import javax.annotation.Resource;
 
 import net.win.dao.CreditTaskDAO;
+import net.win.utils.LoggerUtils;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -14,7 +16,7 @@ public class TaskQuartz {
 	/**
 	 * 改变加时状态
 	 */
-	public void tastStatus() throws Exception {
+	public void tastStatus() {
 		// List<CreditTaskEntity> tasks = creditTaskDAO
 		// .list("from CreditTaskEntity as _task where (_task.status='2' or
 		// _task.status='-2') and"
@@ -35,11 +37,33 @@ public class TaskQuartz {
 		// creditTaskEntity.setRemainTime(null);
 		// }
 		// }
-		Session session = creditTaskDAO.obtainSession();
-		String hql = "update CreditTaskEntity as _task  set _task.receiveDate=null ,_task.receiveIP=null ,_task.buyer=null,_task.status='1',"
-				+ "_task.remainTime=null,_task.receivePerson=null where  (_task.status='2' or _task.status='-2') and "
-				+ "(minute(current_time())-minute(_task.receiveDate))>_task.remainTime";
-		Query query = session.createQuery(hql);
-		query.executeUpdate();
+		Query query;
+		Session session = null;
+		try {
+			session = creditTaskDAO.obtainSession();
+			session.beginTransaction();
+			String sql = "update"
+					+ " Tb_CreditTask "
+					+ "   set"
+					+ "     RECEIVE_DATE_=null,"
+					+ "   RECEIVE_IP_=null,"
+					+ "    BUYER_ID_=null,"
+					+ "       STATUS_='1',"
+					+ "  REMAIN_TIME_=null,"
+					+ "  RECEIVE_PERSON_=null "
+					+ "   where"
+					+ "     ("
+					+ "       STATUS_='2' "
+					+ "      or STATUS_='-2'"
+					+ "    ) "
+					+ "  and datediff(mi,RECEIVE_DATE_,getdate())>=REMAIN_TIME_";
+			query = session.createSQLQuery(sql);
+			query.executeUpdate();
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			session.getTransaction().rollback();
+			LoggerUtils.error("20分钟任务定时错误！", e);
+		}
+
 	}
 }

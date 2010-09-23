@@ -57,14 +57,21 @@ $(document).ready(function() {
 				$(obj).data("nowUrl", $(obj).val());
 			});
 	$("#itemUrl").bind("blur", function() {
+		//如果有被选中的
+		if($("input[name='creditTaskVO.sellerID']:checked").size()>0){
+			$("input[name='creditTaskVO.sellerID']").attr("disabled",false);
+			return ;
+		}
+		
 		var obj = this;
 		var platformType = $("#platformType").val();
 		// 去掉空格
 		$(obj).val($.trim($(obj).val()));
 		// 获取seller input
 		if (!Validater.isItem($(obj).val(),platformType)) {
-			changeStyle(obj, '0', '您输入的格式不地址格式不正确，最好复制在浏览器地址栏里面复制后粘贴,如还有疑问，请联系客户！');
 			submitFlag = false;
+			alert("您输入的格式不地址格式不正确，最好复制在浏览器地址栏里面复制后粘贴,如还有疑问，请联系客户！");
+			changeStyle(obj, '0', '您输入的格式不地址格式不正确，最好复制在浏览器地址栏里面复制后粘贴,如还有疑问，请联系客户！');
 			return;
 		}
 		if ($(obj).data("nowUrl") == $(obj).val()) {
@@ -76,6 +83,8 @@ $(document).ready(function() {
 					type : platformType
 				}, function(data) {
 					if (data.seller == null || data.seller == "") {
+						submitFlag = false;
+						alert("您输入的地址不正确！");
 						changeStyle(obj, '0', '您输入的地址不正确！');
 					} else {
 						var flag = false;
@@ -89,10 +98,12 @@ $(document).ready(function() {
 									}
 								});
 						if (flag) {
+							$("input[name='creditTaskVO.sellerID']").attr("disabled",false);
 							changeStyle(obj, '1', '');
 							selectRadio.attr("checked", true);
 							$(obj).data("nowUrl", $(obj).val());
 						} else {
+							alert("输入的地址和您的卖家账号不相同！");
 							changeStyle(obj, '0', '输入的地址和您的卖家账号不相同！');
 							submitFlag = false;
 						}
@@ -182,6 +193,10 @@ $(document).ready(function() {
 			});
 });
 function validateForm() {
+	if($("input[name='creditTaskVO.sellerID']:checked").size()==0){
+		alert("掌柜未选中，请检查您的商品地址！");
+		return false;
+	}
 	submitFlag = true;
 	$("input").blur();
 	// 验证和第一次加载都为真

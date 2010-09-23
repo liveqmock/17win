@@ -184,8 +184,13 @@ public class UserService extends BaseService {
 			userEntity.setReferee(null);
 		}
 		userDAO.save(userEntity);
-		MailUtils.sendRegisterMail(mailSender, freeMarkerCfj, userEntity
-				.getUsername(), userEntity.getEmail());
+		try {
+			MailUtils.sendRegisterMail(mailSender, freeMarkerCfj, userEntity
+					.getUsername(), userEntity.getEmail());
+		} catch (RuntimeException e) {
+			putAlertMsg("注册失败，您的邮箱不正确！");
+			return INPUT;
+		}
 		putDIV("注册成功,马上激活吧！");
 		return "registerSuccess";
 	}

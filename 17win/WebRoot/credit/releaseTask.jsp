@@ -164,7 +164,7 @@
 																	</td>
 																	<td colspan="4">
 																		<s:if test="#request.sellers!=null">
-																			<s:radio list="#request.sellers" listKey="id"
+																			<s:radio list="#request.sellers" listKey="id"  disabled="true"
 																				name="creditTaskVO.sellerID" listValue="name"></s:radio>
 																		</s:if>
 																	</td>

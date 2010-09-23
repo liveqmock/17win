@@ -45,9 +45,15 @@ function addTime(id) {
 }
 
 $(document).ready(function() {
+			intText("autoreFresh");
+
 			$("input[class='goItemButton']").click(function() {
 						var val = $(this).siblings("input").val();
 						window.open(val, "_blank");
 
+					});
+
+			$("#autoreFresh").focus(function() {
+					
 					});
 		});
