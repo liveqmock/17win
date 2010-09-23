@@ -162,6 +162,7 @@ Validater.isTelphone = function(str) {
 	var reg = /^(13[0-9]|15[1|0|3|6|7|8|9]|18[8|9])\d{8}$/;
 	return reg.test(str);
 };
+
 /**
  * 验证店铺地址 0 是挨个验证 1 淘宝 2拍拍 3有啊
  * 
@@ -171,21 +172,47 @@ Validater.isTelphone = function(str) {
  *            type
  * @return {Boolean}
  */
-Validater.isB2CShop = function(str, type) {
-	var regName = "";
+Validater.isShop = function(url, type) {
+	var regName = null;
 	if ("0" == type) {
-		if (isB2CShop(str, '1') || isB2CShop(str, '2') || isB2CShop(str, '3')) {
+		if (isShop(url, '1') || isShop(url, '2') || isShop(url, '3')) {
 			return true;
 		}
 	}
 	if ("1" == type) {
-		regName = /^http:[/]{2}\w+\-*\w+\.taobao\.com[/\\]?/;
+		regName = new RegExp("^http:[/\\\\]{2}\\w+\\-*\\w+\\.taobao\\.com[/\\\\]?");
 	} else if ("2" == type) {
-		regName = /^http:[/\\]{2}\w+\-*\\w+\.paipai\.com[/\\]?/;
+		regName = new RegExp("^http:[/\\\\]{2}\\w+\\-*\\w+\\.taobao\\.com[/\\\\]?");
 	} else if ("3" == type) {
-		regName = /^http:[/\\]{2}youa.baidu\.com[/\\]?/;
+		regName = new RegExp("^http:[/\\\\]{2}\\w+\\-*\\w+\\.taobao\\.com[/\\\\]?");
 	}
-	return regName.test(str);
+	return url.search(regName) != -1;
+}
+
+/**
+ * 验证商品地址 0 是挨个验证 1 淘宝 2拍拍 3有啊
+ * 
+ * @param {}
+ *            str
+ * @param {}
+ *            type
+ * @return {Boolean}
+ */
+Validater.isItem = function(url, type) {
+	var regName = "";
+	if ("0" == type) {
+		if (isItem(url, '1') || isItem(url, '2') || isItem(url, '3')) {
+			return true;
+		}
+	}
+	if ("1" == type) {
+		regName = new RegExp("^http:[/\\\\]{2}item\\.taobao\\.com[/\\\\]item.htm");
+	} else if ("2" == type) {
+		regName = new RegExp("^http:[/\\\\]{2}auction1\\.paipai\\.com[/\\\\]search");
+	} else if ("3" == type) {
+		regName = new RegExp("^http:[/\\\\]{2}youa.baidu\\.com[/\\\\]item");
+	}
+	return url.search(regName) != -1;
 }
 
 // 根据是否是数字返回值 defValue不是数字就返回一个默认值，比如0

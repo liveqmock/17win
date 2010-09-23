@@ -10,6 +10,9 @@ var timer;
 $(document).ready(function() {
 			timer = setInterval(changeSutmitBtn, 1000);
 			$("#username").focus();
+			
+			intText("qq");
+			intText("telephone");
 			// 用户名
 			$("#username").bind("focus", function() {
 						$(this).data("nowData", $(this).val());
@@ -45,7 +48,7 @@ $(document).ready(function() {
 						if (Validater.isPassword($(this).val())) {
 							validateSuccess(this);
 						} else {
-							validateError(this, "密码格式不正确！");
+							validateError(this, "密码格式不正确，必须为6至20位字符！");
 							submitFlag = false;
 						}
 					});
@@ -68,7 +71,7 @@ $(document).ready(function() {
 								validateSuccess(this);
 							}
 						} else {
-							validateError(this, "操作码格式不正确！");
+							validateError(this, "操作码格式不正确，必须为6至20位字符！");
 							submitFlag = false;
 						}
 					});

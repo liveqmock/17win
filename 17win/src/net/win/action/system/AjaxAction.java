@@ -103,20 +103,41 @@ public class AjaxAction extends BaseAction {
 	 * @return
 	 * @throws Exception
 	 */
-	public String obtainSeller() throws Exception {
+	public String obtainSellerByShop() throws Exception {
 		// 自动获取
 		if ("0".equals(type)) {
 			String shopType = HttpB2CUtils.obtainShopType(url);
 			if (!"0".equals(shopType)) {
-				seller = HttpB2CUtils.obtainSeller(url, shopType);
+				seller = HttpB2CUtils.obtainSellerByShop(url, shopType);
 			} else {
 				seller = "";
 			}
 		} else {
-			seller = HttpB2CUtils.obtainSeller(url, type);
+			seller = HttpB2CUtils.obtainSellerByShop(url, type);
 		}
 		return JSON;
 
+	}
+
+	/**
+	 * 商品账号
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String obtainSellerByItem() throws Exception {
+		// 自动获取
+		if ("0".equals(type)) {
+			String shopType = HttpB2CUtils.obtainShopType(url);
+			if (!"0".equals(shopType)) {
+				seller = HttpB2CUtils.obtainSellerByItem(url, shopType);
+			} else {
+				seller = "";
+			}
+		} else {
+			seller = HttpB2CUtils.obtainSellerByItem(url, type);
+		}
+		return JSON;
 	}
 
 	/**
@@ -146,12 +167,6 @@ public class AjaxAction extends BaseAction {
 				BeanUtils.copyProperties(address, cityEntity);
 				cityList.add(address);
 			}
-			// List<AreaEntity> areas = cities.get(0).getAreas();
-			// for (AreaEntity areaEntity : areas) {
-			// address = new Address();
-			// BeanUtils.copyProperties(address, areaEntity);
-			// areaList.add(address);
-			// }
 		} else {
 			CityEntity cityEntity = cityDAO.load(id);
 			List<AreaEntity> areas = cityEntity.getAreas();

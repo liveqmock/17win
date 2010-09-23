@@ -62,8 +62,8 @@ $(document).ready(function() {
 		// 去掉空格
 		$(obj).val($.trim($(obj).val()));
 		// 获取seller input
-		if (Validater.isBlank($(obj).val())) {
-			changeStyle(obj, '0', '您输入的地址不能为空！');
+		if (Validater.isItem($(obj).val()),platformType) {
+			changeStyle(obj, '0', '您输入的格式不地址格式不正确，最好复制在浏览器地址栏里面复制后粘贴,如还有疑问，请联系客户！');
 			submitFlag = false;
 			return;
 		}
@@ -71,7 +71,7 @@ $(document).ready(function() {
 			return;
 		}
 		// 获取用户地址
-		VhostAop.divAOP.ajax("ajaxManager/ajax!obtainSeller.php", {
+		VhostAop.divAOP.ajax("ajaxManager/ajax!obtainSellerByItem.php", {
 					url : $(obj).val(),
 					type : platformType
 				}, function(data) {

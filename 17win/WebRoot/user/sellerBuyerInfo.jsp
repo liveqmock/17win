@@ -101,23 +101,26 @@ img {
 												border="0" align="center">
 												<tbody id="sellerTable<s:property value="#type"/>">
 													<tr>
-														<td   colspan="3"  height="40" align="left" nowrap="nowrap"
+														<td colspan="3" height="40" align="left" nowrap="nowrap"
 															class="font14b2">
 															<s:set name="platformName"
 																value="#type==1?'淘宝':#type==2?'拍拍':'有啊'"></s:set>
 															<s:property value="#platformName" />
-															卖号资料： 
+															卖号资料：
 														</td>
 													</tr>
 													<tr style="background: #EDF6FF">
-														<th height="10" nowrap="nowrap" align="center" width="40%">
+														<th height="10" nowrap="nowrap" align="center" width="30%">
 															店铺地址
 														</th>
-														<th height="10" nowrap="nowrap" align="center"  width="20%">
+														<th height="10" nowrap="nowrap" align="center" width="20%">
 															卖号
 														</th>
-														<th height="10" nowrap="nowrap" align="center"  width="40%">
+														<th height="10" nowrap="nowrap" align="center" width="30%">
 															发货地址
+														</th>
+														<th height="10" nowrap="nowrap" align="center" width="20%">
+															操作
 														</th>
 													</tr>
 													<s:iterator value="#request.sellers.get(#type)" id="seller">
@@ -135,28 +138,11 @@ img {
 																<s:property value="#seller.name" />
 															</td>
 															<td align="center" nowrap="nowrap">
-																省：
-																<s:select value="#seller.provinceID" disabled="true"
-																	theme="simple" cssStyle="width:80px"
-																	onchange="selectCity(this)" list="#request.provinces"
-																	listKey="id" listValue="name" headerKey=""
-																	headerValue="--请选择--">
-																</s:select>
-																市：
-																<s:if test="#seller.citys!=null">
-																	<s:select disabled="true" cssStyle="width:80px"
-																		theme="simple" value="#seller.cityID"
-																		list="#seller.citys" listKey="id" listValue="name"
-																		headerKey="" headerValue="请选择">
-																	</s:select>
-																</s:if>
-																<s:else>
-																	<select disabled="disabled" style="width: 80px">
-																		<option>
-																			--请选择--
-																		</option>
-																	</select>
-																</s:else>
+																<s:property value="#seller.address" />
+															</td>
+															<td align="center" nowrap="nowrap">
+																<a
+																	href="javascript:showUpdateDIV('<s:property value="#seller.id" />')">修改发货地址</a>
 															</td>
 														</tr>
 													</s:iterator>
@@ -171,7 +157,8 @@ img {
 												align="center">
 												<tbody id="buyerTable<s:property value="#type"/>">
 													<tr>
-														<td width="16%"  colspan="2" height="40" align="left" class="font14b2">
+														<td width="16%" colspan="2" height="40" align="left"
+															class="font14b2">
 															<s:property value="#platformName" />
 															买号资料：
 
@@ -270,8 +257,7 @@ img {
 						<td valign="middle">
 							<input type="text" id="sellerName" name="userVO.seller.name"
 								readonly="readonly">
-							<br />
-							（系统自动获取）
+							<span id="huoquUser" style="display: none"></span>
 						</td>
 					</tr>
 					<tr class="sellerClass">
@@ -279,19 +265,21 @@ img {
 							发货地址：
 						</td>
 						<td valign="middle">
-							<s:select id="tempProvince" list="#request.provinces"
-								theme="simple" id="provinceId" onchange="selectCity(this)"
-								name="userVO.seller.province.id" cssStyle="width:80px "
-								listKey="id" listValue="name" headerKey="" headerValue="--请选择--">
-							</s:select>
-							省&nbsp;
-							<select style="width: 80px" id="cityId"
-								name="userVO.seller.city.id">
-								<option value="">
-									请选择
-								</option>
-							</select>
+							<input type="text" name="sheng" style="width: 80px">
+							省
+							<input type="text" name="shi" style="width: 80px">
 							市
+							<input type="text" name="qu" style="width: 80px">
+							区
+						</td>
+					</tr>
+					<tr class="sellerClass">
+						<td valign="middle">
+							邮编：
+						</td>
+						<td valign="middle">
+							<input type="text" name="youbian"  id="y1" maxlength="6"
+								style="width: 80px">
 						</td>
 					</tr>
 					<tr style="display: none" class="buyerClass">
@@ -299,7 +287,43 @@ img {
 							买号：
 						</td>
 						<td valign="middle">
-							<input type="text" id="buyerName" onblur="obtainBuyer(this)" name="userVO.buyer.name">
+							<input type="text" id="buyerName" onblur="obtainBuyer(this)"
+								name="userVO.buyer.name">
+						</td>
+					</tr>
+				</table>
+			</s:form>
+		</div>
+
+
+		<!-- 
+			修改发货地址 xgj
+		 -->
+		<div id="updateDIV" title="修改发货地址">
+			<s:form action="userInfoManager/info!updateSellerAndBuyer.php"
+				theme="simple" id="updatewForm">
+				<table cellpadding="0" cellspacing="0" border="0">
+					<tr class="sellerClass">
+						<td valign="middle">
+							发货地址：
+						</td>
+						<td valign="middle">
+							<input type="text" name="sheng" style="width: 80px">
+							省
+							<input type="text" name="shi" style="width: 80px">
+							市
+							<input type="text" name="qu" style="width: 80px">
+							区
+						</td>
+					</tr>
+					<tr class="sellerClass">
+						<td valign="middle">
+							邮编：
+						</td>
+						<td valign="middle">
+							<input type="hidden" id="upadteSellerId"  name="upadteSeller">
+							<input type="text" name="youbian"  id="y2" maxlength="6"
+								style="width: 80px">
 						</td>
 					</tr>
 				</table>

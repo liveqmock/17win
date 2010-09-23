@@ -44,6 +44,7 @@ public class AuthorityInterceptor extends AbstractInterceptor {
 		} else {
 			return "noRightsError";
 		}
+
 	}
 
 	/**

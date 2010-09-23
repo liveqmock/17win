@@ -3,14 +3,34 @@ $(document).ready(function() {
 			$("#addBtn").button();
 			$("#addBtn").bind("click", function() {
 						$("#addtableDIV input[type='text']").val("");
-						$("input[name='type'][value='1']").attr("checked",true);
+						$("#addtableDIV input[type='text']")
+								.removeClass("errorText");
+						$("input[name='type'][value='1']")
+								.attr("checked", true);
 						$("#addtableDIV").dialog("open");
-						
+
 						$('.sellerClass').show();
 						$('.sellerClass input select').attr("disabled", true);
 						$('.buyerClass').hide();
 						$('.buyerClass input select').attr("disabled", false);
 
+					});
+			intText("y1");
+			intText("y2");
+
+			$("#updateDIV").dialog({
+						autoOpen : false,
+						draggable : false,
+						hide : 'slide',
+						modal : true,
+						resizable : false,
+						show : 'slide',
+						width : 400,
+						buttons : {
+							"保存" : function() {
+								$("#updatewForm").submit();
+							}
+						}
 					});
 			$("#addtableDIV").dialog({
 						autoOpen : false,
@@ -48,18 +68,17 @@ $(document).ready(function() {
 					});
 
 			$("[name='type']").bind("click", function() {
-						submitFlag = true;
 						if ($(this).val() == "1") {
 							$('.sellerClass').show();
 							$('.buyerClass').hide();
 						} else {
 							$('.sellerClass').hide();
-							$('.buyerClass').show();
+							s;
 						}
 					});
 
 			$("#shopURL").blur(function() {
-						obtainSeller($("#platformType").val(), this);
+						obtainSellerByShop($("#platformType").val(), this);
 
 					}
 
@@ -84,23 +103,17 @@ function selectCity(obj) {
 	}
 	getCities($(obj).val(), $("#cityId").get(0));
 }
-// 选择县区
 // 验证
 function validateForm() {
+	submitFlag = true;
+	if ($("[name='type']:checked").val() == "1") {
+		$(".sellerClass input[type='text']").blur();
+	} else {
+		$(".buyerClass input[type='text']").blur();
+	}
 	if (!submitFlag) {
 		alert("填写的资料不正确！");
 		return false;
-	}
-	if ($("[name='type']:checked").val() == "1") {
-		if (Validater.isBlank($("#sellerName").val())) {
-			alert("卖号不能为空！");
-			return false
-		}
-	} else {
-		if (Validater.isBlank($("#buyerName").val())) {
-			alert("买号不能为空！");
-			return false
-		}
 	}
 	return true;
 }
@@ -125,14 +138,15 @@ function obtainBuyer(obj) {
 	}
 }
 // 根据店铺地址获取到卖号
-function obtainSeller(type, obj) {
+function obtainSellerByShop(type, obj) {
 	// 去掉空格
 	$(obj).val($.trim($(obj).val()));
 	var shopURL = $(obj).val();
 	// 获取seller input
 	var input = $("#sellerName");
-	if (Validater.isBlank(shopURL)) {
-		changeStyle(obj, '0', '您输入的地址不正确！');
+	if (!Validater.isShop(shopURL, type)) {
+		submitFlag = false;
+		changeStyle(obj, '0', '您输入的格式不地址格式不正确，最好复制在浏览器地址栏里面复制后粘贴,如还有疑问，请联系客户！');
 		return;
 	}
 	if ($(obj).data("nowUrl") == shopURL) {
@@ -142,26 +156,34 @@ function obtainSeller(type, obj) {
 			.size() > 0) {
 		changeStyle(obj, '0', '已经存在该店铺！');
 		alert("已经存在该店铺！");
-		return false;
+		submitFlag = false;
+		return;
 	}
+	$("#huoquUser").show();
+	$("#huoquUser").text("(获取中...)");
 	// 获取用户地址
-	VhostAop.divAOP.ajax("ajaxManager/ajax!obtainSeller.php", {
+	VhostAop.divAOP.ajax("ajaxManager/ajax!obtainSellerByShop.php", {
 				url : $(obj).val(),
 				type : type
 			}, function(data) {
 				if (data.seller == null || data.seller == "") {
-					changeStyle(obj, '0', '您输入的地址不正确！');
 					submitFlag = false;
+					changeStyle(obj, '0', '您输入的地址不正确！');
+					$("#huoquUser").text("(失败)");
+
 				} else {
 					if ($("input[platformType='" + type + "'][sellerName='"
 							+ data.seller + "']").size() > 0) {
+						submitFlag = false;
 						changeStyle(obj, '0', '改店铺已经存在！');
 						alert("已经存在该店铺！");
-						return false;
+						$("#huoquUser").text("(失败)");
 					}
 					changeStyle(obj, '1', '该地址可以使用！');
 					$(obj).data("nowUrl", $(obj).val());
 					input.val(data.seller);
+					$("#huoquUser").text("");
+					$("#huoquUser").hide();
 					changeStyle(input.get(0), '1', '成功！');
 				}
 			}, "json");
@@ -174,4 +196,10 @@ function changeStyle(obj, flag, msg) {
 		$(obj).removeClass("errorText");
 	}
 	$(obj).attr("title", msg);
+}
+
+// 弹出修改
+function showUpdateDIV(sellerId) {
+	$("#upadteSellerId").val(sellerId);
+	$("#updateDIV").dialog("open");
 }

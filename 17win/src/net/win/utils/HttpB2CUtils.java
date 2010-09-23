@@ -32,9 +32,14 @@ public final class HttpB2CUtils {
 	private static HttpClient youaHttpClient = createHttpClient("youa");
 
 	// 地址验证
-	private static final String TAOBAO_REGEX = "http:[/\\\\]{2}\\w+\\-*\\w+\\.taobao\\.com[/\\\\]?";
-	private static final String PAIPAI_REGEX = "http:[/\\\\]{2}\\w+\\-*\\w+\\.paipai\\.com[/\\\\]?";
-	private static final String YOUA_REGEX = "http:[/\\\\]{2}youa.baidu\\.com[/\\\\]?";
+	private static final String TAOBAO_SHOP_REGEX = "^http:[/\\\\]{2}\\w+\\-*\\w+\\.taobao\\.com[/\\\\]?";
+	private static final String PAIPAI_SHOP_REGEX = "^http:[/\\\\]{2}\\w+\\-*\\w+\\.paipai\\.com[/\\\\]?";
+	private static final String YOUA_SHOP_REGEX = "^http:[/\\\\]{2}youa.baidu\\.com[/\\\\]?";
+
+	// 商品地址验证
+	private static final String TAOBAO_ITEM_REGEX = "^http:[/\\\\]{2}item\\.taobao\\.com[/\\\\]item.htm";
+	private static final String PAIPAI_ITEM_REGEX = "^http:[/\\\\]{2}auction1\\.paipai\\.com[/\\\\]search";
+	private static final String YOUA_ITEM_REGEX = "^http:[/\\\\]{2}youa.baidu\\.com[/\\\\]item";
 
 	// 账号获取
 	private static final String TAOBAO_USER_REGEX = "data\\-nick=\"([[\u0391-\uFFE5]\\w_]+)\"";
@@ -44,6 +49,7 @@ public final class HttpB2CUtils {
 	private HttpB2CUtils() {
 
 	}
+
 	private static HttpClient createHttpClient(String flag) {
 		HttpParams params = new BasicHttpParams();
 		// Increase max total connection to 200
@@ -74,19 +80,38 @@ public final class HttpB2CUtils {
 	}
 
 	/**
+	 * 获取商品类型
+	 * 
+	 * @return 0 非法地址 1 淘宝 2 拍拍 3 有啊
+	 * @throws Exception
+	 */
+	public static String obtainItemType(String url) throws Exception {
+		if (Pattern.compile(TAOBAO_ITEM_REGEX).matcher(url).find()) {
+			return "1";
+		}
+		if (Pattern.compile(PAIPAI_ITEM_REGEX).matcher(url).find()) {
+			return "2";
+		}
+		if (Pattern.compile(YOUA_ITEM_REGEX).matcher(url).find()) {
+			return "3";
+		}
+		return "0";
+	}
+
+	/**
 	 * 获取店铺类型
 	 * 
 	 * @return 0 非法地址 1 淘宝 2 拍拍 3 有啊
 	 * @throws Exception
 	 */
 	public static String obtainShopType(String url) throws Exception {
-		if (Pattern.compile(TAOBAO_REGEX).matcher(url).find()) {
+		if (Pattern.compile(TAOBAO_SHOP_REGEX).matcher(url).find()) {
 			return "1";
 		}
-		if (Pattern.compile(PAIPAI_REGEX).matcher(url).find()) {
+		if (Pattern.compile(PAIPAI_SHOP_REGEX).matcher(url).find()) {
 			return "2";
 		}
-		if (Pattern.compile(YOUA_REGEX).matcher(url).find()) {
+		if (Pattern.compile(YOUA_SHOP_REGEX).matcher(url).find()) {
 			return "3";
 		}
 		return "0";
@@ -98,9 +123,10 @@ public final class HttpB2CUtils {
 	 * @return
 	 * @throws Exception
 	 */
-	public static String obtainSeller(String url, String type) throws Exception {
+	public static String obtainSellerByShop(String url, String type)
+			throws Exception {
 		String seller = "";
-		//判断输入的url地址的类型和type是否相等
+		// 判断输入的url地址的类型和type是否相等
 		if (!obtainShopType(url).equals(type)) {
 			return "";
 		}
@@ -112,7 +138,7 @@ public final class HttpB2CUtils {
 		if ("1".equals(type)) {
 			Pattern pattern = Pattern.compile(TAOBAO_USER_REGEX);
 			Matcher matcher;
-			OUTTER : while ((line = br.readLine()) != null) {
+			OUTTER: while ((line = br.readLine()) != null) {
 				line = URLDecoder.decode(line, "UTF-8");
 				matcher = pattern.matcher(line);
 				while (matcher.find()) {
@@ -125,7 +151,7 @@ public final class HttpB2CUtils {
 		else if ("2".equals(type)) {
 			Pattern pattern = Pattern.compile(PAIPAI_USER_REGEX);
 			Matcher matcher;
-			OUTTER : while ((line = br.readLine()) != null) {
+			OUTTER: while ((line = br.readLine()) != null) {
 				line = URLDecoder.decode(line, "UTF-8");
 				line = StringUtils.replaceBlank(line.replaceAll("\"", "'"));
 				matcher = pattern.matcher(line);
@@ -139,7 +165,7 @@ public final class HttpB2CUtils {
 		else if ("3".equals(type)) {
 			Pattern pattern = Pattern.compile(YOUA_USER_REGEX);
 			Matcher matcher;
-			OUTTER : while ((line = br.readLine()) != null) {
+			OUTTER: while ((line = br.readLine()) != null) {
 				line = URLDecoder.decode(line, "UTF-8");
 				matcher = pattern.matcher(line);
 				while (matcher.find()) {
@@ -153,6 +179,70 @@ public final class HttpB2CUtils {
 		}
 		return seller;
 	}
+
+	/**
+	 * 获取账号商品
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public static String obtainSellerByItem(String url, String type)
+			throws Exception {
+		String seller = "";
+		// 判断输入的url地址的类型和type是否相等
+		if (!obtainItemType(url).equals(type)) {
+			return "";
+		}
+		HttpEntity entity = getContext(url, type);
+		BufferedReader br = new BufferedReader(new InputStreamReader(entity
+				.getContent(), "UTF-8"));
+		String line;
+		// TB
+		if ("1".equals(type)) {
+			Pattern pattern = Pattern.compile(TAOBAO_USER_REGEX);
+			Matcher matcher;
+			OUTTER: while ((line = br.readLine()) != null) {
+				line = URLDecoder.decode(line, "UTF-8");
+				matcher = pattern.matcher(line);
+				while (matcher.find()) {
+					seller = matcher.group(1);
+					break OUTTER;
+				}
+			}
+		}
+		// PP
+		else if ("2".equals(type)) {
+			Pattern pattern = Pattern.compile(PAIPAI_USER_REGEX);
+			Matcher matcher;
+			OUTTER: while ((line = br.readLine()) != null) {
+				line = URLDecoder.decode(line, "UTF-8");
+				line = StringUtils.replaceBlank(line.replaceAll("\"", "'"));
+				matcher = pattern.matcher(line);
+				while (matcher.find()) {
+					seller = matcher.group(1);
+					break OUTTER;
+				}
+			}
+		}
+		// YA
+		else if ("3".equals(type)) {
+			Pattern pattern = Pattern.compile(YOUA_USER_REGEX);
+			Matcher matcher;
+			OUTTER: while ((line = br.readLine()) != null) {
+				line = URLDecoder.decode(line, "UTF-8");
+				matcher = pattern.matcher(line);
+				while (matcher.find()) {
+					seller = matcher.group(1);
+					break OUTTER;
+				}
+			}
+		}
+		if (entity != null) {
+			entity.consumeContent();
+		}
+		return seller;
+	}
+
 	/**
 	 * 获取内容
 	 * 

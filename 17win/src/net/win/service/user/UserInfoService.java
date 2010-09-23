@@ -17,8 +17,6 @@ import net.win.dao.ProvinceDAO;
 import net.win.dao.SellerDAO;
 import net.win.dao.UserDAO;
 import net.win.entity.BuyerEntity;
-import net.win.entity.CityEntity;
-import net.win.entity.ProvinceEntity;
 import net.win.entity.SellerEntity;
 import net.win.entity.UserEntity;
 import net.win.utils.ArithUtils;
@@ -42,55 +40,24 @@ public class UserInfoService extends BaseService {
 	private SellerDAO sellerDAO;
 	@Resource
 	private BuyerDAO buyerDAO;
-	@Resource
-	private ProvinceDAO provinceDAO;
-	@Resource
-	private CityDAO cityDAO;
 
-	/**
-	 * 删除买家或卖家
-	 * 
-	 * @param userVO
-	 * @return
-	 * @throws Exception
-	 */
-	public String deleteSellerAndBuyer(UserVO userVO) throws Exception {
-		initSellerAndBuyer(userVO);
-		//type买号，卖号 1卖号。  2买号
-		String type = getByParam("type");
-		String hql = "select count(*) from CreditTaskEntity  as _task  where _task.type<>'6' and  (_task.seller.id=:sellerId or _task.buyer.id=:buyId)";
-		ArrayList<Long> propValue = new ArrayList<Long>();
-		if ("1".equals(type)) {
-			SellerEntity sellerEntity = userVO.getSeller();
-			propValue.add(sellerEntity.getId());
-			propValue.add(null);
-		} else {
-			BuyerEntity buyerEntity = userVO.getBuyer();
-			propValue.add(null);
-			propValue.add(buyerEntity.getId());
-		}
-		Long count = (Long) userDAO.uniqueResultObject(hql, new String[] {
-				"sellerId", "buyId" }, propValue.toArray(new Long[2]));
-		if (count > 0) {
-			putAlertMsg("您当前删除的账号可能已经执行一下操作之一(1:任务中,2:申述中,3:定时任务)，不能删除！");
+	public String updateSellerAndBuyer(UserVO userVO) throws Exception {
+		SellerEntity sellerEntity = sellerDAO.get(Long
+				.parseLong(getByParam("upadteSeller")));
+		String sheng = getByParam("sheng").trim();
+		String shi = getByParam("shi").trim();
+		String qu = getByParam("qu").trim();
+		String youbian = getByParam("youbian").trim();
+		String result = sheng + " " + shi + " " + qu + " " + youbian;
+		if (result.length() > 50) {
+			putAlertMsg("地址和邮编长度加起来不能大于50！");
 			return "updateSellerAndBuyer";
-		} else {
-			if ("1".equals(type)) {
-				userDAO
-						.deleteByHql(
-								"delete from  SellerEntity as _seller where _seller.id=:sellerId ",
-								new String[] { "sellerId" },
-								new Object[] { userVO.getSeller().getId() });
-			} else {
-				userDAO
-						.deleteByHql(
-								"delete from  SellerEntity as _buyer where _buyer.id=:buyId ",
-								new String[] { "buyId" }, new Object[] { userVO
-										.getBuyer().getId() });
-			}
-			putAlertMsg("删除成功！");
-			return "deleteSellerAndBuyer";
 		}
+		if (!StringUtils.isBlank(result)) {
+			sellerEntity.setAddress(result);
+		}
+		putAlertMsg("修改成功！");
+		return "updateSellerAndBuyer";
 	}
 
 	/**
@@ -108,11 +75,17 @@ public class UserInfoService extends BaseService {
 
 		if ("1".equals(type)) {
 			SellerEntity sellerEntity = userVO.getSeller();
-			if (nullID(sellerEntity.getProvince())) {
-				sellerEntity.setProvince(null);
+			String sheng = getByParam("sheng").trim();
+			String shi = getByParam("shi").trim();
+			String qu = getByParam("qu").trim();
+			String youbian = getByParam("youbian").trim();
+			String result = sheng + " " + shi + " " + qu + " " + youbian;
+			if (result.length() > 50) {
+				putAlertMsg("地址和邮编长度加起来不能大于50！");
+				return "updateSellerAndBuyer";
 			}
-			if (nullID(sellerEntity.getCity())) {
-				sellerEntity.setCity(null);
+			if (!StringUtils.isBlank(result)) {
+				sellerEntity.setAddress(result);
 			}
 			sellerEntity.setType(platformTypeParam);
 			sellerEntity.setUser(userEntity);
@@ -151,11 +124,6 @@ public class UserInfoService extends BaseService {
 		buyerResult.put("1", new ArrayList<BuyerVO>());
 		buyerResult.put("2", new ArrayList<BuyerVO>());
 		buyerResult.put("3", new ArrayList<BuyerVO>());
-		// 省
-		List<ProvinceEntity> provinces = provinceDAO
-				.list("from ProvinceEntity");
-
-		putByRequest("provinces", provinces);
 		// 解析
 		if (sellers.size() > 0) {
 			SellerVO sellerVO;
@@ -163,27 +131,6 @@ public class UserInfoService extends BaseService {
 				sellerVO = new SellerVO();
 				List<SellerVO> list = sellerResult.get(sellerEntity.getType());
 				BeanUtils.copyProperties(sellerVO, sellerEntity);
-				sellerVO.setProvinces(provinces);
-				if (sellerEntity.getProvince() != null) {
-					// 省
-					List<CityEntity> citys = cityDAO.list(
-							"from CityEntity  where province.id=:id", "id",
-							sellerEntity.getProvince().getId());
-					sellerVO.setCitys(citys);
-					sellerVO.setProvinceID(sellerEntity.getProvince().getId());
-				}
-				if (sellerEntity.getCity() != null) {
-					// 市
-					sellerVO.setCityID(sellerEntity.getCity().getId());
-					// List<AreaEntity> areas = cityDAO.list(
-					// "from AreaEntity where city.id=:id", "id",
-					// sellerEntity.getCity().getId());
-					// sellerVO.setAreas(areas);
-				}
-				// if (sellerEntity.getArea() != null) {
-				// // 县
-				// sellerVO.setAreaID(sellerEntity.getArea().getId());
-				// }
 				list.add(sellerVO);
 			}
 		}

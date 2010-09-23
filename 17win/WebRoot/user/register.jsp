@@ -146,7 +146,7 @@ td {
 									</td>
 
 									<td>
-										<s:textfield name="userVO.userEntity.qq" id="qq" size="30"
+										<s:textfield name="userVO.userEntity.qq" id="qq" size="30"  maxlength="11"
 											cssStyle="width:210px"></s:textfield>
 										<br />
 										刷信誉时必用
@@ -162,7 +162,7 @@ td {
 										<font color="#FF0000">*&nbsp;</font>
 									</td>
 									<td align="left" class="red-bcolor">
-										<s:textfield id="telephone" name="userVO.userEntity.telephone"
+										<s:textfield id="telephone" name="userVO.userEntity.telephone"  maxlength="11"
 											size="30" cssStyle="width:210px"></s:textfield>
 										<br />
 										可凭手机找回密码

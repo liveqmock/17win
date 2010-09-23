@@ -24,13 +24,18 @@ function copy_code(copyText) {
  *            copyText
  */
 function intText(textID) {
+	$("#" + textID).bind("keydown", function() {
+				var value = $(this).val();
+				if (!Validater.isInt(value, "+")) {
+					$(this).val(value.substring(0, value.length - 1));
+				}
+			});
 	$("#" + textID).bind("keyup", function() {
 				var value = $(this).val();
 				if (!Validater.isInt(value, "+")) {
 					$(this).val(value.substring(0, value.length - 1));
 				}
 			});
-
 }
 /**
  * 只能输入浮点数的文本框
@@ -39,6 +44,12 @@ function intText(textID) {
  *            copyText
  */
 function floatText(textID) {
+	$("#" + textID).bind("keydown", function() {
+				var value = $(this).val();
+				if (!Validater.isFloat(value, "+")) {
+					$(this).val(value.substring(0, value.length - 1));
+				}
+			});
 	$("#" + textID).bind("keyup", function() {
 				var value = $(this).val();
 				if (!Validater.isFloat(value, "+")) {
@@ -55,6 +66,19 @@ function floatText(textID) {
  *            copyText
  */
 function numberText(textID) {
+	$("#" + textID).bind("keydown", function() {
+				var value = $(this).val();
+				if (!Validater.isNumber(value, "+")) {
+					var dot = value.substring(value.length - 2, value.length
+									- 1);
+					if (dot == ".") {
+						$(this)
+								.val(value.substring(0, value.length - 1)
+										+ ".0");
+					}
+					$(this).val(value.substring(0, value.length - 1));
+				}
+			});
 	$("#" + textID).bind("keyup", function() {
 				var value = $(this).val();
 				if (!Validater.isNumber(value, "+")) {
@@ -127,7 +151,7 @@ function getAreas(cid, areaObj) {
  *            textID
  */
 function getSeller(url, type, textID) {
-	VhostAop.divAOP.ajax("ajaxManager/ajax!obtainSeller.php", {
+	VhostAop.divAOP.ajax("ajaxManager/ajax!obtainSellerByShop.php", {
 				url : url,
 				type : type
 			}, function(data) {
@@ -140,7 +164,7 @@ function getSeller(url, type, textID) {
 }
 
 // 动态参数
- function dynamicMsg(str) {
+function dynamicMsg(str) {
 	var index = arguments.length - 1;
 	for (var i = 0; i < index; i++) {
 		var reCat = new RegExp("#\\{" + i + "\\}", "g");

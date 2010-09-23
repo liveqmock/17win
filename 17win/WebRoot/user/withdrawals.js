@@ -4,7 +4,7 @@ $(document).ready(function() {
 			// 获取用户地址
 			$("#realIdentity_1").bind("blur", function() {
 						VhostAop.divAOP.ajax(
-								"ajaxManager/ajax!obtainSeller.php", {
+								"ajaxManager/ajax!obtainSellerByItem.php", {
 									url : $(this).val(),
 									type : "0"
 								}, function(data) {

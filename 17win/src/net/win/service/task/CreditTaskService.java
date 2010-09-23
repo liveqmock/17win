@@ -1101,22 +1101,18 @@ public class CreditTaskService extends BaseService {
 	}
 
 	/**
-	 * 生成desc
+	 * 生成地址
 	 */
 	private String createAddress(CreditTaskVO creditTaskVO,
 			TaskMananger taskMananger, Long sellerID) throws Exception {
 		// 生成描述(包含地址)
 		StringBuffer address = new StringBuffer();
 		if (creditTaskVO.getAddress()) {
-			Object[] addresses = (Object[]) sellerDAO
-					.uniqueResultObject(
-							"select _p.name,_c.name from SellerEntity as _s inner join _s.province _p inner join _s.city as _c where _s.id=:id",
-							"id", sellerID);
+			SellerEntity sellerEntity = sellerDAO.get(sellerID);
+			String addresses = sellerEntity.getAddress();
 			if (addresses != null) {
-				for (Object str : addresses) {
-					address.append(str + " ");
-				}
-				address.append(taskMananger.randomObtainAddress(userDAO));
+				address.append(addresses + " "
+						+ taskMananger.randomObtainAddress(userDAO));
 			}
 		}
 		return StringUtils.isBlank(address.toString()) ? "无" : address
