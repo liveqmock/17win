@@ -649,6 +649,19 @@ public class CreditTaskService extends BaseService {
 		}
 		putTaskShowType("3");
 		String queryType = getByParam("queryType");
+		String page = getByParam("page");
+		String autoRefresh = getByParam("autoRefresh");
+		if (queryType != null) {
+			putByRequest("queryType", queryType);
+		} else {
+			putByRequest("queryType", "1");
+		}
+		if (autoRefresh != null) {
+			putByRequest("autoRefresh", autoRefresh);
+		}
+		if (page != null) {
+			creditTaskVO.setNowPage(Integer.parseInt(page));
+		}
 		if (StringUtils.isBlank(platformType)) {
 			WinUtils.throwIllegalityException(getLoginUser().getUsername()
 					+ "试图越过取消重填操作！ ");
@@ -754,6 +767,19 @@ public class CreditTaskService extends BaseService {
 		}
 		putTaskShowType("4");
 		String queryType = getByParam("queryType");
+		String page = getByParam("page");
+		String autoRefresh = getByParam("autoRefresh");
+		if (queryType != null) {
+			putByRequest("queryType", queryType);
+		} else {
+			putByRequest("queryType", "1");
+		}
+		if (autoRefresh != null) {
+			putByRequest("autoRefresh", autoRefresh);
+		}
+		if (page != null) {
+			creditTaskVO.setNowPage(Integer.parseInt(page));
+		}
 		if (StringUtils.isBlank(platformType)) {
 			WinUtils.throwIllegalityException(getLoginUser().getUsername()
 					+ "试图越过取消重填操作！ ");
@@ -902,7 +928,7 @@ public class CreditTaskService extends BaseService {
 		// 设置发布人，发布账号
 		// Long buyerID = creditTaskVO.getBuyerID();
 		Long sellerID = creditTaskVO.getSellerID();
-		if(sellerID==null){
+		if (sellerID == null) {
 			putAlertMsg("掌柜名和商品地址不对应！");
 			return "insertReleaseTaskFail";
 		}
@@ -1056,6 +1082,19 @@ public class CreditTaskService extends BaseService {
 		}
 		putTaskShowType("1");
 		String queryType = getByParam("queryType");
+		String page = getByParam("page");
+		String autoRefresh = getByParam("autoRefresh");
+		if (queryType != null) {
+			putByRequest("queryType", queryType);
+		} else {
+			putByRequest("queryType", "1");
+		}
+		if (autoRefresh != null) {
+			putByRequest("autoRefresh", autoRefresh);
+		}
+		if (page != null) {
+			creditTaskVO.setNowPage(Integer.parseInt(page));
+		}
 		if (!getLoginUser().getOperationCodeStatus()) {
 			putByRequest("preURL", getRequset().getRequestURL() + "?"
 					+ getRequset().getQueryString());
@@ -1149,57 +1188,70 @@ public class CreditTaskService extends BaseService {
 	 */
 	private String orderAndWhereReleasedTaskStr(String type, Boolean countFlag) {
 		if (countFlag) {
-			// _task.type=:platformType
 			// 默认时间排列
 			if ("1".equals(type)) {
 				return "";
 			}
 			// 等待支付
 			if ("2".equals(type)) {
-				return " and _task.type='2' ";
+				return " and _task.status='2' ";
 			}
 			// 等待发货
 			if ("3".equals(type)) {
-				return " and _task.type='3'";
+				return " and _task.status='3'";
 			}
 			// 等待好评
 			if ("4".equals(type)) {
-				return " and _task.type='4' ";
+				return " and _task.status='4' ";
 			}
 			// 等待完成
 			if ("5".equals(type)) {
-				return " and _task.type='5' ";
+				return " and _task.status='5' ";
 			}
 			// 已完成
 			if ("6".equals(type)) {
-				return " and _task.type='6' ";
+				return " and _task.status='6' ";
+			} // 等待接手
+			if ("7".equals(type)) {
+				return " and _task.status='1' ";
+			}
+			// 等待审核
+			if ("8".equals(type)) {
+				return " and _task.status='-2' ";
 			}
 			return "";
 		} else {
-			// _task.type=:platformType
 			// 默认时间排列
 			if ("1".equals(type)) {
 				return " order by   _task.releaseDate desc";
 			}
 			// 等待支付
 			if ("2".equals(type)) {
-				return " and _task.type='2' order by   _task.releaseDate desc";
+				return " and _task.status='2' order by   _task.releaseDate desc";
 			}
 			// 等待发货
 			if ("3".equals(type)) {
-				return " and _task.type='3' order by   _task.releaseDate desc";
+				return " and _task.status='3' order by   _task.releaseDate desc";
 			}
 			// 等待好评
 			if ("4".equals(type)) {
-				return " and _task.type='4' order by   _task.releaseDate desc";
+				return " and _task.status='4' order by   _task.releaseDate desc";
 			}
 			// 等待完成
 			if ("5".equals(type)) {
-				return " and _task.type='5' order by   _task.releaseDate desc";
+				return " and _task.status='5' order by   _task.releaseDate desc";
 			}
 			// 已完成
 			if ("6".equals(type)) {
-				return " and _task.type='6' order by   _task.releaseDate desc";
+				return " and _task.status='6' order by   _task.releaseDate desc";
+			}
+			// 等待接手
+			if ("7".equals(type)) {
+				return " and _task.status='1'  order by   _task.releaseDate desc";
+			}
+			// 等待审核
+			if ("8".equals(type)) {
+				return " and _task.status='-2'  order by   _task.releaseDate desc ";
 			}
 			return " order by   _task.releaseDate desc";
 		}
@@ -1220,23 +1272,23 @@ public class CreditTaskService extends BaseService {
 			}
 			// 已接任务
 			if ("2".equals(type)) {
-				return " and _task.type='2' c";
+				return " and _task.status='2' ";
 			}
 			// 已支付
 			if ("3".equals(type)) {
-				return " and _task.type='3' ";
+				return " and _task.status='3' ";
 			}
 			// 已发货
 			if ("4".equals(type)) {
-				return " and _task.type='4' ";
+				return " and _task.status='4' ";
 			}
 			// 已评价
 			if ("5".equals(type)) {
-				return " and _task.type='5' ";
+				return " and _task.status='5' ";
 			}
 			// 已完成
 			if ("6".equals(type)) {
-				return " and _task.type='6' ";
+				return " and _task.status='6' ";
 			}
 			return "";
 		} else {
@@ -1246,23 +1298,23 @@ public class CreditTaskService extends BaseService {
 			}
 			// 已接任务
 			if ("2".equals(type)) {
-				return " and _task.type='2' order by   _task.releaseDate desc";
+				return " and _task.status='2' order by   _task.releaseDate desc";
 			}
 			// 已支付
 			if ("3".equals(type)) {
-				return " and _task.type='3' order by   _task.releaseDate desc";
+				return " and _task.status='3' order by   _task.releaseDate desc";
 			}
 			// 已发货
 			if ("4".equals(type)) {
-				return " and _task.type='4' order by   _task.releaseDate desc";
+				return " and _task.status='4' order by   _task.releaseDate desc";
 			}
 			// 已评价
 			if ("5".equals(type)) {
-				return " and _task.type='5' order by   _task.releaseDate desc";
+				return " and _task.status='5' order by   _task.releaseDate desc";
 			}
 			// 已完成
 			if ("6".equals(type)) {
-				return " and _task.type='6' order by   _task.releaseDate desc";
+				return " and _task.status='6' order by   _task.releaseDate desc";
 			}
 			return " order by   _task.releaseDate desc";
 		}
@@ -1310,7 +1362,6 @@ public class CreditTaskService extends BaseService {
 			}
 			return "";
 		} else {
-			// _task.type=:platformType
 			// 默认时间排列
 			if ("1".equals(type)) {
 				return " order by   _task.releaseDate desc";

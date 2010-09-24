@@ -3,6 +3,10 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML>
 	<HEAD>
+		<s:if test="#request.autoRefresh!=null">
+			<meta http-equiv="refresh"
+				content="<s:property value="#request.autoRefresh"/>">
+		</s:if>
 		<s:include value="../common/header.jsp"></s:include>
 		<LINK href="css/Css.css" type=text/css rel=stylesheet>
 		<LINK href="css/header.css" type=text/css rel=stylesheet>
@@ -12,6 +16,8 @@
 		<LINK href="css/top_bottom.css" type="text/css" rel="stylesheet">
 		<SCRIPT src="js/jquery-ui-1.8.4.custom.min.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="credit/task.js" type="text/javascript"></SCRIPT>
+		<script type="text/javascript" src="js/utils.js">
+		</script>
 	</HEAD>
 	<BODY>
 		<s:include value="../common/title.jsp"></s:include>
@@ -32,26 +38,34 @@
 								<IMG src="images/task_02.gif">
 							</DIV>
 							<DIV style="MARGIN-TOP: 12px; FLOAT: left; MARGIN-LEFT: 10px">
-								<A href="?sort=2"><SPAN class=anniu>全部任务</SPAN> </A>
-								<A href="?sort=2"><SPAN class=anniu>价低排列</SPAN> </A>
-								<A href="?sort=1"><SPAN class=anniu>价高排列</SPAN> </A>
-								<A href="?sort=3"><SPAN class=anniu>1-40元区</SPAN> </A>
-								<A href="?sort=4"><SPAN class=anniu>40-100元区</SPAN> </A>
-								<A href="?sort=5"><SPAN class=anniu>100-200元区</SPAN> </A>
-								<A href="?sort=5"><SPAN class=anniu>200-500元区</SPAN> </A>
-								<A href="?sort=5"><SPAN class=anniu>500元以上区</SPAN> </A>
+								<A href="javascript:allQuery()"><SPAN class=anniu>全部任务</SPAN>
+								</A>
+								<A href="javascript:moneyAsc()"><SPAN class=anniu>价低排列</SPAN>
+								</A>
+								<A href="javascript:moneyDesc()"><SPAN class=anniu>价高排列</SPAN>
+								</A>
+								<A href="javascript:money1_40()"><SPAN class=anniu>1-40元区</SPAN>
+								</A>
+								<A href="javascript:money40_100()"><SPAN class=anniu>40-100元区</SPAN>
+								</A>
+								<A href="javascript:money100_200()"><SPAN class=anniu>100-200元区</SPAN>
+								</A>
+								<A href="javascript:money200_500()"><SPAN class=anniu>200-500元区</SPAN>
+								</A>
+								<A href="javascript:money500()"><SPAN class=anniu>500元以上区</SPAN>
+								</A>
 							</DIV>
 							<DIV style="CLEAR: right; MARGIN-TOP: 12px; FLOAT: right">
 								刷新时间
-								<input type="text" value="" style="width: 25px"
-									title="不填写或则0表示不自动刷新" />
+								<input type="text" value="<s:property value="#request.autoRefresh"/>" style="width: 25px" id="autoreFresh" 
+									title="必须大于5秒，空表示不刷新！" />
 								<input type="hidden"
 									value="<s:property value="#request.platformType"/>"
 									id="platformType" />
 								<input type="hidden" id="currTaskId" />
 								秒
 								<A title=点击刷新 href="javascript:location.reload(true);"
-									class="yell_font"> <SPAN class=anniu>刷新页面 任务不断跳出</SPAN> </A>
+									class="yell_font"> <SPAN class=anniu>刷新页面</SPAN> </A>
 							</DIV>
 						</DIV>
 					</DIV>
@@ -179,7 +193,7 @@
 						</s:iterator>
 						<TR>
 							<TD colspan="6">
-								<input type="hidden" value="1>" id="queryFlag">
+								<input type="hidden" value="<s:property value="#request.queryType"/>" id="queryType">
 								<input type="hidden"
 									value="<s:property
 											value="creditTaskVO.nowPage" />"

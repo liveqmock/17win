@@ -420,10 +420,12 @@ public class UserInfoService extends BaseService {
 	 */
 	public String initUserInfo(UserVO userVO) throws Exception {
 		UserLoginInfo userLoginInfo = getLoginUser();
+		//接手
 		List<Object[]> tmpResult1 = (List<Object[]>) userDAO
 				.list(
-						" select   _rct.type,_rct.status , count(_rct.id) from  UserEntity   as _u    inner join  _u.releaseCreditTasks as _rct where   _u.id=:id group by  _rct.type, _rct.status  order by _rct.type,_rct.status",
+						" select   _rct.type,_rct.status , count(_rct.id) from  UserEntity   as _u    inner join  _u.receiveCreditTasks as _rct where   _u.id=:id group by  _rct.type, _rct.status  order by _rct.type,_rct.status",
 						"id", userLoginInfo.getId());
+		//发布
 		List<Object[]> tmpResult2 = (List<Object[]>) userDAO
 				.list(
 						"select    _rct.type,_rct.status , count(_rct.id) from  UserEntity   as _u    inner join  _u.releaseCreditTasks as _rct where   _u.id=:id group by   _rct.type, _rct.status  order by _rct.type,_rct.status",
@@ -511,8 +513,8 @@ public class UserInfoService extends BaseService {
 		 * 卖家
 		 */
 		if (tmpResult2.size() > 0) {
-			for (int i = 0; i < tmpResult1.size(); i++) {
-				Object[] objs = tmpResult1.get(i);
+			for (int i = 0; i < tmpResult2.size(); i++) {
+				Object[] objs = tmpResult2.get(i);
 				for (int j = 0; j < objs.length; j++) {
 
 					if ("1".equals(objs[0])) {

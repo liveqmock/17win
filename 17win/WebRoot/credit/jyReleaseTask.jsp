@@ -3,6 +3,10 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML>
 	<HEAD>
+		<s:if test="#request.autoRefresh!=null">
+			<meta http-equiv="refresh"
+				content="<s:property value="#request.autoRefresh"/>">
+		</s:if>
 		<s:include value="../common/header.jsp"></s:include>
 		<LINK href="css/Css.css" type=text/css rel=stylesheet>
 		<LINK href="css/header.css" type=text/css rel=stylesheet>
@@ -31,17 +35,30 @@
 								<IMG src="images/task_02.gif">
 							</DIV>
 							<DIV style="MARGIN-TOP: 12px; FLOAT: left; MARGIN-LEFT: 10px">
-								<A href="?sort=2"><SPAN class=anniu>全部任务</SPAN> </A>
-								<A href="?sort=1"><SPAN class=anniu>等待支付</SPAN> </A>
-								<A href="?sort=3"><SPAN class=anniu>等待发货</SPAN> </A>
-								<A href="?sort=4"><SPAN class=anniu>等待好评</SPAN> </A>
-								<A href="?sort=5"><SPAN class=anniu>等待完成</SPAN> </A>
-								<A href="?sort=5"><SPAN class=anniu>已完成</SPAN> </A>
+								<A href="javascript:sort1()"><SPAN class=anniu>全部任务</SPAN> </A>
+								<A href="javascript:sort7()"><SPAN class=anniu>等待接手</SPAN> </A>
+								<A href="javascript:sort8()"><SPAN class=anniu>等待审核</SPAN> </A>
+								<A href="javascript:sort2()"><SPAN class=anniu>等待支付</SPAN> </A>
+								<A href="javascript:sort3()"><SPAN class=anniu>等待发货</SPAN> </A>
+								<A href="javascript:sort4()"><SPAN class=anniu>等待好评</SPAN> </A>
+								<A href="javascript:sort5()"><SPAN class=anniu>等待完成</SPAN> </A>
+								<A href="javascript:sort6()"><SPAN class=anniu>已完成</SPAN> </A>
 							</DIV>
 							<DIV style="CLEAR: right; MARGIN-TOP: 12px; FLOAT: right">
 								自定义刷新时间
-								<input type="text" value="" style="width: 25px"  id="autoreFresh"
-									title="不填写或则0表示不自动刷新" />
+								<input type="text"
+									value="<s:property value="#request.autoRefresh"/>"
+									style="width: 25px" id="autoreFresh" title="必须大于5秒，空表示不刷新！" />
+								<input type="hidden"
+									value="<s:property value="#request.queryType"/>" id="queryType">
+								<input type="hidden"
+									value="<s:property
+											value="creditTaskVO.nowPage" />"
+									id="nowPage">
+								<input type="hidden"
+									value="<s:property
+										value="creditTaskVO.pageCount" />"
+									id="pageCount">
 								<input type="hidden"
 									value="<s:property value="#request.platformType"/>"
 									id="platformType" />
@@ -277,8 +294,8 @@
 										<font color="red" style="font-weight: bold;">旺旺联系：</font>
 										<s:if test="@net.win.utils.StringUtils@isBlank(#task[21])">接手方没提供旺旺号</s:if>
 										<s:else>
-											<a target="_blank"
-												href="http://amos1.taobao.com/msg.ww?v=2&uid=<s:property value="#task[21]" />&s=1"><img
+											<a
+												href="javascript:callWW('http://amos1.taobao.com/msg.ww?v=2&uid=<s:property value="#task[21]" />&s=1')"><img
 													border="0"
 													src="http://amos1.taobao.com/online.ww?v=2&uid=<s:property value="#task[21]" />&s=1"
 													alt="点击这里给我发消息" /> </a>
@@ -308,29 +325,28 @@
 						</s:if>
 						<s:else>
 							<TR
-								style="WIDTH: 98%; LINE-HEIGHT: 40px; PADDING-TOP: 10px; HEIGHT: 40px; TEXT-ALIGN: center">
-								<TD colspan="7">
-									共
-									<font color="blue"><b>34</b> </font> 条主题&nbsp;&nbsp;&nbsp;首页
-									上一页&nbsp;
-									<a href='mymission.asp?PageNo=2'>下一页</a>&nbsp;
-									<a href='mymission.asp?PageNo=4'>尾页</a>&nbsp;页次：
-									<strong><font color="red">1</font>/4</strong>页 &nbsp;
-									<b>10</b>条主题/页&nbsp;转到：
-									<select name='page' size='1'
-										onchange="javascript:window.location='mymission.asp?PageNo='+this.options[this.selectedIndex].value;">
-										<option value='1' selected="selected">
-											第1页
-										</option>
-										<option value='2'>
-											第2页
-										</option>
-										<option value='3'>
-											第3页
-										</option>
-										<option value='4'>
-											第4页
-										</option>
+								style="WIDTH: 98%; LINE-HEIGHT: 40px; PADDING-TOP: 10px; HEIGHT: 40px;">
+								<TD colspan="7" align="left">
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 共
+									<font color="blue"><b><s:property
+												value="creditTaskVO.dataCount" /> </b> </font> 条主题&nbsp;&nbsp;&nbsp;
+									<a href="javascript:firstPage()">首页</a>
+									<a href="javascript:prevPage()">上一页</a>&nbsp;
+									<a href="javascript:nextPage()">下一页</a>&nbsp;
+									<a href="javascript:lastPage()">尾页</a>&nbsp;页次：
+									<strong><font color="red"><s:property
+												value="creditTaskVO.nowPage" /> </font>/<s:property
+											value="creditTaskVO.pageCount" /> </strong>页 &nbsp;
+									<b><s:property value="creditTaskVO.eachPage" /> </b>条主题/页&nbsp;转到：
+									<select id='toPageSelect' size='1' onchange="jumpPage()">
+										<s:iterator begin="1" end="creditTaskVO.pageCount" step="1"
+											var="index">
+											<option value="<s:property value="#index" />">
+												第
+												<s:property value="#index" />
+												页
+											</option>
+										</s:iterator>
 									</select>
 								</TD>
 							</TR>
