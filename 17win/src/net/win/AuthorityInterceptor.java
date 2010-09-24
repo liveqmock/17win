@@ -5,12 +5,10 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
-import net.win.exception.NoRightsException;
 import net.win.utils.Constant;
 
 import org.apache.struts2.ServletActionContext;
 
-import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 

@@ -201,7 +201,7 @@
 										<br>
 										<a title="刷新排前可以使您的任务在发布区靠前！"
 											href="javascript:toFirstTask(<s:property value="#task[18]"/>)"><span
-											class="anniu">刷新排前</span> </a>
+											class="anniu2">刷新排前</span> </a>
 									</s:if>
 									<s:elseif test="#task[7]==-2">
 										<a title="您对该人信任之后，可以允许他接您的任务！"
@@ -210,7 +210,7 @@
 										<br>
 										<a title="如果对方没有被您审核过，可以清理买家！"
 											href="javascript:clearReceiver(<s:property value="#task[18]"/>)"><span
-											class="anniu">清理买家</span> </a>
+											class="anniu2">清理买家</span> </a>
 										<br>
 										<a title="为对方加时"
 											href="javascript:addTime('<s:property value="#task[18]"/>')"><span

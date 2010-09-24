@@ -23,7 +23,7 @@
 			<value>classpath:hibernate.cfg.xml</value>
 		</property>
 	</bean>
- 
+
 	<!-- 配置事务管理器 -->
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
@@ -57,6 +57,55 @@
 		<aop:advisor pointcut-ref="allManagerMethod"
 			advice-ref="managerAdvice" />
 	</aop:config>
+
+
+
+	<!-- 使Spring关注Annotation 
+		<context:annotation-config/>
+	-->
+	<!--
+		让Spring通过自动扫描来查询和管理Bean 有了这一句上面的<context:annotation-config/>可以注释掉
+	-->
+	<context:component-scan base-package="net.win" />
+
+	<!-- 邮件发送实现 -->
+	<bean id="mailSender"
+		class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.qq.com" />
+		<property name="port" value="25" />
+		<property name="username" value="30756500@qq.com" />
+		<property name="password" value="8868829xgj" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="freeMarkerCfj"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<property name="templateLoaderPath"
+			value="classpath:mailTemplate" /><!--指定模板文件目录-->
+		<property name="freemarkerSettings"><!-- 设置FreeMarker环境属性-->
+			<props>
+				<prop key="template_update_delay">1800</prop><!--刷新模板的周期，单位为秒-->
+				<prop key="default_encoding">UTF-8</prop><!--模板的编码格式 -->
+				<prop key="locale">zh_CN</prop><!-- 本地化设置-->
+			</props>
+		</property>
+	</bean>
+
+	<!--②异步线程执行器-->
+	<bean id="taskExecutor"
+		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<property name="corePoolSize" value="10" />
+		<property name="maxPoolSize" value="30" />
+	</bean>
+
+
+
+
+
+
 
 
 
@@ -134,10 +183,31 @@
 	<!-- quartz -->
 	<!-- 要调用的工作类 -->
 	<bean id="taskQuartz" class="net.win.service.quartz.TaskQuartz">
-	
 	</bean>
+	<!-- 定义调用对象和调用对象的方法
+		<bean id="tastStatusTask"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+		<ref bean="taskQuartz" />
+		</property>
+		<property name="targetMethod">
+		<value>tastStatus</value>
+		</property>
+		<property name="concurrent" value="true" />
+		</bean>
+		<bean id="tastStatusTaskTime"
+		class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+		<ref bean="tastStatusTask" />
+		</property>
+		<property name="cronExpression">
+		<value>0 * * * * ?</value>
+		</property>
+		</bean>
+	-->
+
 	<!-- 定义调用对象和调用对象的方法 -->
-	<bean id="tastStatusTask"
+	<bean id="tastHourTask"
 		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		<!-- 调用的类 -->
 		<property name="targetObject">
@@ -145,71 +215,30 @@
 		</property>
 		<!-- 调用类中的方法 -->
 		<property name="targetMethod">
-			<value>tastStatus</value>
+			<value>tastHourStatus</value>
 		</property>
+		<property name="concurrent" value="true" />
 	</bean>
-	<!-- 定义触发任务状态更新，每分钟-->
-	<bean id="tastStatusTaskTime"
+	<bean id="tastHourTaskTime"
 		class="org.springframework.scheduling.quartz.CronTriggerBean">
 		<property name="jobDetail">
-			<ref bean="tastStatusTask" />
+			<ref bean="tastHourTask" />
 		</property>
 		<!-- cron表达式 -->
 		<property name="cronExpression">
-			<value>0 * * * * ?</value>
+			<value>0 0 * * * ?</value>
 		</property>
 	</bean>
+
+
 	<!-- 总管理类 如果将lazy-init='false'那么容器启动就会执行调度程序  -->
 	<bean id="startQuertz" lazy-init="false" autowire="no"
 		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<property name="triggers">
 			<list>
-				<ref bean="tastStatusTaskTime" />
+				<ref bean="tastHourTaskTime" />
 			</list>
 		</property>
 	</bean>
 	<!-- quartz end  -->
-
-
-
-	<!-- 使Spring关注Annotation 
-		<context:annotation-config/>
-	-->
-	<!--
-		让Spring通过自动扫描来查询和管理Bean 有了这一句上面的<context:annotation-config/>可以注释掉
-	-->
-	<context:component-scan base-package="net.win" />
-
-	<!-- 邮件发送实现 -->
-	<bean id="mailSender"
-		class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<property name="host" value="smtp.qq.com" />
-		<property name="port" value="25" />
-		<property name="username" value="30756500@qq.com" />
-		<property name="password" value="8868829xgj" />
-		<property name="javaMailProperties">
-			<props>
-				<prop key="mail.smtp.auth">true</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="freeMarkerCfj"
-		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-		<property name="templateLoaderPath"
-			value="classpath:mailTemplate" /><!--指定模板文件目录-->
-		<property name="freemarkerSettings"><!-- 设置FreeMarker环境属性-->
-			<props>
-				<prop key="template_update_delay">1800</prop><!--刷新模板的周期，单位为秒-->
-				<prop key="default_encoding">UTF-8</prop><!--模板的编码格式 -->
-				<prop key="locale">zh_CN</prop><!-- 本地化设置-->
-			</props>
-		</property>
-	</bean>
-
-	<!--②异步线程执行器-->
-	<bean id="taskExecutor"
-		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
-		<property name="corePoolSize" value="10" />
-		<property name="maxPoolSize" value="30" />
-	</bean>
 </beans>

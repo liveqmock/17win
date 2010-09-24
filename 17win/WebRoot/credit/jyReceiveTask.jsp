@@ -188,8 +188,8 @@
 								<td valign="top" align="center">
 									<s:if test="#task[12]==-2">
 										<span class="anniu">等待审核</span>
-										<br>
-										<a title="退出任务"
+										<br>  
+										<a title="退出任务" class="anniu"
 											href="javascript:quitTask('<s:property value="#task[19]"/>')">退出任务</a>
 										<br>
 												可联系对方加时
@@ -205,7 +205,7 @@
 										<br>
 										<a title="退出任务，并且返回金钱和发布点给您"
 											href="javascript:quitTask('<s:property value="#task[19]"/>')"><span
-											class="anniu">退出任务</span> </a>
+											class="anniu2">退出任务</span> </a>
 										<br>
 											可联系对方加时
 									</s:elseif>
