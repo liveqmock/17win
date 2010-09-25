@@ -141,7 +141,7 @@
 									<s:elseif test="#task[6]==3">两天后好评</s:elseif>
 									<s:elseif test="#task[6]==4">三天后好评</s:elseif>
 									<s:elseif test="#task[6]==5">自定义好评(<s:property
-											value="#task[9]" />)</s:elseif>
+											value="#task[9]" />小时候后)</s:elseif>
 
 
 								</td>

@@ -1,5 +1,7 @@
 package net.win.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -35,6 +37,12 @@ public class CreditTaskRepositoryEntity extends BaseEntity {
 	// 是否修改价格
 	@Column(name = "UPDATE_PRICE_", nullable = false)
 	private Boolean updatePrice;
+	// 上次发布时间
+	@Column(name = "lastDispathDate_")
+	private Date lastDispathDate;
+	// 发布次数
+	@Column(name = "dispathCount_")
+	private Integer dispathCount = 0;
 	// 好评时间类型(1 马上 2:24小时 3:48小时 ，4：72小时，5 ：自定义)
 	@Column(name = "GOOD_TIME_TYPE_", columnDefinition = "CHAR(1)", nullable = false)
 	private String goodTimeType;
@@ -45,6 +53,10 @@ public class CreditTaskRepositoryEntity extends BaseEntity {
 	@Column(name = "INTERVAL_HOUR_", nullable = false)
 	private Integer intervalHour;
 
+	// 发布点
+	@Column(name = "RELEASE_DOT_", nullable = false)
+	private Double releaseDot;
+
 	// 发布人的卖家号
 	@Column(name = "SELLER_ID_", nullable = false)
 	private Long sellerID;
@@ -52,11 +64,11 @@ public class CreditTaskRepositoryEntity extends BaseEntity {
 	// 是否地址
 	@Column(name = "ADDRESS_", nullable = false)
 	private Boolean address;
-	
+
 	// 描述
-	@Column(name = "DESC_", length=255)
+	@Column(name = "DESC_", length = 255)
 	private String desc;
-	
+
 	// 所属人
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = UserEntity.class)
 	@JoinColumn(name = "USER_ID_")
@@ -165,5 +177,31 @@ public class CreditTaskRepositoryEntity extends BaseEntity {
 	public void setDesc(String desc) {
 		this.desc = desc;
 	}
+
+	public Date getLastDispathDate() {
+		return lastDispathDate;
+	}
+
+	public void setLastDispathDate(Date lastDispathDate) {
+		this.lastDispathDate = lastDispathDate;
+	}
+
+	public Integer getDispathCount() {
+		return dispathCount;
+	}
+
+	public void setDispathCount(Integer dispathCount) {
+		this.dispathCount = dispathCount;
+	}
+
+	public Double getReleaseDot() {
+		return releaseDot;
+	}
+
+	public void setReleaseDot(Double releaseDot) {
+		this.releaseDot = releaseDot;
+	}
+
+ 
 
 }

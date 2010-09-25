@@ -70,6 +70,12 @@ public class CreditTaskService extends BaseService {
 			Long taskId = Long.parseLong(getByParam("taskId"));
 			CreditTaskEntity creditTask = creditTaskDAO.get(taskId);
 			// 如果发布人不是当前的登陆人就报错
+			if (creditTask.getStatus().equals(TaskMananger.STEP_FIVE_STATUS)) {
+				putAlertMsg("已经好评，不要重复提交！");
+				putJumpPage("taskManager/task!initReceivedTast.php?platformType="
+						+ platformType);
+				return JUMP;
+			}
 			if (!platformType.equals(creditTask.getType())
 					|| !creditTask.getReceivePerson().getId().equals(
 							getLoginUser().getId())
@@ -77,6 +83,12 @@ public class CreditTaskService extends BaseService {
 							TaskMananger.STEP_FOUR_STATUS)) {
 				WinUtils.throwIllegalityException(getLoginUser().getUsername()
 						+ "试图越过【买家好评】操作！任务ID是：" + taskId);
+			}
+			if (!creditTask.getGoodTimeType().equals("1")) {
+				Long tempTime = System.currentTimeMillis()
+						- creditTask.getDispatchDate().getTime();
+				WinUtils.throwIllegalityException(getLoginUser().getUsername()
+						+ "试图越过【买家好评】的时间操作！任务ID是：" + taskId);
 			}
 			/**
 			 * 验证
@@ -106,6 +118,12 @@ public class CreditTaskService extends BaseService {
 			return "operationValidate";
 		} else {
 			CreditTaskEntity creditTask = creditTaskDAO.get(taskId);
+			if (creditTask.getStatus().equals(TaskMananger.STEP_TWO_STATUS)) {
+				putAlertMsg("已经撤销，不要重复提交！");
+				putJumpPage("taskManager/task!initReceivedTast.php?platformType="
+						+ platformType);
+				return JUMP;
+			}
 			if (creditTask.getStatus().equals(TaskMananger.STEP_FOUR_STATUS)) {
 				putJumpPage("taskManager/task!initReceivedTast.php?platformType="
 						+ platformType);
@@ -155,6 +173,12 @@ public class CreditTaskService extends BaseService {
 			return "operationValidate";
 		} else {
 			CreditTaskEntity creditTask = creditTaskDAO.get(taskId);
+			if (creditTask.getStatus().equals(TaskMananger.STEP_THREE_STATUS)) {
+				putAlertMsg("已经支付，不要重复提交！");
+				putJumpPage("taskManager/task!initReceivedTast.php?platformType="
+						+ platformType);
+				return JUMP;
+			}
 			// 如果发布人不是当前的登陆人就报错
 			if (!platformType.equals(creditTask.getType())
 					|| !creditTask.getReceivePerson().getId().equals(
@@ -193,6 +217,12 @@ public class CreditTaskService extends BaseService {
 		} else {
 			CreditTaskEntity creditTask = creditTaskDAO.get(taskId);
 			UserEntity receiveUser = creditTask.getReceivePerson();
+			if (creditTask.getStatus().equals(TaskMananger.STEP_ONE_STATUS)) {
+				putAlertMsg("已经退出，不要重复提交！");
+				putJumpPage("taskManager/task!initReceivedTast.php?platformType="
+						+ platformType);
+				return JUMP;
+			}
 			if ((!platformType.equals(creditTask.getType()))
 					|| (!receiveUser.getId().equals(loginInfo.getId()))
 					|| (!platformType.equals(creditTask.getType()))) {
@@ -257,19 +287,51 @@ public class CreditTaskService extends BaseService {
 			putJumpPage("userInfoManager/info!initActiave.php");
 			return JUMP;
 		}
+		if (creditTask.getStatus().equals(TaskMananger.STEP_TWO_STATUS)) {
+			if (creditTask.getReceivePerson().getId().equals(
+					getLoginUser().getId())) {
+				putAlertMsg("您已经接受了此任务，不要重复提交！");
+			} else {
+				putAlertMsg("任务已经被人别抢先接受！！");
+			}
+			putJumpPage("taskManager/task!initReceivedTast.php?platformType="
+					+ platformType);
+			return JUMP;
+		}
 		// 验证状态
 		if (!platformType.equals(creditTask.getType())
-				|| !TaskMananger.STEP_ONE_STATUS.equals(creditTask.getStatus())) {
+				|| !TaskMananger.STEP_ONE_STATUS.equals(creditTask.getStatus())
+				|| buyeId == null) {
 			WinUtils.throwIllegalityException(loginInfo.getUsername()
 					+ "试图越过【接受任务】操作！ 任务ID是:" + taskId);
 		}
 
 		/**
-		 * 判断
+		 * 验证IP
 		 */
-		if (buyeId == null) {
-			WinUtils.throwIllegalityException(loginInfo.getUsername()
-					+ "试图越过接受任务操作！");
+		String ip = getIpAddr();
+		String hqlOne = "select count(*) from CreditTaskEntity as _task inner join buyer _buyer where _buyer.id=:bid "
+				+ "and _task.receiveIP=:receiveIP  "
+				+ "and year(_task.receiveDate)=:year and month(_task.receiveDate)=:month having count(_task.itemUrl)>1";
+		String hqlSix = "select count(*) from CreditTaskEntity as _task inner join buyer _buyer inner join seller as _seller "
+				+ "where _buyer.id=:bid "
+				+ "and _task.receiveIP=:receiveIP and year(_task.receiveDate)=:year and month(_task.receiveDate)=:month having count(_seller.shopURL)>6";
+
+		Integer year = Calendar.getInstance().get(Calendar.YEAR);
+		Integer month = Calendar.getInstance().get(Calendar.MONTH);
+		Long count = (Long) creditTaskDAO.uniqueResultObject(hqlOne,
+				new String[] { "bid", "receiveIP", "year", "month" },
+				new Object[] { buyeId, ip, year, month });
+		if (count == 0) {
+			count = (Long) creditTaskDAO.uniqueResultObject(hqlSix,
+					new String[] { "bid", "receiveIP", "year", "month" },
+					new Object[] { buyeId, ip, year, month });
+		}
+		if (count > 0) {
+			putJumpPage("taskManager/task!initReceivedTast.php?platformType="
+					+ platformType);
+			putAlertMsg("为了您和他人的安全，同一商品买号在一个月内只能接手一次，同一店铺的商品买号最多只能接受6次！");
+			return JUMP;
 		}
 		/**
 		 * 改变任务属性
@@ -277,7 +339,7 @@ public class CreditTaskService extends BaseService {
 		// 接收人
 		creditTask.setReceivePerson(userEntity);
 		// Ip
-		creditTask.setReceiveIP(getIpAddr());
+		creditTask.setReceiveIP(ip);
 		BuyerEntity buyerEntity = new BuyerEntity();
 		buyerEntity.setId(buyeId);
 		creditTask.setBuyer(buyerEntity);
@@ -316,6 +378,13 @@ public class CreditTaskService extends BaseService {
 			CreditTaskEntity creditTask = creditTaskDAO.get(taskId);
 			UserEntity receiveUser = creditTask.getReceivePerson();
 			UserEntity releaEntity = creditTask.getReleasePerson();
+			if (creditTask.getStatus().equals(TaskMananger.STEP_SIX_STATUS)) {
+				putAlertMsg("已经好评，不要重复提交！");
+				putJumpPage("taskManager/task!initReleasedTast.php?platformType="
+						+ platformType);
+				return JUMP;
+			}
+
 			// 如果发布人不是当前的登陆人就报错
 			if (!platformType.equals(creditTask.getType())
 					|| !creditTask.getReleasePerson().getId().equals(
@@ -336,8 +405,8 @@ public class CreditTaskService extends BaseService {
 					creditTask.getMoney()));
 			receiveUser.setReleaseDot(ArithUtils.add(receiveUser
 					.getReleaseDot(), creditTask.getReleaseDot()));
-			receiveUser.setUpgradeScore(5);
-			receiveUser.setConvertScore(5);
+			receiveUser.setUpgradeScore(receiveUser.getUpgradeScore() + 1);
+			receiveUser.setConvertScore(receiveUser.getConvertScore() + 1);
 
 			UserLoginInfo userLoginInfo = WinContext.getInstance()
 					.getUserLoginInfo(receiveUser.getUsername());
@@ -366,6 +435,12 @@ public class CreditTaskService extends BaseService {
 		} else {
 			Long taskId = Long.parseLong(getByParam("taskId"));
 			CreditTaskEntity creditTask = creditTaskDAO.get(taskId);
+			if (creditTask.getStatus().equals(TaskMananger.STEP_FOUR_STATUS)) {
+				putAlertMsg("已经发货，不要重复提交！");
+				putJumpPage("taskManager/task!initReleasedTast.php?platformType="
+						+ platformType);
+				return JUMP;
+			}
 			/**
 			 * 验证
 			 */
@@ -412,6 +487,12 @@ public class CreditTaskService extends BaseService {
 			Long taskId = Long.parseLong(getByParam("taskId"));
 			CreditTaskEntity creditTask = creditTaskDAO.get(taskId);
 			if (creditTask.getStatus().equals(TaskMananger.STEP_ONE_STATUS)) {
+				putAlertMsg("已经清理，不要重复提交！");
+				putJumpPage("taskManager/task!initReleasedTast.php?platformType="
+						+ platformType);
+				return JUMP;
+			}
+			if (creditTask.getStatus().equals(TaskMananger.STEP_ONE_STATUS)) {
 				putJumpPage("taskManager/task!initReleasedTast.php?platformType="
 						+ platformType);
 				putAlertMsg("清理成功！");
@@ -457,6 +538,12 @@ public class CreditTaskService extends BaseService {
 		} else {
 			Long taskId = Long.parseLong(getByParam("taskId"));
 			CreditTaskEntity creditTask = creditTaskDAO.get(taskId);
+			if (creditTask.getStatus().equals(TaskMananger.STEP_TWO_STATUS)) {
+				putAlertMsg("已经审核，不要重复提交！");
+				putJumpPage("taskManager/task!initReleasedTast.php?platformType="
+						+ platformType);
+				return JUMP;
+			}
 			// 如果发布人不是当前的登陆人就报错
 			if (!platformType.equals(creditTask.getType())
 					|| !creditTask.getReleasePerson().getId().equals(
@@ -491,7 +578,6 @@ public class CreditTaskService extends BaseService {
 			Long taskId = Long.parseLong(getByParam("taskId"));
 			UserEntity userEntity = userDAO.get(getLoginUser().getId());
 			CreditTaskEntity creditTask = creditTaskDAO.get(taskId);
-
 			if (creditTask.getStatus().equals(TaskMananger.STEP_ONE_STATUS)) {
 				putJumpPage("taskManager/task!initReleasedTast.php?platformType="
 						+ platformType);
@@ -580,6 +666,12 @@ public class CreditTaskService extends BaseService {
 			Long taskId = Long.parseLong(getByParam("taskId"));
 			UserEntity userEntity = userDAO.get(getLoginUser().getId());
 			CreditTaskEntity creditTask = creditTaskDAO.get(taskId);
+			if (creditTask == null) {
+				putAlertMsg("已经取消了任务，不要重复提交！");
+				putJumpPage("taskManager/task!initReleasedTast.php?platformType="
+						+ platformType);
+				return JUMP;
+			}
 			if (creditTask.getStatus().equals(TaskMananger.STEP_TWO_STATUS)
 					|| creditTask.getStatus().equals(TaskMananger.AUDIT_STATUS)) {
 				putAlertMsg("取消失败，任务已被接受！");
@@ -705,12 +797,18 @@ public class CreditTaskService extends BaseService {
 				if (TaskMananger.STEP_FOUR_STATUS.equals(objs[12])) {
 					if (!objs[14].equals("1")) {
 						Long nowCurrTime = (currentDate - ((Date) objs[20])
-								.getTime()) / 60 / 60 / 1000;
-						Integer remainTime = (Integer) objs[13];
+								.getTime());
+						Integer remainTime = (Integer) objs[13] * 60 * 60 * 1000;
 						if (nowCurrTime >= remainTime) {
 							objs[13] = 0 + "";
 						} else {
-							objs[13] = (remainTime - nowCurrTime) + "";
+							double temp = ((double) (remainTime - nowCurrTime)) / 60 / 60 / 1000;
+							if (temp > 1) {
+								objs[13] = (remainTime - nowCurrTime) / 60 / 60
+										/ 1000 + "";
+							} else {
+								objs[13] = StringUtils.formatNumber(temp);
+							}
 						}
 					}
 				}
@@ -799,17 +897,23 @@ public class CreditTaskService extends BaseService {
 									getLoginUser().getId(), platformType },
 							creditTaskVO.getStart(), creditTaskVO.getLimit());
 			Long currentDate = System.currentTimeMillis();
-			//设置时间
+			// 设置时间
 			for (Object[] objs : result) {
 				if (TaskMananger.STEP_FOUR_STATUS.equals(objs[7])) {
 					if (!objs[13].equals("1")) {
 						Long nowCurrTime = (currentDate - ((Date) objs[20])
-								.getTime()) / 60 / 60 / 1000;
-						Integer remainTime = (Integer) objs[12];
+								.getTime());
+						Integer remainTime = (Integer) objs[12] * 60 * 60 * 1000;
 						if (nowCurrTime >= remainTime) {
 							objs[12] = 0 + "";
 						} else {
-							objs[12] = (remainTime - nowCurrTime) + "";
+							double temp = ((double) (remainTime - nowCurrTime)) / 60 / 60 / 1000;
+							if (temp > 1) {
+								objs[12] = (remainTime - nowCurrTime) / 60 / 60
+										/ 1000 + "";
+							} else {
+								objs[12] = StringUtils.formatNumber(temp);
+							}
 						}
 					}
 				}
@@ -908,7 +1012,7 @@ public class CreditTaskService extends BaseService {
 		// 生成地址
 		creditTask.setAddress(createAddress(creditTaskVO, taskMananger,
 				sellerID));
-		creditTask.setReleaseDot((float) dot);
+		creditTask.setReleaseDot( dot);
 		creditTask.setReleaseDate(new Date());
 		creditTask.setReleasePerson(userEntity);
 		creditTask.setType(platFormType);
@@ -923,6 +1027,7 @@ public class CreditTaskService extends BaseService {
 			BeanUtils.copyProperties(creditTaskRepository, creditTaskVO);
 			creditTaskRepository.setUser(userEntity);
 			creditTaskRepository.setType(platFormType);
+			creditTaskRepository.setReleaseDot( dot);
 			creditTaskRepository
 					.setGoodTimeType(creditTaskVO.getGoodTimeType());
 			if (StringUtils.isBlank(creditTaskVO.getRespositoryName())) {

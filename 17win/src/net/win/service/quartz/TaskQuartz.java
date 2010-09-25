@@ -39,6 +39,12 @@ public class TaskQuartz {
 			query = session.createSQLQuery(sql);
 			query.executeUpdate();
 			session.getTransaction().commit();
+			// String sqlHour = "update"
+			// + " Tb_CreditTask "
+			// + " set"
+			// + " REMAIN_TIME_=0"
+			// + " where STATUS_='4' and _task.goodTimeType!='1' and
+			// (datediff(mi,DISPATCH_DATE_,getdate())> )";
 		} catch (Exception e) {
 			session.getTransaction().rollback();
 			LoggerUtils.error("20分钟任务定时错误！", e);
@@ -46,26 +52,4 @@ public class TaskQuartz {
 
 	}
 
-	/**
-	 * 更新好评的时间
-	 */
-	public void tastHourStatus() {
-		Query query;
-		Session session = null;
-		try {
-			session = creditTaskDAO.obtainSession();
-			session.beginTransaction();
-			String sql = "update"
-					+ " Tb_CreditTask "
-					+ "   set"
-					+ "     REMAIN_TIME_=REMAIN_TIME_-(datediff(hh,DISPATCH_DATE_,getdate())) "
-					+ "   where   STATUS_='4'   and _task.goodTimeType!='1'";
-			query = session.createSQLQuery(sql);
-			query.executeUpdate();
-			session.getTransaction().commit();
-		} catch (Exception e) {
-			session.getTransaction().rollback();
-			LoggerUtils.error("几天后/自定义好评错误！", e);
-		}
-	}
 }

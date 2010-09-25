@@ -53,4 +53,42 @@ public class CreditTaskRepositoryService extends BaseService {
 				creditTaskRepositoryEntity);
 		return JSON;
 	}
+
+	/**
+	 * 获取到任务信息
+	 * 
+	 * @param creditTaskRepositoryVO
+	 * @return
+	 * @throws Exception
+	 */
+	public String queryRepositories(
+			CreditTaskRepositoryVO creditTaskRepositoryVO) throws Exception {
+		String platformType = getPlatformType();
+		String hqlCount = "select count(*) from CreditTaskRepositoryEntity as _taskRe ,SellerEntity as _seller"
+				+ " where _seller.id=_taskRe.sellerID and  _taskRe.type=:platformType and _taskRe.user=:userId";
+		Long count = (Long) creditTaskRepositoryDAO.uniqueResultObject(
+				hqlCount, new String[] { "platformType", "userId" },
+				new Object[] { platformType, getLoginUser().getId() });
+		if (count > 0) {
+			String hql = "select _taskRe ,_seller.name from CreditTaskRepositoryEntity as _taskRe ,SellerEntity as _seller"
+					+ " where _seller.id=_taskRe.sellerID and  _taskRe.type=:platformType and _taskRe.user=:userId";
+			List<Object[]> resultTemp = creditTaskRepositoryDAO.list(hql,
+					new String[] { "platformType", "userId" }, new Object[] {
+							platformType, getLoginUser().getId() });
+			List<CreditTaskRepositoryVO> result = new ArrayList<CreditTaskRepositoryVO>(
+					resultTemp.size());
+			for (Object[] objects : resultTemp) {
+				CreditTaskRepositoryEntity creditTaskRepositoryEntity = (CreditTaskRepositoryEntity) objects[0];
+				CreditTaskRepositoryVO cTemp = new CreditTaskRepositoryVO();
+				BeanUtils.copyProperties(cTemp, creditTaskRepositoryEntity);
+				cTemp.setSellerName((String) objects[1]);
+				result.add(cTemp);
+			}
+			creditTaskRepositoryVO.setDataCount(count.intValue());
+			putByRequest("result", result);
+		}
+		putPlatformByRequest(WinUtils.changeType2Platform(platformType));
+		putPlatformTypeByRequest(platformType);
+		return "queryRepositories";
+	}
 }

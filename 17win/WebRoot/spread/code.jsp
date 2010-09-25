@@ -15,8 +15,7 @@
 		<LINK href="css/index.css" type=text/css rel=stylesheet>
 		<LINK href="css/css.css" type=text/css rel=stylesheet>
 		<LINK href="css/top_bottom.css" type=text/css rel=stylesheet>
-		<SCRIPT src="js/jieducm_pupu.js" type="text/javascript"></SCRIPT>
-			<SCRIPT src="js/utils.js" type="text/javascript"></SCRIPT>
+		<SCRIPT src="js/utils.js" type="text/javascript"></SCRIPT>
 		<style type="text/css">
 .STYLE5 {
 	font-size: 25px
@@ -248,5 +247,62 @@
 				</tr>
 			</tbody>
 		</table>
+		<div class="service2  service serviceA " id="divSerWin">
+			<div class="service-close" id="divMySer">
+				<div onclick="ClickSer();" class="service-button"></div>
+				<div class="service-inside">
+					<dl>
+						<dt>
+							客服工作时间
+						</dt>
+						<dd class="esp_4">
+							周一至周五
+						</dd>
+						<dd class="esp_4">
+							9:00 - 18:30
+						</dd>
+						<dd class="esp_5">
+							<!--<a href="#" target="_blank">自助服务</a>-->
+						</dd>
+						<dt>
+							客服团队
+						</dt>
+						<dd>
+							<a class="serviceA" href="tencent://message/?uin=1348001415">新手帮助</a>
+						</dd>
+						<dd>
+							<a class="serviceA" href="tencent://message/?uin=1181045171">客服一号</a>
+						</dd>
+						<dd>
+							<a href="tencent://message/?uin=1395324789">客服二号</a>
+						</dd>
+						<dd>
+							<a href="tencent://message/?uin=1348001415">客服三号</a>
+						</dd>
+						<dd>
+							<a href="tencent://message/?uin=1181045171">客服四号</a>
+						</dd>
+						<dd>
+							<a href="tencent://message/?uin=1395324789">充值帮助</a>
+						</dd>
+						<dd>
+							<a href="tencent://message/?uin=1097238420">提现帮助</a>
+						</dd>
+						<dd class="esp_1">
+							<a href="tencent://message/?uin=2750697">投诉建议</a>
+						</dd>
+						<dt>
+							QQ交流群
+						</dt>
+						<dd class="esp_2">
+							1-23群已满
+						</dd>
+						<dd class="esp_3">
+							24群：120645229
+						</dd>
+					</dl>
+				</div>
+			</div>
+		</div>
 	</BODY>
 </HTML>

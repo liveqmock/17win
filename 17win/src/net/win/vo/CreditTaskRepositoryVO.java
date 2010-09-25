@@ -1,5 +1,7 @@
 package net.win.vo;
 
+import java.util.Date;
+
 import net.win.BaseVO;
 
 public class CreditTaskRepositoryVO extends BaseVO {
@@ -25,12 +27,22 @@ public class CreditTaskRepositoryVO extends BaseVO {
 	// 发布人的卖家号
 	private Long sellerID;
 
+	// 发布点
+	private Double releaseDot;
+
+	// 上次发布时间
+	private Date lastDispathDate;
+	// 发布次数
+	private Integer dispathCount = 0;
+
 	// 是否地址
 	private Boolean address;
-	
-	
-	//描述
+	// 描述
 	private String desc;
+
+	// 现实
+	// 发布人的卖家号名字
+	private String sellerName;
 
 	public String getName() {
 		return name;
@@ -126,6 +138,38 @@ public class CreditTaskRepositoryVO extends BaseVO {
 
 	public void setDesc(String desc) {
 		this.desc = desc;
+	}
+
+	public Date getLastDispathDate() {
+		return lastDispathDate;
+	}
+
+	public void setLastDispathDate(Date lastDispathDate) {
+		this.lastDispathDate = lastDispathDate;
+	}
+
+	public Integer getDispathCount() {
+		return dispathCount;
+	}
+
+	public void setDispathCount(Integer dispathCount) {
+		this.dispathCount = dispathCount;
+	}
+
+	public String getSellerName() {
+		return sellerName;
+	}
+
+	public void setSellerName(String sellerName) {
+		this.sellerName = sellerName;
+	}
+
+	public Double getReleaseDot() {
+		return releaseDot;
+	}
+
+	public void setReleaseDot(Double releaseDot) {
+		this.releaseDot = releaseDot;
 	}
 
 }

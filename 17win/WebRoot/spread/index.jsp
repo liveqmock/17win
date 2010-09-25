@@ -15,7 +15,6 @@
 		<LINK href="css/index.css" type=text/css rel=stylesheet>
 		<LINK href="css/css.css" type=text/css rel=stylesheet>
 		<LINK href="css/top_bottom.css" type=text/css rel=stylesheet>
-		<SCRIPT src="js/jieducm_pupu.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="js/utils.js" type="text/javascript"></SCRIPT>
 		<style type="text/css">
 .STYLE5 {

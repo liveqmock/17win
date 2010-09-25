@@ -88,18 +88,18 @@
 																color="#ff0000">修改资料</font> </a>
 														</td>
 														<td width="102">
-															<a href="user/md5_pay.asp"><font color="#ff0000">帐号充值</font>
+															<a href="user/paid.jsp"><font color="#ff0000">帐号充值</font>
 															</a>
 														</td>
 													</tr>
 
 													<tr>
 														<td>
-															<a href="taobao/"><font color="#ff0000">免费刷钻&nbsp;
+															<a href="taskManager/task!initTask.php?platformType=1"><font color="#ff0000">免费刷钻&nbsp;
 															</font> </a>
 														</td>
 														<td>
-															<a href="user/exit.asp"
+															<a href="userManager/menuManager/menu!toIndex.php"
 																onclick="return confirm('确定退出操作吗？');"><font
 																color="#ff0000"> 安全退出</font> </a>
 														</td>

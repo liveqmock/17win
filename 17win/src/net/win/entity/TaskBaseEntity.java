@@ -15,10 +15,10 @@ public class TaskBaseEntity extends BaseEntity {
 	private String testID;
 	// 发布点
 	@Column(name = "RELEASE_DOT_", nullable = false)
-	private Float releaseDot;
+	private Double releaseDot;
 	// 发布时间
-	@Column(name = "RELEASE_DATE" )
-	private Date releaseDate  ;
+	@Column(name = "RELEASE_DATE")
+	private Date releaseDate;
 	// 发布人
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = UserEntity.class)
 	@JoinColumn(name = "RELEASE_PERSON_")
@@ -28,7 +28,7 @@ public class TaskBaseEntity extends BaseEntity {
 	@JoinColumn(name = "RECEIVE_PERSON_")
 	private UserEntity receivePerson;
 	// 描述
-	@Column(name = "DESC_", length=50)
+	@Column(name = "DESC_", length = 50)
 	private String desc;
 
 	public String getTestID() {
@@ -39,15 +39,13 @@ public class TaskBaseEntity extends BaseEntity {
 		this.testID = testID;
 	}
 
-	public Float getReleaseDot() {
+	public Double getReleaseDot() {
 		return releaseDot;
 	}
 
-	public void setReleaseDot(Float releaseDot) {
+	public void setReleaseDot(Double releaseDot) {
 		this.releaseDot = releaseDot;
 	}
-
- 
 
 	public Date getReleaseDate() {
 		return releaseDate;

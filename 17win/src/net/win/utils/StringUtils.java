@@ -3,6 +3,7 @@ package net.win.utils;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -34,6 +35,19 @@ public final class StringUtils {
 		} else {
 			return false;
 		}
+	}
+
+	/**
+	 * 
+	 * 
+	 * @param str
+	 * 
+	 * @return
+	 */
+	public static String formatNumber(Number number) {
+		DecimalFormat df = new DecimalFormat("0.0");
+		return df.format(number);
+
 	}
 
 	/**
