@@ -107,7 +107,7 @@
 								<td valign="top" align="center">
 									<s:property value="#task[0]" />
 									<br>
-									<s:date name="#task[1]" format="yyyy-MM-dd hh-mm-ss" />
+									<s:date name="#task[1]" format="yyyy-MM-dd HH-mm-ss" />
 								</td>
 								<td valign="top" align="center">
 									<font color="red"><s:property value="#task[2]" /> </font> 元
@@ -247,7 +247,9 @@
 							<tr>
 								<td colspan="3" valign="top" align="left">
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<font color="red" style="font-weight: bold;">快递单号：</font>
+									<font color="red" style="font-weight: bold;">快递单号：<s:property
+											value="#task[22]" />
+									</font>
 								</td>
 								<td colspan="3" valign="top" align="left">
 									<font color="red" style="font-weight: bold;">打分/好评： <s:if

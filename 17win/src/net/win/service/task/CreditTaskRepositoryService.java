@@ -49,8 +49,8 @@ public class CreditTaskRepositoryService extends BaseService {
 	 * @return
 	 * @throws Exception
 	 */
-	public String innsertRepository(
-			CreditTaskRepositoryVO creditTaskRepositoryVO) throws Exception {
+	public String insertRepository(CreditTaskRepositoryVO creditTaskRepositoryVO)
+			throws Exception {
 		String platformType = getPlatformType();
 		if (!getLoginUser().getOperationCodeStatus()) {
 			putByRequest("preURL", getRequset().getRequestURL() + "?"
@@ -71,11 +71,15 @@ public class CreditTaskRepositoryService extends BaseService {
 			}
 			// 验证 金钱
 			if (creditTaskRepositoryEntity.getMoney() > user.getMoney()) {
+				putJumpPage("taskRepositoryManager/taskRepository!queryRepositories.php?platformType="
+						+ platformType);
 				putAlertMsg("您当前的余额不够发布此任务不够！");
 				return JUMP;
 			}
 			if (creditTaskRepositoryEntity.getReleaseDot() > user
 					.getReleaseDot()) {
+				putJumpPage("taskRepositoryManager/taskRepository!queryRepositories.php?platformType="
+						+ platformType);
 				putAlertMsg("您当前的发布点不够发布此任务不够！");
 				return JUMP;
 			}
@@ -108,24 +112,35 @@ public class CreditTaskRepositoryService extends BaseService {
 			} else {
 				creditTaskEntity.setAddress("无");
 			}
+			creditTaskEntity.setTestID(TaskMananger.getInstance()
+					.generateTaskID());
 			creditTaskEntity.setStatus("1");
 			creditTaskEntity.setUpdatePrice(creditTaskRepositoryEntity
 					.getUpdatePrice());
 			creditTaskEntity
 					.setItemUrl(creditTaskRepositoryEntity.getItemUrl());
+			creditTaskEntity.setType(creditTaskRepositoryEntity.getType());
 			creditTaskEntity.setSeller(seller);
 			creditTaskEntity.setReleasePerson(user);
 			creditTaskEntity.setGrade(creditTaskRepositoryEntity.getGrade());
 			creditTaskEntity.setDesc(creditTaskRepositoryEntity.getDesc());
+			creditTaskEntity.setWaybill(StrategyUtils.makeWaybill());
 			creditTaskDAO.save(creditTaskEntity);
 			// 改变人
 			user.setMoney(ArithUtils.sub(user.getMoney(),
 					creditTaskRepositoryEntity.getMoney()));
 			user.setReleaseDot(ArithUtils.sub(user.getReleaseDot(),
 					creditTaskRepositoryEntity.getReleaseDot()));
+
+			// 仓库信息
+			creditTaskRepositoryEntity
+					.setDispathCount(creditTaskRepositoryEntity
+							.getDispathCount() + 1);
+			creditTaskRepositoryEntity.setLastDispathDate(new Date());
 			updateUserLoginInfo(user);
 			putJumpPage("taskRepositoryManager/taskRepository!queryRepositories.php?platformType="
 					+ platformType);
+			putAlertMsg("发布成功！");
 			return JUMP;
 		}
 	}

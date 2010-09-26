@@ -785,7 +785,7 @@ public class CreditTaskService extends BaseService {
 					.pageQuery(
 							"select _task.testID , _task.releaseDate ,_fbuser.username,_fbuser.qq,_task.money,_task.updatePrice ,_task.releaseDot "// 6
 									+ ", _task.itemUrl , _seller.name,_seller.shopURL,_buyer.name,_jsuser.upgradeScore,_task.status" // 12
-									+ ", _task.remainTime,_task.goodTimeType ,_task.intervalHour,_task.desc,_task.address ,_task.grade,_task.id ,_task.dispatchDate,_fbuser.ww" // index=21
+									+ ", _task.remainTime,_task.goodTimeType ,_task.intervalHour,_task.desc,_task.address ,_task.grade,_task.id ,_task.dispatchDate,_fbuser.ww,_task.waybill" // index=22
 									+ " from CreditTaskEntity as _task inner join _task.releasePerson as _fbuser  inner join _task.seller as _seller left join _task.receivePerson as _jsuser left join _task.buyer as _buyer  where     _jsuser.id=:userId and   _task.type=:platformType "
 									+ orderAndWhereReceivedTaskStr(queryType,
 											false), new String[] { "userId",
@@ -889,7 +889,7 @@ public class CreditTaskService extends BaseService {
 					.pageQuery(
 							"select _task.testID , _task.releaseDate ,_task.money,_task.updatePrice ,_task.releaseDot, _task.itemUrl , _seller.name,_task.status "// 7
 									+ ", _jsuser.username,_buyer.name,_jsuser.qq,_jsuser.upgradeScore" // 11
-									+ ", _task.remainTime,_task.goodTimeType ,_task.intervalHour,_task.desc,_task.address ,_task.grade,_task.id,_seller.shopURL ,_task.dispatchDate,_jsuser.ww" // index=21
+									+ ", _task.remainTime,_task.goodTimeType ,_task.intervalHour,_task.desc,_task.address ,_task.grade,_task.id,_seller.shopURL ,_task.dispatchDate,_jsuser.ww,_task.waybill" // index=22
 									+ " from CreditTaskEntity as _task inner join _task.releasePerson as _fbuser  inner join _task.seller as _seller left join _task.receivePerson as _jsuser left join _task.buyer as _buyer  where     _fbuser.id=:userId and   _task.type=:platformType "
 									+ orderAndWhereReleasedTaskStr(queryType,
 											false), new String[] { "userId",
@@ -1012,11 +1012,12 @@ public class CreditTaskService extends BaseService {
 		// 生成地址
 		creditTask.setAddress(createAddress(creditTaskVO, taskMananger,
 				sellerID));
-		creditTask.setReleaseDot( dot);
+		creditTask.setReleaseDot(dot);
 		creditTask.setReleaseDate(new Date());
 		creditTask.setReleasePerson(userEntity);
 		creditTask.setType(platFormType);
 		creditTask.setIntervalHour(creditTaskVO.getIntervalHour());
+		creditTask.setWaybill(StrategyUtils.makeWaybill());
 		creditTaskDAO.save(creditTask);
 		/**
 		 * 保存任务仓库
@@ -1027,7 +1028,7 @@ public class CreditTaskService extends BaseService {
 			BeanUtils.copyProperties(creditTaskRepository, creditTaskVO);
 			creditTaskRepository.setUser(userEntity);
 			creditTaskRepository.setType(platFormType);
-			creditTaskRepository.setReleaseDot( dot);
+			creditTaskRepository.setReleaseDot(dot);
 			creditTaskRepository
 					.setGoodTimeType(creditTaskVO.getGoodTimeType());
 			if (StringUtils.isBlank(creditTaskVO.getRespositoryName())) {

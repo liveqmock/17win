@@ -10,7 +10,7 @@
 		<LINK href="css/top_bottom.css" type="text/css" rel="stylesheet">
 		<SCRIPT src="js/validater.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="js/utils.js" type="text/javascript"></SCRIPT>
-		<SCRIPT src="credit/taskRepository.js" type="text/javascript"></SCRIPT>
+		<SCRIPT src="credit/timmingTask.js" type="text/javascript"></SCRIPT>
 	</HEAD>
 	<BODY>
 		<s:include value="../common/title.jsp"></s:include>
@@ -52,11 +52,7 @@
 						</td>
 						<td
 							style="FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #006600; TEXT-ALIGN: center">
-							上次发布时间
-						</td>
-						<td
-							style="FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #006600; TEXT-ALIGN: center">
-							发布次数
+							定时时间
 						</td>
 						<td
 							style="FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #006600; TEXT-ALIGN: center">
@@ -97,24 +93,12 @@
 									系统提供地址
 									 </s:if>
 							</td>
-							<td valign="top" align="center">
-								<s:if test="#task.lastDispathDate!=null">
-									<s:date name="#task.lastDispathDate"
-										format="yyyy-MM-dd HH-mm-ss" />
-								</s:if>
-								<s:else>
-									还没发送过！
-								</s:else>
-							</td>
 
 							<td valign="top" align="center">
-								<s:property value="#task.dispathCount" default="0" />
+								<s:date name="#task.timeingTime"
+									format="yyyy-MM-dd HH-mm-ss" />
 							</td>
 							<td valign="top" align="center">
-								<a title="可能由于你填写错误，可以重新进行填写！"
-									href="javascript:releaseRepository(<s:property value="#task.id"/>)"><span
-									class="anniu">发布任务</span> </a>
-								<br>
 								<a title="刷新排前可以使您的任务在发布区靠前！"
 									href="javascript:deleteRepository(<s:property value="#task.id"/>)"><span
 									class="anniu2">删除任务</span> </a>

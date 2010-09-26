@@ -35,7 +35,17 @@ public final class StrategyUtils {
 		WinUtils.throwIllegalityException("试图越过发布点的时间计算操作");
 		return 0;
 	}
-
+	/**
+	 * 快递单号
+	 * 
+	 * @param src
+	 * @param dest
+	 * @throws Exception
+	 */
+	public static String makeWaybill()
+			throws Exception {
+		 return "111111";
+	}
 	/**
 	 * 得到信誉dot发布点
 	 * 

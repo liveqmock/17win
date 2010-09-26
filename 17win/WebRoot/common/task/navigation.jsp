@@ -34,13 +34,6 @@
 			</LI>
 			<LI>
 				<A
-					<s:if test="#request.showTaskType==5">
-					style="FONT-SIZE: 16px; BACKGROUND: url(images/task_nav_02.gif) no-repeat 50% bottom; COLOR: #ffffff"
-					</s:if>
-					href="MySave.asp">定时任务</A>
-			</LI>
-			<LI>
-				<A
 					<s:if test="#request.showTaskType==6">
 					style="FONT-SIZE: 16px; BACKGROUND: url(images/task_nav_02.gif) no-repeat 50% bottom; COLOR: #ffffff"
 					</s:if>

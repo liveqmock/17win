@@ -104,7 +104,7 @@
 								<td valign="top" align="center">
 									<s:property value="#task[0]" />
 									<br>
-									<s:date name="#task[1]" format="yyyy-MM-dd hh-mm-ss" />
+									<s:date name="#task[1]" format="yyyy-MM-dd HH-mm-ss" />
 								</td>
 								<td valign="top" align="center">
 									<SPAN style="Z-INDEX: 20; POSITION: relative"> <a

@@ -39,9 +39,9 @@ public class CreditTaskRepositiryAction extends BaseAction {
 	 */
 	public String releaseRepository() throws Exception {
 		return creditTaskRepositoryService
-				.innsertRepository(creditTaskRepositoryVO);
+				.insertRepository(creditTaskRepositoryVO);
 	}
-	
+
 	/**
 	 * 发布任务
 	 * 
