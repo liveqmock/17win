@@ -108,6 +108,10 @@
 									<s:property value="#task[0]" />
 									<br>
 									<s:date name="#task[1]" format="yyyy-MM-dd HH-mm-ss" />
+									<s:if test="#task[7]==0">
+										<font color="red">定时时间：<s:date name="#task[23]"
+												format="yyyy-MM-dd HH-mm-ss" /> </font>
+									</s:if>
 								</td>
 								<td valign="top" align="center">
 									<font color="red"><s:property value="#task[2]" /> </font> 元
@@ -147,6 +151,12 @@
 									<s:if test="#task[7]==1">
 												暂无接收人
 											</s:if>
+									<s:elseif test="#task[7]==-1">
+										申诉中
+									</s:elseif>
+									<s:elseif test="#task[7]==0">
+										定时任务
+									</s:elseif>
 									<s:else>
 										<font color="#FF0000"><s:property value="#task[9]" />
 										</font>
@@ -157,6 +167,12 @@
 									<s:if test="#task[7]==1">
 												等待接收人
 											</s:if>
+									<s:elseif test="#task[7]==-1">
+										申诉中
+									</s:elseif>
+									<s:elseif test="#task[7]==0">
+										定时任务
+									</s:elseif>
 									<s:elseif test="#task[7]==-2">
 												等待您审核<br>
 										<s:if test="#task[7]!=1">
@@ -248,8 +264,7 @@
 								<td colspan="3" valign="top" align="left">
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									<font color="red" style="font-weight: bold;">快递单号：<s:property
-											value="#task[22]" />
-									</font>
+											value="#task[22]" /> </font>
 								</td>
 								<td colspan="3" valign="top" align="left">
 									<font color="red" style="font-weight: bold;">打分/好评： <s:if

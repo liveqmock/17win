@@ -121,8 +121,7 @@
 						value="#request.platformType" />"
 																			id="platformType" type="hidden" />
 																		<!-- 取消重填 -->
-																		<input
-																			value="<s:property value="creditTaskVO.id"/>"
+																		<input value="<s:property value="creditTaskVO.id"/>"
 																			id="cancelFlagTaskIdHidden" type="hidden" />
 																		<input
 																			value="<s:property value="creditTaskVO.goodTimeType"/>"
@@ -133,12 +132,13 @@
 																		<input
 																			value="<s:property value="creditTaskVO.grade"/>"
 																			id="cancelFlagGradeHidden" type="hidden" />
-																			<input
+																		<input
 																			value="<s:property value="creditTaskVO.intervalHour"/>"
 																			id="cancelFlagHourHidden" type="hidden" />
 																		<!-- end -->
-																		<input value="<s:property value="#session.userLogin.money" />" id="currMoney"
-																			type="hidden" />
+																		<input
+																			value="<s:property value="#session.userLogin.money" />"
+																			id="currMoney" type="hidden" />
 																		<s:textfield name="creditTaskVO.money" size="10"
 																			id="money" maxlength="6"
 																			onkeyup="if(isNaN(value))execCommand('undo')"></s:textfield>
@@ -164,8 +164,9 @@
 																	</td>
 																	<td colspan="4">
 																		<s:if test="#request.sellers!=null">
-																			<s:radio list="#request.sellers" listKey="id"  disabled="true"
-																				name="creditTaskVO.sellerID" listValue="name"></s:radio>
+																			<s:radio list="#request.sellers" listKey="id"
+																				disabled="true" name="creditTaskVO.sellerID"
+																				listValue="name"></s:radio>
 																		</s:if>
 																	</td>
 																</tr>
@@ -191,7 +192,7 @@
 																	</td>
 																	<td>
 																		<input name="creditTaskVO.grade" type="radio"
-																			value="1" checked="checked" >
+																			value="1" checked="checked">
 																		<span class="font12l">全部打5分</span>
 																	</td>
 																	<td>
@@ -206,7 +207,7 @@
 																	</td>
 																	<td>
 																		<input name="creditTaskVO.grade" type="radio"
-																			value="3" >
+																			value="3">
 																		<span class="font12l">带字5分好评</span>
 																	</td>
 																	<td>
@@ -320,7 +321,8 @@
 																		<img style="cursor: pointer;"
 																			onclick="WdatePicker({'minDate':'%y-%M-%d %H:%m:%s','alwaysUseStartDate':false,'el':'tasktimingDate','isShowClear':false,startDate:'%y-%M-%d %H:%m:%s',dateFmt:'yyyy-MM-dd HH:mm:ss','skin':'blue'})"
 																			src="js/My97DatePicker/skin/datePicker.gif"
-																			width="16" height="22" align="absmiddle">
+																			width="16" height="22 align="absmiddle">
+																		<span class="red-bcolor">*只精确到分钟</span>
 																	</td>
 																</tr>
 																<tr>
@@ -341,7 +343,7 @@
 																		收货地址：
 																	</td>
 																	<td colspan="2">
-																		<s:checkbox name="creditTaskVO.address"  
+																		<s:checkbox name="creditTaskVO.address"
 																			fieldValue="true" />
 																		<span class="red-bcolor">*什么是自动生成收货地址信息（实物任务有用）</span>
 																	</td>
