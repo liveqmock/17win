@@ -32,6 +32,39 @@ public class CreditTaskRepositiryAction extends BaseAction {
 	}
 
 	/**
+	 * 发布任务
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String releaseRepository() throws Exception {
+		return creditTaskRepositoryService
+				.innsertRepository(creditTaskRepositoryVO);
+	}
+	
+	/**
+	 * 发布任务
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String deleteRepository() throws Exception {
+		return creditTaskRepositoryService
+				.deleteRepository(creditTaskRepositoryVO);
+	}
+
+	/**
+	 * 查询任务
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String queryRepositories() throws Exception {
+		return creditTaskRepositoryService
+				.queryRepositories(creditTaskRepositoryVO);
+	}
+
+	/**
 	 * 获取任务
 	 * 
 	 * @return

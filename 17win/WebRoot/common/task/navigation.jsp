@@ -1,7 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <DIV style="CLEAR: both; MARGIN-TOP: 2px; WIDTH: 910px; HEIGHT: 25px">
-	<DIV style="FLOAT: left; OVERFLOW: hidden; WIDTH: 700px">
+	<DIV style="FLOAT: left; OVERFLOW: hidden; WIDTH: 800px">
 		<UL id=task_nav>
 			<LI>
 				<A
@@ -40,19 +40,20 @@
 					href="MySave.asp">定时任务</A>
 			</LI>
 			<LI>
-				<A href="userInfoManager/info!initSellerAndBuyer.php">绑定店铺</A>
-			</LI>
-			<LI>
-				<A href="userInfoManager/info!initSellerAndBuyer.php">绑定买号</A>
-			</LI>
-
-			<LI>
 				<A
 					<s:if test="#request.showTaskType==6">
 					style="FONT-SIZE: 16px; BACKGROUND: url(images/task_nav_02.gif) no-repeat 50% bottom; COLOR: #ffffff"
 					</s:if>
-					href="MySave.asp">任务仓库</A>
+					href="taskRepositoryManager/taskRepository!queryRepositories.php?platformType=<s:property value="#request.platformType"/>">任务仓库</A>
 			</LI>
+			<LI>
+				<A href="userInfoManager/info!initSellerAndBuyer.php">绑定店铺</A>
+			</LI>
+
+			<LI>
+				<A href="userInfoManager/info!initSellerAndBuyer.php">绑定买号</A>
+			</LI>
+
 
 		</UL>
 	</DIV>
