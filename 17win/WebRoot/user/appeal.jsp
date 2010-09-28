@@ -17,14 +17,10 @@
 
 		<LINK href="css/center.css" type="text/css" rel="stylesheet">
 
-		<script type="text/javascript"
-			src="<%=basePath%>ckeditor/ckeditor.js"></script>
+		<script type="text/javascript" src="<%=basePath%>ckeditor/ckeditor.js"></script>
 		<script src="user/appeal.js" type="text/javascript"></script>
 
 		<script type="text/javascript">
-			$(document).ready(function() {
-				 	CKEDITOR.replace("editor");
-		});
 		</script>
 		<style type="text/css">
 body {
@@ -163,7 +159,7 @@ img {
 															详细描述：
 														</td>
 														<td>
-															<textarea name="editor">&lt;p&gt;Initial value.&lt;/p&gt;</textarea>
+															<textarea name="editor"></textarea>
 														</td>
 													</tr>
 													<tr>

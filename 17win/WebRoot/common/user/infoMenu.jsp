@@ -213,17 +213,19 @@
 												<a href="withdrawalsManager/withdrawals!initWithdrawals.php">我要提现</a>
 											</td>
 										</tr>
+
 										<tr>
 											<td height=20>
 												<a href="withdrawalsManager/withdrawals!withdrawalsLog.php">提现记录</a>
 											</td>
 										</tr>
+										<!--  
 										<tr>
-
 											<td height=20>
 												<a href="user/operationLog.jsp">操作记录</a>
 											</td>
 										</tr>
+										  -->
 									</table>
 								</div>
 							</td>
@@ -272,8 +274,8 @@
 							</td>
 						</tr>
 					</table>
-					
 					-->
+					<!-- 
 					<table cellpadding=0 cellspacing=0 width=158 align=center>
 						<tr>
 							<td height=25 class="menu_title"
@@ -287,7 +289,6 @@
 							</td>
 						</tr>
 						<tr>
-
 							<td id='submenu241'>
 								<div class=sec_menu style="width: 158">
 									<table cellpadding=0 cellspacing=0 align=center width=130
@@ -308,7 +309,6 @@
 												<a href="user/myAppeal.jsp">我的申诉</a><font color="#0000FF">&nbsp;</font>
 											</td>
 										</tr>
-										<!-- xgj -->
 										<tr>
 											<td height=20>
 												<a href="user/officalBlackList.jsp">官方黑名单</a><font
@@ -331,8 +331,8 @@
 								</div>
 							</td>
 						</tr>
-
 					</table>
+					 -->
 				</DIV>
 			</TD>
 		</TR>

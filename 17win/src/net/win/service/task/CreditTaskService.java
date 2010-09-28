@@ -1199,6 +1199,7 @@ public class CreditTaskService extends BaseService {
 			BeanUtils.copyProperties(buyerVO, buyerEntity);
 			resultBuyers.add(buyerVO);
 		}
+		// ///
 		creditTaskVO.setDataCount(count.intValue());
 		putByRequest("result", result);
 		putByRequest("resultBuyers", resultBuyers);

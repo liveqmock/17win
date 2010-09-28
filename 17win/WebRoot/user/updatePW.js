@@ -45,6 +45,11 @@ $(document).ready(function() {
 			return;
 		}
 		if (Validater.isPassword($(this).val())) {
+			if($(this).val()==$("#password").val()){
+				validateError(this, "操作码和密码不能相同！");
+				submitFlag = false;
+				return;
+			}
 			validateSuccess(this);
 		} else {
 			validateError(this, "\u5fc5\u987b\u662f6\u81f320\u4f4d\u5b57\u7b26");
