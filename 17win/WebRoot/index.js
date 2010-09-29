@@ -7,43 +7,87 @@ function changeValidateCode(obj) {
 }
 var submitFlag = true;
 $(document).ready(function() {
+
+	// 标题层的高度--提示打开或关闭
+	var titHeight = $("#ditTitle").height();
+	// 内容层的高度
+	var conHeight = $("#divContent").height();
+
+	// 打开或关闭
+	$("#close").toggle(function() {
+				// 改变提示
+				$("#close").text("关闭");
+				// 动画--一秒内消息层高度增加,top增加
+				$("#msgDiv").animate({
+							height : titHeight + conHeight
+						}, 1000, function() {
+							// 展开后执行的函数
+						});
+			}, function() {
+				// 改变提示
+				$("#close").text("打开");
+				// alert(temp+" "+titHeight);
+				$("#msgDiv").animate({
+							height : titHeight
+						}, 1000, function() {
+							// 关闭后执行的函数
+						});
+			})
+
+	// 执行
+	var myTimer, i = 8;
+	function starFun() {
+		// 触发click事件,显示
+		if (i == 4) {
+			$("#close").click();
+		}
+		// 清除timeout,触发click事件,关闭层
+		if (i == 0) {
+			window.clearTimeout(myTimer);
+			if ($("#close").text() != "打开")
+				$("#close").click();
+		}
+		myTimer = window.setTimeout(starFun, 1000);
+		i = i - 1;
+	}
+	starFun();
+
 	$("#username").focus();
-	//找回密码
-	$("#findPW").dialog({
-				autoOpen : false,
-				draggable : false,
-				hide : 'slide',
-				modal : true,
-				resizable : false,
-				show : 'slide'
-			});
-	$("#findPW").bind("dialogbeforeclose", function(event, ui) {
-				$("#usernameTelephone").val("");
-			});
-	$("#findPWBtn").button();
-	$("#findPWBtn").bind("click", function() {
-				if (Validater.isBlank($("#usernameTelephone").val())) {
-					alert("数据不能为空");
-					return false;
-				}
-				$.post("ajaxManager/ajax!findPassword.php", {
-							username : $("#usernameTelephone").val(),
-							telephone : $("#usernameTelephone").val()
-						}, function(data) {
-							if (data.bool) {
-								alert("邮件已经发送到你的邮箱里面，请查收！");
-							} else {
-								alert("该用户名或则手机没有被注册过！");
-							}
-							$("#findPW").dialog("close");
-						}, "json");
-			});
+	// // 找回密码
+	// $("#findPW").dialog({
+	// autoOpen : false,
+	// draggable : false,
+	// hide : 'slide',
+	// modal : true,
+	// resizable : false,
+	// show : 'slide'
+	// });
+	// $("#findPW").bind("dialogbeforeclose", function(event, ui) {
+	// $("#usernameTelephone").val("");
+	// });
+	// $("#findPWBtn").button();
+	// $("#findPWBtn").bind("click", function() {
+	// if (Validater.isBlank($("#usernameTelephone").val())) {
+	// alert("数据不能为空");
+	// return false;
+	// }
+	// $.post("ajaxManager/ajax!findPassword.php", {
+	// username : $("#usernameTelephone").val(),
+	// telephone : $("#usernameTelephone").val()
+	// }, function(data) {
+	// if (data.bool) {
+	// alert("邮件已经发送到你的邮箱里面，请查收！");
+	// } else {
+	// alert("该用户名或则手机没有被注册过！");
+	// }
+	// $("#findPW").dialog("close");
+	// }, "json");
+	// });
 	// 弹出找回密码层
 	$("#findPWA").bind("click", function() {
 				$("#findPW").dialog("open");
-			});	
-	
-			
+			});
+
 	// 用户名
 	$("#username").focus();
 	$("#username").bind("blur", function() {

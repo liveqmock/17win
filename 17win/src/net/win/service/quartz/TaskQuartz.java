@@ -21,8 +21,23 @@ public class TaskQuartz {
 		try {
 			session = creditTaskDAO.obtainSession();
 			session.beginTransaction();
-			//修改发布任务
-			String sql1 = "update"
+			// 修改发布任务
+			// String sql = "update"
+			// + " Tb_CreditTask "
+			// + " set"
+			// + " RECEIVE_DATE_=null,"
+			// + " RECEIVE_IP_=null,"
+			// + " BUYER_ID_=null,"
+			// + " STATUS_='1',"
+			// + " REMAIN_TIME_=null,"
+			// + " RECEIVE_PERSON_=null "
+			// + " where"
+			// + " ("
+			// + " STATUS_='2' "
+			// + " or STATUS_='-2'"
+			// + " ) "
+			// + " and datediff(mi,RECEIVE_DATE_,getdate())>=REMAIN_TIME_";
+			String sql = "update"
 					+ " Tb_CreditTask "
 					+ "   set"
 					+ "     RECEIVE_DATE_=null,"
@@ -36,23 +51,26 @@ public class TaskQuartz {
 					+ "       STATUS_='2' "
 					+ "      or STATUS_='-2'"
 					+ "    ) "
-					+ "  and datediff(mi,RECEIVE_DATE_,getdate())>=REMAIN_TIME_";
-			query = session.createSQLQuery(sql1);
+					+ "  and SEC_TO_TIME(UNIX_TIMESTAMP(now())-   UNIX_TIMESTAMP(RECEIVE_DATE_))>=REMAIN_TIME_";
+
+			query = session.createSQLQuery(sql);
 			query.executeUpdate();
 			session.getTransaction().commit();
-			
-			
-			/// 定时任务
+
+			// / 定时任务
 			session.beginTransaction();
-			String sql2 = "update" + " Tb_CreditTask " + "   set"
-					+ "       STATUS_='1'," + "   where"
-					+ "       STATUS_='0'  and  DATEDIFF(datepart,timeingTime,getdate())>=0";
+			String sql2 = "update"
+					+ " Tb_CreditTask "
+					+ "   set"
+					+ "       STATUS_='1',"
+					+ "   where"
+					+ "       STATUS_='0'  and  UNIX_TIMESTAMP(now())-   UNIX_TIMESTAMP(TIMEING_TIME_)>=0";
 			query = session.createSQLQuery(sql2);
 			query.executeUpdate();
 			session.getTransaction().commit();
 		} catch (Exception e) {
 			session.getTransaction().rollback();
-			LoggerUtils.error("20分钟任务定时错误！", e);
+			LoggerUtils.error("定时任务错误!", e);
 		}
 
 	}

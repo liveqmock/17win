@@ -95,9 +95,6 @@ K_ToolsC A:hover {
 .Bootz {
 	MARGIN-TOP: 10px; BACKGROUND: url(../images/Top_18.gif) repeat-x; FLOAT: left; WIDTH: 100%; HEIGHT: 90px
 }
-.LeftNews A {
-	PADDING-LEFT: 15px; BACKGROUND: url(../images/Top_20.gif) no-repeat left 50%
-}
 .LeftNews TD {
 	BACKGROUND: url(../images/Top_19.gif) repeat-x 50% bottom; LINE-HEIGHT: 27px
 }

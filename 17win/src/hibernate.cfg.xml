@@ -8,24 +8,25 @@
 			true
 		</property>
 		<property name="hibernate.connection.driver_class">
-			net.sourceforge.jtds.jdbc.Driver
+			com.mysql.jdbc.Driver
+			<!--		net.sourceforge.jtds.jdbc.Driver  -->
 		</property>
 
 		<property name="hibernate.connection.url">
-			jdbc:jtds:sqlserver://localhost:1433/windb;
-			<!--jdbc:microsoft:sqlserver://localhost:1433;DatabaseName=17windb;SelectMethod=Cursor
-			-->
+			jdbc:mysql://localhost:3306/windb
+			<!-- jdbc:jtds:sqlserver://localhost:1433/windb; -->
 		</property>
 		<property name="hibernate.connection.username">sa</property>
 		<property name="hibernate.connection.password"></property>
 		<!-- 方言  	-->
 		<property name="hibernate.dialect">
-			org.hibernate.dialect.SQLServerDialect
+			org.hibernate.dialect.MySQLDialect
+			<!-- 	org.hibernate.dialect.SQLServerDialect   -->
 		</property>
 
-		<property name="hibernate.connection.charSet">GBK</property>
+		<property name="hibernate.connection.charSet">UTF-8</property>
 		<property name="hibernate.connection.characterEncoding">
-			GBK
+			UTF-8
 		</property>
 		<!--
 			防止出现MySql过夜错误 <property name="hibernate.connection.release_mode">
