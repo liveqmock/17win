@@ -101,7 +101,7 @@
 																				</option>
 																			</select>
 																		</s:else>
-																		<input value="点击此处从任务仓库中获取" style="cursor: pointer;"
+																		<input value="进入任务仓库" style="cursor: pointer;"  id="goTaskRe"
 																			class="btnClass" type="button">
 																	</td>
 																</tr>

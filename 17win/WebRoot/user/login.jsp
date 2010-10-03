@@ -133,7 +133,7 @@
 											<TT>第二步：到刷钻中心接任务,接一个任务系统会自动为你增加发布点。</TT>
 											<BR>
 											<IMG src="images/jieducm_b2.gif">
-											<TT>&nbsp;第三步：对你刚才购买的宝贝进行"好评"</TT>
+											<TT>第三步：对你刚才购买的宝贝进行"好评"</TT>
 											<BR>
 											<IMG src="images/jieducm_b3.gif">
 											<TT>第四步：拥有发布点后即可发布任务，平台担保价为用户自定。</TT>

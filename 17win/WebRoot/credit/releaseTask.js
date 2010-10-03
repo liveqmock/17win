@@ -1,6 +1,11 @@
 var submitFlag = true;
 $(document).ready(function() {
-
+	// 进入任务仓库
+	$("#goTaskRe").click(function() {
+		var platformType = $("#platformType").val();
+		window.location.href = "taskRepositoryManager/taskRepository!queryRepositories.php?platformType="
+				+ platformType;
+	});
 	// 判断是否取消任务
 	var cancelTaskId = $("#cancelFlagTaskIdHidden").val();
 	if (!Validater.isBlank(cancelTaskId)) {
@@ -44,7 +49,8 @@ $(document).ready(function() {
 					submitFlag = false;
 				} else {
 					if (parseFloat($(this).val()) > currMoney) {
-						changeStyle(this, '0', '您当前的金额不足' + $(this).val() + "元！");
+						changeStyle(this, '0', '您当前的金额不足' + $(this).val()
+										+ "元！");
 						submitFlag = false;
 					} else {
 						changeStyle(this, '1', '');
@@ -57,21 +63,22 @@ $(document).ready(function() {
 				$(obj).data("nowUrl", $(obj).val());
 			});
 	$("#itemUrl").bind("blur", function() {
-		//如果有被选中的
-		if($("input[name='creditTaskVO.sellerID']:checked").size()>0){
-			$("input[name='creditTaskVO.sellerID']").attr("disabled",false);
-			return ;
+		// 如果有被选中的
+		if ($("input[name='creditTaskVO.sellerID']:checked").size() > 0) {
+			$("input[name='creditTaskVO.sellerID']").attr("disabled", false);
+			return;
 		}
-		
+
 		var obj = this;
 		var platformType = $("#platformType").val();
 		// 去掉空格
 		$(obj).val($.trim($(obj).val()));
 		// 获取seller input
-		if (!Validater.isItem($(obj).val(),platformType)) {
+		if (!Validater.isItem($(obj).val(), platformType)) {
 			submitFlag = false;
 			alert("您输入的格式不地址格式不正确，最好复制在浏览器地址栏里面复制后粘贴,如还有疑问，请联系客户！");
-			changeStyle(obj, '0', '您输入的格式不地址格式不正确，最好复制在浏览器地址栏里面复制后粘贴,如还有疑问，请联系客户！');
+			changeStyle(obj, '0',
+					'您输入的格式不地址格式不正确，最好复制在浏览器地址栏里面复制后粘贴,如还有疑问，请联系客户！');
 			return;
 		}
 		if ($(obj).data("nowUrl") == $(obj).val()) {
@@ -98,7 +105,8 @@ $(document).ready(function() {
 									}
 								});
 						if (flag) {
-							$("input[name='creditTaskVO.sellerID']").attr("disabled",false);
+							$("input[name='creditTaskVO.sellerID']").attr(
+									"disabled", false);
 							changeStyle(obj, '1', '');
 							selectRadio.attr("checked", true);
 							$(obj).data("nowUrl", $(obj).val());
@@ -193,7 +201,7 @@ $(document).ready(function() {
 			});
 });
 function validateForm() {
-	if($("input[name='creditTaskVO.sellerID']:checked").size()==0){
+	if ($("input[name='creditTaskVO.sellerID']:checked").size() == 0) {
 		alert("掌柜未选中，请检查您的商品地址！");
 		return false;
 	}

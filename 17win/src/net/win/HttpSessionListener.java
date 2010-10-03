@@ -12,9 +12,12 @@ public class HttpSessionListener implements
 	}
 
 	public void sessionDestroyed(HttpSessionEvent event) {
-		String userName = ((UserLoginInfo) event.getSession().getAttribute(
-				Constant.USER_LOGIN_INFO)).getUsername();
-		WinContext.getInstance().removeUserLoginInfo(userName);
+		if ((UserLoginInfo) event.getSession().getAttribute(
+				Constant.USER_LOGIN_INFO) != null) {
+			String userName = ((UserLoginInfo) event.getSession().getAttribute(
+					Constant.USER_LOGIN_INFO)).getUsername();
+			WinContext.getInstance().removeUserLoginInfo(userName);
+		}
 	}
 
 }
