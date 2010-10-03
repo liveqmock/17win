@@ -127,7 +127,7 @@
 	</TR>
 </TABLE>
 	<div class="service2  service serviceA "   id="divSerWin">
-			<div class="service-close" id="divMySer">
+			<div class="service-open" id="divMySer">
 				<div onclick="ClickSer();" class="service-button"></div>
 				<div class="service-inside">
 					<dl>

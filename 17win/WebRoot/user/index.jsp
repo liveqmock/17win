@@ -263,26 +263,6 @@ img {
 
 												</tr>
 												<tr>
-													<td height="55" align="center" class="borderc" valign="top">
-														<b> 流量互刷 </b>
-													</td>
-													<td colspan="2" align="left" class="borderc">
-														平台提示：
-														<font color="#FF0000">请尽快核对货款，按卖家规定时间完成平台任务，超过规定时间12小时后，会员有权进行申诉处理！</font>
-														<br />
-													</td>
-												</tr>
-												<tr>
-													<td height="55" align="center" class="borderc" valign="top">
-														<b> 收藏互刷 </b>
-													</td>
-													<td colspan="2" align="left" class="borderc">
-														平台提示：
-														<font color="#FF0000">请尽快核对货款，按卖家规定时间完成平台任务，超过规定时间12小时后，会员有权进行申诉处理！</font>
-														<br />
-													</td>
-												</tr>
-												<tr>
 													<td height="55" align="center" class="borderc">
 														&nbsp;
 													</td>
