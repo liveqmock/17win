@@ -14,7 +14,7 @@ public class Win17Listener implements ServletContextListener {
 			ConvertUtils.register(new DateConverter(), java.util.Date.class);
 			ConvertUtils.register(new DateConverter(), java.sql.Date.class);
 			Thread.currentThread().getContextClassLoader().loadClass(
-					WinConfig.class.getName());
+					net.win.utils.Constant.class.getName());
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}

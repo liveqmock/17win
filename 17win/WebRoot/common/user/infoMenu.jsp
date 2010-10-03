@@ -198,7 +198,7 @@
 										</tr>
 										<tr>
 											<td height=20>
-												<a href="userInfoManager/info!initBuyDot.php">购买发布点</a>
+												<a href="userInfoManager/info!initBuyDot.php">买发布点</a>
 											</td>
 
 										</tr>

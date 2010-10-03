@@ -18,6 +18,7 @@ import net.win.entity.BuyerEntity;
 import net.win.entity.SellerEntity;
 import net.win.entity.UserEntity;
 import net.win.utils.ArithUtils;
+import net.win.utils.Constant;
 import net.win.utils.StringUtils;
 import net.win.utils.TotalUtils;
 import net.win.utils.WinUtils;
@@ -187,7 +188,8 @@ public class UserInfoService extends BaseService {
 		}
 		if ("1".equals(flag)) {
 			// 购买单个发布点
-			if (userEntity.getMoney() >= 0.5 * releaseDot) {
+			if (userEntity.getMoney() >= Constant.getFabudianPrice()
+					* releaseDot) {
 				userEntity.setMoney(ArithUtils.sub(userEntity.getMoney(),
 						0.5 * releaseDot));
 				userEntity.setReleaseDot(ArithUtils.add(userEntity
@@ -197,36 +199,36 @@ public class UserInfoService extends BaseService {
 			}
 		} else if ("2".equals(flag)) {
 			// 购买皇冠卡
-			Double money = 5000d;
+			Double money = Constant.getHuangguanPrice();
 			if (userEntity.getMoney() >= money) {
 				userEntity.setMoney(ArithUtils
 						.sub(userEntity.getMoney(), money));
 				userEntity.setReleaseDot(ArithUtils.add(userEntity
-						.getReleaseDot(), 100001));
+						.getReleaseDot(), Constant.getHuangguanNumber()));
 			} else {
 				putDIV("您的钱不够支付购买皇冠卡，<a>点击此处充值！</a>");
 			}
 
 		} else if ("3".equals(flag)) {
 			// 购买双钻卡
-			Double money = 275D;
+			Double money = Constant.getShuangzuanPrice();
 			if (userEntity.getMoney() >= money) {
 				userEntity.setMoney(ArithUtils
 						.sub(userEntity.getMoney(), money));
 				userEntity.setReleaseDot(ArithUtils.add(userEntity
-						.getReleaseDot(), 550));
+						.getReleaseDot(), Constant.getShuangzuanNumber()));
 			} else {
 				putDIV("您的钱不够支付购买双钻卡，<a>点击此处充值！</a>");
 			}
 
 		} else if ("4".equals(flag)) {
 			// 购买皇一钻卡
-			Double money = 135D;
+			Double money = Constant.getZuanshiPrice();
 			if (userEntity.getMoney() >= money) {
 				userEntity.setMoney(ArithUtils
 						.sub(userEntity.getMoney(), money));
 				userEntity.setReleaseDot(ArithUtils.add(userEntity
-						.getReleaseDot(), 270));
+						.getReleaseDot(), Constant.getZuanshiNumber()));
 			} else {
 				putDIV("您的钱不够支付购买一钻卡，<a>点击此处充值！</a>");
 			}
@@ -420,12 +422,12 @@ public class UserInfoService extends BaseService {
 	 */
 	public String initUserInfo(UserVO userVO) throws Exception {
 		UserLoginInfo userLoginInfo = getLoginUser();
-		//接手
+		// 接手
 		List<Object[]> tmpResult1 = (List<Object[]>) userDAO
 				.list(
 						" select   _rct.type,_rct.status , count(_rct.id) from  UserEntity   as _u    inner join  _u.receiveCreditTasks as _rct where   _u.id=:id group by  _rct.type, _rct.status  order by _rct.type,_rct.status",
 						"id", userLoginInfo.getId());
-		//发布
+		// 发布
 		List<Object[]> tmpResult2 = (List<Object[]>) userDAO
 				.list(
 						"select    _rct.type,_rct.status , count(_rct.id) from  UserEntity   as _u    inner join  _u.releaseCreditTasks as _rct where   _u.id=:id group by   _rct.type, _rct.status  order by _rct.type,_rct.status",
