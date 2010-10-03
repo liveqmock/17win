@@ -1,5 +1,8 @@
 package net.win.utils;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * 策略工具。。用于生成 金额，发布点的策略工具 ,升级
@@ -11,6 +14,7 @@ public final class StrategyUtils {
 	private StrategyUtils() {
 		// TODO Auto-generated constructor stub
 	}
+
 	/**
 	 * 评价类型，一天，两天，三天
 	 * 
@@ -35,17 +39,221 @@ public final class StrategyUtils {
 		WinUtils.throwIllegalityException("试图越过发布点的时间计算操作");
 		return 0;
 	}
+
 	/**
-	 * 快递单号
+	 * // 圆通 1 // 韵达 2 // 申通 3 // EMS 4 // 顺风 5 // 中通6
 	 * 
 	 * @param src
 	 * @param dest
 	 * @throws Exception
 	 */
-	public static String makeWaybill()
-			throws Exception {
-		 return "111111";
+	public static String makeWaybill() throws Exception {
+		Random random = new Random();
+		int size = WayBill.waybillList.size();
+		int index = random.nextInt(size);
+		WayBill wayBill = WayBill.waybillList.get(index);
+		String type = wayBill.type;
+		if (type.equals("1")) {
+			return "圆通 " + wayBill.code;
+		}
+		if (type.equals("2")) {
+			return "韵达 " + wayBill.code;
+		}
+		if (type.equals("3")) {
+			return "申通" + wayBill.code;
+		}
+		if (type.equals("4")) {
+			return "EMS " + wayBill.code;
+		}
+		if (type.equals("5")) {
+			return "顺风 " + wayBill.code;
+		}
+		if (type.equals("6")) {
+			return "中通 " + wayBill.code;
+		}
+		return "无";
 	}
+
+	private static class WayBill {
+		private WayBill() {
+
+		}
+
+		private WayBill(String type, String code) {
+			this.type = type;
+			this.code = code;
+		}
+
+		/**
+		 * // 圆通 1 // 韵达 2 // 申通 3 // EMS 4 // 顺风 5 // 中通6
+		 */
+		private String type;
+		private String code;
+		private static List<WayBill> waybillList = new LinkedList<WayBill>();
+		static {
+			/**
+			 * 圆通
+			 */
+			waybillList.add(new WayBill("1", "6001756116"));
+			waybillList.add(new WayBill("1", "6001756114"));
+			waybillList.add(new WayBill("1", "6001756112"));
+			waybillList.add(new WayBill("1", "6001756111"));
+			waybillList.add(new WayBill("1", "6001756110"));
+			waybillList.add(new WayBill("1", "6001756131"));
+			waybillList.add(new WayBill("1", "6001756109"));
+			waybillList.add(new WayBill("1", "6001756124"));
+			waybillList.add(new WayBill("1", "6001756126"));
+			waybillList.add(new WayBill("1", "6001756107"));
+			waybillList.add(new WayBill("1", "6001756130"));
+			waybillList.add(new WayBill("1", "6001756130"));
+			waybillList.add(new WayBill("1", "6001756108"));
+			waybillList.add(new WayBill("1", "6001756125"));
+			waybillList.add(new WayBill("1", "6001756087"));
+			// /
+			waybillList.add(new WayBill("1", "2271000681"));
+			waybillList.add(new WayBill("1", "2271000565"));
+			waybillList.add(new WayBill("1", "2271000361"));
+			waybillList.add(new WayBill("1", "2271000861"));
+			waybillList.add(new WayBill("1", "2271000750"));
+			//
+
+			waybillList.add(new WayBill("1", "2312507869"));
+			waybillList.add(new WayBill("1", "2312507867"));
+			waybillList.add(new WayBill("1", "2312507866"));
+			waybillList.add(new WayBill("1", "2312507908"));
+			waybillList.add(new WayBill("1", "2312507909"));
+			waybillList.add(new WayBill("1", "2312507864"));
+			waybillList.add(new WayBill("1", "2312507865"));
+			waybillList.add(new WayBill("1", "2312507907"));
+			/**
+			 * 韵达
+			 */
+			waybillList.add(new WayBill("2", "1200291981000"));
+			waybillList.add(new WayBill("2", "1200291980999"));
+			waybillList.add(new WayBill("2", "1200291980997"));
+			waybillList.add(new WayBill("2", "1200291980994"));
+			waybillList.add(new WayBill("2", "1200291980993"));
+			waybillList.add(new WayBill("2", "1200291980995"));
+			waybillList.add(new WayBill("2", "1200291980991"));
+			waybillList.add(new WayBill("2", "1200291980996"));
+			waybillList.add(new WayBill("2", "1200291980990"));
+			waybillList.add(new WayBill("2", "1200291980987"));
+			waybillList.add(new WayBill("2", "1200291980985"));
+			waybillList.add(new WayBill("2", "1200291980989"));
+			waybillList.add(new WayBill("2", "1200291980822"));
+			waybillList.add(new WayBill("2", "1200291980827"));
+			waybillList.add(new WayBill("2", "1200291980821"));
+			waybillList.add(new WayBill("2", "1200291980823"));
+			waybillList.add(new WayBill("2", "1200291980820"));
+			waybillList.add(new WayBill("2", "1200291980827"));
+			waybillList.add(new WayBill("2", "1200291980826"));
+			waybillList.add(new WayBill("2", "1200291980825"));
+			waybillList.add(new WayBill("2", "1200291980824"));
+			waybillList.add(new WayBill("2", "1200291980831"));
+			waybillList.add(new WayBill("2", "1200286209648"));
+
+			//
+			waybillList.add(new WayBill("2", "1200286209655"));
+			waybillList.add(new WayBill("2", "1200286209654"));
+			waybillList.add(new WayBill("2", "1200286209653"));
+			waybillList.add(new WayBill("2", "1200286209652"));
+			waybillList.add(new WayBill("2", "1200286209662"));
+			waybillList.add(new WayBill("2", "1200286209684"));
+			waybillList.add(new WayBill("2", "1200286209602"));
+			waybillList.add(new WayBill("2", "1200286209603"));
+			waybillList.add(new WayBill("2", "1200286209499"));
+			waybillList.add(new WayBill("2", "1200286209498"));
+
+			/**
+			 * 申通
+			 */
+			waybillList.add(new WayBill("3", "368686240513"));
+			waybillList.add(new WayBill("3", "368686460486"));
+			waybillList.add(new WayBill("3", "368686460487"));
+			waybillList.add(new WayBill("3", "368686460488"));
+			waybillList.add(new WayBill("3", "368686240503"));
+			waybillList.add(new WayBill("3", "368686240520"));
+			waybillList.add(new WayBill("3", "368686240506"));
+			waybillList.add(new WayBill("3", "368686240504"));
+			waybillList.add(new WayBill("3", "368686240505"));
+			waybillList.add(new WayBill("3", "368686240505"));
+			waybillList.add(new WayBill("3", "368686240507"));
+			waybillList.add(new WayBill("3", "368686240508"));
+			waybillList.add(new WayBill("3", "368686240509"));
+			waybillList.add(new WayBill("3", "368686240510"));
+			waybillList.add(new WayBill("3", "368686240511"));
+			waybillList.add(new WayBill("3", "368686240512"));
+			waybillList.add(new WayBill("3", "368686240515"));
+			waybillList.add(new WayBill("3", "368686240517"));
+			waybillList.add(new WayBill("3", "368686240516"));
+			waybillList.add(new WayBill("3", "368686240518"));
+			waybillList.add(new WayBill("3", "368686240519"));
+			waybillList.add(new WayBill("3", "368687508156"));
+
+			/**
+			 * EMS
+			 */
+			waybillList.add(new WayBill("4", "EF672566936CS"));
+			waybillList.add(new WayBill("4", "EF672566922CS"));
+			waybillList.add(new WayBill("4", "EF672566953CS"));
+			waybillList.add(new WayBill("4", "EF672566940CS"));
+			/**
+			 * 顺风
+			 */
+			waybillList.add(new WayBill("5", "027111023362"));
+			waybillList.add(new WayBill("5", "027111023362"));
+			waybillList.add(new WayBill("5", "027111022994"));
+			waybillList.add(new WayBill("5", "027111023344"));
+			waybillList.add(new WayBill("5", "027111022994"));
+			waybillList.add(new WayBill("5", "101599163357"));
+			waybillList.add(new WayBill("5", "101599163215"));
+			waybillList.add(new WayBill("5", "101599163218"));
+
+			// 中通
+			waybillList.add(new WayBill("6", "618326479802"));
+			waybillList.add(new WayBill("6", "618326479806"));
+			waybillList.add(new WayBill("6", "618326479807"));
+			waybillList.add(new WayBill("6", "618326479808"));
+			waybillList.add(new WayBill("6", "618326479809"));
+			//
+			waybillList.add(new WayBill("6", "680086870947"));
+			waybillList.add(new WayBill("6", "680086870957"));
+			waybillList.add(new WayBill("6", "680086870998"));
+			//
+			waybillList.add(new WayBill("6", "680086870952"));
+			waybillList.add(new WayBill("6", "680086870969"));
+			waybillList.add(new WayBill("6", "680086870976"));
+			waybillList.add(new WayBill("6", "680086870975"));
+			waybillList.add(new WayBill("6", "680086870972"));
+			waybillList.add(new WayBill("6", "680086870950"));
+			waybillList.add(new WayBill("6", "680086870975"));
+			waybillList.add(new WayBill("6", "680086870963"));
+			waybillList.add(new WayBill("6", "680086870965"));
+			waybillList.add(new WayBill("6", "680086870970"));
+			//
+			waybillList.add(new WayBill("6", "680086870974"));
+			waybillList.add(new WayBill("6", "680086870968"));
+			waybillList.add(new WayBill("6", "680086870966"));
+			waybillList.add(new WayBill("6", "680086870962"));
+			waybillList.add(new WayBill("6", "680086870959"));
+			waybillList.add(new WayBill("6", "680086870958"));
+			waybillList.add(new WayBill("6", "680086870961"));
+			waybillList.add(new WayBill("6", "680086870964"));
+			waybillList.add(new WayBill("6", "680086870982"));
+			waybillList.add(new WayBill("6", "680086870986"));
+			waybillList.add(new WayBill("6", "680086870944"));
+			waybillList.add(new WayBill("6", "680086870946"));
+			waybillList.add(new WayBill("6", "680086870945"));
+			waybillList.add(new WayBill("6", "680086870949"));
+			waybillList.add(new WayBill("6", "680086870851"));
+			waybillList.add(new WayBill("6", "680086870852"));
+			waybillList.add(new WayBill("6", "680086870943"));
+			waybillList.add(new WayBill("6", "680086870855"));
+			waybillList.add(new WayBill("6", "680086870854"));
+			waybillList.add(new WayBill("6", "680086870861"));
+		}
+	}
+
 	/**
 	 * 得到信誉dot发布点
 	 * 

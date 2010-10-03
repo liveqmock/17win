@@ -1,14 +1,16 @@
-import java.util.Calendar;
-
-import net.win.utils.HttpB2CUtils;
-import net.win.utils.StringUtils;
-
 public class Test {
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) throws Exception {
-		System.out.println(Calendar.getInstance().get(Calendar.MONTH));
+
+		java.util.Random r = new java.util.Random();
+
+		for (int i = 0; i < 10; i++) {
+
+			System.out.println(r.nextInt(3));
+		}
 	}
+
 }
