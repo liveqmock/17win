@@ -114,7 +114,7 @@
 					<s:else>
 						class="li0 "
 				</s:else>
-					href="menuManager/menu!toIndex.php" id="a0" onmouseover="Mea(0);"
+					href="index.html" id="a0" onmouseover="Mea(0);"
 					onMouseOut="setAuto()"><SPAN>首&nbsp;页</SPAN> </A>
 			</LI>
 			<LI class=white>
