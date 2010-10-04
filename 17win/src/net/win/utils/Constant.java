@@ -38,14 +38,13 @@ public final class Constant {
 	private static Integer huangguan_N;
 	private static Integer shuangzuan_N;
 	private static Integer yizuan_N;
-
+	
 	/**
-	 * 任务相关
-	 * 
-	 * @return
+	 * 其他
 	 */
-	private static Integer taskOverReleaseScore;
-	private static Integer taskOverReceiveScore;
+	
+
+ 
 	/**
 	 * vip
 	 */
@@ -81,13 +80,7 @@ public final class Constant {
 		return yizuan_N;
 	}
 
-	public static Integer getTaskOverReceiveScore() {
-		return taskOverReceiveScore;
-	}
-
-	public static Integer getTaskOverReleaseScore() {
-		return taskOverReleaseScore;
-	}
+ 
 
 	/**
 	 * 初始化
@@ -130,15 +123,6 @@ public final class Constant {
 				.selectSingleNode("/win/number/zuanshika");
 		yizuan_N = Integer.parseInt(zuanshika_N.getText());
 
-		// 任务
-		Element taskOverReleaseScoreEke = (Element) root
-				.selectSingleNode("/win/other/taskOverReleaseScore");
-		taskOverReleaseScore = Integer.parseInt(taskOverReleaseScoreEke
-				.getText());
-		Element taskOverReceiveScoreE = (Element) root
-				.selectSingleNode("/win/other/taskOverReceiveScore");
-		taskOverReceiveScore = Integer
-				.parseInt(taskOverReceiveScoreE.getText());
 		// vip
 		Element vipPriceE = (Element) root.selectSingleNode("/win/vip/price");
 		vipPrice = Double.parseDouble(vipPriceE.getText());

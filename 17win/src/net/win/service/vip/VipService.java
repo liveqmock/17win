@@ -72,6 +72,7 @@ public class VipService extends BaseService {
 		calendar.add(calendar.MONTH, monthCount);
 		userEntity.setVipEndDate(calendar.getTime());
 		userEntity.setMoney(ArithUtils.sub(userEntity.getMoney(), money));
+		userEntity.setVipGrowValue(0);
 		getLoginUser().setVipType("1");
 		updateUserLoginInfo(userEntity);
 		putAlertMsg("恭喜您加入VIP，快去体验吧！");

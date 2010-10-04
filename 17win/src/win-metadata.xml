@@ -25,11 +25,6 @@
 	</vip>
 
 	<other>
-		<!-- 任务完成后的积分 -->
-		<!-- 发布任务 -->
-		<taskOverReleaseScore>1</taskOverReleaseScore>
-		<!-- 接受任务 -->
-		<taskOverReceiveScore>3</taskOverReceiveScore>
 		<!-- 接任务比率 -->
 		<receieveTaskDotRate>0.8</receieveTaskDotRate>
 	</other>

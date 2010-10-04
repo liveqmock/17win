@@ -4,6 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+import net.win.entity.VipEntity;
+
 /**
  * 策略工具。。用于生成 金额，发布点的策略工具 ,升级
  * 
@@ -13,6 +15,123 @@ import java.util.Random;
 public final class StrategyUtils {
 	private StrategyUtils() {
 		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * 计算发任务会员成长值
+	 * 
+	 * @param goodType
+	 * @return
+	 * @throws Exception
+	 */
+	public static Integer getReleaseGrowValue(VipEntity vipEntity)
+			throws Exception {
+		// 如果vip失效或则没有vip
+		if (vipEntity == null) {
+			return 0;
+		}
+		if ("1".equals(vipEntity.getType())) {
+			return 1;
+		}
+		if ("2".equals(vipEntity.getType())) {
+			return 2;
+		}
+		if ("3".equals(vipEntity.getType())) {
+			return 3;
+		}
+		return 0;
+	}
+
+	/**
+	 * 计算接任务会员成长值
+	 * 
+	 * @param goodType
+	 * @return
+	 * @throws Exception
+	 */
+	public static Integer getReceieveGrowValue(VipEntity vipEntity)
+			throws Exception {
+		// 如果vip失效或则没有vip
+		if (vipEntity == null) {
+			return 0;
+		}
+		if ("1".equals(vipEntity.getType())) {
+			return 2;
+		}
+		if ("2".equals(vipEntity.getType())) {
+			return 3;
+		}
+		if ("3".equals(vipEntity.getType())) {
+			return 4;
+		}
+		return 0;
+	}
+
+	/**
+	 * 获取任务结束发布点比例
+	 * 
+	 * @param goodType
+	 * @return
+	 * @throws Exception
+	 */
+	public static Double getTaskOverDotRate(VipEntity vipEntity,
+			Boolean vipEnable) throws Exception {
+		// 如果vip失效或则没有vip
+		if (!vipEnable || vipEntity == null) {
+			return 0.8;
+		} else {
+			return 1D;
+		}
+	}
+
+	/**
+	 * 获取任务发送者的的积分
+	 * 
+	 * @param goodType
+	 * @return
+	 * @throws Exception
+	 */
+	public static Integer getReleaseUserTaskScore(VipEntity vipEntity,
+			Boolean vipEnable) throws Exception {
+		// 如果vip失效或则没有vip
+		if (!vipEnable || vipEntity == null) {
+			return 1;
+		}
+		if ("1".equals(vipEntity.getType())) {
+			return 2;
+		}
+		if ("2".equals(vipEntity.getType())) {
+			return 3;
+		}
+		if ("3".equals(vipEntity.getType())) {
+			return 4;
+		}
+		return 1;
+	}
+
+	/**
+	 * 获取任务接受者的的积分
+	 * 
+	 * @param goodType
+	 * @return
+	 * @throws Exception
+	 */
+	public static Integer getReceieveUserTaskScore(VipEntity vipEntity,
+			Boolean vipEnable) throws Exception {
+		// 如果vip失效或则没有vip
+		if (!vipEnable || vipEntity == null) {
+			return 2;
+		}
+		if ("1".equals(vipEntity.getType())) {
+			return 3;
+		}
+		if ("2".equals(vipEntity.getType())) {
+			return 4;
+		}
+		if ("3".equals(vipEntity.getType())) {
+			return 5;
+		}
+		return 2;
 	}
 
 	/**
