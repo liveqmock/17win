@@ -113,11 +113,14 @@ img {
 															headerValue="--请选择--"
 															list="#{'1':'店铺地址提现','2':'支付宝提现','3':'财付通提现'}">
 														</s:select>
-														<span style="display: none" id="shopType">
-															&nbsp;&nbsp;店铺类型：<s:select name="withdrawalsVO.shopType"
-																listKey="key" listValue="value" headerKey=""
-																headerValue="--请选择--"
-																list="#{'1':'淘宝','2':'拍怕','3':'有啊'}">
+		
+														<span
+														<s:if test="withdrawalsVO.type!=1">style="display: none"</s:if>
+														
+															id="shopType"> &nbsp;&nbsp;店铺类型：<s:select
+																name="withdrawalsVO.shopType" listKey="key"
+																listValue="value" headerKey="" headerValue="--请选择--"
+																list="#{'1':'淘宝','2':'拍拍','3':'有啊'}">
 															</s:select> </span>
 													</td>
 													<td>
@@ -262,25 +265,52 @@ img {
 												<s:else>
 													<tfoot>
 														<tr>
-															<th colspan="9">
+															<th colspan="8">
 																<div style="float: left;">
-																	<img src="images/page/_firstpg.gif"
-																		style="cursor: pointer;" />
-																	&nbsp;&nbsp;
-																	<img src="images/page/_prevpg.gif"
-																		style="cursor: pointer;" />
-																	&nbsp;&nbsp;
-																	<img src="images/page/_nextpg.gif"
-																		style="cursor: pointer;" />
-																	&nbsp;&nbsp;
-																	<img src="images/page/_lastpg.gif"
-																		style="cursor: pointer;" />
+																	<a href="javascript:firstPage()">首页</a>
+																	<a href="javascript:prevPage()">上一页</a>&nbsp;
+																	<a href="javascript:nextPage()">下一页</a>&nbsp;
+																	<a href="javascript:lastPage()">尾页</a>&nbsp;
 																</div>
 																<div style="float: left;">
-																	1/1 跳转到
-																	<select>
+																	<s:property value="withdrawalsVO.nowPage" />
+																	/
+																	<s:property value="withdrawalsVO.pageCount" />
+																	跳转到
+																	<select id='toPageSelect' size='1'
+																		onchange="jumpPage()">
+																		<s:iterator begin="1" end="withdrawalsVO.pageCount"
+																			step="1" var="index">
+																			<option value="<s:property value="#index" />">
+																				第
+																				<s:property value="#index" />
+																				页
+																			</option>
+																		</s:iterator>
 																	</select>
 																</div>
+																<div style="float: left;">
+																	排列顺序
+																	<select id='toPageSelect' size='1'
+																		onchange="jumpPage()">
+																		<s:iterator begin="1" end="withdrawalsVO.pageCount"
+																			step="1" var="index">
+																			<option value="<s:property value="#index" />">
+																				第
+																				<s:property value="#index" />
+																				页
+																			</option>
+																		</s:iterator>
+																	</select>
+																</div>
+																<input type="hidden" name="withdrawalsVO.nowPage"
+																	value="<s:property
+											value="withdrawalsVO.nowPage" />"
+																	id="nowPage">
+																<input type="hidden"
+																	value="<s:property
+										value="withdrawalsVO.pageCount" />"
+																	id="pageCount">
 															</th>
 														</tr>
 													</tfoot>
