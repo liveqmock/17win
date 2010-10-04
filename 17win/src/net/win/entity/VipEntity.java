@@ -1,10 +1,10 @@
 package net.win.entity;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -16,21 +16,52 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Tb_Vip")
 public class VipEntity extends BaseEntity {
-	// 名字
-	@Column(name = "NAME_", length = 20, nullable = false)
-	private String name;
-	// 权限
-	private Set<RightsEntity> rightses = new HashSet<RightsEntity>(0);
-	public String getName() {
-		return name;
+	// 类型
+	@Column(name = "Type_", columnDefinition = "CHAR(1)", nullable = false)
+	private String type;
+	// 卖号个数
+	@Column(name = "Seller_Count_", nullable = false)
+	private String sellerCount;
+
+	// 积分400 800 1000 每月送积分
+	@Column(name = "Score_", nullable = false)
+	private Integer score;
+
+	// VIP
+	@ManyToOne(targetEntity = UserBidVipEntity.class, fetch = FetchType.LAZY)
+	@JoinColumn(name = "Vip_id_")
+	private UserBidVipEntity userBidVip;
+
+	public String getType() {
+		return type;
 	}
-	public void setName(String name) {
-		this.name = name;
+
+	public void setType(String type) {
+		this.type = type;
 	}
-	public Set<RightsEntity> getRightses() {
-		return rightses;
+
+	public String getSellerCount() {
+		return sellerCount;
 	}
-	public void setRightses(Set<RightsEntity> rightses) {
-		this.rightses = rightses;
+
+	public void setSellerCount(String sellerCount) {
+		this.sellerCount = sellerCount;
 	}
+
+	public Integer getScore() {
+		return score;
+	}
+
+	public void setScore(Integer score) {
+		this.score = score;
+	}
+
+	public UserBidVipEntity getUserBidVip() {
+		return userBidVip;
+	}
+
+	public void setUserBidVip(UserBidVipEntity userBidVip) {
+		this.userBidVip = userBidVip;
+	}
+
 }

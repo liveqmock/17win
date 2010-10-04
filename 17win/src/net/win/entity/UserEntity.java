@@ -144,6 +144,11 @@ public class UserEntity extends BaseEntity {
 	@Cascade(CascadeType.ALL)
 	private List<CreditTaskRepositoryEntity> creditTaskRepositorys;
 
+	// VIP
+	@ManyToOne(targetEntity = UserBidVipEntity.class, fetch = FetchType.LAZY)
+	@JoinColumn(name = "USER_ID_")
+	private UserBidVipEntity userBidVip;
+
 	public UserEntity getReferee() {
 		return referee;
 	}
@@ -417,6 +422,14 @@ public class UserEntity extends BaseEntity {
 	public void setCreditTaskRepositorys(
 			List<CreditTaskRepositoryEntity> creditTaskRepositorys) {
 		this.creditTaskRepositorys = creditTaskRepositorys;
+	}
+
+	public UserBidVipEntity getUserBidVip() {
+		return userBidVip;
+	}
+
+	public void setUserBidVip(UserBidVipEntity userBidVip) {
+		this.userBidVip = userBidVip;
 	}
 
 }
