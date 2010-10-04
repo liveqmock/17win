@@ -418,7 +418,7 @@ public class CreditTaskService extends BaseService {
 					creditTask.getMoney()));
 			// 发布点
 			Double releaseDot = creditTask.getReleaseDot()
-					* StrategyUtils.getTaskOverDotRate(receiveUserVip,
+					* StrategyUtils.getTaskOverDotRate(releaEntity,receiveUserVip,
 							receiveUser.getVipEnable());
 			receiveUser.setReleaseDot(ArithUtils.add(receiveUser
 					.getReleaseDot(), releaseDot));

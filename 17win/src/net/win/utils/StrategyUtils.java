@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+import net.win.entity.UserEntity;
 import net.win.entity.VipEntity;
 
 /**
@@ -98,11 +99,15 @@ public final class StrategyUtils {
 	 * @return
 	 * @throws Exception
 	 */
-	public static Double getTaskOverDotRate(VipEntity vipEntity,
-			Boolean vipEnable) throws Exception {
+	public static Double getTaskOverDotRate(UserEntity userEntity,
+			VipEntity vipEntity, Boolean vipEnable) throws Exception {
 		// 如果vip失效或则没有vip
 		if (!vipEnable || vipEntity == null) {
-			return 0.8;
+			if (getLevel(userEntity.getUpgradeScore()).equals(1)) {
+				return 1D;
+			} else {
+				return 0.8;
+			}
 		} else {
 			return 1D;
 		}
