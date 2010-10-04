@@ -103,7 +103,8 @@ img {
 													</td>
 													<td>
 														<input style="width: 80px">
-														个月(<font color="red">注意:输入12个月为年付，打8折</font>)
+														个月(
+														<font color="red">注意:输入12个月为年付，打8折</font>)
 													</td>
 												</tr>
 												<tr style="background: #EDF6FF;">
@@ -116,7 +117,7 @@ img {
 												</tr>
 												<tr style="background: #EDF6FF;" align="center">
 													<td colspan="2">
-														<input type="submit" value="购买">
+														<input type="submit" style="cursor: pointer;" value="购买">
 													</td>
 												</tr>
 											</table>
