@@ -97,7 +97,7 @@ public class UserEntity extends BaseEntity {
 	private Boolean vipEnable;
 
 	// 当前的Vip成长值
-	@Column(name = "Vip_Grow_Value_", nullable = false)
+	@Column(name = "Vip_Grow_Value_")
 	private Integer vipGrowValue;
 
 	// 最后一次登陆时间
@@ -154,69 +154,21 @@ public class UserEntity extends BaseEntity {
 	private List<UserEntity> myReferees;
 
 	// // 我的任务模板
-	@OneToMany(targetEntity = UserEntity.class, mappedBy = "referee", fetch = FetchType.LAZY)
+	@OneToMany(targetEntity = CreditTaskRepositoryEntity.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_ID_")
 	@Cascade(CascadeType.ALL)
 	private List<CreditTaskRepositoryEntity> creditTaskRepositorys;
 
 	// VIP
 	@ManyToOne(targetEntity = VipEntity.class, fetch = FetchType.LAZY)
-	@JoinColumn(name = "USER_ID_")
+	@JoinColumn(name = "VIP_ID_")
 	private VipEntity vip;
-
-	public UserEntity getReferee() {
-		return referee;
-	}
-
-	public void setReferee(UserEntity referee) {
-		this.referee = referee;
-	}
-
-	public List<UserEntity> getMyReferees() {
-		return myReferees;
-	}
-
-	public void setMyReferees(List<UserEntity> myReferees) {
-		this.myReferees = myReferees;
-	}
 
 	/**
 	 * 关联关系
 	 * 
 	 * @return
 	 */
-	// // 角色
-	// private VipEntity role = new VipEntity();
-	// // 推广
-	// private Set<UserEntity> promoteUsers = new HashSet<UserEntity>(0);
-	// // 信誉任务模板
-	// private Set<CreditTaskRepositoryEntity> creditTaskTemplates = new
-	// HashSet<CreditTaskRepositoryEntity>(
-	// 0);
-	// // 流量任务模板
-	// private Set<FlowTaskTemplateEntity> flowTaskTemplates = new
-	// HashSet<FlowTaskTemplateEntity>(
-	// 0);
-	// // 收藏任务模板
-	// private Set<CollectTaskTemplateEntity> collectTaskTemplates = new
-	// HashSet<CollectTaskTemplateEntity>(
-	// 0);
-	// // 真实地址模板
-	// @ManyToMany(fetch = FetchType.LAZY)
-	// @JoinTable(name = "TB_USER_RECEIVEREAL_TP", joinColumns =
-	// {@JoinColumn(name = "USER_ID_", nullable = false)}, inverseJoinColumns =
-	// {@JoinColumn(name = "RECEIVEREALINFO_ID_", nullable = false)})
-	// private Set<ReceiveRealInfoEntity> receiveRealInfos = new
-	// HashSet<ReceiveRealInfoEntity>(
-	// 0);
-	// // 虚拟地址模板
-	// @ManyToMany(fetch = FetchType.LAZY)
-	// @JoinTable(name = "TB_USER_RECEIVEVIRTUAL_TP", joinColumns =
-	// {@JoinColumn(name = "USER_ID_", nullable = false)}, inverseJoinColumns =
-	// {@JoinColumn(name = "RECEIVEVIRTUALINFO_ID_", nullable = false)})
-	// private Set<ReceiveVirtualInfoEntity> receiveVirtualInfos = new
-	// HashSet<ReceiveVirtualInfoEntity>(
-	// 0);
 	public String getUsername() {
 		return username;
 	}
@@ -477,6 +429,22 @@ public class UserEntity extends BaseEntity {
 
 	public void setVipGrowValue(Integer vipGrowValue) {
 		this.vipGrowValue = vipGrowValue;
+	}
+
+	public UserEntity getReferee() {
+		return referee;
+	}
+
+	public void setReferee(UserEntity referee) {
+		this.referee = referee;
+	}
+
+	public List<UserEntity> getMyReferees() {
+		return myReferees;
+	}
+
+	public void setMyReferees(List<UserEntity> myReferees) {
+		this.myReferees = myReferees;
 	}
 
 }

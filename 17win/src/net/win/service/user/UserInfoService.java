@@ -311,7 +311,7 @@ public class UserInfoService extends BaseService {
 	}
 
 	/**
-	 * 修改密码
+	 * 我的推广
 	 * 
 	 * @param userVO
 	 * @return

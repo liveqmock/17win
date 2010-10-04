@@ -97,10 +97,10 @@ img {
 														<s:if test="#session.userLogin.vipType!=null">
 														您当前的VIP级别是:
 														<img
-																<s:property value="@net.win.utils.StrategyUtils@getVipImg(#session.userLogin.vipType,#session.userLogin.vipEnable)" />"
-															src="images/<s:property value="@net.win.utils.StrategyUtils@getLevelImg(#session.userLogin.vipType,#session.userLogin.vipEnable)" />" />
+																src="images/vip/<s:property value="@net.win.utils.StrategyUtils@getLevelImg(#session.userLogin.vipType,#session.userLogin.vipEnable)" />" />
 														</s:if>
 														<s:else>
+														您还没有加入VIP
 														</s:else>
 													</td>
 												</tr>
