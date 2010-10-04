@@ -1202,8 +1202,8 @@ public class CreditTaskService extends BaseService {
 		List<Object[]> result = creditTaskDAO
 				.pageQuery(
 						"select _task.testID , _task.releaseDate ,_user.username,_user.upgradeScore,_task.money,_task.updatePrice, "
-								+ "_task.goodTimeType,_task.releaseDot,_task.status ,_task.intervalHour,_task.desc,_task.address,_task.id,_task.grade" // index=13
-								+ " from CreditTaskEntity as _task inner join _task.releasePerson as _user where (_task.status!='0' or _task.status!='-1')  and   _task.type=:platformType "
+								+ "_task.goodTimeType,_task.releaseDot,_task.status ,_task.intervalHour,_task.desc,_task.address,_task.id,_task.grade ,_vip.type" // index=14
+								+ " from CreditTaskEntity as _task inner join _task.releasePerson as _user  left join _user.vip as _vip  where (_task.status!='0' or _task.status!='-1')  and   _task.type=:platformType "
 								+ orderAndWhereInitTaskStr(queryType, false),
 						"platformType", platformType, creditTaskVO.getStart(),
 						creditTaskVO.getLimit());
@@ -1454,37 +1454,37 @@ public class CreditTaskService extends BaseService {
 		} else {
 			// 默认时间排列
 			if ("1".equals(type)) {
-				return " order by   _task.releaseDate desc";
+				return " order by   _vip.type desc , _task.releaseDate desc ";
 			}
 			// 价低排列
 			if ("2".equals(type)) {
-				return " order by   _task.money asc";
+				return " order by   _vip.type desc ,   _task.money asc";
 			}
 			// 价高排列
 			if ("3".equals(type)) {
-				return " order by   _task.money desc";
+				return " order by   _vip.type desc ,    _task.money desc";
 			}
 			// 1-40
 			if ("4".equals(type)) {
-				return " and  (_task.money>0 and _task.money<=40) order by   _task.money asc";
+				return " and  (_task.money>0 and _task.money<=40) order by   _vip.type desc ,   _task.money asc";
 			}
 			// 40-100
 			if ("5".equals(type)) {
-				return " and  (_task.money>40 and _task.money<=100) order by   _task.money asc";
+				return " and  (_task.money>40 and _task.money<=100) order by   _vip.type desc ,   _task.money asc";
 			}
 			// 100-200
 			if ("6".equals(type)) {
-				return " and  (_task.money>100 and _task.money<=200) order by   _task.money asc";
+				return " and  (_task.money>100 and _task.money<=200) order by   _vip.type desc ,   _task.money asc";
 			}
 			// 200-500
 			if ("7".equals(type)) {
-				return " and  (_task.money>200 and _task.money<=500) order by   _task.money asc";
+				return " and  (_task.money>200 and _task.money<=500) order by   _vip.type desc ,   _task.money asc";
 			}
 			// 500 以上
 			if ("8".equals(type)) {
-				return " and  _task.money>500 order by   _task.money asc";
+				return " and  _task.money>500 order by   _vip.type desc ,   _task.money asc";
 			}
-			return " order by   _task.releaseDate desc";
+			return " order by   _vip.type desc ,   _task.releaseDate desc";
 		}
 
 	}

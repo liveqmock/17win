@@ -57,8 +57,9 @@
 							</DIV>
 							<DIV style="CLEAR: right; MARGIN-TOP: 12px; FLOAT: right">
 								刷新时间
-								<input type="text" value="<s:property value="#request.autoRefresh"/>" style="width: 25px" id="autoreFresh" 
-									title="必须大于5秒，空表示不刷新！" />
+								<input type="text"
+									value="<s:property value="#request.autoRefresh"/>"
+									style="width: 25px" id="autoreFresh" title="必须大于5秒，空表示不刷新！" />
 								<input type="hidden"
 									value="<s:property value="#request.platformType"/>"
 									id="platformType" />
@@ -100,7 +101,8 @@
 							</td>
 						</tr>
 						<s:iterator value="#request.result" status="status" id="task">
-							<tr>
+							<tr
+								<s:if test="#task[14]!=null">  style="background: #FFA1A1" </s:if>>
 								<td valign="top" align="center">
 									<s:property value="#task[0]" />
 									<br>
@@ -193,7 +195,8 @@
 						</s:iterator>
 						<TR>
 							<TD colspan="6">
-								<input type="hidden" value="<s:property value="#request.queryType"/>" id="queryType">
+								<input type="hidden"
+									value="<s:property value="#request.queryType"/>" id="queryType">
 								<input type="hidden"
 									value="<s:property
 											value="creditTaskVO.nowPage" />"
