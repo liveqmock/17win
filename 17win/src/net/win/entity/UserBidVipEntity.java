@@ -32,6 +32,25 @@ public class UserBidVipEntity extends BaseEntity {
 	@Column(name = "Receieve_Count_", nullable = false)
 	private Integer receieveCount = 0;
 
+	// 发任务积分数
+	@Column(name = "Release_Score_", nullable = false)
+	private Integer releaseScore = 0;
+	// 接任务几分熟
+	@Column(name = "Receieve_Score_", nullable = false)
+	private Integer receieveScore = 0;
+
+	// 卖号上线数
+	@Column(name = "Seller_Count_", nullable = false)
+	private Integer sellerCount = 0;
+
+	// 会员成长值
+	@Column(name = "Grow_Value_", nullable = false)
+	private Integer growValue = 0;
+
+	// 手机短信
+	@Column(name = "Phone_Msg_", nullable = false)
+	private Integer phoneMsg = 0;
+
 	public List<UserEntity> getUser() {
 		return user;
 	}
@@ -62,5 +81,45 @@ public class UserBidVipEntity extends BaseEntity {
 
 	public void setReceieveCount(Integer receieveCount) {
 		this.receieveCount = receieveCount;
+	}
+
+	public Integer getReleaseScore() {
+		return releaseScore;
+	}
+
+	public void setReleaseScore(Integer releaseScore) {
+		this.releaseScore = releaseScore;
+	}
+
+	public Integer getReceieveScore() {
+		return receieveScore;
+	}
+
+	public void setReceieveScore(Integer receieveScore) {
+		this.receieveScore = receieveScore;
+	}
+
+	public Integer getSellerCount() {
+		return sellerCount;
+	}
+
+	public void setSellerCount(Integer sellerCount) {
+		this.sellerCount = sellerCount;
+	}
+
+	public Integer getGrowValue() {
+		return growValue;
+	}
+
+	public void setGrowValue(Integer growValue) {
+		this.growValue = growValue;
+	}
+
+	public Integer getPhoneMsg() {
+		return phoneMsg;
+	}
+
+	public void setPhoneMsg(Integer phoneMsg) {
+		this.phoneMsg = phoneMsg;
 	}
 }

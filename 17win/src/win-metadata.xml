@@ -19,6 +19,11 @@
 		<zuanshika>270</zuanshika>
 	</number>
 
+	<vip>
+		<price>20</price>
+		<yearRebate>0.8</yearRebate>
+	</vip>
+
 	<other>
 		<!-- 任务完成后的积分 -->
 		<!-- 发布任务 -->

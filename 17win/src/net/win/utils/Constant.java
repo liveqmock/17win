@@ -46,6 +46,11 @@ public final class Constant {
 	 */
 	private static Integer taskOverReleaseScore;
 	private static Integer taskOverReceiveScore;
+	/**
+	 * vip
+	 */
+	private static Double vipPrice;
+	private static Double yearVipPrice;
 
 	public static Double getFabudianPrice() {
 		return fabudian_P;
@@ -134,6 +139,22 @@ public final class Constant {
 				.selectSingleNode("/win/other/taskOverReceiveScore");
 		taskOverReceiveScore = Integer
 				.parseInt(taskOverReceiveScoreE.getText());
+		// vip
+		Element vipPriceE = (Element) root.selectSingleNode("/win/vip/price");
+		vipPrice = Double.parseDouble(vipPriceE.getText());
+		Element yearRebateE = (Element) root
+				.selectSingleNode("/win/vip/yearRebate");
+		Double yearRebate = Double.parseDouble(yearRebateE.getText());
+		yearVipPrice = vipPrice * yearRebate;
+
+	}
+
+	public static Double getYearVipPrice() {
+		return yearVipPrice;
+	}
+
+	public static Double getVipPrice() {
+		return vipPrice;
 	}
 
 }
