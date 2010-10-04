@@ -85,6 +85,21 @@ public class UserEntity extends BaseEntity {
 	// 接受任务数
 	@Column(name = "RECEIVE_TASK_COUNT_")
 	private Integer receiveTaskCount;
+	// VIP开始时间
+	@Column(name = "Vip_Start_Date_")
+	private Date vipStartDate;
+	// VIP结束时间
+	@Column(name = "Vip_End_Date_")
+	private Date vipEndDate;
+
+	// VIP状态 true 表示没失效，false表示失效
+	@Column(name = "Vip_Enable_")
+	private Boolean vipEnable;
+
+	// 当前的Vip成长值
+	@Column(name = "Vip_Grow_Value_", nullable = false)
+	private Integer vipGrowValue;
+
 	// 最后一次登陆时间
 	@Column(name = "LASTLOGINTIME_")
 	private Date lastLoginTime;
@@ -145,9 +160,9 @@ public class UserEntity extends BaseEntity {
 	private List<CreditTaskRepositoryEntity> creditTaskRepositorys;
 
 	// VIP
-	@ManyToOne(targetEntity = UserBidVipEntity.class, fetch = FetchType.LAZY)
+	@ManyToOne(targetEntity = VipEntity.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_ID_")
-	private UserBidVipEntity userBidVip;
+	private VipEntity vip;
 
 	public UserEntity getReferee() {
 		return referee;
@@ -424,12 +439,44 @@ public class UserEntity extends BaseEntity {
 		this.creditTaskRepositorys = creditTaskRepositorys;
 	}
 
-	public UserBidVipEntity getUserBidVip() {
-		return userBidVip;
+	public VipEntity getVip() {
+		return vip;
 	}
 
-	public void setUserBidVip(UserBidVipEntity userBidVip) {
-		this.userBidVip = userBidVip;
+	public void setVip(VipEntity vip) {
+		this.vip = vip;
+	}
+
+	public Date getVipStartDate() {
+		return vipStartDate;
+	}
+
+	public void setVipStartDate(Date vipStartDate) {
+		this.vipStartDate = vipStartDate;
+	}
+
+	public Date getVipEndDate() {
+		return vipEndDate;
+	}
+
+	public void setVipEndDate(Date vipEndDate) {
+		this.vipEndDate = vipEndDate;
+	}
+
+	public Boolean getVipEnable() {
+		return vipEnable;
+	}
+
+	public void setVipEnable(Boolean vipEnable) {
+		this.vipEnable = vipEnable;
+	}
+
+	public Integer getVipGrowValue() {
+		return vipGrowValue;
+	}
+
+	public void setVipGrowValue(Integer vipGrowValue) {
+		this.vipGrowValue = vipGrowValue;
 	}
 
 }

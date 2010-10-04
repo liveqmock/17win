@@ -11,8 +11,8 @@
 
 		<LINK href="css/center.css" type="text/css" rel="stylesheet">
 		<LINK href="css/vip.css" type="text/css" rel="stylesheet">
-		<SCRIPT src="js/jieducm_pupu.js" type="text/javascript"></SCRIPT>
-
+		<script type="text/javascript" src="js/utils.js"></script>
+		<script type="text/javascript" src="user/vip.js"></script>
 		<style type="text/css">
 body {
 	
@@ -94,7 +94,7 @@ img {
 												width="99%" cellspacing="1px">
 												<tr style="background: #EDF6FF;">
 													<td colspan="2">
-														您当前的VIP级别是:
+														您当前的VIP级别是: 成长值为： 距离升级到VIP2还有:
 													</td>
 												</tr>
 												<tr style="background: #EDF6FF;">
@@ -102,8 +102,8 @@ img {
 														购买:
 													</td>
 													<td>
-														<input style="width: 80px">
-														个月(
+														<input style="width: 80px" id="monthCount" name="monthC">
+														月/20元(
 														<font color="red">注意:输入12个月为年付，打8折</font>)
 													</td>
 												</tr>
@@ -112,7 +112,7 @@ img {
 														操作码:
 													</td>
 													<td>
-														<input style="width: 80px">
+														<input style="width: 80px" name="operationCode">
 													</td>
 												</tr>
 												<tr style="background: #EDF6FF;" align="center">

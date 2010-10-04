@@ -154,8 +154,8 @@
 
 										<tr>
 											<td height=20>
-												<a href="user/vip.jsp"><font color="#FF0000">加入VIP</font>
-												</a>
+												<a href="vipManager/base!initVip.php"><font
+													color="#FF0000">加入VIP</font> </a>
 											</td>
 										</tr>
 										<!-- xgj 

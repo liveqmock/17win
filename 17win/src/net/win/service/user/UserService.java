@@ -140,6 +140,8 @@ public class UserService extends BaseService {
 			return "inputLogin";
 		} else {
 			userEntity.setLastLoginTime(new Date());
+			// 设置VIP
+			getLoginUser().setVipType(userEntity.getVip().getType());
 			updateUserLoginInfo(userEntity);
 			return "loginSuccess";
 		}

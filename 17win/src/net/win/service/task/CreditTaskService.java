@@ -352,7 +352,6 @@ public class CreditTaskService extends BaseService {
 			creditTask.setStatus(TaskMananger.STEP_TWO_STATUS);
 		}
 
-		updateUserLoginInfo(userEntity);
 		putJumpPage("taskManager/task!initReceivedTast.php?platformType="
 				+ platformType);
 		putAlertMsg("恭喜您，你已经抢到了此任务！");

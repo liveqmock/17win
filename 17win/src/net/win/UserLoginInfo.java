@@ -36,6 +36,8 @@ public class UserLoginInfo {
 	private String status;
 	// 钱
 	private Double money;
+	//vip类型
+	private String vipType;
 	public String getUsername() {
 		return username;
 	}
@@ -138,5 +140,13 @@ public class UserLoginInfo {
 
 	public void setRegisterTime(Date registerTime) {
 		this.registerTime = registerTime;
+	}
+
+	public String getVipType() {
+		return vipType;
+	}
+
+	public void setVipType(String vipType) {
+		this.vipType = vipType;
 	}
 }
