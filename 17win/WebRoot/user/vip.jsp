@@ -280,6 +280,25 @@ img {
 														</tr>
 														<tr>
 															<td>
+																接任务获得的发布点
+															</td>
+															<td id="chat_0" class="self">
+																任务总发布点的*0.8
+																<br>
+																<font color="red">(一心以上用户)</font>
+															</td>
+															<td id="chat_1">
+																任务总发布点的
+															</td>
+															<td id="chat_2">
+																任务总发布点的
+															</td>
+															<td id="chat_3">
+																任务总发布点的
+															</td>
+														</tr>
+														<tr class="double">
+															<td>
 																积分获取
 															</td>
 															<td id="chat_0" class="self">
