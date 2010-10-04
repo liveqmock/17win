@@ -17,6 +17,7 @@ import net.win.dao.CreditTaskDAO;
 import net.win.dao.CreditTaskRepositoryDAO;
 import net.win.dao.SellerDAO;
 import net.win.dao.UserDAO;
+import net.win.dao.VipDAO;
 import net.win.entity.BuyerEntity;
 import net.win.entity.CreditTaskEntity;
 import net.win.entity.CreditTaskRepositoryEntity;
@@ -54,6 +55,9 @@ public class CreditTaskService extends BaseService {
 	private CreditTaskDAO creditTaskDAO;
 	@Resource
 	private CreditTaskRepositoryDAO creditTaskRepositoryDAO;
+
+	@Resource
+	private VipDAO vipDAO;
 
 	/** ***************************买家操作********************************* */
 	/**
@@ -428,16 +432,30 @@ public class CreditTaskService extends BaseService {
 			updateUserLoginInfo(receiveUser, userLoginInfo);
 
 			/**
-			 * 计算会员成长值
+			 * 计算会员成长值 和升级
 			 */
 			if (releaseUserVip != null && releaEntity.getVipEnable()) {
 				releaEntity.setVipGrowValue(releaEntity.getVipGrowValue()
 						+ StrategyUtils.getReleaseGrowValue(releaseUserVip));
+				String vipType = StrategyUtils.getVipType(releaEntity
+						.getVipGrowValue());
+				if (!releaseUserVip.getType().equals(vipType)) {
+					releaEntity.setVip(vipDAO.getVIPByType(vipType));
+				}
+
 			}
 			if (receiveUserVip != null && receiveUser.getVipEnable()) {
 				receiveUser.setVipGrowValue(receiveUser.getVipGrowValue()
 						+ StrategyUtils.getReleaseGrowValue(receiveUserVip));
+				String vipType = StrategyUtils.getVipType(receiveUser
+						.getVipGrowValue());
+				if (!receiveUserVip.getType().equals(vipType)) {
+					receiveUser.setVip(vipDAO.getVIPByType(vipType));
+				}
 			}
+			/**
+			 * 会员升级
+			 */
 
 			creditTask.setStatus(TaskMananger.STEP_SIX_STATUS);
 			putAlertMsg("好评成功，任务完成！");

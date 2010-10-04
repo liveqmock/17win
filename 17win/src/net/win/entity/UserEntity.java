@@ -85,9 +85,6 @@ public class UserEntity extends BaseEntity {
 	// 接受任务数
 	@Column(name = "RECEIVE_TASK_COUNT_")
 	private Integer receiveTaskCount;
-	// VIP开始时间
-	@Column(name = "Vip_Start_Date_")
-	private Date vipStartDate;
 	// VIP结束时间
 	@Column(name = "Vip_End_Date_")
 	private Date vipEndDate;
@@ -397,14 +394,6 @@ public class UserEntity extends BaseEntity {
 
 	public void setVip(VipEntity vip) {
 		this.vip = vip;
-	}
-
-	public Date getVipStartDate() {
-		return vipStartDate;
-	}
-
-	public void setVipStartDate(Date vipStartDate) {
-		this.vipStartDate = vipStartDate;
 	}
 
 	public Date getVipEndDate() {

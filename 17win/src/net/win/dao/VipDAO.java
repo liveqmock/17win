@@ -19,4 +19,9 @@ public final class VipDAO extends BaseDAO<VipEntity> {
 	public VipEntity getVIP3() {
 		return uniqueResult("from VipEntity where type=3");
 	}
+
+	public VipEntity getVIPByType(String type) throws Exception {
+		return uniqueResult("from VipEntity where type=:type",
+				new String[] { "type" }, new Object[] { type });
+	}
 }

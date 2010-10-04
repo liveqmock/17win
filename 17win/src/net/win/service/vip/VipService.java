@@ -68,7 +68,6 @@ public class VipService extends BaseService {
 		VipEntity vipEntity = vipDAO.getVIP1();
 		userEntity.setVip(vipEntity);
 		Calendar calendar = Calendar.getInstance();
-		userEntity.setVipStartDate(calendar.getTime());
 		calendar.add(calendar.MONTH, monthCount);
 		userEntity.setVipEndDate(calendar.getTime());
 		userEntity.setMoney(ArithUtils.sub(userEntity.getMoney(), money));
@@ -110,7 +109,6 @@ public class VipService extends BaseService {
 		Calendar calendar = Calendar.getInstance();
 		// VIP已经失效
 		if (!userEntity.getVipEnable()) {
-			userEntity.setVipStartDate(calendar.getTime());
 			calendar.add(calendar.MONTH, monthCount);
 			userEntity.setVipEndDate(calendar.getTime());
 			userEntity.setVipEnable(true);

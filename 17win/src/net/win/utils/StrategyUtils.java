@@ -18,6 +18,30 @@ public final class StrategyUtils {
 	}
 
 	/**
+	 * 会员升级
+	 * 
+	 * @param goodType
+	 * @return
+	 * @throws Exception
+	 */
+	public static String getVipType(Integer growValue) throws Exception {
+		// 如果vip失效或则没有vip
+		if (growValue == null) {
+			throw new IllegalArgumentException("会员升级错误！");
+		}
+		if (0 <= growValue && growValue < 1800) {
+			return "1";
+		}
+		if (1800 <= growValue && growValue < 5400) {
+			return "2";
+		}
+		if (5400 <= growValue) {
+			return "3";
+		}
+		return "1";
+	}
+
+	/**
 	 * 计算发任务会员成长值
 	 * 
 	 * @param goodType

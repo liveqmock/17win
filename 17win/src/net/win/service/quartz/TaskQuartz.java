@@ -68,6 +68,18 @@ public class TaskQuartz {
 			query = session.createSQLQuery(sql2);
 			query.executeUpdate();
 			session.getTransaction().commit();
+
+			// / vip失效
+			session.beginTransaction();
+			String sql3 = "update"
+					+ " UserEntity "
+					+ "   set"
+					+ "       vipEnable=false,"
+					+ "   where"
+					+ "  vipEndDate is not null and      second(current_time())>second(vipEndDate)";
+			query = session.createQuery(sql3);
+			query.executeUpdate();
+			session.getTransaction().commit();
 		} catch (Exception e) {
 			session.getTransaction().rollback();
 			LoggerUtils.error("定时任务错误!", e);
