@@ -94,7 +94,14 @@ img {
 												width="99%" cellspacing="1px">
 												<tr style="background: #EDF6FF;">
 													<td colspan="2">
-														您当前的VIP级别是: 成长值为： 距离升级到VIP2还有:
+														<s:if test="#session.userLogin.vipType!=null">
+														您当前的VIP级别是:
+														<img
+																<s:property value="@net.win.utils.StrategyUtils@getVipImg(#session.userLogin.vipType,#session.userLogin.vipEnable)" />"
+															src="images/<s:property value="@net.win.utils.StrategyUtils@getLevelImg(#session.userLogin.vipType,#session.userLogin.vipEnable)" />" />
+														</s:if>
+														<s:else>
+														</s:else>
 													</td>
 												</tr>
 												<tr style="background: #EDF6FF;">
@@ -112,12 +119,18 @@ img {
 														操作码:
 													</td>
 													<td>
-														<input style="width: 80px" name="operationCode">
+														<input style="width: 80px" type="password"
+															name="operationCode">
 													</td>
 												</tr>
 												<tr style="background: #EDF6FF;" align="center">
 													<td colspan="2">
-														<input type="submit" style="cursor: pointer;" value="购买">
+														<s:if test="#session.userLogin.vipType!=null">
+															<input type="submit" style="cursor: pointer;" value="续费">
+														</s:if>
+														<s:else>
+															<input type="submit" style="cursor: pointer;" value="购买">
+														</s:else>
 													</td>
 												</tr>
 											</table>

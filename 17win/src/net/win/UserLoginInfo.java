@@ -1,11 +1,8 @@
 package net.win;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-import net.win.vo.BuyerVO;
-import net.win.vo.SellerVO;
+import javax.persistence.Column;
 
 public class UserLoginInfo {
 	/**
@@ -36,8 +33,12 @@ public class UserLoginInfo {
 	private String status;
 	// 钱
 	private Double money;
-	//vip类型
+	// vip类型
 	private String vipType;
+
+	// VIP状态 true 表示没失效，false表示失效
+	private Boolean vipEnable;
+
 	public String getUsername() {
 		return username;
 	}
@@ -148,5 +149,13 @@ public class UserLoginInfo {
 
 	public void setVipType(String vipType) {
 		this.vipType = vipType;
+	}
+
+	public Boolean getVipEnable() {
+		return vipEnable;
+	}
+
+	public void setVipEnable(Boolean vipEnable) {
+		this.vipEnable = vipEnable;
 	}
 }

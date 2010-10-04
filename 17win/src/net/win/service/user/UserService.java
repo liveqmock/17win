@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import net.win.BaseService;
 import net.win.dao.UserDAO;
 import net.win.entity.UserEntity;
+import net.win.entity.VipEntity;
 import net.win.utils.Constant;
 import net.win.utils.MailUtils;
 import net.win.utils.StringUtils;
@@ -141,7 +142,10 @@ public class UserService extends BaseService {
 		} else {
 			userEntity.setLastLoginTime(new Date());
 			// 设置VIP
-			getLoginUser().setVipType(userEntity.getVip().getType());
+			VipEntity vip = userEntity.getVip();
+			if (vip != null) {
+				getLoginUser().setVipType(userEntity.getVip().getType());
+			}
 			updateUserLoginInfo(userEntity);
 			return "loginSuccess";
 		}

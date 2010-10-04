@@ -402,4 +402,14 @@ public final class StrategyUtils {
 		return "xin_1.gif";
 
 	}
+
+	/**
+	 * 获取VIP的图片
+	 * 
+	 * @param score
+	 * @return
+	 */
+	public static String getVipImg(String type, Boolean enable) {
+		return "vip" + type + "_" + (enable ? "cai" : "yin") + "gif";
+	}
 }
