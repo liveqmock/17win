@@ -32,12 +32,20 @@ public final class Constant {
 	private static Double huangguan_P;
 	private static Double shuangzuan_P;
 	private static Double zuanshi_P;
-	// 皇冠数量
+	/**
+	 * 数量
+	 */
 	private static Integer huangguan_N;
-	// 双钻
 	private static Integer shuangzuan_N;
-	// 一钻
 	private static Integer yizuan_N;
+
+	/**
+	 * 任务相关
+	 * 
+	 * @return
+	 */
+	private static Integer taskOverReleaseScore;
+	private static Integer taskOverReceiveScore;
 
 	public static Double getFabudianPrice() {
 		return fabudian_P;
@@ -68,7 +76,18 @@ public final class Constant {
 		return yizuan_N;
 	}
 
-	public static void initMetatData() {
+	public static Integer getTaskOverReceiveScore() {
+		return taskOverReceiveScore;
+	}
+
+	public static Integer getTaskOverReleaseScore() {
+		return taskOverReleaseScore;
+	}
+
+	/**
+	 * 初始化
+	 */
+	private static void initMetatData() {
 		URL url = Thread.currentThread().getContextClassLoader().getResource(
 				"win-metadata.xml");
 		SAXReader saxReader = new SAXReader(); // 使用SAXReader方式读取XML文件
@@ -105,5 +124,16 @@ public final class Constant {
 		Element zuanshika_N = (Element) root
 				.selectSingleNode("/win/number/zuanshika");
 		yizuan_N = Integer.parseInt(zuanshika_N.getText());
+
+		// 任务
+		Element taskOverReleaseScoreEke = (Element) root
+				.selectSingleNode("/win/other/taskOverReleaseScore");
+		taskOverReleaseScore = Integer.parseInt(taskOverReleaseScoreEke
+				.getText());
+		Element taskOverReceiveScoreE = (Element) root
+				.selectSingleNode("/win/other/taskOverReceiveScore");
+		taskOverReceiveScore = Integer
+				.parseInt(taskOverReceiveScoreE.getText());
 	}
+
 }

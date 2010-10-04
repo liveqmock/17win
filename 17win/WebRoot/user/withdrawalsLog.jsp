@@ -189,9 +189,6 @@ img {
 														<th style="font-size: 12px" nowrap="nowrap">
 															描述
 														</th>
-														<th style="font-size: 12px" nowrap="nowrap">
-															操作
-														</th>
 													</tr>
 												</thead>
 												<tbody>
@@ -249,9 +246,6 @@ img {
 															<td>
 																<s:property value="#withdrawals.statusDesc" />
 															</td>
-															<td>
-																<a href="#">删除</a>
-															</td>
 														</tr>
 													</s:iterator>
 												</tbody>
@@ -265,7 +259,7 @@ img {
 												<s:else>
 													<tfoot>
 														<tr>
-															<th colspan="8">
+															<th colspan="7">
 																<div style="float: left;">
 																	<a href="javascript:firstPage()">首页</a>
 																	<a href="javascript:prevPage()">上一页</a>&nbsp;

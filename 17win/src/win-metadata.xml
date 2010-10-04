@@ -10,7 +10,6 @@
 		<!-- 钻石卡  元-->
 		<zuanshika>135</zuanshika>
 	</price>
-
 	<number>
 		<!-- 皇冠卡  数量-->
 		<huangguanKa>10001</huangguanKa>
@@ -19,4 +18,13 @@
 		<!-- 钻石卡  数量-->
 		<zuanshika>270</zuanshika>
 	</number>
+
+	<other>
+		<!-- 任务完成后的积分 -->
+		<!-- 发布任务 -->
+		<taskOverReleaseScore>1</taskOverReleaseScore>
+		<!-- 接受任务 -->
+		<taskOverReceiveScore>3</taskOverReceiveScore>
+	</other>
+
 </win>

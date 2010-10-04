@@ -398,15 +398,20 @@ public class CreditTaskService extends BaseService {
 			 * 人
 			 */
 			// 修改积分
-			releaEntity.setUpgradeScore(5);
-			releaEntity.setConvertScore(5);
+			releaEntity.setUpgradeScore(releaEntity.getUpgradeScore()
+					+ Constant.getTaskOverReleaseScore());
+			releaEntity.setConvertScore(releaEntity.getConvertScore()
+					+ Constant.getTaskOverReleaseScore());
 			updateUserLoginInfo(releaEntity);
+			// 修改积分和钱
 			receiveUser.setMoney(ArithUtils.add(receiveUser.getMoney(),
 					creditTask.getMoney()));
 			receiveUser.setReleaseDot(ArithUtils.add(receiveUser
 					.getReleaseDot(), creditTask.getReleaseDot()));
-			receiveUser.setUpgradeScore(receiveUser.getUpgradeScore() + 1);
-			receiveUser.setConvertScore(receiveUser.getConvertScore() + 1);
+			receiveUser.setUpgradeScore(receiveUser.getUpgradeScore()
+					+ Constant.getTaskOverReceiveScore());
+			receiveUser.setConvertScore(receiveUser.getConvertScore()
+					+ Constant.getTaskOverReceiveScore());
 
 			UserLoginInfo userLoginInfo = WinContext.getInstance()
 					.getUserLoginInfo(receiveUser.getUsername());
