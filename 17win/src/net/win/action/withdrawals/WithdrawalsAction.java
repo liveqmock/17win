@@ -43,7 +43,7 @@ public class WithdrawalsAction extends BaseAction {
 	}
 
 	/**
-	 * 提现
+	 * 提现记录
 	 * 
 	 * @return
 	 * @throws Exception

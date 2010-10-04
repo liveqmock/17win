@@ -118,6 +118,7 @@ public class WithdrawalsService extends BaseService {
 				.toString(), paramNames.toArray(paramNames
 				.toArray(new String[paramNames.size()])), paramValues
 				.toArray(new Object[paramValues.size()]));
+		List<WithdrawalsVO> result = new ArrayList<WithdrawalsVO>();
 		if (count > 0) {
 			withdrawalsVO.setDataCount(count.intValue());
 			List<WithdrawalsEntity> resultTemp = withDrawalsDAO.pageQuery(
@@ -125,16 +126,15 @@ public class WithdrawalsService extends BaseService {
 							.toArray(new String[paramNames.size()])),
 					paramValues.toArray(new Object[paramValues.size()]),
 					withdrawalsVO.getStart(), withdrawalsVO.getLimit());
-			List<WithdrawalsVO> result = new ArrayList<WithdrawalsVO>(
-					resultTemp.size());
+
 			WithdrawalsVO withdrawalsVOTEMP = null;
 			for (WithdrawalsEntity withdrawalsEntity : resultTemp) {
 				withdrawalsVOTEMP = new WithdrawalsVO();
 				BeanUtils.copyProperties(withdrawalsVOTEMP, withdrawalsEntity);
 				result.add(withdrawalsVOTEMP);
 			}
-			putByRequest("withdrawalses", result);
 		}
+		putByRequest("result", result);
 		return "withdrawalsLog";
 	}
 

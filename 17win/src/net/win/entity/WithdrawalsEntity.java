@@ -24,9 +24,9 @@ public class WithdrawalsEntity extends BaseEntity {
 	// 操作日期
 	@Column(name = "OPERATION_DATE_", nullable = false)
 	private Date operationDate;
-	// 状态(0：申请中，1：完成,2驳回,可能因为商品价格和提取价格不同)
+	// 状态(1：申请中,2驳回,可能因为商品价格和提取价格不同，3：完成)
 	@Column(name = "STATUS_", nullable = false)
-	private String status = "0";
+	private String status = "1";
 	// 状态描述
 	@Column(name = "STATUS_DESC_", nullable = false)
 	private String statusDesc = "";
@@ -47,7 +47,7 @@ public class WithdrawalsEntity extends BaseEntity {
 	 * 选填
 	 */
 	// 店铺类型(1 淘宝 2拍拍 3有啊)
-	@Column(name = "REALNAME_", columnDefinition = "CHAR(1)")
+	@Column(name = "SHOP_TYPE_", columnDefinition = "CHAR(1)")
 	private String shopType;
 
 	public String getType() {

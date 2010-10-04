@@ -319,7 +319,7 @@
 																		<s:textfield name="creditTaskVO.timeingTime"
 																			readonly="true" id="tasktimingDate"></s:textfield>
 																		<img style="cursor: pointer;"
-																			onclick="WdatePicker({'minDate':'%y-%M-%d %H:%m:%s','alwaysUseStartDate':false,'el':'tasktimingDate','isShowClear':false,startDate:'%y-%M-%d %H:%m:%s',dateFmt:'yyyy-MM-dd HH:mm:ss','skin':'blue'})"
+																			onclick="WdatePicker({'minDate':'%y-%M-%d %H:%m:%s','alwaysUseStartDate':false,'el':'tasktimingDate','isShowClear':true,startDate:'%y-%M-%d %H:%m:%s',dateFmt:'yyyy-MM-dd HH:mm:ss','skin':'blue'})"
 																			src="js/My97DatePicker/skin/datePicker.gif"
 																			width="16" height="22 align="absmiddle">
 																		<span class="red-bcolor">*只精确到分钟</span>

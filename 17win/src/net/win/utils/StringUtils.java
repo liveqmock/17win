@@ -101,6 +101,114 @@ public final class StringUtils {
 			return null;
 	}
 
+	/**
+	 * 数字转换中文汉字
+	 */
+	public static String getChineseNumber(int number) throws Exception {
+		String str = "一";
+		switch (number) {
+		case 1:
+			str = "一";
+			break;
+		case 2:
+			str = "二";
+			break;
+		case 3:
+			str = "三";
+			break;
+		case 4:
+			str = "四";
+			break;
+		case 5:
+			str = "五";
+			break;
+		case 6:
+			str = "六";
+			break;
+		case 7:
+			str = "七";
+			break;
+		case 8:
+			str = "八";
+			break;
+		case 9:
+			str = "九";
+			break;
+		case 10:
+			str = "十";
+			break;
+		default:
+			str = "一";
+			break;
+		}
+		return str;
+	}
+
+	/**
+	 * 判断是否为空
+	 * 
+	 * @param str
+	 * @return true表示不为空,false表示空
+	 */
+	public static boolean isEmpty(String str) {
+		if (str != null && !"".equals(str.trim())) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * 计算千分比
+	 */
+	public static String permillage(double p1, double p2) {
+		String str;
+		double p3 = p1 / p2;
+		if (p1 == 0.0) {
+			return "0.00";
+		}
+		if (p2 == 0.0 && p1 != 0.0) {
+			return "-";
+		}
+		DecimalFormat df1 = new DecimalFormat("0.00");
+		str = df1.format(p3 * 1000);
+		return str;
+	}
+
+	/**
+	 * 计算百分比
+	 */
+	public static String percent(double p1, double p2) {
+		String str;
+		if (p1 == 0.0) {
+			return "0.00";
+		}
+		double p3 = p1 / p2;
+		DecimalFormat df1 = new DecimalFormat("##.00");
+		if (p3 * 100 < 1) {
+			df1 = new DecimalFormat("0.00");
+		}
+		str = df1.format(p3 * 100);
+		return str;
+	}
+
+	/**
+	 * 计算平均值
+	 */
+	public static String average(double p1, double p2) {
+		String str;
+		if (p1 == 0.0) {
+			return "0.00";
+		}
+		double p3 = p1 / p2;
+		DecimalFormat df1 = new DecimalFormat("##.00");
+		if (p3 < 1) {
+			df1 = new DecimalFormat("0.00");
+		}
+		str = df1.format(p3);
+		return str;
+	}
+
 	public static void main(String[] args) throws Exception {
 		System.out.println(processPwd("123456"));
 	}
