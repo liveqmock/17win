@@ -106,9 +106,8 @@ public class CreditTaskRepositoryService extends BaseService {
 			}
 			// 有地址
 			if (creditTaskRepositoryEntity.getAddress()) {
-				creditTaskEntity.setAddress(seller.getAddress()
-						+ TaskMananger.getInstance().randomObtainAddress(
-								creditTaskRepositoryDAO));
+				creditTaskEntity.setAddress(seller.getAddress() + " "
+						+ StrategyUtils.makeAddress());
 			} else {
 				creditTaskEntity.setAddress("无");
 			}

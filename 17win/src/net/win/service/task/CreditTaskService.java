@@ -418,8 +418,8 @@ public class CreditTaskService extends BaseService {
 					creditTask.getMoney()));
 			// 发布点
 			Double releaseDot = creditTask.getReleaseDot()
-					* StrategyUtils.getTaskOverDotRate(releaEntity,receiveUserVip,
-							receiveUser.getVipEnable());
+					* StrategyUtils.getTaskOverDotRate(releaEntity,
+							receiveUserVip, receiveUser.getVipEnable());
 			receiveUser.setReleaseDot(ArithUtils.add(receiveUser
 					.getReleaseDot(), releaseDot));
 			// 积分
@@ -1262,8 +1262,7 @@ public class CreditTaskService extends BaseService {
 			SellerEntity sellerEntity = sellerDAO.get(sellerID);
 			String addresses = sellerEntity.getAddress();
 			if (addresses != null) {
-				address.append(addresses + " "
-						+ taskMananger.randomObtainAddress(userDAO));
+				address.append(addresses + " " + StrategyUtils.makeAddress());
 			}
 		}
 		return StringUtils.isBlank(address.toString()) ? "无" : address

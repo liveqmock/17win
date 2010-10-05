@@ -70,20 +70,6 @@ public final class TaskMananger {
 		return DateUtils.parseDate(new Date(), "yyyyMMddHHmmssS");
 	}
 
-	/**
-	 * 返回随机地址
-	 * 
-	 * @param addressDAO
-	 * @return
-	 * @throws Exception
-	 */
-	public String randomObtainAddress(BaseDAO baseDAO) throws Exception {
-		Long addrssCount = (Long) baseDAO
-				.uniqueResultObject("select count(*) from  TaskAddressEntity");
-		int topIndex = (int) (Math.random() * addrssCount + 1);
-		return (String) baseDAO.pageQuery(
-				"select address from  TaskAddressEntity", 0, 1).get(0);
-	}
 
 	private Set<Long> timingTasks = new HashSet<Long>();
 
