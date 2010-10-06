@@ -156,6 +156,18 @@ public class UserEntity extends BaseEntity {
 	@Cascade(CascadeType.ALL)
 	private List<CreditTaskRepositoryEntity> creditTaskRepositorys;
 
+	// // 我的发的站内信
+	@OneToMany(targetEntity = SmsEntity.class, fetch = FetchType.LAZY)
+	@JoinColumn(name = "From_User_ID_")
+	@Cascade(CascadeType.ALL)
+	private List<SmsEntity> fromSms;
+
+	// // 我的收的站内信
+	@OneToMany(targetEntity = SmsEntity.class, fetch = FetchType.LAZY)
+	@JoinColumn(name = "To_User_ID_")
+	@Cascade(CascadeType.ALL)
+	private List<SmsEntity> toSms;
+
 	// VIP
 	@ManyToOne(targetEntity = VipEntity.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "VIP_ID_")
@@ -434,6 +446,24 @@ public class UserEntity extends BaseEntity {
 
 	public void setMyReferees(List<UserEntity> myReferees) {
 		this.myReferees = myReferees;
+	}
+
+ 
+
+	public List<SmsEntity> getFromSms() {
+		return fromSms;
+	}
+
+	public void setFromSms(List<SmsEntity> fromSms) {
+		this.fromSms = fromSms;
+	}
+
+	public List<SmsEntity> getToSms() {
+		return toSms;
+	}
+
+	public void setToSms(List<SmsEntity> toSms) {
+		this.toSms = toSms;
 	}
 
 }
