@@ -26,7 +26,7 @@ public class SmsAction extends BaseAction {
 	@Resource
 	private SmsService smsService;
 
-	private SmsVO smsVO;
+	private SmsVO smsVO = new SmsVO();
 
 	public SmsVO getSmsVO() {
 		return smsVO;

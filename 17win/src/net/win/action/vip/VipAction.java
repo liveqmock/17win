@@ -25,7 +25,7 @@ import org.springframework.stereotype.Controller;
 public class VipAction extends BaseAction {
 	@Resource
 	private VipService vipService;
-	private VipVO vipVO;
+	private VipVO vipVO = new VipVO();
 
 	public VipVO getVipVO() {
 		return vipVO;
