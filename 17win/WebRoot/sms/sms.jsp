@@ -96,7 +96,7 @@ img {
 															对方ID：
 														</td>
 														<td width="490">
-															<s:textfield maxlength="12" name="smsVO.toUsername"
+															<s:textfield maxlength="12" name="smsVO.toUserName"
 																id="toUsername">
 															</s:textfield>
 														</td>
@@ -115,8 +115,11 @@ img {
 															内容：
 														</td>
 														<td>
-															<s:textarea name="smsVO.content" id="content">
+															<s:textarea name="smsVO.content" id="content" cols="50"
+																rows="8">
 															</s:textarea>
+															<br>
+															<font id="showTip" color="red">0/200</font>
 														</td>
 													</tr>
 													<tr>

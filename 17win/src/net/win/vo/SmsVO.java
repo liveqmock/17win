@@ -15,6 +15,16 @@ public class SmsVO extends BaseVO {
 	private Date sendDate;
 
 	private String toUserName;
+	
+	private Boolean read;
+
+	public Boolean getRead() {
+		return read;
+	}
+
+	public void setRead(Boolean read) {
+		this.read = read;
+	}
 
 	public String getType() {
 		return type;

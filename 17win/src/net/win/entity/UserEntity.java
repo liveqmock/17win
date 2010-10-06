@@ -171,6 +171,7 @@ public class UserEntity extends BaseEntity {
 	// VIP
 	@ManyToOne(targetEntity = VipEntity.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "VIP_ID_")
+	@Cascade(CascadeType.ALL)
 	private VipEntity vip;
 
 	/**
@@ -447,8 +448,6 @@ public class UserEntity extends BaseEntity {
 	public void setMyReferees(List<UserEntity> myReferees) {
 		this.myReferees = myReferees;
 	}
-
- 
 
 	public List<SmsEntity> getFromSms() {
 		return fromSms;

@@ -1,7 +1,22 @@
 $(document).ready(function() {
 			if (!Validater.isBlank($("#toUsername").val())) {
 				$("#toUsername").add("readonly", true);
+				$("#title").focus();
+			} else {
+				$("#toUsername").focus();
 			}
+
+			$("#showTip").text($("#content").val().length + "/" + 200);
+
+			$("#content").keydown(function() {
+						var value = $(this).val();
+						$("#showTip").text(value.length + "/" + 200);
+						if (value.length > 200) {
+							alert(value.substring(0, 200));
+							$(this).val(value.substring(0, 200));
+						}
+					});
+
 		});
 
 function validateForm() {

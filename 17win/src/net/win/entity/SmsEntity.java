@@ -41,6 +41,10 @@ public class SmsEntity extends BaseEntity {
 	@Column(name = "Send_Date_", nullable = false)
 	private Date sendDate;
 
+	// 是否已读
+	@Column(name = "Read_", nullable = false)
+	private Boolean read;
+
 	public UserEntity getFromUser() {
 		return fromUser;
 	}
@@ -87,5 +91,13 @@ public class SmsEntity extends BaseEntity {
 
 	public void setSendDate(Date sendDate) {
 		this.sendDate = sendDate;
+	}
+
+	public Boolean getRead() {
+		return read;
+	}
+
+	public void setRead(Boolean read) {
+		this.read = read;
 	}
 }

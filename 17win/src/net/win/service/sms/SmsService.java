@@ -45,10 +45,23 @@ public class SmsService extends BaseService {
 	public String insertSms(SmsVO smsVO) throws Exception {
 		SmsEntity smsEntity = new SmsEntity();
 		UserEntity toUser = userDAO.findUserByName(smsVO.getToUserName());
+		if (smsVO.getToUserName().equals(getLoginUser().getUsername())) {
+			putAlertMsg("不能给自己发送短信！");
+			return "insertSms";
+		}
+		if (toUser == null) {
+			putAlertMsg("没有该接收人！");
+			return "insertSms";
+		}
 		BeanUtils.copyProperties(smsEntity, smsVO);
 		smsEntity.setSendDate(new Date());
 		smsEntity.setFromUser(getLoginUserEntity(userDAO));
 		smsEntity.setToUser(toUser);
+		smsEntity.setType("2");
+		smsEntity.setRead(false);
+		smsDAO.save(smsEntity);
+		putAlertMsg("发送成功！");
+		smsVO.setToUserName("");
 		return "insertSms";
 	}
 }

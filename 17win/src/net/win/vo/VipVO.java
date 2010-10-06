@@ -11,6 +11,7 @@ public class VipVO extends BaseVO {
 	private String nextType;
 	private String nextVipGrowValue;
 	private String vipEnable;
+	private Boolean read;
 	public Integer getGrowValue() {
 		return growValue;
 	}
