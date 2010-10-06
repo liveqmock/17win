@@ -32,7 +32,7 @@ public class VipService extends BaseService {
 	 * @throws Exception
 	 */
 	public String initVip(VipVO vipVO) throws Exception {
-		return "initVip";
+		return INPUT;
 	}
 
 	/**

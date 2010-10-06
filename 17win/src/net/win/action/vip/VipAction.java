@@ -34,15 +34,15 @@ public class VipAction extends BaseAction {
 	public void setVipVO(VipVO vipVO) {
 		this.vipVO = vipVO;
 	}
-	
 
 	@Action("/vip")
 	public String execute() throws Exception {
 		// TODO Auto-generated method stub
 		return INPUT;
 	}
+
 	public String initVip() throws Exception {
-		return INPUT;
+		return vipService.initVip(vipVO);
 	}
 
 	/**

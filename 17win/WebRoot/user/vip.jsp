@@ -90,8 +90,7 @@ img {
 										</div>
 										<br>
 										<div>
-											<s:form theme="simple" action="vipManager/vip!buyVip.php"
-												onsubmit=" return  validateForm()">
+											<s:form theme="simple" action="vipManager/vip!buyVip.php">
 												<table style="background: white;" cellpadding="1px"
 													width="99%" cellspacing="1px">
 													<tr style="background: #EDF6FF;">
@@ -130,10 +129,12 @@ img {
 													<tr style="background: #EDF6FF;" align="center">
 														<td colspan="2">
 															<s:if test="#session.userLogin.vipType!=null">
-																<input type="submit" style="cursor: pointer;" value="续费">
+																<input type="button" id="renewalVipButton"
+																	style="cursor: pointer;" value="续费">
 															</s:if>
 															<s:else>
-																<input type="submit" style="cursor: pointer;" value="购买">
+																<input type="button" id="buyVipButton"
+																	style="cursor: pointer;" value="购买">
 															</s:else>
 														</td>
 													</tr>

@@ -3,6 +3,7 @@ package net.win.action.sms;
 import javax.annotation.Resource;
 
 import net.win.BaseAction;
+import net.win.service.sms.SmsService;
 import net.win.service.vip.VipService;
 import net.win.vo.VipVO;
 
@@ -24,17 +25,8 @@ import org.springframework.stereotype.Controller;
 		@Result(name = "input", location = "/user/vip.jsp"), })
 public class SmsAction extends BaseAction {
 	@Resource
-	private VipService vipService;
-	private VipVO vipVO;
-
-	public VipVO getVipVO() {
-		return vipVO;
-	}
-
-	public void setVipVO(VipVO vipVO) {
-		this.vipVO = vipVO;
-	}
-	
+	private SmsService smsService;
+ 
 
 	@Action("/sms")
 	public String execute() throws Exception {
@@ -43,21 +35,5 @@ public class SmsAction extends BaseAction {
 	}
 	public String initVip() throws Exception {
 		return INPUT;
-	}
-
-	/**
-	 * 购买VIP
-	 * 
-	 */
-	public String buyVip() throws Exception {
-		return vipService.insertVip(vipVO);
-	}
-
-	/**
-	 * 续费VIP
-	 * 
-	 */
-	public String renewalVip() throws Exception {
-		return vipService.insertRenewalVip(vipVO);
 	}
 }
