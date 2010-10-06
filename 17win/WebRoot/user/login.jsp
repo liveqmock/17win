@@ -61,7 +61,7 @@
 													</td>
 													<td width="75%" bgcolor="#FFFFFF">
 														<div align="left">
-															<tt> <s:textfield name="userVO.userEntity.username"
+															<tt> <s:textfield name="userVO.userEntity.username"  
 																	size="30" cssStyle="width:180px" id="username"
 																	maxlength="12"></s:textfield> </tt>
 														</div>

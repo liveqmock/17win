@@ -85,51 +85,51 @@ public final class Constant {
 	/**
 	 * 初始化
 	 */
-	private static void initMetatData() {
+	private synchronized  static void initMetatData() {
 		URL url = Thread.currentThread().getContextClassLoader().getResource(
 				"win-metadata.xml");
 		SAXReader saxReader = new SAXReader(); // 使用SAXReader方式读取XML文件
 		// 加载数据库XML配置文件，得到Document对象
 		Document document = null;
-		;
 		try {
 			document = saxReader.read(url.getFile());
-		} catch (DocumentException e) {
+			Element root = document.getRootElement(); // 获得根节点
+			// 得到money节点
+			Element fabudian = (Element) root
+					.selectSingleNode("/win/price/fabudian");
+			fabudian_P = Double.parseDouble(fabudian.getText());
+			Element huangguanka = (Element) root
+					.selectSingleNode("/win/price/huangguanKa");
+			huangguan_P = Double.parseDouble(huangguanka.getText());
+			Element shuangzuanka = (Element) root
+					.selectSingleNode("/win/price/shuangzuanka");
+			shuangzuan_P = Double.parseDouble(shuangzuanka.getText());
+			Element zuanshika = (Element) root
+					.selectSingleNode("/win/price/zuanshika");
+			zuanshi_P = Double.parseDouble(zuanshika.getText());
+
+			// 得到数量
+			Element huangguanka_N = (Element) root
+					.selectSingleNode("/win/number/huangguanKa");
+			huangguan_N = Integer.parseInt(huangguanka_N.getText());
+			Element shuangzuanka_N = (Element) root
+					.selectSingleNode("/win/number/shuangzuanka");
+			shuangzuan_N = Integer.parseInt(shuangzuanka_N.getText());
+			Element zuanshika_N = (Element) root
+					.selectSingleNode("/win/number/zuanshika");
+			yizuan_N = Integer.parseInt(zuanshika_N.getText());
+
+			// vip
+			Element vipPriceE = (Element) root.selectSingleNode("/win/vip/price");
+			vipPrice = Double.parseDouble(vipPriceE.getText());
+			Element yearRebateE = (Element) root
+					.selectSingleNode("/win/vip/yearRebate");
+			Double yearRebate = Double.parseDouble(yearRebateE.getText());
+			yearVipPrice = vipPrice * yearRebate;
+		} catch (Exception e) {
 			LoggerUtils.error(e);
 		}
-		Element root = document.getRootElement(); // 获得根节点
-		// 得到money节点
-		Element fabudian = (Element) root
-				.selectSingleNode("/win/price/fabudian");
-		fabudian_P = Double.parseDouble(fabudian.getText());
-		Element huangguanka = (Element) root
-				.selectSingleNode("/win/price/huangguanKa");
-		huangguan_P = Double.parseDouble(huangguanka.getText());
-		Element shuangzuanka = (Element) root
-				.selectSingleNode("/win/price/shuangzuanka");
-		shuangzuan_P = Double.parseDouble(shuangzuanka.getText());
-		Element zuanshika = (Element) root
-				.selectSingleNode("/win/price/zuanshika");
-		zuanshi_P = Double.parseDouble(zuanshika.getText());
-
-		// 得到数量
-		Element huangguanka_N = (Element) root
-				.selectSingleNode("/win/number/huangguanKa");
-		huangguan_N = Integer.parseInt(huangguanka_N.getText());
-		Element shuangzuanka_N = (Element) root
-				.selectSingleNode("/win/number/shuangzuanka");
-		shuangzuan_N = Integer.parseInt(shuangzuanka_N.getText());
-		Element zuanshika_N = (Element) root
-				.selectSingleNode("/win/number/zuanshika");
-		yizuan_N = Integer.parseInt(zuanshika_N.getText());
-
-		// vip
-		Element vipPriceE = (Element) root.selectSingleNode("/win/vip/price");
-		vipPrice = Double.parseDouble(vipPriceE.getText());
-		Element yearRebateE = (Element) root
-				.selectSingleNode("/win/vip/yearRebate");
-		Double yearRebate = Double.parseDouble(yearRebateE.getText());
-		yearVipPrice = vipPrice * yearRebate;
+		
 
 	}
 

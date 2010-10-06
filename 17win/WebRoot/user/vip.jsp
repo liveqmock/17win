@@ -90,15 +90,18 @@ img {
 										</div>
 										<br>
 										<div>
-											<s:form theme="simple" action="vipManager/base!buyVip.php">
+											<s:form theme="simple" action="vipManager/vip!buyVip.php"
+												onsubmit=" return  validateForm()">
 												<table style="background: white;" cellpadding="1px"
 													width="99%" cellspacing="1px">
 													<tr style="background: #EDF6FF;">
 														<td colspan="2">
-															<s:if test="#session.userLogin.vipType!=null">
-														您当前的VIP级别是:
-														<img
+															<s:if test="#session.userLogin.vipEnable">
+																<img
 																	src="images/vip/<s:property value="@net.win.utils.StrategyUtils@getLevelImg(#session.userLogin.vipType,#session.userLogin.vipEnable)" />" />
+															到期时间：<s:date name="#session.userLogin.vipEndDate"
+																	format="yyyy-MM-dd HH-mm-ss" />
+															当前成长值：<s:property value="#session.userLogin.vipGrowValue" />
 															</s:if>
 															<s:else>
 														您还没有加入VIP
@@ -121,7 +124,7 @@ img {
 														</td>
 														<td>
 															<input style="width: 80px" type="password" maxlength="20"
-																name="operationCode">
+																id="operationCodeId" name="operationCode">
 														</td>
 													</tr>
 													<tr style="background: #EDF6FF;" align="center">

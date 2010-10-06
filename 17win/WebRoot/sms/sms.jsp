@@ -92,10 +92,18 @@ img {
 												<tbody>
 													<tr>
 														<td height="40" align="right">
-															标&nbsp;&nbsp;&nbsp;&nbsp;题：
+															对方ID：
 														</td>
 														<td width="490">
-															<input type="text">
+															<input type="text"  maxlength="12">
+														</td>
+													</tr>
+													<tr>
+														<td height="40" align="right">
+															标题：
+														</td>
+														<td width="490">
+															<input type="text" maxlength="50">
 														</td>
 													</tr>
 													<tr>
@@ -103,7 +111,7 @@ img {
 															详细描述：
 														</td>
 														<td>
-															<textarea name="editor"></textarea>
+															<textarea name="editor" ></textarea>
 														</td>
 													</tr>
 													<tr>

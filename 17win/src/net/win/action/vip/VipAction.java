@@ -36,7 +36,7 @@ public class VipAction extends BaseAction {
 	}
 	
 
-	@Action("/base")
+	@Action("/vip")
 	public String execute() throws Exception {
 		// TODO Auto-generated method stub
 		return INPUT;

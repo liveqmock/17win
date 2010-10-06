@@ -33,6 +33,12 @@ public class UserLoginInfo {
 	private String status;
 	// 钱
 	private Double money;
+
+	// vip结束日期
+	private Date vipEndDate;
+	// VIP 成长值
+	private Integer vipGrowValue;
+
 	// vip类型
 	private String vipType;
 
@@ -157,5 +163,21 @@ public class UserLoginInfo {
 
 	public void setVipEnable(Boolean vipEnable) {
 		this.vipEnable = vipEnable;
+	}
+
+	public Date getVipEndDate() {
+		return vipEndDate;
+	}
+
+	public void setVipEndDate(Date vipEndDate) {
+		this.vipEndDate = vipEndDate;
+	}
+
+	public Integer getVipGrowValue() {
+		return vipGrowValue;
+	}
+
+	public void setVipGrowValue(Integer vipGrowValue) {
+		this.vipGrowValue = vipGrowValue;
 	}
 }

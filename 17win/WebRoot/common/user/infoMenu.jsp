@@ -154,7 +154,7 @@
 
 										<tr>
 											<td height=20>
-												<a href="vipManager/base!initVip.php"><font
+												<a href="vipManager/vip!initVip.php"><font
 													color="#FF0000">加入VIP</font> </a>
 											</td>
 										</tr>
