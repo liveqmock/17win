@@ -283,20 +283,6 @@ img {
 																		</s:iterator>
 																	</select>
 																</div>
-																<div style="float: left;">
-																	排列顺序
-																	<select id='toPageSelect' size='1'
-																		onchange="jumpPage()">
-																		<s:iterator begin="1" end="withdrawalsVO.pageCount"
-																			step="1" var="index">
-																			<option value="<s:property value="#index" />">
-																				第
-																				<s:property value="#index" />
-																				页
-																			</option>
-																		</s:iterator>
-																	</select>
-																</div>
 																<input type="hidden" name="withdrawalsVO.nowPage"
 																	value="<s:property
 											value="withdrawalsVO.nowPage" />"

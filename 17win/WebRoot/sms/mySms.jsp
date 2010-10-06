@@ -13,15 +13,12 @@
 		<LINK href="css/style.css" type="text/css" rel="stylesheet">
 		<LINK href="css/index.css" type="text/css" rel="stylesheet">
 		<LINK href="css/top_bottom.css" type="text/css" rel="stylesheet">
+		<LINK href="css/blue/style.css" type="text/css" rel="stylesheet">
 		<LINK href="css/Css.css" type="text/css" rel="stylesheet">
 		<LINK href="css/center.css" type="text/css" rel="stylesheet">
-
-
 		<SCRIPT src="js/jquery.tablesorter.min.js" type="text/javascript"></SCRIPT>
-
 		<script src="<%=basePath%>js/My97DatePicker/WdatePicker.js"
 			type="text/javascript"></script>
-
 		<script src="sms/mySms.js" type="text/javascript"></script>
 		<style type="text/css">
 body {
@@ -216,23 +213,7 @@ img {
 																<a href="javascript:lastPage()">尾页</a>&nbsp;
 															</div>
 															<div style="float: left;">
-																<s:property value="smsVO.nowPage" />
-																/
-																<s:property value="smsVO.pageCount" />
 																跳转到
-																<select id='toPageSelect' size='1' onchange="jumpPage()">
-																	<s:iterator begin="1" end="smsVO.pageCount" step="1"
-																		var="index">
-																		<option value="<s:property value="#index" />">
-																			第
-																			<s:property value="#index" />
-																			页
-																		</option>
-																	</s:iterator>
-																</select>
-															</div>
-															<div style="float: left;">
-																排列顺序
 																<select id='toPageSelect' size='1' onchange="jumpPage()">
 																	<s:iterator begin="1" end="smsVO.pageCount" step="1"
 																		var="index">

@@ -46,7 +46,9 @@ public class SmsService extends BaseService {
 	 * @throws Exception
 	 */
 	public String deleteSms(SmsVO smsVO) throws Exception {
-		smsDAO.deleteById(smsVO.getId());
+		smsDAO.deleteByHql("delete from SmsEntity where id=:smsID",
+				new String[] { "smsID" }, new Object[] { smsVO.getId() });
+		querySms(smsVO);
 		putAlertMsg("删除成功！");
 		return "deleteSms";
 	}

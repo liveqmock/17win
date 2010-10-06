@@ -16,24 +16,24 @@ $(document).ready(function() {
 // 删除
 function deleteSms(id) {
 	if (confirm("您确认要删除此短信！")) {
-		window.href.location = "smsManager/sms!deleteSms.php";
+		window.location.href = "smsManager/sms!deleteSms.php?smsVO.id=" + id;
 	}
 }
-// 删除
+// 浏览
 function brower(id) {
 	if (confirm("您确认要删除此短信！")) {
 		window.href.location = "smsManager/sms!deleteSms.php";
 	}
 }
-// 删除
+// 回复
 function reply(fromUsername) {
 	if (confirm("您确认要删除此短信！")) {
-		window.href.location = "smsManager/sms!deleteSms.php";
+		window.href.location = "smsManager/sms!deleteSms.php?smsVO.id=";
 	}
 }
 function validateForm() {
-	var startDate = $("input[name='withdrawalsVO.startDate']").val();
-	var endDate = $("input[name='withdrawalsVO.endDate']").val();
+	var startDate = $("#startDate").val();
+	var endDate = $("#endDate").val();
 	if (Validater.compareDate(startDate, endDate)) {
 		alert("【结束时间】必须大于等于【开始时间】！");
 		return false;

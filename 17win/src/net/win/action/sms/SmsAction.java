@@ -21,7 +21,10 @@ import org.springframework.stereotype.Controller;
 @Namespace("/smsManager")
 @Results( { @Result(name = "initSendSms", location = "/sms/sms.jsp"),
 		@Result(name = "insertSms", location = "/sms/sms.jsp"),
-		@Result(name = "input", location = "/sms/sms.jsp"), })
+		@Result(name = "input", location = "/sms/sms.jsp"),
+		@Result(name = "querySms", location = "/sms/mySms.jsp"),
+		@Result(name = "deleteSms", location = "/sms/mySms.jsp")
+})
 public class SmsAction extends BaseAction {
 	@Resource
 	private SmsService smsService;
