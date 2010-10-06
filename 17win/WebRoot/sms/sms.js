@@ -1,26 +1,22 @@
 $(document).ready(function() {
-	CKEDITOR.replace("editor", {
-				toolbar : '17wintoolBar',
-				uiColor : '#9AB8F3'
-			});
+			if (!Validater.isBlank($("#toUsername").val())) {
+				$("#toUsername").add("readonly", true);
+			}
+		});
 
-	CKEDITOR.on('dialogDefinition', function(ev) {
-				var dialogName = ev.data.name;
-				var dialogDefinition = ev.data.definition;
-				if (dialogName == 'link') {
-					dialogDefinition.removeContents('advanced');
-					dialogDefinition.removeContents('target');
-				}
+function validateForm() {
+	var toUsername = $("#toUsername").val();
+	var title = $("#title").val();
+	var content = $("#content").val();
+	if (Validater.isBlank(toUsername) || Validater.isBlank(title)
+			|| Validater.isBlank(content)) {
+		alert("内容不能为空！");
+		return false;
+	}
+	if ($("#content").val().length > 200) {
+		alert("内容必须在200个字以内！当前是：" + $("#content").val().length + "多个字！");
+		return false;
+	}
 
-				if (dialogName == 'image') {
-					dialogDefinition.removeContents('advanced');
-					dialogDefinition.removeContents('Link');
-				}
-
-				if (dialogName == 'flash') {
-					dialogDefinition.removeContents('advanced');
-				}
-
-			});
-
-});
+	return true;
+}

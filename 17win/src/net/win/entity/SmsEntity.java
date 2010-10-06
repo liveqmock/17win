@@ -1,11 +1,16 @@
 package net.win.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 /**
  * 站内信
@@ -32,6 +37,9 @@ public class SmsEntity extends BaseEntity {
 	private String title;
 	@Column(name = "Content_", length = 200, nullable = false)
 	private String content;
+	// 发送时间
+	@Column(name = "Send_Date_", nullable = false)
+	private Date sendDate;
 
 	public UserEntity getFromUser() {
 		return fromUser;
@@ -71,5 +79,13 @@ public class SmsEntity extends BaseEntity {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public Date getSendDate() {
+		return sendDate;
+	}
+
+	public void setSendDate(Date sendDate) {
+		this.sendDate = sendDate;
 	}
 }

@@ -87,7 +87,8 @@ img {
 										<div class="pp8">
 											<strong>发送站内信</strong>
 										</div>
-										<s:form theme="simple">
+										<s:form theme="simple" action="smsManager/sms!addSms.php"
+											onsubmit="return validateForm()">
 											<table>
 												<tbody>
 													<tr>
@@ -95,7 +96,9 @@ img {
 															对方ID：
 														</td>
 														<td width="490">
-															<input type="text"  maxlength="12">
+															<s:textfield maxlength="12" name="smsVO.toUsername"
+																id="toUsername">
+															</s:textfield>
 														</td>
 													</tr>
 													<tr>
@@ -103,15 +106,17 @@ img {
 															标题：
 														</td>
 														<td width="490">
-															<input type="text" maxlength="50">
+															<s:textfield maxlength="50" name="smsVO.title" id="title">
+															</s:textfield>
 														</td>
 													</tr>
 													<tr>
 														<td height="40" align="right" valign="top">
-															详细描述：
+															内容：
 														</td>
 														<td>
-															<textarea name="editor" ></textarea>
+															<s:textarea name="smsVO.content" id="content">
+															</s:textarea>
 														</td>
 													</tr>
 													<tr>
@@ -120,13 +125,9 @@ img {
 														</td>
 														<td valign="middle">
 															&nbsp;&nbsp;&nbsp;
-
 															<input type="submit" value="提交"
 																style="height: 30px; width: 50px;" id="button"
 																name="button">
-
-															<input type="reset" value="重置"
-																style="height: 30px; width: 50px;" name="Submit">
 														</td>
 													</tr>
 												</tbody>

@@ -4,8 +4,7 @@ import javax.annotation.Resource;
 
 import net.win.BaseAction;
 import net.win.service.sms.SmsService;
-import net.win.service.vip.VipService;
-import net.win.vo.VipVO;
+import net.win.vo.SmsVO;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
@@ -26,14 +25,34 @@ import org.springframework.stereotype.Controller;
 public class SmsAction extends BaseAction {
 	@Resource
 	private SmsService smsService;
- 
+
+	private SmsVO smsVO;
+
+	public SmsVO getSmsVO() {
+		return smsVO;
+	}
+
+	public void setSmsVO(SmsVO smsVO) {
+		this.smsVO = smsVO;
+	}
 
 	@Action("/sms")
 	public String execute() throws Exception {
 		// TODO Auto-generated method stub
 		return INPUT;
 	}
-	public String initVip() throws Exception {
-		return INPUT;
+
+	/**
+	 * 初始化
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String initSendSms() throws Exception {
+		return smsService.initSendSms(smsVO);
+	}
+
+	public String addSms() throws Exception {
+		return smsService.insertSms(smsVO);
 	}
 }
