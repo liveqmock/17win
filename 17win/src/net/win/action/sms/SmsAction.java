@@ -20,8 +20,8 @@ import org.springframework.stereotype.Controller;
 @ParentPackage("17win-default")
 @Namespace("/smsManager")
 @Results( { @Result(name = "insertVip", location = "/sms/sms.jsp"),
-		@Result(name = "insertRenewalVip", location = "/user/vip.jsp"),
-		@Result(name = "input", location = "/user/vip.jsp"), })
+		@Result(name = "insertSms", location = "/sms/sms.jsp"),
+		@Result(name = "input", location = "/sms/sms.jsp"), })
 public class SmsAction extends BaseAction {
 	@Resource
 	private SmsService smsService;
