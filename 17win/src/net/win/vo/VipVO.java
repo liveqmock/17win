@@ -5,6 +5,7 @@ import net.win.BaseVO;
 public class VipVO extends BaseVO {
 	private String type;
 	
+	
 	// 输出现实
 	private Integer growValue;
 	private String nextType;

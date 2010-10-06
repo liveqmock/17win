@@ -90,51 +90,52 @@ img {
 										</div>
 										<br>
 										<div>
-											<table style="background: white;" cellpadding="1px"
-												width="99%" cellspacing="1px">
-												<tr style="background: #EDF6FF;">
-													<td colspan="2">
-														<s:if test="#session.userLogin.vipType!=null">
+											<s:form theme="simple" action="vipManager/base!buyVip.php">
+												<table style="background: white;" cellpadding="1px"
+													width="99%" cellspacing="1px">
+													<tr style="background: #EDF6FF;">
+														<td colspan="2">
+															<s:if test="#session.userLogin.vipType!=null">
 														您当前的VIP级别是:
 														<img
-																src="images/vip/<s:property value="@net.win.utils.StrategyUtils@getLevelImg(#session.userLogin.vipType,#session.userLogin.vipEnable)" />" />
-														</s:if>
-														<s:else>
+																	src="images/vip/<s:property value="@net.win.utils.StrategyUtils@getLevelImg(#session.userLogin.vipType,#session.userLogin.vipEnable)" />" />
+															</s:if>
+															<s:else>
 														您还没有加入VIP
 														</s:else>
-													</td>
-												</tr>
-												<tr style="background: #EDF6FF;">
-													<td align="right">
-														购买:
-													</td>
-													<td>
-														<input style="width: 80px" id="monthCount" name="monthC">
-														月/20元(
-														<font color="red">注意:输入12个月为年付，打8折</font>)
-													</td>
-												</tr>
-												<tr style="background: #EDF6FF;">
-													<td align="right">
-														操作码:
-													</td>
-													<td>
-														<input style="width: 80px" type="password"
-															name="operationCode">
-													</td>
-												</tr>
-												<tr style="background: #EDF6FF;" align="center">
-													<td colspan="2">
-														<s:if test="#session.userLogin.vipType!=null">
-															<input type="submit" style="cursor: pointer;" value="续费">
-														</s:if>
-														<s:else>
-															<input type="submit" style="cursor: pointer;" value="购买">
-														</s:else>
-													</td>
-												</tr>
-											</table>
-
+														</td>
+													</tr>
+													<tr style="background: #EDF6FF;">
+														<td align="right">
+															购&nbsp;&nbsp;买:
+														</td>
+														<td>
+															<input style="width: 80px" id="monthCount" name="monthC">
+															月/20元(
+															<font color="red">注意:输入12个月为年付，打8折</font>)
+														</td>
+													</tr>
+													<tr style="background: #EDF6FF;">
+														<td align="right">
+															操作码:
+														</td>
+														<td>
+															<input style="width: 80px" type="password" maxlength="20"
+																name="operationCode">
+														</td>
+													</tr>
+													<tr style="background: #EDF6FF;" align="center">
+														<td colspan="2">
+															<s:if test="#session.userLogin.vipType!=null">
+																<input type="submit" style="cursor: pointer;" value="续费">
+															</s:if>
+															<s:else>
+																<input type="submit" style="cursor: pointer;" value="购买">
+															</s:else>
+														</td>
+													</tr>
+												</table>
+											</s:form>
 										</div>
 										<br>
 										<!-- 我的会员成长类会员功能特权 开始-->

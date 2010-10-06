@@ -16,6 +16,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "TB_Sms")
 public class SmsEntity extends BaseEntity {
+	// 类别， 1 系统 2 用户
+	@Column(name = "Type_", columnDefinition = "CHAR(1)", nullable = false)
+	private String type;
 	// 所属人
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = UserEntity.class)
 	@JoinColumn(name = "From_User_ID_")
@@ -60,5 +63,13 @@ public class SmsEntity extends BaseEntity {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 }

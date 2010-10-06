@@ -78,7 +78,7 @@ td {
 										<font color="#FF0000">*&nbsp;</font>
 									</td>
 									<td>
-										<s:password id="password"
+										<s:password id="password"  maxlength="20"
 											name="userVO.userEntity.loginPassword" size="30"
 											cssStyle="width:210px"></s:password>
 										<br />
@@ -95,7 +95,7 @@ td {
 										<font color="#FF0000">*&nbsp;</font>
 									</td>
 									<td>
-										<input type="password" id="rePassword" size="30"
+										<input type="password" id="rePassword" size="30"  maxlength="20"
 											style="width: 210px">
 										<br />
 										重复上面的密码
@@ -111,7 +111,7 @@ td {
 										<font color="#FF0000">*&nbsp;</font>
 									</td>
 									<td>
-										<s:password id="opertationCode"
+										<s:password id="opertationCode"  maxlength="20"
 											name="userVO.userEntity.opertationCode" size="30"
 											cssStyle="width:210px"></s:password>
 										<br />
@@ -128,8 +128,8 @@ td {
 										<font color="#FF0000">*&nbsp;</font>
 									</td>
 									<td align="left" class="red-bcolor">
-										<input type="password" id="reOperationCode" size="30"
-											style="width: 210px" />
+										<input type="password" id="reOperationCode" size="30"  maxlength="20"
+											style="width: 210px" />  
 										<br />
 										重复上面的操作密码
 									</td>
