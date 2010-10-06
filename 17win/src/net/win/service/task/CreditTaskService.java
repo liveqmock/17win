@@ -410,10 +410,13 @@ public class CreditTaskService extends BaseService {
 			releaEntity.setConvertScore(releaEntity.getConvertScore()
 					+ releaseScore);
 			updateUserLoginInfo(releaEntity);
-			// 修改积分和钱 接收人
+			// 修改积分和钱 接收人 和 接受号
 			VipEntity receiveUserVip = receiveUser.getVip();
 			Integer receieveScore = StrategyUtils.getReleaseUserTaskScore(
 					receiveUserVip, receiveUser.getVipEnable());
+
+			creditTask.getBuyer()
+					.setScore(creditTask.getBuyer().getScore() + 1);
 			receiveUser.setMoney(ArithUtils.add(receiveUser.getMoney(),
 					creditTask.getMoney()));
 			// 发布点

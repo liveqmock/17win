@@ -91,7 +91,7 @@ public class UserEntity extends BaseEntity {
 
 	// VIP状态 true 表示没失效，false表示失效
 	@Column(name = "Vip_Enable_")
-	private Boolean vipEnable;
+	private Boolean vipEnable = false;
 
 	// 当前的Vip成长值
 	@Column(name = "Vip_Grow_Value_")

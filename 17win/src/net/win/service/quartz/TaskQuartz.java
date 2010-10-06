@@ -76,7 +76,7 @@ public class TaskQuartz {
 					+ "   set"
 					+ "       vipEnable=false,"
 					+ "   where"
-					+ "  vipEndDate is not null and      second(current_time())>second(vipEndDate)";
+					+ " vipEnable=true and   vipEndDate is not null and       second(current_time())>second(vipEndDate)";
 			query = session.createQuery(sql3);
 			query.executeUpdate();
 			session.getTransaction().commit();

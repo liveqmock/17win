@@ -1,6 +1,5 @@
 package net.win.utils;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -17,6 +16,29 @@ import net.win.entity.VipEntity;
 public final class StrategyUtils {
 	private StrategyUtils() {
 		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * 计算卖号个数
+	 * 
+	 * @param goodType
+	 * @return
+	 * @throws Exception
+	 */
+	public static Integer getSellerCount(String type, Boolean vipEnable) {
+		if (!vipEnable) {
+			return 2;
+		}
+		if ("1".equals(type)) {
+			return 3;
+		}
+		if ("1".equals(type)) {
+			return 4;
+		}
+		if ("1".equals(type)) {
+			return null;
+		}
+		return 2;
 	}
 
 	/**

@@ -19,6 +19,7 @@ import net.win.entity.SellerEntity;
 import net.win.entity.UserEntity;
 import net.win.utils.ArithUtils;
 import net.win.utils.Constant;
+import net.win.utils.StrategyUtils;
 import net.win.utils.StringUtils;
 import net.win.utils.TotalUtils;
 import net.win.utils.WinUtils;
@@ -73,6 +74,24 @@ public class UserInfoService extends BaseService {
 		UserEntity userEntity = getLoginUserEntity(userDAO);
 
 		if ("1".equals(type)) {
+			Long count = (Long) sellerDAO
+					.uniqueResultObject(
+							"select count(*) from SellerEntity as _seller "
+									+ "where _seller.user.id=:userId and type=:platformType",
+							new String[] { "userId", "platformType" },
+							new Object[] { getLoginUser().getId(),
+									platformTypeParam });
+			Integer sellerCountFlag = StrategyUtils.getSellerCount(
+					getLoginUser().getVipType(), getLoginUser().getVipEnable());
+			if (sellerCountFlag != null) {
+				if (count >= sellerCountFlag) {
+					String platform = WinUtils
+							.changeType2Platform(platformTypeParam);
+					putAlertMsg("您当前在" + platform + "平台最多只能拥有"
+							+ sellerCountFlag + "个账号");
+					return "updateSellerAndBuyer";
+				}
+			}
 			SellerEntity sellerEntity = userVO.getSeller();
 			String sheng = getByParam("sheng").trim();
 			String shi = getByParam("shi").trim();
