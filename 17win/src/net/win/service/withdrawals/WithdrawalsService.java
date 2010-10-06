@@ -102,8 +102,8 @@ public class WithdrawalsService extends BaseService {
 			paramNames.add("startDate");
 			paramValues.add(withdrawalsVO.getStartDate());
 		} else if (withdrawalsVO.getEndDate() != null) {
-			resultHQL.append(" and   _w.money<=:endDate  ");
-			countHQL.append(" and   _w.money<=:endDate  ");
+			resultHQL.append(" and   _w.operationDate<=:endDate  ");
+			countHQL.append(" and   _w.operationDate<=:endDate  ");
 			paramNames.add("endDate");
 			paramValues.add(withdrawalsVO.getEndDate());
 		}

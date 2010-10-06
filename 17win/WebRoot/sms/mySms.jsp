@@ -1,6 +1,12 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
 <HTML>
 	<HEAD>
 		<s:include value="../common/header.jsp"></s:include>
@@ -9,9 +15,13 @@
 		<LINK href="css/top_bottom.css" type="text/css" rel="stylesheet">
 		<LINK href="css/Css.css" type="text/css" rel="stylesheet">
 		<LINK href="css/center.css" type="text/css" rel="stylesheet">
-		<link href="css/excite-bike/jquery-ui-1.8.4.custom.css"
-			rel="stylesheet" type="text/css" />
-		<SCRIPT src="js/jquery-ui-1.8.4.custom.min.js" type="text/javascript"></SCRIPT>
+
+
+		<SCRIPT src="js/jquery.tablesorter.min.js" type="text/javascript"></SCRIPT>
+
+		<script src="<%=basePath%>js/My97DatePicker/WdatePicker.js"
+			type="text/javascript"></script>
+
 		<script src="sms/mySms.js" type="text/javascript"></script>
 		<style type="text/css">
 body {
@@ -89,210 +99,165 @@ img {
 											<strong>我的站内信</strong>
 										</div>
 										<!-- xgj -->
-										<div>
-											<div id="tabs">
-												<ul>
-													<li>
-														<a href="#tabs-1">系统站内信信</a>
-													</li>
-													<li>
-														<a href="#tabs-2">收到的站内信</a>
-													</li>
-													<li>
-														<a href="#tabs-3">发送的站内信</a>
-													</li>
-												</ul>
-												<div id="tabs-1">
-													<s:form
-														action="withdrawalsManager/withdrawals!withdrawals.php"
-														theme="simple" onsubmit="return validateForm('1')">
-														<table>
-															<tr>
-																<Td align="right">
-																	提现人：
-																	<input name="withdrawalsVO.type" type="hidden"
-																		value="1">
-																	<input name="withdrawalsVO.shopType" id="shopType"
-																		type="hidden" value="1">
-																</Td>
-																<Td>
-																	<s:property value="#session.userLogin.username" />
-																</Td>
-															</tr>
-															<tr>
-																<Td align="right">
-																	提现金额：
-																</Td>
-																<Td>
-																	<s:textfield name="withdrawalsVO.money" id="money_1"></s:textfield>
-																	元
-																</Td>
-															</tr>
-															<tr>
-																<Td align="right">
-																	商品地址：
-																</Td>
-																<Td>
-																	<s:textfield name="withdrawalsVO.realIdentity"
-																		id="realIdentity_1"></s:textfield>
-																	(淘宝，拍拍，有啊任意一个和提现金额价格相等的商品地址)
-																	<span id="errorShop"></span>
-																</Td>
-															</tr>
-															<tr>
-																<Td align="right">
-																	掌柜：
-																</Td>
-																<Td>
-																	<s:textfield name="withdrawalsVO.realname"
-																		readonly="true" id="realname_1"></s:textfield>
-																	(系统自动获取)
-																</Td>
-															</tr>
-															<tr>
-																<Td align="right">
-																	操作密码：
-																</Td>
-																<Td>
-																	<s:textfield name="withdrawalsVO.operationCode"
-																		id="operationCode_1"></s:textfield>
-																</Td>
-															</tr>
-															<tr>
-																<Td colspan="2" align="center">
-																	<input type="submit" class="buttonFlag"
-																		value="提&nbsp;&nbsp;交">
-																</Td>
+										<br>
+										<s:form action="smsManager/sms!querySms.php"
+											onsubmit="return validateForm()" theme="simple">
+											<table width="100%" cellpadding="1" cellspacing="1"
+												border="0px" style="background: #DDEDFA">
+												<tr>
+													<td>
+														发送日期：
+														<s:textfield name="smsVO.startDate" id="startDate"
+															onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})"
+															readonly="true" cssStyle="width:110px">
+														</s:textfield>
+														至
+														<s:textfield name="smsVO.endDate" id="endDate"
+															readonly="true"
+															onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})"
+															cssStyle="width:110px">
+														</s:textfield>
+													</td>
+													<td>
+														短信类型：
+														<s:select id="smsVO" listKey="key" listValue="value"
+															name="smsVO.type" headerKey="" headerValue="--请选择--"
+															list="#{'1':'系统短信','2':'普通短信'}">
+														</s:select>
+													</td>
+													<td>
+														<input type="submit" value="查&nbsp;&nbsp;询"
+															style="cursor: pointer;">
+													</td>
+												</tr>
+											</table>
+										</s:form>
+										<br>
+										<table id="myTable" class="tablesorter" cellpadding="1">
+											<thead>
+												<tr>
+													<th style="font-size: 12px" nowrap="nowrap">
+														发送人
+													</th>
+													<th style="font-size: 12px" nowrap="nowrap">
+														接收人
+													</th>
+													<th style="font-size: 12px" nowrap="nowrap">
+														类型
+													</th>
+													<th style="font-size: 12px" nowrap="nowrap">
+														标题
+													</th>
+													<th style="font-size: 12px" nowrap="nowrap">
+														发送时间
+													</th>
+													<th style="font-size: 12px" nowrap="nowrap">
+														操作
+													</th>
+												</tr>
+											</thead>
+											<tbody>
+												<s:iterator value="#request.result" id="sms">
+													<tr>
+														<td>
+															<s:property value="#sms.fromUserName" />
+														</td>
+														<td>
+															<s:property value="#sms.toUserName" />
+														</td>
+														<td>
+															<s:if test="#sms.type==1">
+																	系统消息
+															</s:if>
+															<s:else>
+																普通消息
+															</s:else>
+														</td>
+														<td>
+															<s:if test="#sms.false">
+																<b>*<s:property value="#sms.title" /> </b>
+															</s:if>
+															<s:else>
+																<s:property value="#sms.title" />
+															</s:else>
+														</td>
+														<td>
+															<s:date name="#sms.sendDate" format="yyyy-MM-dd HH-mm-ss" />
+														</td>
+														<td>
+															<a
+																href="javascript:brower(<s:property value="#sms.id" />);">浏览</a>
+															<s:if
+																test="#sms.type==2 && #sms.toUserName!=#session.userLogin.username">
+																<a
+																	href="javascript:reply(<s:property value="#sms.fromUserName" />);">回复</a>
+															</s:if>
+															<a
+																href="javascript:deleteSms(<s:property value="#sms.id" />);">删除</a>
+														</td>
+													</tr>
+												</s:iterator>
+											</tbody>
+											<s:if test="#request.result.size()==0">
+												<tr>
+													<th colspan="9" align="center">
+														您当前没有短信！
+													</th>
+												</tr>
+											</s:if>
+											<s:else>
+												<tfoot>
+													<tr>
+														<th colspan="7">
+															<div style="float: left;">
+																<a href="javascript:firstPage()">首页</a>
+																<a href="javascript:prevPage()">上一页</a>&nbsp;
+																<a href="javascript:nextPage()">下一页</a>&nbsp;
+																<a href="javascript:lastPage()">尾页</a>&nbsp;
+															</div>
+															<div style="float: left;">
+																<s:property value="smsVO.nowPage" />
+																/
+																<s:property value="smsVO.pageCount" />
+																跳转到
+																<select id='toPageSelect' size='1' onchange="jumpPage()">
+																	<s:iterator begin="1" end="smsVO.pageCount" step="1"
+																		var="index">
+																		<option value="<s:property value="#index" />">
+																			第
+																			<s:property value="#index" />
+																			页
+																		</option>
+																	</s:iterator>
+																</select>
+															</div>
+															<div style="float: left;">
+																排列顺序
+																<select id='toPageSelect' size='1' onchange="jumpPage()">
+																	<s:iterator begin="1" end="smsVO.pageCount" step="1"
+																		var="index">
+																		<option value="<s:property value="#index" />">
+																			第
+																			<s:property value="#index" />
+																			页
+																		</option>
+																	</s:iterator>
+																</select>
+															</div>
+															<input type="hidden" name="smsVO.nowPage"
+																value="<s:property
+											value="smsVO.nowPage" />"
+																id="nowPage">
+															<input type="hidden"
+																value="<s:property
+										value="smsVO.pageCount" />"
+																id="pageCount">
+														</th>
+													</tr>
+												</tfoot>
+											</s:else>
+										</table>
 
-															</tr>
-														</table>
-													</s:form>
-												</div>
-												<div id="tabs-2">
-													<s:form
-														action="withdrawalsManager/withdrawals!withdrawals.php"
-														theme="simple" onsubmit="return validateForm('2')">
-														<table>
-															<tr>
-																<Td align="right">
-																	提现人：
-																	<input name="withdrawalsVO.type" type="hidden"
-																		value="2">
-																</Td>
-																<Td>
-																	<s:property value="#session.userLogin.username" />
-																</Td>
-															</tr>
-															<tr>
-																<Td align="right">
-																	提现金额：
-																</Td>
-																<Td>
-																	<s:textfield name="withdrawalsVO.money" id="money_2"></s:textfield>
-																	元
-																</Td>
-															</tr>
-															<tr>
-																<Td align="right">
-																	您的支付宝账号：
-																</Td>
-																<Td>
-																	<s:textfield name="withdrawalsVO.realIdentity"
-																		id="realIdentity_2"></s:textfield>
-																</Td>
-															</tr>
-															<tr>
-																<Td align="right">
-																	您的真名：
-																</Td>
-																<Td>
-																	<s:textfield name="withdrawalsVO.realName"
-																		id="realName_2"></s:textfield>
-																</Td>
-															</tr>
-
-															<tr>
-																<Td align="right">
-																	操作密码：
-																</Td>
-																<Td>
-																	<s:textfield name="withdrawalsVO.operationCode"
-																		id="operationCode_2"></s:textfield>
-																</Td>
-															</tr>
-															<tr>
-																<Td colspan="2" align="center">
-																	<input type="submit" value="提&nbsp;&nbsp;交">
-																</Td>
-
-															</tr>
-														</table>
-													</s:form>
-												</div>
-												<div id="tabs-3">
-													<s:form
-														action="withdrawalsManager/withdrawals!withdrawals.php"
-														theme="simple" onsubmit="return validateForm('3')">
-														<table>
-															<tr>
-																<Td align="right">
-																	提现人：
-																	<input name="withdrawalsVO.type" type="hidden"
-																		value="3">
-																</Td>
-																<Td>
-																	<s:property value="#session.userLogin.username" />
-																</Td>
-															</tr>
-															<tr>
-																<Td align="right">
-																	提现金额：
-																</Td>
-																<Td>
-																	<s:textfield name="withdrawalsVO.money" id="money_3"></s:textfield>
-																	元
-																</Td>
-															</tr>
-															<tr>
-																<Td align="right">
-																	您的财付通账号：
-																</Td>
-																<Td>
-																	<s:textfield name="withdrawalsVO.realIdentity"
-																		id="realIdentity_3"></s:textfield>
-																</Td>
-															</tr>
-															<tr>
-																<Td align="right">
-																	您的真名：
-																</Td>
-																<Td>
-																	<s:textfield name="withdrawalsVO.realName"
-																		id="realName_3"></s:textfield>
-																</Td>
-															</tr>
-
-															<tr>
-																<Td align="right">
-																	操作密码：
-																</Td>
-																<Td>
-																	<s:textfield name="withdrawalsVO.operationCode"
-																		id="operationCode_3"></s:textfield>
-																</Td>
-															</tr>
-															<tr>
-																<Td colspan="2" align="center">
-																	<input type="submit" value="提&nbsp;&nbsp;交">
-																</Td>
-
-															</tr>
-														</table>
-													</s:form>
-												</div>
-											</div>
-										</div>
-										<!-- end -->
 									</div>
 								</div>
 							</td>

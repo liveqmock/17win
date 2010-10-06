@@ -15,8 +15,30 @@ public class SmsVO extends BaseVO {
 	private Date sendDate;
 
 	private String toUserName;
-	
+
+	private String fromUserName;
+
 	private Boolean read;
+
+	// 参数
+	private Date startDate;
+	private Date endDate;
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
 
 	public Boolean getRead() {
 		return read;
@@ -64,5 +86,13 @@ public class SmsVO extends BaseVO {
 
 	public void setSendDate(Date sendDate) {
 		this.sendDate = sendDate;
+	}
+
+	public String getFromUserName() {
+		return fromUserName;
+	}
+
+	public void setFromUserName(String fromUserName) {
+		this.fromUserName = fromUserName;
 	}
 }

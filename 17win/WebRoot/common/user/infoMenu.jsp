@@ -258,7 +258,7 @@
 										</tr>
 										<tr>
 											<td height=20>
-												<a href="userInfoManager/info!initBuyDot.php">我的站内信</a>
+												<a href="smsManager/sms!querySms.php">我的站内信</a>
 											</td>
 
 										</tr>

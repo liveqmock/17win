@@ -52,7 +52,43 @@ public class SmsAction extends BaseAction {
 		return smsService.initSendSms(smsVO);
 	}
 
+	/**
+	 * 添加
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
 	public String addSms() throws Exception {
 		return smsService.insertSms(smsVO);
+	}
+
+	/**
+	 * 查询
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String querySms() throws Exception {
+		return smsService.querySms(smsVO);
+	}
+
+	/**
+	 * 删除
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String deleteSms() throws Exception {
+		return smsService.deleteSms(smsVO);
+	}
+
+	/**
+	 * 修改已读标记
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String updateSms() throws Exception {
+		return smsService.updateSms(smsVO);
 	}
 }
