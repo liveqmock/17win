@@ -1,4 +1,13 @@
 $(document).ready(function() {
+			$("#browerSms").dialog({
+						autoOpen : false,
+						draggable : false,
+						hide : 'Highlight',
+						modal : true,
+						resizable : false,
+						show : 'Highlight'
+					});
+
 			$("#myTable").tablesorter({
 						widthFixed : true,
 						sortList : [[0, 0]],
@@ -12,7 +21,6 @@ $(document).ready(function() {
 						}
 					});
 		});
-
 // 删除
 function deleteSms(id) {
 	if (confirm("您确认要删除此短信！")) {
@@ -20,16 +28,18 @@ function deleteSms(id) {
 	}
 }
 // 浏览
-function brower(id) {
-	if (confirm("您确认要删除此短信！")) {
-		window.href.location = "smsManager/sms!deleteSms.php";
+function brower(id, read) {
+	if (!read) {
+		$.post("smsManager/sms!updateSms.php?smsVO.id=" + id);
 	}
+	$("#browerSms").show();
+	$("#title").val($(this).attr("title"));
+	$("#content").text($(this).attr("content"));
 }
 // 回复
 function reply(fromUsername) {
-	if (confirm("您确认要删除此短信！")) {
-		window.href.location = "smsManager/sms!deleteSms.php?smsVO.id=";
-	}
+	window.open("smsManager/sms!initSendSms.php?toUser=" + fromUsername,
+			"_blank");
 }
 function validateForm() {
 	var startDate = $("#startDate").val();

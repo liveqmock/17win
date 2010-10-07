@@ -16,6 +16,9 @@
 		<LINK href="css/blue/style.css" type="text/css" rel="stylesheet">
 		<LINK href="css/Css.css" type="text/css" rel="stylesheet">
 		<LINK href="css/center.css" type="text/css" rel="stylesheet">
+		<link href="css/excite-bike/jquery-ui-1.8.4.custom.css"
+			rel="stylesheet" type="text/css" />
+		<SCRIPT src="js/jquery-ui-1.8.4.custom.min.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="js/jquery.tablesorter.min.js" type="text/javascript"></SCRIPT>
 		<script src="<%=basePath%>js/My97DatePicker/WdatePicker.js"
 			type="text/javascript"></script>
@@ -182,8 +185,8 @@ img {
 															<s:date name="#sms.sendDate" format="yyyy-MM-dd HH-mm-ss" />
 														</td>
 														<td>
-															<a
-																href="javascript:brower(<s:property value="#sms.id" />);">浏览</a>
+															<a content="<s:property value="#sms.content"/>" title="<s:property value="#sms.title"/>"
+																href="javascript:brower(<s:property value="#sms.id" />,<s:property value="#sms.read" />);">浏览</a>
 															<s:if
 																test="#sms.type==2 && #sms.toUserName!=#session.userLogin.username">
 																<a
@@ -249,5 +252,26 @@ img {
 			</tr>
 		</table>
 		<s:include value="../common/footDuan.jsp"></s:include>
+
+		<div id="browerSms" title="站内信">
+			<table border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td nowrap="nowrap">
+						标题:
+					</td>
+					<td>
+						<input type="text" id="title" />
+					</td>
+				</tr>
+				<tr>
+					<td nowrap="nowrap" valign="top">
+						内容:
+					</td>
+					<td>
+						<textarea cols="50" rows="8" id=content"></textarea>
+					</td>
+				</tr>
+			</table>
+		</div>
 	</BODY>
 </HTML>
