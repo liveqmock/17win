@@ -26,7 +26,7 @@ public class AdminEntity extends BaseEntity {
 	// 用户
 	@OneToOne(optional = false)
 	@Cascade(CascadeType.ALL)
-	@JoinColumn(name = "User_ID_")
+	@JoinColumn(name = "User_ID_", unique = true)
 	private UserEntity user;
 
 	public String getUsername() {
