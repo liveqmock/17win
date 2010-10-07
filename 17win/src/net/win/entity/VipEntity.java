@@ -23,11 +23,11 @@ public class VipEntity extends BaseEntity {
 	@Column(name = "Type_", columnDefinition = "CHAR(1)", nullable = false)
 	private String type;
 
-	// 积分400 800 1000 每月送积分
-	@Column(name = "Score_", nullable = false)
-	private Integer score;
+	// // 积分400 800 1000 每月送积分
+	// @Column(name = "presentDot", nullable = false)
+	// private Double presentDot;
 
-	// VIP
+	// 人员
 	@OneToMany(targetEntity = UserEntity.class, mappedBy = "vip", fetch = FetchType.LAZY)
 	private List<UserEntity> users;
 
@@ -101,13 +101,13 @@ public class VipEntity extends BaseEntity {
 		return sellerCount;
 	}
 
-	public Integer getScore() {
-		return score;
-	}
-
-	public void setScore(Integer score) {
-		this.score = score;
-	}
+	// public Integer getScore() {
+	// return score;
+	// }
+	//
+	// public void setScore(Integer score) {
+	// this.score = score;
+	//	}
 
 	public Integer getGrowValue() {
 		return growValue;

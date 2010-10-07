@@ -27,6 +27,7 @@
 		<SCRIPT src="js/validater.js" type=text/javascript></SCRIPT>
 		<SCRIPT src="index.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="js/service.js" type="text/javascript"></SCRIPT>
+		<SCRIPT src="js/jquery.messager.js" type="text/javascript"></SCRIPT>
 	</HEAD>
 	<BODY>
 		<s:form action="userManager/base!login.php" theme="simple"
@@ -95,8 +96,8 @@
 
 													<tr>
 														<td>
-															<a href="taskManager/task!initTask.php?platformType=1"><font color="#ff0000">免费刷钻&nbsp;
-															</font> </a>
+															<a href="taskManager/task!initTask.php?platformType=1"><font
+																color="#ff0000">免费刷钻&nbsp; </font> </a>
 														</td>
 														<td>
 															<a href="userManager/menuManager/menu!toIndex.php"
@@ -177,21 +178,13 @@
 												</TD>
 											</TR>
 											<TR>
-												<TD>
-													<div align="right">
-														<input name="imageField" src="images/login-q_r4_c3.gif"
-															border="0" type="image" onFocus="this.blur()" />
-													</div>
-												</TD>
-												<TD>
-													<div style="float: left">
-														<a href="userManager/base!initRegister.php"><img
-																src="images/login-q_r4_c31.gif" hspace="5" vspace="0"
-																border="0" /> </a>
-													</div>
-													<div style="float: right">
-														<a href="javascript:void(0);" id="findPWA" border="0">找回密码</a>
-													</div>
+												<TD colspan="2" nowrap="nowrap">
+													<input name="imageField" src="images/login-q_r4_c3.gif"
+														border="0" type="image" onFocus="this.blur()" />
+													<a href="userManager/base!initRegister.php"><img
+															src="images/login-q_r4_c31.gif" hspace="5" vspace="0"
+															border="0" /> </a>
+													<a href="javascript:void(0);" id="findPWA" border="0">找回密码</a>
 												</TD>
 											</TR>
 										</TABLE>
@@ -334,16 +327,16 @@ var links = "";
 var texts = "";
 
 linkarr[1] = "register.asp";
-picarr[1] = "images/20098138353780097.gif";
+picarr[1] = "images/indexSlider/20098138353780097.gif";
 textarr[1] = "新平台更加稳定，更加人性化，操作更方便！";
 linkarr[2] = "register.asp";
-picarr[2] = "images/20098138453136263.gif";
+picarr[2] = "images/indexSlider/20098138453136263.gif";
 textarr[2] = "想刷就刷，刷的开心，刷的放心！";
 linkarr[3] = "register.asp";
-picarr[3] = "images/20098138461028694.gif";
+picarr[3] = "images/indexSlider/20098138461028694.gif";
 textarr[3] = "互刷改变你生活，永久免费";
 linkarr[4] = "register.asp";
-picarr[4] = "images/20098138463632056.gif";
+picarr[4] = "images/indexSlider/20098138463632056.gif";
 textarr[4] = "边做生意边刷信誉";
 for(i=1;i<picarr.length;i++){
   if(files=="") files = picarr[i];
@@ -373,6 +366,7 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 						</table>
 						<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
 							<TBODY>
+
 								<TR height="3">
 									<TD height="3"></TD>
 								</TR>
@@ -384,6 +378,7 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 													<TD class=index_tt
 														style="BORDER-RIGHT: #6bbfec 1px solid; BORDER-TOP: #6bbfec 1px solid; BORDER-LEFT: #6bbfec 1px solid; BORDER-BOTTOM: #6bbfec 1px"
 														align=left colSpan=2 height=30>
+
 														&nbsp; 买、卖家教程
 													</TD>
 												</TR>
@@ -393,6 +388,7 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 													</TD>
 												</TR>
 												<TR>
+
 													<TD align=left width=346>
 														<TABLE style="BACKGROUND: url(Images/Top_30.gif) repeat-y"
 															cellSpacing=0 cellPadding=0 width=340 border=0>
@@ -405,6 +401,7 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 																	</TD>
 																</TR>
 																<TR>
+
 																	<TD height=120>
 																		<TABLE cellSpacing=0 cellPadding=0 width=300
 																			align=center border=0>
@@ -418,6 +415,7 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 																									<a href='../news.asp?/1448.html'
 																										target="_blank" title='淘宝刷钻-帐号不再被盗-------我有妙招'><font
 																										color=>淘宝刷钻-帐号不再被盗----</font> </a>
+
 																								</td>
 																							</tr>
 																							<tr>
@@ -428,6 +426,7 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 																								</td>
 																							</tr>
 																							<tr>
+
 																								<td>
 																									<a href='../news.asp?/1446.html'
 																										target="_blank" title='淘宝刷信誉-哪句话让你感到最郁闷？'><font
@@ -439,6 +438,7 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 																									<a href='../news.asp?/1445.html'
 																										target="_blank" title='免费刷钻-公务员兼职淘宝三年买房买车'><font
 																										color=>免费刷钻-公务员兼职淘宝三年买</font> </a>
+
 																								</td>
 																							</tr>
 																							<tr>
@@ -450,6 +450,7 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 																								</td>
 																							</tr>
 																							<tr>
+
 																								<td>
 																									<a href='../news.asp?/1443.html'
 																										target="_blank" title='淘宝刷钻-如何处理顾客砍价问题？'><font
@@ -462,6 +463,7 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 																						<a href="newmore.asp?action=92"><IMG
 																								src="images/jieducm_27.gif" width=84 height=88
 																								border="0"> </a>
+
 																					</TD>
 																				</TR>
 																			</TBODY>
@@ -473,6 +475,7 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 																		style="BACKGROUND: url(Images/Top_31.gif) no-repeat"
 																		height=7></TD>
 																</TR>
+
 															</TBODY>
 														</TABLE>
 													</TD>
@@ -486,6 +489,7 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 																		align=left height=45>
 																		&nbsp; 买家教程
 																	</TD>
+
 																</TR>
 																<TR>
 																	<TD height=120>
@@ -497,6 +501,7 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 																						<table class=LeftNews cellSpacing=0 cellPadding=0
 																							width="100%" border=0>
 																							<tr>
+
 																								<td>
 																									<a href='../news.asp?/1449.html'
 																										target="_blank" title='互刷平台-第三方诈骗的详细过程和防骗经验'><font
@@ -508,6 +513,7 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 																									<a href='../news.asp?/1440.html'
 																										target="_blank" title='淘宝刷钻-阿里巴巴注资搜狗，意在淘宝'><font
 																										color=>淘宝刷钻-阿里巴巴注资搜狗，意</font> </a>
+
 																								</td>
 																							</tr>
 																							<tr>
@@ -518,6 +524,7 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 																								</td>
 																							</tr>
 																							<tr>
+
 																								<td>
 																									<a href='../news.asp?/1434.html'
 																										target="_blank" title='淘宝刷信誉-网店的核心价值是什么'><font
@@ -529,6 +536,7 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 																									<a href='../news.asp?/1432.html'
 																										target="_blank" title='免费刷钻-买家必读'><font
 																										color=>免费刷钻-买家必读</font> </a>
+
 																								</td>
 																							</tr>
 																							<tr>
@@ -539,6 +547,7 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 																								</td>
 																							</tr>
 																						</table>
+
 																					</TD>
 																					<TD align=right width="35%" rowSpan=4>
 																						<a href="newmore.asp?action=93"><IMG
@@ -549,6 +558,7 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 																			</TBODY>
 																		</TABLE>
 																	</TD>
+
 																</TR>
 																<TR>
 																	<TD
@@ -560,6 +570,7 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 													</TD>
 												</TR>
 											</TBODY>
+
 										</TABLE>
 									</TD>
 								</TR>
@@ -571,6 +582,7 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 										<table width=100% border=0 align="center" cellPadding=0
 											cellSpacing=0
 											style="BORDER-TOP: #72c2ed 1px solid; BORDER-RIGHT: #72c2ed 1px solid; BORDER-LEFT: #72c2ed 1px solid; BORDER-BOTTOM: #72c2ed 1px solid">
+
 											<tr>
 												<td>
 
@@ -583,6 +595,7 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 												</td>
 											</tr>
 										</table>
+
 									</TD>
 								</TR>
 							</TBODY>
@@ -740,32 +753,8 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 		</s:form>
 		<s:property value="#request.msg" escape="false" />
 
-		<div id="findPW" title="找回密码">
-			<table border="0" cellpadding="0" cellspacing="0">
-				<tr>
-					<td nowrap="nowrap">
-						用户名/手机号码:
-					</td>
-					<td>
-						<input type="text" id="usernameTelephone" />
-
-					</td>
-				</tr>
-				<tr>
-					<td>
-						&nbsp;
-						<input type="button" id="findPWBtn" value="提交" />
-					</td>
-					<td>
-					</td>
-
-				</tr>
-			</table>
-		</div>
-
-
 		<div class="service2  service serviceA " id="divSerWin">
-			<div class="service-close" id="divMySer">
+			<div class="service-open" id="divMySer">
 				<div onclick="ClickSer();" class="service-button"></div>
 				<div class="service-inside">
 					<dl>
