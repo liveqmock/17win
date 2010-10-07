@@ -73,13 +73,13 @@ img {
 
 							<!-- 要插入的 -->
 							<td valign="top">
-									<div class="pp7">
-											您现在的位置是：个人中心 &gt;&gt; 我的推广 &gt;&gt;
-										</div>
+								<div class="pp7">
+									您现在的位置是：个人中心 &gt;&gt; 我的推广 &gt;&gt;
+								</div>
 								<div
 									style="clear: both; width: 730px; background-color: rgb(243, 248, 254);">
-									
-								
+
+
 									<div style="clear: both; margin-top: 20px; line-height: 150%;">
 										<table width="100%" cellspacing="0" cellpadding="0" border="0">
 											<tbody>
@@ -92,7 +92,7 @@ img {
 																	<td width="1">
 																		<img width="3" height="25"
 																			src="images/mytaobaobj1_3.gif">
-																			
+
 																	</td>
 																	<td width="120" background="images/mytaobaobj1_4.gif"
 																		align="middle">
@@ -208,92 +208,6 @@ img {
 										</tbody>
 									</table>
 								</div>
-								<div
-									style="clear: both; width: 730px; background-color: rgb(243, 248, 254);">
-									<div style="clear: both; margin-top: 20px; line-height: 150%;">
-										<table width="100%" cellspacing="0" cellpadding="0" border="0">
-											<tbody>
-												<tr>
-													<td>
-														<table cellspacing="0" cellpadding="0" border="0"
-															align="left">
-															<tbody>
-																<tr>
-																	<td width="1">
-																		<img width="3" height="25"
-																			src="images/mytaobaobj1_3.gif">
-																	</td>
-																	<td width="200" background="images/mytaobaobj1_4.gif"
-																		align="middle">
-																		<font color="#ffffff"><span>推广排行榜（推广积分排列）</span>
-																		</font>
-																	</td>
-																	<td width="1">
-																		<img width="3" height="25"
-																			src="images/mytaobaobj1_6.gif">
-																	</td>
-																</tr>
-															</tbody>
-														</table>
-														<table cellspacing="0" cellpadding="0" border="0"
-															align="left">
-															<tbody>
-																<tr>
-																	<td>
-																		<span style="padding-left: 20px;"></span>
-																	</td>
-																</tr>
-															</tbody>
-														</table>
-													</td>
-												</tr>
-											</tbody>
-										</table>
-										<table width="100%" cellspacing="0" cellpadding="0" border="0">
-											<tbody>
-												<tr>
-													<td height="4" bgcolor="#1e88c1"></td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-								<div
-									style="clear: both; border: 1px solid rgb(171, 190, 200); margin-top: 10px; width: 730px; background-color: rgb(243, 248, 254);">
-									<table align="left"
-										style="border-width: 0px; margin-left: 20px; width: 90%;">
-										<thead
-											style="border-bottom: 1px solid rgb(204, 204, 204); height: 40px;">
-											<tr>
-												<td style="font-weight: bolder; width: 20%;">
-													用户名
-												</td>
-												<td style="font-weight: bolder; width: 20%;">
-													推荐人数
-												</td>
-												<td style="font-weight: bolder; width: 20%;">
-													当前推广积分
-												</td>
-											</tr>
-										</thead>
-										<tbody>
-											<s:iterator value="#request.referees">
-												<tr>
-													<td>
-														<s:property value="username" />
-													</td>
-													<td>
-														<s:property value="spreadCount" />
-													</td>
-													<td >
-														<s:property value="spreadScore" />
-													</td>
-												</tr>
-											</s:iterator>
-										</tbody>
-									</table>
-								</div>
-
 							</td>
 							<!-- end -->
 						</tr>

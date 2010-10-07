@@ -2,10 +2,11 @@ $(document).ready(function() {
 			$("#browerSms").dialog({
 						autoOpen : false,
 						draggable : false,
-						hide : 'Highlight',
+						hide : 'highlight',
 						modal : true,
 						resizable : false,
-						show : 'Highlight'
+						width:500,
+						show : 'highlight'
 					});
 
 			$("#myTable").tablesorter({
@@ -32,9 +33,10 @@ function brower(id, read) {
 	if (!read) {
 		$.post("smsManager/sms!updateSms.php?smsVO.id=" + id);
 	}
-	$("#browerSms").show();
-	$("#title").val($(this).attr("title"));
-	$("#content").text($(this).attr("content"));
+	$("#title").val($("#a_"+id).attr("title"));
+	$("#content").text($("#a_"+id).attr("content"));
+	$("#browerSms").dialog("open");
+	
 }
 // 回复
 function reply(fromUsername) {

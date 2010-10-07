@@ -93,7 +93,7 @@ img {
 								<div class="pp9">
 									<div style="padding-bottom: 15px; width: 97%;">
 										<div class="pp7">
-											您现在的位置是：个人中心 &gt;&gt;站内信管理 &gt;&gt;
+											您现在的位置是：个人中心 &gt;&gt;短信管理 &gt;&gt;
 										</div>
 										<div class="pp8">
 											<strong>我的站内信</strong>
@@ -133,7 +133,8 @@ img {
 											</table>
 										</s:form>
 										<br>
-										<table id="myTable" class="tablesorter" cellpadding="1">
+										<table id="myTable" class="tablesorter" cellpadding="1"
+											style="table-layout: fixed">
 											<thead>
 												<tr>
 													<th style="font-size: 12px" nowrap="nowrap">
@@ -160,7 +161,14 @@ img {
 												<s:iterator value="#request.result" id="sms">
 													<tr>
 														<td>
-															<s:property value="#sms.fromUserName" />
+															<s:if
+																test="!#sms.read &&  #sms.fromUserName!=#session.userLogin.username">
+																<b>*<s:property value="#sms.fromUserName" />
+																</b>
+															</s:if>
+															<s:else>
+																<s:property value="#sms.fromUserName" />
+															</s:else>
 														</td>
 														<td>
 															<s:property value="#sms.toUserName" />
@@ -173,24 +181,21 @@ img {
 																普通消息
 															</s:else>
 														</td>
-														<td>
-															<s:if test="#sms.false">
-																<b>*<s:property value="#sms.title" /> </b>
-															</s:if>
-															<s:else>
-																<s:property value="#sms.title" />
-															</s:else>
+														<td
+															style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+															<s:property value="#sms.title" />
 														</td>
 														<td>
 															<s:date name="#sms.sendDate" format="yyyy-MM-dd HH-mm-ss" />
 														</td>
 														<td>
-															<a content="<s:property value="#sms.content"/>" title="<s:property value="#sms.title"/>"
-																href="javascript:brower(<s:property value="#sms.id" />,<s:property value="#sms.read" />);">浏览</a>
+															<a content="<s:property value="#sms.content"/>"
+																title="<s:property value="#sms.title"/>"  id="a_<s:property value="#sms.id"/>"
+																href="javascript:brower(<s:property value="#sms.id" />,<s:property value="#sms.read" />,this);">浏览</a>
 															<s:if
-																test="#sms.type==2 && #sms.toUserName!=#session.userLogin.username">
+																test="#sms.type==2 && #sms.fromUserName!=#session.userLogin.username">
 																<a
-																	href="javascript:reply(<s:property value="#sms.fromUserName" />);">回复</a>
+																	href="javascript:reply('<s:property value="#sms.fromUserName" />');">回复</a>
 															</s:if>
 															<a
 																href="javascript:deleteSms(<s:property value="#sms.id" />);">删除</a>
@@ -200,7 +205,7 @@ img {
 											</tbody>
 											<s:if test="#request.result.size()==0">
 												<tr>
-													<th colspan="9" align="center">
+													<th colspan="6" align="center">
 														您当前没有短信！
 													</th>
 												</tr>
@@ -208,7 +213,7 @@ img {
 											<s:else>
 												<tfoot>
 													<tr>
-														<th colspan="7">
+														<th colspan="6">
 															<div style="float: left;">
 																<a href="javascript:firstPage()">首页</a>
 																<a href="javascript:prevPage()">上一页</a>&nbsp;
@@ -260,7 +265,7 @@ img {
 						标题:
 					</td>
 					<td>
-						<input type="text" id="title" />
+						<input type="text" id="title" readonly="readonly" />
 					</td>
 				</tr>
 				<tr>
@@ -268,7 +273,7 @@ img {
 						内容:
 					</td>
 					<td>
-						<textarea cols="50" rows="8" id=content"></textarea>
+						<textarea cols="50" rows="8" id="content" readonly="readonly"></textarea>
 					</td>
 				</tr>
 			</table>

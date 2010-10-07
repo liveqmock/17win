@@ -352,19 +352,6 @@ public class UserInfoService extends BaseService {
 		}
 		// 设置我的推广
 		putByRequest("myRefees", result1);
-		// 设置推广排行
-		List<UserEntity> referees = userDAO
-				.pageQuery(
-						" from UserEntity _u  order by _u.spreadCount , _u.spreadScore",
-						0, 15);
-		List<UserInfoVO> result2 = new ArrayList<UserInfoVO>();
-		for (UserEntity userEntity : referees) {
-			UserInfoVO userInfoVO = new UserInfoVO(userEntity.getUsername(),
-					userEntity.getSpreadCount(), userEntity.getSpreadScore());
-			result2.add(userInfoVO);
-		}
-		// 推广排行
-		putByRequest("referees", result2);
 		return "myRefee";
 	}
 

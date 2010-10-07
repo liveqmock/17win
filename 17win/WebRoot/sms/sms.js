@@ -1,6 +1,6 @@
 $(document).ready(function() {
 			if (!Validater.isBlank($("#toUsername").val())) {
-				$("#toUsername").add("readonly", true);
+				$("#toUsername").attr("readonly", true);
 				$("#title").focus();
 			} else {
 				$("#toUsername").focus();
@@ -9,7 +9,7 @@ $(document).ready(function() {
 			$("#showTip").text($("#content").val().length + "/" + 200);
 
 			$("#content").keydown(function() {
-						var value = $(this).val();
+						var value = $(this).val()+1;
 						$("#showTip").text(value.length + "/" + 200);
 						if (value.length > 200) {
 							alert(value.substring(0, 200));

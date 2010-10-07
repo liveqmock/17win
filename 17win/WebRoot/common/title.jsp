@@ -74,18 +74,13 @@
 												style="BACKGROUND: url(images/jieducm_top_btn5.jpg) no-repeat">
 												<A href="system/shuakeRank.jsp">刷客排行</A>
 											</LI>
-											<!--  xgj
-											<LI
-												style="BACKGROUND: url(images/jieducm_top_btn4.jpg) no-repeat">
-												<A href="user/sms.asp">手机短信</A>
-											</LI> -->
 											<LI
 												style="BACKGROUND: url(images/jieducm_top_btn3.jpg) no-repeat">
-												<A href="user/exchange.jsp">我要兑换</A>
+												<A href="userInfoManager/info!initExchange.php">我要兑换</A>
 											</LI>
 											<LI
 												style="BACKGROUND: url(images/jieducm_top_btn2.jpg) no-repeat">
-												<A href="user/buyDot.jsp">买发布点</A>
+												<A href="userInfoManager/info!initBuyDot.php">买发布点</A>
 											</LI>
 											<LI
 												style="BACKGROUND: url(images/jieducm_top_btn1.jpg) no-repeat">
@@ -113,9 +108,9 @@
 				</s:if>
 					<s:else>
 						class="li0 "
-				</s:else>
-					href="index.html" id="a0" onmouseover="Mea(0);"
-					onMouseOut="setAuto()"><SPAN>首&nbsp;页</SPAN> </A>
+				</s:else> href="index.html"
+					id="a0" onmouseover="Mea(0);" onMouseOut="setAuto()"><SPAN>首&nbsp;页</SPAN>
+				</A>
 			</LI>
 			<LI class=white>
 				<A
@@ -151,7 +146,7 @@
 					<s:else>
 						class="li0 "
 				</s:else> href="credit/task.jsp"
-					id="a4" onmouseover="Mea(4);" onMouseOut="setAuto()">流量互刷</A>
+					id="a4" onmouseover="Mea(4);" onMouseOut="setAuto()">双色球</A>
 				<br>
 			</LI>
 			<LI class=white>
@@ -161,8 +156,8 @@
 				</s:if>
 					<s:else>
 						class="li0 "
-				</s:else> href="credit/task.jsp"
-					id="a5" onmouseover="Mea(5);" onMouseOut="setAuto()">收藏互刷</A>
+				</s:else> href="user/paid.jsp"
+					id="a5" onmouseover="Mea(5);" onMouseOut="setAuto()">账号充值</A>
 			</LI>
 			<LI class=white>
 				<A

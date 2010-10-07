@@ -82,7 +82,7 @@ img {
 								<div class="pp9">
 									<div style="padding-bottom: 15px; width: 97%;">
 										<div class="pp7">
-											您现在的位置是：个人中心 &gt;&gt;站内信 &gt;&gt;
+											您现在的位置是：个人中心 &gt;&gt;短信管理 &gt;&gt;
 										</div>
 										<div class="pp8">
 											<strong>发送站内信</strong>
