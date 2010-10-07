@@ -3,7 +3,7 @@
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
+			+ path + "/admin/";
 %>
 <META http-equiv=Content-Type content="text/html; charset=UTF-8">
 <base href="<%=basePath%>">
