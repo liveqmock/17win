@@ -18,8 +18,8 @@ import org.springframework.stereotype.Controller;
 @Scope("prototype")
 @ParentPackage("17win-default")
 @Namespace("/adminManager")
-@Results( { @Result(name = "input", location = "/admin/user/register.jsp"),
-		@Result(name = "inputLogin", location = "/admin/user/.jsp")
+@Results( { @Result(name = "input", location = "/admin/login.jsp"),
+		@Result(name = "inputLogin", location = "/admin/login.jsp")
 
 })
 public class AdminAction extends BaseAction {

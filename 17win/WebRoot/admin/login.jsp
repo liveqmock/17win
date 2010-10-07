@@ -3,121 +3,43 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<title>企业信息管理系统_用户登录</title>
-		<style type="text/css">
-<!--
-body {
-	margin-left: 0px;
-	margin-top: 0px;
-	margin-right: 0px;
-	margin-bottom: 0px;
-	background-color: #016aa9;
-	overflow: hidden;
-}
-
-.STYLE1 {
-	color: #000000;
-	font-size: 12px;
-}
--->
-</style>
 	</head>
-
 	<body>
-
 		<s:form theme="simple" action="/adminManager/admin!login.php">
-			<table width="100%" height="100%" border="0" cellpadding="0"
-				cellspacing="0">
-				<tr>
+			<table>
+				<Tr>
 					<td>
-						<table width="962" border="0" align="center" cellpadding="0"
-							cellspacing="0">
-							<tr>
-								<td height="235" background="images/login_03.gif">
-									&nbsp;
-								</td>
-							</tr>
-							<tr>
-								<td height="53">
-									<table width="100%" border="0" cellspacing="0" cellpadding="0">
-										<tr>
-											<td width="394" height="53" background="images/login_05.gif">
-												&nbsp;
-											</td>
-											<td width="206" background="images/login_06.gif">
-												<table width="100%" border="0" cellspacing="0"
-													cellpadding="0">
-													<tr>
-														<td width="16%" height="25">
-															<div align="right">
-																<span class="STYLE1">用户</span>
-															</div>
-														</td>
-														<td width="57%" height="25">
-															<div align="center">
-																<input type="text" name="username"
-																	style="width: 105px; height: 17px; background-color: #292929; border: solid 1px #7dbad7; font-size: 12px; color: #6cd0ff">
-															</div>
-														</td>
-														<td width="27%" height="25">
-															&nbsp;
-														</td>
-													</tr>
-													<tr>
-														<td height="25">
-															<div align="right">
-																<span class="STYLE1">密码</span>
-															</div>
-														</td>
-														<td height="25">
-															<div align="center">
-																<input type="password" name="password"
-																	style="width: 105px; height: 17px; background-color: #292929; border: solid 1px #7dbad7; font-size: 12px; color: #6cd0ff">
-															</div>
-														</td>
-														<td height="25">
-															&nbsp;
-														</td>
-													</tr>
-
-													<tr>
-														<td height="25" nowrap="nowrap">
-															<div align="right">
-																<span class="STYLE1">验证码</span>
-															</div>
-														</td>
-														<td height="25">
-															<div align="center">
-																<img src="verify/verificationCode.php"
-																	onclick="changeValidateCode(this)" title="点击图片刷新验证码"
-																	style="cursor: pointer;" />
-															</div>
-														</td>
-														<td height="25">
-															<div align="left">
-																<input type="submit" value="提交" />
-															</div>
-														</td>
-													</tr>
-												</table>
-											</td>
-											<td width="362" background="images/login_07.gif">
-												&nbsp;
-											</td>
-										</tr>
-									</table>
-								</td>
-							</tr>
-							<tr>
-								<td height="213" background="images/login_08.gif">
-									&nbsp;
-								</td>
-							</tr>
-						</table>
+						登录名:
 					</td>
-				</tr>
+					<td>
+						<input name="username">
+					</td>
+				</Tr>
+				<Tr>
+					<td>
+						登录名:
+					</td>
+					<td>
+						<input type="password" name="password">
+					</td>
+				</Tr>
+				<Tr>
+					<td>
+						验证码:
+					</td>
+					<td>
+						<input type="text" name="password" style="width: 60px"
+							maxlength="4" />
+						<img src="verify/verificationCode.php" />
+					</td>
+				</Tr>
+				<Tr>
+					<td colspan="2">
+						<input type="submit" value="提交">
+					</td>
+				</Tr>
 			</table>
-			<s:property value="#request.msg" escape="false" />
 		</s:form>
+		<s:property value="#request.msg" escape="false" />
 	</body>
 </html>

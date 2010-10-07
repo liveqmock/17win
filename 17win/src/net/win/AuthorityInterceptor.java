@@ -28,6 +28,9 @@ public class AuthorityInterceptor extends AbstractInterceptor {
 		EXINCLUDE_PATH.add("ajaxManager/ajax!userExists.php");
 		EXINCLUDE_PATH.add("ajaxManager/ajax!phoneExists.php");
 		EXINCLUDE_PATH.add("ajaxManager/ajax!emailExists.php");
+		EXINCLUDE_PATH.add("adminManager/admin!login.php");
+		
+		
 
 	}
 	/**

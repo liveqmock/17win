@@ -1,8 +1,10 @@
 package net.win.entity;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -13,6 +15,8 @@ import org.hibernate.annotations.CascadeType;
  * @author Administrator
  * 
  */
+@Entity
+@Table(name = "Tb_Admin")
 public class AdminEntity extends BaseEntity {
 	/**
 	 * 基本信息

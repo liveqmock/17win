@@ -53,8 +53,7 @@ public class AdminService extends BaseService {
 		String code = getByParam("code");
 		String password = getByParam("password");
 		String username = getByParam("username");
-
-		if (!code.equals(getBySession(Constant.VERIFY_CODE))) {
+		if (code == null || !code.equals(getBySession(Constant.VERIFY_CODE))) {
 			putAlertMsg("验证码不正确！");
 			return "inputLogin";
 		}
