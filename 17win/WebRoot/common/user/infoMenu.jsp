@@ -197,6 +197,12 @@
 											</td>
 										</tr>
 										<tr>
+
+											<td height=20>
+												<a href="user/paid.jsp">充值记录</a>
+											</td>
+										</tr>
+										<tr>
 											<td height=20>
 												<a href="userInfoManager/info!initBuyDot.php">买发布点</a>
 											</td>
