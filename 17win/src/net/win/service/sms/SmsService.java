@@ -11,6 +11,8 @@ import net.win.dao.SmsDAO;
 import net.win.dao.UserDAO;
 import net.win.entity.SmsEntity;
 import net.win.entity.UserEntity;
+import net.win.utils.LoggerUtils;
+import net.win.utils.MsgUtils;
 import net.win.utils.StringUtils;
 import net.win.vo.SmsVO;
 
@@ -53,6 +55,10 @@ public class SmsService extends BaseService {
 		return "deleteSms";
 	}
 
+	public String initSendTelphone() throws Exception {
+		return "initSendTelphone";
+	}
+
 	/**
 	 * 修改
 	 * 
@@ -93,6 +99,26 @@ public class SmsService extends BaseService {
 		putAlertMsg("发送成功！");
 		smsVO.setToUserName("");
 		return "insertSms";
+	}
+
+	/**
+	 * 发送短信
+	 * 
+	 * @param smsVO
+	 * @return
+	 * @throws Exception
+	 */
+	public String sendTelphone() throws Exception {
+		try {
+			String telphone = getByParam("telehpne");
+			String content = getByParam("contentID");
+			MsgUtils.sendMsg(telphone, content);
+			putAlertMsg("发送成功！");
+		} catch (RuntimeException e) {
+			LoggerUtils.error(e);
+			putAlertMsg("发送失败，请联系管理员！");
+		}
+		return "sendTelphone";
 	}
 
 	/**

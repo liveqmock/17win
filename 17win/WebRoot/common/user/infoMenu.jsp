@@ -264,7 +264,7 @@
 										</tr>
 										<tr>
 											<td height=20>
-												<a href="userInfoManager/info!initExchange.php">发送手机短信</a>
+												<a href="smsManager/sms!initSendTelphone.php">发送手机短信</a>
 											</td>
 										</tr>
 									</table>

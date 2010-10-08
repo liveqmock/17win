@@ -8,12 +8,12 @@ $(document).ready(function() {
 
 			$("#showTip").text($("#content").val().length + "/" + 200);
 
-			$("#content").keydown(function() {
-						var value = $(this).val()+1;
-						$("#showTip").text(value.length + "/" + 200);
+			$("#content").keyup(function() {
+						var value = $(this).val();
 						if (value.length > 200) {
-							alert(value.substring(0, 200));
 							$(this).val(value.substring(0, 200));
+						} else {
+							$("#showTip").text(value.length + "/" + 200);
 						}
 					});
 
@@ -32,6 +32,6 @@ function validateForm() {
 		alert("内容必须在200个字以内！当前是：" + $("#content").val().length + "多个字！");
 		return false;
 	}
-
+	$("#submitBTN").attr("disabled", true);
 	return true;
 }
