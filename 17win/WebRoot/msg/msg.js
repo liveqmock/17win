@@ -20,10 +20,14 @@ function validateForm() {
 		alert("号码格式不正确！");
 		return false;
 	}
+	if (Validater.isBlank(content)) {
+		alert("内容不能为空！");
+		return false;
+	}
 	if ($("#contentID").val().length > 70) {
 		alert("内容必须在70个字以内！当前是：" + $("#content").val().length + "多个字！");
 		return false;
 	}
- 	$("#submitBTN").attr("disabled",true);
+	$("#submitBTN").attr("disabled", true);
 	return true;
 }
