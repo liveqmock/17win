@@ -20,7 +20,8 @@ import org.springframework.stereotype.Controller;
 @Namespace("/adminManager")
 @Results( { @Result(name = "input", location = "/admin/login.jsp"),
 		@Result(name = "inputLogin", location = "/admin/login.jsp"),
-		@Result(name = "loginOut", location = "/admin/login.jsp") })
+		@Result(name = "loginOut", location = "/admin/login.jsp"),
+		@Result(name = "loginSuccess", location = "/admin/user/userIndex.jsp") })
 public class AdminAction extends BaseAction {
 	@Resource
 	private AdminService adminService;

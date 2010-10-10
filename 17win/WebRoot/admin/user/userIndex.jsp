@@ -5,852 +5,248 @@
 	<head>
 		<s:include value="/admin/common/header.jsp"></s:include>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<SCRIPT type="text/javascript" src="user/userIndex.js"></SCRIPT>
 	</head>
 
 	<body>
-		<table width="100%" border="0" cellspacing="0" cellpadding="0">
-			<tr>
-				<td height="30" background="images/tab_05.gif">
-					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		<s:form action="adminUserManager/adminUser!queryPay.php"
+			onsubmit="return validateForm()" theme="simple">
+			<table width="100%" cellpadding="1" cellspacing="1" border="0px"
+				style="background: #DDEDFA">
+				<tr>
+					<td>
+						用户名：
+						<s:textfield name="adminUserVO.username">
+						</s:textfield>
+					</td>
+					<td>
+						发布点：
+						<s:textfield name="adminUserVO.startReleaseDot" id="startDate"
+							cssStyle="width:110px">
+						</s:textfield>
+						至
+						<s:textfield name="adminUserVO.endReleaseDot" id="endDate"
+							cssStyle="width:110px">
+						</s:textfield>
+					</td>
+					<td>
+						余额：
+						<s:textfield name="adminUserVO.startMoney" id="startDate"
+							cssStyle="width:110px">
+						</s:textfield>
+						至
+						<s:textfield name="adminUserVO.endMoney" id="endDate"
+							cssStyle="width:110px">
+						</s:textfield>
+					</td>
+					<td>
+						注册日期：
+						<s:textfield name="adminUserVO.regeditStartDate" id="startDate"
+							onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})"
+							readonly="true" cssStyle="width:110px">
+						</s:textfield>
+						至
+						<s:textfield name="adminUserVO.regeditEndDate" id="endDate"
+							readonly="true"
+							onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})"
+							cssStyle="width:110px">
+						</s:textfield>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						电子邮件：
+						<s:textfield name="adminUserVO.email">
+						</s:textfield>
+					</td>
+					<td>
+						手机：
+						<s:textfield name="adminUserVO.telphone" maxlength="11">
+						</s:textfield>
+					</td>
+					<td>
+						推广积分：
+						<s:textfield name="adminUserVO.startSpreadScore" id="startDate"
+							cssStyle="width:110px">
+						</s:textfield>
+						至
+						<s:textfield name="adminUserVO.endSpreadScore" id="endDate"
+							cssStyle="width:110px">
+						</s:textfield>
+					</td>
+					<td>
+						发任务数：
+						<s:textfield name="adminUserVO.startReleaseTaskCount">
+						</s:textfield>
+						至
+						<s:textfield name="adminUserVO.endReleaseTaskCount">
+						</s:textfield>
+					</td>
+
+				</tr>
+				<tr>
+					<td>
+						接任务数：
+						<s:textfield name="adminUserVO.startReceieveTaskCount">
+						</s:textfield>
+						至
+						<s:textfield name="adminUserVO.endReceieveTaskCount;">
+						</s:textfield>
+					</td>
+					<td>
+						VIP成长值：
+						<s:textfield name="adminUserVO.startVipGrowValue;" id="startDate"
+							cssStyle="width:110px">
+						</s:textfield>
+						至
+						<s:textfield name="adminUserVO.endVipGrowValue" id="endDate"
+							cssStyle="width:110px">
+						</s:textfield>
+					</td>
+					<td>
+						是否VIP：
+						<s:select listKey="key" listValue="value"
+							name="adminUserVO.vipEnable" headerKey="" headerValue="--请选择--"
+							list="#{'true':'是','false':'不是'}">
+						</s:select>
+					</td>
+					<td>
+						<input type="submit" value="查&nbsp;&nbsp;询"
+							style="cursor: pointer;">
+					</td>
+				</tr>
+				<tr>
+
+				</tr>
+			</table>
+			<br>
+			<table width="100%" cellpadding="1" id="myTable" class="tablesorter"
+				style="table-layout: fixed;">
+				<thead>
+					<tr>
+						<th nowrap="nowrap" style="font-size: 12px;">
+							用户名
+						</th>
+						<th nowrap="nowrap" style="font-size: 12px;">
+							发布点
+						</th>
+						<th nowrap="nowrap" style="font-size: 12px;">
+							余额
+						</th>
+						<th nowrap="nowrap" style="font-size: 12px;">
+							注册时间
+						</th>
+						<th nowrap="nowrap" style="font-size: 12px;">
+							电子邮件
+						</th>
+						<th nowrap="nowrap" style="font-size: 12px;">
+							手机
+						</th>
+						<th nowrap="nowrap" style="font-size: 12px;">
+							推广积分
+						</th>
+						<th nowrap="nowrap" style="font-size: 12px;">
+							发任务数
+						</th>
+						<th nowrap="nowrap" style="font-size: 12px;">
+							接任务数
+						</th>
+						<th nowrap="nowrap" style="font-size: 12px;">
+							是否VIP
+						</th>
+						<th nowrap="nowrap" style="font-size: 12px;">
+							VIP成长值
+						</th>
+						<th nowrap="nowrap" style="font-size: 12px;">
+							操作
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<s:iterator value="#request.result" id="user">
 						<tr>
-							<td width="12" height="30">
-								<img src="images/tab_03.gif" width="12" height="30" />
+							<td>
+								<s:property value="#user[0]" />
 							</td>
 							<td>
-								<table width="100%" border="0" cellspacing="0" cellpadding="0">
-									<tr>
-										<td width="46%" valign="middle">
-											<table width="100%" border="0" cellspacing="0"
-												cellpadding="0">
-												<tr>
-													<td width="5%">
-														<div align="center">
-															<img src="images/tb.gif" width="16" height="16" />
-														</div>
-													</td>
-													<td width="95%" class="STYLE1">
-														<span class="STYLE3">你当前的位置</span>：[业务中心]-[我的邮件]
-													</td>
-												</tr>
-											</table>
-										</td>
-										<td width="54%">
-											<table border="0" align="right" cellpadding="0"
-												cellspacing="0">
-												<tr>
-													<td width="60">
-														<table width="87%" border="0" cellpadding="0"
-															cellspacing="0">
-															<tr>
-																<td class="STYLE1">
-																	<div align="center">
-																		<input type="checkbox" name="checkbox62"
-																			value="checkbox" />
-																	</div>
-																</td>
-																<td class="STYLE1">
-																	<div align="center">
-																		全选
-																	</div>
-																</td>
-															</tr>
-														</table>
-													</td>
-													<td width="60">
-														<table width="90%" border="0" cellpadding="0"
-															cellspacing="0">
-															<tr>
-																<td class="STYLE1">
-																	<div align="center">
-																		<img src="images/22.gif" width="14" height="14" />
-																	</div>
-																</td>
-																<td class="STYLE1">
-																	<div align="center">
-																		新增
-																	</div>
-																</td>
-															</tr>
-														</table>
-													</td>
-													<td width="60">
-														<table width="90%" border="0" cellpadding="0"
-															cellspacing="0">
-															<tr>
-																<td class="STYLE1">
-																	<div align="center">
-																		<img src="images/33.gif" width="14" height="14" />
-																	</div>
-																</td>
-																<td class="STYLE1">
-																	<div align="center">
-																		修改
-																	</div>
-																</td>
-															</tr>
-														</table>
-													</td>
-													<td width="52">
-														<table width="88%" border="0" cellpadding="0"
-															cellspacing="0">
-															<tr>
-																<td class="STYLE1">
-																	<div align="center">
-																		<img src="images/11.gif" width="14" height="14" />
-																	</div>
-																</td>
-																<td class="STYLE1">
-																	<div align="center">
-																		删除
-																	</div>
-																</td>
-															</tr>
-														</table>
-													</td>
-												</tr>
-											</table>
-										</td>
-									</tr>
-								</table>
-							</td>
-							<td width="16">
-								<img src="images/tab_07.gif" width="16" height="30" />
-							</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<table width="100%" border="0" cellspacing="0" cellpadding="0">
-						<tr>
-							<td width="8" background="images/tab_12.gif">
-								&nbsp;
+								<s:property value="#user[1]" />
 							</td>
 							<td>
-								<table width="100%" border="0" cellpadding="0" cellspacing="1"
-									bgcolor="b5d6e6" onmouseover="changeto()"
-									onmouseout="changeback()">
-									<tr>
-										<td width="3%" height="22" background="images/bg.gif"
-											bgcolor="#FFFFFF">
-											<div align="center">
-												<input type="checkbox" name="checkbox" value="checkbox" />
-											</div>
-										</td>
-										<td width="3%" height="22" background="images/bg.gif"
-											bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">序号</span>
-											</div>
-										</td>
-										<td width="12%" height="22" background="images/bg.gif"
-											bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">接收号码</span>
-											</div>
-										</td>
-										<td width="14%" height="22" background="images/bg.gif"
-											bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">发送时间</span>
-											</div>
-										</td>
-										<td width="18%" background="images/bg.gif" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">邮件地址</span>
-											</div>
-										</td>
-										<td width="23%" height="22" background="images/bg.gif"
-											bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">内容</span>
-											</div>
-										</td>
-										<td width="15%" height="22" background="images/bg.gif"
-											bgcolor="#FFFFFF" class="STYLE1">
-											<div align="center">
-												基本操作
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<input type="checkbox" name="checkbox2" value="checkbox" />
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center" class="STYLE1">
-												<div align="center">
-													01
-												</div>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">13813916585</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">2007-11-16 15:00:20 </span>
-											</div>
-										</td>
-										<td bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">tiezhu0902@163.com</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">南京科技股份有限公司…</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE4"><img src="images/edt.gif"
-														width="16" height="16" />编辑&nbsp; &nbsp;<img
-														src="images/del.gif" width="16" height="16" />删除</span>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<input type="checkbox" name="checkbox3" value="checkbox" />
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center" class="STYLE1">
-												<div align="center">
-													02
-												</div>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">13813916585</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">2007-11-16 15:00:20 </span>
-											</div>
-										</td>
-										<td bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">tiezhu0902@163.com</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">南京科技股份有限公司…</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE4"><img src="images/edt.gif"
-														width="16" height="16" />编辑&nbsp; &nbsp;<img
-														src="images/del.gif" width="16" height="16" />删除</span>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<input type="checkbox" name="checkbox4" value="checkbox" />
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center" class="STYLE1">
-												<div align="center">
-													03
-												</div>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">13813916585</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">2007-11-16 15:00:20 </span>
-											</div>
-										</td>
-										<td bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">tiezhu0902@163.com</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">南京科技股份有限公司…</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE4"><img src="images/edt.gif"
-														width="16" height="16" />编辑&nbsp; &nbsp;<img
-														src="images/del.gif" width="16" height="16" />删除</span>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<input type="checkbox" name="checkbox5" value="checkbox" />
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center" class="STYLE1">
-												<div align="center">
-													04
-												</div>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">13813916585</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">2007-11-16 15:00:20 </span>
-											</div>
-										</td>
-										<td bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">tiezhu0902@163.com</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">南京科技股份有限公司…</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE4"><img src="images/edt.gif"
-														width="16" height="16" />编辑&nbsp; &nbsp;<img
-														src="images/del.gif" width="16" height="16" />删除</span>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<input type="checkbox" name="checkbox6" value="checkbox" />
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center" class="STYLE1">
-												<div align="center">
-													05
-												</div>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">13813916585</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">2007-11-16 15:00:20 </span>
-											</div>
-										</td>
-										<td bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">tiezhu0902@163.com</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">南京科技股份有限公司…</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE4"><img src="images/edt.gif"
-														width="16" height="16" />编辑&nbsp; &nbsp;<img
-														src="images/del.gif" width="16" height="16" />删除</span>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<input type="checkbox" name="checkbox7" value="checkbox" />
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center" class="STYLE1">
-												<div align="center">
-													06
-												</div>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">13813916585</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">2007-11-16 15:00:20 </span>
-											</div>
-										</td>
-										<td bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">tiezhu0902@163.com</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">南京科技股份有限公司…</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE4"><img src="images/edt.gif"
-														width="16" height="16" />编辑&nbsp; &nbsp;<img
-														src="images/del.gif" width="16" height="16" />删除</span>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<input type="checkbox" name="checkbox8" value="checkbox" />
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center" class="STYLE1">
-												<div align="center">
-													07
-												</div>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">13813916585</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">2007-11-16 15:00:20 </span>
-											</div>
-										</td>
-										<td bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">tiezhu0902@163.com</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">南京科技股份有限公司…</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE4"><img src="images/edt.gif"
-														width="16" height="16" />编辑&nbsp; &nbsp;<img
-														src="images/del.gif" width="16" height="16" />删除</span>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<input type="checkbox" name="checkbox9" value="checkbox" />
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center" class="STYLE1">
-												<div align="center">
-													08
-												</div>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">13813916585</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">2007-11-16 15:00:20 </span>
-											</div>
-										</td>
-										<td bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">tiezhu0902@163.com</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">南京科技股份有限公司…</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE4"><img src="images/edt.gif"
-														width="16" height="16" />编辑&nbsp; &nbsp;<img
-														src="images/del.gif" width="16" height="16" />删除</span>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<input type="checkbox" name="checkbox10" value="checkbox" />
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center" class="STYLE1">
-												<div align="center">
-													09
-												</div>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">13813916585</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">2007-11-16 15:00:20 </span>
-											</div>
-										</td>
-										<td bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">tiezhu0902@163.com</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">南京科技股份有限公司…</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE4"><img src="images/edt.gif"
-														width="16" height="16" />编辑&nbsp; &nbsp;<img
-														src="images/del.gif" width="16" height="16" />删除</span>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<input type="checkbox" name="checkbox11" value="checkbox" />
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center" class="STYLE1">
-												<div align="center">
-													10
-												</div>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">13813916585</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">2007-11-16 15:00:20 </span>
-											</div>
-										</td>
-										<td bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">tiezhu0902@163.com</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">南京科技股份有限公司…</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE4"><img src="images/edt.gif"
-														width="16" height="16" />编辑&nbsp; &nbsp;<img
-														src="images/del.gif" width="16" height="16" />删除</span>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<input type="checkbox" name="checkbox12" value="checkbox" />
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center" class="STYLE1">
-												<div align="center">
-													11
-												</div>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">13813916585</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">2007-11-16 15:00:20 </span>
-											</div>
-										</td>
-										<td bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">tiezhu0902@163.com</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">南京科技股份有限公司…</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE4"><img src="images/edt.gif"
-														width="16" height="16" />编辑&nbsp; &nbsp;<img
-														src="images/del.gif" width="16" height="16" />删除</span>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<input type="checkbox" name="checkbox13" value="checkbox" />
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center" class="STYLE1">
-												<div align="center">
-													12
-												</div>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">13813916585</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">2007-11-16 15:00:20 </span>
-											</div>
-										</td>
-										<td bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">tiezhu0902@163.com</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">南京科技股份有限公司…</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE4"><img src="images/edt.gif"
-														width="16" height="16" />编辑&nbsp; &nbsp;<img
-														src="images/del.gif" width="16" height="16" />删除</span>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<input type="checkbox" name="checkbox14" value="checkbox" />
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center" class="STYLE1">
-												<div align="center">
-													13
-												</div>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">13813916585</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">2007-11-16 15:00:20 </span>
-											</div>
-										</td>
-										<td bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">tiezhu0902@163.com</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">南京科技股份有限公司…</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE4"><img src="images/edt.gif"
-														width="16" height="16" />编辑&nbsp; &nbsp;<img
-														src="images/del.gif" width="16" height="16" />删除</span>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<input type="checkbox" name="checkbox15" value="checkbox" />
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center" class="STYLE1">
-												<div align="center">
-													14
-												</div>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">13813916585</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">2007-11-16 15:00:20 </span>
-											</div>
-										</td>
-										<td bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">tiezhu0902@163.com</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">南京科技股份有限公司…</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE4"><img src="images/edt.gif"
-														width="16" height="16" />编辑&nbsp; &nbsp;<img
-														src="images/del.gif" width="16" height="16" />删除</span>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<input type="checkbox" name="checkbox16" value="checkbox" />
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center" class="STYLE1">
-												<div align="center">
-													15
-												</div>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">13813916585</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">2007-11-16 15:00:20 </span>
-											</div>
-										</td>
-										<td bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">tiezhu0902@163.com</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE1">南京科技股份有限公司…</span>
-											</div>
-										</td>
-										<td height="20" bgcolor="#FFFFFF">
-											<div align="center">
-												<span class="STYLE4"><img src="images/edt.gif"
-														width="16" height="16" />编辑&nbsp; &nbsp;<img
-														src="images/del.gif" width="16" height="16" />删除</span>
-											</div>
-										</td>
-									</tr>
-								</table>
-							</td>
-							<td width="8" background="images/tab_15.gif">
-								&nbsp;
-							</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td height="35" background="images/tab_19.gif">
-					<table width="100%" border="0" cellspacing="0" cellpadding="0">
-						<tr>
-							<td width="12" height="35">
-								<img src="images/tab_18.gif" width="12" height="35" />
+								<s:property value="#user[2]" />
 							</td>
 							<td>
-								<table width="100%" border="0" cellspacing="0" cellpadding="0">
-									<tr>
-										<td class="STYLE4">
-											&nbsp;&nbsp;共有 120 条记录，当前第 1/10 页
-										</td>
-										<td>
-											<table border="0" align="right" cellpadding="0"
-												cellspacing="0">
-												<tr>
-													<td width="40">
-														<img src="images/first.gif" width="37" height="15" />
-													</td>
-													<td width="45">
-														<img src="images/back.gif" width="43" height="15" />
-													</td>
-													<td width="45">
-														<img src="images/next.gif" width="43" height="15" />
-													</td>
-													<td width="40">
-														<img src="images/last.gif" width="37" height="15" />
-													</td>
-													<td width="100">
-														<div align="center">
-															<span class="STYLE1">转到第 <input name="textfield"
-																	type="text" size="4"
-																	style="height: 12px; width: 20px; border: 1px solid #999999;" />
-																页 </span>
-														</div>
-													</td>
-													<td width="40">
-														<img src="images/go.gif" width="37" height="15" />
-													</td>
-												</tr>
-											</table>
-										</td>
-									</tr>
-								</table>
+								<s:date name="#user[3]" format="yyyy-MM-dd HH-mm-ss" />
 							</td>
-							<td width="16">
-								<img src="images/tab_20.gif" width="16" height="35" />
+							<td>
+								<s:property value="#user[4]" />
+							</td>
+							<td>
+								<s:property value="#user[5]" />
+							</td>
+							<td>
+								<s:property value="#user[6]" />
+							</td>
+							<td>
+								<s:property value="#user[7]" />
+							</td>
+							<td>
+								<s:property value="#user[8]" />
+							</td>
+							<td>
+								<s:property value="#user[9]" />
+							</td>
+							<td>
+								<s:property value="#user[10]" />
+							</td>
+							<td>
+								操作
 							</td>
 						</tr>
-					</table>
-				</td>
-			</tr>
-		</table>
+					</s:iterator>
+				</tbody>
+				<s:if test="#request.result.size()==0">
+					<tr>
+						<th colspan="6" align="center">
+							没有用户！
+						</th>
+					</tr>
+				</s:if>
+				<s:else>
+					<tfoot>
+						<tr>
+							<th colspan="6">
+								<div style="float: left;">
+									<a href="javascript:firstPage()">首页</a>
+									<a href="javascript:prevPage()">上一页</a>&nbsp;
+									<a href="javascript:nextPage()">下一页</a>&nbsp;
+									<a href="javascript:lastPage()">尾页</a>&nbsp;
+								</div>
+								<div style="float: left;">
+									跳转到
+									<select id='toPageSelect' size='1' onchange="jumpPage()">
+										<s:iterator begin="1" end="smsVO.pageCount" step="1"
+											var="index">
+											<option value="<s:property value="#index" />">
+												第
+												<s:property value="#index" />
+												页
+											</option>
+										</s:iterator>
+									</select>
+								</div>
+								<input type="hidden" name="smsVO.nowPage"
+									value="<s:property
+											value="smsVO.nowPage" />"
+									id="nowPage">
+								<input type="hidden"
+									value="<s:property
+										value="smsVO.pageCount" />"
+									id="pageCount">
+							</th>
+						</tr>
+					</tfoot>
+				</s:else>
+			</table>
+		</s:form>
 	</body>
 </html>
