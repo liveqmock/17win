@@ -6,17 +6,10 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import net.win.BaseService;
-import net.win.dao.BuyerDAO;
-import net.win.dao.SellerDAO;
 import net.win.dao.UserDAO;
-import net.win.entity.UserEntity;
-import net.win.entity.WithdrawalsEntity;
 import net.win.utils.StringUtils;
 import net.win.vo.AdminUserVO;
-import net.win.vo.UserVO;
-import net.win.vo.WithdrawalsVO;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Service;
 
 @SuppressWarnings( { "unchecked" })
@@ -25,7 +18,6 @@ public class AdminUserService extends BaseService {
 	@Resource
 	private UserDAO userDAO;
 
-	@Resource
 	/**
 	 * 查询所有用户
 	 * 

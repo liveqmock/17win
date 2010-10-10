@@ -224,7 +224,7 @@
 								<div style="float: left;">
 									跳转到
 									<select id='toPageSelect' size='1' onchange="jumpPage()">
-										<s:iterator begin="1" end="smsVO.pageCount" step="1"
+										<s:iterator begin="1" end="adinUserVO.pageCount" step="1"
 											var="index">
 											<option value="<s:property value="#index" />">
 												第
@@ -234,13 +234,13 @@
 										</s:iterator>
 									</select>
 								</div>
-								<input type="hidden" name="smsVO.nowPage"
+								<input type="hidden" name="adinUserVO.nowPage"
 									value="<s:property
-											value="smsVO.nowPage" />"
+											value="adinUserVO.nowPage" />"
 									id="nowPage">
 								<input type="hidden"
 									value="<s:property
-										value="smsVO.pageCount" />"
+										value="adinUserVO.pageCount" />"
 									id="pageCount">
 							</th>
 						</tr>

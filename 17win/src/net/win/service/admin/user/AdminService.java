@@ -61,11 +61,12 @@ public class AdminService extends BaseService {
 				.uniqueResult(
 						"from AdminEntity  as _u where _u.username=:username and _u.password=:password",
 						new String[] { "username", "password" }, new Object[] {
-								username, password });
+								username,StringUtils.processPwd(password) });
 		if (adminEntity == null) {
 			putAlertMsg("用户名或密码错误");
 			return "inputLogin";
 		} else {
+			updateUserLoginInfo(adminEntity.getUser());
 			return "loginSuccess";
 		}
 	}

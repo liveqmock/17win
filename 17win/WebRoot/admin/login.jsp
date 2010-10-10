@@ -28,7 +28,7 @@
 						验证码:
 					</td>
 					<td>
-						<input type="text" name="password" style="width: 60px"
+						<input type="text" name="code" style="width: 60px"
 							maxlength="4" />
 						<img src="verify/verificationCode.php" />
 					</td>
