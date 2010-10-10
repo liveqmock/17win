@@ -53,6 +53,15 @@ public class BaseService {
 	}
 
 	/**
+	 * 获取验证码
+	 * 
+	 * @return
+	 */
+	protected String getVerifyCode() {
+		return (String) getBySession(Constant.VERIFY_CODE);
+	}
+
+	/**
 	 * 存放平台类型
 	 * 
 	 * @return
@@ -78,6 +87,7 @@ public class BaseService {
 	protected void putPlatformByRequest(String platform) {
 		putByRequest("platform", platform);
 	}
+
 	/**
 	 * 存放现实类型
 	 * 
@@ -86,6 +96,7 @@ public class BaseService {
 	protected void putTaskShowType(String showTaskType) {
 		putByRequest("showTaskType", showTaskType);
 	}
+
 	/**
 	 * 存放现实类型
 	 * 
@@ -126,12 +137,14 @@ public class BaseService {
 		WinContext.getInstance().putUserLoginInfo(userLoginInfo.getUsername(),
 				userLoginInfo);
 	}
+
 	/**
 	 * 
 	 * @param userEntity
 	 * @throws Exception
 	 */
-	protected void updateUserLoginInfo(UserEntity userEntity,UserLoginInfo userLoginInfo) throws Exception {
+	protected void updateUserLoginInfo(UserEntity userEntity,
+			UserLoginInfo userLoginInfo) throws Exception {
 		// ///
 		BeanUtils.copyProperties(userLoginInfo, userEntity);
 		userLoginInfo.setLevel(StrategyUtils.getLevel(userEntity
@@ -215,7 +228,15 @@ public class BaseService {
 	protected void putJumpPage(String page) throws Exception {
 		putByRequest(JUMP, page);
 	}
-
+	/**
+	 * outteer 是否是其他网站
+	 * @param message
+	 * @throws Exception
+	 */
+	protected void putJumpOutterPage(String page) throws Exception {
+		putByRequest("outter", true);
+		putByRequest(JUMP, page);
+	}
 	/**
 	 * 显示DIV
 	 * 

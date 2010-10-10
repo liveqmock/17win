@@ -193,13 +193,13 @@
 										<tr>
 
 											<td height=20>
-												<a href="user/paid.jsp">帐号充值</a>
+												<a href="payManager/pay!initPay.php">帐号充值</a>
 											</td>
 										</tr>
 										<tr>
 
 											<td height=20>
-												<a href="user/paid.jsp">充值记录</a>
+												<a href="payManager/pay!queryPay.php">充值记录</a>
 											</td>
 										</tr>
 										<tr>

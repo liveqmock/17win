@@ -99,5 +99,6 @@
 		<mapping class="net.win.entity.VipEntity" />
 		<mapping class="net.win.entity.SmsEntity" />
 		<mapping class="net.win.entity.AdminEntity" />
+		<mapping class="net.win.entity.PayEntity" />
 	</session-factory>
 </hibernate-configuration>
