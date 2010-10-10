@@ -7,7 +7,7 @@
 			+ path;
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/admin/";
+			+ path + "/admin/user/";
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
@@ -80,7 +80,7 @@ document.all("frmTitle").style.display=""
 				</td>
 				<td width="100%" align="center" valign="top">
 					<iframe name="I2" height="100%" width="100%" border="0"
-						frameborder="0" src="userIndex.jsp">
+						frameborder="0" src="adminUserManager/adminUser!queryUser.php">
 						浏览器不支持嵌入式框架，或被配置为不显示嵌入式框架。
 					</iframe>
 				</td>

@@ -5,112 +5,117 @@
 	<head>
 		<s:include value="/admin/common/header.jsp"></s:include>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<SCRIPT type="text/javascript" src="admin/user/userIndex.js"></SCRIPT>
+		<SCRIPT type="text/javascript" src="user/userIndex.js"></SCRIPT>
 	</head>
 
 	<body>
-		<s:form action="adminUserManager/adminUser!queryPay.php"
+		<s:form action="adminUserManager/adminUser!queryUser.php"
 			onsubmit="return validateForm()" theme="simple">
 			<table width="100%" cellpadding="1" cellspacing="1" border="0px"
 				style="background: #DDEDFA">
 				<tr>
-					<td>
-						用户名：
+					<td nowrap="nowrap">
+						用&nbsp;&nbsp;户&nbsp;&nbsp;名：
 						<s:textfield name="adminUserVO.username">
 						</s:textfield>
 					</td>
-					<td>
-						发布点：
+					<td nowrap="nowrap">
+						发&nbsp;&nbsp;&nbsp;布&nbsp;&nbsp;&nbsp;点：
 						<s:textfield name="adminUserVO.startReleaseDot" id="startDate"
-							cssStyle="width:110px">
+							cssStyle="width:40px">
 						</s:textfield>
 						至
 						<s:textfield name="adminUserVO.endReleaseDot" id="endDate"
-							cssStyle="width:110px">
+							cssStyle="width:40px">
 						</s:textfield>
 					</td>
-					<td>
-						余额：
+					<td nowrap="nowrap">
+						余&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;额：
 						<s:textfield name="adminUserVO.startMoney" id="startDate"
-							cssStyle="width:110px">
+							cssStyle="width:40px">
 						</s:textfield>
 						至
 						<s:textfield name="adminUserVO.endMoney" id="endDate"
-							cssStyle="width:110px">
+							cssStyle="width:40px">
 						</s:textfield>
 					</td>
-					<td>
+					<td nowrap="nowrap">
 						注册日期：
 						<s:textfield name="adminUserVO.regeditStartDate" id="startDate"
 							onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})"
-							readonly="true" cssStyle="width:110px">
+							readonly="true" cssStyle="width:80px">
 						</s:textfield>
 						至
 						<s:textfield name="adminUserVO.regeditEndDate" id="endDate"
 							readonly="true"
 							onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})"
-							cssStyle="width:110px">
+							cssStyle="width:80px">
 						</s:textfield>
 					</td>
 				</tr>
 				<tr>
-					<td>
+					<td nowrap="nowrap">
 						电子邮件：
-						<s:textfield name="adminUserVO.email">
+						<s:textfield name="adminUserVO.email" cssStyle="width:80px">
 						</s:textfield>
 					</td>
-					<td>
-						手机：
-						<s:textfield name="adminUserVO.telphone" maxlength="11">
+					<td nowrap="nowrap">
+						手&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机：
+						<s:textfield name="adminUserVO.telphone" maxlength="11"
+							cssStyle="width:60px">
 						</s:textfield>
 					</td>
-					<td>
+					<td nowrap="nowrap">
 						推广积分：
 						<s:textfield name="adminUserVO.startSpreadScore" id="startDate"
-							cssStyle="width:110px">
+							cssStyle="width:40px">
 						</s:textfield>
 						至
 						<s:textfield name="adminUserVO.endSpreadScore" id="endDate"
-							cssStyle="width:110px">
+							cssStyle="width:40px">
 						</s:textfield>
 					</td>
-					<td>
+					<td nowrap="nowrap">
 						发任务数：
-						<s:textfield name="adminUserVO.startReleaseTaskCount">
+						<s:textfield name="adminUserVO.startReleaseTaskCount"
+							cssStyle="width:40px">
 						</s:textfield>
 						至
-						<s:textfield name="adminUserVO.endReleaseTaskCount">
+						<s:textfield name="adminUserVO.endReleaseTaskCount"
+							cssStyle="width:40px">
 						</s:textfield>
 					</td>
 
 				</tr>
 				<tr>
-					<td>
+					<td nowrap="nowrap">
 						接任务数：
-						<s:textfield name="adminUserVO.startReceieveTaskCount">
+						<s:textfield name="adminUserVO.startReceieveTaskCount"
+							cssStyle="width:40px">
 						</s:textfield>
 						至
-						<s:textfield name="adminUserVO.endReceieveTaskCount;">
+						<s:textfield name="adminUserVO.endReceieveTaskCount;"
+							cssStyle="width:40px">
 						</s:textfield>
 					</td>
-					<td>
+					<td nowrap="nowrap">
 						VIP成长值：
-						<s:textfield name="adminUserVO.startVipGrowValue;" id="startDate"
-							cssStyle="width:110px">
+						<s:textfield name="adminUserVO.startVipGrowValue;"
+							cssStyle="width:40px">
 						</s:textfield>
 						至
-						<s:textfield name="adminUserVO.endVipGrowValue" id="endDate"
-							cssStyle="width:110px">
+						<s:textfield name="adminUserVO.endVipGrowValue"
+							cssStyle="width:40px">
 						</s:textfield>
 					</td>
-					<td>
-						是否VIP：
+					<td nowrap="nowrap">
+						是&nbsp;否&nbsp;VIP：
 						<s:select listKey="key" listValue="value"
 							name="adminUserVO.vipEnable" headerKey="" headerValue="--请选择--"
 							list="#{'true':'是','false':'不是'}">
 						</s:select>
 					</td>
-					<td>
+					<td nowrap="nowrap">
 						<input type="submit" value="查&nbsp;&nbsp;询"
 							style="cursor: pointer;">
 					</td>
@@ -206,7 +211,7 @@
 				</tbody>
 				<s:if test="#request.result.size()==0">
 					<tr>
-						<th colspan="6" align="center">
+						<th colspan="12" align="center">
 							没有用户！
 						</th>
 					</tr>
@@ -214,7 +219,7 @@
 				<s:else>
 					<tfoot>
 						<tr>
-							<th colspan="6">
+							<th colspan="12">
 								<div style="float: left;">
 									<a href="javascript:firstPage()">首页</a>
 									<a href="javascript:prevPage()">上一页</a>&nbsp;
