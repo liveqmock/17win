@@ -5,7 +5,7 @@
 	<head>
 		<s:include value="/admin/common/header.jsp"></s:include>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<SCRIPT type="text/javascript" src="user/userIndex.js"></SCRIPT>
+		<SCRIPT type="text/javascript" src="admin/user/userIndex.js"></SCRIPT>
 	</head>
 
 	<body>
@@ -224,7 +224,7 @@
 								<div style="float: left;">
 									跳转到
 									<select id='toPageSelect' size='1' onchange="jumpPage()">
-										<s:iterator begin="1" end="adinUserVO.pageCount" step="1"
+										<s:iterator begin="1" end="adminUserVO.pageCount" step="1"
 											var="index">
 											<option value="<s:property value="#index" />">
 												第
@@ -234,13 +234,13 @@
 										</s:iterator>
 									</select>
 								</div>
-								<input type="hidden" name="adinUserVO.nowPage"
+								<input type="hidden" name="adminUserVO.nowPage"
 									value="<s:property
-											value="adinUserVO.nowPage" />"
+											value="adminUserVO.nowPage" />"
 									id="nowPage">
 								<input type="hidden"
 									value="<s:property
-										value="adinUserVO.pageCount" />"
+										value="adminUserVO.pageCount" />"
 									id="pageCount">
 							</th>
 						</tr>

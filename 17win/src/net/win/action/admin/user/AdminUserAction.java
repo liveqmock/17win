@@ -18,7 +18,7 @@ import org.springframework.stereotype.Controller;
 @Controller
 @Scope("prototype")
 @ParentPackage("17win-default")
-@Results( { @Result(name = "queryUser", location = "admin/user/userIndex.jsp") })
+@Results( { @Result(name = "queryUser", location = "/admin/user/userMiddel.html") })
 @Namespace("/adminUserManager")
 public class AdminUserAction extends BaseAction {
 	@Resource

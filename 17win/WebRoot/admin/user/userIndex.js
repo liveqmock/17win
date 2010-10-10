@@ -1,26 +1,5 @@
 $(document).ready(function() {
-			$("#browerSms").dialog({
-						autoOpen : false,
-						draggable : false,
-						hide : 'highlight',
-						modal : true,
-						resizable : false,
-						width:500,
-						show : 'highlight'
-					});
-
-			$("#myTable").tablesorter({
-						widthFixed : true,
-						sortList : [[0, 0]],
-						headers : {
-							3 : {
-								sorter : false
-							},
-							5 : {
-								sorter : false
-							}
-						}
-					});
+			$("#myTable").tablesorter();
 		});
 // 删除
 function deleteSms(id) {
@@ -33,10 +12,10 @@ function brower(id, read) {
 	if (!read) {
 		$.post("smsManager/sms!updateSms.php?smsVO.id=" + id);
 	}
-	$("#title").val($("#a_"+id).attr("title"));
-	$("#content").text($("#a_"+id).attr("content"));
+	$("#title").val($("#a_" + id).attr("title"));
+	$("#content").text($("#a_" + id).attr("content"));
 	$("#browerSms").dialog("open");
-	
+
 }
 // 回复
 function reply(fromUsername) {

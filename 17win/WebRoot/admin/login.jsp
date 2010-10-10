@@ -12,7 +12,7 @@
 						登录名:
 					</td>
 					<td>
-						<input name="username">
+						<input name="username" tabindex="1">
 					</td>
 				</Tr>
 				<Tr>
