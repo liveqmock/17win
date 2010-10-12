@@ -7,6 +7,8 @@ import net.win.service.admin.user.AdminUserService;
 import net.win.vo.AdminUserVO;
 
 import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.InterceptorRef;
+import org.apache.struts2.convention.annotation.InterceptorRefs;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
@@ -18,7 +20,10 @@ import org.springframework.stereotype.Controller;
 @Controller
 @Scope("prototype")
 @ParentPackage("17win-default")
-@Results( { @Result(name = "queryUser", location = "/admin/user/userIndex.jsp") })
+@Results( {
+		@Result(name = "queryUser", location = "/admin/user/userIndex.jsp"),
+		@Result(name = "updateUserMoney", location = "/admin/user/userIndex.jsp"), })
+		
 @Namespace("/adminUserManager")
 public class AdminUserAction extends BaseAction {
 	@Resource
@@ -38,6 +43,17 @@ public class AdminUserAction extends BaseAction {
 	public String execute() throws Exception {
 		// TODO Auto-generated method stub
 		return super.execute();
+	}
+
+	/**
+	 * 充值
+	 * 
+	 * @param userVO
+	 * @return
+	 * @throws Exception
+	 */
+	public String addMoney() throws Exception {
+		return adminUserService.updateUserMoney(adminUserVO);
 	}
 
 	/**

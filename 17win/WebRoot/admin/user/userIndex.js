@@ -1,6 +1,30 @@
 $(document).ready(function() {
 			$("#myTable").tablesorter();
+			$("#updateMoneyDIV").dialog({
+						autoOpen : false,
+						draggable : true,
+						hide : 'slide',
+						modal : true,
+						resizable : false,
+						show : 'slide',
+						width : 400,
+						buttons : {
+							"保存" : function() {
+								if (Validater.isBlank($("#moneyId").val()) || isNaN($("#moneyId").val())) {
+									alert("金额格式不对");
+								} else {
+									$("#moneyForm").submit();
+								}
+							}
+						}
+					});
 		});
+
+// 充值
+function addMoney(id) {
+	$("#userIdId").val(id);
+	$("#updateMoneyDIV").dialog("open");
+}
 // 删除
 function deleteSms(id) {
 	if (confirm("您确认要删除此短信！")) {

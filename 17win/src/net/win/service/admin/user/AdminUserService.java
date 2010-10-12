@@ -7,6 +7,8 @@ import javax.annotation.Resource;
 
 import net.win.BaseService;
 import net.win.dao.UserDAO;
+import net.win.entity.UserEntity;
+import net.win.utils.ArithUtils;
 import net.win.utils.StringUtils;
 import net.win.vo.AdminUserVO;
 
@@ -18,6 +20,16 @@ public class AdminUserService extends BaseService {
 	@Resource
 	private UserDAO userDAO;
 
+	public String updateUserMoney(AdminUserVO adminUserVO) throws Exception {
+		Double money = Double.parseDouble(getByParam("money"));
+		Long id = Long.parseLong(getByParam("userId"));
+		UserEntity userEntity = userDAO.get(id);
+		userEntity.setMoney(ArithUtils.add(userEntity.getMoney(), money));
+		queryUser(adminUserVO);
+		putAlertMsg("充值成功！");
+		return "updateUserMoney";
+	}
+
 	/**
 	 * 查询所有用户
 	 * 
@@ -27,8 +39,9 @@ public class AdminUserService extends BaseService {
 	 */
 	public String queryUser(AdminUserVO adminUserVO) throws Exception {
 		StringBuffer resultHQL = new StringBuffer(
-				"select  _user.username,_user.releaseDot,_user.money,_user.registerTime,_user.email,_user.telephone,"
-						+ "_user.spreadScore,_user.spreadScore,_user.releaseTaskCount,_user.receiveTaskCount,_user.vipEnable,_user.vipGrowValue,_user.vipEndDate "
+				"select  _user.username,_user.releaseDot,_user.money,_user.registerTime,_user.email,_user.telephone," //5
+						+ "_user.spreadScore,_user.spreadScore,_user.releaseTaskCount,_user.receiveTaskCount,_user.vipEnable,_user.vipGrowValue,_user.vipEndDate ,"//12
+						+ " _user.status,_user.id" // 14
 						+ " from UserEntity   as _user  where 1=1 ");
 		StringBuffer countHQL = new StringBuffer(
 				"select  count(*)  from UserEntity  as _user  where 1=1  ");

@@ -125,12 +125,15 @@
 				</tr>
 			</table>
 			<br>
-			<table width="100%" cellpadding="1" id="myTable" class="tablesorter"
+			<table width="100%" cellpadding="1" id="myTable" class="tablesorter"   style="font-size: 12px;"
 				style="table-layout: fixed;">
 				<thead>
 					<tr>
 						<th nowrap="nowrap" style="font-size: 12px;">
 							用户名
+						</th>
+						<th nowrap="nowrap" style="font-size: 12px;">
+							状态
 						</th>
 						<th nowrap="nowrap" style="font-size: 12px;">
 							发布点
@@ -148,9 +151,6 @@
 							手机
 						</th>
 						<th nowrap="nowrap" style="font-size: 12px;">
-							推广积分
-						</th>
-						<th nowrap="nowrap" style="font-size: 12px;">
 							发任务数
 						</th>
 						<th nowrap="nowrap" style="font-size: 12px;">
@@ -158,9 +158,6 @@
 						</th>
 						<th nowrap="nowrap" style="font-size: 12px;">
 							是否VIP
-						</th>
-						<th nowrap="nowrap" style="font-size: 12px;">
-							VIP成长值
 						</th>
 						<th nowrap="nowrap" style="font-size: 12px;">
 							操作
@@ -174,25 +171,27 @@
 								<s:property value="#user[0]" />
 							</td>
 							<td>
+								<s:if test="#user[13]==0">
+									未激活
+								</s:if>
+								<s:elseif test="#user[13]==1">正常</s:elseif>
+								<s:elseif test="#user[13]==2">冻结</s:elseif>
+								<s:elseif test="#user[13]==3">找密码</s:elseif>
+							</td>
+							<td>
 								<s:property value="#user[1]" />
 							</td>
 							<td>
 								<s:property value="#user[2]" />
 							</td>
 							<td>
-								<s:date name="#user[3]" format="yyyy-MM-dd HH-mm-ss" />
+								<s:date name="#user[3]" format="yyyy-MM-dd" />
 							</td>
 							<td>
 								<s:property value="#user[4]" />
 							</td>
 							<td>
 								<s:property value="#user[5]" />
-							</td>
-							<td>
-								<s:property value="#user[6]" />
-							</td>
-							<td>
-								<s:property value="#user[7]" />
 							</td>
 							<td>
 								<s:property value="#user[8]" />
@@ -204,7 +203,8 @@
 								<s:property value="#user[10]" />
 							</td>
 							<td>
-								操作
+								<a
+									href="javascript:addMoney('<s:property value="#user[14]" />')">充值</a>
 							</td>
 						</tr>
 					</s:iterator>
@@ -219,7 +219,7 @@
 				<s:else>
 					<tfoot>
 						<tr>
-							<th colspan="12">
+							<th colspan="11"  style="font-size: 12px;">
 								<div style="float: left;">
 									<a href="javascript:firstPage()">首页</a>
 									<a href="javascript:prevPage()">上一页</a>&nbsp;
@@ -253,5 +253,22 @@
 				</s:else>
 			</table>
 		</s:form>
+		<div id="updateMoneyDIV" title="充值">
+			<s:form action="adminUserManager/adminUser!addMoney.php"
+				id="moneyForm" theme="simple">
+				<table cellpadding="0" cellspacing="0" border="0">
+					<tr class="sellerClass">
+						<td valign="middle">
+							金额：
+						</td>
+						<td>
+							<input type="text" name="money" id="moneyId" style="width: 80px">
+							<input type="hidden" name="userId" id="userIdId">
+						</td>
+
+					</tr>
+				</table>
+			</s:form>
+		</div>
 	</body>
 </html>
