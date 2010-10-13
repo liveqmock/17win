@@ -21,7 +21,7 @@ import org.springframework.stereotype.Controller;
 @Results( { @Result(name = "input", location = "/admin/index.jsp"),
 		@Result(name = "inputLogin", location = "/admin/index.jsp"),
 		@Result(name = "loginOut", location = "/admin/index.jsp"),
-		@Result(name = "loginSuccess",type="redirect", location = "/admin/userMiddel.jsp") })
+		@Result(name = "loginSuccess",type="redirect", location = "/admin/main.html") })
 public class AdminAction extends BaseAction {
 	@Resource
 	private AdminService adminService;

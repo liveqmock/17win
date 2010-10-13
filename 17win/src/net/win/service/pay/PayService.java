@@ -14,7 +14,6 @@ import net.win.entity.PayEntity;
 import net.win.entity.UserEntity;
 import net.win.utils.StringUtils;
 import net.win.vo.PayVO;
-import net.win.vo.SmsVO;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -98,19 +97,14 @@ public class PayService extends BaseService {
 			paramValues.add(payVO.getStartDate());
 			paramValues.add(payVO.getEndDate());
 		} else if (payVO.getStartDate() != null) {
-
 			resultHQL.append(" and _pay.payDate>=:startDate  ");
 			countHQL.append(" and  _pay.payDate>=:startDate   ");
-
 			paramNames.add("startDate");
 			paramValues.add(payVO.getStartDate());
 		} else if (payVO.getEndDate() != null) {
 
 			resultHQL.append(" and   _w.payDate<=:endDate ");
 			countHQL.append(" and   _w.payDate<=:endDate  ");
-			paramNames.add("startDate");
-			paramValues.add(payVO.getStartDate());
-
 			paramNames.add("endDate");
 			paramValues.add(payVO.getEndDate());
 		}
