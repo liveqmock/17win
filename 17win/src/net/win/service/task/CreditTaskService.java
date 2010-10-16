@@ -401,7 +401,9 @@ public class CreditTaskService extends BaseService {
 			/**
 			 * 人
 			 */
-			// 修改积分发送人
+			/**
+			 * 修改积分发送人
+			 */
 			VipEntity releaseUserVip = releaEntity.getVip();
 			Integer releaseScore = StrategyUtils.getReleaseUserTaskScore(
 					releaseUserVip, releaEntity.getVipEnable());
@@ -410,22 +412,27 @@ public class CreditTaskService extends BaseService {
 			releaEntity.setConvertScore(releaEntity.getConvertScore()
 					+ releaseScore);
 			updateUserLoginInfo(releaEntity);
-			// 修改积分和钱 接收人 和 接受号
+			/**
+			 * 修改积分和钱 接收人 和 接受号
+			 */
 			VipEntity receiveUserVip = receiveUser.getVip();
 			Integer receieveScore = StrategyUtils.getReleaseUserTaskScore(
 					receiveUserVip, receiveUser.getVipEnable());
-
 			creditTask.getBuyer()
 					.setScore(creditTask.getBuyer().getScore() + 1);
 			receiveUser.setMoney(ArithUtils.add(receiveUser.getMoney(),
 					creditTask.getMoney()));
-			// 发布点
+			/**
+			 * 发布点
+			 */
 			Double releaseDot = creditTask.getReleaseDot()
 					* StrategyUtils.getTaskOverDotRate(releaEntity,
 							receiveUserVip, receiveUser.getVipEnable());
 			receiveUser.setReleaseDot(ArithUtils.add(receiveUser
 					.getReleaseDot(), releaseDot));
-			// 积分
+			/**
+			 * 计算积分
+			 */
 			receiveUser.setUpgradeScore(receiveUser.getUpgradeScore()
 					+ receieveScore);
 			receiveUser.setConvertScore(receiveUser.getConvertScore()
@@ -434,6 +441,13 @@ public class CreditTaskService extends BaseService {
 					.getUserLoginInfo(receiveUser.getUsername());
 			updateUserLoginInfo(receiveUser, userLoginInfo);
 
+			/**
+			 * 计算发布和任务数
+			 */
+			releaEntity
+					.setReleaseTaskCount(releaEntity.getReleaseTaskCount() + 1);
+			receiveUser
+					.setReceiveTaskCount(releaEntity.getReceiveTaskCount() + 1);
 			/**
 			 * 计算会员成长值 和升级
 			 */
@@ -459,7 +473,6 @@ public class CreditTaskService extends BaseService {
 			/**
 			 * 会员升级
 			 */
-
 			creditTask.setStatus(TaskMananger.STEP_SIX_STATUS);
 			putAlertMsg("好评成功，任务完成！");
 			putJumpPage("taskManager/task!initReleasedTast.php?platformType="

@@ -81,10 +81,10 @@ public class UserEntity extends BaseEntity {
 	private String ww;
 	// 发布任务数
 	@Column(name = "RELEASE_TASK_COUNT_")
-	private Integer releaseTaskCount;
+	private Integer releaseTaskCount = 0;
 	// 接受任务数
 	@Column(name = "RECEIVE_TASK_COUNT_")
-	private Integer receiveTaskCount;
+	private Integer receiveTaskCount = 0;
 	// VIP结束时间
 	@Column(name = "Vip_End_Date_")
 	private Date vipEndDate;
