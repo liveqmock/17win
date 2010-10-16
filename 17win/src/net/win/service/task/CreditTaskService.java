@@ -388,7 +388,6 @@ public class CreditTaskService extends BaseService {
 						+ platformType);
 				return JUMP;
 			}
-
 			// 如果发布人不是当前的登陆人就报错
 			if (!platformType.equals(creditTask.getType())
 					|| !creditTask.getReleasePerson().getId().equals(

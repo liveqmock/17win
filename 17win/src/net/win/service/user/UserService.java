@@ -32,6 +32,7 @@ public class UserService extends BaseService {
 	@Resource
 	private FreeMarkerConfigurer freeMarkerCfj;
 
+
 	/**
 	 * 注销
 	 * 

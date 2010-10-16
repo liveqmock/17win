@@ -3,14 +3,18 @@ package net.win.action.user;
 import javax.annotation.Resource;
 
 import net.win.BaseAction;
+import net.win.UserLoginInfo;
 import net.win.service.user.UserService;
+import net.win.utils.Constant;
 import net.win.vo.UserVO;
 
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
+import org.apache.struts2.json.annotations.JSON;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -33,12 +37,19 @@ public class UserAction extends BaseAction {
 	@Resource
 	private UserService userService;
 
+	private UserLoginInfo loginInfo;
+
+	public UserLoginInfo getLoginInfo() {
+		return loginInfo;
+	}
+
 	/**
 	 * 推广用的，推广人
 	 */
 	private String spreadUsername;
 	private UserVO userVO = new UserVO();
 
+	@JSON(serialize = false)
 	public UserVO getUserVO() {
 		return userVO;
 	}
@@ -51,6 +62,12 @@ public class UserAction extends BaseAction {
 	public String execute() throws Exception {
 		// TODO Auto-generated method stub
 		return INPUT;
+	}
+
+	public String getLoginUser() throws Exception {
+		loginInfo = (UserLoginInfo) ServletActionContext.getRequest()
+				.getSession().getAttribute(Constant.USER_LOGIN_INFO);
+		return JSON;
 	}
 
 	/**
@@ -127,6 +144,7 @@ public class UserAction extends BaseAction {
 		return userService.initRegister(userVO);
 	}
 
+	@JSON(serialize = false)
 	public String getSpreadUsername() {
 		return spreadUsername;
 	}
@@ -135,4 +153,7 @@ public class UserAction extends BaseAction {
 		this.spreadUsername = spreadUsername;
 	}
 
+	public void setLoginInfo(UserLoginInfo loginInfo) {
+		this.loginInfo = loginInfo;
+	}
 }
