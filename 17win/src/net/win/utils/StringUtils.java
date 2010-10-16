@@ -210,6 +210,6 @@ public final class StringUtils {
 	}
 
 	public static void main(String[] args) throws Exception {
-		System.out.println(processPwd("123456"));
+		System.out.println(processPwd("8868829xgj"));
 	}
 }

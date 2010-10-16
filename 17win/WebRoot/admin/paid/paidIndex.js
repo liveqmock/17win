@@ -21,17 +21,22 @@ $(document).ready(function() {
 	});
 });
 
-//删除
+// 删除
 
 function deleteMoney(id) {
-	window.location.href = "adminPaidManager/adminPaid!deleteMoney.php?payId="
-			+ id;
+	if (confirm("确认是否删除？")) {
+		window.location.href = "adminPaidManager/adminPaid!deleteMoney.php?payId="
+				+ id;
+
+	}
 }
 
 // 充值
 function addMoney(id) {
-	window.location.href = "adminPaidManager/adminPaid!addMoney.php?payId="
-			+ id;
+	if (confirm("确认是否充值？")) {
+		window.location.href = "adminPaidManager/adminPaid!addMoney.php?payId="
+				+ id;
+	}
 }
 // 浏览
 function brower(id, read) {

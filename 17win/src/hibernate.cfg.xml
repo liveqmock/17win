@@ -100,5 +100,7 @@
 		<mapping class="net.win.entity.SmsEntity" />
 		<mapping class="net.win.entity.AdminEntity" />
 		<mapping class="net.win.entity.PayEntity" />
+		<mapping class="net.win.entity.NewsEntity" />
+		<mapping class="net.win.entity.NewsTypeEntity" />
 	</session-factory>
 </hibernate-configuration>

@@ -21,18 +21,17 @@ $(document).ready(function() {
 	});
 });
 
+//删除
+
+function deleteMoney(id) {
+	window.location.href = "adminPaidManager/adminPaid!deleteMoney.php?payId="
+			+ id;
+}
+
 // 充值
 function addMoney(id) {
-	if (confirm("确认是否充值？")) {
-		$("#userIdId").val(id);
-		$("#updateMoneyDIV").dialog("open");
-	}
-}
-// 删除
-function deleteSms(id) {
-	if (confirm("您确认要删除此短信！")) {
-		window.location.href = "smsManager/sms!deleteSms.php?smsVO.id=" + id;
-	}
+	window.location.href = "adminPaidManager/adminPaid!addMoney.php?payId="
+			+ id;
 }
 // 浏览
 function brower(id, read) {
