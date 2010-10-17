@@ -4,7 +4,6 @@ import javax.annotation.Resource;
 
 import net.win.BaseAction;
 import net.win.service.admin.news.AdminNewsService;
-import net.win.service.admin.user.AdminService;
 import net.win.vo.NewsTypeVO;
 import net.win.vo.NewsVO;
 
@@ -25,7 +24,12 @@ import org.springframework.stereotype.Controller;
 		@Result(name = "initNewsType", location = "/admin/news/newsType.jsp"),
 		@Result(name = "updateNewsType", location = "/admin/news/newsType.jsp"),
 		@Result(name = "deleteNewsType", location = "/admin/news/newsType.jsp"),
-		@Result(name = "addNewsType", location = "/admin/news/newsType.jsp") })
+		@Result(name = "addNewsType", location = "/admin/news/newsType.jsp"),
+
+		@Result(name = "queryNews", location = "/admin/news/newsIndex.jsp"),
+		@Result(name = "addNews", location = "/admin/news/newsIndex.jsp"),
+		@Result(name = "updateNews", location = "/admin/news/newsIndex.jsp"),
+		@Result(name = "deleteNews", location = "/admin/news/newsIndex.jsp") })
 public class AdminNewsAction extends BaseAction {
 	@Resource
 	private AdminNewsService adminNewsService;
@@ -57,6 +61,47 @@ public class AdminNewsAction extends BaseAction {
 	}
 
 	/**
+	 * 初始化新闻
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String queryNews() throws Exception {
+		return adminNewsService.queryNews(newsVO);
+	}
+
+	/**
+	 * 新增
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String addNews() throws Exception {
+		return adminNewsService.addNews(newsVO);
+	}
+
+	/**
+	 * 修改
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String updateNews() throws Exception {
+		return adminNewsService.addNews(newsVO);
+	}
+
+	/**
+	 * 删除
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String deleteNews() throws Exception {
+		return adminNewsService.deleteNews(newsVO);
+	}
+
+	// /-------------------------------------------------------------------------
+	/**
 	 * 初始化
 	 * 
 	 * @return
@@ -73,7 +118,7 @@ public class AdminNewsAction extends BaseAction {
 	 * @throws Exception
 	 */
 	public String addNewsType() throws Exception {
-		return adminNewsService.addNewsType(newsTypeVO);
+		return adminNewsService.insertyNewsType(newsTypeVO);
 	}
 
 	/**

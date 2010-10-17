@@ -125,8 +125,8 @@ public class AdminPaidService extends BaseService {
 			paramValues.add(adminPayVO.getStartDate());
 		} else if (adminPayVO.getEndDate() != null) {
 
-			resultHQL.append(" and   _w.payDate<=:endDate ");
-			countHQL.append(" and   _w.payDate<=:endDate  ");
+			resultHQL.append(" and   _pay.payDate<=:endDate ");
+			countHQL.append(" and   _pay.payDate<=:endDate  ");
 
 			paramNames.add("endDate");
 			paramValues.add(adminPayVO.getEndDate());

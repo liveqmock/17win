@@ -16,7 +16,7 @@ public class NewsEntity extends BaseEntity {
 	@Column(name = "name_", length = 20, nullable = false)
 	private String content;
 	// URL
-	@Column(name = "url_", nullable = false)
+	@Column(name = "url_")
 	private String url;
 
 	// 发布时间

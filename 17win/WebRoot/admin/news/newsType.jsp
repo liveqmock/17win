@@ -62,8 +62,7 @@
 							名字：
 						</td>
 						<td>
-							<input type="text" name="newsTypeVO.name" id="newsName"
-								style="width: 80px">
+							<input type="text" name="newsTypeVO.name" id="newsName">
 							<input type="hidden" name="newsTypeVO.id" id="currID">
 						</td>
 

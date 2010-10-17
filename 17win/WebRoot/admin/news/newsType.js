@@ -22,7 +22,7 @@ $(document).ready(function() {
 
 // 删除
 
-function deleteMoney(id) {
+function deleteNewsType(id) {
 	if (confirm("确认是否删除？")) {
 		window.location.href = "adminNewsManager/adminNews!deleteNewsType.php?newsTypeVO.id="
 				+ id;

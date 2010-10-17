@@ -16,6 +16,26 @@ public class NewsVO extends BaseVO {
 	// 发布时间
 	private Date date;
 
+	// 查询
+	private Date startDate;
+	private Date endDate;
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
 	public String getTitle() {
 		return title;
 	}
