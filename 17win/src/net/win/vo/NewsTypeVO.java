@@ -1,9 +1,5 @@
 package net.win.vo;
 
-import java.util.Date;
-
-import javax.persistence.Column;
-
 import net.win.BaseVO;
 
 public class NewsTypeVO extends BaseVO {

@@ -4,24 +4,40 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Tb_News")
 public class NewsEntity extends BaseEntity {
 	// 标题
-	@Column(name = "type_", length = 50, nullable = false)
+	@Column(name = "Title_", length = 50, nullable = false)
 	private String title;
 	// 内容
-	@Column(name = "name_", length = 20, nullable = false)
+	@Column(name = "Content_", columnDefinition = "text", nullable = false)
 	private String content;
 	// URL
-	@Column(name = "url_")
+	@Column(name = "Url_")
 	private String url;
 
 	// 发布时间
-	@Column(name = "date_", columnDefinition = "text", nullable = false)
+	@Column(name = "date_", nullable = false)
 	private Date date;
+
+	// 充值人
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = NewsTypeEntity.class)
+	@JoinColumn(name = "Type_ID_")
+	private NewsTypeEntity type;
+
+	public NewsTypeEntity getType() {
+		return type;
+	}
+
+	public void setType(NewsTypeEntity type) {
+		this.type = type;
+	}
 
 	public String getTitle() {
 		return title;

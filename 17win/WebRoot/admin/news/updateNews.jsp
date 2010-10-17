@@ -5,11 +5,11 @@
 	<head>
 		<s:include value="/admin/common/header.jsp"></s:include>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<SCRIPT type="text/javascript" src="news/addNews.js"></SCRIPT>
+		<SCRIPT type="text/javascript" src="news/updateNews.js"></SCRIPT>
 	</head>
 
 	<body>
-		<s:form action="adminNewsManager/adminNews!addNews.php" theme="simple" target="mainFrame">
+		<s:form action="adminNewsManager/adminNews!updateNews.php" theme="simple"  target="mainFrame">
 			<table cellpadding="1" cellspacing="1" border="0px">
 				<tr>
 					<td nowrap="nowrap">

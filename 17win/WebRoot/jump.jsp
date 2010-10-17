@@ -13,7 +13,9 @@
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<s:property value="#request.msg" escape="false" />
 		<s:if test="#request.outter==null">
-			<script language="javascript"> top.location='<%=basePath%><s:property value="#request.jump" />';   </script>
+			<script language="javascript"> 
+			window.open("<%=basePath%><s:property value="#request.jump" />","_self");
+			</script>
 		</s:if>
 		<s:else>
 			<script language="javascript"> top.location='<s:property value="#request.jump" />';   </script>

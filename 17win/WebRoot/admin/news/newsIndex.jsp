@@ -5,7 +5,7 @@
 	<head>
 		<s:include value="/admin/common/header.jsp"></s:include>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<SCRIPT type="text/javascript" src="paid/newsIndex.js"></SCRIPT>
+		<SCRIPT type="text/javascript" src="news/newsIndex.js"></SCRIPT>
 	</head>
 
 	<body>
@@ -18,6 +18,12 @@
 						标题：
 						<s:textfield name="newsVO.title">
 						</s:textfield>
+					</td>
+					<td nowrap="nowrap">
+						类型：
+						<s:select name="newsVO.typeId" list="#request.newsTpyes"
+							listKey="id" listValue="name" headerKey="" headerValue="--请选择--">
+						</s:select>
 					</td>
 					<td nowrap="nowrap">
 						添加日期：
@@ -34,6 +40,9 @@
 					<td nowrap="nowrap">
 						<input type="submit" value="查&nbsp;&nbsp;询"
 							style="cursor: pointer;">
+						<input type="button" value="新&nbsp;&nbsp;增"
+							onclick="javascript:window.location.href ='adminNewsManager/adminNews!initAddNews.php'"
+							style="cursor: pointer;">
 					</td>
 				</tr>
 			</table>
@@ -44,6 +53,9 @@
 					<tr>
 						<th nowrap="nowrap" style="font-size: 12px;">
 							标题
+						</th>
+						<th nowrap="nowrap" style="font-size: 12px;">
+							类型
 						</th>
 						<th nowrap="nowrap" style="font-size: 12px;">
 							URL
@@ -63,6 +75,9 @@
 								<s:property value="#newsVO.title" />
 							</td>
 							<td>
+								<s:property value="#newsVO.typeName" />
+							</td>
+							<td>
 								<s:property value="#newsVO.url" />
 							</td>
 							<td>
@@ -72,6 +87,8 @@
 								<a
 									href="javascript:addMoney('<s:property value="#newsVO.id" />')">浏览</a>
 								<a
+									href="javascript:addMoney('<s:property value="#newsVO.id" />')">修改</a>
+								<a
 									href="javascript:deleteMoney('<s:property value="#newsVO.id" />')">删除</a>
 							</td>
 						</tr>
@@ -79,7 +96,7 @@
 				</tbody>
 				<s:if test="#request.result.size()==0">
 					<tr>
-						<th colspan="4" align="center">
+						<th colspan="5" align="center">
 							没有记录！
 						</th>
 					</tr>

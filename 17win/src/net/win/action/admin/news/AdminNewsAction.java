@@ -27,8 +27,12 @@ import org.springframework.stereotype.Controller;
 		@Result(name = "addNewsType", location = "/admin/news/newsType.jsp"),
 
 		@Result(name = "queryNews", location = "/admin/news/newsIndex.jsp"),
-		@Result(name = "addNews", location = "/admin/news/newsIndex.jsp"),
-		@Result(name = "updateNews", location = "/admin/news/newsIndex.jsp"),
+		@Result(name = "initAddNews", location = "/admin/news/addNews.jsp"),
+
+		@Result(name = "addNews", type = "chain", location = "adminNewsManager/adminNews!queryNews.php"),
+		@Result(name = "updateNews", type = "chain", location = "adminNewsManager/adminNews!queryNews.php"),
+
+		@Result(name = "initUpdateNews", location = "/admin/news/updateIndex.jsp"),
 		@Result(name = "deleteNews", location = "/admin/news/newsIndex.jsp") })
 public class AdminNewsAction extends BaseAction {
 	@Resource
@@ -71,6 +75,16 @@ public class AdminNewsAction extends BaseAction {
 	}
 
 	/**
+	 * 初始化新增
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String initAddNews() throws Exception {
+		return adminNewsService.initAddNews(newsVO);
+	}
+
+	/**
 	 * 新增
 	 * 
 	 * @return
@@ -78,6 +92,16 @@ public class AdminNewsAction extends BaseAction {
 	 */
 	public String addNews() throws Exception {
 		return adminNewsService.addNews(newsVO);
+	}
+
+	/**
+	 * 初始化 修改
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String initUpdateNews() throws Exception {
+		return adminNewsService.initUpdateNews(newsVO);
 	}
 
 	/**

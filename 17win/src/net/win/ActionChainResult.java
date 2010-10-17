@@ -178,7 +178,7 @@ public class ActionChainResult implements Result {
 
 		if (index != -1) {
 			finalMethodName = finalActionName.substring(index + 1).split("\\.")[0];
-			finalActionName = finalActionName.substring(0, index).split("/")[2];
+			finalActionName = finalActionName.substring(0, index).split("/")[1];
 		} else {
 			finalMethodName = this.methodName != null ? TextParseUtil
 					.translateVariables(this.methodName, stack) : null;

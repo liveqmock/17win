@@ -24,6 +24,7 @@
 </script>
 <script type="text/javascript" src="<%=basePathRoot%>/js/utils.js">
 </script>
+<script type="text/javascript" src="<%=basePathRoot%>/ckeditor/ckeditor.js"></script>
 <script type="text/javascript"
 	src="<%=basePathRoot%>/js/My97DatePicker/WdatePicker.js">
 </script>

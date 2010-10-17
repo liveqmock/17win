@@ -15,10 +15,21 @@ public class NewsVO extends BaseVO {
 	private String url;
 	// 发布时间
 	private Date date;
+	
+	private String typeName;
 
 	// 查询
 	private Date startDate;
 	private Date endDate;
+	private Long typeId;
+
+	public Long getTypeId() {
+		return typeId;
+	}
+
+	public void setTypeId(Long typeId) {
+		this.typeId = typeId;
+	}
 
 	public Date getStartDate() {
 		return startDate;
@@ -82,5 +93,13 @@ public class NewsVO extends BaseVO {
 
 	public void setNextNews(NewsVO nextNews) {
 		this.nextNews = nextNews;
+	}
+
+	public String getTypeName() {
+		return typeName;
+	}
+
+	public void setTypeName(String typeName) {
+		this.typeName = typeName;
 	}
 }
