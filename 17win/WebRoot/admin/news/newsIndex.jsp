@@ -85,11 +85,11 @@
 							</td>
 							<td>
 								<a
-									href="javascript:addMoney('<s:property value="#newsVO.id" />')">浏览</a>
+									href="javascript:browserNews('<s:property value="#newsVO.id" />')">浏览</a>
 								<a
-									href="javascript:addMoney('<s:property value="#newsVO.id" />')">修改</a>
+									href="javascript:updateNews('<s:property value="#newsVO.id" />')">修改</a>
 								<a
-									href="javascript:deleteMoney('<s:property value="#newsVO.id" />')">删除</a>
+									href="javascript:deleteNews('<s:property value="#newsVO.id" />')">删除</a>
 							</td>
 						</tr>
 					</s:iterator>

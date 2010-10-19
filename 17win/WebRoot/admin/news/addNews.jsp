@@ -9,7 +9,8 @@
 	</head>
 
 	<body>
-		<s:form action="adminNewsManager/adminNews!addNews.php" theme="simple" target="mainFrame">
+		<s:form action="adminNewsManager/adminNews!addNews.php" theme="simple"
+			target="mainFrame">
 			<table cellpadding="1" cellspacing="1" border="0px">
 				<tr>
 					<td nowrap="nowrap">
@@ -17,7 +18,7 @@
 					</td>
 					<td>
 						<s:select name="newsVO.typeId" list="#request.newsTpyes"
-							listKey="id" listValue="name" >
+							listKey="id" listValue="name">
 						</s:select>
 					</td>
 				</tr>
@@ -38,11 +39,12 @@
 					</td>
 				</tr>
 				<tr>
-					<td nowrap="nowrap">
+					<td nowrap="nowrap" colspan="2" align="center">
 						<input type="submit" value="提交">
-					</td>
-					<td>
 						<input type="reset" value="重置">
+						<input type="button"
+							onclick="javascript:window.location.href ='adminNewsManager/adminNews!queryNews.php'"
+							value="返回">
 					</td>
 				</tr>
 			</table>

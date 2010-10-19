@@ -138,6 +138,19 @@ public class AdminNewsService extends BaseService {
 	}
 
 	/**
+	 * 浏览
+	 * 
+	 * @param adminPayVO
+	 * @return
+	 * @throws Exception
+	 */
+	public String browserNews(NewsVO newsVO) throws Exception {
+		NewsEntity newsEntity = newsDAO.get(newsVO.getId());
+		BeanUtils.copyProperties(newsVO, newsEntity);
+		return "browserNews";
+	}
+
+	/**
 	 * 新增新闻
 	 * 
 	 * @param adminPayVO
@@ -210,6 +223,7 @@ public class AdminNewsService extends BaseService {
 	public String deleteNews(NewsVO newsVO) throws Exception {
 		newsDAO.deleteById(newsVO.getId());
 		queryNews(newsVO);
+		putAlertMsg("删除成功！");
 		return "deleteNews";
 	}
 

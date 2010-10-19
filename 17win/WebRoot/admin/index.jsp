@@ -2,17 +2,19 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
+		<s:include value="/admin/common/header.jsp"></s:include>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<script type="text/javascript" src="index.js"></script>
 	</head>
 	<body>
 		<s:form theme="simple" action="/adminManager/admin!login.php">
-			<table>
+			<table align="center">
 				<Tr>
 					<td>
 						登录名:
 					</td>
 					<td>
-						<input name="username" tabindex="1">
+						<input name="username" id="usernameID" tabindex="1">
 					</td>
 				</Tr>
 				<Tr>
@@ -28,8 +30,7 @@
 						验证码:
 					</td>
 					<td>
-						<input type="text" name="code" style="width: 60px"
-							maxlength="4" />
+						<input type="text" name="code" style="width: 60px" maxlength="4" />
 						<img src="verify/verificationCode.php" />
 					</td>
 				</Tr>

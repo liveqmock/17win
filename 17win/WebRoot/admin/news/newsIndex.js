@@ -23,44 +23,22 @@ $(document).ready(function() {
 
 // 删除
 
-function deleteMoney(id) {
+function deleteNews(id) {
 	if (confirm("确认是否删除？")) {
-		window.location.href = "adminPaidManager/adminPaid!deleteMoney.php?payId="
+		window.location.href = "adminNewsManager/adminNews!deleteNews.php?newsVO.id="
 				+ id;
 
 	}
 }
-
-// 充值
-function addMoney(id) {
-	if (confirm("确认是否充值？")) {
-		window.location.href = "adminPaidManager/adminPaid!addMoney.php?payId="
-				+ id;
-	}
+// 更新
+function updateNews(id) {
+	window.location.href = "adminNewsManager/adminNews!initUpdateNews.php?newsVO.id="
+			+ id;
 }
 // 浏览
-function brower(id, read) {
-	if (!read) {
-		$.post("smsManager/sms!updateSms.php?smsVO.id=" + id);
-	}
-	$("#title").val($("#a_" + id).attr("title"));
-	$("#content").text($("#a_" + id).attr("content"));
-	$("#browerSms").dialog("open");
-
-}
-// 回复
-function reply(fromUsername) {
-	window.open("smsManager/sms!initSendSms.php?toUser=" + fromUsername,
-			"_blank");
-}
-function validateForm() {
-	var startDate = $("#startDate").val();
-	var endDate = $("#endDate").val();
-	if (Validater.compareDate(startDate, endDate)) {
-		alert("【结束时间】必须大于等于【开始时间】！");
-		return false;
-	}
-	return true;
+function browserNews(id, read) {
+	window.location.href = "adminNewsManager/adminNews!browserNews.php?newsVO.id="
+			+ id
 }
 
 // ///分页
