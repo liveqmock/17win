@@ -36,6 +36,7 @@
 					</td>
 					<td>
 						<s:textarea name="newsVO.content"></s:textarea>
+						<s:hidden name="newsVO.id"/>
 					</td>
 				</tr>
 				<tr>

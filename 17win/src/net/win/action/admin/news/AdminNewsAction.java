@@ -35,7 +35,11 @@ import org.springframework.stereotype.Controller;
 		@Result(name = "initUpdateNews", location = "/admin/news/updateNews.jsp"),
 		@Result(name = "deleteNews", location = "/admin/news/newsIndex.jsp"),
 
-		@Result(name = "browserNews", location = "/admin/news/browserNews.jsp")
+		@Result(name = "browserNews", location = "/admin/news/browserNews.jsp"),
+
+		@Result(name = "showHelp", location = "/help/index.jsp"),
+
+		@Result(name = "listNews", location = "/help/list.jsp")
 
 })
 public class AdminNewsAction extends BaseAction {
@@ -66,6 +70,34 @@ public class AdminNewsAction extends BaseAction {
 	public String execute() throws Exception {
 		// TODO Auto-generated method stub
 		return super.execute();
+	}
+
+	/**
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String detailNews() throws Exception {
+		return adminNewsService.detailNews(newsVO);
+	}
+
+	/**
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String listNews() throws Exception {
+		return adminNewsService.listNews(newsVO);
+	}
+
+	/**
+	 * 新闻显示
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String showHelp() throws Exception {
+		return adminNewsService.showHelp(newsVO);
 	}
 
 	/**

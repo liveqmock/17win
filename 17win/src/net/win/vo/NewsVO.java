@@ -18,7 +18,10 @@ public class NewsVO extends BaseVO {
 	
 	private String typeName;
 
+	
 	// 查询
+
+	
 	private Date startDate;
 	private Date endDate;
 	private Long typeId;

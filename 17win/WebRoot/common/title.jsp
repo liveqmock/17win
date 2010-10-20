@@ -197,7 +197,7 @@
 				</s:if>
 					<s:else>
 						class="li0 "
-				</s:else> href="system/newer.jsp"
+				</s:else> href="adminNewsManager/adminNews!showHelp.php"
 					id="a9" onmouseover="Mea(9);" onMouseOut="setAuto()">新手入门</A>
 			</LI>
 		</UL>
