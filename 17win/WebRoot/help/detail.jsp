@@ -4,8 +4,8 @@
 <HTML>
 	<HEAD>
 		<s:include value="../common/header.jsp"></s:include>
-		<LINK href="css/Css.css" type="text/css" rel="stylesheet" />
-		<LINK href="css/top_bottom.css" type="text/css" ' rel="stylesheet">
+		<LINK href="css/Css.css" type=text/css rel=stylesheet>
+		<LINK href="css/top_bottom.css" type=text/css rel=stylesheet>
 		<SCRIPT src="help/list.js" type=text/javascript></SCRIPT>
 		<style type="text/css">
 <!--
@@ -76,7 +76,7 @@ body {
 																		id="obj">
 																		<tr>
 																			<td>
-																				<a href='help/<s:property value="#obj.url"/>' target="_blank"
+																				<a href='#' target="_blank"
 																					title='<s:property value="#obj.title"/>'><font><s:property
 																							value="#obj.title" /> </font> </a>
 																			</td>
@@ -128,7 +128,7 @@ body {
 																		id="obj">
 																		<tr>
 																			<td>
-																				<a href='help/<s:property value="#obj.url"/>' target="_blank"
+																				<a href='#' target="_blank"
 																					title='<s:property value="#obj.title"/>'><font><s:property
 																							value="#obj.title" /> </font> </a>
 																			</td>
@@ -149,16 +149,20 @@ body {
 								<table width="690" cellspacing="0" cellpadding="0" border="0">
 									<tbody>
 										<tr>
-											<td height="26" background="images/news1.gif">
+											<td height="26" background="images/news1.gif"
+												style="border: 1px,">
 												<table width="655" cellspacing="0" cellpadding="0"
 													border="0" align="center">
 													<tbody>
 														<tr>
-															<td class="f12ls1">
+															<td class="f12bt">
 																当前位置：
 																<a href="adminNewsManager/adminNews!showHelp.php">帮助中心</a>
 																&gt;
-																<s:property value="newsVO.typeName" />
+																<a
+																	href="javascript:window.location.href=encodeURI(encodeURI('adminNewsManager/adminNews!listNews.php?newsVO.typeName=<s:property
+																		value="#request.result.typeName" />'));"><s:property
+																		value="#request.result.typeName" /> </a>
 															</td>
 														</tr>
 													</tbody>
@@ -169,30 +173,47 @@ body {
 											<td valign="top" background="images/news2.gif">
 												<table width="669" cellspacing="0" cellpadding="0"
 													border="0" align="center">
-
 													<tbody>
-														<s:iterator value="#request.result" status="status"
-															id="newsVO">
-															<tr>
-																<td height="30" background="images/news4.gif">
-																	<table width="659" cellspacing="0" cellpadding="0"
-																		border="0" align="right" class="LeftNews">
-																		<tbody>
-																			<tr>
-																				<td width="644" class="f12hs">
-																					<a title="<s:property value="#newsVO.title"/>"
-																						target="_blank"
-																						href="help/<s:property value="#newsVO.url"/>"> <s:property
-																							value="#newsVO.title" /> </a>
-																				</td>
-																			</tr>
-																		</tbody>
-																	</table>
-																</td>
-															</tr>
-														</s:iterator>
+														<tr>
+															<td height="30">
+																<table width="644" cellspacing="0" cellpadding="0"
+																	border="0" align="center">
+																	<tbody>
+																		<tr>
+																			<td width="644" valign="bottom" height="60"
+																				align="center" class="f12bt STYLE1">
+																				<s:property value="#request.result.title" />
+																			</td>
+																		</tr>
+																		<tr>
+																			<td height="33" align="center"
+																				style="border-bottom: 1px dashed rgb(3, 101, 190); height: 30px; color: #0365BE; font-size: 12px"
+																				class="f12ls1">
+																				<s:property value="#request.result.date" />
+																			</td>
+																		</tr>
+																	</tbody>
+																</table>
+															</td>
+														</tr>
+														<tr>
+															<td height="30">
+																<table width="644" cellspacing="0" cellpadding="0"
+																	border="0" align="center">
+																	<tbody>
+																		<tr>
+																			<td width="644" height="145" class="f14d">
+																				<s:property value="#request.result.content"
+																					escape="false" />
+																			</td>
+																		</tr>
+																	</tbody>
+																</table>
+															</td>
+														</tr>
 													</tbody>
 												</table>
+												`
 											</td>
 										</tr>
 										<tr>
@@ -201,41 +222,29 @@ body {
 													border="0" align="center">
 													<tbody>
 														<tr>
-															<TD>
-																<input type="hidden"
-																	value="<s:property
-											value="newsVO.typeName" />"
-																	id="typeName">
-																<input type="hidden"
-																	value="<s:property
-											value="newsVO.nowPage" />"
-																	id="nowPage">
-																<input type="hidden"
-																	value="<s:property
-										value="newsVO.pageCount" />"
-																	id="pageCount">
-																共
-																<font color="blue"><b><s:property
-																			value="newsVO.dataCount" /> </b> </font> 条主题&nbsp;&nbsp;&nbsp;
-																<a href="javascript:firstPage()">首页</a>
-																<a href="javascript:prevPage()">上一页</a>&nbsp;
-																<a href="javascript:nextPage()">下一页</a>&nbsp;
-																<a href="javascript:lastPage()">尾页</a>&nbsp;页次：
-																<strong><font color="red"><s:property
-																			value="newsVO.nowPage" /> </font>/<s:property
-																		value="newsVO.pageCount" /> </strong>页 &nbsp;
-																<b><s:property value="newsVO.eachPage" /> </b>条主题/页&nbsp;转到：
-																<select id='toPageSelect' size='1' onchange="jumpPage()">
-																	<s:iterator begin="1" end="newsVO.pageCount" step="1"
-																		var="index">
-																		<option value="<s:property value="#index" />">
-																			第
-																			<s:property value="#index" />
-																			页
-																		</option>
-																	</s:iterator>
-																</select>
-															</TD>
+															<td>
+																<span class="hd"> <s:if
+																		test="#request.prevNews!=null">
+																	上一篇： <a
+																			href="help/<s:property
+																				value="#request.prevNews.url" />"><s:property
+																				value="#request.prevNews.title" /> </a>
+																	</s:if> <s:if test="#request.prevNews!=null">
+																	上一篇： <a href="news.asp?/1386.html">下一篇： <a
+																			href="help/<s:property
+																					value="#request.afterNews.url" /> "><s:property
+																					value="#request.afterNews.title" /> </a>
+																	</s:if> </span>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+
+												<table width="655" cellspacing="0" cellpadding="0"
+													border="0" align="center">
+													<tbody>
+														<tr>
+															<td></td>
 														</tr>
 													</tbody>
 												</table>

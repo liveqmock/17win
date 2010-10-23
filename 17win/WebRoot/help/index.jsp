@@ -28,7 +28,6 @@ body {
 	</HEAD>
 	<BODY>
 		<s:include value="../common/title.jsp"></s:include>
-
 		<TABLE cellSpacing="0" cellPadding="0" width="960" align="center"
 			border="0">
 			<tr>
@@ -77,7 +76,7 @@ body {
 																		id="obj">
 																		<tr>
 																			<td>
-																				<a href='#' target="_blank"
+																				<a href='help/<s:property value="#obj.url"/>' target="_blank"
 																					title='<s:property value="#obj.title"/>'><font><s:property
 																							value="#obj.title" /> </font> </a>
 																			</td>
@@ -129,7 +128,7 @@ body {
 																		id="obj">
 																		<tr>
 																			<td>
-																				<a href='#' target="_blank"
+																				<a href='help/<s:property value="#obj.url"/>' target="_blank"
 																					title='<s:property value="#obj.title"/>'><font><s:property
 																							value="#obj.title" /> </font> </a>
 																			</td>
@@ -179,7 +178,7 @@ body {
 																	id="obj">
 																	<tr>
 																		<td>
-																			<a href='#' target="_blank"
+																			<a href='help/<s:property value="#obj.url"/>' target="_blank"
 																				title='<s:property value="#obj.title"/>'><font><s:property
 																						value="#obj.title" /> </font> </a>
 																		</td>
@@ -222,7 +221,7 @@ body {
 																	id="obj">
 																	<tr>
 																		<td>
-																			<a href='#' target="_blank"
+																			<a href='help/<s:property value="#obj.url"/>' target="_blank"
 																				title='<s:property value="#obj.title"/>'><font><s:property
 																						value="#obj.title" /> </font> </a>
 																		</td>
@@ -276,7 +275,7 @@ body {
 																	id="obj">
 																	<tr>
 																		<td>
-																			<a href='#' target="_blank"
+																			<a href='help/<s:property value="#obj.url"/>' target="_blank"
 																				title='<s:property value="#obj.title"/>'><font><s:property
 																						value="#obj.title" /> </font> </a>
 																		</td>
@@ -319,7 +318,7 @@ body {
 																	id="obj">
 																	<tr>
 																		<td>
-																			<a href='#' target="_blank"
+																			<a href='help/<s:property value="#obj.url"/>' target="_blank"
 																				title='<s:property value="#obj.title"/>'><font><s:property
 																						value="#obj.title" /> </font> </a>
 																		</td>
@@ -373,7 +372,7 @@ body {
 																	id="obj">
 																	<tr>
 																		<td>
-																			<a href='#' target="_blank"
+																			<a href='help/<s:property value="#obj.url"/>' target="_blank"
 																				title='<s:property value="#obj.title"/>'><font><s:property
 																						value="#obj.title" /> </font> </a>
 																		</td>
@@ -416,7 +415,7 @@ body {
 																	id="obj">
 																	<tr>
 																		<td>
-																			<a href='#' target="_blank"
+																			<a href='help/<s:property value="#obj.url"/>' target="_blank"
 																				title='<s:property value="#obj.title"/>'><font><s:property
 																						value="#obj.title" /> </font> </a>
 																		</td>
@@ -470,7 +469,7 @@ body {
 																	id="obj">
 																	<tr>
 																		<td>
-																			<a href='#' target="_blank"
+																			<a href='help/<s:property value="#obj.url"/>' target="_blank"
 																				title='<s:property value="#obj.title"/>'><font><s:property
 																						value="#obj.title" /> </font> </a>
 																		</td>
@@ -513,7 +512,7 @@ body {
 																	id="obj">
 																	<tr>
 																		<td>
-																			<a href='#' target="_blank"
+																			<a href='help/<s:property value="#obj.url"/>' target="_blank"
 																				title='<s:property value="#obj.title"/>'><font><s:property
 																						value="#obj.title" /> </font> </a>
 																		</td>
@@ -537,62 +536,6 @@ body {
 
 
 		<s:include value="../common/footKuan.jsp"></s:include>
-		<div class="service2  service serviceA " id="divSerWin">
-			<div class="service-open" id="divMySer">
-				<div onclick="ClickSer();" class="service-button"></div>
-				<div class="service-inside">
-					<dl>
-						<dt>
-							客服工作时间
-						</dt>
-						<dd class="esp_4">
-							周一至周五
-						</dd>
-						<dd class="esp_4">
-							9:00 - 18:30
-						</dd>
-						<dd class="esp_5">
-							<!--<a href="#" target="_blank">自助服务</a>-->
-						</dd>
-						<dt>
-							客服团队
-						</dt>
-						<dd>
-							<a class="serviceA" href="tencent://message/?uin=1348001415">新手帮助</a>
-						</dd>
-						<dd>
-							<a class="serviceA" href="tencent://message/?uin=1181045171">客服一号</a>
-						</dd>
-						<dd>
-							<a href="tencent://message/?uin=1395324789">客服二号</a>
-						</dd>
-						<dd>
-							<a href="tencent://message/?uin=1348001415">客服三号</a>
-						</dd>
-						<dd>
-							<a href="tencent://message/?uin=1181045171">客服四号</a>
-						</dd>
-						<dd>
-							<a href="tencent://message/?uin=1395324789">充值帮助</a>
-						</dd>
-						<dd>
-							<a href="tencent://message/?uin=1097238420">提现帮助</a>
-						</dd>
-						<dd class="esp_1">
-							<a href="tencent://message/?uin=2750697">投诉建议</a>
-						</dd>
-						<dt>
-							QQ交流群
-						</dt>
-						<dd class="esp_2">
-							1-23群已满
-						</dd>
-						<dd class="esp_3">
-							24群：120645229
-						</dd>
-					</dl>
-				</div>
-			</div>
-		</div>
+		
 	</BODY>
 </HTML>
