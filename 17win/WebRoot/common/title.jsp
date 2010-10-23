@@ -38,7 +38,7 @@
 					<TD vAlign=top width=528>
 						<TABLE cellSpacing=0 cellPadding=0 width=535 align=right border=0>
 							<TR>
-								<TD height=32 align="right">
+								<TD height=32 align="right" id="userLoginId">
 									<s:if test="#session.userLogin==null">
 										<span class="yell_font">您还没登录！</span>
 										<A href="userManager/base!initLogin.php" target="_top">登陆</A> |

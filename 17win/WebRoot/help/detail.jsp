@@ -6,7 +6,7 @@
 		<s:include value="../common/header.jsp"></s:include>
 		<LINK href="css/Css.css" type=text/css rel=stylesheet>
 		<LINK href="css/top_bottom.css" type=text/css rel=stylesheet>
-		<SCRIPT src="help/list.js" type=text/javascript></SCRIPT>
+		<SCRIPT src="js/utils.js" type=text/javascript></SCRIPT>
 		<style type="text/css">
 <!--
 body {
@@ -26,7 +26,7 @@ body {
 -->
 </style>
 	</HEAD>
-	<BODY>
+	<BODY onload="getUserLogin()">
 		<s:include value="../common/title.jsp"></s:include>
 		<TABLE cellSpacing="0" cellPadding="0" width="960" align="center"
 			border="0">

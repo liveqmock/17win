@@ -172,3 +172,26 @@ function dynamicMsg(str) {
 	}
 	return str;
 }
+
+// 获取用户信息
+function getUserLogin() {
+	$.getJSON("userManager/base!getLoginUser.php", function(data) {
+		var user = data.loginInfo;
+		var tdYes = "<span class='yell_font'>欢迎您！</span> "
+				+ "			<font color='red'><b>admin </b> </font> 回来 |  "
+				+ "				<a target='_self' href='userManager/base!loginOut.php'> "
+				+ "				[安全退出] </a> "
+				+ "			|    "
+				+ "			<a target='_self' href='userInfoManager/info!init.php'> "
+				+ "				[个人中心] </a>|  "
+				+ "		<a onclick='window.external.addFavorite('http://www.2000w.net','淘宝刷信誉')' title='添加到收藏夹' href='#'>[收藏本站]</a>  ";
+		var tdNo = +"<span class='yell_font'>您还没登录！</span> "
+				+ "	<a target='_top' href='userManager/base!initLogin.php'>登陆</a> | 注册</a> | "
+				+ " <a onclick='window.external.addFavorite('http://www.2000w.net','淘宝刷信誉')' title='添加到收藏夹' href='#'>[收藏本站]</a> ";
+		if (user == null) {
+			$("#userLoginId").html(tdNo);
+		} else {
+			$("#userLoginId").html(tdYes);
+		}
+	});
+}
