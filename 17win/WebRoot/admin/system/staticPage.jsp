@@ -13,7 +13,7 @@
 					<input type="button"
 						onclick="window.location.href='adminSystemManager/adminSystem!staticNewsPage.php'"
 						value="生成新闻">
-					<input type="button" value="生成首页">
+					<input type="button"  onclick="window.location.href='adminSystemManager/adminSystem!staticIndexPage.php'"   value="生成首页">
 				</td>
 			</tr>
 		</table>

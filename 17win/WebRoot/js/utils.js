@@ -178,7 +178,7 @@ function getUserLogin() {
 	$.getJSON("userManager/base!getLoginUser.php", function(data) {
 		var user = data.loginInfo;
 		var tdYes = "<span class='yell_font'>欢迎您！</span> "
-				+ "			<font color='red'><b>admin </b> </font> 回来 |  "
+				+ "			<font color='red'><b>"+user.username+" </b> </font> 回来 |  "
 				+ "				<a target='_self' href='userManager/base!loginOut.php'> "
 				+ "				[安全退出] </a> "
 				+ "			|    "

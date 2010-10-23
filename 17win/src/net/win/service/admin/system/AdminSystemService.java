@@ -48,9 +48,10 @@ public class AdminSystemService extends BaseService {
 			BufferedWriter writer = null;
 			BufferedReader reader = null;
 			try {
-				httpget = new HttpGet(basePath
-						+ "adminNewsManager/adminNews!detailNews.php?newsVO.id="
-						+ newsEntity.getId());
+				httpget = new HttpGet(
+						basePath
+								+ "adminNewsManager/adminNews!detailNews.php?newsVO.id="
+								+ newsEntity.getId());
 				HttpResponse response = httpclient.execute(httpget);
 				HttpEntity entity = response.getEntity();
 				if (entity != null) {
@@ -83,5 +84,54 @@ public class AdminSystemService extends BaseService {
 		httpclient.getConnectionManager().shutdown();
 		putAlertMsg("生成成功！");
 		return "staticNewsPage";
+	}
+
+	/**
+	 * 首页静态页面
+	 * 
+	 * @param newsVO
+	 * @return
+	 * @throws Exception
+	 */
+	public String staticIndexPage() throws Exception {
+		String path = getRequset().getContextPath();
+		String basePath = getRequset().getScheme() + "://"
+				+ getRequset().getServerName() + ":"
+				+ getRequset().getServerPort() + path + "/";
+		HttpClient httpclient = new DefaultHttpClient();
+		HttpGet httpget = null;
+		BufferedWriter writer = null;
+		BufferedReader reader = null;
+
+		try {
+			httpget = new HttpGet(basePath + "menuManager/menu!toIndex.php");
+			HttpResponse response = httpclient.execute(httpget);
+			HttpEntity entity = response.getEntity();
+			if (entity != null) {
+				writer = new BufferedWriter(new OutputStreamWriter(
+						new FileOutputStream(new File(ContextUtils
+								.getRootPath()
+								+ File.separator + "index.html")), "UTF-8"));
+				reader = new BufferedReader(new InputStreamReader(entity
+						.getContent(), "UTF-8"));
+				String line = null;
+				while ((line = reader.readLine()) != null) {
+					writer.write(line);
+				}
+			}
+		} catch (RuntimeException e) {
+			throw new RuntimeException(e);
+		} finally {
+			if (writer != null) {
+				writer.close();
+			}
+			if (reader != null) {
+				reader.close();
+			}
+		}
+		httpget.abort();
+		httpclient.getConnectionManager().shutdown();
+		putAlertMsg("生成成功！");
+		return "staticIndexPage";
 	}
 }

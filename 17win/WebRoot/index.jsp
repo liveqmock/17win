@@ -9,9 +9,9 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML>
 	<HEAD>
+		<META http-equiv=Content-Type content="text/html; charset=UTF-8">
 		<base href="<%=basePath%>">
 		<title>淘宝刷信誉 -淘宝刷钻 _刷钻平台_互刷平台_免费刷钻首选灵谷刷客平台</title>
-		<META http-equiv=Content-Type content="text/html; charset=gb2312">
 		<meta
 			content="淘宝刷信誉,淘宝刷钻,刷钻平台,互刷平台,免费刷钻首选灵谷刷客平台.第三方担保,保证用户在淘宝刷信誉,淘宝刷钻的资金安全。灵谷互刷平台更可免费刷钻。"
 			name="description" />
@@ -34,7 +34,8 @@
 			onsubmit="return validateForm()">
 			<s:token></s:token>
 			<s:include value="common/title.jsp"></s:include>
-			<TABLE cellSpacing=0 cellPadding=0 width=960 align=center border=0>
+			<TABLE cellSpacing="0" cellPadding="0" width="960" align="center"
+				border="0">
 				<TR>
 					<TD vAlign=top width=270>
 
@@ -61,7 +62,8 @@
 										</td>
 									</tr>
 									<tr>
-										<td colspan="6" style="padding: 10px;" class="K_mtcontent">
+										<td colspan="6" style="padding: 10px;" class="K_mtcontent"
+											id="tableLoginUserInfoID">
 
 											<table width="100%" cellspacing="0" cellpadding="0"
 												border="0" class="LeftNews">
@@ -100,7 +102,7 @@
 																color="#ff0000">免费刷钻&nbsp; </font> </a>
 														</td>
 														<td>
-															<a href="userManager/menuManager/menu!toIndex.php"
+															<a href="userManager/base!loginOut.php"
 																onclick="return confirm('确定退出操作吗？');"><font
 																color="#ff0000"> 安全退出</font> </a>
 														</td>
@@ -133,7 +135,7 @@
 									</TD>
 								</TR>
 								<TR>
-									<TD class=K_mtcontent
+									<TD class="K_mtcontent" id="tableLoginUserInfoID"
 										style="PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 10px; PADDING-TOP: 10px"
 										colSpan=6>
 

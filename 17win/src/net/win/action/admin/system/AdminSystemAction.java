@@ -20,7 +20,11 @@ import org.springframework.stereotype.Controller;
 @Namespace("/adminSystemManager")
 @Results( {
 		@Result(name = "staticPage", location = "/admin/system/staticPage.jsp"),
-		@Result(name = "staticNewsPage", location = "/admin/system/staticPage.jsp") })
+		@Result(name = "staticNewsPage", location = "/admin/system/staticPage.jsp"),
+		@Result(name = "staticIndexPage", location = "/admin/system/staticPage.jsp")
+		
+
+})
 public class AdminSystemAction extends BaseAction {
 	@Resource
 	private AdminSystemService adminSystemService;
@@ -51,6 +55,16 @@ public class AdminSystemAction extends BaseAction {
 	 */
 	public String staticNewsPage() throws Exception {
 		return adminSystemService.staticNewsPage();
+	}
+
+	/**
+	 * 首页静态页面
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String staticIndexPage() throws Exception {
+		return adminSystemService.staticIndexPage();
 	}
 
 }
