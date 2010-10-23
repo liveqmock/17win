@@ -1,7 +1,6 @@
 package net.win.service.admin.news;
 
 import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -60,6 +59,36 @@ public class AdminNewsService extends BaseService {
 		}
 		putByRequest("wzResult", wzResult);
 		putByRequest("tjResult", tjResult);
+
+		List<NewsEntity> prevNews = newsDAO.pageQuery(
+				"from NewsEntity  where  id <:newsID  order by  id desc ",
+				new String[] { "newsID" }, new Object[] { newsVO.getId() }, 1,
+				1);
+		List<NewsEntity> afterNews = newsDAO.pageQuery(
+				"from NewsEntity  where  id >:newsID  order by  id asc ",
+				new String[] { "newsID" }, new Object[] { newsVO.getId() }, 1,
+				1);
+		if (prevNews.size() > 0) {
+			newsVOTemp = new NewsVO();
+			BeanUtils.copyProperties(newsVOTemp, prevNews.get(0));
+			putByRequest("prevNews", newsVOTemp);
+		} else {
+			putByRequest("prevNews", null);
+		}
+
+		if (afterNews.size() > 0) {
+			newsVOTemp = new NewsVO();
+			BeanUtils.copyProperties(newsVOTemp, afterNews.get(0));
+			putByRequest("afterNews", newsVOTemp);
+		} else {
+			putByRequest("afterNews", null);
+		}
+
+		NewsEntity newsEntity = newsDAO.get(newsVO.getId());
+		newsVOTemp = new NewsVO();
+		BeanUtils.copyProperties(newsVOTemp, newsEntity);
+		newsVOTemp.setTypeName(newsEntity.getType().getName());
+		putByRequest("result", newsVOTemp);
 		return "detailNews";
 	}
 
@@ -92,8 +121,8 @@ public class AdminNewsService extends BaseService {
 			BeanUtils.copyProperties(newsVOTemp, newsEntity);
 			tjResult.add(newsVOTemp);
 		}
-		
-		newsVO.setTypeName(URLDecoder.decode(newsVO.getTypeName(),"UTF-8"));
+
+		newsVO.setTypeName(URLDecoder.decode(newsVO.getTypeName(), "UTF-8"));
 		Long count = (Long) newsDAO
 				.uniqueResultObject(
 						"select count(*) from NewsEntity as _news where _news.type.name=:typeName  order by _news.date",
@@ -428,7 +457,7 @@ public class AdminNewsService extends BaseService {
 				.uniqueResultObject(
 						"select count(*) from NewsEntity as _news  where _news.type.id=:typID",
 						new String[] { "typID" }, new Object[] { newsVO
-								.getTypeId() });
+								.getTypeId() }) + 1;
 		NewsEntity newsEntity = newsDAO.get(newsVO.getId());
 		BeanUtils.copyProperties(newsEntity, newsVO);
 

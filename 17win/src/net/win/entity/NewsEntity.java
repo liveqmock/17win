@@ -19,7 +19,7 @@ public class NewsEntity extends BaseEntity {
 	@Column(name = "Content_", columnDefinition = "text", nullable = false)
 	private String content;
 	// URL
-	@Column(name = "Url_")
+	@Column(name = "Url_" ,unique=true)
 	private String url;
 
 	// 发布时间

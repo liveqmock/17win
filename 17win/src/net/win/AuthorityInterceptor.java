@@ -31,6 +31,8 @@ public class AuthorityInterceptor extends AbstractInterceptor {
 		EXINCLUDE_PATH.add("adminManager/admin!login.php");
 		EXINCLUDE_PATH.add("adminNewsManager/adminNews!showHelp.php");
 		EXINCLUDE_PATH.add("adminNewsManager/adminNews!listNews.php");
+		EXINCLUDE_PATH.add("adminNewsManager/adminNews!detailNews.php");
+
 	}
 	/**
 	 * 

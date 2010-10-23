@@ -39,9 +39,9 @@ import org.springframework.stereotype.Controller;
 
 		@Result(name = "showHelp", location = "/help/index.jsp"),
 
-		@Result(name = "listNews", location = "/help/list.jsp")
+		@Result(name = "listNews", location = "/help/list.jsp"),
 
-})
+		@Result(name = "detailNews", location = "/help/detail.jsp") })
 public class AdminNewsAction extends BaseAction {
 	@Resource
 	private AdminNewsService adminNewsService;
