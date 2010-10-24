@@ -67,12 +67,14 @@ public class AdminSystemService extends BaseService {
 					String line = null;
 					while ((line = reader.readLine()) != null) {
 						writer.write(line);
+						writer.newLine();
 					}
 				}
 			} catch (RuntimeException e) {
 				throw new RuntimeException(e);
 			} finally {
 				if (writer != null) {
+					writer.newLine();
 					writer.close();
 				}
 				if (reader != null) {
@@ -117,6 +119,7 @@ public class AdminSystemService extends BaseService {
 				String line = null;
 				while ((line = reader.readLine()) != null) {
 					writer.write(line);
+					writer.newLine();
 				}
 			}
 		} catch (RuntimeException e) {

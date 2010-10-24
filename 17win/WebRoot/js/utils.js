@@ -175,7 +175,7 @@ function dynamicMsg(str) {
 
 // 获取用户信息
 function getUserLogin() {
-	$.getJSON("userManager/base!getLoginUser.php", function(data) {
+	$.getJSON("userManager/base!getLoginUser.php?time="+new Date().getTime(), function(data) {
 		var user = data.loginInfo;
 		var tdYes = "<span class='yell_font'>欢迎您！</span> "
 				+ "			<font color='red'><b>"+user.username+" </b> </font> 回来 |  "
