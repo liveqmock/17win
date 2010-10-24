@@ -95,7 +95,7 @@ td {
 										<font color="#FF0000">*&nbsp;</font>
 									</td>
 									<td>
-										<input type="password" id="rePassword" size="30"  maxlength="20"
+										<input type="password" id="rePassword" size="30"  maxlength="20" 
 											style="width: 210px">
 										<br />
 										重复上面的密码

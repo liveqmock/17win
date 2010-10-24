@@ -191,7 +191,7 @@ img {
 																</div>
 															</td>
 															<td>
-																xgj1988 你现在的发布点是：
+																<s:property value="#session.userLogin.username" /> 您现在的发布点是：
 																<s:property value="#session.userLogin.releaseDot" />
 															</td>
 														</tr>
@@ -264,7 +264,7 @@ img {
 																</div>
 															</td>
 															<td>
-																xgj1988 你现在的积分是：
+																<s:property value="#session.userLogin.username" /> 您现在的积分是：
 																<s:property value="#session.userLogin.convertScore" />
 															</td>
 														</tr>

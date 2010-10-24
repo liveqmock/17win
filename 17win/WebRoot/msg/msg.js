@@ -13,11 +13,27 @@ $(document).ready(function() {
 
 		});
 
+function selectSendType(obj) {
+	if ($(obj).val() == "1") {
+		$("#showName").text("用户ID：");
+	} else {
+		$("#showName").text("手机号码：");
+	}
+	$("#telehpneID").val("");
+}
+
 function validateForm() {
 	var telphone = $("#telehpneID").val();
 	var content = $("#contentID").val();
-	if (!Validater.isTelphone(telphone)) {
-		alert("号码格式不正确！");
+	var opertaionCode=$("#opertaionCodeID").val();
+	if ($("#sendTypeId").val() == "2") {
+		if (!Validater.isTelphone(telphone)) {
+			alert("号码格式不正确！");
+			return false;
+		} 
+	}
+	if (Validater.isBlank(opertaionCode)) {
+		alert("操作码不能为空！");
 		return false;
 	}
 	if (Validater.isBlank(content)) {

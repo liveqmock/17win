@@ -111,7 +111,28 @@ public class SmsService extends BaseService {
 	public String sendTelphone() throws Exception {
 		try {
 			String telphone = getByParam("telehpne");
-			String content = getByParam("contentID");
+			String content = getByParam("content");
+			String sendType = getByParam("sendType");
+			String opertaionCode = getByParam("opertaionCode");
+			UserEntity userEntity = getLoginUserEntity(userDAO);
+			if (!userEntity.getOpertationCode().equals(
+					StringUtils.processPwd(opertaionCode))) {
+				putAlertMsg("操作码不正确！");
+				return "sendTelphone";
+			}
+			if (getLoginUser().getVipEnable()) {
+				putAlertMsg("发送失败，您不是会员！");
+				return "sendTelphone";
+			}
+			if (sendType.equals("1")) {
+				UserEntity toUser = userDAO.findUserByName(telphone);
+				if (toUser == null) {
+					putAlertMsg("用户不存在！");
+					return "sendTelphone";
+				} else {
+					telphone = toUser.getTelephone();
+				}
+			}
 			MsgUtils.sendMsg(telphone, content);
 			putAlertMsg("发送成功！");
 		} catch (RuntimeException e) {

@@ -85,7 +85,7 @@ img {
 											您现在的位置是：个人中心 &gt;&gt;短信管理 &gt;&gt;
 										</div>
 										<div class="pp8">
-											<strong>发送手机短信</strong>
+											<strong>发送手机短信<font color="red">(会员功能)</font> </strong>
 										</div>
 										<s:form theme="simple"
 											action="smsManager/sms!sendTelphone.php"
@@ -94,12 +94,27 @@ img {
 												<tbody>
 													<tr>
 														<td height="40" align="right">
-															对方ID：
+															发送类型：
 														</td>
 														<td width="490">
-															<s:textfield maxlength="11" name="telehpne"
-																id="telehpneID">
-															</s:textfield>
+															<select name="sendType" id="sendTypeId"
+																onchange="selectSendType(this)">
+																<option value="1">
+																	站内用户
+																</option>
+																<option value="2">
+																	自定义发送
+																</option>
+															</select>
+														</td>
+													</tr>
+													<tr>
+														<td height="40" align="right" id="showName">
+															用户ID：
+														</td>
+														<td width="490">
+															<input type="text" maxlength="12" name="telehpne"
+																id="telehpneID" />
 														</td>
 													</tr>
 													<tr>
@@ -107,11 +122,19 @@ img {
 															内容：
 														</td>
 														<td>
-															<s:textarea name="content" id="contentID" cols="50"
-																rows="8">
-															</s:textarea>
+															<textarea name="content" id="contentID" cols="50"
+																rows="8"></textarea>
 															<br>
 															<font id="showTip" color="red">0/70</font>
+														</td>
+													</tr>
+													<tr>
+														<td height="40" align="right" id="showName">
+															操作码：
+														</td>
+														<td width="490">
+															<input type="password" maxlength="20" name="opertaionCode"
+																id="opertaionCodeID" />
 														</td>
 													</tr>
 													<tr>
@@ -120,7 +143,7 @@ img {
 														</td>
 														<td valign="middle">
 															&nbsp;&nbsp;&nbsp;
-															<input type="submit" value="提交"  id="submitBTN"  
+															<input type="submit" value="提交" id="submitBTN"
 																style="height: 30px; width: 50px;" id="button"
 																name="button">
 														</td>

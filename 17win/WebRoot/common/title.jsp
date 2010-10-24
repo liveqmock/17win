@@ -67,10 +67,6 @@
 									<DIV id=index_top_r2>
 										<ul>
 											<LI
-												style="BACKGROUND: url(images/jieducm_top_btn6.jpg) no-repeat">
-												<A onClick="return Button3_onclick()"
-													href="javascript:void(0)">客服中心</A>
-											<LI
 												style="BACKGROUND: url(images/jieducm_top_btn5.jpg) no-repeat">
 												<A href="system/shuakeRank.jsp">刷客排行</A>
 											</LI>
@@ -84,7 +80,7 @@
 											</LI>
 											<LI
 												style="BACKGROUND: url(images/jieducm_top_btn1.jpg) no-repeat">
-												<A href="user/paid.jsp">账号充值</A>
+												<A href="payManager/pay!initPay.php">账号充值</A>
 											</LI>
 										</ul>
 									</DIV>
