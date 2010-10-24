@@ -109,7 +109,7 @@
 					<s:else>
 						class="li0 "
 				</s:else> href="index.html"
-					id="a0" onmouseover="Mea(0);" onMouseOut="setAuto()"><SPAN>首&nbsp;页</SPAN>
+					id="a0" onmouseover="Mea(0);" testclass=""><SPAN>首&nbsp;页</SPAN>
 				</A>
 			</LI>
 			<LI class=white>
@@ -121,7 +121,7 @@
 						class="li0 "
 				</s:else>
 					href="taskManager/task!initTask.php?platformType=1" id="a1"
-					onmouseover="Mea(1);" onMouseOut="setAuto()">淘宝互刷</A>
+					onmouseover="Mea(1);" testclass="">淘宝互刷</A>
 			</LI>
 			<LI class=white>
 				<A
@@ -132,7 +132,7 @@
 						class="li0 "
 				</s:else>
 					href="taskManager/task!initTask.php?platformType=2" id="a2"
-					onmouseover="Mea(2);" onMouseOut="setAuto()">拍拍互刷</A>
+					onmouseover="Mea(2);" testclass="">拍拍互刷</A>
 			</LI>
 			<LI class=white>
 				<A
@@ -143,8 +143,9 @@
 						class="li0 "
 				</s:else>
 					href="taskManager/task!initTask.php?platformType=3" id="a3"
-					onmouseover="Mea(3);" onMouseOut="setAuto()">有啊互刷</A>
+					onmouseover="Mea(3);" testclass="">有啊互刷</A>
 			</LI>
+			<!-- 
 			<LI class=white>
 				<A
 					<s:if test="#request.showIndexType==5">
@@ -153,9 +154,10 @@
 					<s:else>
 						class="li0 "
 				</s:else> href="credit/task.jsp"
-					id="a4" onmouseover="Mea(4);" onMouseOut="setAuto()">双色球</A>
+					id="a4" onmouseover="Mea(4);" testclass="">双色球</A>
 				<br>
 			</LI>
+			 -->
 			<LI class=white>
 				<A
 					<s:if test="#request.showIndexType==6">
@@ -163,8 +165,8 @@
 				</s:if>
 					<s:else>
 						class="li0 "
-				</s:else> href="user/paid.jsp"
-					id="a5" onmouseover="Mea(5);" onMouseOut="setAuto()">账号充值</A>
+				</s:else> href="payManager/pay!initPay.php"
+					id="a5" onmouseover="Mea(5);" testclass="">账号充值</A>
 			</LI>
 			<LI class=white>
 				<A
@@ -173,9 +175,9 @@
 				</s:if>
 					<s:else>
 						class="li0 "
-				</s:else>
-					href="user/exchange.jsp" id="a6" onmouseover="Mea(6);"
-					onMouseOut="setAuto()">赠送兑换</A>
+				</s:else>   
+					href="userInfoManager/info!initExchange.php" id="a6" onmouseover="Mea(6);"
+					testclass="">赠送兑换</A>
 			</LI>
 			<LI class=white>
 				<A
@@ -184,8 +186,8 @@
 				</s:if>
 					<s:else>
 						class="li0 "
-				</s:else> href="spread/index.jsp"
-					id="a7" onmouseover="Mea(7);" onMouseOut="setAuto()">推广赚钱</A>
+				</s:else> href="userInfoManager/info!referee.php" target="_blank"
+					id="a7" onmouseover="Mea(7);" testclass="">推广赚钱</A>
 			</LI>
 			<LI class=white>
 				<A
@@ -194,8 +196,8 @@
 				</s:if>
 					<s:else>
 						class="li0 "
-				</s:else> href="user/vip.jsp"
-					id="a8" onmouseover="Mea(8);" onMouseOut="setAuto()">加入VIP</A>
+				</s:else> href="vipManager/vip!initVip.php"
+					id="a8" onmouseover="Mea(8);" testclass="">加入VIP</A>
 			</LI>
 			<LI class=white>
 				<A
@@ -206,7 +208,7 @@
 						class="li0 "
 				</s:else>
 					href="adminNewsManager/adminNews!showHelp.php" id="a9"
-					onmouseover="Mea(9);" onMouseOut="setAuto()">新手入门</A>
+					onmouseover="Mea(9);" testclass="">新手入门</A>
 			</LI>
 		</UL>
 	</DIV>

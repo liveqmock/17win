@@ -32,6 +32,7 @@ public class VipService extends BaseService {
 	 * @throws Exception
 	 */
 	public String initVip(VipVO vipVO) throws Exception {
+		putIndexShowType("9");
 		return INPUT;
 	}
 

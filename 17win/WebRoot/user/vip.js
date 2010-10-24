@@ -25,5 +25,10 @@ function validateForm() {
 		alert("内容不能为空！");
 		return false;
 	}
+	if(!Validater.isInt(month,"0+")){
+		$("#monthCount").val("");
+		alert("月份必须为数字！");
+		return false;
+	}
 	return true;
 }

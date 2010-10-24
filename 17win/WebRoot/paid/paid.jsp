@@ -4,58 +4,15 @@
 <HTML>
 	<HEAD>
 		<s:include value="../common/header.jsp"></s:include>
-		<LINK href="css/style.css" type="text/css" rel="stylesheet">
 		<LINK href="css/index.css" type="text/css" rel="stylesheet">
-		<LINK href="css/top_bottom.css" type="text/css" rel="stylesheet">
 		<LINK href="css/Css.css" type="text/css" rel="stylesheet">
-
+		<LINK href="css/top_bottom.css" type="text/css" rel="stylesheet">
+			
 		<LINK href="css/center.css" type="text/css" rel="stylesheet">
 		<SCRIPT src="js/jieducm_pupu.js" type="text/javascript"></SCRIPT>
 		<script src="js/validater.js" type="text/javascript"></script>
 		<script src="js/utils.js" type="text/javascript"></script>
 		<script src="paid/paid.js" type="text/javascript"></script>
-		<style type="text/css">
-body {
-	
-}
-
-img {
-	vertical-align: bottom;
-	border: 0px;
-}
-
-.sec_menu {
-	border-left: 1px solid white;
-	border-right: 1px solid white;
-	border-bottom: 1px solid white;
-	overflow: hidden;
-}
-
-.menu_title {
-	
-}
-
-.menu_title span {
-	position: relative;
-	top: 2px;
-	left: 28px;
-	color: #ffffff;
-	font-weight: bold;
-}
-
-.menu_title2 {
-	
-}
-
-.menu_title2 span {
-	position: relative;
-	top: 2px;
-	left: 28px;
-	color: #ffffff;
-	font-weight: bold;
-}
-</style>
-
 	</HEAD>
 	<BODY>
 		<s:include value="../common/title.jsp"></s:include>

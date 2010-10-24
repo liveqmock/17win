@@ -60,6 +60,11 @@ public class UserInfoService extends BaseService {
 		return "updateSellerAndBuyer";
 	}
 
+	public String initExchange(UserVO userVO) throws Exception {
+		putIndexShowType("7");
+		return "initExchange";
+	}
+
 	/**
 	 * 增加买家或卖家
 	 * 
@@ -269,6 +274,7 @@ public class UserInfoService extends BaseService {
 	 * @throws Exception
 	 */
 	public String updateExchange(UserVO userVO) throws Exception {
+		putIndexShowType("5");
 		String flag = getByParam("flag");
 		UserEntity userEntity = getLoginUserEntity(userDAO);
 		String operaCode = userVO.getOperationCode();

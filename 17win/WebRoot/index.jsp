@@ -61,7 +61,58 @@
 								<tr>
 									<td colspan="6" style="padding: 10px;" class="K_mtcontent"
 										id="tableLoginUserInfoID">
-
+										<table width="100%" cellspacing="0" cellpadding="0" border="0"
+											class="LeftNews">
+											<tbody>
+												<tr>
+													<td>
+														用户名：
+													</td>
+													<td>
+														<input type="text" name="userVO.userEntity.username"
+															size="30" maxlength="12" value="" tabindex="0"
+															id="username" style="width: 120px;">
+														<span><img title="验证成功" src="images/icon_ok.gif">
+														</span>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														密 码：
+													</td>
+													<td>
+														<input type="password"
+															name="userVO.userEntity.loginPassword" size="30"
+															maxlength="20" id="password" style="width: 120px;">
+														<span> </span>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														验证码：
+													</td>
+													<td>
+														<input type="text" name="userVO.verificationCode"
+															size="30" maxlength="4" value="" id="verificationCode"
+															style="width: 60px;">
+														<img src="verify/verificationCode.php"
+															onclick="changeValidateCode(this)" title="点击图片刷新验证码"
+															style="cursor: pointer;">
+														<span> </span>
+													</td>
+												</tr>
+												<tr>
+													<td nowrap="nowrap" colspan="2">
+														<input type="image" border="0" name="imageField"
+															src="images/login-q_r4_c3.gif" onfocus="this.blur()">
+														<a href="userManager/base!initRegister.php"><img
+																vspace="0" hspace="5" border="0"
+																src="images/login-q_r4_c31.gif"> </a>
+														<a href="javascript:void(0);" id="findPWA" border="0">找回密码</a>
+													</td>
+												</tr>
+											</tbody>
+										</table>
 									</td>
 								</tr>
 							</tbody>
