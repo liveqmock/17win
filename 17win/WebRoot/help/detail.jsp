@@ -229,11 +229,11 @@ body {
 																			href="help/<s:property
 																				value="#request.prevNews.url" />"><s:property
 																				value="#request.prevNews.title" /> </a>
-																	</s:if> <s:if test="#request.prevNews!=null">
-																	上一篇： <a href="news.asp?/1386.html">下一篇： <a
+																	</s:if> <s:if test="#request.afterNews!=null">
+																	下一篇： <a
 																			href="help/<s:property
 																					value="#request.afterNews.url" /> "><s:property
-																					value="#request.afterNews.title" /> </a>
+																				value="#request.afterNews.title" /> </a>
 																	</s:if> </span>
 															</td>
 														</tr>

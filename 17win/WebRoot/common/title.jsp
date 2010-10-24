@@ -124,12 +124,19 @@
 					onmouseover="Mea(1);" onMouseOut="setAuto()">淘宝互刷</A>
 			</LI>
 			<LI class=white>
-				<A class="li0 " href="taskManager/task!initTask.php?platformType=2"
-					id="a2" onmouseover="Mea(2);" onMouseOut="setAuto()">拍拍互刷</A>
+				<A
+					<s:if test="#request.showIndexType==3">
+					class="li1 white"  	style="COLOR: #000000"
+				</s:if>
+					<s:else>
+						class="li0 "
+				</s:else>
+					href="taskManager/task!initTask.php?platformType=2" id="a2"
+					onmouseover="Mea(2);" onMouseOut="setAuto()">拍拍互刷</A>
 			</LI>
 			<LI class=white>
 				<A
-					<s:if test="#request.showIndexType==3">
+					<s:if test="#request.showIndexType==4">
 					class="li1 white"  	style="COLOR: #000000"
 				</s:if>
 					<s:else>
@@ -140,7 +147,7 @@
 			</LI>
 			<LI class=white>
 				<A
-					<s:if test="#request.showIndexType==4">
+					<s:if test="#request.showIndexType==5">
 					class="li1 white"  	style="COLOR: #000000"
 				</s:if>
 					<s:else>
@@ -151,7 +158,7 @@
 			</LI>
 			<LI class=white>
 				<A
-					<s:if test="#request.showIndexType==5">
+					<s:if test="#request.showIndexType==6">
 					class="li1 white"  	style="COLOR: #000000"
 				</s:if>
 					<s:else>
@@ -161,7 +168,7 @@
 			</LI>
 			<LI class=white>
 				<A
-					<s:if test="#request.showIndexType==6">
+					<s:if test="#request.showIndexType==7">
 					class="li1 white"  	style="COLOR: #000000"
 				</s:if>
 					<s:else>
@@ -172,7 +179,7 @@
 			</LI>
 			<LI class=white>
 				<A
-					<s:if test="#request.showIndexType==7">
+					<s:if test="#request.showIndexType==8">
 					class="li1 white"  	style="COLOR: #000000"
 				</s:if>
 					<s:else>
@@ -182,7 +189,7 @@
 			</LI>
 			<LI class=white>
 				<A
-					<s:if test="#request.showIndexType==8">
+					<s:if test="#request.showIndexType==9">
 					class="li1 white"  	style="COLOR: #000000"
 				</s:if>
 					<s:else>
@@ -192,13 +199,14 @@
 			</LI>
 			<LI class=white>
 				<A
-					<s:if test="#request.showIndexType==9">
+					<s:if test="#request.showIndexType==10">
 					class="li1 white"  	style="COLOR: #000000"
 				</s:if>
 					<s:else>
 						class="li0 "
-				</s:else> href="adminNewsManager/adminNews!showHelp.php"
-					id="a9" onmouseover="Mea(9);" onMouseOut="setAuto()">新手入门</A>
+				</s:else>
+					href="adminNewsManager/adminNews!showHelp.php" id="a9"
+					onmouseover="Mea(9);" onMouseOut="setAuto()">新手入门</A>
 			</LI>
 		</UL>
 	</DIV>

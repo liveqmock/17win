@@ -62,11 +62,11 @@ public class AdminNewsService extends BaseService {
 
 		List<NewsEntity> prevNews = newsDAO.pageQuery(
 				"from NewsEntity  where  id <:newsID  order by  id desc ",
-				new String[] { "newsID" }, new Object[] { newsVO.getId() }, 1,
+				new String[] { "newsID" }, new Object[] { newsVO.getId() }, 0,
 				1);
 		List<NewsEntity> afterNews = newsDAO.pageQuery(
 				"from NewsEntity  where  id >:newsID  order by  id asc ",
-				new String[] { "newsID" }, new Object[] { newsVO.getId() }, 1,
+				new String[] { "newsID" }, new Object[] { newsVO.getId() }, 0,
 				1);
 		if (prevNews.size() > 0) {
 			newsVOTemp = new NewsVO();
@@ -157,6 +157,7 @@ public class AdminNewsService extends BaseService {
 	 * @throws Exception
 	 */
 	public String showHelp(NewsVO newsVO) throws Exception {
+		putIndexShowType("10");
 		List<NewsEntity> newses1 = newsDAO
 				.pageQuery(
 						"from NewsEntity as _news where _news.type.name='网站公告'  order by _news.date",

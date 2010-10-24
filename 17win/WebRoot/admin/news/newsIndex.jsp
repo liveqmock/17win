@@ -85,7 +85,7 @@
 							</td>
 							<td>
 								<a
-									href="javascript:browserNews('<s:property value="#newsVO.id" />')"  >浏览</a>
+									href="javascript:window.open('adminNewsManager/adminNews!browserNews.php?newsVO.id=<s:property value="#newsVO.id"/>','_self');">浏览</a>
 								<a
 									href="javascript:updateNews('<s:property value="#newsVO.id" />')">修改</a>
 								<a

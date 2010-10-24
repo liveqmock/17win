@@ -35,11 +35,6 @@ function updateNews(id) {
 	window.location.href = "adminNewsManager/adminNews!initUpdateNews.php?newsVO.id="
 			+ id;
 }
-// 浏览
-function browserNews(id, read) {
-	window.location.href = "adminNewsManager/adminNews!browserNews.php?newsVO.id="
-			+ id
-}
 
 // ///分页
 function firstPage() {
