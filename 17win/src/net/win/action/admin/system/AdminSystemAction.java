@@ -18,11 +18,7 @@ import org.springframework.stereotype.Controller;
 @Scope("prototype")
 @ParentPackage("17win-default")
 @Namespace("/adminSystemManager")
-@Results( {
-		@Result(name = "staticPage", location = "/admin/system/staticPage.jsp"),
-		@Result(name = "staticNewsPage", location = "/admin/system/staticPage.jsp"),
-		@Result(name = "staticIndexPage", location = "/admin/system/staticPage.jsp")
-		
+@Results( { @Result(name = "input", location = "/admin/system/staticPage.jsp")
 
 })
 public class AdminSystemAction extends BaseAction {
@@ -58,6 +54,16 @@ public class AdminSystemAction extends BaseAction {
 	}
 
 	/**
+	 * 新闻静态页面 2
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String staticNews2Page() throws Exception {
+		return adminSystemService.staticNews2Page();
+	}
+
+	/**
 	 * 首页静态页面
 	 * 
 	 * @return
@@ -65,6 +71,16 @@ public class AdminSystemAction extends BaseAction {
 	 */
 	public String staticIndexPage() throws Exception {
 		return adminSystemService.staticIndexPage();
+	}
+
+	/**
+	 * 首页静态页面
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String staticShuakeIndexPage() throws Exception {
+		return adminSystemService.staticShuakeIndexPage();
 	}
 
 }

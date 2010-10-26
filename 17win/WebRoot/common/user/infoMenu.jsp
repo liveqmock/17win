@@ -137,13 +137,6 @@
 												<A href="userInfoManager/info!myRefee.php">我的推广</A>
 											</td>
 										</tr>
-										<tr>
-											<td height=20>
-												<a href="system/shuakeRank.jsp">刷客排行</a>
-											</td>
-
-										</tr>
-
 										<!-- xgj
 										<tr>
 											<td height=20>

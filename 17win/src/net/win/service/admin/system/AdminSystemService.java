@@ -85,7 +85,61 @@ public class AdminSystemService extends BaseService {
 		}
 		httpclient.getConnectionManager().shutdown();
 		putAlertMsg("生成成功！");
-		return "staticNewsPage";
+		return INPUT;
+	}
+
+	/**
+	 * 首页静态页面2
+	 * 
+	 * @param newsVO
+	 * @return
+	 * @throws Exception
+	 */
+	public String staticNews2Page() throws Exception {
+		String path = getRequset().getContextPath();
+		String basePath = getRequset().getScheme() + "://"
+				+ getRequset().getServerName() + ":"
+				+ getRequset().getServerPort() + path + "/";
+		HttpClient httpclient = new DefaultHttpClient();
+		HttpGet httpget = null;
+		BufferedWriter writer = null;
+		BufferedReader reader = null;
+
+		try {
+			httpget = new HttpGet(basePath
+					+ "adminNewsManager/adminNews!showHelp.php");
+			HttpResponse response = httpclient.execute(httpget);
+			HttpEntity entity = response.getEntity();
+			if (entity != null) {
+				writer = new BufferedWriter(new OutputStreamWriter(
+						new FileOutputStream(new File(ContextUtils
+								.getRootPath()
+								+ File.separator
+								+ "help"
+								+ File.separator
+								+ "index.html")), "UTF-8"));
+				reader = new BufferedReader(new InputStreamReader(entity
+						.getContent(), "UTF-8"));
+				String line = null;
+				while ((line = reader.readLine()) != null) {
+					writer.write(line);
+					writer.newLine();
+				}
+			}
+		} catch (RuntimeException e) {
+			throw new RuntimeException(e);
+		} finally {
+			if (writer != null) {
+				writer.close();
+			}
+			if (reader != null) {
+				reader.close();
+			}
+		}
+		httpget.abort();
+		httpclient.getConnectionManager().shutdown();
+		putAlertMsg("生成成功！");
+		return INPUT;
 	}
 
 	/**
@@ -135,6 +189,57 @@ public class AdminSystemService extends BaseService {
 		httpget.abort();
 		httpclient.getConnectionManager().shutdown();
 		putAlertMsg("生成成功！");
-		return "staticIndexPage";
+		return INPUT;
+	}
+
+	/**
+	 * 首页刷客排行静态页面
+	 * 
+	 * @param newsVO
+	 * @return
+	 * @throws Exception
+	 */
+	public String staticShuakeIndexPage() throws Exception {
+		String path = getRequset().getContextPath();
+		String basePath = getRequset().getScheme() + "://"
+				+ getRequset().getServerName() + ":"
+				+ getRequset().getServerPort() + path + "/";
+		HttpClient httpclient = new DefaultHttpClient();
+		HttpGet httpget = null;
+		BufferedWriter writer = null;
+		BufferedReader reader = null;
+
+		try {
+			httpget = new HttpGet(basePath + "menuManager/menu!toIndex.php");
+			HttpResponse response = httpclient.execute(httpget);
+			HttpEntity entity = response.getEntity();
+			if (entity != null) {
+				writer = new BufferedWriter(new OutputStreamWriter(
+						new FileOutputStream(new File(ContextUtils
+								.getRootPath()
+								+ File.separator + "shuake" + "index.html")),
+						"UTF-8"));
+				reader = new BufferedReader(new InputStreamReader(entity
+						.getContent(), "UTF-8"));
+				String line = null;
+				while ((line = reader.readLine()) != null) {
+					writer.write(line);
+					writer.newLine();
+				}
+			}
+		} catch (RuntimeException e) {
+			throw new RuntimeException(e);
+		} finally {
+			if (writer != null) {
+				writer.close();
+			}
+			if (reader != null) {
+				reader.close();
+			}
+		}
+		httpget.abort();
+		httpclient.getConnectionManager().shutdown();
+		putAlertMsg("生成成功！");
+		return INPUT;
 	}
 }

@@ -161,8 +161,9 @@
 				</s:if>
 					<s:else>
 						class="li0 "
-				</s:else> href="payManager/pay!initPay.php"
-					id="a5" onmouseover="Mea(5);" testclass="">账号充值</A>
+				</s:else>
+					href="payManager/pay!initPay.php" id="a5" onmouseover="Mea(5);"
+					testclass="">账号充值</A>
 			</LI>
 			<LI class=white>
 				<A
@@ -171,9 +172,9 @@
 				</s:if>
 					<s:else>
 						class="li0 "
-				</s:else>   
-					href="userInfoManager/info!initExchange.php" id="a6" onmouseover="Mea(6);"
-					testclass="">赠送兑换</A>
+				</s:else>
+					href="userInfoManager/info!initExchange.php" id="a6"
+					onmouseover="Mea(6);" testclass="">赠送兑换</A>
 			</LI>
 			<LI class=white>
 				<A
@@ -182,8 +183,9 @@
 				</s:if>
 					<s:else>
 						class="li0 "
-				</s:else> href="userInfoManager/info!referee.php" target="_blank"
-					id="a7" onmouseover="Mea(7);" testclass="">推广赚钱</A>
+				</s:else>
+					href="userInfoManager/info!referee.php" target="_blank" id="a7"
+					onmouseover="Mea(7);" testclass="">推广赚钱</A>
 			</LI>
 			<LI class=white>
 				<A
@@ -192,8 +194,20 @@
 				</s:if>
 					<s:else>
 						class="li0 "
-				</s:else> href="vipManager/vip!initVip.php"
-					id="a8" onmouseover="Mea(8);" testclass="">加入VIP</A>
+				</s:else>
+					href="vipManager/vip!initVip.php" id="a8" onmouseover="Mea(8);"
+					testclass="">加入VIP</A>
+			</LI>
+			<LI class=white>
+				<A
+					<s:if test="#request.showIndexType==11">
+					class="li1 white"  	style="COLOR: #000000"
+				</s:if>
+					<s:else>
+						class="li0 "
+				</s:else>
+					href="adminNewsManager/adminNews!showHelp.php" id="a9"
+					onmouseover="Mea(9);" testclass="">刷客排行</A>
 			</LI>
 			<LI class=white>
 				<A
