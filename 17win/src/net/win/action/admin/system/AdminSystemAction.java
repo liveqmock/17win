@@ -40,7 +40,7 @@ public class AdminSystemAction extends BaseAction {
 	 */
 	public String initStaticPage() throws Exception {
 		// TODO Auto-generated method stub
-		return "staticPage";
+		return INPUT;
 	}
 
 	/**
@@ -74,7 +74,7 @@ public class AdminSystemAction extends BaseAction {
 	}
 
 	/**
-	 * 首页静态页面
+	 * 刷客首页静态页面
 	 * 
 	 * @return
 	 * @throws Exception

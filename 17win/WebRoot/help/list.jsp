@@ -156,7 +156,7 @@ body {
 														<tr>
 															<td class="f12ls1">
 																当前位置：
-																<a href="adminNewsManager/adminNews!showHelp.php">帮助中心</a>
+																<a href="help/index.html">帮助中心</a>
 																&gt;
 																<s:property value="newsVO.typeName" />
 															</td>

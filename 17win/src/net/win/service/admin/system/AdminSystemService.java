@@ -210,14 +210,14 @@ public class AdminSystemService extends BaseService {
 		BufferedReader reader = null;
 
 		try {
-			httpget = new HttpGet(basePath + "menuManager/menu!toIndex.php");
+			httpget = new HttpGet(basePath + "shuakeManager/shuake!initShuakeIndex.php");
 			HttpResponse response = httpclient.execute(httpget);
 			HttpEntity entity = response.getEntity();
 			if (entity != null) {
 				writer = new BufferedWriter(new OutputStreamWriter(
 						new FileOutputStream(new File(ContextUtils
 								.getRootPath()
-								+ File.separator + "shuake" + "index.html")),
+								+ File.separator + "shuake"+File.separator+ "index.html")),
 						"UTF-8"));
 				reader = new BufferedReader(new InputStreamReader(entity
 						.getContent(), "UTF-8"));

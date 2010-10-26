@@ -157,7 +157,7 @@ body {
 														<tr>
 															<td class="f12bt">
 																当前位置：
-																<a href="adminNewsManager/adminNews!showHelp.php">帮助中心</a>
+																<a href="help/index.html">帮助中心</a>
 																&gt;
 																<a
 																	href="javascript:window.location.href=encodeURI(encodeURI('adminNewsManager/adminNews!listNews.php?newsVO.typeName=<s:property

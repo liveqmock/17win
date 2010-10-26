@@ -206,8 +206,7 @@
 					<s:else>
 						class="li0 "
 				</s:else>
-					href="adminNewsManager/adminNews!showHelp.php" id="a9"
-					onmouseover="Mea(9);" testclass="">刷客排行</A>
+					href="shuake/index.html" id="a10" onmouseover="Mea(10);" testclass="">刷客排行</A>
 			</LI>
 			<LI class=white>
 				<A
@@ -216,9 +215,8 @@
 				</s:if>
 					<s:else>
 						class="li0 "
-				</s:else>
-					href="adminNewsManager/adminNews!showHelp.php" id="a9"
-					onmouseover="Mea(9);" testclass="">新手入门</A>
+				</s:else> href="help/index.html"
+					id="a9" onmouseover="Mea(9);" testclass="">新手入门</A>
 			</LI>
 		</UL>
 	</DIV>
