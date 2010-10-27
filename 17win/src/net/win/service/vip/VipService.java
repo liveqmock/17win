@@ -8,6 +8,7 @@ import net.win.BaseService;
 import net.win.dao.UserDAO;
 import net.win.dao.VipDAO;
 import net.win.entity.UserEntity;
+import net.win.entity.VipBidUserEntity;
 import net.win.entity.VipEntity;
 import net.win.utils.ArithUtils;
 import net.win.utils.Constant;
@@ -69,10 +70,14 @@ public class VipService extends BaseService {
 		userEntity.setVip(vipEntity);
 		Calendar calendar = Calendar.getInstance();
 		calendar.add(calendar.MONTH, monthCount);
-		userEntity.setVipEndDate(calendar.getTime());
 		userEntity.setMoney(ArithUtils.sub(userEntity.getMoney(), money));
-		userEntity.setVipGrowValue(0);
 		getLoginUser().setVipType("1");
+
+		VipBidUserEntity vipBidUserEntity = new VipBidUserEntity();
+		vipBidUserEntity.setEndDate(calendar.getTime());
+		vipBidUserEntity.setGrowValue(0);
+		userEntity.setVipBidUserEntity(vipBidUserEntity);
+
 		updateUserLoginInfo(userEntity);
 		putAlertMsg("恭喜您加入VIP，快去体验吧！");
 		return "insertVip";
@@ -89,6 +94,7 @@ public class VipService extends BaseService {
 		String operationCode = getByParam("operationCode");
 		Integer monthCount = Integer.parseInt(getByParam("monthC"));
 		UserEntity userEntity = userDAO.get(getLoginUser().getId());
+		VipBidUserEntity vipBidUserEntity = userEntity.getVipBidUserEntity();
 		if (!userEntity.getOpertationCode().equals(
 				StringUtils.processPwd(operationCode))) {
 			putAlertMsg("操作码不正确！");
@@ -110,12 +116,12 @@ public class VipService extends BaseService {
 		// VIP已经失效
 		if (!userEntity.getVipEnable()) {
 			calendar.add(calendar.MONTH, monthCount);
-			userEntity.setVipEndDate(calendar.getTime());
+			vipBidUserEntity.setEndDate(calendar.getTime());
 			userEntity.setVipEnable(true);
 		} else {
-			calendar.setTime(userEntity.getVipEndDate());
+			calendar.setTime(vipBidUserEntity.getEndDate());
 			calendar.add(calendar.MONTH, monthCount);
-			userEntity.setVipEndDate(calendar.getTime());
+			vipBidUserEntity.setEndDate(calendar.getTime());
 		}
 		userEntity.setMoney(ArithUtils.sub(userEntity.getMoney(), money));
 		updateUserLoginInfo(userEntity);
