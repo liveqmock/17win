@@ -23,6 +23,7 @@ import net.win.entity.CreditTaskEntity;
 import net.win.entity.CreditTaskRepositoryEntity;
 import net.win.entity.SellerEntity;
 import net.win.entity.UserEntity;
+import net.win.entity.VipBidUserEntity;
 import net.win.entity.VipEntity;
 import net.win.utils.ArithUtils;
 import net.win.utils.Constant;
@@ -404,17 +405,21 @@ public class CreditTaskService extends BaseService {
 			 * 修改积分发送人
 			 */
 			VipEntity releaseUserVip = releaEntity.getVip();
+			VipBidUserEntity releaseVipBidUser = releaEntity
+					.getVipBidUserEntity();
 			Integer releaseScore = StrategyUtils.getReleaseUserTaskScore(
 					releaseUserVip, releaEntity.getVipEnable());
 			releaEntity.setUpgradeScore(releaEntity.getUpgradeScore()
 					+ releaseScore);
 			releaEntity.setConvertScore(releaEntity.getConvertScore()
 					+ releaseScore);
-			updateUserLoginInfo(releaEntity);
+
 			/**
 			 * 修改积分和钱 接收人 和 接受号
 			 */
 			VipEntity receiveUserVip = receiveUser.getVip();
+			VipBidUserEntity receiveVipBidUser = receiveUser
+					.getVipBidUserEntity();
 			Integer receieveScore = StrategyUtils.getReleaseUserTaskScore(
 					receiveUserVip, receiveUser.getVipEnable());
 			creditTask.getBuyer()
@@ -438,8 +443,6 @@ public class CreditTaskService extends BaseService {
 					+ receieveScore);
 			UserLoginInfo userLoginInfo = WinContext.getInstance()
 					.getUserLoginInfo(receiveUser.getUsername());
-			updateUserLoginInfo(receiveUser, userLoginInfo);
-
 			/**
 			 * 计算发布和任务数
 			 */
@@ -451,20 +454,19 @@ public class CreditTaskService extends BaseService {
 			 * 计算会员成长值 和升级
 			 */
 			if (releaseUserVip != null && releaEntity.getVipEnable()) {
-				releaEntity.setVipGrowValue(releaEntity.getVipGrowValue()
+				releaseVipBidUser.setGrowValue(releaseVipBidUser.getGrowValue()
 						+ StrategyUtils.getReleaseGrowValue(releaseUserVip));
-				String vipType = StrategyUtils.getVipType(releaEntity
-						.getVipGrowValue());
+				String vipType = StrategyUtils.getVipType(releaseVipBidUser
+						.getGrowValue());
 				if (!releaseUserVip.getType().equals(vipType)) {
 					releaEntity.setVip(vipDAO.getVIPByType(vipType));
 				}
-
 			}
 			if (receiveUserVip != null && receiveUser.getVipEnable()) {
-				receiveUser.setVipGrowValue(receiveUser.getVipGrowValue()
+				receiveVipBidUser.setGrowValue(receiveVipBidUser.getGrowValue()
 						+ StrategyUtils.getReleaseGrowValue(receiveUserVip));
-				String vipType = StrategyUtils.getVipType(receiveUser
-						.getVipGrowValue());
+				String vipType = StrategyUtils.getVipType(receiveVipBidUser
+						.getGrowValue());
 				if (!receiveUserVip.getType().equals(vipType)) {
 					receiveUser.setVip(vipDAO.getVIPByType(vipType));
 				}
@@ -476,6 +478,9 @@ public class CreditTaskService extends BaseService {
 			putAlertMsg("好评成功，任务完成！");
 			putJumpPage("taskManager/task!initReleasedTast.php?platformType="
 					+ platformType);
+			// 更新信息
+			updateUserLoginInfo(releaEntity);
+			updateUserLoginInfo(receiveUser, userLoginInfo);
 			return JUMP;
 		}
 	}
