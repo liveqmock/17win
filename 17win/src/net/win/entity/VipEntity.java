@@ -5,8 +5,6 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -39,7 +37,7 @@ public class VipEntity extends BaseEntity {
 	@Column(name = "Grow_Value_", nullable = false)
 	private Integer growValue = 0;
 
-	// 手机短信
+	// 手机短信数量
 	@Column(name = "Phone_Msg_", nullable = false)
 	private Integer phoneMsg = 0;
 
@@ -53,7 +51,7 @@ public class VipEntity extends BaseEntity {
 	// 发任务积分数
 	@Column(name = "Release_Score_", nullable = false)
 	private Integer releaseScore = 0;
-	// 接任务几分熟
+	// 接任务积分数
 	@Column(name = "Receieve_Score_", nullable = false)
 	private Integer receieveScore = 0;
 
