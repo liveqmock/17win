@@ -22,6 +22,9 @@
 					<input type="button"
 						onclick="window.location.href='adminSystemManager/adminSystem!staticShuakeIndexPage.php'"
 						value="生成刷客首页">
+					<input type="button"
+						onclick="window.location.href='adminSystemManager/adminSystem!staticLoginPage.php'"
+						value="生成登录界面">
 				</td>
 			</tr>
 		</table>

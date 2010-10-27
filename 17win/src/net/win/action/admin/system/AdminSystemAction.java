@@ -83,4 +83,14 @@ public class AdminSystemAction extends BaseAction {
 		return adminSystemService.staticShuakeIndexPage();
 	}
 
+	/**
+	 * 登录界面
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String staticLoginPage() throws Exception {
+		return adminSystemService.staticLoginPage();
+	}
+
 }

@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import net.win.BaseService;
 import net.win.dao.UserDAO;
+import net.win.dao.VipBidUserDAO;
 import net.win.dao.VipDAO;
 import net.win.entity.UserEntity;
 import net.win.entity.VipBidUserEntity;
@@ -24,6 +25,8 @@ public class VipService extends BaseService {
 	private UserDAO userDAO;
 	@Resource
 	private VipDAO vipDAO;
+	@Resource
+	private VipBidUserDAO vipBidUserDAO;
 
 	/**
 	 * 初始化
@@ -71,13 +74,15 @@ public class VipService extends BaseService {
 		Calendar calendar = Calendar.getInstance();
 		calendar.add(calendar.MONTH, monthCount);
 		userEntity.setMoney(ArithUtils.sub(userEntity.getMoney(), money));
+		userEntity.setVipEnable(true);
 		getLoginUser().setVipType("1");
 
 		VipBidUserEntity vipBidUserEntity = new VipBidUserEntity();
 		vipBidUserEntity.setEndDate(calendar.getTime());
 		vipBidUserEntity.setGrowValue(0);
 		vipBidUserEntity.setRemainMsgCount(5);
-		userEntity.setVipBidUserEntity(vipBidUserEntity);
+		vipBidUserEntity.setUser(userEntity);
+		vipBidUserDAO.save(vipBidUserEntity);
 
 		updateUserLoginInfo(userEntity);
 		putAlertMsg("恭喜您加入VIP，快去体验吧！");

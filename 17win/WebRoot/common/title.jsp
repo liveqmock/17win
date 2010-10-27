@@ -41,7 +41,7 @@
 								<TD height=32 align="right" id="userLoginId">
 									<s:if test="#session.userLogin==null">
 										<span class="yell_font">您还没登录！</span>
-										<A href="userManager/base!initLogin.php" target="_top">登陆</A> |
+										<A href="user/login.html" target="_top">登陆</A> |
 									<A href="userManager/base!initRegister.php" target="_top">
 											注册</A> |
 									</s:if>

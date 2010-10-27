@@ -85,7 +85,7 @@ $(document).ready(function() {
 			function(data) {
 				var user = data.loginInfo;
 				var tdNo = "<span class='yell_font'>您还没登录！</span> "
-						+ "	<a target='_top' href='userManager/base!initLogin.php'>登陆</a> | 注册</a> | "
+						+ "	<a target='_top' href='user/login.html'>登陆</a> | 注册</a> | "
 						+ " <a onclick='window.external.addFavorite('http://www.2000w.net','淘宝刷信誉')' title='添加到收藏夹' href='#'>[收藏本站]</a> ";
 				var tableNo = "<table width='100%' cellspacing='0' cellpadding='0' border='0' class='LeftNews'>"
 						+ "		<tbody><tr> "
