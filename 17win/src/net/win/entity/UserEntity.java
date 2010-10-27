@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
@@ -168,11 +169,9 @@ public class UserEntity extends BaseEntity {
 	private VipEntity vip;
 
 	// VIP信息
-	@ManyToOne(targetEntity = VipBidUserEntity.class, fetch = FetchType.LAZY)
-	@JoinColumn(name = "VIP_INFO_ID_")
+	@OneToOne(targetEntity = VipBidUserEntity.class, mappedBy = "user", fetch = FetchType.LAZY)
 	@Cascade(CascadeType.ALL)
 	private VipBidUserEntity vipBidUserEntity;
-
 	/**
 	 * 关联关系
 	 * 

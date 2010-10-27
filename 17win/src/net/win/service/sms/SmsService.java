@@ -55,7 +55,20 @@ public class SmsService extends BaseService {
 		return "deleteSms";
 	}
 
+	/**
+	 * 初始化手机短信
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
 	public String initSendTelphone() throws Exception {
+		UserEntity userEntity = getLoginUserEntity(userDAO);
+		if (userEntity.getVipEnable()) {
+			putByRequest("remainMsgCount", userEntity.getVipBidUserEntity()
+					.getRemainMsgCount());
+		} else {
+			putByRequest("notVIP", "noVIP");
+		}
 		return "initSendTelphone";
 	}
 
@@ -102,7 +115,7 @@ public class SmsService extends BaseService {
 	}
 
 	/**
-	 * 发送短信
+	 * 发送手机短信
 	 * 
 	 * @param smsVO
 	 * @return

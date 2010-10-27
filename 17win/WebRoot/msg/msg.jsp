@@ -92,6 +92,16 @@ img {
 											onsubmit="return validateForm()">
 											<table>
 												<tbody>
+													<s:if test="#request.remainMsgCount!=null">
+														<tr>
+															<td height="40" align="left" style="color: red"
+																colspan="2">
+																&nbsp;&nbsp;您当前剩余
+																<b><s:property value="#request.remainMsgCount" />
+																</b>条短信可以发送!
+															</td>
+														</tr>
+													</s:if>
 													<tr>
 														<td height="40" align="right">
 															发送类型：
@@ -133,8 +143,8 @@ img {
 															操作码：
 														</td>
 														<td width="490">
-															<input type="password" maxlength="20" name="opertaionCode"
-																id="opertaionCodeID" />
+															<input type="password" maxlength="20"
+																name="opertaionCode" id="opertaionCodeID" />
 														</td>
 													</tr>
 													<tr>
@@ -144,6 +154,9 @@ img {
 														<td valign="middle">
 															&nbsp;&nbsp;&nbsp;
 															<input type="submit" value="提交" id="submitBTN"
+																<s:if test="#request.notVIP!=null">
+																	disabled="disabled"
+																</s:if>
 																style="height: 30px; width: 50px;" id="button"
 																name="button">
 														</td>

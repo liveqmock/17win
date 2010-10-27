@@ -99,16 +99,6 @@
 						</s:textfield>
 					</td>
 					<td nowrap="nowrap">
-						VIP成长值：
-						<s:textfield name="adminUserVO.startVipGrowValue;"
-							cssStyle="width:40px">
-						</s:textfield>
-						至
-						<s:textfield name="adminUserVO.endVipGrowValue"
-							cssStyle="width:40px">
-						</s:textfield>
-					</td>
-					<td nowrap="nowrap">
 						是&nbsp;否&nbsp;VIP：
 						<s:select listKey="key" listValue="value"
 							name="adminUserVO.vipEnable" headerKey="" headerValue="--请选择--"
@@ -119,14 +109,26 @@
 						<input type="submit" value="查&nbsp;&nbsp;询"
 							style="cursor: pointer;">
 					</td>
+					<td nowrap="nowrap">
+						<!-- 
+						VIP成长值：
+						<s:textfield name="adminUserVO.startVipGrowValue;"
+							cssStyle="width:40px">
+						</s:textfield>
+						至
+						<s:textfield name="adminUserVO.endVipGrowValue"
+							cssStyle="width:40px">
+						</s:textfield>
+						 -->
+					</td>
 				</tr>
 				<tr>
 
 				</tr>
 			</table>
 			<br>
-			<table width="100%" cellpadding="1" id="myTable" class="tablesorter"   style="font-size: 12px;"
-				style="table-layout: fixed;">
+			<table width="100%" cellpadding="1" id="myTable" class="tablesorter"
+				style="font-size: 12px;" style="table-layout: fixed;">
 				<thead>
 					<tr>
 						<th nowrap="nowrap" style="font-size: 12px;">
@@ -171,12 +173,12 @@
 								<s:property value="#user[0]" />
 							</td>
 							<td>
-								<s:if test="#user[13]==0">
+								<s:if test="#user[11]==0">
 									未激活
 								</s:if>
-								<s:elseif test="#user[13]==1">正常</s:elseif>
-								<s:elseif test="#user[13]==2">冻结</s:elseif>
-								<s:elseif test="#user[13]==3">找密码</s:elseif>
+								<s:elseif test="#user[11]==1">正常</s:elseif>
+								<s:elseif test="#user[11]==2">冻结</s:elseif>
+								<s:elseif test="#user[11]==3">找密码</s:elseif>
 							</td>
 							<td>
 								<s:property value="#user[1]" />
@@ -204,7 +206,7 @@
 							</td>
 							<td>
 								<a
-									href="javascript:addMoney('<s:property value="#user[14]" />')">充值</a>
+									href="javascript:addMoney('<s:property value="#user[12]" />')">充值</a>
 							</td>
 						</tr>
 					</s:iterator>
@@ -219,7 +221,7 @@
 				<s:else>
 					<tfoot>
 						<tr>
-							<th colspan="11"  style="font-size: 12px;">
+							<th colspan="11" style="font-size: 12px;">
 								<div style="float: left;">
 									<a href="javascript:firstPage()">首页</a>
 									<a href="javascript:prevPage()">上一页</a>&nbsp;

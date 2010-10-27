@@ -76,6 +76,7 @@ public class VipService extends BaseService {
 		VipBidUserEntity vipBidUserEntity = new VipBidUserEntity();
 		vipBidUserEntity.setEndDate(calendar.getTime());
 		vipBidUserEntity.setGrowValue(0);
+		vipBidUserEntity.setRemainMsgCount(5);
 		userEntity.setVipBidUserEntity(vipBidUserEntity);
 
 		updateUserLoginInfo(userEntity);
