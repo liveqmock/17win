@@ -85,17 +85,10 @@ public class UserEntity extends BaseEntity {
 	// 接受任务数
 	@Column(name = "RECEIVE_TASK_COUNT_")
 	private Integer receiveTaskCount = 0;
-	// VIP结束时间
-	@Column(name = "Vip_End_Date_")
-	private Date vipEndDate;
 
 	// VIP状态 true 表示没失效，false表示失效
 	@Column(name = "Vip_Enable_")
 	private Boolean vipEnable = false;
-
-	// 当前的Vip成长值
-	@Column(name = "Vip_Grow_Value_")
-	private Integer vipGrowValue;
 
 	// 最后一次登陆时间
 	@Column(name = "LASTLOGINTIME_")
@@ -173,6 +166,12 @@ public class UserEntity extends BaseEntity {
 	@JoinColumn(name = "VIP_ID_")
 	@Cascade(CascadeType.ALL)
 	private VipEntity vip;
+
+	// VIP信息
+	@ManyToOne(targetEntity = VipBidUserEntity.class, fetch = FetchType.LAZY)
+	@JoinColumn(name = "VIP_INFO_ID_")
+	@Cascade(CascadeType.ALL)
+	private VipBidUserEntity vipBidUserEntity;
 
 	/**
 	 * 关联关系
@@ -409,28 +408,12 @@ public class UserEntity extends BaseEntity {
 		this.vip = vip;
 	}
 
-	public Date getVipEndDate() {
-		return vipEndDate;
-	}
-
-	public void setVipEndDate(Date vipEndDate) {
-		this.vipEndDate = vipEndDate;
-	}
-
 	public Boolean getVipEnable() {
 		return vipEnable;
 	}
 
 	public void setVipEnable(Boolean vipEnable) {
 		this.vipEnable = vipEnable;
-	}
-
-	public Integer getVipGrowValue() {
-		return vipGrowValue;
-	}
-
-	public void setVipGrowValue(Integer vipGrowValue) {
-		this.vipGrowValue = vipGrowValue;
 	}
 
 	public UserEntity getReferee() {
@@ -463,6 +446,14 @@ public class UserEntity extends BaseEntity {
 
 	public void setToSms(List<SmsEntity> toSms) {
 		this.toSms = toSms;
+	}
+
+	public VipBidUserEntity getVipBidUserEntity() {
+		return vipBidUserEntity;
+	}
+
+	public void setVipBidUserEntity(VipBidUserEntity vipBidUserEntity) {
+		this.vipBidUserEntity = vipBidUserEntity;
 	}
 
 }
