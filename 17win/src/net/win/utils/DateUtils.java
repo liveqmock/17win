@@ -25,7 +25,7 @@ public abstract class DateUtils {
 	 * @param format
 	 * @return
 	 */
-	public static String parseDate(Date date, String format) {
+	public static String format(Date date, String format) {
 		if (date == null || format == null)
 			return "";
 		DateFormat dateFormat = new SimpleDateFormat(format);

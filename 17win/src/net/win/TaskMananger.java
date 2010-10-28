@@ -67,7 +67,7 @@ public final class TaskMananger {
 	 * @throws Exception
 	 */
 	public synchronized String generateTaskID() throws Exception {
-		return DateUtils.parseDate(new Date(), "yyyyMMddHHmmssS");
+		return DateUtils.format(new Date(), "yyyyMMddHHmmssS");
 	}
 
 

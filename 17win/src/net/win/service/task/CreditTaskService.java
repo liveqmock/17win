@@ -413,6 +413,11 @@ public class CreditTaskService extends BaseService {
 					+ releaseScore);
 			releaEntity.setConvertScore(releaEntity.getConvertScore()
 					+ releaseScore);
+			// 有会员
+			if (releaEntity.getVipEnable() && releaseUserVip != null) {
+				releaseVipBidUser.setGrowValue(releaseVipBidUser.getGrowValue()
+						+ releaseUserVip.getReleaseGrowValue());
+			}
 
 			/**
 			 * 修改积分和钱 接收人 和 接受号
@@ -426,6 +431,11 @@ public class CreditTaskService extends BaseService {
 					.setScore(creditTask.getBuyer().getScore() + 1);
 			receiveUser.setMoney(ArithUtils.add(receiveUser.getMoney(),
 					creditTask.getMoney()));
+			// 有会员
+			if (receiveUser.getVipEnable() && receiveUserVip != null) {
+				receiveVipBidUser.setGrowValue(receiveVipBidUser.getGrowValue()
+						+ receiveUserVip.getReceieveGrowValue());
+			}
 			/**
 			 * 发布点
 			 */

@@ -80,11 +80,13 @@ public class VipService extends BaseService {
 		VipBidUserEntity vipBidUserEntity = new VipBidUserEntity();
 		vipBidUserEntity.setEndDate(calendar.getTime());
 		vipBidUserEntity.setGrowValue(0);
-		vipBidUserEntity.setRemainMsgCount(5);
+		vipBidUserEntity.setRemainMsgCount(vipEntity.getPhoneMsg());
 		vipBidUserEntity.setUser(userEntity);
 		vipBidUserDAO.save(vipBidUserEntity);
 
 		updateUserLoginInfo(userEntity);
+		getLoginUser().setVipEndDate(vipBidUserEntity.getEndDate());
+		getLoginUser().setVipGrowValue(vipBidUserEntity.getGrowValue());
 		putAlertMsg("恭喜您加入VIP，快去体验吧！");
 		return "insertVip";
 	}
@@ -131,6 +133,8 @@ public class VipService extends BaseService {
 		}
 		userEntity.setMoney(ArithUtils.sub(userEntity.getMoney(), money));
 		updateUserLoginInfo(userEntity);
+		getLoginUser().setVipEndDate(vipBidUserEntity.getEndDate());
+		getLoginUser().setVipGrowValue(vipBidUserEntity.getGrowValue());
 		putAlertMsg("恭喜您续费成功！");
 		return "insertRenewalVip";
 

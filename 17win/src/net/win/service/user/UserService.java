@@ -1,5 +1,6 @@
 package net.win.service.user;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -7,10 +8,14 @@ import javax.annotation.Resource;
 
 import net.win.BaseService;
 import net.win.dao.UserDAO;
+import net.win.dao.VipDAO;
 import net.win.entity.UserEntity;
+import net.win.entity.VipBidUserEntity;
 import net.win.entity.VipEntity;
 import net.win.utils.Constant;
+import net.win.utils.DateUtils;
 import net.win.utils.MailUtils;
+import net.win.utils.StrategyUtils;
 import net.win.utils.StringUtils;
 import net.win.vo.UserVO;
 
@@ -30,8 +35,9 @@ public class UserService extends BaseService {
 	@Resource
 	private JavaMailSender mailSender;
 	@Resource
+	private VipDAO vipDAO;
+	@Resource
 	private FreeMarkerConfigurer freeMarkerCfj;
-
 
 	/**
 	 * 注销
@@ -141,14 +147,65 @@ public class UserService extends BaseService {
 			userVO.setVerificationCode(null);
 			return "inputLogin";
 		} else {
-			userEntity.setLastLoginTime(new Date());
-			// 设置VIP
+			boolean vipUpdate = false;
+			// 今天第一次登录
+			Date nowDate = new Date();
+			String oldDateStr = DateUtils.format(userEntity.getLastLoginTime(),
+					"yyyy-MM-dd");
+			String newDateStr = DateUtils.format(nowDate, "yyyy-MM-dd");
 			VipEntity vip = userEntity.getVip();
+			VipBidUserEntity vipBidUser = userEntity.getVipBidUserEntity();
+			// VIP有效
+			if (userEntity.getVipEnable()) {
+				// VIP过期
+				if (nowDate.getTime() > userEntity.getVipBidUserEntity()
+						.getEndDate().getTime()) {
+					userEntity.setVipEnable(false);
+				} else {
+					// 判断是否第一次登录
+					if (!oldDateStr.equals(newDateStr)) {
+						// 设置成长值，判断会员是否升级
+						vipBidUser.setGrowValue(vip.getLoginGrowValue());
+						String vipType = StrategyUtils.getVipType(vipBidUser
+								.getGrowValue());
+						if (!vip.getType().equals(vipType)) {
+							vipUpdate = true;
+							userEntity.setVip(vipDAO.getVIPByType(vipType));
+							vip = userEntity.getVip();
+						}
+					}
+				}
+			}
+			if (userEntity.getVipEnable()) {
+				// 设置VIP的登录积分 和 成长值
+				if (!oldDateStr.equals(newDateStr)) {
+					userEntity.setUpgradeScore(userEntity.getUpgradeScore()
+							+ vip.getLoginScore());
+					userEntity.setConvertScore(userEntity.getConvertScore()
+							+ vip.getLoginScore());
+				}
+			} else {
+				if (!oldDateStr.equals(newDateStr)) {
+					userEntity.setUpgradeScore(userEntity.getUpgradeScore()
+							+ vip.getLoginScore());
+					userEntity.setConvertScore(userEntity.getConvertScore()
+							+ vip.getLoginScore());
+				}
+			}
+
+			userEntity.setLastLoginTime(nowDate);
+			// 设置VIP
 			if (vip != null) {
-				getLoginUser().setVipType(userEntity.getVip().getType());
+				getLoginUser().setVipType(vip.getType());
 			}
 			updateUserLoginInfo(userEntity);
-			return "loginSuccess";
+			if (vipUpdate) {
+				putAlertMsg("恭喜您，会员升级！");
+				putJumpPage("/userInfoManager/info!init.php");
+				return JUMP;
+			} else {
+				return "loginSuccess";
+			}
 		}
 	}
 

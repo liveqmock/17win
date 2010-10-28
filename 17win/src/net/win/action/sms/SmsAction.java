@@ -26,7 +26,7 @@ import org.springframework.stereotype.Controller;
 		@Result(name = "deleteSms", location = "/sms/mySms.jsp"),
 		@Result(name = "sendTelphone", location = "/msg/msg.jsp"),
 		@Result(name = "initSendTelphone", location = "/msg/msg.jsp"),
-		
+
 })
 public class SmsAction extends BaseAction {
 	@Resource
@@ -67,8 +67,7 @@ public class SmsAction extends BaseAction {
 	public String addSms() throws Exception {
 		return smsService.insertSms(smsVO);
 	}
-	
-	
+
 	/**
 	 * 
 	 * 
@@ -78,6 +77,7 @@ public class SmsAction extends BaseAction {
 	public String initSendTelphone() throws Exception {
 		return smsService.initSendTelphone();
 	}
+
 	/**
 	 * 
 	 * 
@@ -85,7 +85,7 @@ public class SmsAction extends BaseAction {
 	 * @throws Exception
 	 */
 	public String sendTelphone() throws Exception {
-		return smsService.sendTelphone();
+		return smsService.updateSendTelphone();
 	}
 
 	/**

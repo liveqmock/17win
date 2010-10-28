@@ -149,16 +149,7 @@ public final class StrategyUtils {
 		if (!vipEnable || vipEntity == null) {
 			return 1;
 		}
-		if ("1".equals(vipEntity.getType())) {
-			return 2;
-		}
-		if ("2".equals(vipEntity.getType())) {
-			return 3;
-		}
-		if ("3".equals(vipEntity.getType())) {
-			return 4;
-		}
-		return 1;
+		return vipEntity.getReleaseScore();
 	}
 
 	/**
@@ -174,17 +165,9 @@ public final class StrategyUtils {
 		if (!vipEnable || vipEntity == null) {
 			return 2;
 		}
-		if ("1".equals(vipEntity.getType())) {
-			return 3;
-		}
-		if ("2".equals(vipEntity.getType())) {
-			return 4;
-		}
-		if ("3".equals(vipEntity.getType())) {
-			return 5;
-		}
-		return 2;
+		return vipEntity.getReceieveScore();
 	}
+
 
 	/**
 	 * 评价类型，一天，两天，三天
@@ -425,7 +408,7 @@ public final class StrategyUtils {
 	 * @return
 	 */
 	public static String getVipImg(String type, Boolean enable) {
-		return "vip" + type + "_" + (enable ? "cai" : "yin") + "gif";
+		return "vip" + type + "_" + (enable ? "cai" : "yin") + ".gif";
 	}
 
 	/**

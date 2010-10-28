@@ -89,23 +89,23 @@ img {
 												cellpadding="0" id="con_three_1">
 
 												<tr>
-													<td height="55" align="center" class="borderc"
-														valign="middle">
+													<td height="55" align="center" class="borderc" valign="top">
 														<b>你好： </b>
 													</td>
 
 													<td align="left" class="borderc" nowrap="nowrap">
 														<Font color="#FF0000"><s:property
-																value="#session.userLogin.username"></s:property>【<s:if
+																value="#session.userLogin.username"></s:property>(<s:if
 																test="#session.userLogin.vipEnable">
 																<img
-																	src="images/vip/<s:property value="@net.win.utils.StrategyUtils@getLevelImg(#session.userLogin.vipType,#session.userLogin.vipEnable)" />" />
+																	src="images/vip/<s:property value="@net.win.utils.StrategyUtils@getVipImg(#session.userLogin.vipType,#session.userLogin.vipEnable)" />" />
 															到期时间：<s:date name="#session.userLogin.vipEndDate"
-																	format="yyyy-MM-dd HH-mm-ss" />
+																	format="yyyy-MM-dd" />
 															当前成长值：<s:property value="#session.userLogin.vipGrowValue" />
 															</s:if> <s:else>
 														您还没有加入VIP
-														</s:else>】<b>(注册时间：<s:date format="yyyy-MM-dd hh:mm:ss"
+														</s:else>)<b><br />(<img
+																	src="images/<s:property value="#session.userLogin.levelImg" />" />注册时间：<s:date format="yyyy-MM-dd hh:mm:ss"
 																	name="#session.userLogin.registerTime" />)</b> </Font>
 													</td>
 													<td width="63%" align="left" class="borderc">

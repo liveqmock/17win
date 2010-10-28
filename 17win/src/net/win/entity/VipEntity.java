@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Tb_Vip")
 public class VipEntity extends BaseEntity {
-	// 类型
+	// 类型 1 vip1 2 vip2 3vip3
 	@Column(name = "Type_", columnDefinition = "CHAR(1)", nullable = false)
 	private String type;
 
@@ -29,24 +29,22 @@ public class VipEntity extends BaseEntity {
 	@OneToMany(targetEntity = UserEntity.class, mappedBy = "vip", fetch = FetchType.LAZY)
 	private List<UserEntity> users;
 
-	// 卖号上线数
+	// 卖号上线数 -1 没有限制
 	@Column(name = "Seller_Count_", nullable = false)
 	private Integer sellerCount = 0;
 
-	// 会员成长值
-	@Column(name = "Grow_Value_", nullable = false)
-	private Integer growValue = 0;
+ 
 
 	// 手机短信数量
 	@Column(name = "Phone_Msg_", nullable = false)
 	private Integer phoneMsg = 0;
 
-	// 发任务数
-	@Column(name = "Release_Count_", nullable = false)
-	private Integer releaseCount = 0;
-	// 接任务数
-	@Column(name = "Receieve_Count_", nullable = false)
-	private Integer receieveCount = 0;
+	// 发任务数 发任务所得的成长值
+	@Column(name = "Release_GrowValue_", nullable = false)
+	private Integer releaseGrowValue = 0;
+	// 接任务数 接受任务所得的成长值
+	@Column(name = "Receieve_GrowValue_", nullable = false)
+	private Integer receieveGrowValue = 0;
 
 	// 发任务积分数
 	@Column(name = "Release_Score_", nullable = false)
@@ -55,20 +53,27 @@ public class VipEntity extends BaseEntity {
 	@Column(name = "Receieve_Score_", nullable = false)
 	private Integer receieveScore = 0;
 
-	public Integer getReleaseCount() {
-		return releaseCount;
+	// 登录送积分
+	@Column(name = "Login_Score", nullable = false)
+	private Integer loginScore = 0;
+	// 登录送成长值
+	@Column(name = "Login_GrowValue", nullable = false)
+	private Integer loginGrowValue = 0;
+
+	public Integer getReleaseGrowValue() {
+		return releaseGrowValue;
 	}
 
-	public void setReleaseCount(Integer releaseCount) {
-		this.releaseCount = releaseCount;
+	public void setReleaseGrowValue(Integer releaseGrowValue) {
+		this.releaseGrowValue = releaseGrowValue;
 	}
 
-	public Integer getReceieveCount() {
-		return receieveCount;
+	public Integer getReceieveGrowValue() {
+		return receieveGrowValue;
 	}
 
-	public void setReceieveCount(Integer receieveCount) {
-		this.receieveCount = receieveCount;
+	public void setReceieveGrowValue(Integer receieveGrowValue) {
+		this.receieveGrowValue = receieveGrowValue;
 	}
 
 	public Integer getReleaseScore() {
@@ -99,21 +104,7 @@ public class VipEntity extends BaseEntity {
 		return sellerCount;
 	}
 
-	// public Integer getScore() {
-	// return score;
-	// }
-	//
-	// public void setScore(Integer score) {
-	// this.score = score;
-	//	}
-
-	public Integer getGrowValue() {
-		return growValue;
-	}
-
-	public void setGrowValue(Integer growValue) {
-		this.growValue = growValue;
-	}
+	 
 
 	public Integer getPhoneMsg() {
 		return phoneMsg;
@@ -133,6 +124,22 @@ public class VipEntity extends BaseEntity {
 
 	public void setUsers(List<UserEntity> users) {
 		this.users = users;
+	}
+
+	public Integer getLoginScore() {
+		return loginScore;
+	}
+
+	public void setLoginScore(Integer loginScore) {
+		this.loginScore = loginScore;
+	}
+
+	public Integer getLoginGrowValue() {
+		return loginGrowValue;
+	}
+
+	public void setLoginGrowValue(Integer loginGrowValue) {
+		this.loginGrowValue = loginGrowValue;
 	}
 
 }

@@ -307,24 +307,58 @@ img {
 																积分获取
 															</td>
 															<td id="chat_0" class="self">
-																接任务2个
+																接任务2分
 																<br>
-																发任务1个
+																发任务1分
 															</td>
 															<td id="chat_1">
-																接任务3个
+																接任务3分
 																<br>
-																发任务2个
+																发任务2分
 															</td>
 															<td id="chat_2">
-																接任务4个
+																接任务4分
 																<br>
-																发任务3个
+																发任务3分
 															</td>
 															<td id="chat_3">
-																接任务5个
+																接任务5分
 																<br>
-																发任务4个
+																发任务4分
+															</td>
+														</tr>
+														<tr>
+															<td>
+																每天登录送积分
+															</td>
+															<td id="chat_0" class="self">
+																5分
+															</td>
+															<td id="chat_1">
+																10分
+															</td>
+															<td id="chat_2">
+																20分
+															</td>
+															<td id="chat_3">
+																30分
+															</td>
+														</tr>
+														<tr class="double">
+															<td>
+																每天登录送成长值
+															</td>
+															<td id="chat_0" class="self">
+																不可用
+															</td>
+															<td id="chat_1">
+																5点
+															</td>
+															<td id="chat_2">
+																10点
+															</td>
+															<td id="chat_3">
+																15点
 															</td>
 														</tr>
 													</tbody>

@@ -64,8 +64,12 @@ public class SmsService extends BaseService {
 	public String initSendTelphone() throws Exception {
 		UserEntity userEntity = getLoginUserEntity(userDAO);
 		if (userEntity.getVipEnable()) {
-			putByRequest("remainMsgCount", userEntity.getVipBidUserEntity()
-					.getRemainMsgCount());
+			if (userEntity.getVipBidUserEntity().getRemainMsgCount() == 0) {
+				putByRequest("noMsgCount", "noMsgCount");
+			} else {
+				putByRequest("remainMsgCount", userEntity.getVipBidUserEntity()
+						.getRemainMsgCount());
+			}
 		} else {
 			putByRequest("notVIP", "noVIP");
 		}
@@ -121,7 +125,7 @@ public class SmsService extends BaseService {
 	 * @return
 	 * @throws Exception
 	 */
-	public String sendTelphone() throws Exception {
+	public String updateSendTelphone() throws Exception {
 		try {
 			String telphone = getByParam("telehpne");
 			String content = getByParam("content");
@@ -146,8 +150,19 @@ public class SmsService extends BaseService {
 					telphone = toUser.getTelephone();
 				}
 			}
+			if (userEntity.getVipBidUserEntity().getRemainMsgCount() == 0) {
+				putAlertMsg("发送失败，您所剩的短信数量不够！");
+				return "sendTelphone";
+			} else {
+				userEntity.getVipBidUserEntity()
+						.setRemainMsgCount(
+								userEntity.getVipBidUserEntity()
+										.getRemainMsgCount() - 1);
+			}
 			MsgUtils.sendMsg(telphone, content);
-			putAlertMsg("发送成功！");
+			putAlertMsg("发送成功！您还剩余"
+					+ userEntity.getVipBidUserEntity().getRemainMsgCount()
+					+ "条短信");
 		} catch (RuntimeException e) {
 			LoggerUtils.error(e);
 			putAlertMsg("发送失败，请联系管理员！");

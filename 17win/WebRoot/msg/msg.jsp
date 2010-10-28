@@ -97,8 +97,16 @@ img {
 															<td height="40" align="left" style="color: red"
 																colspan="2">
 																&nbsp;&nbsp;您当前剩余
-																<b><s:property value="#request.remainMsgCount" />
-																</b>条短信可以发送!
+																<b><s:property value="#request.remainMsgCount" /> </b>条短信可以发送!
+															</td>
+														</tr>
+													</s:if>
+													<s:if test="#request.noMsgCount!=null">
+														<tr>
+															<td height="40" align="left" style="color: red"
+																colspan="2">
+																&nbsp;&nbsp;您当前剩余的短信数量为
+																<b>0</b>，不能发送。
 															</td>
 														</tr>
 													</s:if>
@@ -154,7 +162,7 @@ img {
 														<td valign="middle">
 															&nbsp;&nbsp;&nbsp;
 															<input type="submit" value="提交" id="submitBTN"
-																<s:if test="#request.notVIP!=null">
+																<s:if test="#request.notVIP!=null || #request.noMsgCount!=null">
 																	disabled="disabled"
 																</s:if>
 																style="height: 30px; width: 50px;" id="button"
