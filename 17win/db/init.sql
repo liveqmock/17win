@@ -3,7 +3,6 @@ INSERT INTO `tb_admin` VALUES ('1', '2lqXf8/H7flNymvXojziAg==', 'admin', '1');
 
 
 --vip
-INSERT INTO `tb_vip` VALUES ('1', '0', '5', '2', '3', '1', '2', '3', '1');
-INSERT INTO `tb_vip` VALUES ('2', '1800', '10', '3', '4', '2', '3', '4', '2');
-INSERT INTO `tb_vip` VALUES ('3', '5400', '20', '4', '5', '3', '4', '-1', '3');
-
+INSERT INTO `tb_vip` VALUES ('1', '5', '10', '5', '2', '3', '1', '2', '3', '1');
+INSERT INTO `tb_vip` VALUES ('2', '10', '20', '10', '3', '4', '2', '3', '4', '2');
+INSERT INTO `tb_vip` VALUES ('3', '15', '30', '20', '4', '5', '3', '4', '-1', '3');

@@ -125,6 +125,7 @@ $(document).ready(function() {
 				if (user == null) {
 					$("#userLoginId").html(tdNo);
 					$("#tableLoginUserInfoID").html(tableNo);
+					$("#username").focus();
 					return;
 				}
 
@@ -181,6 +182,7 @@ $(document).ready(function() {
 
 				$("#userLoginId").html(tdYes);
 				$("#tableLoginUserInfoID").html(tableYes);
+				
 			});
 
 });

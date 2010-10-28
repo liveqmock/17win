@@ -186,10 +186,10 @@ public class UserService extends BaseService {
 				}
 			} else {
 				if (!oldDateStr.equals(newDateStr)) {
-					userEntity.setUpgradeScore(userEntity.getUpgradeScore()
-							+ vip.getLoginScore());
-					userEntity.setConvertScore(userEntity.getConvertScore()
-							+ vip.getLoginScore());
+					userEntity
+							.setUpgradeScore(userEntity.getUpgradeScore() + 5);
+					userEntity
+							.setConvertScore(userEntity.getConvertScore() + 5);
 				}
 			}
 
