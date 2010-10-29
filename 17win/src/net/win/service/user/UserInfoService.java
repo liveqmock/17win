@@ -639,6 +639,14 @@ public class UserInfoService extends BaseService {
 		// 合并数据
 		TotalUtils.totalAllByInt(result1);
 		TotalUtils.totalAllByInt(result2);
+
+		// 短信数
+		Long smsCount=(Long)userDAO
+				.uniqueResultObject(
+						"select count(*) from SmsEntity  _sms where _sms.fromUser.id=:userid and _sms.read=:read",
+						new String[] { "userid", "read" }, new Object[] {
+								userLoginInfo.getId(), false });
+		putByRequest("smsCount", smsCount);
 		putByRequest("sellTasks", result1);
 		putByRequest("buyTasks", result2);
 		return INPUT;

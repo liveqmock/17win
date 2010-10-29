@@ -169,9 +169,6 @@ img {
 														<th height="10" nowrap="nowrap" align="center" width="50%">
 															买号
 														</th>
-														<th height="10" nowrap="nowrap" align="center" width="50%">
-															买号积分
-														</th>
 													</tr>
 													<s:iterator value="#request.buyers.get(#type)" id="buyer">
 														<tr class="buyerTr">
@@ -180,9 +177,6 @@ img {
 																	platformType="<s:property value="#type"/>"
 																	buyerName="<s:property value="#buyer.name" />" />
 																<s:property value="#buyer.name" />
-															</td>
-															<td align="center">
-																<s:property value="#buyer.score" />
 															</td>
 														</tr>
 													</s:iterator>

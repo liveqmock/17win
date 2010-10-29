@@ -105,7 +105,8 @@ img {
 															</s:if> <s:else>
 														您还没有加入VIP
 														</s:else>)<b><br />(<img
-																	src="images/<s:property value="#session.userLogin.levelImg" />" />注册时间：<s:date format="yyyy-MM-dd hh:mm:ss"
+																	src="images/<s:property value="#session.userLogin.levelImg" />" />注册时间：<s:date
+																	format="yyyy-MM-dd hh:mm:ss"
 																	name="#session.userLogin.registerTime" />)</b> </Font>
 													</td>
 													<td width="63%" align="left" class="borderc">
@@ -152,7 +153,8 @@ img {
 													<td colspan="2" align="left" class="borderc">
 														<font color="#FF0000"><font color="#FF0000"></font>&nbsp;
 														</font>
-														<a href="record.asp">查看交易记录</a>
+														<a href="smsManager/sms!querySms.php">未读短信(<s:property
+																value="#request.smsCount" />)</a>
 													</td>
 												</tr>
 												<!-- 
