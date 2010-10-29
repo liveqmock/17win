@@ -175,7 +175,7 @@ public class UserInfoAction extends BaseAction {
 	 */
 	public String referee() throws Exception {
 		putIndexShowType("8");
-		return "referee";
+		return userInfoService.referee();
 	}
 
 	/**

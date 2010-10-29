@@ -25,6 +25,7 @@ import net.win.entity.SellerEntity;
 import net.win.entity.UserEntity;
 import net.win.entity.VipBidUserEntity;
 import net.win.entity.VipEntity;
+import net.win.stragegy.ScoreStrategy;
 import net.win.utils.ArithUtils;
 import net.win.utils.Constant;
 import net.win.utils.StrategyUtils;
@@ -427,8 +428,6 @@ public class CreditTaskService extends BaseService {
 					.getVipBidUserEntity();
 			Integer receieveScore = StrategyUtils.getReleaseUserTaskScore(
 					receiveUserVip, receiveUser.getVipEnable());
-			creditTask.getBuyer()
-					.setScore(creditTask.getBuyer().getScore() + 1);
 			receiveUser.setMoney(ArithUtils.add(receiveUser.getMoney(),
 					creditTask.getMoney()));
 			// 有会员
@@ -488,6 +487,22 @@ public class CreditTaskService extends BaseService {
 			putAlertMsg("好评成功，任务完成！");
 			putJumpPage("taskManager/task!initReleasedTast.php?platformType="
 					+ platformType);
+
+			/**
+			 * 计算推广
+			 */
+			// 积累接受100个任务
+			if (receiveUser.getReceiveTaskCount() % 100 == 0) {
+				UserEntity refereeUser = receiveUser.getReferee();
+				if (refereeUser != null) {
+					refereeUser.setMoney(10 + refereeUser.getMoney());
+				}
+			}
+			// 通过你的宣传链接注册的会员积分每上升1000
+			// 你的收益=100积分
+			ScoreStrategy.updateRefreeScore(receiveUser);
+			ScoreStrategy.updateRefreeScore(releaEntity);
+
 			// 更新信息
 			updateUserLoginInfo(releaEntity);
 			updateUserLoginInfo(receiveUser, userLoginInfo);

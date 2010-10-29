@@ -165,7 +165,7 @@
 													</td>
 
 													<td width="45%" valign="middle" class="union_line">
-														通过你的宣传链接注册的会员累计发布200次任务
+														通过你的宣传链接注册的会员累计接受100次任务
 														<br />
 														<span class="STYLE5">你的收益=10元</span>
 													</td>
@@ -211,7 +211,7 @@
 													<td width="45%" valign="middle" class="union_line">
 														通过你的宣传链接注册的会员购买VIP
 														<br />
-														<span class="STYLE5">你的收益=20个发布点</span>
+														<span class="STYLE5">你的收益=5元</span>
 													</td>
 													<td width="38%" valign="middle">
 														<img src="images/g3.jpg" width="233" height="65" />
@@ -285,25 +285,27 @@
 														达人资料
 														<br />
 
-														会员名：xgj1988
+														会员名：
+														<s:property value="#session.userLogin.username" />
 														<br />
-														推荐会员：2人
+														推荐会员：<s:property value="#request.userCount" />人
 														<br />
-
-														营销总收入：
-														<strong>20</strong>个积分
 													</td>
 												</tr>
 												<tr>
 													<td colspan="2" valign="top">
-														我推广即得奖金0元
+														我推广即得奖金
+														<s:property value="#request.refereeMoney" />
+														元
 														<br />
-														我推广0个会员成为VIP会员
+														我推广
+														<s:property value="#request.vipCount" />
+														个会员成为VIP会员
 														<br />
-														我推广0个会员来购买网站点卡
+														我推广
+														<s:property value="#request.userCount" />
+														个会员来购买网站点卡
 														<br />
-
-														我推广会员来购买网站发布点为0个
 													</td>
 												</tr>
 											</table>

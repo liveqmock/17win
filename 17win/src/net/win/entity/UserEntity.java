@@ -73,6 +73,9 @@ public class UserEntity extends BaseEntity {
 	// 推广人数
 	@Column(name = "SPREAD_COUNT_", nullable = false)
 	private Integer spreadCount = 0;
+	//推广所得的金额
+	@Column(name = "Referee_Money_", nullable = false)
+	private Integer refereeMoney=0;
 	/**
 	 * 可选选项
 	 */
@@ -453,6 +456,14 @@ public class UserEntity extends BaseEntity {
 
 	public void setVipBidUserEntity(VipBidUserEntity vipBidUserEntity) {
 		this.vipBidUserEntity = vipBidUserEntity;
+	}
+
+	public Integer getRefereeMoney() {
+		return refereeMoney;
+	}
+
+	public void setRefereeMoney(Integer refereeMoney) {
+		this.refereeMoney = refereeMoney;
 	}
 
 }

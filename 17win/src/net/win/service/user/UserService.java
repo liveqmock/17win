@@ -12,6 +12,7 @@ import net.win.dao.VipDAO;
 import net.win.entity.UserEntity;
 import net.win.entity.VipBidUserEntity;
 import net.win.entity.VipEntity;
+import net.win.stragegy.ScoreStrategy;
 import net.win.utils.Constant;
 import net.win.utils.DateUtils;
 import net.win.utils.MailUtils;
@@ -198,6 +199,9 @@ public class UserService extends BaseService {
 			if (vip != null) {
 				getLoginUser().setVipType(vip.getType());
 			}
+			// 通过你的宣传链接注册的会员积分每上升1000
+			// 你的收益=100积分
+			ScoreStrategy.updateRefreeScore(userEntity);
 			updateUserLoginInfo(userEntity);
 			if (vipUpdate) {
 				putAlertMsg("恭喜您，会员升级！");

@@ -20,10 +20,7 @@ public class BuyerEntity extends BaseEntity {
 	// 类型(1淘宝,2怕拍,3有啊)
 	@Column(name = "TYPE_", columnDefinition = "CHAR(1)", nullable = false)
 	private String type;
-	// 积分
-	@Column(name = "SCORE_", nullable = false)
-	private Integer score = 0;
-
+ 
 	// 所属人
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_ID_")
@@ -53,11 +50,4 @@ public class BuyerEntity extends BaseEntity {
 		this.type = type;
 	}
 
-	public Integer getScore() {
-		return score;
-	}
-
-	public void setScore(Integer score) {
-		this.score = score;
-	}
 }

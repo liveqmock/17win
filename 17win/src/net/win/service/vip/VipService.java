@@ -84,9 +84,16 @@ public class VipService extends BaseService {
 		vipBidUserEntity.setUser(userEntity);
 		vipBidUserDAO.save(vipBidUserEntity);
 
+		// 通过你的宣传链接注册的会员购买VIP
+		// 你的收益=20个发布点
+		if (userEntity.getReferee() != null) {
+			userEntity.getReferee().setReleaseDot(
+					userEntity.getReferee().getReleaseDot() + 20);
+		}
 		updateUserLoginInfo(userEntity);
 		getLoginUser().setVipEndDate(vipBidUserEntity.getEndDate());
 		getLoginUser().setVipGrowValue(vipBidUserEntity.getGrowValue());
+
 		putAlertMsg("恭喜您加入VIP，快去体验吧！");
 		return "insertVip";
 	}

@@ -41,6 +41,30 @@ public class UserInfoService extends BaseService {
 	@Resource
 	private BuyerDAO buyerDAO;
 
+	public String referee() throws Exception {
+		UserEntity userEntity = getLoginUserEntity(userDAO);
+		// 推广 奖金
+		Integer refereeMoney = userEntity.getRefereeMoney();
+		// 推广的会员数
+		Long userCount = (Long) userDAO
+				.uniqueResultObject(
+						"select count(*) from UserEntity as _user where _user.referee.id=:userId ",
+						new String[] { "userId" }, new Object[] { userEntity
+								.getId() });
+		// 推广的VIP会员数
+		Long vipCount = (Long) userDAO
+				.uniqueResultObject(
+						"select count(*) from UserEntity as _user where _user.referee.id=:userId and _user.vipEnable=:vipEnable",
+						new String[] { "userId", "vipEnable" }, new Object[] {
+								userEntity.getId(), true });
+
+		putByRequest("userCount", userCount);
+		putByRequest("refereeMoney", refereeMoney);
+		putByRequest("vipCount", vipCount);
+
+		return "referee";
+	}
+
 	public String updateSellerAndBuyer(UserVO userVO) throws Exception {
 		SellerEntity sellerEntity = sellerDAO.get(Long
 				.parseLong(getByParam("upadteSeller")));
@@ -218,6 +242,11 @@ public class UserInfoService extends BaseService {
 						0.5 * releaseDot));
 				userEntity.setReleaseDot(ArithUtils.add(userEntity
 						.getReleaseDot(), releaseDot));
+				if (userEntity.getReferee() != null) {
+					userEntity.getReferee().setMoney(
+							userEntity.getReferee().getMoney()
+									+ (0.5 * releaseDot * 0.1));
+				}
 			} else {
 				putDIV("您的钱不够支付购买" + releaseDot + "个发布点的费用，<a>点击此处充值！</a>");
 			}
@@ -229,6 +258,10 @@ public class UserInfoService extends BaseService {
 						.sub(userEntity.getMoney(), money));
 				userEntity.setReleaseDot(ArithUtils.add(userEntity
 						.getReleaseDot(), Constant.getHuangguanNumber()));
+				if (userEntity.getReferee() != null) {
+					userEntity.getReferee().setMoney(
+							userEntity.getReferee().getMoney() + (money * 0.1));
+				}
 			} else {
 				putDIV("您的钱不够支付购买皇冠卡，<a>点击此处充值！</a>");
 			}
@@ -241,6 +274,10 @@ public class UserInfoService extends BaseService {
 						.sub(userEntity.getMoney(), money));
 				userEntity.setReleaseDot(ArithUtils.add(userEntity
 						.getReleaseDot(), Constant.getShuangzuanNumber()));
+				if (userEntity.getReferee() != null) {
+					userEntity.getReferee().setMoney(
+							userEntity.getReferee().getMoney() + (money * 0.1));
+				}
 			} else {
 				putDIV("您的钱不够支付购买双钻卡，<a>点击此处充值！</a>");
 			}
@@ -253,6 +290,10 @@ public class UserInfoService extends BaseService {
 						.sub(userEntity.getMoney(), money));
 				userEntity.setReleaseDot(ArithUtils.add(userEntity
 						.getReleaseDot(), Constant.getZuanshiNumber()));
+				if (userEntity.getReferee() != null) {
+					userEntity.getReferee().setMoney(
+							userEntity.getReferee().getMoney() + (money * 0.1));
+				}
 			} else {
 				putDIV("您的钱不够支付购买一钻卡，<a>点击此处充值！</a>");
 			}
