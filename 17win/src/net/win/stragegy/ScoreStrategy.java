@@ -28,13 +28,31 @@ public final class ScoreStrategy {
 	 * @return
 	 * @throws Exception
 	 */
-	public static void updateRefreeScore(UserEntity userEntity) throws Exception {
+	public static void updateRefreeScoreByScore(UserEntity userEntity)
+			throws Exception {
 		if (userEntity.getUpgradeScore() % 1000 == 0) {
 			if (userEntity.getReferee() != null) {
 				userEntity.getReferee().setUpgradeScore(
 						userEntity.getReferee().getUpgradeScore() + 100);
 				userEntity.getReferee().setConvertScore(
 						userEntity.getReferee().getConvertScore() + 100);
+				updateRefreeScoreByScore(userEntity.getReferee());
+			}
+		}
+	}
+
+	/**
+	 * 积累接受100个任务 推广人获取10元钱
+	 * 
+	 * @param userEntity
+	 * @throws Exception
+	 */
+	public static void updateRefreeMoneyByTask(UserEntity userEntity)
+			throws Exception {
+		if (userEntity.getReceiveTaskCount() % 100 == 0) {
+			UserEntity refereeUser = userEntity.getReferee();
+			if (refereeUser != null) {
+				refereeUser.setMoney(10 + refereeUser.getMoney());
 			}
 		}
 	}

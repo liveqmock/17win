@@ -201,7 +201,7 @@ public class UserService extends BaseService {
 			}
 			// 通过你的宣传链接注册的会员积分每上升1000
 			// 你的收益=100积分
-			ScoreStrategy.updateRefreeScore(userEntity);
+			ScoreStrategy.updateRefreeScoreByScore(userEntity);
 			updateUserLoginInfo(userEntity);
 			if (vipUpdate) {
 				putAlertMsg("恭喜您，会员升级！");

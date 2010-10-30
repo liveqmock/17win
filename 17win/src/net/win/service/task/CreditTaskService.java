@@ -369,7 +369,7 @@ public class CreditTaskService extends BaseService {
 	 * 卖家操作
 	 */
 	/**
-	 * 卖家好评
+	 * 卖家好评 任务完成
 	 */
 	public String updateSellerEvaluate(CreditTaskVO creditTaskVO)
 			throws Exception {
@@ -492,16 +492,11 @@ public class CreditTaskService extends BaseService {
 			 * 计算推广
 			 */
 			// 积累接受100个任务
-			if (receiveUser.getReceiveTaskCount() % 100 == 0) {
-				UserEntity refereeUser = receiveUser.getReferee();
-				if (refereeUser != null) {
-					refereeUser.setMoney(10 + refereeUser.getMoney());
-				}
-			}
+			ScoreStrategy.updateRefreeMoneyByTask(receiveUser);
 			// 通过你的宣传链接注册的会员积分每上升1000
 			// 你的收益=100积分
-			ScoreStrategy.updateRefreeScore(receiveUser);
-			ScoreStrategy.updateRefreeScore(releaEntity);
+			ScoreStrategy.updateRefreeScoreByScore(receiveUser);
+			ScoreStrategy.updateRefreeScoreByScore(releaEntity);
 
 			// 更新信息
 			updateUserLoginInfo(releaEntity);
