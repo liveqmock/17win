@@ -339,11 +339,11 @@ public final class HttpB2CUtils {
 			}
 			br.close();
 			httpget.abort();
-	        httpclient.getConnectionManager().shutdown();        
+			httpclient.getConnectionManager().shutdown();
 		}
 		// 有啊
 		else if ("3".equals(type)) {
-			return -1;
+			return 0;
 		}
 		return -1;
 	}

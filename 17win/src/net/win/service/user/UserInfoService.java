@@ -19,6 +19,7 @@ import net.win.entity.SellerEntity;
 import net.win.entity.UserEntity;
 import net.win.utils.ArithUtils;
 import net.win.utils.Constant;
+import net.win.utils.HttpB2CUtils;
 import net.win.utils.StrategyUtils;
 import net.win.utils.StringUtils;
 import net.win.utils.TotalUtils;
@@ -171,6 +172,13 @@ public class UserInfoService extends BaseService {
 				putAlertMsg(buyerEntity.getName() + "已被使用！");
 				return "insertSellerAndBuyer";
 			}
+			Integer score = HttpB2CUtils.obtainCreditValue(buyerEntity
+					.getName(), buyerEntity.getCreditURL(), platformTypeParam);
+			if (score == -1) {
+				putAlertMsg("您输入的地址有问题，如果有疑问请联系客户！");
+				return "insertSellerAndBuyer";
+			}
+			buyerEntity.setScore(score);
 			buyerEntity.setType(platformTypeParam);
 			buyerEntity.setUser(userEntity);
 			buyerEntity.setEnable(true);

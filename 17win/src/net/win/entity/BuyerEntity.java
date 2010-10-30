@@ -27,6 +27,9 @@ public class BuyerEntity extends BaseEntity {
 	@Column(name = "ENABLE_", nullable = false)
 	private Boolean enable;
 
+	@Column(name = "SCORE_", nullable = false)
+	private Integer score;
+
 	// 所属人
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_ID_")
@@ -70,5 +73,13 @@ public class BuyerEntity extends BaseEntity {
 
 	public void setCreditURL(String creditURL) {
 		this.creditURL = creditURL;
+	}
+
+	public Integer getScore() {
+		return score;
+	}
+
+	public void setScore(Integer score) {
+		this.score = score;
 	}
 }
