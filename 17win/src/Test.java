@@ -1,25 +1,19 @@
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.conn.ClientConnectionManager;
-import org.apache.http.conn.params.ConnManagerParams;
-import org.apache.http.conn.params.ConnPerRouteBean;
-import org.apache.http.conn.routing.HttpRoute;
-import org.apache.http.conn.scheme.PlainSocketFactory;
-import org.apache.http.conn.scheme.Scheme;
-import org.apache.http.conn.scheme.SchemeRegistry;
-import org.apache.http.conn.ssl.SSLSocketFactory;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.HttpParams;
+import org.apache.http.message.BasicHeader;
 import org.cyberneko.html.parsers.DOMParser;
 import org.dom4j.Document;
 import org.dom4j.Node;
@@ -28,66 +22,57 @@ import org.dom4j.io.DOMReader;
 import org.dom4j.xpath.DefaultXPath;
 import org.jaxen.SimpleNamespaceContext;
 import org.xml.sax.SAXException;
+
 @SuppressWarnings("unused")
 public class Test {
-	private static HttpClient taobaoHttpClient = createHttpClient("taobao");
 
-	/**
-	 * 创建httppClient
-	 * 
-	 * @param flag
-	 * @return
-	 */
-	private static HttpClient createHttpClient(String flag) {
-		HttpParams params = new BasicHttpParams();
-		// Increase max total connection to 200
-		ConnManagerParams.setMaxTotalConnections(params, 200);
-		// Increase default max connection per route to 20
-		ConnPerRouteBean connPerRoute = new ConnPerRouteBean(20);
-		// Increase max connections for localhost:80 to 50
-		HttpHost host = null;
-		if ("taobao".equals(flag)) {
-			host = new HttpHost("www.taobao.com", 80);
+	public static void fn() throws Exception {
+		int chByte = 0;
+		URL url = null;
+		HttpURLConnection httpConn = null;
+		InputStream in = null;
+		FileOutputStream out = null;
+
+		try {
+			url = new URL(
+					"http://shop1.paipai.com/cgi-bin/credit_info?uin=30756500&");
+			httpConn = (HttpURLConnection) url.openConnection();
+			HttpURLConnection.setFollowRedirects(true);
+			httpConn.setRequestMethod("GET");
+
+			httpConn
+					.setRequestProperty(
+							"Cookie",
+							"	PPRD_S=PVS.USER-PVSE.1; pvid=3194253992; flv=10.1 r53; pgv=pgvReferrer=&ssid=s9049088248; visitkey=3625640881013513");
+
+			// logger.info(httpConn.getResponseMessage());
+			in = httpConn.getInputStream();
+			out = new FileOutputStream(new File("d:\\1.html"));
+
+			chByte = in.read();
+			while (chByte != -1) {
+				out.write(chByte);
+				chByte = in.read();
+			}
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				out.close();
+				in.close();
+				httpConn.disconnect();
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
 		}
-		if ("paipai".equals(flag)) {
-			host = new HttpHost("www.paipai.com", 80);
-		}
-		if ("youa".equals(flag)) {
-			host = new HttpHost("www.youa.com", 80);
-		}
-		connPerRoute.setMaxForRoute(new HttpRoute(host), 50);
-		ConnManagerParams.setMaxConnectionsPerRoute(params, connPerRoute);
-		SchemeRegistry schemeRegistry = new SchemeRegistry();
-		schemeRegistry.register(new Scheme("http", PlainSocketFactory
-				.getSocketFactory(), 80));
-		schemeRegistry.register(new Scheme("https", SSLSocketFactory
-				.getSocketFactory(), 443));
-		ClientConnectionManager cm = new ThreadSafeClientConnManager(params,
-				schemeRegistry);
-		return new DefaultHttpClient(cm, params);
+
 	}
 
 	public static void main(String[] argv) throws Exception {
-
-		HttpClient httpClient = taobaoHttpClient;
-
-		HttpPost httRequest = new HttpPost("http://www.paipai.com");
-		HttpResponse response = httpClient.execute(httRequest);
-		httRequest = new HttpPost(
-				"http://shop1.paipai.com/cgi-bin/credit_info?uin=30756500&");
-		response = httpClient.execute(httRequest);
-		HttpEntity entity = response.getEntity();
-
-		String url = "http://shop1.paipai.com/cgi-bin/credit_info?uin=30756500&";
-		Document document = getDoc(url);// 获取document
-		// String gz = "//xmlns:A[@id='J_BuyerRate']|a[@id='J_BuyerRate']";//
-		// xpath匹配
-
-		String gz = "//xmlns:A[starts-with(@href,'http://store.taobao.com/shop/')]";// xpath匹配
-		//
-
-		Node node = getAttr(document, gz);// 获取属性
-		System.out.println(node.getText().trim());
+     String x="<a href='http:[/\\\\]{2}shop\\d+\\.paipai\\.com[/\\\\]cgi\\-bin[/\\\\]credit_info\\?uin=\\d+' target='_blank'>(\\d+)</a>";
+     System.out.println("<a href='http://shop1.paipai.com/cgi-bin/credit_info?uin=380712448' target='_blank'>17</a>".matches(x));
 
 	}
 

@@ -15,6 +15,7 @@ import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.conn.params.ConnManagerParams;
@@ -26,6 +27,7 @@ import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
+import org.apache.http.message.BasicHeader;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpParams;
 import org.cyberneko.html.parsers.DOMParser;
@@ -297,27 +299,51 @@ public final class HttpB2CUtils {
 		}
 		// 拍拍
 		else if ("2".equals(type)) {
-			if (!url.matches(PAIPAI_CREDIT_URL)) {
-				return -1;
-			} else {
-				List<Node> nodes = getMutliNodeByDom4j(
-						url,
-						"//xmlns:A[starts-with(@href,'http://store.taobao.com/shop/')]|//xmlns:A[@id='J_BuyerRate']|a[@id='J_BuyerRate']",
-						nameSpaces);
-				if (nodes.size() != 2) {
-					return -1;
-				} else {
-					if (username.equals(nodes.get(0).getText().trim())) {
+			HttpClient httpclient = new DefaultHttpClient();
+
+			HttpGet httpget = new HttpGet(
+					"http://shop1.paipai.com/cgi-bin/credit_info?uin=30756500&");
+			httpget
+					.setHeader(new BasicHeader(
+							"Cookie",
+							"	PPRD_S=PVS.USER-PVSE.1; pvid=3194253992; flv=10.1 r53; pgv=pgvReferrer=&ssid=s9049088248; visitkey=3625640881013513"));
+
+			HttpResponse response = httpclient.execute(httpget);
+			HttpEntity entity = response.getEntity();
+			BufferedReader br = new BufferedReader(new InputStreamReader(entity
+					.getContent(), "UTF-8"));
+			String buyer = null;
+			String line;
+			Pattern pattern = Pattern
+					.compile("<li id='userNickname'><span class='name'>买家昵称：</span><strong>(.+)<span class='imstatic'></span></strong></li>");
+
+			Pattern pattern2 = Pattern
+					.compile("<a href='http:[/\\\\]{2}shop\\d+\\.paipai\\.com[/\\\\]cgi\\-bin[/\\\\]credit_info\\?uin=\\d+' target='_blank'>(\\d+)</a>");
+			Matcher matcher;
+			Matcher matcher2;
+			OUTTER: while ((line = br.readLine()) != null) {
+				line = URLDecoder.decode(line, "UTF-8").replaceAll("\"", "'");
+				matcher = pattern.matcher(line);
+				matcher2 = pattern2.matcher(line);
+				while (matcher.find()) {
+					buyer = matcher.group(1);
+					if (!buyer.equals(username)) {
 						return -1;
 					} else {
-						return Integer.parseInt(nodes.get(1).getText().trim());
+						break OUTTER;
 					}
 				}
+				while (matcher2.find()) {
+					return Integer.parseInt(matcher.group(1));
+				}
 			}
+			br.close();
+			httpget.abort();
+	        httpclient.getConnectionManager().shutdown();        
 		}
 		// 有啊
 		else if ("3".equals(type)) {
-			return 0;
+			return -1;
 		}
 		return -1;
 	}
