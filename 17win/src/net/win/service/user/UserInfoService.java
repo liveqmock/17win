@@ -64,9 +64,10 @@ public class UserInfoService extends BaseService {
 
 		return "referee";
 	}
-	
+
 	/**
 	 * 更新卖号
+	 * 
 	 * @param userVO
 	 * @return
 	 * @throws Exception
@@ -109,6 +110,20 @@ public class UserInfoService extends BaseService {
 		UserEntity userEntity = getLoginUserEntity(userDAO);
 
 		if ("1".equals(type)) {
+			SellerEntity sellerEntity = userVO.getSeller();
+			// 判断当前卖号是否被注册过
+			Boolean sellerExists = (0 == (Long) sellerDAO
+					.uniqueResultObject(
+							"select count(*) from  SellerEntity as _seller where _seller.name=:sellerName and _seller.type=:platformType",
+							new String[] { "sellerName", "platformType" },
+							new Object[] { sellerEntity.getName(),
+									platformTypeParam }));
+			if (!sellerExists) {
+				putAlertMsg(sellerEntity.getName() + "已被使用！");
+				return "insertSellerAndBuyer";
+			}
+
+			// 判断当前的级别是否可以用友多个卖号
 			Long count = (Long) sellerDAO
 					.uniqueResultObject(
 							"select count(*) from SellerEntity as _seller "
@@ -117,8 +132,9 @@ public class UserInfoService extends BaseService {
 							new Object[] { getLoginUser().getId(),
 									platformTypeParam });
 			Integer sellerCountFlag = StrategyUtils.getSellerCount(
-					getLoginUser().getVipType(), getLoginUser().getVipEnable());
-			if (sellerCountFlag != null) {
+					getLoginUser().getVipType(), getLoginUser().getVipEnable(),
+					userEntity.getVip());
+			if (sellerCountFlag != -1) {
 				if (count >= sellerCountFlag) {
 					String platform = WinUtils
 							.changeType2Platform(platformTypeParam);
@@ -127,7 +143,7 @@ public class UserInfoService extends BaseService {
 					return "insertSellerAndBuyer";
 				}
 			}
-			SellerEntity sellerEntity = userVO.getSeller();
+
 			String sheng = getByParam("sheng").trim();
 			String shi = getByParam("shi").trim();
 			String qu = getByParam("qu").trim();
@@ -145,6 +161,16 @@ public class UserInfoService extends BaseService {
 			sellerDAO.save(sellerEntity);
 		} else {
 			BuyerEntity buyerEntity = userVO.getBuyer();
+			Boolean sellerExists = (0 == (Long) buyerDAO
+					.uniqueResultObject(
+							"select count(*) from  BuyerEntity as _buyer where _buyer.name=:buyerName and _buyer.type=:platformType",
+							new String[] { "buyerName", "platformType" },
+							new Object[] { buyerEntity.getName(),
+									platformTypeParam }));
+			if (!sellerExists) {
+				putAlertMsg(buyerEntity.getName() + "已被使用！");
+				return "insertSellerAndBuyer";
+			}
 			buyerEntity.setType(platformTypeParam);
 			buyerEntity.setUser(userEntity);
 			buyerEntity.setEnable(true);
@@ -648,7 +674,7 @@ public class UserInfoService extends BaseService {
 		TotalUtils.totalAllByInt(result2);
 
 		// 短信数
-		Long smsCount=(Long)userDAO
+		Long smsCount = (Long) userDAO
 				.uniqueResultObject(
 						"select count(*) from SmsEntity  _sms where _sms.fromUser.id=:userid and _sms.read=:read",
 						new String[] { "userid", "read" }, new Object[] {
