@@ -24,8 +24,6 @@ public class BuyerEntity extends BaseEntity {
 	@Column(name = "ENABLE_", nullable = false)
 	private Boolean enable;
 
-	@Column(name = "CREDIT_URL_", length = 255, nullable = false)
-	private String creditURL;
 	// 所属人
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_ID_")
@@ -62,13 +60,4 @@ public class BuyerEntity extends BaseEntity {
 	public void setType(String type) {
 		this.type = type;
 	}
-
-	public String getCreditURL() {
-		return creditURL;
-	}
-
-	public void setCreditURL(String creditURL) {
-		this.creditURL = creditURL;
-	}
-
 }

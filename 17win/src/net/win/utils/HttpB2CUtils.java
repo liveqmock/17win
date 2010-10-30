@@ -4,6 +4,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URLDecoder;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,6 +28,14 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpParams;
+import org.cyberneko.html.parsers.DOMParser;
+import org.dom4j.Document;
+import org.dom4j.Node;
+import org.dom4j.XPath;
+import org.dom4j.io.DOMReader;
+import org.dom4j.xpath.DefaultXPath;
+import org.jaxen.SimpleNamespaceContext;
+import org.xml.sax.SAXException;
 
 public final class HttpB2CUtils {
 	private static HttpClient taobaoHttpClient = createHttpClient("taobao");
@@ -54,6 +65,12 @@ public final class HttpB2CUtils {
 
 	}
 
+	/**
+	 * 创建httppClient
+	 * 
+	 * @param flag
+	 * @return
+	 */
 	private static HttpClient createHttpClient(String flag) {
 		HttpParams params = new BasicHttpParams();
 		// Increase max total connection to 200
@@ -138,7 +155,7 @@ public final class HttpB2CUtils {
 		BufferedReader br = new BufferedReader(new InputStreamReader(entity
 				.getContent(), "UTF-8"));
 		String line;
-		// TB
+		// 淘宝
 		if ("1".equals(type)) {
 			Pattern pattern = Pattern.compile(TAOBAO_USER_REGEX);
 			Matcher matcher;
@@ -151,7 +168,7 @@ public final class HttpB2CUtils {
 				}
 			}
 		}
-		// PP
+		// 拍拍
 		else if ("2".equals(type)) {
 			Pattern pattern = Pattern.compile(PAIPAI_USER_REGEX);
 			Matcher matcher;
@@ -165,7 +182,7 @@ public final class HttpB2CUtils {
 				}
 			}
 		}
-		// YA
+		// 有啊
 		else if ("3".equals(type)) {
 			Pattern pattern = Pattern.compile(YOUA_USER_REGEX);
 			Matcher matcher;
@@ -201,7 +218,7 @@ public final class HttpB2CUtils {
 		BufferedReader br = new BufferedReader(new InputStreamReader(entity
 				.getContent(), "UTF-8"));
 		String line;
-		// TB
+		// 淘宝
 		if ("1".equals(type)) {
 			Pattern pattern = Pattern.compile(TAOBAO_USER_REGEX);
 			Matcher matcher;
@@ -214,7 +231,7 @@ public final class HttpB2CUtils {
 				}
 			}
 		}
-		// PP
+		// 拍拍
 		else if ("2".equals(type)) {
 			Pattern pattern = Pattern.compile(PAIPAI_USER_REGEX);
 			Matcher matcher;
@@ -228,7 +245,7 @@ public final class HttpB2CUtils {
 				}
 			}
 		}
-		// YA
+		// 有啊
 		else if ("3".equals(type)) {
 			Pattern pattern = Pattern.compile(YOUA_USER_REGEX);
 			Matcher matcher;
@@ -245,6 +262,64 @@ public final class HttpB2CUtils {
 			entity.consumeContent();
 		}
 		return seller;
+	}
+
+	/**
+	 * 获取买家信誉值 -1表示不支持
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public static Integer obtainCreditValue(String username, String url,
+			String type) throws Exception {
+		Integer value = 0;
+		Map nameSpaces = new HashMap();
+		nameSpaces.put("xmlns", "http://www.w3.org/1999/xhtml");
+		// 淘宝
+		if ("1".equals(type)) {
+			if (!url.matches(TAOBAO_CREDIT_URL)) {
+				return -1;
+			} else {
+				List<Node> nodes = getMutliNodeByDom4j(
+						url,
+						"//xmlns:A[starts-with(@href,'http://store.taobao.com/shop/')]|//xmlns:A[@id='J_BuyerRate']|a[@id='J_BuyerRate']",
+						nameSpaces);
+				if (nodes.size() != 2) {
+					return -1;
+				} else {
+					if (username.equals(nodes.get(0).getText().trim())) {
+						return -1;
+					} else {
+						return Integer.parseInt(nodes.get(1).getText().trim());
+					}
+				}
+			}
+		}
+		// 拍拍
+		else if ("2".equals(type)) {
+			if (!url.matches(PAIPAI_CREDIT_URL)) {
+				return -1;
+			} else {
+				List<Node> nodes = getMutliNodeByDom4j(
+						url,
+						"//xmlns:A[starts-with(@href,'http://store.taobao.com/shop/')]|//xmlns:A[@id='J_BuyerRate']|a[@id='J_BuyerRate']",
+						nameSpaces);
+				if (nodes.size() != 2) {
+					return -1;
+				} else {
+					if (username.equals(nodes.get(0).getText().trim())) {
+						return -1;
+					} else {
+						return Integer.parseInt(nodes.get(1).getText().trim());
+					}
+				}
+			}
+		}
+		// 有啊
+		else if ("3".equals(type)) {
+			return 0;
+		}
+		return -1;
 	}
 
 	/**
@@ -272,5 +347,60 @@ public final class HttpB2CUtils {
 		HttpResponse response = httpClient.execute(httRequest);
 		HttpEntity entity = response.getEntity();
 		return entity;
+	}
+
+	/**
+	 * 获取多节点
+	 * 
+	 * @param url
+	 * @param xpathStr
+	 * @param nameSpace
+	 * @return
+	 */
+	private static List<Node> getMutliNodeByDom4j(String url, String xpathStr,
+			Map nameSpace) {
+		Document document = getDoc(url);// 获取document
+		Map nameSpaces = new HashMap();
+		XPath xpath = new DefaultXPath(xpathStr);
+		xpath.setNamespaceContext(new SimpleNamespaceContext(nameSpaces));
+		List<Node> nodes = xpath.selectNodes(document);
+		return nodes;
+	}
+
+	/**
+	 * 获取单节点
+	 * 
+	 * @param url
+	 * @param xpathStr
+	 * @param nameSpace
+	 * @return
+	 */
+	private static Node getOneNodeByDom4j(String url, String xpathStr,
+			Map nameSpace) {
+		Document document = getDoc(url);// 获取document
+		Map nameSpaces = new HashMap();
+		XPath xpath = new DefaultXPath(xpathStr);
+		xpath.setNamespaceContext(new SimpleNamespaceContext(nameSpaces));
+		Node node = xpath.selectSingleNode(document);
+		return node;
+	}
+
+	public static Document getDoc(String url) {
+		DOMParser parser = new DOMParser();
+		try {
+			parser.parse(url);
+		} catch (SAXException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		org.w3c.dom.Document doc = parser.getDocument();
+
+		// SAXReader reader = new SAXReader();
+		DOMReader domReader = new DOMReader();
+		Document document = domReader.read(doc);
+		return document;
 	}
 }

@@ -296,15 +296,6 @@ img {
 								name="userVO.buyer.name">
 						</td>
 					</tr>
-					<tr style="display: none" class="buyerClass">
-						<td valign="middle">
-							信誉地址：
-						</td>
-						<td valign="middle">
-							<input type="text" id="creditURL" name="userVO.buyer.creditURL">
-							<font color="red">(有啊不填写)</font>
-						</td>
-					</tr>
 				</table>
 			</s:form>
 		</div>
@@ -314,8 +305,8 @@ img {
 			修改发货地址 xgj
 		 -->
 		<div id="updateDIV" title="修改发货地址">
-			<s:form action="userInfoManager/info!updateSeller.php"
-				theme="simple" id="updatewForm">
+			<s:form action="userInfoManager/info!updateSeller.php" theme="simple"
+				id="updatewForm">
 				<table cellpadding="0" cellspacing="0" border="0">
 					<tr class="sellerClass">
 						<td valign="middle">
