@@ -34,8 +34,8 @@ import org.springframework.stereotype.Controller;
 		@Result(name = "initActiave", location = "/user/activate.jsp"),
 		@Result(name = "updateActiave", location = "/user/activate.jsp"),
 		@Result(name = "initSellerAndBuyer", location = "/user/sellerBuyerInfo.jsp"),
-		@Result(name = "updateSellerAndBuyer", type = "chain", location = "/userInfoManager/info!initSellerAndBuyer.php"),
-		@Result(name = "deleteSellerAndBuyer", type = "chain", location = "/userInfoManager/info!initSellerAndBuyer.php") })
+		@Result(name = "updateSeller", type = "chain", location = "/userInfoManager/info!initSellerAndBuyer.php"),
+		@Result(name = "insertSellerAndBuyer", type = "chain", location = "/userInfoManager/info!initSellerAndBuyer.php") })
 @Namespace("/userInfoManager")
 public class UserInfoAction extends BaseAction {
 	@Resource
@@ -60,8 +60,8 @@ public class UserInfoAction extends BaseAction {
 	 * @return
 	 * @throws Exception
 	 */
-	public String updateSellerAndBuyer() throws Exception {
-		return userInfoService.updateSellerAndBuyer(userVO);
+	public String updateSeller() throws Exception {
+		return userInfoService.updateSeller(userVO);
 	}
 
 	/**

@@ -1272,9 +1272,10 @@ public class CreditTaskService extends BaseService {
 						creditTaskVO.getLimit());
 		List<BuyerEntity> buyers = userDAO
 				.list(
-						" from BuyerEntity  as _b where _b.user.id=:userId  and  _b.type=:type",
-						new String[] { "userId", "type" }, new Object[] {
-								getLoginUser().getId(), platformType });
+						" from BuyerEntity  as _b where _b.user.id=:userId  and  _b.type=:type and _b.enable=:enable",
+						new String[] { "userId", "type", "enable" },
+						new Object[] { getLoginUser().getId(), platformType,
+								true });
 		List<BuyerVO> resultBuyers = new ArrayList<BuyerVO>(buyers.size());
 		if (buyers.size() == 0) {
 			putJumpPage("userInfoManager/info!initSellerAndBuyer.php");

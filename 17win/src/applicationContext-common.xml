@@ -112,7 +112,7 @@
 
 	</bean>
 	<!-- 定义调用对象和调用对象的方法 -->
-	<bean id="tastStatusTask"
+	<bean id="minuteTask"
 		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		<!-- 调用的类 -->
 		<property name="targetObject">
@@ -120,14 +120,14 @@
 		</property>
 		<!-- 调用类中的方法 -->
 		<property name="targetMethod">
-			<value>tastStatus</value>
+			<value>minuteTask</value>
 		</property>
 	</bean>
 	<!-- 定义触发任务状态更新，每分钟-->
-	<bean id="tastStatusTaskTime"
+	<bean id="minuteTaskTime"
 		class="org.springframework.scheduling.quartz.CronTriggerBean">
 		<property name="jobDetail">
-			<ref bean="tastStatusTask" />
+			<ref bean="minuteTask" />
 		</property>
 		<!-- cron表达式 -->
 		<property name="cronExpression">
@@ -139,7 +139,7 @@
 		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<property name="triggers">
 			<list>
-				<ref bean="tastStatusTaskTime" />
+				<ref bean="minuteTaskTime" />
 			</list>
 		</property> 
 	</bean>

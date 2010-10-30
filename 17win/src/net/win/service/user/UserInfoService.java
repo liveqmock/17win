@@ -64,8 +64,14 @@ public class UserInfoService extends BaseService {
 
 		return "referee";
 	}
-
-	public String updateSellerAndBuyer(UserVO userVO) throws Exception {
+	
+	/**
+	 * 更新卖号
+	 * @param userVO
+	 * @return
+	 * @throws Exception
+	 */
+	public String updateSeller(UserVO userVO) throws Exception {
 		SellerEntity sellerEntity = sellerDAO.get(Long
 				.parseLong(getByParam("upadteSeller")));
 		String sheng = getByParam("sheng").trim();
@@ -75,13 +81,13 @@ public class UserInfoService extends BaseService {
 		String result = sheng + " " + shi + " " + qu + " " + youbian;
 		if (result.length() > 50) {
 			putAlertMsg("地址和邮编长度加起来不能大于50！");
-			return "updateSellerAndBuyer";
+			return "updateSeller";
 		}
 		if (!StringUtils.isBlank(result)) {
 			sellerEntity.setAddress(result);
 		}
 		putAlertMsg("修改成功！");
-		return "updateSellerAndBuyer";
+		return "updateSeller";
 	}
 
 	public String initExchange(UserVO userVO) throws Exception {
@@ -118,7 +124,7 @@ public class UserInfoService extends BaseService {
 							.changeType2Platform(platformTypeParam);
 					putAlertMsg("您当前在" + platform + "平台最多只能拥有"
 							+ sellerCountFlag + "个账号");
-					return "updateSellerAndBuyer";
+					return "insertSellerAndBuyer";
 				}
 			}
 			SellerEntity sellerEntity = userVO.getSeller();
@@ -129,7 +135,7 @@ public class UserInfoService extends BaseService {
 			String result = sheng + " " + shi + " " + qu + " " + youbian;
 			if (result.length() > 50) {
 				putAlertMsg("地址和邮编长度加起来不能大于50！");
-				return "updateSellerAndBuyer";
+				return "insertSellerAndBuyer";
 			}
 			if (!StringUtils.isBlank(result)) {
 				sellerEntity.setAddress(result);
@@ -146,7 +152,7 @@ public class UserInfoService extends BaseService {
 		}
 		initSellerAndBuyer(userVO);
 		putAlertMsg("添加成功！");
-		return "updateSellerAndBuyer";
+		return "insertSellerAndBuyer";
 	}
 
 	/**

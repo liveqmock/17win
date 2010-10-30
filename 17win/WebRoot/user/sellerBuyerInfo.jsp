@@ -169,6 +169,9 @@ img {
 														<th height="10" nowrap="nowrap" align="center" width="50%">
 															买号
 														</th>
+														<th height="10" nowrap="nowrap" align="center" width="50%">
+															是否可用
+														</th>
 													</tr>
 													<s:iterator value="#request.buyers.get(#type)" id="buyer">
 														<tr class="buyerTr">
@@ -177,6 +180,14 @@ img {
 																	platformType="<s:property value="#type"/>"
 																	buyerName="<s:property value="#buyer.name" />" />
 																<s:property value="#buyer.name" />
+															</td>
+															<td height="10" align="center">
+																<s:if test="#buyer.enable">
+																	是
+																</s:if>
+																<s:else>
+																	否
+																</s:else>
 															</td>
 														</tr>
 													</s:iterator>
@@ -272,7 +283,7 @@ img {
 							邮编：
 						</td>
 						<td valign="middle">
-							<input type="text" name="youbian"  id="y1" maxlength="6"
+							<input type="text" name="youbian" id="y1" maxlength="6"
 								style="width: 80px">
 						</td>
 					</tr>
@@ -285,6 +296,15 @@ img {
 								name="userVO.buyer.name">
 						</td>
 					</tr>
+					<tr style="display: none" class="buyerClass">
+						<td valign="middle">
+							信誉地址：
+						</td>
+						<td valign="middle">
+							<input type="text" id="creditURL" name="userVO.buyer.creditURL">
+							<font color="red">(有啊不填写)</font>
+						</td>
+					</tr>
 				</table>
 			</s:form>
 		</div>
@@ -294,7 +314,7 @@ img {
 			修改发货地址 xgj
 		 -->
 		<div id="updateDIV" title="修改发货地址">
-			<s:form action="userInfoManager/info!updateSellerAndBuyer.php"
+			<s:form action="userInfoManager/info!updateSeller.php"
 				theme="simple" id="updatewForm">
 				<table cellpadding="0" cellspacing="0" border="0">
 					<tr class="sellerClass">
@@ -315,8 +335,8 @@ img {
 							邮编：
 						</td>
 						<td valign="middle">
-							<input type="hidden" id="upadteSellerId"  name="upadteSeller">
-							<input type="text" name="youbian"  id="y2" maxlength="6"
+							<input type="hidden" id="upadteSellerId" name="upadteSeller">
+							<input type="text" name="youbian" id="y2" maxlength="6"
 								style="width: 80px">
 						</td>
 					</tr>

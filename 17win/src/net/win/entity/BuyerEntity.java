@@ -14,17 +14,30 @@ import javax.persistence.Table;
  */
 // 名字
 public class BuyerEntity extends BaseEntity {
-	
+
 	@Column(name = "NAME_", length = 20, nullable = false)
 	private String name;
 	// 类型(1淘宝,2怕拍,3有啊)
 	@Column(name = "TYPE_", columnDefinition = "CHAR(1)", nullable = false)
 	private String type;
- 
+
+	@Column(name = "ENABLE_", nullable = false)
+	private Boolean enable;
+
+	@Column(name = "CREDIT_URL_", length = 255, nullable = false)
+	private String creditURL;
 	// 所属人
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_ID_")
 	private UserEntity user;
+
+	public Boolean getEnable() {
+		return enable;
+	}
+
+	public void setEnable(Boolean enable) {
+		this.enable = enable;
+	}
 
 	public UserEntity getUser() {
 		return user;
@@ -48,6 +61,14 @@ public class BuyerEntity extends BaseEntity {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public String getCreditURL() {
+		return creditURL;
+	}
+
+	public void setCreditURL(String creditURL) {
+		this.creditURL = creditURL;
 	}
 
 }

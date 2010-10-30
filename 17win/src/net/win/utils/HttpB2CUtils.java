@@ -31,7 +31,7 @@ public final class HttpB2CUtils {
 	private static HttpClient paipaiHttpClient = createHttpClient("paipai");
 	private static HttpClient youaHttpClient = createHttpClient("youa");
 
-	// 地址验证
+	// 店铺地址验证
 	private static final String TAOBAO_SHOP_REGEX = "^http:[/\\\\]{2}\\w+\\-*\\w+\\.taobao\\.com[/\\\\]?";
 	private static final String PAIPAI_SHOP_REGEX = "^http:[/\\\\]{2}\\w+\\-*\\w+\\.paipai\\.com[/\\\\]?";
 	private static final String YOUA_SHOP_REGEX = "^http:[/\\\\]{2}youa.baidu\\.com[/\\\\]?";
@@ -45,6 +45,10 @@ public final class HttpB2CUtils {
 	private static final String TAOBAO_USER_REGEX = "data\\-nick=\"([[\u0391-\uFFE5]\\w_]+)\"";
 	private static final String PAIPAI_USER_REGEX = "<litagid='HOME_PAGE'><ahref='http://(\\d+)\\.paipai\\.com/";
 	private static final String YOUA_USER_REGEX = "uname=\"([[\u0391-\uFFE5]\\w_]+)\"";
+
+	// 信誉地址验证
+	private static final String TAOBAO_CREDIT_URL = "^http:[/\\\\]{2}rate\\.taobao\\.com[/\\\\]rate.htm\\?user_id=\\d+";
+	private static final String PAIPAI_CREDIT_URL = "^http:[/\\\\]{2}shop\\d+\\.paipai\\.com[/\\\\]cgi\\-bin[/\\\\]credit_info\\?uin=\\d+&";
 
 	private HttpB2CUtils() {
 
