@@ -141,6 +141,7 @@ public class UserInfoService extends BaseService {
 			BuyerEntity buyerEntity = userVO.getBuyer();
 			buyerEntity.setType(platformTypeParam);
 			buyerEntity.setUser(userEntity);
+			buyerEntity.setEnable(true);
 			buyerDAO.save(buyerEntity);
 		}
 		initSellerAndBuyer(userVO);
