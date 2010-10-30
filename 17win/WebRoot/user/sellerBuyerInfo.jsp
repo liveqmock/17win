@@ -296,6 +296,15 @@ img {
 								name="userVO.buyer.name">
 						</td>
 					</tr>
+					<tr style="display: none" class="buyerClass">
+						<td valign="middle">
+							信誉地址：
+						</td>
+						<td valign="middle">
+							<input type="text" id="creditURL" name="userVO.buyer.creditURL">
+							<font color="red">(仅支持淘宝,拍拍，有问题联系客户)</font>
+						</td>
+					</tr>
 				</table>
 			</s:form>
 		</div>

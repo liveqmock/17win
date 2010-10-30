@@ -21,6 +21,9 @@ public class BuyerEntity extends BaseEntity {
 	@Column(name = "TYPE_", columnDefinition = "CHAR(1)", nullable = false)
 	private String type;
 
+	@Column(name = "CREDIT_URL_", length = 255)
+	private String creditURL;
+
 	@Column(name = "ENABLE_", nullable = false)
 	private Boolean enable;
 
@@ -59,5 +62,13 @@ public class BuyerEntity extends BaseEntity {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public String getCreditURL() {
+		return creditURL;
+	}
+
+	public void setCreditURL(String creditURL) {
+		this.creditURL = creditURL;
 	}
 }
