@@ -25,20 +25,13 @@ public final class StrategyUtils {
 	 * @return
 	 * @throws Exception
 	 */
-	public static Integer getSellerCount(String type, Boolean vipEnable) {
+	public static Integer getSellerCount(String type, Boolean vipEnable,
+			VipEntity vipEntity) {
 		if (!vipEnable) {
 			return 2;
+		} else {
+			return vipEntity.getSellerCount();
 		}
-		if ("1".equals(type)) {
-			return 3;
-		}
-		if ("1".equals(type)) {
-			return 4;
-		}
-		if ("1".equals(type)) {
-			return null;
-		}
-		return 2;
 	}
 
 	/**
@@ -167,7 +160,6 @@ public final class StrategyUtils {
 		}
 		return vipEntity.getReceieveScore();
 	}
-
 
 	/**
 	 * 评价类型，一天，两天，三天
