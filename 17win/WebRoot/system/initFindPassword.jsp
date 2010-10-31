@@ -7,10 +7,10 @@
 		<LINK href="css/index.css" type=text/css rel=stylesheet>
 		<LINK href="css/Css.css" type=text/css rel=stylesheet>
 		<LINK href="css/top_bottom.css" type=text/css rel=stylesheet>
-		<script src="user/findPassword.js" type="text/javascript"></script>
+		<script src="system/initFindPassword.js" type="text/javascript"></script>
 	</HEAD>
 	<BODY>
-		<s:form action="userManager/base!findPassword.php" theme="simple"
+		<s:form action="userInfoManager/info!findPassword.php" theme="simple"
 			onsubmit="return validateForm()">
 			<s:include value="../common/title.jsp"></s:include>
 			<div align="center">
@@ -22,11 +22,10 @@
 						<DIV
 							style="PADDING-RIGHT: 20px; PADDING-LEFT: 20px; PADDING-BOTTOM: 20px; WIDTH: 700px; PADDING-TOP: 20px; TEXT-ALIGN: left">
 							<DIV style="FONT-WEIGHT: bolder; FONT-SIZE: 18px; COLOR: red">
-								找回密码
 							</DIV>
 							<BR>
 							<DIV style="COLOR: #999900">
-								<FONT color=#ff0000>请输入6至20位字符的新密码。</FONT>
+								<FONT color=#ff0000>请输入您的用户名或密码，我们会发送邮件到您的邮箱里面。如果有疑问请联系我们的客户。</FONT>
 							</DIV>
 							<BR>
 							<DIV style="COLOR: red">
@@ -37,16 +36,8 @@
 							<DIV>
 								<P>
 								</P>
-								密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：
-								<s:password id="password" name="userVO.userEntity.loginPassword"
-									maxLength="16"></s:password>
-								<s:hidden name="userVO.userEntity.username"></s:hidden>
-								<br>
-								确认密码：
-								<input type="password" id="rePassword" maxLength="16">
-								<input type="hidden" name="preURL" size="30"
-									value="<%="?" + request.getQueryString()%>"
-									style="width: 210px">
+								<INPUT id="username" type="text" maxLength="12"
+									name="userVO.username">
 							</DIV>
 							<BR>
 							<DIV>

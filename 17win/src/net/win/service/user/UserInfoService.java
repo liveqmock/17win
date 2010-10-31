@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import net.win.BaseService;
 import net.win.TaskMananger;
@@ -20,6 +21,7 @@ import net.win.entity.UserEntity;
 import net.win.utils.ArithUtils;
 import net.win.utils.Constant;
 import net.win.utils.HttpB2CUtils;
+import net.win.utils.MailUtils;
 import net.win.utils.StrategyUtils;
 import net.win.utils.StringUtils;
 import net.win.utils.TotalUtils;
@@ -28,7 +30,12 @@ import net.win.vo.BuyerVO;
 import net.win.vo.SellerVO;
 import net.win.vo.UserVO;
 
+import org.apache.struts2.ServletActionContext;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
+
+import sun.misc.BASE64Encoder;
 
 import com.sun.org.apache.commons.beanutils.BeanUtils;
 
@@ -41,7 +48,63 @@ public class UserInfoService extends BaseService {
 	private SellerDAO sellerDAO;
 	@Resource
 	private BuyerDAO buyerDAO;
+	@Resource
+	private JavaMailSender mailSender;
+	@Resource
+	private FreeMarkerConfigurer freeMarkerCfj;
 
+	/**
+	 * 初始化找回密码
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String initFindPassword() throws Exception {
+		return "initFindPassword";
+	}
+
+	/**
+	 * 查找密码
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String updateFindPassword(UserVO userVO) throws Exception {
+		UserEntity userEntity = userDAO
+				.uniqueResult(
+						" from UserEntity as _u where _u.username=:username  or _u.telephone =:telephone ",
+						new String[] { "username", "telephone" }, new Object[] {
+								userVO.getUsername(), userVO.getUsername() });
+		if (userEntity == null) {
+			putAlertMsg("用户名或手机不存在！");
+			return "updateFindPassword";
+		}
+		BASE64Encoder encoder = new BASE64Encoder();
+		String username64 = encoder.encode(userEntity.getUsername().getBytes());
+		String nowTime65 = encoder.encode((System.currentTimeMillis() + "")
+				.getBytes());
+
+		HttpServletRequest request = ServletActionContext.getRequest();
+		String path = request.getContextPath();
+		String basePath = request.getScheme() + "://" + request.getServerName()
+				+ ":" + request.getServerPort() + path + "/";
+		String content = basePath + "userManager/base!initFindPassword.php?u="
+				+ username64 + "&t=" + nowTime65;
+
+		userEntity.setStatusAndLastStatus("3");
+
+		MailUtils.sendPasswordMail(mailSender, freeMarkerCfj, userEntity
+				.getUsername(), userEntity.getEmail(), content);
+		putAlertMsg("邮件已经发送到您的邮箱里面，请根据邮件找回密码！");
+		return "updateFindPassword";
+	}
+
+	/**
+	 * 推广
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
 	public String referee() throws Exception {
 		UserEntity userEntity = getLoginUserEntity(userDAO);
 		// 推广 奖金

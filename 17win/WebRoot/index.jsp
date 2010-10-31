@@ -108,7 +108,8 @@
 														<a href="userManager/base!initRegister.php"><img
 																vspace="0" hspace="5" border="0"
 																src="images/login-q_r4_c31.gif"> </a>
-														<a href="javascript:void(0);" id="findPWA" border="0">找回密码</a>
+														<a href="userInfoManager/info!initFindPassword.php"
+															id="findPWA" border="0">找回密码</a>
 													</td>
 												</tr>
 											</tbody>

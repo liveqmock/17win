@@ -23,6 +23,8 @@ public class UserVO extends BaseVO {
 	// 用户名
 	private String username;
 
+	//电话
+	private String telphone;
 	private SellerEntity seller = new SellerEntity();
 
 	private BuyerEntity buyer = new BuyerEntity();
@@ -89,6 +91,14 @@ public class UserVO extends BaseVO {
 
 	public void setBuyer(BuyerEntity buyer) {
 		this.buyer = buyer;
+	}
+
+	public String getTelphone() {
+		return telphone;
+	}
+
+	public void setTelphone(String telphone) {
+		this.telphone = telphone;
 	}
 
 }

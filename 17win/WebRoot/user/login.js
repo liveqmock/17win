@@ -18,9 +18,6 @@ $(document).ready(function() {
 				resizable : false,
 				show : 'slide'
 			});
-	$("#findPW").bind("dialogbeforeclose", function(event, ui) {
-				$("#usernameTelephone").val("");
-			});
 
 	if ($("#activateDIV") != null) {
 		$("#activateDIV").dialog({
@@ -32,7 +29,6 @@ $(document).ready(function() {
 					show : 'slide'
 				});
 	}
-	$("#findPWBtn").button();
 	$("#findPWBtn").bind("click", function() {
 				if (Validater.isBlank($("#usernameTelephone").val())) {
 					alert("数据不能为空");

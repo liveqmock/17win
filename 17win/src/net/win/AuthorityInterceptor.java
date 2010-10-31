@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import net.win.utils.Constant;
 
 import org.apache.struts2.ServletActionContext;
-import org.objectweb.asm.xwork.tree.JumpInsnNode;
 
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
@@ -35,6 +34,8 @@ public class AuthorityInterceptor extends AbstractInterceptor {
 		EXINCLUDE_PATH.add("adminNewsManager/adminNews!detailNews.php");
 		EXINCLUDE_PATH.add("userManager/base!getLoginUser.php");
 		EXINCLUDE_PATH.add("shuakeManager/shuake!initShuakeIndex.php");
+		EXINCLUDE_PATH.add("userInfoManager/info!initFindPassword.php");
+		EXINCLUDE_PATH.add("userInfoManager/info!findPassword.php");
 
 	}
 	/**

@@ -35,7 +35,11 @@ import org.springframework.stereotype.Controller;
 		@Result(name = "updateActiave", location = "/user/activate.jsp"),
 		@Result(name = "initSellerAndBuyer", location = "/user/sellerBuyerInfo.jsp"),
 		@Result(name = "updateSeller", type = "chain", location = "/userInfoManager/info!initSellerAndBuyer.php"),
-		@Result(name = "insertSellerAndBuyer", type = "chain", location = "/userInfoManager/info!initSellerAndBuyer.php") })
+		@Result(name = "insertSellerAndBuyer", type = "chain", location = "/userInfoManager/info!initSellerAndBuyer.php"),
+		@Result(name = "initFindPassword", location = "/system/initFindPassword.jsp"),
+		@Result(name = "updateFindPassword", location = "/system/initFindPassword.jsp")
+
+})
 @Namespace("/userInfoManager")
 public class UserInfoAction extends BaseAction {
 	@Resource
@@ -51,6 +55,26 @@ public class UserInfoAction extends BaseAction {
 	public String execute() throws Exception {
 		// TODO Auto-generated method stub
 		return super.execute();
+	}
+
+	/**
+	 * 初始化找回密码
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String initFindPassword() throws Exception {
+		return userInfoService.initFindPassword();
+	}
+
+	/**
+	 * 找回密码
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String findPassword() throws Exception {
+		return userInfoService.updateFindPassword(userVO);
 	}
 
 	/**

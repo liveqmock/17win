@@ -61,7 +61,7 @@
 													</td>
 													<td width="75%" bgcolor="#FFFFFF">
 														<div align="left">
-															<tt> <s:textfield name="userVO.userEntity.username"  
+															<tt> <s:textfield name="userVO.userEntity.username"
 																	size="30" cssStyle="width:180px" id="username"
 																	maxlength="12"></s:textfield> </tt>
 														</div>
@@ -99,7 +99,8 @@
 												<tr>
 													<td colspan="2" bgcolor="#FFFFFF">
 														<label>
-															<a id="findPWA" href="javascript:void(0);"><img
+															<a id="findPWA"
+																href="userInfoManager/info!initFindPassword.php"><img
 																	src="images/forgetpw.gif" width="12" height="13"
 																	border="0">&nbsp;找回密码</a>&nbsp;
 															<a href="userManager/base!initRegister.php">&nbsp;&nbsp;&nbsp;<img
@@ -111,7 +112,7 @@
 
 												<tr>
 													<td colspan="2" align="center" bgcolor="#FFFFFF">
-														<INPUT id="loginBtn" type=submit value="登陆服务平台"/>
+														<INPUT id="loginBtn" type=submit value="登陆服务平台" />
 														&nbsp; &nbsp;
 													</td>
 												</tr>
@@ -147,28 +148,6 @@
 			</TABLE>
 			<s:include value="../common/footKuan.jsp"></s:include>
 		</s:form>
-		<div id="findPW" title="找回密码">
-			<table border="0" cellpadding="0" cellspacing="0">
-				<tr>
-					<td nowrap="nowrap">
-						用户名/手机号码:
-					</td>
-					<td>
-						<input type="text" id="usernameTelephone" />
-
-					</td>
-				</tr>
-				<tr>
-					<td>
-						&nbsp;
-						<input type="button" id="findPWBtn" value="提交" />
-					</td>
-					<td>
-					</td>
-
-				</tr>
-			</table>
-		</div>
 		<s:if test="#request.div!=null">
 			<div id="activateDIV" title="激活账号">
 				<table border="0" cellpadding="0" cellspacing="0">
