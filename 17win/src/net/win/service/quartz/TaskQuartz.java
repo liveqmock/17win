@@ -36,19 +36,19 @@ public class TaskQuartz {
 					+ "       STATUS_='2' "
 					+ "      or STATUS_='-2'"
 					+ "    ) "
-					+ "  and SEC_TO_TIME(UNIX_TIMESTAMP(now())-   UNIX_TIMESTAMP(RECEIVE_DATE_))>=REMAIN_TIME_";
+					+ "  and (SEC_TO_TIME(UNIX_TIMESTAMP(now())- UNIX_TIMESTAMP(RECEIVE_DATE_))>=REMAIN_TIME_)";
 			query = session.createSQLQuery(sql);
 			query.executeUpdate();
 			session.getTransaction().commit();
 
-			// / 定时任务
+			// / 修改定时任务
 			session.beginTransaction();
 			String sql2 = "update"
 					+ " Tb_CreditTask "
 					+ "   set"
-					+ "       STATUS_='1',"
+					+ "       STATUS_='1' "
 					+ "   where"
-					+ "       STATUS_='0'  and  UNIX_TIMESTAMP(now())-   UNIX_TIMESTAMP(TIMEING_TIME_)>=0";
+					+ "       STATUS_='0'  and  (UNIX_TIMESTAMP(now())-   UNIX_TIMESTAMP(TIMEING_TIME_)>=0)";
 			query = session.createSQLQuery(sql2);
 			query.executeUpdate();
 			session.getTransaction().commit();

@@ -55,7 +55,7 @@ public final class HttpB2CUtils {
 	private static final String YOUA_ITEM_REGEX = "^http:[/\\\\]{2}youa.baidu\\.com[/\\\\]item";
 
 	// 账号获取
-	private static final String TAOBAO_USER_REGEX = "data\\-nick=\"([[\u0391-\uFFE5]\\w_]+)\"";
+	private static final String TAOBAO_USER_REGEX = "data\\-nick=\"(.+)\" data-tnick=";
 	private static final String PAIPAI_USER_REGEX = "<litagid='HOME_PAGE'><ahref='http://(\\d+)\\.paipai\\.com/";
 	private static final String YOUA_USER_REGEX = "uname=\"([[\u0391-\uFFE5]\\w_]+)\"";
 
@@ -155,17 +155,16 @@ public final class HttpB2CUtils {
 		}
 		HttpEntity entity = getContext(url, type);
 		BufferedReader br = new BufferedReader(new InputStreamReader(entity
-				.getContent(), "UTF-8"));
+				.getContent(), "GBK"));
 		String line;
 		// 淘宝
 		if ("1".equals(type)) {
 			Pattern pattern = Pattern.compile(TAOBAO_USER_REGEX);
 			Matcher matcher;
 			OUTTER: while ((line = br.readLine()) != null) {
-				line = URLDecoder.decode(line, "UTF-8");
 				matcher = pattern.matcher(line);
 				while (matcher.find()) {
-					seller = matcher.group(1);
+					seller =URLDecoder.decode(matcher.group(1),"UTF-8");
 					break OUTTER;
 				}
 			}
@@ -175,11 +174,10 @@ public final class HttpB2CUtils {
 			Pattern pattern = Pattern.compile(PAIPAI_USER_REGEX);
 			Matcher matcher;
 			OUTTER: while ((line = br.readLine()) != null) {
-				line = URLDecoder.decode(line, "UTF-8");
 				line = StringUtils.replaceBlank(line.replaceAll("\"", "'"));
 				matcher = pattern.matcher(line);
 				while (matcher.find()) {
-					seller = matcher.group(1);
+					seller =URLDecoder.decode(matcher.group(1),"UTF-8");
 					break OUTTER;
 				}
 			}
@@ -189,10 +187,9 @@ public final class HttpB2CUtils {
 			Pattern pattern = Pattern.compile(YOUA_USER_REGEX);
 			Matcher matcher;
 			OUTTER: while ((line = br.readLine()) != null) {
-				line = URLDecoder.decode(line, "UTF-8");
 				matcher = pattern.matcher(line);
 				while (matcher.find()) {
-					seller = matcher.group(1);
+					seller =URLDecoder.decode(matcher.group(1),"UTF-8");
 					break OUTTER;
 				}
 			}
@@ -218,17 +215,16 @@ public final class HttpB2CUtils {
 		}
 		HttpEntity entity = getContext(url, type);
 		BufferedReader br = new BufferedReader(new InputStreamReader(entity
-				.getContent(), "UTF-8"));
+				.getContent(), "GBK"));
 		String line;
 		// 淘宝
 		if ("1".equals(type)) {
 			Pattern pattern = Pattern.compile(TAOBAO_USER_REGEX);
 			Matcher matcher;
 			OUTTER: while ((line = br.readLine()) != null) {
-				line = URLDecoder.decode(line, "UTF-8");
 				matcher = pattern.matcher(line);
 				while (matcher.find()) {
-					seller = matcher.group(1);
+					seller =URLDecoder.decode(matcher.group(1),"UTF-8");
 					break OUTTER;
 				}
 			}
@@ -238,11 +234,10 @@ public final class HttpB2CUtils {
 			Pattern pattern = Pattern.compile(PAIPAI_USER_REGEX);
 			Matcher matcher;
 			OUTTER: while ((line = br.readLine()) != null) {
-				line = URLDecoder.decode(line, "UTF-8");
 				line = StringUtils.replaceBlank(line.replaceAll("\"", "'"));
 				matcher = pattern.matcher(line);
 				while (matcher.find()) {
-					seller = matcher.group(1);
+					seller =URLDecoder.decode(matcher.group(1),"UTF-8");
 					break OUTTER;
 				}
 			}
@@ -252,10 +247,9 @@ public final class HttpB2CUtils {
 			Pattern pattern = Pattern.compile(YOUA_USER_REGEX);
 			Matcher matcher;
 			OUTTER: while ((line = br.readLine()) != null) {
-				line = URLDecoder.decode(line, "UTF-8");
 				matcher = pattern.matcher(line);
 				while (matcher.find()) {
-					seller = matcher.group(1);
+					seller =URLDecoder.decode(matcher.group(1),"UTF-8");
 					break OUTTER;
 				}
 			}
@@ -272,9 +266,9 @@ public final class HttpB2CUtils {
 	 * @return
 	 * @throws Exception
 	 */
+	@SuppressWarnings("unchecked")
 	public static Integer obtainCreditValue(String username, String url,
 			String type) throws Exception {
-		Integer value = 0;
 		Map nameSpaces = new HashMap();
 		nameSpaces.put("xmlns", "http://www.w3.org/1999/xhtml");
 		// 淘宝
@@ -299,47 +293,49 @@ public final class HttpB2CUtils {
 		}
 		// 拍拍
 		else if ("2".equals(type)) {
-			HttpClient httpclient = new DefaultHttpClient();
+			if (!url.matches(PAIPAI_CREDIT_URL)) {
+				return -1;
+			} else {
+				HttpClient httpclient = new DefaultHttpClient();
+				HttpGet httpget = new HttpGet(url);
+				httpget
+						.setHeader(new BasicHeader(
+								"Cookie",
+								"	PPRD_S=PVS.USER-PVSE.1; pvid=3194253992; flv=10.1 r53; pgv=pgvReferrer=&ssid=s9049088248; visitkey=3625640881013513"));
 
-			HttpGet httpget = new HttpGet(
-					"http://shop1.paipai.com/cgi-bin/credit_info?uin=30756500&");
-			httpget
-					.setHeader(new BasicHeader(
-							"Cookie",
-							"	PPRD_S=PVS.USER-PVSE.1; pvid=3194253992; flv=10.1 r53; pgv=pgvReferrer=&ssid=s9049088248; visitkey=3625640881013513"));
+				HttpResponse response = httpclient.execute(httpget);
+				HttpEntity entity = response.getEntity();
+				BufferedReader br = new BufferedReader(new InputStreamReader(
+						entity.getContent(), "GBK"));
+				String buyer = null;
+				String line;
+				Pattern pattern = Pattern
+						.compile("<li id='userNickname'><span class='name'>买家昵称：</span><strong>(.+)<span class='imstatic'></span></strong></li>");
 
-			HttpResponse response = httpclient.execute(httpget);
-			HttpEntity entity = response.getEntity();
-			BufferedReader br = new BufferedReader(new InputStreamReader(entity
-					.getContent(), "UTF-8"));
-			String buyer = null;
-			String line;
-			Pattern pattern = Pattern
-					.compile("<li id='userNickname'><span class='name'>买家昵称：</span><strong>(.+)<span class='imstatic'></span></strong></li>");
-
-			Pattern pattern2 = Pattern
-					.compile("<a href='http:[/\\\\]{2}shop\\d+\\.paipai\\.com[/\\\\]cgi\\-bin[/\\\\]credit_info\\?uin=\\d+' target='_blank'>(\\d+)</a>");
-			Matcher matcher;
-			Matcher matcher2;
-			OUTTER: while ((line = br.readLine()) != null) {
-				line = URLDecoder.decode(line, "UTF-8").replaceAll("\"", "'");
-				matcher = pattern.matcher(line);
-				matcher2 = pattern2.matcher(line);
-				while (matcher.find()) {
-					buyer = matcher.group(1);
-					if (!buyer.equals(username)) {
-						return -1;
-					} else {
-						break OUTTER;
+				Pattern pattern2 = Pattern
+						.compile("<a href='http:[/\\\\]{2}shop\\d+\\.paipai\\.com[/\\\\]cgi\\-bin[/\\\\]credit_info\\?uin=\\d+' target='_blank'>(\\d+)</a>");
+				Matcher matcher;
+				Matcher matcher2;
+				OUTTER: while ((line = br.readLine()) != null) {
+					line = line.replaceAll("\"", "'");
+					matcher = pattern.matcher(line);
+					matcher2 = pattern2.matcher(line);
+					while (matcher.find()) {
+						buyer = matcher.group(1);
+						if (!buyer.equals(username)) {
+							return -1;
+						} else {
+							break OUTTER;
+						}
+					}
+					while (matcher2.find()) {
+						return Integer.parseInt(matcher.group(1));
 					}
 				}
-				while (matcher2.find()) {
-					return Integer.parseInt(matcher.group(1));
-				}
+				br.close();
+				httpget.abort();
+				httpclient.getConnectionManager().shutdown();
 			}
-			br.close();
-			httpget.abort();
-			httpclient.getConnectionManager().shutdown();
 		}
 		// 有啊
 		else if ("3".equals(type)) {

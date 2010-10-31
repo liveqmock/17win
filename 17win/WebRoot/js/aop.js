@@ -68,6 +68,11 @@ VhostAop.divAOP.ajaxParam3 = function(url, data, callback) {
 VhostAop.divAOP.ajax = function(url, data, callback) {
 	var aop = VhostAop.divAOP;
 	aop.before();
+	if (url.indexOf("?") != -1) {
+		url = url + "&time=" + new Date().getTime();
+	} else {
+		url = url + "?time=" + new Date().getTime();
+	}
 	$.post(url, data, function(data) {
 				callback(data);
 				aop.after();

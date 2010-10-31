@@ -124,7 +124,7 @@ function validateForm() {
 function beforeBlur(obj) {
 	$(obj).data("nowUrl", $(obj).val());
 }
-// 买家失去焦点
+// 卖家失去焦点
 function obtainBuyer(obj) {
 	var type = $("#platformType").val();
 	if (Validater.isBlank($(obj).val())) {
