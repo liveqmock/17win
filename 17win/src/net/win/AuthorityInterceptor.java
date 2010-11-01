@@ -56,6 +56,11 @@ public class AuthorityInterceptor extends AbstractInterceptor {
 		EXINCLUDE_ACTIVATE_PATH
 				.add("commonManager/common!activateOperattionCode.php");
 		EXINCLUDE_ACTIVATE_PATH.add("userInfoManager/info!actiave.php");
+		EXINCLUDE_ACTIVATE_PATH.add("userInfoManager/info!referee.php");
+		EXINCLUDE_ACTIVATE_PATH.add("userInfoManager/info!myRefee.php");
+		
+		
+		
 	}
 	/**
 	 * 
