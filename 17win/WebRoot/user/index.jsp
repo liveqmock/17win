@@ -104,8 +104,7 @@ img {
 															当前成长值：<s:property value="#session.userLogin.vipGrowValue" />
 															</s:if> <s:else>
 														您还没有加入VIP
-														</s:else>)<b><br />(<img
-																	src="images/<s:property value="#session.userLogin.levelImg" />" />注册时间：<s:date
+														</s:else>)<b><br />(注册时间：<s:date
 																	format="yyyy-MM-dd hh:mm:ss"
 																	name="#session.userLogin.registerTime" />)</b> </Font>
 													</td>

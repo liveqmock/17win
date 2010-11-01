@@ -68,7 +68,7 @@
 										<ul>
 											<LI
 												style="BACKGROUND: url(images/jieducm_top_btn5.jpg) no-repeat">
-												<A href="system/shuakeRank.jsp">刷客排行</A>
+												<A href="shuake/index.html">刷客排行</A>
 											</LI>
 											<LI
 												style="BACKGROUND: url(images/jieducm_top_btn3.jpg) no-repeat">

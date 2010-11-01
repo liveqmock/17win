@@ -20,7 +20,7 @@ $(document).ready(function() {
 			// 用户名
 			$("#username").bind("blur", function() {
 						var obj = this;
-						if (Validater.isUsername($(this).val())) {
+						if (Validater.isName($(this).val(),4,12)) {
 							// 去掉空格
 							$(obj).val($.trim($(obj).val()));
 							if ($(obj).data("nowData") == $(obj).val()) {
@@ -39,7 +39,7 @@ $(document).ready(function() {
 									});
 
 						} else {
-							validateError(this, "用户名必须是又数字或则字符组成的4-12位字符串！");
+							validateError(this, "用户名必须4-12个字符的字母、汉字、数字、下划线！");
 							submitFlag = false;
 						}
 					});

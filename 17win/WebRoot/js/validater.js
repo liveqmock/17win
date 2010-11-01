@@ -103,7 +103,7 @@ Validater.isNumber = function(str, type) {
 };
 // 判定名称，中文，英文字母下划线，数字，范围
 Validater.isName = function(str, min, max) {
-	var regName = new RegExp("^[\\w\\u4e00-\\u9fa5\\-]{" + min + "," + max
+	var regName = new RegExp("^[\\w\\u4e00-\\u9fa5\\-_]{" + min + "," + max
 			+ "}$");
 	return regName.test(str);
 };

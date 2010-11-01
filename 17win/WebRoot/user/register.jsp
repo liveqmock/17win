@@ -66,7 +66,7 @@ td {
 										<s:textfield name="userVO.userEntity.username" size="30"
 											cssStyle="width:210px" id="username" maxlength="12"></s:textfield>
 										<br />
-										<span id="c0">4-12个字符的字母或者数字</span>
+										<span id="c0">4-12个字符的字母、汉字、数字、下划线</span>
 									</td>
 									<td nowrap="nowrap" valign="top" width="400">
 									</td>

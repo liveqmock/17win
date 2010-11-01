@@ -393,7 +393,7 @@
 
 											<td class="border_bottom_lan">
 												<div align="center" class="yell_font">
-													380点
+													380元
 												</div>
 											</td>
 										</tr>
@@ -406,7 +406,7 @@
 											</td>
 											<td class="border_bottom_lan">
 												<div align="center" class="yell_font">
-													340点
+													340元
 												</div>
 											</td>
 										</tr>
@@ -415,12 +415,12 @@
 
 											<td class="border_bottom_lan">
 												<div align="center">
-													0610
+													0610gf
 												</div>
 											</td>
 											<td class="border_bottom_lan">
 												<div align="center" class="yell_font">
-													280点
+													280元
 												</div>
 											</td>
 										</tr>
@@ -433,7 +433,7 @@
 											</td>
 											<td class="border_bottom_lan">
 												<div align="center" class="yell_font">
-													250点
+													250元
 												</div>
 											</td>
 										</tr>
@@ -442,12 +442,12 @@
 										<tr>
 											<td class="border_bottom_lan">
 												<div align="center">
-													ke288
+													ke288f
 												</div>
 											</td>
 											<td class="border_bottom_lan">
 												<div align="center" class="yell_font">
-													120点
+													120元
 												</div>
 											</td>
 										</tr>
@@ -455,12 +455,12 @@
 										<tr>
 											<td class="border_bottom_lan">
 												<div align="center">
-													小梦惠
+													center
 												</div>
 											</td>
 											<td class="border_bottom_lan">
 												<div align="center" class="yell_font">
-													120点
+													120元
 												</div>
 											</td>
 
@@ -474,7 +474,7 @@
 											</td>
 											<td class="border_bottom_lan">
 												<div align="center" class="yell_font">
-													100点
+													100元
 												</div>
 											</td>
 										</tr>
@@ -482,13 +482,13 @@
 										<tr>
 											<td class="border_bottom_lan">
 												<div align="center">
-													婷婷千色坊
+													ttqsef
 												</div>
 											</td>
 
 											<td class="border_bottom_lan">
 												<div align="center" class="yell_font">
-													100点
+													100元
 												</div>
 											</td>
 										</tr>
@@ -501,13 +501,26 @@
 											</td>
 											<td class="border_bottom_lan">
 												<div align="center" class="yell_font">
-													80点
+													80元
 												</div>
 											</td>
 										</tr>
 
 										<tr>
 
+											<td class="border_bottom_lan">
+												<div align="center">
+													yiyeguan
+												</div>
+											</td>
+											<td class="border_bottom_lan">
+												<div align="center" class="yell_font">
+													80元
+												</div>
+											</td>
+										</tr>
+
+										<tr>
 											<td class="border_bottom_lan">
 												<div align="center">
 													一夜皇冠
@@ -515,20 +528,7 @@
 											</td>
 											<td class="border_bottom_lan">
 												<div align="center" class="yell_font">
-													80点
-												</div>
-											</td>
-										</tr>
-
-										<tr>
-											<td class="border_bottom_lan">
-												<div align="center">
-													VIP会员
-												</div>
-											</td>
-											<td class="border_bottom_lan">
-												<div align="center" class="yell_font">
-													70点
+													70元
 												</div>
 											</td>
 										</tr>
@@ -542,7 +542,7 @@
 											</td>
 											<td class="border_bottom_lan">
 												<div align="center" class="yell_font">
-													60点
+													60元
 												</div>
 											</td>
 										</tr>
