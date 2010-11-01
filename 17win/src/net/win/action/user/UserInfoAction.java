@@ -32,6 +32,7 @@ import org.springframework.stereotype.Controller;
 		@Result(name = "initBuyDot", location = "/user/buyDot.jsp"),
 		@Result(name = "updateBuyDot", location = "/user/buyDot.jsp"),
 		@Result(name = "initActiave", location = "/user/activate.jsp"),
+		@Result(name = "sendActiave", location = "/user/activate.jsp"),
 		@Result(name = "updateActiave", location = "/user/activate.jsp"),
 		@Result(name = "initSellerAndBuyer", location = "/user/sellerBuyerInfo.jsp"),
 		@Result(name = "updateSeller", type = "chain", location = "/userInfoManager/info!initSellerAndBuyer.php"),
@@ -116,8 +117,18 @@ public class UserInfoAction extends BaseAction {
 	 * @return
 	 * @throws Exception
 	 */
-	public String actiave() throws Exception {
+	public String updateActiave() throws Exception {
 		return userInfoService.updateActiave(userVO);
+	}
+
+	/**
+	 * 发送激活账号
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String sendActiave() throws Exception {
+		return userInfoService.sendActiave(userVO);
 	}
 
 	/**
@@ -127,7 +138,7 @@ public class UserInfoAction extends BaseAction {
 	 * @throws Exception
 	 */
 	public String initActiave() throws Exception {
-		return "initActiave";
+		return userInfoService.initActiave(userVO);
 	}
 
 	/**

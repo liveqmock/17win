@@ -14,29 +14,48 @@ import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 
 public class AuthorityInterceptor extends AbstractInterceptor {
 
-	private static final Set<String> EXINCLUDE_PATH = new HashSet<String>();
+	/**
+	 * 不包含的用户登录路径
+	 */
+	private static final Set<String> EXINCLUDE_USER_LOGIN_PATH = new HashSet<String>();
 	static {
-		EXINCLUDE_PATH.add("userManager/base!initLogin.php");
-		EXINCLUDE_PATH.add("userManager/base!initRegister.php");
-		EXINCLUDE_PATH.add("userManager/base!initRegister.php");
-		EXINCLUDE_PATH.add("userManager/base!register.php");
-		EXINCLUDE_PATH.add("userManager/base!initFindPassword.php");
-		EXINCLUDE_PATH.add("userManager/base!findPassword.php");
-		EXINCLUDE_PATH.add("menuManager/menu!toIndex.php");
-		EXINCLUDE_PATH.add("userManager/base!login.php");
-		EXINCLUDE_PATH.add("ajaxManager/ajax!findPassword.php");
-		EXINCLUDE_PATH.add("ajaxManager/ajax!userExists.php");
-		EXINCLUDE_PATH.add("ajaxManager/ajax!phoneExists.php");
-		EXINCLUDE_PATH.add("ajaxManager/ajax!emailExists.php");
-		EXINCLUDE_PATH.add("adminManager/admin!login.php");
-		EXINCLUDE_PATH.add("adminNewsManager/adminNews!showHelp.php");
-		EXINCLUDE_PATH.add("adminNewsManager/adminNews!listNews.php");
-		EXINCLUDE_PATH.add("adminNewsManager/adminNews!detailNews.php");
-		EXINCLUDE_PATH.add("userManager/base!getLoginUser.php");
-		EXINCLUDE_PATH.add("shuakeManager/shuake!initShuakeIndex.php");
-		EXINCLUDE_PATH.add("userInfoManager/info!initFindPassword.php");
-		EXINCLUDE_PATH.add("userInfoManager/info!findPassword.php");
+		EXINCLUDE_USER_LOGIN_PATH.add("userManager/base!initLogin.php");
+		EXINCLUDE_USER_LOGIN_PATH.add("userManager/base!initRegister.php");
+		EXINCLUDE_USER_LOGIN_PATH.add("userManager/base!initRegister.php");
+		EXINCLUDE_USER_LOGIN_PATH.add("userManager/base!register.php");
+		EXINCLUDE_USER_LOGIN_PATH.add("userManager/base!initFindPassword.php");
+		EXINCLUDE_USER_LOGIN_PATH.add("userManager/base!findPassword.php");
+		EXINCLUDE_USER_LOGIN_PATH.add("menuManager/menu!toIndex.php");
+		EXINCLUDE_USER_LOGIN_PATH.add("userManager/base!login.php");
+		EXINCLUDE_USER_LOGIN_PATH.add("ajaxManager/ajax!findPassword.php");
+		EXINCLUDE_USER_LOGIN_PATH.add("ajaxManager/ajax!userExists.php");
+		EXINCLUDE_USER_LOGIN_PATH.add("ajaxManager/ajax!phoneExists.php");
+		EXINCLUDE_USER_LOGIN_PATH.add("ajaxManager/ajax!emailExists.php");
+		EXINCLUDE_USER_LOGIN_PATH.add("adminManager/admin!login.php");
+		EXINCLUDE_USER_LOGIN_PATH
+				.add("adminNewsManager/adminNews!showHelp.php");
+		EXINCLUDE_USER_LOGIN_PATH
+				.add("adminNewsManager/adminNews!listNews.php");
+		EXINCLUDE_USER_LOGIN_PATH
+				.add("adminNewsManager/adminNews!detailNews.php");
+		EXINCLUDE_USER_LOGIN_PATH.add("userManager/base!getLoginUser.php");
+		EXINCLUDE_USER_LOGIN_PATH
+				.add("shuakeManager/shuake!initShuakeIndex.php");
+		EXINCLUDE_USER_LOGIN_PATH
+				.add("userInfoManager/info!initFindPassword.php");
+		EXINCLUDE_USER_LOGIN_PATH.add("userInfoManager/info!findPassword.php");
 
+	}
+	/**
+	 * 不包含的激活路径
+	 */
+	private static final Set<String> EXINCLUDE_ACTIVATE_PATH = new HashSet<String>();
+	static {
+		EXINCLUDE_ACTIVATE_PATH.add("userInfoManager/info!initActiave.php");
+		EXINCLUDE_ACTIVATE_PATH.add("taskManager/task!initTask.php");
+		EXINCLUDE_ACTIVATE_PATH
+				.add("commonManager/common!activateOperattionCode.php");
+		EXINCLUDE_ACTIVATE_PATH.add("userInfoManager/info!actiave.php");
 	}
 	/**
 	 * 
@@ -45,8 +64,16 @@ public class AuthorityInterceptor extends AbstractInterceptor {
 
 	@Override
 	public String intercept(ActionInvocation invocation) throws Exception {
-		if (validate(invocation)) {
-			return invocation.invoke();
+		if (validateUserLogin(invocation)) {
+			if (validateUserActive(invocation)) {
+				return invocation.invoke();
+			} else {
+				ServletActionContext.getRequest().setAttribute("msg",
+						"<script>alert('" + "您的账号还没激活！" + "');</script>");
+				ServletActionContext.getRequest().setAttribute("jump",
+						"userInfoManager/info!initActiave.php");
+				return "jump";
+			}
 		} else {
 			ServletActionContext.getRequest().setAttribute("msg",
 					"<script>alert('" + "没有登录,请登录！" + "');</script>");
@@ -58,15 +85,15 @@ public class AuthorityInterceptor extends AbstractInterceptor {
 	}
 
 	/**
-	 * 验证
+	 * 验证用户登录
 	 * 
 	 * @param invocation
 	 */
-	private Boolean validate(ActionInvocation invocation) {
+	private Boolean validateUserLogin(ActionInvocation invocation) {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		UserLoginInfo userLoginInfo = (UserLoginInfo) request.getSession()
 				.getAttribute(Constant.USER_LOGIN_INFO);
-		for (String url : EXINCLUDE_PATH) {
+		for (String url : EXINCLUDE_USER_LOGIN_PATH) {
 			if (request.getRequestURI().toLowerCase().endsWith(
 					url.toLowerCase())) {
 				return true;
@@ -75,9 +102,27 @@ public class AuthorityInterceptor extends AbstractInterceptor {
 		if (userLoginInfo != null) {
 			return true;
 		}
-		// if (EXINCLUDE_PATH.contains(request.getRequestURL())) {
-		// return true;
-		// }
+		return false;
+	}
+
+	/**
+	 * 验证是否激活
+	 * 
+	 * @param invocation
+	 */
+	private Boolean validateUserActive(ActionInvocation invocation) {
+		HttpServletRequest request = ServletActionContext.getRequest();
+		UserLoginInfo userLoginInfo = (UserLoginInfo) request.getSession()
+				.getAttribute(Constant.USER_LOGIN_INFO);
+		for (String url : EXINCLUDE_USER_LOGIN_PATH) {
+			if (request.getRequestURI().toLowerCase().endsWith(
+					url.toLowerCase())) {
+				return true;
+			}
+		}
+		if (!userLoginInfo.getStatus().equals("0")) {
+			return true;
+		}
 		return false;
 	}
 }

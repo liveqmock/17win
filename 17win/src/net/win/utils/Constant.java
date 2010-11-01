@@ -16,6 +16,9 @@ public final class Constant {
 	}
 	// 登陆用户的信息
 	public static final String USER_LOGIN_INFO = "userLogin";
+
+	// 登陆用户的信息
+	public static final String USER_ACTIVE_CODE_INFO = "userActiveCode";
 	//
 	public static final String RTP_I18N_LANGUAGE = "language";
 	// 验证码
@@ -38,13 +41,11 @@ public final class Constant {
 	private static Integer huangguan_N;
 	private static Integer shuangzuan_N;
 	private static Integer yizuan_N;
-	
+
 	/**
 	 * 其他
 	 */
-	
 
- 
 	/**
 	 * vip
 	 */
@@ -80,12 +81,10 @@ public final class Constant {
 		return yizuan_N;
 	}
 
- 
-
 	/**
 	 * 初始化
 	 */
-	private synchronized  static void initMetatData() {
+	private synchronized static void initMetatData() {
 		URL url = Thread.currentThread().getContextClassLoader().getResource(
 				"win-metadata.xml");
 		SAXReader saxReader = new SAXReader(); // 使用SAXReader方式读取XML文件
@@ -120,7 +119,8 @@ public final class Constant {
 			yizuan_N = Integer.parseInt(zuanshika_N.getText());
 
 			// vip
-			Element vipPriceE = (Element) root.selectSingleNode("/win/vip/price");
+			Element vipPriceE = (Element) root
+					.selectSingleNode("/win/vip/price");
 			vipPrice = Double.parseDouble(vipPriceE.getText());
 			Element yearRebateE = (Element) root
 					.selectSingleNode("/win/vip/yearRebate");
@@ -129,7 +129,6 @@ public final class Constant {
 		} catch (Exception e) {
 			LoggerUtils.error(e);
 		}
-		
 
 	}
 

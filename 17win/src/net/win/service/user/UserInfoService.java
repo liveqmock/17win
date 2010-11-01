@@ -307,7 +307,7 @@ public class UserInfoService extends BaseService {
 	}
 
 	/**
-	 * 激活账号
+	 * 发送激活号码
 	 * 
 	 * @param userVO
 	 * @return
@@ -315,9 +315,49 @@ public class UserInfoService extends BaseService {
 	 */
 	public String updateActiave(UserVO userVO) throws Exception {
 		UserEntity userEntity = getLoginUserEntity(userDAO);
-		userEntity.setStatusAndLastStatus("1");
-		putAlertMsg("激活成功！快去体验吧！");
-		return "updateActiave";
+		String activeCode = getByParam("activeCode");
+		String activeCodeOld = (String) getBySession(Constant.USER_ACTIVE_CODE_INFO);
+		if (activeCodeOld.equals(activeCode)) {
+			userEntity.setStatusAndLastStatus("1");
+			putAlertMsg("激活成功！快去体验吧！");
+			putByRequest("activeCode", "1");
+			return "updateActiave";
+		} else {
+			userEntity.setStatusAndLastStatus("1");
+			putByRequest("activeCode", "3");
+			putAlertMsg("激活码错误！");
+			return "updateActiave";
+		}
+	}
+
+	/**
+	 * 发送激活号码
+	 * 
+	 * @param userVO
+	 * @return
+	 * @throws Exception
+	 */
+	public String sendActiave(UserVO userVO) throws Exception {
+		putBySession(Constant.USER_ACTIVE_CODE_INFO, "123456");
+		putAlertMsg("激活号码发送成功！");
+		putByRequest("activeCode", "3");
+		return "sendActiave";
+	}
+
+	/**
+	 * 初始化激活码
+	 * 
+	 * @param userVO
+	 * @return
+	 * @throws Exception
+	 */
+	public String initActiave(UserVO userVO) throws Exception {
+		if (getLoginUser().getStatus().equals("0")) {
+			putByRequest("activeCode", "1");
+		} else {
+			putByRequest("activeCode", "2");
+		}
+		return "initActiave";
 	}
 
 	/**
