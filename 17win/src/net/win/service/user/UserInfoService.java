@@ -352,7 +352,7 @@ public class UserInfoService extends BaseService {
 	 * @throws Exception
 	 */
 	public String initActiave(UserVO userVO) throws Exception {
-		if (getLoginUser().getStatus().equals("0")) {
+		if (!getLoginUser().getStatus().equals("0")) {
 			putByRequest("activeCode", "1");
 		} else {
 			putByRequest("activeCode", "2");
