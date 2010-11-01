@@ -9,6 +9,26 @@ public class BuyerVO extends BaseVO {
 	// 积分
 	private Integer score = 0;
 
+	private Boolean enable;
+	
+	private String creditURL;
+
+	public String getCreditURL() {
+		return creditURL;
+	}
+
+	public void setCreditURL(String creditURL) {
+		this.creditURL = creditURL;
+	}
+
+	public Boolean getEnable() {
+		return enable;
+	}
+
+	public void setEnable(Boolean enable) {
+		this.enable = enable;
+	}
+
 	public String getName() {
 		return name;
 	}

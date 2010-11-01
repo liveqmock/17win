@@ -164,7 +164,7 @@ public final class HttpB2CUtils {
 			OUTTER: while ((line = br.readLine()) != null) {
 				matcher = pattern.matcher(line);
 				while (matcher.find()) {
-					seller =URLDecoder.decode(matcher.group(1),"UTF-8");
+					seller = URLDecoder.decode(matcher.group(1), "UTF-8");
 					break OUTTER;
 				}
 			}
@@ -177,7 +177,7 @@ public final class HttpB2CUtils {
 				line = StringUtils.replaceBlank(line.replaceAll("\"", "'"));
 				matcher = pattern.matcher(line);
 				while (matcher.find()) {
-					seller =URLDecoder.decode(matcher.group(1),"UTF-8");
+					seller = URLDecoder.decode(matcher.group(1), "UTF-8");
 					break OUTTER;
 				}
 			}
@@ -189,7 +189,7 @@ public final class HttpB2CUtils {
 			OUTTER: while ((line = br.readLine()) != null) {
 				matcher = pattern.matcher(line);
 				while (matcher.find()) {
-					seller =URLDecoder.decode(matcher.group(1),"UTF-8");
+					seller = URLDecoder.decode(matcher.group(1), "UTF-8");
 					break OUTTER;
 				}
 			}
@@ -224,7 +224,7 @@ public final class HttpB2CUtils {
 			OUTTER: while ((line = br.readLine()) != null) {
 				matcher = pattern.matcher(line);
 				while (matcher.find()) {
-					seller =URLDecoder.decode(matcher.group(1),"UTF-8");
+					seller = URLDecoder.decode(matcher.group(1), "UTF-8");
 					break OUTTER;
 				}
 			}
@@ -237,7 +237,7 @@ public final class HttpB2CUtils {
 				line = StringUtils.replaceBlank(line.replaceAll("\"", "'"));
 				matcher = pattern.matcher(line);
 				while (matcher.find()) {
-					seller =URLDecoder.decode(matcher.group(1),"UTF-8");
+					seller = URLDecoder.decode(matcher.group(1), "UTF-8");
 					break OUTTER;
 				}
 			}
@@ -249,7 +249,7 @@ public final class HttpB2CUtils {
 			OUTTER: while ((line = br.readLine()) != null) {
 				matcher = pattern.matcher(line);
 				while (matcher.find()) {
-					seller =URLDecoder.decode(matcher.group(1),"UTF-8");
+					seller = URLDecoder.decode(matcher.group(1), "UTF-8");
 					break OUTTER;
 				}
 			}
@@ -261,7 +261,7 @@ public final class HttpB2CUtils {
 	}
 
 	/**
-	 * 获取买家信誉值 -1表示不支持
+	 * 获取买家信誉值 -1表示错误 0表示有啊
 	 * 
 	 * @return
 	 * @throws Exception
@@ -283,7 +283,7 @@ public final class HttpB2CUtils {
 				if (nodes.size() != 2) {
 					return -1;
 				} else {
-					if (username.equals(nodes.get(0).getText().trim())) {
+					if (!username.equals(nodes.get(0).getText().trim())) {
 						return -1;
 					} else {
 						return Integer.parseInt(nodes.get(1).getText().trim());
@@ -379,12 +379,12 @@ public final class HttpB2CUtils {
 	 * @param nameSpace
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	private static List<Node> getMutliNodeByDom4j(String url, String xpathStr,
 			Map nameSpace) {
 		Document document = getDoc(url);// 获取document
-		Map nameSpaces = new HashMap();
 		XPath xpath = new DefaultXPath(xpathStr);
-		xpath.setNamespaceContext(new SimpleNamespaceContext(nameSpaces));
+		xpath.setNamespaceContext(new SimpleNamespaceContext(nameSpace));
 		List<Node> nodes = xpath.selectNodes(document);
 		return nodes;
 	}

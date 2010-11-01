@@ -164,12 +164,14 @@ img {
 
 														</td>
 													</tr>
-
 													<tr style="background: #EDF6FF">
-														<th height="10" nowrap="nowrap" align="center" width="50%">
+														<th height="10" nowrap="nowrap" align="center" width="33.3%">
 															买号
 														</th>
-														<th height="10" nowrap="nowrap" align="center" width="50%">
+														<th height="10" nowrap="nowrap" align="center"  width="33.3%">
+															信誉值
+														</th>
+														<th height="10" nowrap="nowrap" align="center"  width="33.3%">
 															是否可用
 														</th>
 													</tr>
@@ -180,6 +182,9 @@ img {
 																	platformType="<s:property value="#type"/>"
 																	buyerName="<s:property value="#buyer.name" />" />
 																<s:property value="#buyer.name" />
+															</td>
+															<td height="10" align="center">
+																<s:property value="#buyer.score" />
 															</td>
 															<td height="10" align="center">
 																<s:if test="#buyer.enable">
@@ -220,7 +225,7 @@ img {
 				<table cellpadding="0" cellspacing="0" border="0">
 					<tr>
 						<td valign="middle">
-							类型：
+							<font color="red">*</font>类型：
 						</td>
 						<td valign="middle">
 							<span> <input type="radio" value="1" name="type"
@@ -230,7 +235,7 @@ img {
 					</tr>
 					<tr>
 						<td valign="middle">
-							平台：
+							<font color="red">*</font>平台：
 						</td>
 						<td valign="middle">
 							<select id="platformType" name="platformTypeParam">
@@ -248,7 +253,7 @@ img {
 					</tr>
 					<tr class="sellerClass">
 						<td valign="middle">
-							店铺地址：
+							<font color="red">*</font>店铺地址：
 						</td>
 						<td valign="middle">
 							<input type="text" name="userVO.seller.shopURL" id="shopURL"
@@ -257,7 +262,7 @@ img {
 					</tr>
 					<tr class="sellerClass">
 						<td valign="middle">
-							掌柜名字：
+							<font color="red">*</font>掌柜名字：
 						</td>
 						<td valign="middle">
 							<input type="text" id="sellerName" name="userVO.seller.name"
@@ -267,7 +272,7 @@ img {
 					</tr>
 					<tr class="sellerClass">
 						<td valign="middle">
-							发货地址：
+							&nbsp;发货地址：
 						</td>
 						<td valign="middle">
 							<input type="text" name="sheng" style="width: 80px">
@@ -280,7 +285,7 @@ img {
 					</tr>
 					<tr class="sellerClass">
 						<td valign="middle">
-							邮编：
+							&nbsp;邮编：
 						</td>
 						<td valign="middle">
 							<input type="text" name="youbian" id="y1" maxlength="6"
@@ -289,7 +294,7 @@ img {
 					</tr>
 					<tr style="display: none" class="buyerClass">
 						<td valign="middle">
-							买号：
+							<font color="red">*</font>买号：
 						</td>
 						<td valign="middle">
 							<input type="text" id="buyerName" onblur="obtainBuyer(this)"
@@ -297,8 +302,8 @@ img {
 						</td>
 					</tr>
 					<tr style="display: none" class="buyerClass">
-						<td valign="middle">
-							信誉地址：
+						<td valign="middle" nowrap="nowrap">
+							&nbsp;信誉地址：
 						</td>
 						<td valign="middle">
 							<input type="text" id="creditURL" name="userVO.buyer.creditURL">

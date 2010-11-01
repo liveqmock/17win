@@ -28,6 +28,7 @@ $(document).ready(function() {
 						width : 400,
 						buttons : {
 							"保存" : function() {
+								$(this).attr("disabled", true);
 								$("#updatewForm").submit();
 							}
 						}
@@ -39,10 +40,11 @@ $(document).ready(function() {
 						modal : true,
 						resizable : false,
 						show : 'slide',
-						width : 400,
+						width : 500,
 						buttons : {
 							"保存" : function() {
 								if (validateForm()) {
+									$(this).attr("disabled", true);
 									$("#addForm").submit();
 								}
 							}

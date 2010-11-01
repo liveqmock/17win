@@ -238,7 +238,7 @@ public class UserInfoService extends BaseService {
 			Integer score = HttpB2CUtils.obtainCreditValue(buyerEntity
 					.getName(), buyerEntity.getCreditURL(), platformTypeParam);
 			if (score == -1) {
-				putAlertMsg("您输入的地址有问题，如果有疑问请联系客户！");
+				putAlertMsg("您输入的地址有问题或地址和买号不同，如果有疑问请联系客户！");
 				return "insertSellerAndBuyer";
 			}
 			buyerEntity.setScore(score);
