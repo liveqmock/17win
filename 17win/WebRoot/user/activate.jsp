@@ -57,39 +57,43 @@ img {
 
 	</HEAD>
 	<BODY>
-		<s:form action="userInfoManager/info!actiave.php" theme="simple">
-			<s:include value="../common/title.jsp"></s:include>
-			<table width="760" border="0" align="center" cellpadding="0"
-				cellspacing="0" bgcolor="#FFFFFF">
-				<tr>
-					<td>
-						<table width="910" border="0" cellspacing="0" cellpadding="0">
-							<tr>
-								<!-- xgj   user left menu-->
-								<s:include value="../common/user/infoMenu.jsp"></s:include>
-								<!-- end xgj -->
-								<td width="15">
-									&nbsp;
-								</td>
+		<s:include value="../common/title.jsp"></s:include>
+		<table width="760" border="0" align="center" cellpadding="0"
+			cellspacing="0" bgcolor="#FFFFFF">
+			<tr>
+				<td>
+					<table width="910" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<!-- xgj   user left menu-->
+							<s:include value="../common/user/infoMenu.jsp"></s:include>
+							<!-- end xgj -->
+							<td width="15">
+								&nbsp;
+							</td>
 
-								<td valign="top">
-									<table width="100%" cellspacing="0" cellpadding="0" border="0">
-										<tbody>
-											<tr>
-												<td height="5"></td>
-											</tr>
-										</tbody>
-									</table>
-									<div class="pp9">
-										<div style="padding-bottom: 15px; width: 97%;">
-											<div class="pp7">
-												您现在的位置是：个人中心 &gt;&gt; 激活账号 &gt;&gt;
-											</div>
-											<div class="pp8">
-												<strong>激活账号</strong>
-											</div>
-
-
+							<td valign="top">
+								<table width="100%" cellspacing="0" cellpadding="0" border="0">
+									<tbody>
+										<tr>
+											<td height="5"></td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="pp9">
+									<div style="padding-bottom: 15px; width: 97%;">
+										<div class="pp7">
+											您现在的位置是：个人中心 &gt;&gt; 激活账号 &gt;&gt;
+										</div>
+										<div class="pp8">
+											<strong>激活账号</strong>
+										</div>
+										<form
+											<s:if test="#request.activeCode==2">
+										action="userInfoManager/info!sendActiave.php"
+										</s:if>
+											<s:elseif test="#request.activeCode==3">
+											action="userInfoManager/info!updateActiave.php"
+											</s:elseif>>
 											<table width="99%" cellspacing="0" cellpadding="0" border="0"
 												align="center">
 												<tbody>
@@ -98,35 +102,67 @@ img {
 															&nbsp;
 														</td>
 													</tr>
-													<tr>
-														<td width="146" height="40" align="right" class="font12h">
-															手机号：
-														</td>
-														<td width="230">
-															<s:property value="#session.userLogin.telephone" />
-														</td>
-														<td width="524"></td>
-													</tr>
-													<tr>
-														<td height="40" align="center" class="font12h" colspan="2">
-															<input type="submit" value="获取激活码" id="button"
-																style="cursor: pointer;" name="button">
-														</td>
-														<td>
-															&nbsp;
-														</td>
-													</tr>
+
+													<s:if test="#request.activeCode==1">
+														<tr>
+															<td height="10" colspan="3">
+																您的账号已经激活！
+															</td>
+														</tr>
+													</s:if>
+													<s:elseif test="#request.activeCode==2">
+														<tr>
+															<td width="146" height="40" align="right" class="font12h">
+																手机号：
+															</td>
+															<td width="230">
+																<s:property value="#session.userLogin.telephone" />
+															</td>
+															<td width="524"></td>
+														</tr>
+														<tr>
+															<td height="40" align="center" class="font12h"
+																colspan="2">
+																<input type="submit" value="获取激活码" id="button"
+																	style="cursor: pointer;" name="button">
+															</td>
+															<td>
+																&nbsp;
+															</td>
+														</tr>
+													</s:elseif>
+													<s:elseif test="#request.activeCode==3">
+														<tr>
+															<td width="146" height="40" align="right" class="font12h">
+																输入您的激活码：
+															</td>
+															<td width="230">
+																<input value="" type="text" maxlength="6">
+															</td>
+															<td width="524"></td>
+														</tr>
+														<tr>
+															<td height="40" align="center" class="font12h"
+																colspan="2">
+																<input type="submit" value="确认" id="button"
+																	style="cursor: pointer;" name="button">
+															</td>
+															<td>
+																&nbsp;
+															</td>
+														</tr>
+													</s:elseif>
 												</tbody>
 											</table>
-										</div>
+										</form>
 									</div>
-								</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-			</table>
-			<s:include value="../common/footDuan.jsp"></s:include>
-		</s:form>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		<s:include value="../common/footDuan.jsp"></s:include>
 	</BODY>
 </HTML>
