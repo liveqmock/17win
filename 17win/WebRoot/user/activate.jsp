@@ -9,10 +9,6 @@
 		<LINK href="css/top_bottom.css" type="text/css" rel="stylesheet">
 		<LINK href="css/Css.css" type="text/css" rel="stylesheet">
 		<LINK href="css/center.css" type="text/css" rel="stylesheet">
-		<SCRIPT src="js/jieducm_pupu.js" type="text/javascript"></SCRIPT>
-		<SCRIPT src="js/aop.js" type=text/javascript></SCRIPT>
-		<SCRIPT src="js/utils.js" type=text/javascript></SCRIPT>
-		<SCRIPT src="user/updateInfo.js" type=text/javascript></SCRIPT>
 		<style type="text/css">
 body {
 	
@@ -137,7 +133,8 @@ img {
 																输入您的激活码：
 															</td>
 															<td width="230">
-																<input value="" type="text" maxlength="6">
+																<input value="" name="activeCode" id="activeCodeID"
+																	type="text" maxlength="6">
 															</td>
 															<td width="524"></td>
 														</tr>

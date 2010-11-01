@@ -317,15 +317,15 @@ public class UserInfoService extends BaseService {
 		UserEntity userEntity = getLoginUserEntity(userDAO);
 		String activeCode = getByParam("activeCode");
 		String activeCodeOld = (String) getBySession(Constant.USER_ACTIVE_CODE_INFO);
-		if (activeCodeOld.equals(activeCode)) {
-			userEntity.setStatusAndLastStatus("1");
-			putAlertMsg("激活成功！快去体验吧！");
-			putByRequest("activeCode", "1");
-			return "updateActiave";
-		} else {
+		if (activeCode == null || !activeCodeOld.equals(activeCode)) {
 			userEntity.setStatusAndLastStatus("1");
 			putByRequest("activeCode", "3");
 			putAlertMsg("激活码错误！");
+			return "updateActiave";
+		} else {
+			userEntity.setStatusAndLastStatus("1");
+			putAlertMsg("激活成功！快去体验吧！");
+			putByRequest("activeCode", "1");
 			return "updateActiave";
 		}
 	}
