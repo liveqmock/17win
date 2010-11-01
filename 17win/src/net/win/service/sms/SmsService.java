@@ -132,6 +132,10 @@ public class SmsService extends BaseService {
 			String sendType = getByParam("sendType");
 			String opertaionCode = getByParam("opertaionCode");
 			UserEntity userEntity = getLoginUserEntity(userDAO);
+			if (content.trim().length() > 70) {
+				putAlertMsg("内容过长！");
+				return "sendTelphone";
+			}
 			if (!userEntity.getOpertationCode().equals(
 					StringUtils.processPwd(opertaionCode))) {
 				putAlertMsg("操作码不正确！");
