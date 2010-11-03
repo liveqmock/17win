@@ -52,12 +52,12 @@ $(document).ready(function() {
 	$("#username").focus();
 	$("#username").bind("blur", function() {
 		var obj = this;
-		if (Validater.isUsername($(this).val())) {
+		if (Validater.isName($(this).val(),4,12)) {
 			validateSuccess(obj);
 		} else {
 			validateError(
 					this,
-					"\u7528\u6237\u540d\u5fc5\u987b\u662f\u53c8\u6570\u5b57\u6216\u5219\u5b57\u7b26\u7ec4\u6210\u76844-12\u4f4d\u5b57\u7b26\u4e32");
+					"用户名必须4-12个字符的字母、汉字、数字、下划线！");
 			submitFlag = false;
 		}
 	});
@@ -66,7 +66,7 @@ $(document).ready(function() {
 		if (Validater.isPassword($(this).val())) {
 			validateSuccess(this);
 		} else {
-			validateError(this, "\u5fc5\u987b\u662f6\u81f320\u4f4d\u5b57\u7b26");
+			validateError(this, "密码格式不正确，必须为6至20位字符！");
 			submitFlag = false;
 		}
 	});
@@ -85,7 +85,7 @@ $(document).ready(function() {
 			function(data) {
 				var user = data.loginInfo;
 				var tdNo = "<span class='yell_font'>您还没登录！</span> "
-						+ "	<a target='_top' href='user/login.html'>登陆</a> | 注册</a> | "
+						+ "	<a target='_top' href='user/login.html'>登陆</a> | <a target='_top' href='userManager/base!initRegister.php'>注册</a> | "
 						+ " <a onclick='window.external.addFavorite('http://www.2000w.net','淘宝刷信誉')' title='添加到收藏夹' href='#'>[收藏本站]</a> ";
 				var tableNo = "<table width='100%' cellspacing='0' cellpadding='0' border='0' class='LeftNews'>"
 						+ "		<tbody><tr> "

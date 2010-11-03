@@ -58,9 +58,13 @@ public class AuthorityInterceptor extends AbstractInterceptor {
 		EXINCLUDE_ACTIVATE_PATH.add("userInfoManager/info!actiave.php");
 		EXINCLUDE_ACTIVATE_PATH.add("userInfoManager/info!referee.php");
 		EXINCLUDE_ACTIVATE_PATH.add("userInfoManager/info!myRefee.php");
+
+		EXINCLUDE_ACTIVATE_PATH.add("userInfoManager/info!updateActiave.php");
+		EXINCLUDE_ACTIVATE_PATH.add("userInfoManager/info!sendActiave.php");
+		EXINCLUDE_ACTIVATE_PATH.add("userInfoManager/info!initActiave.php");
+		EXINCLUDE_ACTIVATE_PATH.add("usermanager/base!getloginuser.php");
 		
-		
-		
+
 	}
 	/**
 	 * 
@@ -79,6 +83,7 @@ public class AuthorityInterceptor extends AbstractInterceptor {
 						"userInfoManager/info!initActiave.php");
 				return "jump";
 			}
+
 		} else {
 			ServletActionContext.getRequest().setAttribute("msg",
 					"<script>alert('" + "没有登录,请登录！" + "');</script>");
@@ -119,7 +124,10 @@ public class AuthorityInterceptor extends AbstractInterceptor {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		UserLoginInfo userLoginInfo = (UserLoginInfo) request.getSession()
 				.getAttribute(Constant.USER_LOGIN_INFO);
-		for (String url : EXINCLUDE_USER_LOGIN_PATH) {
+		if (userLoginInfo == null) {
+			return true;
+		}
+		for (String url : EXINCLUDE_ACTIVATE_PATH) {
 			if (request.getRequestURI().toLowerCase().endsWith(
 					url.toLowerCase())) {
 				return true;

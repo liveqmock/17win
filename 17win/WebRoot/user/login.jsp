@@ -148,20 +148,5 @@
 			</TABLE>
 			<s:include value="../common/footKuan.jsp"></s:include>
 		</s:form>
-		<s:if test="#request.div!=null">
-			<div id="activateDIV" title="激活账号">
-				<table border="0" cellpadding="0" cellspacing="0">
-					<tr>
-						<td>
-							手机号码:15112355607
-						</td>
-						<td>
-							<input type="button" id="actioveBtn" value="获取激活码" />
-						</td>
-					</tr>
-
-				</table>
-			</div>
-		</s:if>
 	</BODY>
 </HTML>

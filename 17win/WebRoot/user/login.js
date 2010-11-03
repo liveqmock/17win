@@ -4,69 +4,31 @@ function changeValidateCode(obj) {
 	// 每次请求需要一个不同的参数，否则可能会返回同样的验证码
 	// 这和浏览器的缓存机制有关系，也可以把页面设置为不缓存，这样就不用这个参数了。
 	obj.src = "verify/verificationCode.php?time=" + timenow;
-} 
+}
 var submitFlag = true;
 $(document).ready(function() {
 	$("#username").focus();
 	$("#verificationCode").val("");
 	$("#loginBtn").button();
-	$("#findPW").dialog({
-				autoOpen : false,
-				draggable : false,
-				hide : 'slide',
-				modal : true,
-				resizable : false,
-				show : 'slide'
-			});
-
-	if ($("#activateDIV") != null) {
-		$("#activateDIV").dialog({
-					autoOpen : true,
-					draggable : false,
-					hide : 'slide',
-					modal : true,
-					resizable : false,
-					show : 'slide'
-				});
-	}
-	$("#findPWBtn").bind("click", function() {
-				if (Validater.isBlank($("#usernameTelephone").val())) {
-					alert("数据不能为空");
-					return false;
-				}
-				$.post("ajaxManager/ajax!findPassword.php", {
-							username : $("#usernameTelephone").val(),
-							telephone : $("#usernameTelephone").val()
-						}, function(data) {
-							if (data.bool) {
-								alert("邮件已经发送到你的邮箱里面，请查收！");
-							} else {
-								alert("该用户名或则手机没有被注册过！");
-							}
-							$("#findPW").dialog("close");
-						}, "json");
-			});
 	// 用户名
 	$("#username").bind("blur", function() {
-		var obj = this;
-		if (Validater.isUsername($(this).val())) {
-			validateSuccess(obj);
-		} else {
-			validateError(
-					this,
-					"\u7528\u6237\u540d\u5fc5\u987b\u662f\u53c8\u6570\u5b57\u6216\u5219\u5b57\u7b26\u7ec4\u6210\u76844-12\u4f4d\u5b57\u7b26\u4e32");
-			submitFlag = false;
-		}
-	});
+				var obj = this;
+				if (Validater.isName($(this).val(), 4, 12)) {
+					validateSuccess(obj);
+				} else {
+					validateError(this, "用户名必须4-12个字符的字母、汉字、数字、下划线！");
+					submitFlag = false;
+				}
+			});
 	// 密码
 	$("#password").bind("blur", function() {
-		if (Validater.isPassword($(this).val())) {
-			validateSuccess(this);
-		} else {
-			validateError(this, "\u5fc5\u987b\u662f6\u81f320\u4f4d\u5b57\u7b26");
-			submitFlag = false;
-		}
-	});
+				if (Validater.isPassword($(this).val())) {
+					validateSuccess(this);
+				} else {
+					validateError(this, "登录时需要使用密码，可以是6至20位字符 ");
+					submitFlag = false;
+				}
+			});
 	// 验证码
 	$("#verificationCode").bind("blur", function() {
 				if ($(this).val().length == 4) {
@@ -75,10 +37,6 @@ $(document).ready(function() {
 					validateError(this, "\u9a8c\u8bc1\u7801\u4e0d\u6b63\u786e");
 					submitFlag = false;
 				}
-			});
-	// 弹出找回密码层
-	$("#findPWA").bind("click", function() {
-				$("#findPW").dialog("open");
 			});
 });
 function validateForm() {

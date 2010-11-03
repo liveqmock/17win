@@ -259,7 +259,8 @@ public class UserService extends BaseService {
 			putAlertMsg("注册失败，您的邮箱不正确！");
 			return INPUT;
 		}
-		putDIV("注册成功,马上激活吧！");
-		return "registerSuccess";
+		putAlertMsg("注册成功！");
+		putJumpPage("user/login.html");
+		return JUMP;
 	}
 }

@@ -326,6 +326,7 @@ public class UserInfoService extends BaseService {
 			userEntity.setStatusAndLastStatus("1");
 			putAlertMsg("激活成功！快去体验吧！");
 			putByRequest("activeCode", "1");
+			updateUserLoginInfo(userEntity);
 			return "updateActiave";
 		}
 	}
@@ -339,7 +340,7 @@ public class UserInfoService extends BaseService {
 	 */
 	public String sendActiave(UserVO userVO) throws Exception {
 		putBySession(Constant.USER_ACTIVE_CODE_INFO, "123456");
-		putAlertMsg("激活号码发送成功！");
+		putAlertMsg("激活码已成功的发送到您手机上，请核对后天输入！");
 		putByRequest("activeCode", "3");
 		return "sendActiave";
 	}
