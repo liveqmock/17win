@@ -1085,7 +1085,12 @@ public class CreditTaskService extends BaseService {
 		if (creditTask.getTimeingTime() == null) {
 			creditTask.setStatus(TaskMananger.STEP_ONE_STATUS);
 		} else {
-			taskMananger.addTimingTask(creditTask.getId());
+			// 验证定时时间是否 小于 当前的系统时间
+			if (creditTask.getTimeingTime().getTime() < System
+					.currentTimeMillis()) {
+				putAlertMsg("定时任务时间必须大于当前的时间！");
+				return "insertReleaseTaskFail";
+			}
 			creditTask.setStatus(TaskMananger.TIMING_STATUS);
 		}
 		creditTask.setSeller(seller);
