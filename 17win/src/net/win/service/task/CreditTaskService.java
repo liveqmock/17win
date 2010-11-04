@@ -44,7 +44,7 @@ import org.springframework.stereotype.Service;
  * @author xgj
  * 
  */
-@SuppressWarnings("unused")
+@SuppressWarnings( { "unused", "unchecked" })
 @Service("creditTaskService")
 public class CreditTaskService extends BaseService {
 	@Resource
@@ -1223,6 +1223,7 @@ public class CreditTaskService extends BaseService {
 	 * @param userVO
 	 * @return
 	 */
+
 	public String initTask(CreditTaskVO creditTaskVO) throws Exception {
 		String platformType = getPlatformType();
 		if ("1".equals(platformType)) {
@@ -1259,14 +1260,14 @@ public class CreditTaskService extends BaseService {
 		Long count = (Long) creditTaskDAO
 				.uniqueResultObject(
 						"select count(*)"
-								+ " from CreditTaskEntity as _task inner join _task.releasePerson as _user where (_task.status!='0' or _task.status!='-1')  and   _task.type=:platformType"
+								+ " from CreditTaskEntity as _task inner join _task.releasePerson as _user where  _task.status not  in ('0','-1')  and   _task.type=:platformType"
 								+ orderAndWhereInitTaskStr(queryType, true),
 						"platformType", platformType);
 		List<Object[]> result = creditTaskDAO
 				.pageQuery(
 						"select _task.testID , _task.releaseDate ,_user.username,_user.upgradeScore,_task.money,_task.updatePrice, "
 								+ "_task.goodTimeType,_task.releaseDot,_task.status ,_task.intervalHour,_task.desc,_task.address,_task.id,_task.grade ,_vip.type" // index=14
-								+ " from CreditTaskEntity as _task inner join _task.releasePerson as _user  left join _user.vip as _vip  where (_task.status!='0' or _task.status!='-1')  and   _task.type=:platformType "
+								+ " from CreditTaskEntity as _task inner join _task.releasePerson as _user  left join _user.vip as _vip  where _task.status not  in ('0','-1')   and   _task.type=:platformType "
 								+ orderAndWhereInitTaskStr(queryType, false),
 						"platformType", platformType, creditTaskVO.getStart(),
 						creditTaskVO.getLimit());
@@ -1277,12 +1278,7 @@ public class CreditTaskService extends BaseService {
 						new Object[] { getLoginUser().getId(), platformType,
 								true });
 		List<BuyerVO> resultBuyers = new ArrayList<BuyerVO>(buyers.size());
-		if (buyers.size() == 0) {
-			putJumpPage("userInfoManager/info!initSellerAndBuyer.php");
-			putAlertMsg("您的" + WinUtils.changeType2Platform(platformType)
-					+ "平台还没有绑定买号！");
-			return JUMP;
-		}
+
 		for (BuyerEntity buyerEntity : buyers) {
 			BuyerVO buyerVO = new BuyerVO();
 			BeanUtils.copyProperties(buyerVO, buyerEntity);
@@ -1294,6 +1290,10 @@ public class CreditTaskService extends BaseService {
 		putByRequest("resultBuyers", resultBuyers);
 		putPlatformByRequest(WinUtils.changeType2Platform(platformType));
 		putPlatformTypeByRequest(platformType);
+		if (buyers.size() == 0) {
+			putByRequest("noBuyser", "noBuyser");
+			return "initTask";
+		}
 		return "initTask";
 	}
 

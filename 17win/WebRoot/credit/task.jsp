@@ -112,8 +112,7 @@
 									<SPAN style="Z-INDEX: 20; POSITION: relative"> <a
 										href="../user/send_message.asp?sendname=shengjun0911"
 										title="发送站内信息" target="_blank"><s:property
-												value="#task[2]" /> </a> </SPAN>(
-									<font color=red>在线</font>）
+												value="#task[2]" /> </a> </SPAN>
 									<br>
 									<img
 										src="images/<s:property value="@net.win.utils.StrategyUtils@getLevelImg(#task[3])" />"
@@ -233,18 +232,25 @@
 			</div>
 		</s:form>
 		<s:include value="../common/footDuan.jsp"></s:include>
-		<div id="buyerDIV" title="选择接手小号">
-			<s:iterator value="#request.resultBuyers" id="buyer" status="status">
-				<s:if test="#status.index==0">
-					<input type="radio" value="<s:property value="#buyer.id" />"
-						checked="checked" name="buyerName" />
-				</s:if>
-				<s:else>
-					<input type="radio" value="<s:property value="#buyer.id" />"
-						name="buyerName" />
-				</s:else>
-				<s:property value="#buyer.name" />
-			</s:iterator>
-		</div>
+
+		<s:if test="#request.noBuyser!=null">
+			<input value="true" id="noBuyerId" type="hidden" />
+		</s:if>
+		<s:else>
+			<input value="false" id="noBuyerId" type="hidden" />
+			<div id="buyerDIV" title="选择接手小号">
+				<s:iterator value="#request.resultBuyers" id="buyer" status="status">
+					<s:if test="#status.index==0">
+						<input type="radio" value="<s:property value="#buyer.id" />"
+							checked="checked" name="buyerName" />
+					</s:if>
+					<s:else>
+						<input type="radio" value="<s:property value="#buyer.id" />"
+							name="buyerName" />
+					</s:else>
+					<s:property value="#buyer.name" />
+				</s:iterator>
+			</div>
+		</s:else>
 	</BODY>
 </HTML>

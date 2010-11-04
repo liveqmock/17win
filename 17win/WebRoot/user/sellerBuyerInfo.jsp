@@ -165,13 +165,16 @@ img {
 														</td>
 													</tr>
 													<tr style="background: #EDF6FF">
-														<th height="10" nowrap="nowrap" align="center" width="33.3%">
+														<th height="10" nowrap="nowrap" align="center"
+															width="33.3%">
 															买号
 														</th>
-														<th height="10" nowrap="nowrap" align="center"  width="33.3%">
+														<th height="10" nowrap="nowrap" align="center"
+															width="33.3%">
 															信誉值
 														</th>
-														<th height="10" nowrap="nowrap" align="center"  width="33.3%">
+														<th height="10" nowrap="nowrap" align="center"
+															width="33.3%">
 															是否可用
 														</th>
 													</tr>
@@ -310,6 +313,11 @@ img {
 							<font color="red">(仅支持淘宝,拍拍，有问题联系客户)</font>
 						</td>
 					</tr>
+					<tr>
+						<td valign="middle" colspan="2">
+							<input type="submit" value="增加">
+						</td>
+					</tr>
 				</table>
 			</s:form>
 		</div>
@@ -343,6 +351,11 @@ img {
 							<input type="hidden" id="upadteSellerId" name="upadteSeller">
 							<input type="text" name="youbian" id="y2" maxlength="6"
 								style="width: 80px">
+						</td>
+					</tr>
+					<tr>
+						<td valign="middle" colspan="2">
+							<input type="submit" value="修改	">
 						</td>
 					</tr>
 				</table>

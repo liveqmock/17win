@@ -51,8 +51,16 @@ $(document).ready(function() {
 });
 // 接手任务
 function receiveTask(id) {
-	$("#currTaskId").val(id);
-	$("#buyerDIV").dialog("open");
+	if ($("#noBuyerId").val() == "false") {
+		if (confirm("您当前没有买号是否现在添加？")) {
+			window.location.href = "userInfoManager/info!initSellerAndBuyer.php";
+		} else {
+			return;
+		}
+	} else {
+		$("#currTaskId").val(id);
+		$("#buyerDIV").dialog("open");
+	}
 }
 
 // ///分页

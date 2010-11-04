@@ -25,13 +25,8 @@ $(document).ready(function() {
 						modal : true,
 						resizable : false,
 						show : 'slide',
-						width : 400,
-						buttons : {
-							"保存" : function() {
-								$(this).attr("disabled", true);
-								$("#updatewForm").submit();
-							}
-						}
+						width : 500
+
 					});
 			$("#addtableDIV").dialog({
 						autoOpen : false,
@@ -40,15 +35,8 @@ $(document).ready(function() {
 						modal : true,
 						resizable : false,
 						show : 'slide',
-						width : 500,
-						buttons : {
-							"保存" : function() {
-								if (validateForm()) {
-									$(this).attr("disabled", true);
-									$("#addForm").submit();
-								}
-							}
-						}
+						width : 500
+
 					});
 			// 卖家/买号
 			$("[name='type']").bind("click", function() {

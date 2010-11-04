@@ -110,8 +110,6 @@
 								</td>
 								<td valign="top" align="center">
 									<s:property value="#task[2]" />
-									（
-									<font color=red>在线</font>）
 									<br>
 									<img src="images/xin_1.gif" alt=刷客经验积分：2779>
 								</td>

@@ -108,10 +108,6 @@
 									<s:property value="#task[0]" />
 									<br>
 									<s:date name="#task[1]" format="yyyy-MM-dd HH-mm-ss" />
-									<s:if test="#task[7]==0">
-										<font color="red">定时时间：<s:date name="#task[23]"
-												format="yyyy-MM-dd HH-mm-ss" /> </font>
-									</s:if>
 								</td>
 								<td valign="top" align="center">
 									<font color="red"><s:property value="#task[2]" /> </font> 元
@@ -135,16 +131,24 @@
 										color="#FF0000">掌柜:<s:property value="#task[6]" /> </font> </a>
 								</td>
 								<td valign="top" align="center">
-									<s:if test="#task[7]==1">
-												暂无接收人
+									<s:if test="#task[7]==0">
+												定时任务
+												<br>
+												没接手人
 											</s:if>
 									<s:else>
-										<a href="#" title="发送站内信息" target="_blank"><s:property
-												value="#task[8]" />（<font color=red>在线</font>）</a>
-										<br>
-										<img
-											src="images/<s:property value="@net.win.utils.StrategyUtils@getLevelImg(#task[11])" />"
-											alt="刷客经验积分：<s:property value="#task[11]" />">
+										<s:if test="#task[7]==1">
+												暂无接收人
+											</s:if>
+										<s:else>
+
+											<a href="#" title="发送站内信息" target="_blank"><s:property
+													value="#task[8]" /> </a>
+											<br>
+											<img
+												src="images/<s:property value="@net.win.utils.StrategyUtils@getLevelImg(#task[11])" />"
+												alt="刷客经验积分：<s:property value="#task[11]" />">
+										</s:else>
 									</s:else>
 								</td>
 								<td valign="top" align="center">
@@ -210,7 +214,15 @@
 									<br>
 								</td>
 								<td valign="top" align="center">
-									<s:if test="#task[7]==1">
+									<s:if test="#task[7]==0">
+										<a title="可能由于你填写错误，可以重新进行填写！"
+											href="javascript:cancelTask(<s:property value="#task[18]"/>)"><span
+											class="anniu">取消重填</span> </a>
+										<br>
+										<font color="red">定时时间：<s:date name="#task[23]"
+												format="yyyy-MM-dd HH-mm-ss" /> </font>
+									</s:if>
+									<s:elseif test="#task[7]==1">
 										<a title="可能由于你填写错误，可以重新进行填写！"
 											href="javascript:cancelTask(<s:property value="#task[18]"/>)"><span
 											class="anniu">取消重填</span> </a>
@@ -218,7 +230,7 @@
 										<a title="刷新排前可以使您的任务在发布区靠前！"
 											href="javascript:toFirstTask(<s:property value="#task[18]"/>)"><span
 											class="anniu2">刷新排前</span> </a>
-									</s:if>
+									</s:elseif>
 									<s:elseif test="#task[7]==-2">
 										<a title="您对该人信任之后，可以允许他接您的任务！"
 											href="javascript:audiReceiver(<s:property value="#task[18]"/>)"><span
@@ -287,13 +299,16 @@
 											</s:elseif> </font>
 								</td>
 								<td align="left" valign="top">
-									<s:if test="#task[7]!=1">
+									<s:if test="#task[7]==0">
+										定时任务没接手人
+									</s:if>
+									<s:elseif test="#task[7]!=1">
 										<font color="red" style="font-weight: bold;">Q&nbsp;&nbsp;Q联系：</font>
 										<a
 											href="tencent://message/?uin=<s:property value="#task[10]"/>"><img
 												src="http://wpa.qq.com/pa?p=1:<s:property value="#task[10]"/>:41"
 												border="0" /> </a>
-									</s:if>
+									</s:elseif>
 								</td>
 							</tr>
 							<tr>
@@ -307,7 +322,10 @@
 											value="#task[15]" /> </font>
 								</td>
 								<td align="left" valign="top" nowrap="nowrap">
-									<s:if test="#task[7]!=1">
+									<s:if test="#task[7]==0">
+										定时任务没接手人
+									</s:if>
+									<s:elseif test="#task[7]!=1">
 										<font color="red" style="font-weight: bold;">旺旺联系：</font>
 										<s:if test="@net.win.utils.StringUtils@isBlank(#task[21])">接手方没提供旺旺号</s:if>
 										<s:else>
@@ -317,7 +335,7 @@
 													src="http://amos1.taobao.com/online.ww?v=2&uid=<s:property value="#task[21]" />&s=1"
 													alt="点击这里给我发消息" /> </a>
 										</s:else>
-									</s:if>
+									</s:elseif>
 								</td>
 							</tr>
 							<tr>
