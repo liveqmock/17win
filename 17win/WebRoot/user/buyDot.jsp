@@ -15,6 +15,7 @@
 			rel="stylesheet" type="text/css" />
 
 		<SCRIPT src="js/jquery-ui-1.8.4.custom.min.js" type="text/javascript"></SCRIPT>
+		<SCRIPT src="js/utils.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="user/buyDot.js" type="text/javascript"></SCRIPT>
 
 		<style type="text/css">
@@ -139,8 +140,8 @@ img {
 																cssStyle="width:80px" id="operationCode_1"></s:password>
 															<br>
 															<input type="image" name="ImageButton1"
-																src="images/buy1.png" onclick="return validateForm('1');"
-																id="ImageButton1">
+																src="images/buy1.png"
+																onclick="return validateForm('1');" id="ImageButton1">
 														</div>
 													</s:form>
 												</div>
@@ -166,8 +167,7 @@ img {
 															<br>
 															<input type="image" name="ImageButton2"
 																src="images/buy1.png"
-																 onclick="return validateForm('2');"
-																id="ImageButton2">
+																onclick="return validateForm('2');" id="ImageButton2">
 														</div>
 													</s:form>
 												</div>
@@ -193,8 +193,7 @@ img {
 															<br>
 															<input type="image" name="ImageButton2"
 																src="images/buy1.png"
-															 onclick="return validateForm('3');"
-																id="ImageButton2">
+																onclick="return validateForm('3');" id="ImageButton2">
 														</div>
 													</s:form>
 												</div>
@@ -220,8 +219,7 @@ img {
 															<br>
 															<input type="image" name="ImageButton3"
 																src="images/buy1.png"
-																 onclick="return validateForm('4');"
-																id="ImageButton2">
+																onclick="return validateForm('4');" id="ImageButton2">
 														</div>
 													</s:form>
 												</div>

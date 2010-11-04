@@ -2,6 +2,7 @@
 
 $(document).ready(function() {
 
+			intText("releaseDot");
 			if (!Validater.isNull($("#showDIV").get(0))) {
 				$("#showDIV").dialog({
 							autoOpen : true,
@@ -18,12 +19,11 @@ function validateForm(flag) {
 
 	if ("1" == flag) {
 		var dot = parseFloat($("#dot").val());
-		if (!confirm('您确定要购买一钻卡吗？')) {
+		if (!confirm('您确定要购买发布点吗？')) {
 			return false;
 		}
-		var releaseDot = parseFloat($("#releaseDot").val());
-		var operationCode = $("#operationCode_1").val();
-		if (!Validater.isInt(releaseDot,'+')) {
+
+		if (!Validater.isInt(releaseDot, '+')) {
 			alert("发布点数量必须为正整数！");
 			return false;
 		}
