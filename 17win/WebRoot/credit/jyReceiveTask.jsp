@@ -8,6 +8,10 @@
 				content="<s:property value="#request.autoRefresh"/>">
 		</s:if>
 		<s:include value="../common/header.jsp"></s:include>
+		<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+		<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+		<META HTTP-EQUIV="Expires" CONTENT="0">
+
 		<LINK href="css/Css.css" type=text/css rel=stylesheet>
 		<LINK href="css/header.css" type=text/css rel=stylesheet>
 		<LINK href="css/index.css" type=text/css rel=stylesheet>
@@ -186,7 +190,7 @@
 								<td valign="top" align="center">
 									<s:if test="#task[12]==-2">
 										<span class="anniu">等待审核</span>
-										<br>  
+										<br>
 										<a title="退出任务" class="anniu"
 											href="javascript:quitTask('<s:property value="#task[19]"/>')">退出任务</a>
 										<br>
@@ -236,7 +240,9 @@
 							<Tr>
 								<td colspan="3" valign="top" align="left">
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<font color="red" style="font-weight: bold;">快递单号：<s:property value="#task[22]" /></font>
+									<font color="red" style="font-weight: bold;">快递单号：<s:property
+											value="#task[22]" />
+									</font>
 								</td>
 								<td colspan="3" align="left">
 									<font color="red" style="font-weight: bold;">打分/好评： <s:if
@@ -281,7 +287,7 @@
 									<font color="red" style="font-weight: bold;">旺旺联系：</font>
 									<s:if test="@net.win.utils.StringUtils@isBlank(#task[21])">发布方没提供旺旺号</s:if>
 									<s:else>
-										<a  
+										<a
 											href="javascript:callWW('http://amos1.taobao.com/msg.ww?v=2&uid=<s:property value="#task[21]" />&s=1')"><img
 												border="0"
 												src="http://amos1.taobao.com/online.ww?v=2&uid=<s:property value="#task[21]" />&s=1"

@@ -11,6 +11,10 @@
 <html>
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+		<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+		<META HTTP-EQUIV="Expires" CONTENT="0">
+
 		<s:property value="#request.msg" escape="false" />
 		<s:if test="#request.outter==null">
 			<script language="javascript"> 

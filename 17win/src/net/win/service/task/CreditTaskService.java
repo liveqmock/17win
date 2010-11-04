@@ -317,24 +317,28 @@ public class CreditTaskService extends BaseService {
 		 * 验证IP
 		 */
 		String ip = getIpAddr();
-		String hqlOne = "select count(*) from CreditTaskEntity as _task inner join buyer _buyer where _buyer.id=:bid "
-				+ "and _task.receiveIP=:receiveIP  "
-				+ "and year(_task.receiveDate)=:year and month(_task.receiveDate)=:month having count(_task.itemUrl)>1";
-		String hqlSix = "select count(*) from CreditTaskEntity as _task inner join buyer _buyer inner join seller as _seller "
+		// 一月接一个IP,同一商品一次
+		String hqlOne = "select count(*) from UserEntity  as  _buyer  inner join _buyer.receiveCreditTasks as _task where _buyer.id=:bid "
+				+ " and _task.receiveIP=:receiveIP  "
+				+ " and year(_task.receiveDate)=:year and month(_task.receiveDate)=:month  and  _task.itemUrl=:itemUrl";
+		// 一个月同一IP 接同一店铺 6次
+		String hqlSix = "select count(*)   from UserEntity  as  _buyer  inner join _buyer.receiveCreditTasks as _task inner join _task.releasePerson.sellers as _seller "
 				+ "where _buyer.id=:bid "
-				+ "and _task.receiveIP=:receiveIP and year(_task.receiveDate)=:year and month(_task.receiveDate)=:month having count(_seller.shopURL)>6";
+				+ "and _task.receiveIP=:receiveIP and year(_task.receiveDate)=:year and month(_task.receiveDate)=:month and  _seller.shopURL=:shopUrl";
 
 		Integer year = Calendar.getInstance().get(Calendar.YEAR);
 		Integer month = Calendar.getInstance().get(Calendar.MONTH);
-		Long count = (Long) creditTaskDAO.uniqueResultObject(hqlOne,
-				new String[] { "bid", "receiveIP", "year", "month" },
-				new Object[] { buyeId, ip, year, month });
-		if (count == 0) {
-			count = (Long) creditTaskDAO.uniqueResultObject(hqlSix,
-					new String[] { "bid", "receiveIP", "year", "month" },
-					new Object[] { buyeId, ip, year, month });
+		Boolean refuseFlag = (Long) creditTaskDAO
+				.uniqueResultObject(hqlOne, new String[] { "bid", "receiveIP",
+						"year", "month", "itemUrl" }, new Object[] { buyeId,
+						ip, year, month, creditTask.getItemUrl() }) == 1;
+		if (!refuseFlag) {
+			refuseFlag = (Long) creditTaskDAO.uniqueResultObject(hqlSix,
+					new String[] { "bid", "receiveIP", "year", "month",
+							"shopUrl" }, new Object[] { buyeId, ip, year,
+							month, creditTask.getSeller().getShopURL() }) == 6;
 		}
-		if (count > 0) {
+		if (refuseFlag) {
 			putJumpPage("taskManager/task!initReceivedTast.php?platformType="
 					+ platformType);
 			putAlertMsg("为了您和他人的安全，同一商品买号在一个月内只能接手一次，同一店铺的商品买号最多只能接受6次！");

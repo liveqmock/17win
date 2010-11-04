@@ -21,7 +21,6 @@
 								积分：
 								<font color=#ff0000><s:property
 										value="#session.userLogin.convertScore"></s:property> </font>
-								<a href="../user/user.asp">&nbsp; 站内信(<FONT color=#ff0000>0</FONT>)</a>
 							</div>
 						</div>
 					</div>

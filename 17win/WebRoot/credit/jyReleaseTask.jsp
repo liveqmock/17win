@@ -8,6 +8,10 @@
 				content="<s:property value="#request.autoRefresh"/>">
 		</s:if>
 		<s:include value="../common/header.jsp"></s:include>
+		<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+		<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+		<META HTTP-EQUIV="Expires" CONTENT="0">
+
 		<LINK href="css/Css.css" type=text/css rel=stylesheet>
 		<LINK href="css/header.css" type=text/css rel=stylesheet>
 		<LINK href="css/index.css" type=text/css rel=stylesheet>
