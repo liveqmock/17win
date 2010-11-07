@@ -22,7 +22,9 @@
 			</script>
 		</s:if>
 		<s:else>
-			<script language="javascript"> top.location='<s:property value="#request.jump" />';   </script>
+			<script language="javascript">
+			window.open("<s:property value="#request.jump" />","_self");
+			</script>
 		</s:else>
 	</head>
 </html>

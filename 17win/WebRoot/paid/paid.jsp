@@ -185,5 +185,10 @@ img {
 			</tr>
 		</table>
 		<s:include value="../common/footDuan.jsp"></s:include>
+		<s:if test="#request.toTaobao!=null">
+			<script language="javascript">
+				window.open("http://item.taobao.com/item.htm?id=7428687890","_blank");
+			</script>
+		</s:if>
 	</BODY>
 </HTML>

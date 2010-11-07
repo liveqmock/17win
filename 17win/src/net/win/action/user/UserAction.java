@@ -94,15 +94,6 @@ public class UserAction extends BaseAction {
 		return userService.initFindPassword(userVO);
 	}
 
-	/**
-	 * 手机激活
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	public String activateAccount() throws Exception {
-		return userService.activateAccount(userVO);
-	}
 
 	/**
 	 * 登陆

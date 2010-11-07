@@ -39,7 +39,7 @@ public class PayService extends BaseService {
 	}
 
 	/**
-	 * 删除
+	 * 添加
 	 * 
 	 * @param smsVO
 	 * @return
@@ -63,9 +63,9 @@ public class PayService extends BaseService {
 		payEntity.setPayDate(new Date());
 		payEntity.setUser(userEntity);
 		payDAO.save(payEntity);
-		putJumpOutterPage("http://item.taobao.com/item.htm?id=7428687890");
 		putAlertMsg("充值提交成功，请到淘宝进行充值,如有问题，请联系客户！");
-		return JUMP;
+		putByRequest("toTaobao", "toTaobao");
+		return "insertPay";
 	}
 
 	/**

@@ -21,7 +21,9 @@ import org.springframework.stereotype.Controller;
 @Namespace("/payManager")
 @Results( { @Result(name = "initPay", location = "/paid/paid.jsp"),
 		@Result(name = "insertPay", location = "/paid/paid.jsp"),
-		@Result(name = "queryPay", location = "/paid/myPaid.jsp"), })
+		@Result(name = "queryPay", location = "/paid/myPaid.jsp"),
+		@Result(name = "initPay", location = "/paid/paid.jsp")
+})
 public class PayAction extends BaseAction {
 	@Resource
 	private PayService payService;
@@ -49,6 +51,7 @@ public class PayAction extends BaseAction {
 	 * @throws Exception
 	 */
 	public String initPay() throws Exception {
+//		
 		return payService.initPay(payVO);
 	}
 

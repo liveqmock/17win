@@ -9,6 +9,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML>
 	<HEAD>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<s:include value="../common/header.jsp"></s:include>
 		<link href="css/union.css" type="text/css" rel="stylesheet" />
 		<link href="css/unionCss.css" type="text/css" rel="stylesheet" />
@@ -288,7 +289,9 @@
 														会员名：
 														<s:property value="#session.userLogin.username" />
 														<br />
-														推荐会员：<s:property value="#request.userCount" />人
+														推荐会员：
+														<s:property value="#request.userCount" />
+														人
 														<br />
 													</td>
 												</tr>

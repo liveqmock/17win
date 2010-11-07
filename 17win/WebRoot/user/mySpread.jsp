@@ -78,6 +78,12 @@ img {
 								</div>
 								<div
 									style="clear: both; width: 730px; background-color: rgb(243, 248, 254);">
+									<div style="clear: both; margin-top: 20px; line-height: 150%;">
+										<font color="red">推荐我的用户是：<b><s:property  value="#request.referee"/></b></font>
+									</div>
+								</div>
+								<div
+									style="clear: both; width: 730px; background-color: rgb(243, 248, 254);">
 
 
 									<div style="clear: both; margin-top: 20px; line-height: 150%;">

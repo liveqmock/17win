@@ -27,7 +27,6 @@ import org.springframework.stereotype.Controller;
 		@Result(name = "referee", location = "/spread/index.jsp"),
 		@Result(name = "refereeCode", location = "/spread/code.jsp"),
 		@Result(name = "myRefee", location = "/user/mySpread.jsp"),
-		@Result(name = "updateExchange", location = "/user/exchange.jsp"),
 		@Result(name = "initExchange", location = "/user/exchange.jsp"),
 		@Result(name = "initBuyDot", location = "/user/buyDot.jsp"),
 		@Result(name = "updateBuyDot", location = "/user/buyDot.jsp"),

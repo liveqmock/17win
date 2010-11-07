@@ -1,5 +1,6 @@
 package net.win.service.user;
 
+import java.net.URLDecoder;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -28,7 +29,7 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 import sun.misc.BASE64Decoder;
 
-@SuppressWarnings("unused")
+@SuppressWarnings( { "unused", "deprecation" })
 @Service("userService")
 public class UserService extends BaseService {
 	@Resource
@@ -110,16 +111,6 @@ public class UserService extends BaseService {
 				return "error";
 			}
 		}
-	}
-
-	/**
-	 * 手机激活
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	public String activateAccount(UserVO userVO) throws Exception {
-		return "initRegister";
 	}
 
 	/**
@@ -220,6 +211,9 @@ public class UserService extends BaseService {
 	 * @throws Exception
 	 */
 	public String initRegister(UserVO userVO) throws Exception {
+		String username = getByParam("spreadUsername");
+		username = new String(username.getBytes("ISO-8859-1"), "GBK");
+		putByRequest("username", username);
 		return "initRegister";
 	}
 
@@ -232,6 +226,7 @@ public class UserService extends BaseService {
 	public String insertUser(UserVO userVO) throws Exception {
 		String vcode = (String) getBySession(Constant.VERIFY_CODE);
 		UserEntity userEntity = userVO.getUserEntity();
+		putByRequest("username", userEntity.getReferee().getUsername());
 		if (vcode == null || !vcode.equals(userVO.getVerificationCode())) {
 			putAlertMsg("验证码不正确！");
 			return INPUT;
@@ -250,13 +245,16 @@ public class UserService extends BaseService {
 		// 推广人
 		if (StringUtils.isBlank(userEntity.getReferee().getUsername())) {
 			userEntity.setReferee(null);
+		} else {
+			userEntity.setReferee(userDAO.findUserByName(userEntity
+					.getReferee().getUsername()));
 		}
 		userDAO.save(userEntity);
 		try {
 			MailUtils.sendRegisterMail(mailSender, freeMarkerCfj, userEntity
 					.getUsername(), userEntity.getEmail());
 		} catch (RuntimeException e) {
-			putAlertMsg("注册失败，您的邮箱不正确！");
+			putAlertMsg("您的邮箱有异常，请于管理员联系！");
 			return INPUT;
 		}
 		putAlertMsg("注册成功！");

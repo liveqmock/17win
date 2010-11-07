@@ -15,6 +15,10 @@ $(document).ready(function() {
 							$(this).val("");
 						}
 					});
+					
+			intText("releaseDot_1");
+			intText("releaseDot_2");
+			intText("releaseDot_3");
 		});
 
 function validateForm(flag) {

@@ -485,7 +485,7 @@ public class UserInfoService extends BaseService {
 			Double releaseDot = userVO.getReleaseDot();
 			String username = userVO.getUsername();
 			UserEntity touser = userDAO.uniqueResult(
-					"fromo UserEntity where username=:username", "username",
+					"from  UserEntity where username=:username", "username",
 					username);
 			if (releaseDot > userEntity.getReleaseDot()) {
 				WinUtils.throwIllegalityException("违法的操作，试图越过兑换发布点验证");
@@ -507,8 +507,7 @@ public class UserInfoService extends BaseService {
 				WinUtils.throwIllegalityException("违法的操作，试图越过兑换发布点验证");
 			}
 			if (releaseDot * 200 > userEntity.getConvertScore()) {
-				putAlertMsg("您的积分不够" + releaseDot * 200 + ",最多只能兑换"
-						+ userEntity.getConvertScore() / 200 + "个发布点");
+				putAlertMsg("兑换失败！您的积分不够" + releaseDot * 200);
 			}
 			userEntity.setReleaseDot(ArithUtils.add(userEntity.getReleaseDot(),
 					releaseDot));
@@ -518,7 +517,8 @@ public class UserInfoService extends BaseService {
 		}
 		updateUserLoginInfo(userEntity);
 		putAlertMsg("操作成功！");
-		return "updateExchange";
+		putJumpPage("userInfoManager/info!initExchange.php");
+		return JUMP;
 	}
 
 	/**
@@ -531,6 +531,13 @@ public class UserInfoService extends BaseService {
 	public String myRefee(UserVO userVO) throws Exception {
 
 		UserEntity newUserEntity = userDAO.get(getLoginUser().getId());
+		
+		UserEntity referee= newUserEntity.getReferee();
+		if(referee==null){
+			putByRequest("referee", "无");
+		}else{
+			putByRequest("referee", referee.getUsername());
+		}
 
 		List<UserEntity> myReferees = newUserEntity.getMyReferees();
 		List<UserInfoVO> result1 = new ArrayList<UserInfoVO>();
