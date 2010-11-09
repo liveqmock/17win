@@ -433,7 +433,7 @@ public class CreditTaskService extends BaseService {
 			Integer receieveScore = StrategyUtils.getReleaseUserTaskScore(
 					receiveUserVip, receiveUser.getVipEnable());
 			receiveUser.setMoney(ArithUtils.add(receiveUser.getMoney(),
-					creditTask.getMoney()));
+					creditTask.getMoney() + creditTask.getAddtionMoney()));
 			// 有会员
 			if (receiveUser.getVipEnable() && receiveUserVip != null) {
 				receiveVipBidUser.setGrowValue(receiveVipBidUser.getGrowValue()
@@ -446,7 +446,8 @@ public class CreditTaskService extends BaseService {
 					* StrategyUtils.getTaskOverDotRate(releaEntity,
 							receiveUserVip, receiveUser.getVipEnable());
 			receiveUser.setReleaseDot(ArithUtils.add(receiveUser
-					.getReleaseDot(), releaseDot));
+					.getReleaseDot(), releaseDot
+					+ creditTask.getAddtionReleaseDot()));
 			/**
 			 * 计算积分
 			 */
@@ -872,7 +873,7 @@ public class CreditTaskService extends BaseService {
 					.pageQuery(
 							"select _task.testID , _task.releaseDate ,_fbuser.username,_fbuser.qq,_task.money,_task.updatePrice ,_task.releaseDot "// 6
 									+ ", _task.itemUrl , _seller.name,_seller.shopURL,_buyer.name,_jsuser.upgradeScore,_task.status" // 12
-									+ ", _task.remainTime,_task.goodTimeType ,_task.intervalHour,_task.desc,_task.address ,_task.grade,_task.id ,_task.dispatchDate,_fbuser.ww,_task.waybill" // index=22
+									+ ", _task.remainTime,_task.goodTimeType ,_task.intervalHour,_task.desc,_task.address ,_task.grade,_task.id ,_task.dispatchDate,_fbuser.ww,_task.waybill,_task.addtionMoney,_task.addtionReleaseDot" // index=24
 									+ " from CreditTaskEntity as _task inner join _task.releasePerson as _fbuser  inner join _task.seller as _seller left join _task.receivePerson as _jsuser left join _task.buyer as _buyer  where     _jsuser.id=:userId and   _task.type=:platformType "
 									+ orderAndWhereReceivedTaskStr(queryType,
 											false), new String[] { "userId",
@@ -976,7 +977,7 @@ public class CreditTaskService extends BaseService {
 					.pageQuery(
 							"select _task.testID , _task.releaseDate ,_task.money,_task.updatePrice ,_task.releaseDot, _task.itemUrl , _seller.name,_task.status "// 7
 									+ ", _jsuser.username,_buyer.name,_jsuser.qq,_jsuser.upgradeScore" // 11
-									+ ", _task.remainTime,_task.goodTimeType ,_task.intervalHour,_task.desc,_task.address ,_task.grade,_task.id,_seller.shopURL ,_task.dispatchDate,_jsuser.ww,_task.waybill,_task.timeingTime" // index=23
+									+ ", _task.remainTime,_task.goodTimeType ,_task.intervalHour,_task.desc,_task.address ,_task.grade,_task.id,_seller.shopURL ,_task.dispatchDate,_jsuser.ww,_task.waybill,_task.timeingTime,_task.addtionMoney,_task.addtionReleaseDot" // index=25
 									+ " from CreditTaskEntity as _task inner join _task.releasePerson as _fbuser  inner join _task.seller as _seller left join _task.receivePerson as _jsuser left join _task.buyer as _buyer  where     _fbuser.id=:userId and   _task.type=:platformType "
 									+ orderAndWhereReleasedTaskStr(queryType,
 											false), new String[] { "userId",
@@ -1036,7 +1037,8 @@ public class CreditTaskService extends BaseService {
 		}
 		// 算发布点
 		double dot = StrategyUtils.generateCreditRDot(creditTaskVO.getMoney(),
-				creditTaskVO.getIntervalHour());
+				creditTaskVO.getIntervalHour())
+				+ creditTaskVO.getAddtionReleaseDot();
 		// 验证
 		if (!userEntity.getStatus().equals("1")) {
 			switch (Integer.parseInt(userEntity.getStatus())) {
@@ -1059,9 +1061,10 @@ public class CreditTaskService extends BaseService {
 			WinUtils.throwIllegalityException("视图越过发布任务的任务类型验证！");
 			return "insertReleaseTaskFail";
 		}
-		if (creditTask.getMoney() > userEntity.getMoney()) {
+		if (creditTask.getMoney() + creditTask.getAddtionMoney() > userEntity
+				.getMoney()) {
 			creditTaskVO.setMoney(null);
-			putAlertMsg("您当前的余额为不够发布这个任务，点此处进行充值！");
+			putAlertMsg("您当前的余额为不够发布这个任务！");
 			return "insertReleaseTaskFail";
 		}
 
@@ -1135,7 +1138,8 @@ public class CreditTaskService extends BaseService {
 		 * 改变用户金钱和发布点
 		 */
 		userEntity.setMoney(ArithUtils.sub(userEntity.getMoney(), creditTask
-				.getMoney()));
+				.getMoney()
+				+ creditTask.getAddtionMoney()));
 		userEntity.setReleaseDot(ArithUtils
 				.sub(userEntity.getReleaseDot(), dot));
 		// 完成对金钱进行修改,登陆名的也需要
@@ -1270,7 +1274,7 @@ public class CreditTaskService extends BaseService {
 		List<Object[]> result = creditTaskDAO
 				.pageQuery(
 						"select _task.testID , _task.releaseDate ,_user.username,_user.upgradeScore,_task.money,_task.updatePrice, "
-								+ "_task.goodTimeType,_task.releaseDot,_task.status ,_task.intervalHour,_task.desc,_task.address,_task.id,_task.grade ,_vip.type" // index=14
+								+ "_task.goodTimeType,_task.releaseDot,_task.status ,_task.intervalHour,_task.desc,_task.address,_task.id,_task.grade ,_vip.type,_task.addtionMoney,_task.addtionReleaseDot" // index=16
 								+ " from CreditTaskEntity as _task inner join _task.releasePerson as _user  left join _user.vip as _vip  where _task.status not  in ('0','-1')   and   _task.type=:platformType "
 								+ orderAndWhereInitTaskStr(queryType, false),
 						"platformType", platformType, creditTaskVO.getStart(),

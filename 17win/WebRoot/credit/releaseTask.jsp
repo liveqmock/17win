@@ -101,8 +101,8 @@
 																				</option>
 																			</select>
 																		</s:else>
-																		<input value="进入任务仓库" style="cursor: pointer;"  id="goTaskRe"
-																			class="btnClass" type="button">
+																		<input value="进入任务仓库" style="cursor: pointer;"
+																			id="goTaskRe" class="btnClass" type="button">
 																	</td>
 																</tr>
 																<tr>
@@ -155,7 +155,7 @@
 																	<td colspan="4">
 																		<s:textfield name="creditTaskVO.itemUrl" id="itemUrl"
 																			maxlength="255"></s:textfield>
-																		<span class="font12l"> *自动检测宝贝地址和掌柜名是否相符</span>
+																		<span class="font12l">自动检测宝贝地址和掌柜名是否相符</span>
 																	</td>
 																</tr>
 																<tr>
@@ -219,8 +219,8 @@
 																		&nbsp;
 																	</td>
 																	<td colspan="2">
-																		<a href="#" target="_blank"><font color="#FF0000"><strong>*
-																					发布延时收货的任务，平台免费提供物流单号，并强制买家延时收货</strong> </font> </a>
+																		<a href="#" target="_blank"><font color="#FF0000"><strong>发布延时收货的任务，平台免费提供物流单号，并强制买家延时收货</strong>
+																		</font> </a>
 																	</td>
 																</tr>
 																<tr>
@@ -307,9 +307,29 @@
 																	<td colspan="2">
 																		<s:checkbox name="creditTaskVO.protect" value="false"
 																			fieldValue="true" />
-																		<span class="red-bcolor">*什么是任务保护</span>
+																		<span class="red-bcolor">什么是任务保护</span>
 																	</td>
 
+																</tr>
+																<tr>
+																	<td class="font14b4" align="right">
+																		附加金额：
+																	</td>
+																	<td colspan="2">
+																		<s:textfield name="creditTaskVO.addtionMoney"  maxLength="3"
+																			cssStyle="width:40px" id="addtionMoneyId"></s:textfield>
+																		<span class="red-bcolor">可以附加金额给接手方</span>
+																	</td>
+																</tr>
+																<tr>
+																	<td class="font14b4" align="right" nowrap="nowrap">
+																		附加发布点：
+																	</td>
+																	<td colspan="2">
+																		<s:textfield name="creditTaskVO.addtionReleaseDot" maxLength="3"
+																			cssStyle="width:40px" id="addtionReleaseDotId"></s:textfield>
+																		<span class="red-bcolor">可以附加发布点给接手方</span>
+																	</td>
 																</tr>
 																<tr>
 																	<td class="font14b4" align="right">
@@ -322,7 +342,7 @@
 																			onclick="WdatePicker({'minDate':'%y-%M-%d %H:%m:%s','alwaysUseStartDate':false,'el':'tasktimingDate','isShowClear':true,startDate:'%y-%M-%d %H:%m:%s',dateFmt:'yyyy-MM-dd HH:mm:ss','skin':'blue'})"
 																			src="js/My97DatePicker/skin/datePicker.gif"
 																			width="16" height="22 align="absmiddle">
-																		<span class="red-bcolor">*只精确到分钟</span>
+																		<span class="red-bcolor">只精确到分钟</span>
 																	</td>
 																</tr>
 																<tr>
@@ -335,7 +355,7 @@
 																		<span style="display: none" id="respositoryName">
 																			<s:textfield name="creditTaskVO.respositoryName"
 																				id="itemUrl" maxlength="20"></s:textfield> 默认为任务ID </span>
-																		<span class="red-bcolor">*什么是任务仓库</span>
+																		<span class="red-bcolor">什么是任务仓库</span>
 																	</td>
 																</tr>
 																<tr>
@@ -345,7 +365,7 @@
 																	<td colspan="2">
 																		<s:checkbox name="creditTaskVO.address"
 																			fieldValue="true" />
-																		<span class="red-bcolor">*什么是自动生成收货地址信息（实物任务有用）</span>
+																		<span class="red-bcolor">什么是自动生成收货地址信息（实物任务有用）</span>
 																	</td>
 																</tr>
 																<tr>

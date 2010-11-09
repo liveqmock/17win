@@ -119,7 +119,9 @@
 										alt="刷客经验积分：<s:property value="#task[3]" />">
 								</td>
 								<td valign="top" align="center">
-									<font color="red"><s:property value="#task[4]" /> </font> 元 (
+									<font color="red"><s:property value="#task[4]" /> </font><font
+										color="blue">+<s:property value="#task[15]" />
+									</font> 元 (
 									<s:if test="#task[5]">
 												需改价格
 									</s:if>
@@ -128,8 +130,9 @@
 									</s:else>
 									)
 									<br>
-									<font color="red"><s:property value="#task[7]" /> </font> 个发布点
-									<IMG alt=延迟收货 src=images/shiwu.gif>
+									<font color="red"><s:property value="#task[7]" /> </font><font
+										color="blue">+<s:property value="#task[16]" />
+									</font> 个发布点
 								</td>
 								<td valign="top" align="center">
 

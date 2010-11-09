@@ -57,6 +57,14 @@ public class CreditTaskEntity extends TaskBaseEntity {
 	// 地址
 	@Column(name = "ADDRESS_", length = 100)
 	private String address;
+
+	// 附加金额、
+	@Column(name = "ADDTATION_MONEY", nullable = false)
+	private Integer addtionMoney = 0;
+	// 附加发布点
+	@Column(name = "ADDTATION_RELEASE_DOT", nullable = false)
+	private Integer addtionReleaseDot = 0;
+
 	// 定时任务时间(不能小于开始时间)
 	@Column(name = "TIMEING_TIME_")
 	private Date timeingTime;
@@ -64,7 +72,7 @@ public class CreditTaskEntity extends TaskBaseEntity {
 	// 接手时间
 	@Column(name = "RECEIVE_DATE_")
 	private Date receiveDate;
-	
+
 	// 发货时间
 	@Column(name = "DISPATCH_DATE_")
 	private Date dispatchDate;
@@ -82,8 +90,7 @@ public class CreditTaskEntity extends TaskBaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "BUYER_ID_")
 	private BuyerEntity buyer;
-	
-	
+
 	public String getType() {
 		return type;
 	}
@@ -228,5 +235,20 @@ public class CreditTaskEntity extends TaskBaseEntity {
 		this.dispatchDate = dispatchDate;
 	}
 
- 
+	public Integer getAddtionMoney() {
+		return addtionMoney;
+	}
+
+	public void setAddtionMoney(Integer addtionMoney) {
+		this.addtionMoney = addtionMoney;
+	}
+
+	public Integer getAddtionReleaseDot() {
+		return addtionReleaseDot;
+	}
+
+	public void setAddtionReleaseDot(Integer addtionReleaseDot) {
+		this.addtionReleaseDot = addtionReleaseDot;
+	}
+
 }

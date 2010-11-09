@@ -2,6 +2,8 @@ package net.win.vo;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+
 import net.win.BaseVO;
 
 public class CreditTaskVO extends BaseVO {
@@ -39,6 +41,11 @@ public class CreditTaskVO extends BaseVO {
 	private String goodTimeType;
 	// 描述
 	private String desc;
+
+	// 附加金额、
+	private Integer addtionMoney;
+	// 附加发布点
+	private Integer addtionReleaseDot;
 
 	// 任务保护
 	private Boolean protect;
@@ -226,6 +233,26 @@ public class CreditTaskVO extends BaseVO {
 
 	public void setBuyerID(Long buyerID) {
 		this.buyerID = buyerID;
+	}
+
+	public Integer getAddtionMoney() {
+		if (addtionMoney == null)
+			return 0;
+		return addtionMoney;
+	}
+
+	public void setAddtionMoney(Integer addtionMoney) {
+		this.addtionMoney = addtionMoney;
+	}
+
+	public Integer getAddtionReleaseDot() {
+		if (addtionReleaseDot == null)
+			return 0;
+		return addtionReleaseDot;
+	}
+
+	public void setAddtionReleaseDot(Integer addtionReleaseDot) {
+		this.addtionReleaseDot = addtionReleaseDot;
 	}
 
 }

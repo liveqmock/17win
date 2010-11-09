@@ -2,6 +2,8 @@ package net.win.vo;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+
 import net.win.BaseVO;
 
 public class CreditTaskRepositoryVO extends BaseVO {
@@ -43,6 +45,11 @@ public class CreditTaskRepositoryVO extends BaseVO {
 	// 现实
 	// 发布人的卖家号名字
 	private String sellerName;
+	
+	// 附加金额、
+	private Integer addtionMoney = 0;
+	// 附加发布点
+	private Integer addtionReleaseDot = 0;
 
 	public String getName() {
 		return name;
@@ -170,6 +177,22 @@ public class CreditTaskRepositoryVO extends BaseVO {
 
 	public void setReleaseDot(Double releaseDot) {
 		this.releaseDot = releaseDot;
+	}
+
+	public Integer getAddtionMoney() {
+		return addtionMoney;
+	}
+
+	public void setAddtionMoney(Integer addtionMoney) {
+		this.addtionMoney = addtionMoney;
+	}
+
+	public Integer getAddtionReleaseDot() {
+		return addtionReleaseDot;
+	}
+
+	public void setAddtionReleaseDot(Integer addtionReleaseDot) {
+		this.addtionReleaseDot = addtionReleaseDot;
 	}
 
 }

@@ -70,17 +70,20 @@ public class CreditTaskRepositoryService extends BaseService {
 						+ " 试图越过【任务仓库的发布任务】操作.");
 			}
 			// 验证 金钱
-			if (creditTaskRepositoryEntity.getMoney() > user.getMoney()) {
+			if (creditTaskRepositoryEntity.getMoney()
+					+ creditTaskRepositoryEntity.getAddtionMoney() > user
+					.getMoney()) {
 				putJumpPage("taskRepositoryManager/taskRepository!queryRepositories.php?platformType="
 						+ platformType);
-				putAlertMsg("您当前的余额不够发布此任务不够！");
+				putAlertMsg("您当前的余额不够发布此任务！");
 				return JUMP;
 			}
-			if (creditTaskRepositoryEntity.getReleaseDot() > user
+			if (creditTaskRepositoryEntity.getReleaseDot()
+					+ creditTaskRepositoryEntity.getAddtionReleaseDot() > user
 					.getReleaseDot()) {
 				putJumpPage("taskRepositoryManager/taskRepository!queryRepositories.php?platformType="
 						+ platformType);
-				putAlertMsg("您当前的发布点不够发布此任务不够！");
+				putAlertMsg("您当前的发布点不够发布此任务！");
 				return JUMP;
 			}
 

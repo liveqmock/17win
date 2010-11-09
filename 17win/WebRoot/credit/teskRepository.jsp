@@ -66,13 +66,16 @@
 					<s:iterator value="#request.result" status="status" id="task">
 						<tr style="BORDER-BOTTOM: #06314a 1px dashed;">
 							<td valign="top" align="center">
-								<font color="red"><s:property value="#task.money" /> </font> 元
+								<font color="red"><s:property value="#task.money" /> </font>
+								<font color="blue">+<s:property
+										value="#task.addtionMoney" /> </font>元
 								<s:if test="#test.updatePrice">(需改价格)</s:if>
 								<s:else>(全额相等)</s:else>
 								<br>
 								<font color="red"><s:property value="#task.releaseDot" />
-								</font> 个发布点
-								<IMG alt="延迟收货" src=images/shiwu.gif>
+								</font>
+								<font color="blue">+<s:property
+										value="#task.addtionReleaseDot" /> </font> 个发布点
 							</td>
 							<td valign="top" align="center">
 								<input type="text" readonly="readonly"

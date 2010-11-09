@@ -1,5 +1,8 @@
 var submitFlag = true;
 $(document).ready(function() {
+	intText("addtionMoneyId");
+	intText("addtionReleaseDotId");
+
 	// 进入任务仓库
 	$("#goTaskRe").click(function() {
 		var platformType = $("#platformType").val();
@@ -48,13 +51,7 @@ $(document).ready(function() {
 					changeStyle(this, '0', '不是有效的数值！');
 					submitFlag = false;
 				} else {
-					if (parseFloat($(this).val()) > currMoney) {
-						changeStyle(this, '0', '您当前的金额不足' + $(this).val()
-										+ "元！");
-						submitFlag = false;
-					} else {
-						changeStyle(this, '1', '');
-					}
+					changeStyle(this, '1', '');
 				}
 			});
 
@@ -186,6 +183,13 @@ $(document).ready(function() {
 									"checked", obj.address);
 							// 描述
 							$("input[name='creditTaskVO.desc']").val(obj.desc);
+
+							// 附加时间
+							$("#addtionMoney").val(obj.addtionMoney);
+							// 附加发布点
+							$("#addtionReleaseDotId")
+									.val(obj.addtionReleaseDot);
+
 							$("input[class='errorText']")
 									.removeClass("errorText");
 						} else {

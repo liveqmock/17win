@@ -241,6 +241,10 @@ public class UserInfoService extends BaseService {
 				putAlertMsg("您输入的地址有问题或地址和买号不同，如果有疑问请联系客户！");
 				return "insertSellerAndBuyer";
 			}
+			if (score > 250) {
+				putAlertMsg("您的买号级别过高，请换一个号！");
+				return "insertSellerAndBuyer";
+			}
 			buyerEntity.setScore(score);
 			buyerEntity.setType(platformTypeParam);
 			buyerEntity.setUser(userEntity);
@@ -531,11 +535,11 @@ public class UserInfoService extends BaseService {
 	public String myRefee(UserVO userVO) throws Exception {
 
 		UserEntity newUserEntity = userDAO.get(getLoginUser().getId());
-		
-		UserEntity referee= newUserEntity.getReferee();
-		if(referee==null){
+
+		UserEntity referee = newUserEntity.getReferee();
+		if (referee == null) {
 			putByRequest("referee", "无");
-		}else{
+		} else {
 			putByRequest("referee", referee.getUsername());
 		}
 

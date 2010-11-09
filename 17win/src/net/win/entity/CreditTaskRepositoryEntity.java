@@ -69,6 +69,13 @@ public class CreditTaskRepositoryEntity extends BaseEntity {
 	@Column(name = "DESC_", length = 255)
 	private String desc;
 
+	// 附加金额、
+	@Column(name = "ADDTATION_MONEY", nullable = false)
+	private Integer addtionMoney = 0;
+	// 附加发布点
+	@Column(name = "ADDTATION_RELEASE_DOT", nullable = false)
+	private Integer addtionReleaseDot = 0;
+
 	// 所属人
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = UserEntity.class)
 	@JoinColumn(name = "USER_ID_")
@@ -202,6 +209,20 @@ public class CreditTaskRepositoryEntity extends BaseEntity {
 		this.releaseDot = releaseDot;
 	}
 
- 
+	public Integer getAddtionMoney() {
+		return addtionMoney;
+	}
+
+	public void setAddtionMoney(Integer addtionMoney) {
+		this.addtionMoney = addtionMoney;
+	}
+
+	public Integer getAddtionReleaseDot() {
+		return addtionReleaseDot;
+	}
+
+	public void setAddtionReleaseDot(Integer addtionReleaseDot) {
+		this.addtionReleaseDot = addtionReleaseDot;
+	}
 
 }

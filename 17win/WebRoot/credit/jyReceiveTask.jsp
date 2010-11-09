@@ -118,12 +118,11 @@
 									<img src="images/xin_1.gif" alt=刷客经验积分：2779>
 								</td>
 								<td valign="top" align="center">
-									<font color="red"><s:property value="#task[4]" /> </font> 元
-									<s:if test="#test[5]">(需改价格)</s:if>
-									<s:else>(全额相等)</s:else>
-									<br>
-									<font color="red"><s:property value="#task[6]" /> </font> 个发布点
-									<IMG alt="延迟收货" src=images/shiwu.gif>
+									<font color="red"><s:property value="#task[4]" /> </font><font
+										color="blue">+<s:property value="#task[23]" /> 元 <s:if
+											test="#test[5]">(需改价格)</s:if> <s:else>(全额相等)</s:else> <br>
+										<font color="red"><s:property value="#task[6]" /> </font><font
+										color="blue">+<s:property value="#task[24]" /> 个发布点 
 								</td>
 								<td align="center" valign="top">
 									<s:if test="#task[12]==-2">
@@ -241,8 +240,7 @@
 								<td colspan="3" valign="top" align="left">
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									<font color="red" style="font-weight: bold;">快递单号：<s:property
-											value="#task[22]" />
-									</font>
+											value="#task[22]" /> </font>
 								</td>
 								<td colspan="3" align="left">
 									<font color="red" style="font-weight: bold;">打分/好评： <s:if

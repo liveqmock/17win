@@ -114,13 +114,14 @@
 									<s:date name="#task[1]" format="yyyy-MM-dd HH-mm-ss" />
 								</td>
 								<td valign="top" align="center">
-									<font color="red"><s:property value="#task[2]" /> </font> 元
+									<font color="red"><s:property value="#task[2]" /> </font><font
+										color="blue">+<s:property value="#task[24]" /> 元
 									<s:if test="#test[3]">(需改价格)</s:if>
 									<s:else>(全额相等)</s:else>
 									<br>
 
-									<font color="red"><s:property value="#task[4]" /> </font> 个发布点
-									<IMG alt="延迟收货" src=images/shiwu.gif>
+									<font color="red"><s:property value="#task[4]" /> </font><font
+										color="blue">+<s:property value="#task[25]" /> 个发布点
 								</td>
 								<td valign="top" align="center">
 									<input type="text" readonly="readonly"
