@@ -748,7 +748,6 @@ public class CreditTaskService extends BaseService {
 		if (!getLoginUser().getOperationCodeStatus()) {
 			putByRequest("preURL", getRequset().getRequestURL() + "?"
 					+ getRequset().getQueryString());
-
 			return "operationValidate";
 		} else {
 			Long taskId = Long.parseLong(getByParam("taskId"));
@@ -791,9 +790,11 @@ public class CreditTaskService extends BaseService {
 			 * 修改用户金钱和发布点
 			 */
 			userEntity.setMoney(ArithUtils.add(userEntity.getMoney(),
-					creditTask.getMoney()));
+					creditTask.getMoney())
+					+ creditTask.getAddtionMoney());
 			userEntity.setReleaseDot(ArithUtils.add(userEntity.getReleaseDot(),
-					creditTask.getReleaseDot()));
+					creditTask.getReleaseDot())
+					+ creditTask.getAddtionReleaseDot());
 			putByRequest("cancelTask", "cancelTask");
 			putByRequest("cancelTask", "cancelTask");
 			putAlertMsg("取消成功，金额已返回！");
