@@ -391,11 +391,15 @@ public class UserInfoService extends BaseService {
 						0.5 * releaseDot));
 				userEntity.setReleaseDot(ArithUtils.add(userEntity
 						.getReleaseDot(), releaseDot));
+				logMoneyCapital(userDAO, 0 - 0.5 * releaseDot, "购买发布点",
+						userEntity);
+				logDotCapital(userDAO, releaseDot, "购买发布点", userEntity);
 				if (userEntity.getReferee() != null) {
 					userEntity.getReferee().setMoney(
 							userEntity.getReferee().getMoney()
 									+ (0.5 * releaseDot * 0.1));
 				}
+
 			} else {
 				putDIV("您的钱不够支付购买" + releaseDot + "个发布点的费用，<a>点击此处充值！</a>");
 			}
@@ -407,6 +411,9 @@ public class UserInfoService extends BaseService {
 						.sub(userEntity.getMoney(), money));
 				userEntity.setReleaseDot(ArithUtils.add(userEntity
 						.getReleaseDot(), Constant.getHuangguanNumber()));
+				logMoneyCapital(userDAO, 0 - money, "购买皇冠卡", userEntity);
+				logDotCapital(userDAO, Constant.getHuangguanNumber()
+						.doubleValue(), "购买皇冠卡", userEntity);
 				if (userEntity.getReferee() != null) {
 					userEntity.getReferee().setMoney(
 							userEntity.getReferee().getMoney() + (money * 0.1));
@@ -423,6 +430,9 @@ public class UserInfoService extends BaseService {
 						.sub(userEntity.getMoney(), money));
 				userEntity.setReleaseDot(ArithUtils.add(userEntity
 						.getReleaseDot(), Constant.getShuangzuanNumber()));
+				logMoneyCapital(userDAO, 0 - money, "购买双钻卡", userEntity);
+				logDotCapital(userDAO, Constant.getShuangzuanNumber()
+						.doubleValue(), "购买双钻卡", userEntity);
 				if (userEntity.getReferee() != null) {
 					userEntity.getReferee().setMoney(
 							userEntity.getReferee().getMoney() + (money * 0.1));
@@ -432,13 +442,16 @@ public class UserInfoService extends BaseService {
 			}
 
 		} else if ("4".equals(flag)) {
-			// 购买皇一钻卡
+			// 购买一钻卡
 			Double money = Constant.getZuanshiPrice();
 			if (userEntity.getMoney() >= money) {
 				userEntity.setMoney(ArithUtils
 						.sub(userEntity.getMoney(), money));
 				userEntity.setReleaseDot(ArithUtils.add(userEntity
 						.getReleaseDot(), Constant.getZuanshiNumber()));
+				logMoneyCapital(userDAO, 0 - money, "购买一钻卡", userEntity);
+				logDotCapital(userDAO, Constant.getZuanshiNumber()
+						.doubleValue(), "购买一钻卡", userEntity);
 				if (userEntity.getReferee() != null) {
 					userEntity.getReferee().setMoney(
 							userEntity.getReferee().getMoney() + (money * 0.1));
@@ -475,7 +488,7 @@ public class UserInfoService extends BaseService {
 			return "updateExchange";
 		}
 		if ("1".equals(flag)) {
-			// 兑换发布点
+			// 兑换金额
 			Double releaseDot = userVO.getReleaseDot();
 			if (releaseDot < 10 || releaseDot > userEntity.getReleaseDot()) {
 				WinUtils.throwIllegalityException("违法的操作，试图越过兑换发布点验证");
@@ -484,6 +497,10 @@ public class UserInfoService extends BaseService {
 					releaseDot));
 			userEntity.setMoney(ArithUtils.add(userEntity.getMoney(),
 					ArithUtils.mul(releaseDot, 0.5)));
+
+			logDotCapital(userDAO, 0 - releaseDot, "发布点兑换金额", userEntity);
+			logMoneyCapital(userDAO, ArithUtils.mul(releaseDot, 0.5),
+					"发布点兑换金额", userEntity);
 		} else if ("2".equals(flag)) {
 			// 赠送
 			Double releaseDot = userVO.getReleaseDot();
@@ -504,8 +521,13 @@ public class UserInfoService extends BaseService {
 			userEntity.setReleaseDot(ArithUtils.sub(touser.getReleaseDot(),
 					releaseDot));
 			touser.setReleaseDot(ArithUtils.add(touser.getMoney(), releaseDot));
+
+			logDotCapital(userDAO, 0 - releaseDot, "赠送发布点给"
+					+ touser.getUsername(), userEntity);
+			logDotCapital(userDAO, releaseDot, userEntity.getUsername()
+					+ "赠送发布点给你的发布点", touser);
 		} else if ("3".equals(flag)) {
-			// 赠送
+			// 积分兑换
 			Double releaseDot = userVO.getReleaseDot();
 			if (releaseDot > userEntity.getReleaseDot()) {
 				WinUtils.throwIllegalityException("违法的操作，试图越过兑换发布点验证");
@@ -518,6 +540,8 @@ public class UserInfoService extends BaseService {
 			Integer tempScore = ((Double) (releaseDot * 200)).intValue();
 			userEntity
 					.setConvertScore(userEntity.getConvertScore() - tempScore);
+
+			logDotCapital(userDAO, releaseDot, "积分兑换发布点", userEntity);
 		}
 		updateUserLoginInfo(userEntity);
 		putAlertMsg("操作成功！");

@@ -41,19 +41,4 @@ public final class ScoreStrategy {
 		}
 	}
 
-	/**
-	 * 积累接受100个任务 推广人获取10元钱
-	 * 
-	 * @param userEntity
-	 * @throws Exception
-	 */
-	public static void updateRefreeMoneyByTask(UserEntity userEntity)
-			throws Exception {
-		if (userEntity.getReceiveTaskCount() % 100 == 0) {
-			UserEntity refereeUser = userEntity.getReferee();
-			if (refereeUser != null) {
-				refereeUser.setMoney(10 + refereeUser.getMoney());
-			}
-		}
-	}
 }

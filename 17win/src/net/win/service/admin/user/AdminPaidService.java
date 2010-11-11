@@ -7,20 +7,16 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import net.win.BaseService;
-import net.win.UserLoginInfo;
 import net.win.dao.PayDAO;
 import net.win.dao.SmsDAO;
 import net.win.dao.UserDAO;
 import net.win.entity.PayEntity;
 import net.win.entity.SmsEntity;
 import net.win.entity.UserEntity;
-import net.win.service.sms.SmsService;
 import net.win.utils.ArithUtils;
 import net.win.utils.StringUtils;
 import net.win.utils.WinUtils;
 import net.win.vo.AdminPayVO;
-import net.win.vo.AdminUserVO;
-import net.win.vo.PayVO;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -79,6 +75,7 @@ public class AdminPaidService extends BaseService {
 		smsEntity.setToUser(userEntity);
 		smsEntity.setRead(false);
 		smsDAO.save(smsEntity);
+		logMoneyCapital(smsDAO, payEntity.getMoney(), "账号充值", userEntity);
 		queryPay(adminPayVO);
 		putAlertMsg("充值成功！");
 		return "updateUserMoney";

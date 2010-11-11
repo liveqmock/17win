@@ -89,10 +89,14 @@ public class VipService extends BaseService {
 		if (userEntity.getReferee() != null) {
 			userEntity.getReferee().setReleaseDot(
 					userEntity.getReferee().getReleaseDot() + 20);
+			logDotCapital(userDAO, 20D, "你推荐的名为：" + userEntity.getUsername()
+					+ "购买VIP。你获得的20个发布点！", userEntity.getReferee());
 		}
 		updateUserLoginInfo(userEntity);
 		getLoginUser().setVipEndDate(vipBidUserEntity.getEndDate());
 		getLoginUser().setVipGrowValue(vipBidUserEntity.getGrowValue());
+
+		logMoneyCapital(userDAO, 0 - money, "购买VIP", userEntity);
 
 		putAlertMsg("恭喜您加入VIP，快去体验吧！");
 		return "insertVip";

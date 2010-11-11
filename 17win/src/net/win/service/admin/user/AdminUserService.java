@@ -26,6 +26,7 @@ public class AdminUserService extends BaseService {
 		UserEntity userEntity = userDAO.get(id);
 		userEntity.setMoney(ArithUtils.add(userEntity.getMoney(), money));
 		queryUser(adminUserVO);
+		logMoneyCapital(userDAO, money, "账号充值", userEntity);
 		putAlertMsg("充值成功！");
 		return "updateUserMoney";
 	}
@@ -39,8 +40,8 @@ public class AdminUserService extends BaseService {
 	 */
 	public String queryUser(AdminUserVO adminUserVO) throws Exception {
 		StringBuffer resultHQL = new StringBuffer(
-				"select  _user.username,_user.releaseDot,_user.money,_user.registerTime,_user.email,_user.telephone," //5
-						+ "_user.spreadScore,_user.spreadScore,_user.releaseTaskCount,_user.receiveTaskCount,_user.vipEnable ,"//10
+				"select  _user.username,_user.releaseDot,_user.money,_user.registerTime,_user.email,_user.telephone," // 5
+						+ "_user.spreadScore,_user.spreadScore,_user.releaseTaskCount,_user.receiveTaskCount,_user.vipEnable ,"// 10
 						+ " _user.status,_user.id" // 12
 						+ " from UserEntity   as _user  where 1=1 ");
 		StringBuffer countHQL = new StringBuffer(
@@ -238,7 +239,7 @@ public class AdminUserService extends BaseService {
 		// countHQL.append(" and _user.vipGrowValue<=:endVipGrowValue ");
 		// paramNames.add("endVipGrowValue");
 		// paramValues.add(adminUserVO.getEndVipGrowValue());
-		//		}
+		// }
 		Long count = (Long) userDAO.uniqueResultObject(countHQL.toString(),
 				paramNames.toArray(paramNames.toArray(new String[paramNames
 						.size()])), paramValues.toArray(new Object[paramValues

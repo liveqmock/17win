@@ -497,11 +497,20 @@ public class CreditTaskService extends BaseService {
 			 * 计算推广
 			 */
 			// 积累接受100个任务
-			ScoreStrategy.updateRefreeMoneyByTask(receiveUser);
+			updateRefreeMoneyByTask(userDAO, receiveUser);
 			// 通过你的宣传链接注册的会员积分每上升1000
 			// 你的收益=100积分
 			ScoreStrategy.updateRefreeScoreByScore(receiveUser);
 			ScoreStrategy.updateRefreeScoreByScore(releaEntity);
+
+			// 记录 信息
+
+			logMoneyCapital(userDAO, creditTask.getMoney()
+					+ creditTask.getAddtionMoney(), "接受任务获取金额", receiveUser);
+
+			logDotCapital(userDAO, releaseDot
+					+ creditTask.getAddtionReleaseDot(), "接受任务获取发布点",
+					receiveUser);
 
 			// 更新信息
 			updateUserLoginInfo(releaEntity);
@@ -798,6 +807,12 @@ public class CreditTaskService extends BaseService {
 			putByRequest("cancelTask", "cancelTask");
 			putByRequest("cancelTask", "cancelTask");
 			putAlertMsg("取消成功，金额已返回！");
+
+			logMoneyCapital(userDAO, creditTask.getMoney()
+					+ creditTask.getAddtionMoney(), "取消重填  任务 返回金额", userEntity);
+			logDotCapital(userDAO, creditTask.getReleaseDot()
+					+ creditTask.getAddtionReleaseDot(), "取消重填  任务 返回发布点",
+					userEntity);
 			updateUserLoginInfo(userEntity);
 			return "cancelTask";
 		}
@@ -1145,6 +1160,11 @@ public class CreditTaskService extends BaseService {
 				.sub(userEntity.getReleaseDot(), dot));
 		// 完成对金钱进行修改,登陆名的也需要
 		updateUserLoginInfo(userEntity);
+
+		logMoneyCapital(userDAO, 0 - creditTask.getMoney()
+				+ creditTask.getAddtionMoney(), "发布任务", userEntity);
+		logDotCapital(userDAO, 0 - dot, "发布任务", userEntity);
+
 		putDIV("");
 		return "insertReleaseTaskSuccess";
 	}

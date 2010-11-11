@@ -5,12 +5,9 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 import net.win.BaseService;
 import net.win.TaskMananger;
-import net.win.UserLoginInfo;
-import net.win.dao.BuyerDAO;
 import net.win.dao.CreditTaskDAO;
 import net.win.dao.CreditTaskRepositoryDAO;
 import net.win.dao.SellerDAO;
@@ -21,11 +18,8 @@ import net.win.entity.SellerEntity;
 import net.win.entity.UserEntity;
 import net.win.utils.ArithUtils;
 import net.win.utils.StrategyUtils;
-import net.win.utils.StringUtils;
 import net.win.utils.WinUtils;
 import net.win.vo.CreditTaskRepositoryVO;
-import net.win.vo.CreditTaskVO;
-import net.win.vo.SellerVO;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -95,6 +89,10 @@ public class CreditTaskRepositoryService extends BaseService {
 			creditTaskEntity.setMoney(creditTaskRepositoryEntity.getMoney());
 			creditTaskEntity.setGoodTimeType(creditTaskRepositoryEntity
 					.getGoodTimeType());
+			creditTaskEntity.setAddtionMoney(creditTaskRepositoryEntity
+					.getAddtionMoney());
+			creditTaskEntity.setAddtionReleaseDot(creditTaskRepositoryEntity
+					.getAddtionReleaseDot());
 
 			creditTaskEntity
 					.setProtect(creditTaskRepositoryEntity.getProtect());
@@ -130,9 +128,13 @@ public class CreditTaskRepositoryService extends BaseService {
 			creditTaskDAO.save(creditTaskEntity);
 			// 改变人
 			user.setMoney(ArithUtils.sub(user.getMoney(),
-					creditTaskRepositoryEntity.getMoney()));
-			user.setReleaseDot(ArithUtils.sub(user.getReleaseDot(),
-					creditTaskRepositoryEntity.getReleaseDot()));
+					creditTaskRepositoryEntity.getMoney()
+							+ creditTaskRepositoryEntity.getAddtionMoney()));
+			user
+					.setReleaseDot(ArithUtils.sub(user.getReleaseDot(),
+							creditTaskRepositoryEntity.getReleaseDot()
+									+ creditTaskRepositoryEntity
+											.getAddtionReleaseDot()));
 
 			// 仓库信息
 			creditTaskRepositoryEntity
@@ -142,6 +144,15 @@ public class CreditTaskRepositoryService extends BaseService {
 			updateUserLoginInfo(user);
 			putJumpPage("taskRepositoryManager/taskRepository!queryRepositories.php?platformType="
 					+ platformType);
+
+			logMoneyCapital(userDAO, 0 - creditTaskRepositoryEntity.getMoney()
+					+ creditTaskRepositoryEntity.getAddtionMoney(), "从仓库发布任务",
+					user);
+
+			logDotCapital(userDAO, 0
+					- creditTaskRepositoryEntity.getReleaseDot()
+					+ creditTaskRepositoryEntity.getAddtionReleaseDot(),
+					"从仓库发布任务", user);
 			putAlertMsg("发布成功！");
 			return JUMP;
 		}

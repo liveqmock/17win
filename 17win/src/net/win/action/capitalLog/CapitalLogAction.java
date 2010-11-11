@@ -4,9 +4,7 @@ import javax.annotation.Resource;
 
 import net.win.BaseAction;
 import net.win.service.capitalLog.CapitalLogService;
-import net.win.service.withdrawals.WithdrawalsService;
 import net.win.vo.CapitalLogVO;
-import net.win.vo.WithdrawalsVO;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
@@ -21,8 +19,8 @@ import org.springframework.stereotype.Controller;
 @Scope("prototype")
 @ParentPackage("17win-default")
 @Results( {
-		@Result(name = "inpur", location = "/capital/index.jsp"),
-		@Result(name = "initWithdrawals", location = "/capital/withdrawals.jsp") })
+		@Result(name = "input", location = "/capitalLog/index.jsp"),
+		@Result(name = "queryLogs", location = "/capitalLog/index.jsp") })
 @Namespace("/capitalLogManager")
 public class CapitalLogAction extends BaseAction {
 	@Resource

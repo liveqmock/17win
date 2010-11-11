@@ -22,8 +22,8 @@ public class CapitalLogVO extends BaseVO {
 	private String desc;
 
 	//
-	
-	private String value;
+
+	private Double value;
 	// 查询
 	private Date startDate;
 	private Date endDate;
@@ -87,11 +87,11 @@ public class CapitalLogVO extends BaseVO {
 		this.endDate = endDate;
 	}
 
-	public String getValue() {
+	public Double getValue() {
 		return value;
 	}
 
-	public void setValue(String value) {
+	public void setValue(Double value) {
 		this.value = value;
 	}
 

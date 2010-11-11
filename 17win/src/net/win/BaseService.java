@@ -1,11 +1,14 @@
 package net.win;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import net.win.dao.UserDAO;
 import net.win.entity.BaseEntity;
+import net.win.entity.CapitalLogEntity;
 import net.win.entity.UserEntity;
 import net.win.utils.Constant;
 import net.win.utils.StrategyUtils;
@@ -228,8 +231,10 @@ public class BaseService {
 	protected void putJumpPage(String page) throws Exception {
 		putByRequest(JUMP, page);
 	}
+
 	/**
 	 * outteer 是否是其他网站
+	 * 
 	 * @param message
 	 * @throws Exception
 	 */
@@ -237,6 +242,7 @@ public class BaseService {
 		putByRequest("outter", true);
 		putByRequest(JUMP, page);
 	}
+
 	/**
 	 * 显示DIV
 	 * 
@@ -277,7 +283,48 @@ public class BaseService {
 		return ServletActionContext.getRequest().getSession().getAttribute(key);
 	}
 
+	// 保存金额记录
+	protected void logMoneyCapital(BaseDAO baseDAO, Double value, String desc,
+			UserEntity userEntity) throws Exception {
+		CapitalLogEntity capitalLogEntity = new CapitalLogEntity();
+		capitalLogEntity.setType("1");
+		capitalLogEntity.setValue(value);
+		capitalLogEntity.setDesc(desc);
+		capitalLogEntity.setUser(userEntity);
+		capitalLogEntity.setLogTime(new Date());
+		baseDAO.save(capitalLogEntity);
+	}
+
+	// 保存发布点记录
+	protected void logDotCapital(BaseDAO baseDAO, Double value, String desc,
+			UserEntity userEntity) throws Exception {
+		CapitalLogEntity capitalLogEntity = new CapitalLogEntity();
+		capitalLogEntity.setType("2");
+		capitalLogEntity.setValue(value);
+		capitalLogEntity.setDesc(desc);
+		capitalLogEntity.setUser(userEntity);
+		capitalLogEntity.setLogTime(new Date());
+		baseDAO.save(capitalLogEntity);
+	}
+
 	protected Boolean nullID(BaseEntity base) {
 		return base.getId() == null;
+	}
+
+	/**
+	 * 积累接受100个任务 推广人获取10元钱
+	 * 
+	 * @param userEntity
+	 * @throws Exception
+	 */
+	protected void updateRefreeMoneyByTask(BaseDAO baseDAO,
+			UserEntity userEntity) throws Exception {
+		if (userEntity.getReceiveTaskCount() % 100 == 0) {
+			UserEntity refereeUser = userEntity.getReferee();
+			if (refereeUser != null) {
+				refereeUser.setMoney(10 + refereeUser.getMoney());
+				logDotCapital(baseDAO, 10D, "你推广的用户接受了100个任务你获得10元！", refereeUser);
+			}
+		}
 	}
 }

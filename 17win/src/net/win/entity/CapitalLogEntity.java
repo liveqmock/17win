@@ -31,7 +31,7 @@ public class CapitalLogEntity extends BaseEntity {
 
 	// 金额 或则发布点的值
 	@Column(name = "Value_", nullable = false)
-	private Integer value;
+	private Double value;
 
 	// 描述
 	@Column(name = "Desc_", length = 200, nullable = false)
@@ -69,11 +69,12 @@ public class CapitalLogEntity extends BaseEntity {
 		this.desc = desc;
 	}
 
-	public Integer getValue() {
+	public Double getValue() {
 		return value;
 	}
 
-	public void setValue(Integer value) {
+	public void setValue(Double value) {
 		this.value = value;
 	}
+
 }

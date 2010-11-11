@@ -150,22 +150,13 @@ img {
 												<thead>
 													<tr>
 														<th style="font-size: 12px" nowrap="nowrap">
-															提现类型
+															资产类型
 														</th>
 														<th style="font-size: 12px" nowrap="nowrap">
-															平台类型
-														</th>
-														<th style="font-size: 12px" nowrap="nowrap">
-															提现链接
-														</th>
-														<th style="font-size: 12px" nowrap="nowrap">
-															提现金额
+															值
 														</th>
 														<th style="font-size: 12px" nowrap="nowrap">
 															操作日期
-														</th>
-														<th style="font-size: 12px" nowrap="nowrap">
-															状态
 														</th>
 														<th style="font-size: 12px" nowrap="nowrap">
 															描述
@@ -173,59 +164,27 @@ img {
 													</tr>
 												</thead>
 												<tbody>
-													<s:iterator value="#request.result" id="withdrawals">
+													<s:iterator value="#request.result" id="capitalLog">
 														<tr
 															<s:if test="#status.odd"> style="background: #FFC278"</s:if>>
 															<td>
-																<s:if test="#withdrawals.type==1">
-																	店铺地址提现
+																<s:if test="#capitalLog.type==1">
+																  金额
 																</s:if>
-																<s:elseif test="#withdrawals.type==2">
-																	支付宝提现
+																<s:elseif test="#capitalLog.type==2">
+																	发布点
 																</s:elseif>
-																<s:else>
-																	财付通提现
-																</s:else>
+															</td>
 															</td>
 															<td>
-																<s:if test="#withdrawals.type==1">
-																	<s:if test="#withdrawals.shopType==1">
-																		淘宝
-																	</s:if>
-																	<s:elseif test="#withdrawals.shopType==2">
-																		拍拍
-																	</s:elseif>
-																	<s:else>
-																		有啊
-																	</s:else>
-																</s:if>
-																<s:else>
-																	-
-																</s:else>
+																<s:property value="#capitalLog.value" />
 															</td>
 															<td>
-																<s:property value="#withdrawals.realIdentity" />
-															</td>
-															<td>
-																<s:property value="#withdrawals.money" />
-															</td>
-															<td>
-																<s:date name="#withdrawals.operationDate"
+																<s:date name="#capitalLog.logTim"
 																	format="yyyy-MM-dd HH-mm-ss" />
 															</td>
 															<td>
-																<s:if test="#withdrawals.status==1">
-																		申请中
-																	</s:if>
-																<s:elseif test="#withdrawals.status==2">
-																		被驳回
-																	</s:elseif>
-																<s:else>
-																		已完成
-																	</s:else>
-															</td>
-															<td>
-																<s:property value="#withdrawals.statusDesc" />
+																<s:property value="#capitalLog.desc" />
 															</td>
 														</tr>
 													</s:iterator>
@@ -233,7 +192,7 @@ img {
 												<s:if test="#request.result.size()==0">
 													<tr>
 														<th colspan="9" align="center">
-															您目前还没有进行过提现！
+															没有数据！
 														</th>
 													</tr>
 												</s:if>

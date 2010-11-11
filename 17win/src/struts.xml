@@ -50,13 +50,13 @@
 			<result name="jump">/jump.jsp</result>
 			<result name="json" type="json"></result>
 			<result name="commonError">
-				errorPage/commonError.jsp
+				/errorPage/commonError.jsp
 			</result>
 			<result name="systemError">
-				errorPage/systemError.jsp
+				/errorPage/systemError.jsp
 			</result>
 			<result name="noPageError">
-				errorPage/noPageError.jsp
+				/errorPage/noPageError.jsp
 			</result>
 			<result name="noRightsError">/user/login.html</result>
 			<result name="illegalityError">
