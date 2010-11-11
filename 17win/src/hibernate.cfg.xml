@@ -103,5 +103,6 @@
 		<mapping class="net.win.entity.NewsEntity" />
 		<mapping class="net.win.entity.NewsTypeEntity" />
 		<mapping class="net.win.entity.VipBidUserEntity" />
+		<mapping class="net.win.entity.CapitalLogEntity" />
 	</session-factory>
 </hibernate-configuration>

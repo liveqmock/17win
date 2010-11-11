@@ -218,6 +218,11 @@
 												<a href="withdrawalsManager/withdrawals!withdrawalsLog.php">提现记录</a>
 											</td>
 										</tr>
+										<tr>
+											<td height=20>
+												<a href="capitalLogManager/capitalLog!queryLogs.php">资产记录</a>
+											</td>
+										</tr>
 										<!--  
 										<tr>
 											<td height=20>
