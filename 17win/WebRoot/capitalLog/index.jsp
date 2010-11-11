@@ -175,7 +175,6 @@ img {
 																	发布点
 																</s:elseif>
 															</td>
-															</td>
 															<td>
 																<s:property value="#capitalLog.value" />
 															</td>
