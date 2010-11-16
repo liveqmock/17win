@@ -102,7 +102,7 @@ img {
 														</td>
 													</tr>
 													<tr>
-														<td width="146" height="40" align="right" class="font12h">
+														<td width="146" height="40" align="right" class="font12h" valign="top"> 
 															当前操作密码：
 														</td>
 														<td width="230">
@@ -129,7 +129,7 @@ img {
 														</td>
 													</tr>
 													<tr>
-														<td height="40" align="right" class="font12h">
+														<td height="40" align="right" class="font12h" valign="top">
 															登录密码：
 														</td>
 														<td>
@@ -146,7 +146,7 @@ img {
 													</tr>
 
 													<tr>
-														<td height="40" align="right" class="font12h">
+														<td height="40" align="right" class="font12h" valign="top">
 															确认登录密码：
 														</td>
 														<td>
@@ -171,7 +171,7 @@ img {
 
 
 													<tr>
-														<td height="40" align="right" class="font12h">
+														<td height="40" align="right" class="font12h" valign="top">
 															操作密码：
 														</td>
 														<td align="left" class="red-bcolor">
@@ -186,7 +186,7 @@ img {
 														</td>
 													</tr>
 													<tr>
-														<td height="40" align="right" class="font12h">
+														<td height="40" align="right" class="font12h" valign="top">
 															确认操作密码：
 														</td>
 														<td align="left" class="red-bcolor">

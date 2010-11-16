@@ -66,18 +66,20 @@ body {
 													</TR>
 
 													<TR>
-														<TD class=K_mtcontent
+														<TD class="K_mtcontent"
 															style="PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 10px; PADDING-TOP: 10px"
-															colSpan=6>
+															colspan="99">
 															<TABLE class=LeftNews cellSpacing=0 cellPadding=0
-																width="100%" border=0>
+																style="table-layout: fixed" width="100%" border=0>
 																<TBODY>
 																	<s:iterator value="#request.wzResult" status="status"
 																		id="obj">
 																		<tr>
-																			<td>
+																			<td nowrap="nowrap" width="100%"
+																				style="overflow: hidden; text-overflow: ellipsis;">
 																				<a href='#' target="_blank"
-																					title='<s:property value="#obj.title"/>'><font><s:property
+																					title='<s:property value="#obj.title"/>'><font
+																					style="font-size: 12px"> <s:property
 																							value="#obj.title" /> </font> </a>
 																			</td>
 																		</tr>
@@ -118,18 +120,20 @@ body {
 														</TD>
 													</TR>
 													<TR>
-														<TD class=K_mtcontent
+														<TD class="K_mtcontent"
 															style="PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 10px; PADDING-TOP: 10px"
-															colSpan=6>
+															colspan="99">
 															<TABLE class=LeftNews cellSpacing=0 cellPadding=0
-																width="100%" border=0>
+																style="table-layout: fixed" width="100%" border=0>
 																<TBODY>
 																	<s:iterator value="#request.tjResult" status="status"
 																		id="obj">
 																		<tr>
-																			<td>
+																			<td nowrap="nowrap" width="100%"
+																				style="overflow: hidden; text-overflow: ellipsis;">
 																				<a href='#' target="_blank"
-																					title='<s:property value="#obj.title"/>'><font><s:property
+																					title='<s:property value="#obj.title"/>'><font
+																					style="font-size: 12px"><s:property
 																							value="#obj.title" /> </font> </a>
 																			</td>
 																		</tr>
@@ -157,8 +161,7 @@ body {
 														<tr>
 															<td class="f12bt">
 																当前位置：
-																<a href="help/index.html">帮助中心</a>
-																&gt;
+																<a href="help/index.html">帮助中心</a> &gt;
 																<a
 																	href="javascript:window.location.href=encodeURI(encodeURI('adminNewsManager/adminNews!listNews.php?newsVO.typeName=<s:property
 																		value="#request.result.typeName" />'));"><s:property

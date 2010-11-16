@@ -1,4 +1,3 @@
- 
 // ///分页
 function firstPage() {
 	var nowPage = parseInt($("#nowPage").val());
@@ -50,6 +49,6 @@ function query(page) {
 		return;
 	}
 	var typeName = $("#typeName").val();
-	window.location.href = "adminNewsManager/adminNews!listNews.php"
-			+ "?newsVO.typeName=" + typeName + +"&newsVO.nowPage=" + page;
+	window.location.href = encodeURI(encodeURI("adminNewsManager/adminNews!listNews.php"
+			+ "?newsVO.typeName=" + typeName + "&newsVO.nowPage=" + page));
 }

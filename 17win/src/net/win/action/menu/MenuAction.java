@@ -1,8 +1,10 @@
 package net.win.action.menu;
 
-import net.win.BaseAction;
+import javax.annotation.Resource;
 
-import org.apache.struts2.ServletActionContext;
+import net.win.BaseAction;
+import net.win.service.menu.MenuService;
+
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -16,8 +18,11 @@ import org.springframework.stereotype.Controller;
 @Scope("prototype")
 @ParentPackage("17win-default")
 @Namespace("/menuManager")
-@Results( { @Result(name = "indexJSP", location = "/index.jsp") })
+@Results( { @Result(name = "toIndex", location = "/index.jsp") })
 public class MenuAction extends BaseAction {
+
+	@Resource
+	private MenuService menuService;
 
 	@Action("/menu")
 	public String execute() throws Exception {
@@ -31,9 +36,7 @@ public class MenuAction extends BaseAction {
 	 * @throws Exception
 	 */
 	public String toIndex() throws Exception {
-		// TODO Auto-generated method stub
-		ServletActionContext.getRequest().setAttribute("showIndexType", "1");
-		return "indexJSP";
+		return menuService.toIndex();
 	}
 
 }

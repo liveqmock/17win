@@ -129,13 +129,13 @@ img {
 														记录日期：
 														<s:textfield name="capitalLogVO.startDate" id="startDate"
 															readonly="true"
-															onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})"
+															onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd HH-mm-ss','skin':'blue'})"
 															cssStyle="width:110px">
 														</s:textfield>
 														至
 														<s:textfield name="capitalLogVO.endDate" id="endDate"
 															readonly="true"
-															onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})"
+															onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd HH-mm-ss','skin':'blue'})"
 															cssStyle="width:110px">
 														</s:textfield>
 													</td>

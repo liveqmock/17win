@@ -44,9 +44,7 @@ function firstPage() {
 		return;
 	}
 	$("#nowPage").val(1);
-	if (validateForm()) {
-		$("form").submit();
-	}
+	$("form").submit();
 }
 function prevPage() {
 	var nowPage = parseInt($("#nowPage").val());
@@ -55,9 +53,7 @@ function prevPage() {
 		return;
 	}
 	$("#nowPage").val(nowPage - 1);
-	if (validateForm()) {
-		$("form").submit();
-	}
+	$("form").submit();
 }
 function nextPage() {
 	var nowPage = parseInt($("#nowPage").val());
@@ -67,9 +63,7 @@ function nextPage() {
 		return;
 	}
 	$("#nowPage").val(nowPage + 1);
-	if (validateForm()) {
-		$("form").submit();
-	}
+	$("form").submit();
 }
 function lastPage() {
 	var page = parseInt($("#pageCount").val());
@@ -80,14 +74,10 @@ function lastPage() {
 		return;
 	}
 	$("#nowPage").val(page);
-	if (validateForm()) {
-		$("form").submit();
-	}
+	$("form").submit();
 }
 function jumpPage() {
 	var page = parseInt($("#toPageSelect").val());
 	$("#nowPage").val(page);
-	if (validateForm()) {
-		$("form").submit();
-	}
+	$("form").submit();
 }

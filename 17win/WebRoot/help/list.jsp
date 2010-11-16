@@ -4,8 +4,8 @@
 <HTML>
 	<HEAD>
 		<s:include value="../common/header.jsp"></s:include>
-		<LINK href="css/Css.css" type="text/css" rel="stylesheet" />
-		<LINK href="css/top_bottom.css" type="text/css" ' rel="stylesheet">
+		<LINK href="css/Css.css" type=text/css rel=stylesheet>
+		<LINK href="css/top_bottom.css" type=text/css rel=stylesheet>
 		<SCRIPT src="help/list.js" type=text/javascript></SCRIPT>
 		<style type="text/css">
 <!--
@@ -66,18 +66,21 @@ body {
 													</TR>
 
 													<TR>
-														<TD class=K_mtcontent
+														<TD class="K_mtcontent"
 															style="PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 10px; PADDING-TOP: 10px"
-															colSpan=6>
+															width="100%" colspan="99">
 															<TABLE class=LeftNews cellSpacing=0 cellPadding=0
-																width="100%" border=0>
+																style="table-layout: fixed" width="100%" border=0>
 																<TBODY>
 																	<s:iterator value="#request.wzResult" status="status"
 																		id="obj">
 																		<tr>
-																			<td>
-																				<a href='help/<s:property value="#obj.url"/>' target="_blank"
-																					title='<s:property value="#obj.title"/>'><font><s:property
+																			<td nowrap="nowrap"
+																				style="overflow: hidden; text-overflow: ellipsis;">
+																				<a href='help/<s:property value="#obj.url"/>'
+																					target="_blank"
+																					title='<s:property value="#obj.title"/>'><font
+																					style="font-size: 12px"><s:property
 																							value="#obj.title" /> </font> </a>
 																			</td>
 																		</tr>
@@ -118,18 +121,21 @@ body {
 														</TD>
 													</TR>
 													<TR>
-														<TD class=K_mtcontent
+														<TD class="K_mtcontent"
 															style="PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 10px; PADDING-TOP: 10px"
-															colSpan=6>
-															<TABLE class=LeftNews cellSpacing=0 cellPadding=0
-																width="100%" border=0>
+															width="100%" colspan="99">
+															<TABLE class="LeftNews" cellSpacing=0 cellPadding=0
+																style="table-layout: fixed" width="100%" border=0>
 																<TBODY>
 																	<s:iterator value="#request.tjResult" status="status"
 																		id="obj">
 																		<tr>
-																			<td>
-																				<a href='help/<s:property value="#obj.url"/>' target="_blank"
-																					title='<s:property value="#obj.title"/>'><font><s:property
+																			<td nowrap="nowrap" width="100%"
+																				style="overflow: hidden; text-overflow: ellipsis;">
+																				<a href='help/<s:property value="#obj.url"/>'
+																					target="_blank"
+																					title='<s:property value="#obj.title"/>'><font
+																					style="font-size: 12px"><s:property
 																							value="#obj.title" /> </font> </a>
 																			</td>
 																		</tr>
@@ -156,8 +162,7 @@ body {
 														<tr>
 															<td class="f12ls1">
 																当前位置：
-																<a href="help/index.html">帮助中心</a>
-																&gt;
+																<a href="help/index.html">帮助中心</a> &gt;
 																<s:property value="newsVO.typeName" />
 															</td>
 														</tr>
@@ -182,8 +187,8 @@ body {
 																				<td width="644" class="f12hs">
 																					<a title="<s:property value="#newsVO.title"/>"
 																						target="_blank"
-																						href="help/<s:property value="#newsVO.url"/>"> <s:property
-																							value="#newsVO.title" /> </a>
+																						href="help/<s:property value="#newsVO.url"/>">
+																						<s:property value="#newsVO.title" /> </a>
 																				</td>
 																			</tr>
 																		</tbody>
@@ -217,10 +222,10 @@ body {
 																共
 																<font color="blue"><b><s:property
 																			value="newsVO.dataCount" /> </b> </font> 条主题&nbsp;&nbsp;&nbsp;
-																<a href="javascript:firstPage()">首页</a>
-																<a href="javascript:prevPage()">上一页</a>&nbsp;
-																<a href="javascript:nextPage()">下一页</a>&nbsp;
-																<a href="javascript:lastPage()">尾页</a>&nbsp;页次：
+																<a href="javascript:firstPage();">首页</a>
+																<a href="javascript:prevPage();">上一页</a>&nbsp;
+																<a href="javascript:nextPage();">下一页</a>&nbsp;
+																<a href="javascript:lastPage();">尾页</a>&nbsp;页次：
 																<strong><font color="red"><s:property
 																			value="newsVO.nowPage" /> </font>/<s:property
 																		value="newsVO.pageCount" /> </strong>页 &nbsp;

@@ -6,7 +6,6 @@
 		<s:include value="../common/header.jsp"></s:include>
 		<LINK href="css/Css.css" type=text/css rel=stylesheet>
 		<LINK href="css/top_bottom.css" type=text/css rel=stylesheet>
-		<SCRIPT src="js/jieducm_pupu.js" type=text/javascript></SCRIPT>
 		<style type="text/css">
 <!--
 body {
@@ -66,18 +65,22 @@ body {
 													</TR>
 
 													<TR>
-														<TD class=K_mtcontent
+														<TD class="K_mtcontent" width="100%"
 															style="PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 10px; PADDING-TOP: 10px"
-															colSpan=6>
+															colspan="99">
 															<TABLE class=LeftNews cellSpacing=0 cellPadding=0
-																width="100%" border=0>
+																style="table-layout: fixed" width="100%" border=0>
 																<TBODY>
 																	<s:iterator value="#request.wzResult" status="status"
 																		id="obj">
 																		<tr>
-																			<td>
-																				<a href='help/<s:property value="#obj.url"/>' target="_blank"
-																					title='<s:property value="#obj.title"/>'><font><s:property
+																			<td nowrap="nowrap"
+																				width="100%
+																				style="overflow:hidden; text-overflow:ellipsis;">
+																				<a href='help/<s:property value="#obj.url"/>'
+																					target="_blank"
+																					title='<s:property value="#obj.title"/>'><font
+																					style="font-size: 12px"><s:property
 																							value="#obj.title" /> </font> </a>
 																			</td>
 																		</tr>
@@ -118,18 +121,21 @@ body {
 														</TD>
 													</TR>
 													<TR>
-														<TD class=K_mtcontent
+														<TD class="K_mtcontent"
 															style="PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 10px; PADDING-TOP: 10px"
-															colSpan=6>
+															colSpan="99">
 															<TABLE class=LeftNews cellSpacing=0 cellPadding=0
-																width="100%" border=0>
+																style="table-layout: fixed" width="100%" border=0>
 																<TBODY>
 																	<s:iterator value="#request.tjResult" status="status"
 																		id="obj">
 																		<tr>
-																			<td>
-																				<a href='help/<s:property value="#obj.url"/>' target="_blank"
-																					title='<s:property value="#obj.title"/>'><font><s:property
+																			<td nowrap="nowrap" width="100%"
+																				style="overflow: hidden; text-overflow: ellipsis;">
+																				<a href='help/<s:property value="#obj.url"/>'
+																					target="_blank"
+																					title='<s:property value="#obj.title"/>'><font
+																					style="font-size: 12px"><s:property
 																							value="#obj.title" /> </font> </a>
 																			</td>
 																		</tr>
@@ -172,14 +178,17 @@ body {
 														style="PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 10px; PADDING-TOP: 10px"
 														colSpan=6>
 														<TABLE class=LeftNews cellSpacing=0 cellPadding=0
-															width="100%" border=0>
+															style="table-layout: fixed" width="100%" border=0>
 															<TBODY>
 																<s:iterator value="#request.xsResult" status="status"
 																	id="obj">
 																	<tr>
-																		<td>
-																			<a href='help/<s:property value="#obj.url"/>' target="_blank"
-																				title='<s:property value="#obj.title"/>'><font><s:property
+																		<td nowrap="nowrap"
+																			style="overflow: hidden; text-overflow: ellipsis;">
+																			<a href='help/<s:property value="#obj.url"/>'
+																				target="_blank"
+																				title='<s:property value="#obj.title"/>'><font
+																				style="font-size: 12px"><s:property
 																						value="#obj.title" /> </font> </a>
 																		</td>
 																	</tr>
@@ -215,14 +224,17 @@ body {
 														style="PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 10px; PADDING-TOP: 10px"
 														colSpan=6>
 														<TABLE class=LeftNews cellSpacing=0 cellPadding=0
-															width="100%" border=0>
+															style="table-layout: fixed" width="100%" border=0>
 															<TBODY>
 																<s:iterator value="#request.skResult" status="status"
 																	id="obj">
 																	<tr>
-																		<td>
-																			<a href='help/<s:property value="#obj.url"/>' target="_blank"
-																				title='<s:property value="#obj.title"/>'><font><s:property
+																		<td nowrap="nowrap"
+																			style="overflow: hidden; text-overflow: ellipsis;">
+																			<a href='help/<s:property value="#obj.url"/>'
+																				target="_blank"
+																				title='<s:property value="#obj.title"/>'><font
+																				style="font-size: 12px"><s:property
 																						value="#obj.title" /> </font> </a>
 																		</td>
 																	</tr>
@@ -269,14 +281,17 @@ body {
 														style="PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 10px; PADDING-TOP: 10px"
 														colSpan=6>
 														<TABLE class=LeftNews cellSpacing=0 cellPadding=0
-															width="100%" border=0>
+															style="table-layout: fixed" width="100%" border=0>
 															<TBODY>
 																<s:iterator value="#request.mjResult" status="status"
 																	id="obj">
 																	<tr>
-																		<td>
-																			<a href='help/<s:property value="#obj.url"/>' target="_blank"
-																				title='<s:property value="#obj.title"/>'><font><s:property
+																		<td nowrap="nowrap"
+																			style="overflow: hidden; text-overflow: ellipsis;">
+																			<a href='help/<s:property value="#obj.url"/>'
+																				target="_blank"
+																				title='<s:property value="#obj.title"/>'><font
+																				style="font-size: 12px"><s:property
 																						value="#obj.title" /> </font> </a>
 																		</td>
 																	</tr>
@@ -312,14 +327,17 @@ body {
 														style="PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 10px; PADDING-TOP: 10px"
 														colSpan=6>
 														<TABLE class=LeftNews cellSpacing=0 cellPadding=0
-															width="100%" border=0>
+															style="table-layout: fixed" width="100%" border=0>
 															<TBODY>
 																<s:iterator value="#request.majResult" status="status"
 																	id="obj">
 																	<tr>
-																		<td>
-																			<a href='help/<s:property value="#obj.url"/>' target="_blank"
-																				title='<s:property value="#obj.title"/>'><font><s:property
+																		<td nowrap="nowrap"
+																			style="overflow: hidden; text-overflow: ellipsis;">
+																			<a href='help/<s:property value="#obj.url"/>'
+																				target="_blank"
+																				title='<s:property value="#obj.title"/>'><font
+																				style="font-size: 12px"><s:property
 																						value="#obj.title" /> </font> </a>
 																		</td>
 																	</tr>
@@ -366,14 +384,17 @@ body {
 														style="PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 10px; PADDING-TOP: 10px"
 														colSpan=6>
 														<TABLE class=LeftNews cellSpacing=0 cellPadding=0
-															width="100%" border=0>
+															style="table-layout: fixed" width="100%" border=0>
 															<TBODY>
 																<s:iterator value="#request.dpResult" status="status"
 																	id="obj">
 																	<tr>
-																		<td>
-																			<a href='help/<s:property value="#obj.url"/>' target="_blank"
-																				title='<s:property value="#obj.title"/>'><font><s:property
+																		<td nowrap="nowrap"
+																			style="overflow: hidden; text-overflow: ellipsis;">
+																			<a href='help/<s:property value="#obj.url"/>'
+																				target="_blank"
+																				title='<s:property value="#obj.title"/>'><font
+																				style="font-size: 12px"><s:property
 																						value="#obj.title" /> </font> </a>
 																		</td>
 																	</tr>
@@ -409,14 +430,17 @@ body {
 														style="PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 10px; PADDING-TOP: 10px"
 														colSpan=6>
 														<TABLE class=LeftNews cellSpacing=0 cellPadding=0
-															width="100%" border=0>
+															style="table-layout: fixed" width="100%" border=0>
 															<TBODY>
 																<s:iterator value="#request.zqResult" status="status"
 																	id="obj">
 																	<tr>
-																		<td>
-																			<a href='help/<s:property value="#obj.url"/>' target="_blank"
-																				title='<s:property value="#obj.title"/>'><font><s:property
+																		<td nowrap="nowrap"
+																			style="overflow: hidden; text-overflow: ellipsis;">
+																			<a href='help/<s:property value="#obj.url"/>'
+																				target="_blank"
+																				title='<s:property value="#obj.title"/>'><font
+																				style="font-size: 12px"><s:property
 																						value="#obj.title" /> </font> </a>
 																		</td>
 																	</tr>
@@ -463,14 +487,17 @@ body {
 														style="PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 10px; PADDING-TOP: 10px"
 														colSpan=6>
 														<TABLE class=LeftNews cellSpacing=0 cellPadding=0
-															width="100%" border=0>
+															style="table-layout: fixed" width="100%" border=0>
 															<TBODY>
 																<s:iterator value="#request.wlResult" status="status"
 																	id="obj">
 																	<tr>
-																		<td>
-																			<a href='help/<s:property value="#obj.url"/>' target="_blank"
-																				title='<s:property value="#obj.title"/>'><font><s:property
+																		<td nowrap="nowrap"
+																			style="overflow: hidden; text-overflow: ellipsis;">
+																			<a href='help/<s:property value="#obj.url"/>'
+																				target="_blank"
+																				title='<s:property value="#obj.title"/>'><font
+																				style="font-size: 12px"> <s:property
 																						value="#obj.title" /> </font> </a>
 																		</td>
 																	</tr>
@@ -506,14 +533,17 @@ body {
 														style="PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 10px; PADDING-TOP: 10px"
 														colSpan=6>
 														<TABLE class=LeftNews cellSpacing=0 cellPadding=0
-															width="100%" border=0>
+															style="table-layout: fixed" width="100%" border=0>
 															<TBODY>
 																<s:iterator value="#request.fwResult" status="status"
 																	id="obj">
 																	<tr>
-																		<td>
-																			<a href='help/<s:property value="#obj.url"/>' target="_blank"
-																				title='<s:property value="#obj.title"/>'><font><s:property
+																		<td nowrap="nowrap"
+																			style="overflow: hidden; text-overflow: ellipsis;">
+																			<a href='help/<s:property value="#obj.url"/>'
+																				target="_blank"
+																				title='<s:property value="#obj.title"/>'><font
+																				style="font-size: 12px"><s:property
 																						value="#obj.title" /> </font> </a>
 																		</td>
 																	</tr>
@@ -536,6 +566,6 @@ body {
 
 
 		<s:include value="../common/footKuan.jsp"></s:include>
-		
+
 	</BODY>
 </HTML>

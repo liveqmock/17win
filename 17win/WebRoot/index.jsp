@@ -149,86 +149,22 @@
 								</TD>
 							</TR>
 							<TR>
-								<TD class=K_mtcontent
+								<TD class="K_mtcontent"   
 									style="PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 10px; PADDING-TOP: 10px"
-									colSpan=6>
-									<TABLE class=LeftNews cellSpacing=0 cellPadding=0 width="100%"
-										border=0>
-										<tr>
-											<td>
-												<a href='../news.asp?/1405.html' target="_blank"
-													title='我是新手，我该如何操作？'><font color=>我是新手，我该如何操作？</font> </a>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<a href='../news.asp?/1404.html' target="_blank"
-													title='灵谷平台制度'><font color=>灵谷平台制度</font> </a>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<a href='../news.asp?/1401.html' target="_blank"
-													title='VIP服务'><font color=>VIP服务</font> </a>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<a href='../news.asp?/1400.html' target="_blank"
-													title='刷客常见问题'><font color=>刷客常见问题</font> </a>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<a href='../news.asp?/1399.html' target="_blank"
-													title='新手教程！新人必看！'><font color=>新手教程！新人必看！</font> </a>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<a href='../news.asp?/1398.html' target="_blank"
-													title='什么是买家信誉页面'><font color=>什么是买家信誉页面</font> </a>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<a href='../news.asp?/1397.html' target="_blank"
-													title='新手必看-平台刷钻原理及问题解答'><font color=>新手必看-平台刷钻原理及问题解</font>
-												</a>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<a href='../news.asp?/1396.html' target="_blank"
-													title='这平台刷要钱么？'><font color=>这平台刷要钱么？</font> </a>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<a href='../news.asp?/1395.html' target="_blank"
-													title='新会员接任务的步骤是怎样的？'><font color=>新会员接任务的步骤是怎样的？</font>
-												</a>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<a href='../news.asp?/1394.html' target="_blank"
-													title='【新手入门】教您如何预防骗子'><font color=>【新手入门】教您如何预防骗子</font>
-												</a>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<a href='../news.asp?/1393.html' target="_blank"
-													title='[推荐]买家详细规则'><font color=>[推荐]买家详细规则</font> </a>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<a href='../news.asp?/1354.html' target="_blank"
-													title='淘宝信用炒作规则标准公布'><font color=>淘宝信用炒作规则标准公布</font> </a>
-											</td>
-										</tr>
+									colSpan="99">
+									<TABLE class="LeftNews" cellSpacing=0 cellPadding=0 style="table-layout: fixed"
+										width="100%" border="0">
+										<s:iterator value="#request.xsResult" status="status" id="obj">
+											<tr>
+												<td  width="100%" nowrap="nowrap"
+																										style="overflow: hidden; text-overflow: ellipsis;">
+													<a href='help/<s:property value="#obj.url"/>'
+														target="_blank" title='<s:property value="#obj.title"/>'><font
+														style="font-size: 12px"><s:property
+																value="#obj.title" /> </font> </a>
+												</td>
+											</tr>
+										</s:iterator>
 									</TABLE>
 								</TD>
 							</TR>
@@ -334,55 +270,23 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 																			<TBODY>
 																				<TR>
 																					<TD width="65%" height=30>
-																						<table class=LeftNews cellSpacing=0 cellPadding=0
+																						<table class="LeftNews" cellSpacing=0
+																							cellPadding=0 style="table-layout: fixed"
 																							width="100%" border=0>
-																							<tr>
-																								<td>
-																									<a href='../news.asp?/1448.html'
-																										target="_blank" title='淘宝刷钻-帐号不再被盗-------我有妙招'><font
-																										color=>淘宝刷钻-帐号不再被盗----</font> </a>
+																							<s:iterator value="#request.sellerResult"
+																								status="status" id="obj">
+																								<tr>
+																									<td nowrap="nowrap"
+																										style="overflow: hidden; text-overflow: ellipsis;">
+																										<a href='help/<s:property value="#obj.url"/>'
+																											target="_blank"
+																											title='<s:property value="#obj.title"/>'><font
+																											style="font-size: 12px"><s:property
+																													value="#obj.title" /> </font> </a>
+																									</td>
+																								</tr>
+																							</s:iterator>
 
-																								</td>
-																							</tr>
-																							<tr>
-																								<td>
-																									<a href='../news.asp?/1447.html'
-																										target="_blank" title='免费刷钻-宝首个获风投网店现身深圳'><font
-																										color=>免费刷钻-宝首个获风投网店现身</font> </a>
-																								</td>
-																							</tr>
-																							<tr>
-
-																								<td>
-																									<a href='../news.asp?/1446.html'
-																										target="_blank" title='淘宝刷信誉-哪句话让你感到最郁闷？'><font
-																										color=>淘宝刷信誉-哪句话让你感到最郁</font> </a>
-																								</td>
-																							</tr>
-																							<tr>
-																								<td>
-																									<a href='../news.asp?/1445.html'
-																										target="_blank" title='免费刷钻-公务员兼职淘宝三年买房买车'><font
-																										color=>免费刷钻-公务员兼职淘宝三年买</font> </a>
-
-																								</td>
-																							</tr>
-																							<tr>
-																								<td>
-																									<a href='../news.asp?/1444.html'
-																										target="_blank"
-																										title='淘宝刷钻-QQ广播之病毒式传播，小卖家也有大流量'><font
-																										color=>淘宝刷钻-QQ广播之病毒式传播</font> </a>
-																								</td>
-																							</tr>
-																							<tr>
-
-																								<td>
-																									<a href='../news.asp?/1443.html'
-																										target="_blank" title='淘宝刷钻-如何处理顾客砍价问题？'><font
-																										color=>淘宝刷钻-如何处理顾客砍价问题</font> </a>
-																								</td>
-																							</tr>
 																						</table>
 																					</TD>
 																					<TD align=right width="35%" rowSpan=4>
@@ -424,54 +328,22 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 																			<TBODY>
 																				<TR>
 																					<TD align=left width="65%" height=30>
-																						<table class=LeftNews cellSpacing=0 cellPadding=0
+																						<table class="LeftNews" cellSpacing=0
+																							cellPadding=0 style="table-layout: fixed"
 																							width="100%" border=0>
-																							<tr>
-
-																								<td>
-																									<a href='../news.asp?/1449.html'
-																										target="_blank" title='互刷平台-第三方诈骗的详细过程和防骗经验'><font
-																										color=>互刷平台-第三方诈骗的详细过程</font> </a>
-																								</td>
-																							</tr>
-																							<tr>
-																								<td>
-																									<a href='../news.asp?/1440.html'
-																										target="_blank" title='淘宝刷钻-阿里巴巴注资搜狗，意在淘宝'><font
-																										color=>淘宝刷钻-阿里巴巴注资搜狗，意</font> </a>
-
-																								</td>
-																							</tr>
-																							<tr>
-																								<td>
-																									<a href='../news.asp?/1435.html'
-																										target="_blank" title='互刷平台-淘宝排名八大规则'><font
-																										color=>互刷平台-淘宝排名八大规则</font> </a>
-																								</td>
-																							</tr>
-																							<tr>
-
-																								<td>
-																									<a href='../news.asp?/1434.html'
-																										target="_blank" title='淘宝刷信誉-网店的核心价值是什么'><font
-																										color=>淘宝刷信誉-网店的核心价值是什</font> </a>
-																								</td>
-																							</tr>
-																							<tr>
-																								<td>
-																									<a href='../news.asp?/1432.html'
-																										target="_blank" title='免费刷钻-买家必读'><font
-																										color=>免费刷钻-买家必读</font> </a>
-
-																								</td>
-																							</tr>
-																							<tr>
-																								<td>
-																									<a href='../news.asp?/1431.html'
-																										target="_blank" title='刷钻平台-淘宝买家也要讲评价的诚信'><font
-																										color=>刷钻平台-淘宝买家也要讲评价的</font> </a>
-																								</td>
-																							</tr>
+																							<s:iterator value="#request.buyerResult"
+																								status="status" id="obj">
+																								<tr>
+																									<td nowrap="nowrap"
+																										style="overflow: hidden; text-overflow: ellipsis;">
+																										<a href='help/<s:property value="#obj.url"/>'
+																											target="_blank"
+																											title='<s:property value="#obj.title"/>'><font
+																											style="font-size: 12px"><s:property
+																													value="#obj.title" /> </font> </a>
+																									</td>
+																								</tr>
+																							</s:iterator>
 																						</table>
 
 																					</TD>

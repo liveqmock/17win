@@ -4,21 +4,8 @@ $(document).ready(function() {
 			numberText("endValue");
 			$("#myTable").tablesorter({
 						widthFixed : true,
-						sortList : [[0, 0]],
-						headers : {
-							2 : {
-								sorter : false
-							},
-							4 : {
-								sorter : false
-							},
-							6 : {
-								sorter : false
-							},
-							7 : {
-								sorter : false
-							}
-						}
+						sortList : [[0, 0]]
+						 
 					});
 		});
 
