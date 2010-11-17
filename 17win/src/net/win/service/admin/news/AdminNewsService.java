@@ -123,7 +123,7 @@ public class AdminNewsService extends BaseService {
 		}
 
 		newsVO.setTypeName(URLDecoder.decode(newsVO.getTypeName(), "UTF-8"));
-		
+
 		Long count = (Long) newsDAO
 				.uniqueResultObject(
 						"select count(*) from NewsEntity as _news where _news.type.name=:typeName  order by _news.date desc",
@@ -282,7 +282,7 @@ public class AdminNewsService extends BaseService {
 	 */
 	public String queryNews(NewsVO newsVO) throws Exception {
 		StringBuffer resultHQL = new StringBuffer(
-				"select  _news, _type.name  from NewsEntity as _news inner join _news.type as _type where 1=1");
+				"select  _news, _type.name  from NewsEntity as _news inner join _news.type as _type where 1=1 ");
 		StringBuffer countHQL = new StringBuffer(
 				"select  count(*)   from NewsEntity as _news  inner join _news.type as _type where 1=1");
 		List<String> paramNames = new ArrayList<String>();
@@ -326,6 +326,7 @@ public class AdminNewsService extends BaseService {
 			paramValues.add(newsVO.getEndDate());
 		}
 
+		resultHQL.append("order by _news.date desc");
 		Long count = (Long) newsDAO.uniqueResultObject(countHQL.toString(),
 				paramNames.toArray(paramNames.toArray(new String[paramNames
 						.size()])), paramValues.toArray(new Object[paramValues
@@ -403,20 +404,15 @@ public class AdminNewsService extends BaseService {
 	 * @throws Exception
 	 */
 	public String addNews(NewsVO newsVO) throws Exception {
-		Long count = (Long) newsDAO
-				.uniqueResultObject(
-						"select count(*) from NewsEntity as _news  where _news.type.id=:typID",
-						new String[] { "typID" }, new Object[] { newsVO
-								.getTypeId() }) + 1;
 		NewsEntity newsEntity = new NewsEntity();
 		BeanUtils.copyProperties(newsEntity, newsVO);
 		NewsTypeEntity newsTypeEntity = new NewsTypeEntity();
 		newsTypeEntity.setId(newsVO.getTypeId());
 		newsEntity.setType(newsTypeEntity);
 		newsEntity.setDate(new Date());
-		newsEntity.setUrl("detail_" + newsVO.getTypeId() + "_" + count
-				+ ".html");
-		newsDAO.save(newsEntity);
+		newsEntity.setUrl("detail_null.html");
+		Long id = newsDAO.save(newsEntity);
+		newsEntity.setUrl("detail_" + id + ".html");
 		putAlertMsg("增加成功！");
 		putJumpPage("adminNewsManager/adminNews!queryNews.php");
 		newsDAO.flushSession();
@@ -455,11 +451,6 @@ public class AdminNewsService extends BaseService {
 	 * @throws Exception
 	 */
 	public String updateNews(NewsVO newsVO) throws Exception {
-		Long count = (Long) newsDAO
-				.uniqueResultObject(
-						"select count(*) from NewsEntity as _news  where _news.type.id=:typID",
-						new String[] { "typID" }, new Object[] { newsVO
-								.getTypeId() }) + 1;
 		NewsEntity newsEntity = newsDAO.get(newsVO.getId());
 		BeanUtils.copyProperties(newsEntity, newsVO);
 
@@ -467,8 +458,7 @@ public class AdminNewsService extends BaseService {
 		newsTypeEntity.setId(newsVO.getTypeId());
 		newsEntity.setType(newsTypeEntity);
 		newsEntity.setDate(new Date());
-		newsEntity.setUrl("detail_" + newsVO.getTypeId() + "_" + count
-				+ ".html");
+		newsEntity.setUrl("detail_" + newsVO.getId() + ".html");
 		putJumpPage("adminNewsManager/adminNews!queryNews.php");
 		putAlertMsg("修改成功！");
 		newsDAO.flushSession();

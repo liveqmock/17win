@@ -7,6 +7,7 @@
 		<LINK href="css/Css.css" type=text/css rel=stylesheet>
 		<LINK href="css/top_bottom.css" type=text/css rel=stylesheet>
 		<SCRIPT src="help/list.js" type=text/javascript></SCRIPT>
+		<SCRIPT src="js/utils.js" type=text/javascript></SCRIPT>
 		<style type="text/css">
 <!--
 body {

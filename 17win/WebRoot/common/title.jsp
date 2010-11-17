@@ -32,7 +32,7 @@
 				<TR>
 					<TD width=433>
 						<A href="http://www.2000w.net" title="淘宝刷信誉,淘宝刷钻,刷钻平台"><IMG
-								alt="淘宝刷信誉,淘宝刷钻,刷钻平台" src="images/201063012565665641.jpg"
+								alt="淘宝刷信誉,淘宝刷钻,刷钻平台" src="images/logo.gif"
 								border=0> </A>
 					</TD>
 					<TD vAlign=top width=528>

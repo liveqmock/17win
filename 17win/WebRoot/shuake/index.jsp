@@ -16,12 +16,10 @@
 		<LINK href="css/index.css" type=text/css rel=stylesheet>
 		<LINK href="css/top_bottom.css" type="text/css" rel="stylesheet">
 		<link href="css/top.css" type="text/css" rel="stylesheet" />
-		<SCRIPT src="js/jquery-ui-1.8.4.custom.min.js" type="text/javascript"></SCRIPT>
-		<SCRIPT src="credit/task.js" type="text/javascript"></SCRIPT>
 		<script type="text/javascript" src="js/utils.js">
 		</script>
 	</HEAD>
-	<BODY>
+	<BODY onload="getUserLogin()" >
 		<s:include value="../common/title.jsp"></s:include>
 		<DIV id=box>
 			<DIV class=clear></DIV>

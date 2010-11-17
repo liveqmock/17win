@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -14,6 +15,7 @@ import net.win.BaseService;
 import net.win.dao.NewsDAO;
 import net.win.entity.NewsEntity;
 import net.win.utils.ContextUtils;
+import net.win.utils.DateUtils;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -35,7 +37,7 @@ public class AdminSystemService extends BaseService {
 	 * @return
 	 * @throws Exception
 	 */
-	public String staticNewsPage() throws Exception {
+	public String updateStaticNewsPage() throws Exception {
 
 		List<NewsEntity> newses = newsDAO.listAll();
 		HttpClient httpclient = new DefaultHttpClient();
@@ -44,6 +46,13 @@ public class AdminSystemService extends BaseService {
 				+ getRequset().getServerName() + ":"
 				+ getRequset().getServerPort() + path + "/";
 		for (NewsEntity newsEntity : newses) {
+			if (newsEntity.getPageDate() != null
+					&& (DateUtils
+							.format(newsEntity.getDate(), "yyyyMMddHHmmss")
+							.equals(DateUtils.format(newsEntity.getPageDate(),
+									"yyyyMMddHHmmss")))) {
+				continue;
+			}
 			HttpGet httpget = null;
 			BufferedWriter writer = null;
 			BufferedReader reader = null;
@@ -70,6 +79,8 @@ public class AdminSystemService extends BaseService {
 						writer.newLine();
 					}
 				}
+				newsEntity.setDate(new Date());
+				newsEntity.setPageDate(new Date());
 			} catch (RuntimeException e) {
 				throw new RuntimeException(e);
 			} finally {

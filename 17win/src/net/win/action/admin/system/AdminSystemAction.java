@@ -50,7 +50,7 @@ public class AdminSystemAction extends BaseAction {
 	 * @throws Exception
 	 */
 	public String staticNewsPage() throws Exception {
-		return adminSystemService.staticNewsPage();
+		return adminSystemService.updateStaticNewsPage();
 	}
 
 	/**

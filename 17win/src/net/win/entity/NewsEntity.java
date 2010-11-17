@@ -19,12 +19,16 @@ public class NewsEntity extends BaseEntity {
 	@Column(name = "Content_", columnDefinition = "text", nullable = false)
 	private String content;
 	// URL
-	@Column(name = "Url_" ,unique=true)
+	@Column(name = "Url_", unique = true)
 	private String url;
 
-	// 发布时间
+	// 修改时间
 	@Column(name = "date_", nullable = false)
 	private Date date;
+
+	// 修改时间
+	@Column(name = "page_date_", nullable = true)
+	private Date pageDate;
 
 	// 充值人
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = NewsTypeEntity.class)
@@ -69,6 +73,14 @@ public class NewsEntity extends BaseEntity {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public Date getPageDate() {
+		return pageDate;
+	}
+
+	public void setPageDate(Date pageDate) {
+		this.pageDate = pageDate;
 	}
 
 }
