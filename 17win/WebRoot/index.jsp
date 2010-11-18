@@ -25,9 +25,9 @@
 		<SCRIPT src="js/jquery-1.4.2.min.js" type=text/javascript></SCRIPT>
 		<SCRIPT src="js/jquery-ui-1.8.4.custom.min.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="js/validater.js" type=text/javascript></SCRIPT>
-		<SCRIPT src="index.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="js/service.js" type="text/javascript"></SCRIPT>
-		<SCRIPT src="js/jquery.messager.js" type="text/javascript"></SCRIPT>
+		<SCRIPT src="js/jquery.node.js" type="text/javascript"></SCRIPT>
+		<SCRIPT src="index.js" type="text/javascript"></SCRIPT>
 	</HEAD>
 	<BODY>
 		<s:form action="userManager/base!login.php" theme="simple"
@@ -149,15 +149,15 @@
 								</TD>
 							</TR>
 							<TR>
-								<TD class="K_mtcontent"   
+								<TD class="K_mtcontent"
 									style="PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 10px; PADDING-TOP: 10px"
 									colSpan="99">
-									<TABLE class="LeftNews" cellSpacing=0 cellPadding=0 style="table-layout: fixed"
-										width="100%" border="0">
+									<TABLE class="LeftNews" cellSpacing=0 cellPadding=0
+										style="table-layout: fixed" width="100%" border="0">
 										<s:iterator value="#request.xsResult" status="status" id="obj">
 											<tr>
-												<td  width="100%" nowrap="nowrap"
-																										style="overflow: hidden; text-overflow: ellipsis;">
+												<td width="100%" nowrap="nowrap"
+													style="overflow: hidden; text-overflow: ellipsis;">
 													<a href='help/<s:property value="#obj.url"/>'
 														target="_blank" title='<s:property value="#obj.title"/>'><font
 														style="font-size: 12px"><s:property
@@ -606,6 +606,42 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 						</dd>
 					</dl>
 				</div>
+			</div>
+		</div>
+
+		<div id="newnotice"
+			style="width: 300px; border: solid #A1CFE6 1px; background-color: #A1CFE6;">
+			<p
+				style="font-size: 12px; margin: 1px; padding: 0px 2px 0px 5px; background-color: #73B8DA; font-weight: bold; color: #666666; height: 20px; line-height: 20px;">
+				<span style="float: left;">最新公告</span>
+				<span
+					style="display: block; float: right; width: 48px; height: 15px;">
+					<label id="tomin"
+						style="float: left; width: 15px; height: 15px; line-height: 15px; cursor: pointer; background-image: url(images/notice_button.gif); background-position: center;"
+						title="最小化">
+					</label> <label id="tomax"
+						style="float: left; width: 15px; height: 15px; line-height: 15px; cursor: pointer; background-image: url(images/notice_button.gif); background-position: bottom;"
+						title="最大化">
+					</label> <label id="toclose"
+						style="float: left; width: 15px; height: 15px; line-height: 15px; cursor: pointer; background-image: url(images/notice_button.gif);"
+						title="关闭">
+					</label> </span>
+			</p>
+			<div id="noticecon"
+				style="background-color: #EEF7FB; font-size: 12px; margin: 1px; padding: 0px 5px 0px 5px; height: 100px; line-height: 20px;">
+				<table width="100%" style="table-layout: fixed">
+					<s:iterator value="#request.ggResult" status="status" id="obj">
+						<tr>
+							<td nowrap="nowrap" width="100%
+								style="overflow:hidden; text-overflow:ellipsis;">
+								<a href='help/<s:property value="#obj.url"/>' target="_blank"
+									title='<s:property value="#obj.title"/>'><font color="red"
+									style="font-size: 12px"><s:property value="#obj.title" />
+								</font> </a>
+							</td>
+						</tr>
+					</s:iterator>
+				</table>
 			</div>
 		</div>
 	</BODY>

@@ -31,7 +31,9 @@
 					</td>
 					<td>
 						<input type="text" name="code" style="width: 60px" maxlength="4" />
-						<img src="verify/verificationCode.php" />
+						<img src="verify/verificationCode.php"
+							onclick="changeValidateCode(this)" title="点击图片刷新验证码"
+							style="cursor: pointer;">
 					</td>
 				</Tr>
 				<Tr>

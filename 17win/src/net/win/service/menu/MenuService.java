@@ -44,9 +44,15 @@ public class MenuService extends BaseService {
 						"from NewsEntity as _news where _news.type.name='买家必读'  order by _news.date desc",
 						0, 5);
 
+		List<NewsEntity> newses4 = newsDAO
+				.pageQuery(
+						"from NewsEntity as _news where _news.type.name='网站公告'  order by _news.date desc",
+						0, 3);
+
 		List<NewsVO> xsResult = new ArrayList<NewsVO>();
 		List<NewsVO> sellerResult = new ArrayList<NewsVO>();
 		List<NewsVO> buyerResult = new ArrayList<NewsVO>();
+		List<NewsVO> ggResult = new ArrayList<NewsVO>();
 		NewsVO newsVOTemp = null;
 		for (NewsEntity newsEntity : newses1) {
 			newsVOTemp = new NewsVO();
@@ -64,10 +70,16 @@ public class MenuService extends BaseService {
 			BeanUtils.copyProperties(newsVOTemp, newsEntity);
 			buyerResult.add(newsVOTemp);
 		}
+		for (NewsEntity newsEntity : newses4) {
+			newsVOTemp = new NewsVO();
+			BeanUtils.copyProperties(newsVOTemp, newsEntity);
+			ggResult.add(newsVOTemp);
+		}
 
 		putByRequest("xsResult", xsResult);
 		putByRequest("sellerResult", sellerResult);
 		putByRequest("buyerResult", buyerResult);
+		putByRequest("ggResult", ggResult);
 		return "toIndex";
 	}
 }

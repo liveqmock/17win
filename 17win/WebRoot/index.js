@@ -7,69 +7,41 @@ function changeValidateCode(obj) {
 }
 var submitFlag = true;
 $(document).ready(function() {
-	$.messager.lays(300, 200);
-	$.messager
-			.show(
-					'17win公告',
-					'300x200的消息<br>脚本之家（JB51.net）提供各类编程源码、书籍教程、JavaScript/CSS特效代码以及常用软件下载等，做有质量的学习型源码下载站。');
-	$("#username").focus();
-	// // 找回密码
-	// $("#findPW").dialog({
-	// autoOpen : false,
-	// draggable : false,
-	// hide : 'slide',
-	// modal : true,
-	// resizable : false,
-	// show : 'slide'
-	// });
-	// $("#findPW").bind("dialogbeforeclose", function(event, ui) {
-	// $("#usernameTelephone").val("");
-	// });
-	// $("#findPWBtn").button();
-	// $("#findPWBtn").bind("click", function() {
-	// if (Validater.isBlank($("#usernameTelephone").val())) {
-	// alert("数据不能为空");
-	// return false;
-	// }
-	// $.post("ajaxManager/ajax!findPassword.php", {
-	// username : $("#usernameTelephone").val(),
-	// telephone : $("#usernameTelephone").val()
-	// }, function(data) {
-	// if (data.bool) {
-	// alert("邮件已经发送到你的邮箱里面，请查收！");
-	// } else {
-	// alert("该用户名或则手机没有被注册过！");
-	// }
-	// $("#findPW").dialog("close");
-	// }, "json");
-	// });
-	// 弹出找回密码层
-	$("#findPWA").bind("click", function() {
-				$("#findPW").dialog("open");
+	$("#newnotice").floatdiv("leftbottom");
+	$(window).load(function() {
+				$("#newnotice").slideDown("slow");
+			})
+	$("#tomin").click(function() {
+				$("#noticecon", "#newnotice").slideUp();
+			});
+	$("#tomax").click(function() {
+				$("#noticecon", "#newnotice").slideDown();
+			});
+	$("#toclose").click(function() {
+				$("#newnotice").hide();
 			});
 
+	$("#username").focus();
 	// 用户名
 	$("#username").focus();
 	$("#username").bind("blur", function() {
-		var obj = this;
-		if (Validater.isName($(this).val(),4,12)) {
-			validateSuccess(obj);
-		} else {
-			validateError(
-					this,
-					"用户名必须4-12个字符的字母、汉字、数字、下划线！");
-			submitFlag = false;
-		}
-	});
+				var obj = this;
+				if (Validater.isName($(this).val(), 4, 12)) {
+					validateSuccess(obj);
+				} else {
+					validateError(this, "用户名必须4-12个字符的字母、汉字、数字、下划线！");
+					submitFlag = false;
+				}
+			});
 	// 密码
 	$("#password").bind("blur", function() {
-		if (Validater.isPassword($(this).val())) {
-			validateSuccess(this);
-		} else {
-			validateError(this, "密码格式不正确，必须为6至20位字符！");
-			submitFlag = false;
-		}
-	});
+				if (Validater.isPassword($(this).val())) {
+					validateSuccess(this);
+				} else {
+					validateError(this, "密码格式不正确，必须为6至20位字符！");
+					submitFlag = false;
+				}
+			});
 	// 验证码
 	$("#verificationCode").bind("blur", function() {
 				if ($(this).val().length == 4) {
@@ -80,7 +52,6 @@ $(document).ready(function() {
 			});
 
 	// //// ajax
-
 	$.getJSON("userManager/base!getLoginUser.php?time=" + new Date().getTime(),
 			function(data) {
 				var user = data.loginInfo;
@@ -182,7 +153,7 @@ $(document).ready(function() {
 
 				$("#userLoginId").html(tdYes);
 				$("#tableLoginUserInfoID").html(tableYes);
-				
+
 			});
 
 });
