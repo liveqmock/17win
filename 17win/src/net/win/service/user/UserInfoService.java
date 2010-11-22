@@ -30,14 +30,13 @@ import net.win.vo.BuyerVO;
 import net.win.vo.SellerVO;
 import net.win.vo.UserVO;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 import sun.misc.BASE64Encoder;
-
-import com.sun.org.apache.commons.beanutils.BeanUtils;
 
 @SuppressWarnings( { "unchecked" })
 @Service("userInfoService")
