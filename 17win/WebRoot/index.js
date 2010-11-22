@@ -54,6 +54,9 @@ $(document).ready(function() {
 	// //// ajax
 	$.getJSON("userManager/base!getLoginUser.php?time=" + new Date().getTime(),
 			function(data) {
+				if(data==null){
+					return ;
+				}
 				var user = data.loginInfo;
 				var tdNo = "<span class='yell_font'>您还没登录！</span> "
 						+ "	<a target='_top' href='user/login.html'>登陆</a> | <a target='_top' href='userManager/base!initRegister.php'>注册</a> | "

@@ -28,22 +28,22 @@ public class CapitalLogVO extends BaseVO {
 	private Date startDate;
 	private Date endDate;
 
-	private Integer startValue;
-	private Integer endValue;
+	private Double startValue;
+	private Double endValue;
 
-	public Integer getStartValue() {
+	public Double getStartValue() {
 		return startValue;
 	}
 
-	public void setStartValue(Integer startValue) {
+	public void setStartValue(Double startValue) {
 		this.startValue = startValue;
 	}
 
-	public Integer getEndValue() {
+	public Double getEndValue() {
 		return endValue;
 	}
 
-	public void setEndValue(Integer endValue) {
+	public void setEndValue(Double endValue) {
 		this.endValue = endValue;
 	}
 

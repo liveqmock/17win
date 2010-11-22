@@ -145,14 +145,14 @@ public class CreditTaskRepositoryService extends BaseService {
 			putJumpPage("taskRepositoryManager/taskRepository!queryRepositories.php?platformType="
 					+ platformType);
 
-			logMoneyCapital(userDAO, 0 - creditTaskRepositoryEntity.getMoney()
-					+ creditTaskRepositoryEntity.getAddtionMoney(), "从仓库发布任务",
-					user);
+			logMoneyCapital(
+					userDAO,
+					0 - (creditTaskRepositoryEntity.getMoney() + creditTaskRepositoryEntity
+							.getAddtionMoney()), "从仓库发布任务", user);
 
-			logDotCapital(userDAO, 0
-					- creditTaskRepositoryEntity.getReleaseDot()
-					+ creditTaskRepositoryEntity.getAddtionReleaseDot(),
-					"从仓库发布任务", user);
+			logDotCapital(userDAO, 0 - (creditTaskRepositoryEntity
+					.getReleaseDot() + creditTaskRepositoryEntity
+					.getAddtionReleaseDot()), "从仓库发布任务", user);
 			putAlertMsg("发布成功！");
 			return JUMP;
 		}

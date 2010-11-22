@@ -1162,10 +1162,10 @@ public class CreditTaskService extends BaseService {
 		// 完成对金钱进行修改,登陆名的也需要
 		updateUserLoginInfo(userEntity);
 
-		logMoneyCapital(userDAO, 0 - creditTask.getMoney()
-				+ creditTask.getAddtionMoney(), "发布任务", userEntity);
-		logDotCapital(userDAO, 0 - creditTaskDot
-				+ creditTaskVO.getAddtionReleaseDot(), "发布任务", userEntity);
+		logMoneyCapital(userDAO, 0 - (creditTask.getMoney()
+				+ creditTask.getAddtionMoney()), "发布任务", userEntity);
+		logDotCapital(userDAO, 0 - (creditTaskDot
+				+ creditTaskVO.getAddtionReleaseDot()), "发布任务", userEntity);
 
 		putDIV("");
 		return "insertReleaseTaskSuccess";

@@ -179,7 +179,7 @@ img {
 																<s:property value="#capitalLog.value" />
 															</td>
 															<td>
-																<s:date name="#capitalLog.logTim"
+																<s:date name="#capitalLog.logTime"
 																	format="yyyy-MM-dd HH-mm-ss" />
 															</td>
 															<td>

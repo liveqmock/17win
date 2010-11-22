@@ -1,9 +1,6 @@
 
 
 $(document).ready(function() {
-			// numberText("releaseDot_1");
-			// //numberText("releaseDot_2");
-			// numberText("releaseDot_3");
 			$("form input").bind("focus", function() {
 						if ($(this).attr("type") != "submit") {
 							$(this).val("");

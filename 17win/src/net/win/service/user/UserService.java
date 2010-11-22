@@ -212,8 +212,10 @@ public class UserService extends BaseService {
 	 */
 	public String initRegister(UserVO userVO) throws Exception {
 		String username = getByParam("spreadUsername");
-		username = new String(username.getBytes("ISO-8859-1"), "GBK");
-		putByRequest("username", username);
+		if (username != null) {
+			username = new String(username.getBytes("ISO-8859-1"), "GBK");
+			putByRequest("username", username);
+		}
 		return "initRegister";
 	}
 

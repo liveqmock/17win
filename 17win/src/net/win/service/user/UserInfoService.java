@@ -391,7 +391,7 @@ public class UserInfoService extends BaseService {
 						0.5 * releaseDot));
 				userEntity.setReleaseDot(ArithUtils.add(userEntity
 						.getReleaseDot(), releaseDot));
-				logMoneyCapital(userDAO, 0 - 0.5 * releaseDot, "购买发布点",
+				logMoneyCapital(userDAO, 0 - (0.5 * releaseDot), "购买发布点",
 						userEntity);
 				logDotCapital(userDAO, releaseDot, "购买发布点", userEntity);
 				if (userEntity.getReferee() != null) {
