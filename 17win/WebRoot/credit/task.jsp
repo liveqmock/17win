@@ -120,8 +120,7 @@
 								</td>
 								<td valign="top" align="center">
 									<font color="red"><s:property value="#task[4]" /> </font><font
-										color="blue">+<s:property value="#task[15]" />
-									</font> 元 (
+										color="blue">+<s:property value="#task[15]" /> </font> 元 (
 									<s:if test="#task[5]">
 												需改价格
 									</s:if>
@@ -131,8 +130,7 @@
 									)
 									<br>
 									<font color="red"><s:property value="#task[7]" /> </font><font
-										color="blue">+<s:property value="#task[16]" />
-									</font> 个发布点
+										color="blue">+<s:property value="#task[16]" /> </font> 个发布点
 								</td>
 								<td valign="top" align="center">
 
@@ -180,14 +178,15 @@
 								</TD>
 							</tr>
 
-							<!-- 分隔 -->
-							<TR>
+							<TR
+								<s:if test="#task[14]!=null">  style="background: #FFA1A1" </s:if>>
 								<TD align="left" colspan="6">
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									<font color="red" style="font-weight: bold;"> 任务描述：<s:property
 											value="#task[10]" /> </font>
 								</TD>
 							</TR>
+							<!-- 分隔 -->
 							<tr>
 								<td colspan="7">
 									<hr width="98%"

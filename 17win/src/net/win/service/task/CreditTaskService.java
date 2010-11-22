@@ -1052,9 +1052,8 @@ public class CreditTaskService extends BaseService {
 					.getIntervalHourByGoodType(creditTaskVO.getGoodTimeType()));
 		}
 		// 算发布点
-		double dot = StrategyUtils.generateCreditRDot(creditTaskVO.getMoney(),
-				creditTaskVO.getIntervalHour())
-				+ creditTaskVO.getAddtionReleaseDot();
+		double creditTaskDot = StrategyUtils.generateCreditRDot(creditTaskVO
+				.getMoney(), creditTaskVO.getIntervalHour());
 		// 验证
 		if (!userEntity.getStatus().equals("1")) {
 			switch (Integer.parseInt(userEntity.getStatus())) {
@@ -1088,8 +1087,10 @@ public class CreditTaskService extends BaseService {
 			putAlertMsg("不能发布小于1元的任务！");
 			return "insertReleaseTaskFail";
 		}
-		if (dot > userEntity.getReleaseDot()) {
-			putAlertMsg("您当前的发布点不够" + dot + "！");
+		if (creditTaskDot + creditTaskVO.getAddtionReleaseDot() > userEntity
+				.getReleaseDot()) {
+			putAlertMsg("您当前的发布点不够" + creditTaskDot
+					+ creditTaskVO.getAddtionReleaseDot() + "，不能发布此任务！");
 			return "insertReleaseTaskFail";
 		}
 		// 设置发布人，发布账号
@@ -1123,7 +1124,7 @@ public class CreditTaskService extends BaseService {
 		// 生成地址
 		creditTask.setAddress(createAddress(creditTaskVO, taskMananger,
 				sellerID));
-		creditTask.setReleaseDot(dot);
+		creditTask.setReleaseDot(creditTaskDot);
 		creditTask.setReleaseDate(new Date());
 		creditTask.setReleasePerson(userEntity);
 		creditTask.setType(platFormType);
@@ -1139,7 +1140,7 @@ public class CreditTaskService extends BaseService {
 			BeanUtils.copyProperties(creditTaskRepository, creditTaskVO);
 			creditTaskRepository.setUser(userEntity);
 			creditTaskRepository.setType(platFormType);
-			creditTaskRepository.setReleaseDot(dot);
+			creditTaskRepository.setReleaseDot(creditTaskDot);
 			creditTaskRepository
 					.setGoodTimeType(creditTaskVO.getGoodTimeType());
 			if (StringUtils.isBlank(creditTaskVO.getRespositoryName())) {
@@ -1156,14 +1157,15 @@ public class CreditTaskService extends BaseService {
 		userEntity.setMoney(ArithUtils.sub(userEntity.getMoney(), creditTask
 				.getMoney()
 				+ creditTask.getAddtionMoney()));
-		userEntity.setReleaseDot(ArithUtils
-				.sub(userEntity.getReleaseDot(), dot));
+		userEntity.setReleaseDot(ArithUtils.sub(userEntity.getReleaseDot(),
+				creditTaskDot + creditTaskVO.getAddtionReleaseDot()));
 		// 完成对金钱进行修改,登陆名的也需要
 		updateUserLoginInfo(userEntity);
 
 		logMoneyCapital(userDAO, 0 - creditTask.getMoney()
 				+ creditTask.getAddtionMoney(), "发布任务", userEntity);
-		logDotCapital(userDAO, 0 - dot, "发布任务", userEntity);
+		logDotCapital(userDAO, 0 - creditTaskDot
+				+ creditTaskVO.getAddtionReleaseDot(), "发布任务", userEntity);
 
 		putDIV("");
 		return "insertReleaseTaskSuccess";
