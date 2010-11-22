@@ -14,9 +14,8 @@ import net.win.utils.Constant;
 import net.win.utils.StrategyUtils;
 import net.win.utils.StringUtils;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.struts2.ServletActionContext;
-
-import com.sun.org.apache.commons.beanutils.BeanUtils;
 
 public class BaseService {
 	protected static final String SUCCESS = "success";
@@ -323,7 +322,8 @@ public class BaseService {
 			UserEntity refereeUser = userEntity.getReferee();
 			if (refereeUser != null) {
 				refereeUser.setMoney(10 + refereeUser.getMoney());
-				logDotCapital(baseDAO, 10D, "你推广的用户接受了100个任务你获得10元！", refereeUser);
+				logDotCapital(baseDAO, 10D, "你推广的用户接受了100个任务你获得10元！",
+						refereeUser);
 			}
 		}
 	}
