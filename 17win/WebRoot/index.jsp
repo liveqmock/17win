@@ -95,7 +95,7 @@
 														<input type="text" name="userVO.verificationCode"
 															size="30" maxlength="4" value="" id="verificationCode"
 															style="width: 60px;">
-														<img src="verify/verificationCode.php"
+														<img src="verify/verificationCode.php" id="verificationID"
 															onclick="changeValidateCode(this)" title="点击图片刷新验证码"
 															style="cursor: pointer;">
 														<span> </span>

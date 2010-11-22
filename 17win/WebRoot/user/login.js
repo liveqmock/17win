@@ -7,6 +7,7 @@ function changeValidateCode(obj) {
 }
 var submitFlag = true;
 $(document).ready(function() {
+	changeValidateCode($("#verificationID").get(0));
 	$("#username").focus();
 	$("#verificationCode").val("");
 	$("#loginBtn").button();

@@ -94,10 +94,10 @@ img {
 												<table style="background: white;" cellpadding="1px"
 													width="99%" cellspacing="1px">
 													<tr style="background: #EDF6FF;">
-														<td colspan="2">
+														<td colspan="2" >
 															<s:if test="#session.userLogin.vipEnable">
 																<img
-																	src="images/vip/<s:property value="@net.win.utils.StrategyUtils@getLevelImg(#session.userLogin.vipType,#session.userLogin.vipEnable)" />" />
+																	src="images/vip/<s:property value="@net.win.utils.StrategyUtils@getVipImg(#session.userLogin.vipType,#session.userLogin.vipEnable)" />" />
 															到期时间：<s:date name="#session.userLogin.vipEndDate"
 																	format="yyyy-MM-dd HH-mm-ss" />
 															当前成长值：<s:property value="#session.userLogin.vipGrowValue" />

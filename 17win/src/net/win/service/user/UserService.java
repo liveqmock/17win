@@ -8,6 +8,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import net.win.BaseService;
+import net.win.UserLoginInfo;
 import net.win.dao.UserDAO;
 import net.win.dao.VipDAO;
 import net.win.entity.UserEntity;
@@ -120,6 +121,7 @@ public class UserService extends BaseService {
 	 * @throws Exception
 	 */
 	public String updateLogin(UserVO userVO) throws Exception {
+		UserLoginInfo userLoginInfo = getLoginUser();
 		if (!userVO.getVerificationCode().equals(
 				getBySession(Constant.VERIFY_CODE))) {
 			putAlertMsg("验证码不正确！");
@@ -150,14 +152,14 @@ public class UserService extends BaseService {
 			// VIP有效
 			if (userEntity.getVipEnable()) {
 				// VIP过期
-				if (nowDate.getTime() > userEntity.getVipBidUserEntity()
-						.getEndDate().getTime()) {
+				if (nowDate.getTime() > vipBidUser.getEndDate().getTime()) {
 					userEntity.setVipEnable(false);
 				} else {
 					// 判断是否第一次登录
 					if (!oldDateStr.equals(newDateStr)) {
 						// 设置成长值，判断会员是否升级
 						vipBidUser.setGrowValue(vip.getLoginGrowValue());
+
 						String vipType = StrategyUtils.getVipType(vipBidUser
 								.getGrowValue());
 						if (!vip.getType().equals(vipType)) {
@@ -166,6 +168,9 @@ public class UserService extends BaseService {
 							vip = userEntity.getVip();
 						}
 					}
+					userLoginInfo.setVipEndDate(userEntity
+							.getVipBidUserEntity().getEndDate());
+					userLoginInfo.setVipGrowValue(vipBidUser.getGrowValue());
 				}
 			}
 			if (userEntity.getVipEnable()) {

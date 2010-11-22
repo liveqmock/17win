@@ -54,8 +54,9 @@ $(document).ready(function() {
 	// //// ajax
 	$.getJSON("userManager/base!getLoginUser.php?time=" + new Date().getTime(),
 			function(data) {
-				if(data==null){
-					return ;
+				if (data == null) {
+					changeValidateCode($("#verificationID").get(0));
+					return;
 				}
 				var user = data.loginInfo;
 				var tdNo = "<span class='yell_font'>您还没登录！</span> "
@@ -97,6 +98,7 @@ $(document).ready(function() {
 						+ "		<a border='0' id='findPWA' href='javascript:void(0);'>找回密码</a> "
 						+ "	</td> " + "	</tr>  	</tbody></table>";
 				if (user == null) {
+					changeValidateCode($("#verificationID").get(0));
 					$("#userLoginId").html(tdNo);
 					$("#tableLoginUserInfoID").html(tableNo);
 					$("#username").focus();
