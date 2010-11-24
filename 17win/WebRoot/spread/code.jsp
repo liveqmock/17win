@@ -193,13 +193,13 @@
 									<td>
 										HTML:
 										<input name="Input" id="copyTxt_4" style="width: 400px"
-											value="&lt;a href='http://www.2000w.net/register.asp?promotion=xgj1988' target='_blank'&gt;xgj1988'&lt;/a&gt;"
+											value="&lt;a href='http://www.17win.net/register.asp?promotion=xgj1988' target='_blank'&gt;xgj1988'&lt;/a&gt;"
 											size="46" />
 										<br />
 										<br />
 										UBB:&nbsp;&nbsp;&nbsp;&nbsp
 										<input name="Input" id="copyTxt_5" style="width: 400px"
-											value="[url=http://www.2000w.net/register.asp?promotion=xgj1988]xgj1988[/url]"
+											value="[url=http://www.17win.net/register.asp?promotion=xgj1988]xgj1988[/url]"
 											size="46" />
 										<br />
 										&nbsp;&nbsp;&nbsp;

@@ -427,32 +427,32 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 				align=center border=0>
 				<TR align=left>
 					<TD>
-						<a href='http://www.2000w.net' target='_blank' title=拍拍刷信誉><IMG
+						<a href='http://www.17win.net' target='_blank' title=拍拍刷信誉><IMG
 								title=拍拍刷信誉 height=55 src=images/jieducm_04.gif width=109
 								border=0> </A>
 					</TD>
 					<TD>
-						<a href='http://www.2000w.net' target='_blank' title=拍拍刷信誉><IMG
+						<a href='http://www.17win.net' target='_blank' title=拍拍刷信誉><IMG
 								title=拍拍刷信誉 height=55 src=images/jieducm_03.gif width=109
 								border=0> </A>
 					</TD>
 					<TD>
-						<a href='http://www.2000w.net' target='_blank' title=刷钻网><IMG
+						<a href='http://www.17win.net' target='_blank' title=刷钻网><IMG
 								title=刷钻网 height=55 src=images/jieducm_05.gif width=109 border=0>
 						</A>
 					</TD>
 					<TD>
-						<a href='http://www.2000w.net' target='_blank' title=淘宝互刷><IMG
+						<a href='http://www.17win.net' target='_blank' title=淘宝互刷><IMG
 								title=淘宝互刷 height=55 src=images/jieducm_06.gif width=109
 								border=0> </A>
 					</TD>
 					<TD>
-						<a href='http://www.2000w.net' target='_blank' title=传媒><IMG
+						<a href='http://www.17win.net' target='_blank' title=传媒><IMG
 								title=传媒 height=55 src=images/jieducm_011.gif width=109 border=0>
 						</A>
 					</TD>
 					<TD>
-						<a href='http://www.2000w.net' target='_blank' title=传媒><IMG
+						<a href='http://www.17win.net' target='_blank' title=传媒><IMG
 								title=传媒 height=55 src=images/jieducm_022.gif width=109 border=0>
 						</A>
 					</TD>
@@ -480,15 +480,15 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 						</A>
 					</TD>
 					<TD>
-						<a href='http://www.2000w.net' target='_blank' title=淘宝刷信誉>[淘宝刷信誉]
+						<a href='http://www.17win.net' target='_blank' title=淘宝刷信誉>[淘宝刷信誉]
 						</A>
 					</TD>
 					<TD>
-						<a href='http://www.2000w.net' target='_blank' title=淘宝刷钻>[淘宝刷钻]
+						<a href='http://www.17win.net' target='_blank' title=淘宝刷钻>[淘宝刷钻]
 						</A>
 					</TD>
 					<TD>
-						<a href='http://www.2000w.net' target='_blank' title="刷钻平台">[刷钻平台]
+						<a href='http://www.17win.net' target='_blank' title="刷钻平台">[刷钻平台]
 						</A>
 					</TD>
 					<TD>
@@ -496,7 +496,7 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 						</A>
 					</TD>
 					<TD>
-						<a href='http://www.2000w.net' target='_blank' title="免费刷钻">[免费刷钻]
+						<a href='http://www.17win.net' target='_blank' title="免费刷钻">[免费刷钻]
 						</A>
 					</TD>
 					<TD>
@@ -535,9 +535,9 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 							豫ICP备05329849号
 							<br />
 							本站服务导航:
-							<a href="http://www.2000w.net/" target="_blank">淘宝刷信誉</a>|
-							<a href="http://www.2000w.net/" target="_blank">刷钻平台</a>|
-							<a href="http://www.2000w.net/" target="_blank">淘宝刷钻</a>|
+							<a href="http://www.17win.net/" target="_blank">淘宝刷信誉</a>|
+							<a href="http://www.17win.net/" target="_blank">刷钻平台</a>|
+							<a href="http://www.17win.net/" target="_blank">淘宝刷钻</a>|
 						</div>
 					</TD>
 					<TD width=211>

@@ -31,9 +31,8 @@
 			<TABLE width=969 border=0 align=center cellPadding=2 cellSpacing=0>
 				<TR>
 					<TD width=433>
-						<A href="http://www.2000w.net" title="淘宝刷信誉,淘宝刷钻,刷钻平台"><IMG
-								alt="淘宝刷信誉,淘宝刷钻,刷钻平台" src="images/logo.gif"
-								border=0> </A>
+						<A href="http://www.17win.net" title="淘宝刷信誉,淘宝刷钻,刷钻平台"><IMG
+								alt="淘宝刷信誉,淘宝刷钻,刷钻平台" src="images/logo.gif" border=0> </A>
 					</TD>
 					<TD vAlign=top width=528>
 						<TABLE cellSpacing=0 cellPadding=0 width=535 align=right border=0>
@@ -55,8 +54,9 @@
 										<A href="userInfoManager/info!init.php" target="_self">
 											[个人中心] </A>|
 									</s:else>
-									<A href="#" title=添加到收藏夹
-										onclick="window.external.addFavorite('http://www.2000w.net','淘宝刷信誉')">[收藏本站]</A>
+									<A
+										href="javascript:window.external.addFavorite('http://www.17win.net','淘宝刷信誉');"
+										title="添加到收藏夹">[收藏本站]</A>
 									<!-- xgj|
 									<A href="help/link.asp" target="_top">广告服务</A>
 									 -->
@@ -206,7 +206,8 @@
 					<s:else>
 						class="li0 "
 				</s:else>
-					href="shuake/index.html" id="a10" onmouseover="Mea(10);" testclass="">刷客排行</A>
+					href="shuake/index.html" id="a10" onmouseover="Mea(10);"
+					testclass="">刷客排行</A>
 			</LI>
 			<LI class=white>
 				<A
