@@ -29,10 +29,4 @@ public final class ContextUtils {
 				"").toString();
 		return s.split("/", 2)[1];
 	}
-	
-	public static void main(String[] args) {
-		String s = Thread.currentThread().getContextClassLoader().getResource(
-		"winConf.properties").toString();
-		System.out.println(s);
-	}
 }

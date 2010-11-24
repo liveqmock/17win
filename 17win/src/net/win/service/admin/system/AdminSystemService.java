@@ -38,7 +38,6 @@ public class AdminSystemService extends BaseService {
 	 * @throws Exception
 	 */
 	public String updateStaticNewsPage() throws Exception {
-
 		List<NewsEntity> newses = newsDAO.listAll();
 		HttpClient httpclient = new DefaultHttpClient();
 		String path = getRequset().getContextPath();
@@ -306,6 +305,73 @@ public class AdminSystemService extends BaseService {
 		}
 		httpget.abort();
 		httpclient.getConnectionManager().shutdown();
+		putAlertMsg("生成成功！");
+		return INPUT;
+	}
+	
+	/**
+	 * 生成全部
+	 * 
+	 * @param newsVO
+	 * @return
+	 * @throws Exception
+	 */
+	public String staticAllPage() throws Exception {
+		//生成新闻
+		List<NewsEntity> newses = newsDAO.listAll();
+		HttpClient httpclient = new DefaultHttpClient();
+		String path = getRequset().getContextPath();
+		String basePath = getRequset().getScheme() + "://"
+				+ getRequset().getServerName() + ":"
+				+ getRequset().getServerPort() + path + "/";
+		for (NewsEntity newsEntity : newses) {
+			HttpGet httpget = null;
+			BufferedWriter writer = null;
+			BufferedReader reader = null;
+			try {
+				httpget = new HttpGet(
+						basePath
+								+ "adminNewsManager/adminNews!detailNews.php?newsVO.id="
+								+ newsEntity.getId());
+				HttpResponse response = httpclient.execute(httpget);
+				HttpEntity entity = response.getEntity();
+				if (entity != null) {
+					writer = new BufferedWriter(new OutputStreamWriter(
+							new FileOutputStream(new File(ContextUtils
+									.getRootPath()
+									+ File.separator
+									+ "help"
+									+ File.separator
+									+ newsEntity.getUrl())), "UTF-8"));
+					reader = new BufferedReader(new InputStreamReader(entity
+							.getContent(), "UTF-8"));
+					String line = null;
+					while ((line = reader.readLine()) != null) {
+						writer.write(line);
+						writer.newLine();
+					}
+				}
+				newsEntity.setDate(new Date());
+				newsEntity.setPageDate(new Date());
+			} catch (RuntimeException e) {
+				throw new RuntimeException(e);
+			} finally {
+				if (writer != null) {
+					writer.newLine();
+					writer.close();
+				}
+				if (reader != null) {
+					reader.close();
+				}
+			}
+			httpget.abort();
+		}
+		httpclient.getConnectionManager().shutdown();
+		
+		staticNews2Page();
+		staticIndexPage();
+		staticShuakeIndexPage();
+		staticLoginPage();
 		putAlertMsg("生成成功！");
 		return INPUT;
 	}

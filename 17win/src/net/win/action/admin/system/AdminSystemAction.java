@@ -92,5 +92,13 @@ public class AdminSystemAction extends BaseAction {
 	public String staticLoginPage() throws Exception {
 		return adminSystemService.staticLoginPage();
 	}
-
+	/**
+	 * 登录界面
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String staticAllPage() throws Exception {
+		return adminSystemService.staticAllPage();
+	}
 }

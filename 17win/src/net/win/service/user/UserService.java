@@ -121,9 +121,9 @@ public class UserService extends BaseService {
 	 * @throws Exception
 	 */
 	public String updateLogin(UserVO userVO) throws Exception {
-		UserLoginInfo userLoginInfo = getLoginUser();
-		if (!userVO.getVerificationCode().equals(
-				getBySession(Constant.VERIFY_CODE))) {
+		if (userVO.getVerificationCode() == null
+				||  !userVO.getVerificationCode().equals(
+						getBySession(Constant.VERIFY_CODE))) {
 			putAlertMsg("验证码不正确！");
 			userVO.setVerificationCode(null);
 			return "inputLogin";
@@ -168,6 +168,7 @@ public class UserService extends BaseService {
 							vip = userEntity.getVip();
 						}
 					}
+					UserLoginInfo userLoginInfo = getLoginUser();
 					userLoginInfo.setVipEndDate(userEntity
 							.getVipBidUserEntity().getEndDate());
 					userLoginInfo.setVipGrowValue(vipBidUser.getGrowValue());
@@ -265,7 +266,7 @@ public class UserService extends BaseService {
 			return INPUT;
 		}
 		putAlertMsg("注册成功！");
-		putJumpPage("user/login.html");
+		putJumpPage("user/userManager/base!initLogin.php");
 		return JUMP;
 	}
 }

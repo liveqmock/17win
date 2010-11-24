@@ -43,7 +43,6 @@ public final class WinContext {
 	 */
 	public void putUserLoginInfo(String username, UserLoginInfo UserLoginInfo) {
 		sessionCache.put(username, UserLoginInfo);
-		System.out.println(sessionCache.get(username).getMoney());
 	}
 
 	/**

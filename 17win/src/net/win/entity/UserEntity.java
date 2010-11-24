@@ -172,7 +172,8 @@ public class UserEntity extends BaseEntity {
 	private VipEntity vip;
 
 	// VIP信息
-	@OneToOne(targetEntity = VipBidUserEntity.class, mappedBy = "user", fetch = FetchType.LAZY)
+	@OneToOne(targetEntity = VipBidUserEntity.class, fetch = FetchType.LAZY)
+	@JoinColumn(name = "USER_VIPINFO_ID_")
 	@Cascade(CascadeType.ALL)
 	private VipBidUserEntity vipBidUserEntity;
 

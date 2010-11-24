@@ -33,8 +33,7 @@ public class VipBidUserEntity extends BaseEntity {
 	private Integer growValue = 0;
 
 	// VIP信息
-	@OneToOne(targetEntity = UserEntity.class, fetch = FetchType.LAZY)
-	@JoinColumn(name = "USER_ID_")
+	@OneToOne(targetEntity = UserEntity.class, mappedBy = "vipBidUserEntity", fetch = FetchType.LAZY)
 	private UserEntity user;
 
 	public Date getEndDate() {

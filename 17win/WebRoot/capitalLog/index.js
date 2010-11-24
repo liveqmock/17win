@@ -1,11 +1,8 @@
 $(document).ready(function() {
-
-			numberText("startValue");
-			numberText("endValue");
 			$("#myTable").tablesorter({
 						widthFixed : true,
 						sortList : [[0, 0]]
-						 
+
 					});
 		});
 
@@ -14,13 +11,20 @@ function validateForm() {
 	var endValue = $("#endValue").val();
 	var startDate = $("#startDate").val();
 	var endDate = $("#endDate").val();
-	if (parseFloat(startValue) > parseFloat(endValue)) {
-		alert("【结束金额】必须大于等于【开始金额】！");
-		return false;
-	}
-	if (Validater.compareDate(startDate, endDate)) {
-		alert("【结束时间】必须大于等于【开始时间】！");
-		return false;
+	try {
+		if(isNaN(startValue) || isNaN(endValue)){
+			alert("必须输入数值！");
+		}
+		if (parseFloat(startValue) > parseFloat(endValue)) {
+			alert("【结束金额】必须大于等于【开始金额】！");
+			return false;
+		}
+		if (Validater.compareDate(startDate, endDate)) {
+			alert("【结束时间】必须大于等于【开始时间】！");
+			return false;
+		}
+	} catch (err) {
+		alert("输入的数据不正确！");
 	}
 	return true;
 }

@@ -21,36 +21,6 @@ $(document).ready(function() {
 				$("#newnotice").hide();
 			});
 
-	$("#username").focus();
-	// 用户名
-	$("#username").focus();
-	$("#username").bind("blur", function() {
-				var obj = this;
-				if (Validater.isName($(this).val(), 4, 12)) {
-					validateSuccess(obj);
-				} else {
-					validateError(this, "用户名必须4-12个字符的字母、汉字、数字、下划线！");
-					submitFlag = false;
-				}
-			});
-	// 密码
-	$("#password").bind("blur", function() {
-				if (Validater.isPassword($(this).val())) {
-					validateSuccess(this);
-				} else {
-					validateError(this, "密码格式不正确，必须为6至20位字符！");
-					submitFlag = false;
-				}
-			});
-	// 验证码
-	$("#verificationCode").bind("blur", function() {
-				if ($(this).val().length == 4) {
-					validateSuccess(this);
-				} else {
-					submitFlag = false;
-				}
-			});
-
 	// //// ajax
 	$.getJSON("userManager/base!getLoginUser.php?time=" + new Date().getTime(),
 			function(data) {
@@ -102,6 +72,34 @@ $(document).ready(function() {
 					$("#userLoginId").html(tdNo);
 					$("#tableLoginUserInfoID").html(tableNo);
 					$("#username").focus();
+					// 用户名
+					$("#username").bind("blur", function() {
+								var obj = this;
+								if (Validater.isName($(this).val(), 4, 12)) {
+									validateSuccess(obj);
+								} else {
+									validateError(this,
+											"用户名必须4-12个字符的字母、汉字、数字、下划线！");
+									submitFlag = false;
+								}
+							});
+					// 密码
+					$("#password").bind("blur", function() {
+								if (Validater.isPassword($(this).val())) {
+									validateSuccess(this);
+								} else {
+									validateError(this, "密码格式不正确，必须为6至20位字符！");
+									submitFlag = false;
+								}
+							});
+					// 验证码
+					$("#verificationCode").bind("blur", function() {
+								if ($(this).val().length == 4) {
+									validateSuccess(this);
+								} else {
+									submitFlag = false;
+								}
+							});
 					return;
 				}
 

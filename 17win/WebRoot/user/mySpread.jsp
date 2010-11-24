@@ -79,7 +79,8 @@ img {
 								<div
 									style="clear: both; width: 730px; background-color: rgb(243, 248, 254);">
 									<div style="clear: both; margin-top: 20px; line-height: 150%;">
-										<font color="red">推荐我的用户是：<b><s:property  value="#request.referee"/></b></font>
+										<font color="red">推荐我的用户是：<b><s:property
+													value="#request.referee" /> </b> </font>
 									</div>
 								</div>
 								<div
@@ -138,31 +139,59 @@ img {
 									<table id="myTable" class="tablesorter" cellpadding="1">
 										<thead>
 											<tr>
-												<th>
+												<th style="font-size: 12px">
 													用户名
 												</th>
-												<th>
-													联系方式
+												<th style="font-size: 12px">
+													联系QQ
 												</th>
-												<th>
+												<th style="font-size: 12px">
 													发任务数
 												</th>
-												<th>
+												<th style="font-size: 12px">
 													接任务数
 												</th>
-												<th>
+												<th style="font-size: 12px">
 													注册时间
 												</th>
-												<th>
+												<th style="font-size: 12px">
 													现在积分
 												</th>
-												<th>
+												<th style="font-size: 12px">
 													现在发布点
 												</th>
 											</tr>
 										</thead>
 										<tbody>
 											<s:if test="#request.myRefees.size()>0">
+												<s:iterator value="#request.myRefees" id="user">
+													<tr>
+														<td>
+															<s:property value="#user.username" />
+														</td>
+														<td>
+															<a
+																href="tencent://message/?uin=<s:property value="#user.qq"/>"><img
+																	src="http://wpa.qq.com/pa?p=1:<s:property value="#user.qq"/>:41"
+																	border="0" /> </a>
+														</td>
+														<td>
+															<s:property value="#user.releaseTaskCount" />
+														</td>
+														<td>
+															<s:property value="#user.receiveTaskCount" />
+														</td>
+														<td>
+															<s:property value="#user.registerTime" />
+														</td>
+														<td>
+															<s:property value="#user.convertScore" />
+														</td>
+														<td>
+															<s:property value="#user.releaseDot" />
+														</td>
+													</tr>
+												</s:iterator>
 												<tfoot>
 													<tr>
 														<th colspan="8">
@@ -170,41 +199,11 @@ img {
 														</th>
 													</tr>
 												</tfoot>
-												<s:iterator value="#request.myRefees" id="user">
-													<tr>
-														<td>
-															<s:property value="user.username" />
-														</td>
-														<td>
-															<a
-																href="tencent://message/?uin=<s:property value="user.qq" />"><img
-																	border="0"
-																	src="http://wpa.qq.com/pa?p=1:<s:property value="user.qq" />:4">
-															</a>
-															<s:property value="user.qq" />
-														</td>
-														<td>
-															<s:property value="user.releaseTaskCount" />
-														</td>
-														<td>
-															<s:property value="user.receiveTaskCount" />
-														</td>
-														<td>
-															<s:property value="user.registerTime" />
-														</td>
-														<td>
-															<s:property value="user.convertScore" />
-														</td>
-														<td>
-															<s:property value="user.releaseDot" />
-														</td>
-													</tr>
-												</s:iterator>
 											</s:if>
 											<s:else>
 												<tfoot>
 													<tr>
-														<th colspan="8">
+														<th colspan="7" style="font-size: 12px" align="center">
 															<A href="userInfoManager/info!referee.php"
 																target="_blank">您当前没有推广:现在马上就去推广吧!</A>
 														</th>

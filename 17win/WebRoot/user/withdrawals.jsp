@@ -179,8 +179,8 @@ img {
 																	操作密码：
 																</Td>
 																<Td>
-																	<s:textfield name="withdrawalsVO.operationCode"
-																		id="operationCode_1"></s:textfield>
+																	<s:password name="withdrawalsVO.operationCode" maxlength="20"
+																		id="operationCode_1"></s:password> 
 																</Td>
 															</tr>
 															<tr>
@@ -241,8 +241,8 @@ img {
 																	操作密码：
 																</Td>
 																<Td>
-																	<s:textfield name="withdrawalsVO.operationCode"
-																		id="operationCode_2"></s:textfield>
+																	<s:password name="withdrawalsVO.operationCode" maxlength="20"
+																		id="operationCode_2"></s:password>
 																</Td>
 															</tr>
 															<tr>
@@ -302,8 +302,8 @@ img {
 																	操作密码：
 																</Td>
 																<Td>
-																	<s:textfield name="withdrawalsVO.operationCode"
-																		id="operationCode_3"></s:textfield>
+																	<s:password name="withdrawalsVO.operationCode" maxlength="20"
+																		id="operationCode_3"></s:password>
 																</Td>
 															</tr>
 															<tr>

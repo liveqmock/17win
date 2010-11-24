@@ -27,6 +27,13 @@
 						value="生成登录界面">
 				</td>
 			</tr>
+			<tr>
+				<td nowrap="nowrap" colspan="99">
+					<input type="button"
+						onclick="window.location.href='adminSystemManager/adminSystem!staticAllPage.php'"
+						value="生成全部">
+				</td>
+			</tr>
 		</table>
 	</body>
 </html>

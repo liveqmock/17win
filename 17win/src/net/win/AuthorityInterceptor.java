@@ -88,7 +88,7 @@ public class AuthorityInterceptor extends AbstractInterceptor {
 			ServletActionContext.getRequest().setAttribute("msg",
 					"<script>alert('" + "没有登录,请登录！" + "');</script>");
 			ServletActionContext.getRequest().setAttribute("jump",
-					"user/login.html");
+					"userManager/base!initLogin.php");
 			return "jump";
 		}
 

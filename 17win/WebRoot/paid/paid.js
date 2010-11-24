@@ -15,8 +15,8 @@ function validateForm() {
 	var money = $("#money").val();
 	var opertationCodeId = $("#opertationCodeId").val();
 	var verificationCodeID = $("#verificationCodeID").val();
-	if (money != "50" || money != "100" || money != "200" || money != "300"
-			|| money != "500") {
+	if (money != "50" && money != "100" && money != "200" && money != "300"
+			&& money != "500") {
 		alert("金额必须为50,100,200,300,500");
 		return false; 
 	}
