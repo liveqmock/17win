@@ -57,7 +57,7 @@ $(document).ready(function() {
 
 	// 商品地址
 	$("#itemUrl").bind("focus", function() {
-				$(obj).data("nowUrl", $(obj).val());
+				$(obj).data("nowUrl", $.trim($(obj).val()));
 			});
 	$("#itemUrl").bind("blur", function() {
 		// 如果有被选中的
@@ -65,7 +65,6 @@ $(document).ready(function() {
 			$("input[name='creditTaskVO.sellerID']").attr("disabled", false);
 			return;
 		}
-
 		var obj = this;
 		var platformType = $("#platformType").val();
 		// 去掉空格

@@ -171,9 +171,13 @@ public class UserInfoService extends BaseService {
 		String platformTypeParam = getByParam("platformTypeParam");
 
 		UserEntity userEntity = getLoginUserEntity(userDAO);
-
 		if ("1".equals(type)) {
 			SellerEntity sellerEntity = userVO.getSeller();
+			if (StringUtils.isBlank(sellerEntity.getName())) {
+				putAlertMsg("名字不能为空！");
+				putJumpPage("userInfoManager/info!initSellerAndBuyer.php");
+				return JUMP;
+			}
 			// 判断当前卖号是否被注册过
 			Boolean sellerExists = (0 == (Long) sellerDAO
 					.uniqueResultObject(
@@ -183,7 +187,8 @@ public class UserInfoService extends BaseService {
 									platformTypeParam }));
 			if (!sellerExists) {
 				putAlertMsg(sellerEntity.getName() + "已被使用！");
-				return "insertSellerAndBuyer";
+				putJumpPage("userInfoManager/info!initSellerAndBuyer.php");
+				return JUMP;
 			}
 
 			// 判断当前的级别是否可以用友多个卖号
@@ -203,7 +208,8 @@ public class UserInfoService extends BaseService {
 							.changeType2Platform(platformTypeParam);
 					putAlertMsg("您当前在" + platform + "平台最多只能拥有"
 							+ sellerCountFlag + "个账号");
-					return "insertSellerAndBuyer";
+					putJumpPage("userInfoManager/info!initSellerAndBuyer.php");
+					return JUMP;
 				}
 			}
 
@@ -224,6 +230,10 @@ public class UserInfoService extends BaseService {
 			sellerDAO.save(sellerEntity);
 		} else {
 			BuyerEntity buyerEntity = userVO.getBuyer();
+			if (StringUtils.isBlank(buyerEntity.getName())) {
+				putAlertMsg("名字不能为空！");
+				return "insertSellerAndBuyer";
+			}
 			Boolean sellerExists = (0 == (Long) buyerDAO
 					.uniqueResultObject(
 							"select count(*) from  BuyerEntity as _buyer where _buyer.name=:buyerName and _buyer.type=:platformType",

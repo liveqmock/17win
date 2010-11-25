@@ -124,8 +124,13 @@ img {
 																				金&nbsp;&nbsp;&nbsp;&nbsp;额：
 																			</td>
 																			<td>
-																				<input maxlength="34" name="payVO.money" id="money"
-																					style="width: 145px; height: 15px;">
+																				<select name="payVO.money" id="money">
+																					<option value="50">50元</option>
+																					<option value="100">100元</option>
+																					<option value="200">200元</option>
+																					<option value="300">300元</option>
+																					<option value="500">500元</option>
+																				</select>
 																			</td>
 																		</tr>
 																		<tr>

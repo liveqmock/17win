@@ -82,4 +82,9 @@ public class MenuService extends BaseService {
 		putByRequest("ggResult", ggResult);
 		return "toIndex";
 	}
+
+	public String to404Index() throws Exception {
+		return "to404Index";
+
+	}
 }

@@ -24,7 +24,7 @@ function validateForm(flag) {
 	var moneyTO = parseFloat($("#money_" + flag).val());
 	var operationCode = $("#operationCode_" + flag).val();
 	var realIdentity = $("#realIdentity_" + flag).val();
-	var realName = $("#realName_" + flag).val();
+	var realName = $("#realname_" + flag).val();
 	if (!Validater.isNumber(moneyTO, '+')) {
 		alert("金额必须为大于0的数值！");
 		return false;

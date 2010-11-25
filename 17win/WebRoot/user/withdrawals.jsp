@@ -169,7 +169,7 @@ img {
 																	掌柜：
 																</Td>
 																<Td>
-																	<s:textfield name="withdrawalsVO.realname"  readonly="true"
+																	<s:textfield name="withdrawalsVO.realName"  readonly="true"
 																		id="realname_1"></s:textfield>
 																	(系统自动获取)
 																</Td>

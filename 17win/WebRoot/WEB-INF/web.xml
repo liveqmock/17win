@@ -65,6 +65,11 @@
 			org.springframework.web.util.Log4jConfigListener
 		</listener-class>
 	</listener>
+
+	<error-page>
+		<error-code>404</error-code>
+		<location>/errorPage/error404.html</location>
+	</error-page>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 		<welcome-file>index.jsp</welcome-file>

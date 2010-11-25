@@ -147,28 +147,32 @@ public class WithdrawalsService extends BaseService {
 	 */
 	public String insertWithdrawals(WithdrawalsVO withdrawalsVO)
 			throws Exception {
+		putJumpPage("withdrawalsManager/withdrawals!initWithdrawals.php");
 		UserEntity userEntity = getLoginUserEntity(userDAO);
 		WithdrawalsEntity withdrawalsEntity = new WithdrawalsEntity();
 		BeanUtils.copyProperties(withdrawalsEntity, withdrawalsVO);
-		if (!userEntity.equals(StringUtils.processPwd(withdrawalsVO
-				.getOperationCode()))) {
+		if (!userEntity.getOpertationCode().equals(
+				StringUtils.processPwd(withdrawalsVO.getOperationCode()))) {
 			putAlertMsg("操作码不正确！");
-			return "insertWithdrawals";
 		} else {
 			if (withdrawalsEntity.getMoney() < 100) {
 				WinUtils.throwIllegalityException("视图越过提现大于100的操作！");
 			}
 			if (withdrawalsEntity.getMoney() > userEntity.getMoney()) {
 				putAlertMsg("提现错误！您的17win余额不够" + withdrawalsEntity.getMoney());
+				return JUMP;
+			}
+			if (StringUtils.isBlank(withdrawalsEntity.getRealName())) {
+				putAlertMsg("名字或账号不能为空!");
+				return JUMP;
 			}
 			withdrawalsEntity.setUser(userEntity);
-			withdrawalsEntity.setStatus("0");
+			withdrawalsEntity.setStatus("1");
 			withdrawalsEntity.setStatusDesc("进入提现流程");
 			withdrawalsEntity.setOperationDate(new Date());
 			withDrawalsDAO.save(withdrawalsEntity);
-
 			putAlertMsg("操作成功，您的操作已经进入提现流程，我们会马上完成您的提现然后邮件通知您！");
 		}
-		return "insertWithdrawals";
+		return JUMP;
 	}
 }

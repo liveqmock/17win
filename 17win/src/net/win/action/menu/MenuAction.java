@@ -18,7 +18,10 @@ import org.springframework.stereotype.Controller;
 @Scope("prototype")
 @ParentPackage("17win-default")
 @Namespace("/menuManager")
-@Results( { @Result(name = "toIndex", location = "/index.jsp") })
+@Results( { @Result(name = "toIndex", location = "/index.jsp"),
+	@Result(name = "to404Index", location = "/errorPage/error404.jsp")
+	
+})
 public class MenuAction extends BaseAction {
 
 	@Resource
@@ -37,6 +40,16 @@ public class MenuAction extends BaseAction {
 	 */
 	public String toIndex() throws Exception {
 		return menuService.toIndex();
+	}
+	
+
+	/**
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String to404Index() throws Exception {
+		return menuService.to404Index();
 	}
 
 }

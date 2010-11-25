@@ -223,7 +223,7 @@ img {
 			</tr>
 		</table>
 		<div id="addtableDIV" title="卖号/买号增加">
-			<s:form action="userInfoManager/info!sellerAndBuyer.php"
+			<s:form action="userInfoManager/info!sellerAndBuyer.php"     onsubmit="return validateForm();"
 				theme="simple" id="addForm">
 				<table cellpadding="0" cellspacing="0" border="0">
 					<tr>

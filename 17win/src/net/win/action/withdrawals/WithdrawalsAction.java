@@ -21,7 +21,7 @@ import org.springframework.stereotype.Controller;
 @Results( {
 		@Result(name = "initWithdrawals", location = "/user/withdrawals.jsp"),
 		@Result(name = "loginSuccess", location = "/user/withdrawals.jsp"),
-		@Result(name = "withdrawalsLog", location = "/user/withdrawalsLog.jsp") })
+		@Result(name = "withdrawalsLog", location = "/user/withdrawalsLog.jsp")})
 @Namespace("/withdrawalsManager")
 public class WithdrawalsAction extends BaseAction {
 	@Resource

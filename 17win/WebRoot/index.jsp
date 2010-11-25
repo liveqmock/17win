@@ -10,6 +10,16 @@
 <HTML>
 	<HEAD>
 		<META http-equiv=Content-Type content="text/html; charset=UTF-8">
+		<%
+			//让浏览器不缓存jsp页面 
+			response.setHeader("Pragma", "No-cache");// http1.0 
+			response.setHeader("Cache-Control", "no-store,no-cache"); //http1.1 
+			response.setHeader("Expires", "0");
+			response.setDateHeader("Expires", 0);// 这个是针对代理的？但我设置后还是没达到效果。不解！！
+		%>
+		<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+		<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+		<META HTTP-EQUIV="Expires" CONTENT="0">
 		<base href="<%=basePath%>">
 		<title>淘宝刷信誉 -淘宝刷钻 _刷钻平台_互刷平台_免费刷钻首选一起赢(17win)刷客平台</title>
 		<meta
