@@ -1,23 +1,25 @@
 $(document).ready(function() {
-			$("#tabs").tabs();
-			$(".buttonFlag").button();
-			// 获取用户地址
-			$("#realIdentity_1").bind("blur", function() {
-						VhostAop.divAOP.ajax(
-								"ajaxManager/ajax!obtainSellerByItem.php", {
-									url : $(this).val(),
-									type : "0"
-								}, function(data) {
-									if (data.seller == null
-											|| data.seller == "") {
-										alert("您输入的地址不正确！");
-									} else {
-										$("#realname_1").val(data.seller);
-										$("#shopType").val(data.type);
-									}
-								}, "json");
-					});
-		});
+	$("#tabs").tabs();
+	$(".buttonFlag").button();
+	// 获取用户地址
+	$("#realIdentity_1").bind("blur", function() {
+				if (Validater.isBlank($(this).val())) {
+					return;
+				}
+				VhostAop.divAOP.ajax("ajaxManager/ajax!obtainSellerByItem.php",
+						{
+							url : $(this).val(),
+							type : "0"
+						}, function(data) {
+							if (data.seller == null || data.seller == "") {
+								alert("您输入的地址不正确！");
+							} else {
+								$("#realname_1").val(data.seller);
+								$("#shopType").val(data.type);
+							}
+						}, "json");
+			});
+});
 
 function validateForm(flag) {
 	var money = parseFloat($("#money").val());
@@ -35,10 +37,6 @@ function validateForm(flag) {
 	}
 	if (moneyTO > money) {
 		alert("您输入的金额大于你拥有的金额,你只拥有" + money + "元！");
-		return false;
-	}
-	if (Validater.isBlank(operationCode)) {
-		alert("操作码不能为空！");
 		return false;
 	}
 	if ("1" == flag) {
@@ -68,6 +66,10 @@ function validateForm(flag) {
 			alert("真实名字不能为空");
 			return false;
 		}
+	}
+	if (Validater.isBlank(operationCode)) {
+		alert("操作码不能为空！");
+		return false;
 	}
 	return true;
 }
