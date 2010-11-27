@@ -3,8 +3,8 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
-		<s:include value="/admin/common/header.jsp"></s:include>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<s:include value="/admin/common/header.jsp"></s:include>
 		<SCRIPT type="text/javascript"
 			src="withdrawalsIndex/withdrawalsIndex.js"></SCRIPT>
 	</head>
@@ -183,7 +183,7 @@
 				<s:else>
 					<tfoot>
 						<tr>
-							<th colspan="5" style="font-size: 12px;">
+							<th colspan="9" style="font-size: 12px;">
 								<div style="float: left;">
 									<a href="javascript:firstPage()">首页</a>
 									<a href="javascript:prevPage()">上一页</a>&nbsp;
@@ -193,7 +193,7 @@
 								<div style="float: left;">
 									跳转到
 									<select id='toPageSelect' size='1' onchange="jumpPage()">
-										<s:iterator begin="1" end="adminPayVO.pageCount" step="1"
+										<s:iterator begin="1" end="withdrawalsVO.pageCount" step="1"
 											var="index">
 											<option value="<s:property value="#index" />">
 												第
@@ -203,13 +203,13 @@
 										</s:iterator>
 									</select>
 								</div>
-								<input type="hidden" name="adminPayVO.nowPage"
+								<input type="hidden" name="withdrawalsVO.nowPage"
 									value="<s:property
-											value="adminPayVO.nowPage" />"
+											value="withdrawalsVO.nowPage" />"
 									id="nowPage">
 								<input type="hidden"
 									value="<s:property
-										value="adminPayVO.pageCount" />"
+										value="withdrawalsVO.pageCount" />"
 									id="pageCount">
 							</th>
 						</tr>

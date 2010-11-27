@@ -3,8 +3,9 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
-		<s:include value="/admin/common/header.jsp"></s:include>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<s:include value="/admin/common/header.jsp"></s:include>
+		
 		<SCRIPT type="text/javascript" src="user/userIndex.js"></SCRIPT>
 	</head>
 

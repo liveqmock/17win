@@ -137,9 +137,8 @@ public class AdminWithDrawalsService extends BaseService {
 				result.add(withdrawalsVOTEMP);
 			}
 		}
-		putJumpPage("adminWithdrawalsManager/adminWithdrawals!queryLog.php");
-		putAlertMsg("操作成功");
-		return JUMP;
+		putByRequest("result", result);
+		return "updateLog";
 	}
 
 	/**
