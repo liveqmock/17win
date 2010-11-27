@@ -61,13 +61,34 @@ public class AdminService extends BaseService {
 				.uniqueResult(
 						"from AdminEntity  as _u where _u.username=:username and _u.password=:password",
 						new String[] { "username", "password" }, new Object[] {
-								username,StringUtils.processPwd(password) });
+								username, StringUtils.processPwd(password) });
 		if (adminEntity == null) {
 			putAlertMsg("用户名或密码错误");
 			return "inputLogin";
 		} else {
 			updateUserLoginInfo(adminEntity.getUser());
+			getLoginUser().setAdminID(adminEntity.getId());
 			return "loginSuccess";
 		}
+	}
+
+	/**
+	 * 修改密码
+	 */
+	public String updatePassword() throws Exception {
+		String code = getByParam("code");
+		if (code == null || !code.equals(getBySession(Constant.VERIFY_CODE))) {
+			putAlertMsg("验证码不正确！");
+			return "updatePassword";
+		}
+		AdminEntity adminEntity = adminDAO.get(getLoginUser().getAdminID());
+		String password = getByParam("passsword");
+		if (StringUtils.isBlank(password)) {
+			putAlertMsg("密码不能为空!");
+			return "updatePassword";
+		}
+		adminEntity.setPassword(StringUtils.processPwd(password));
+		putAlertMsg("修改成功!");
+		return "updatePassword";
 	}
 }

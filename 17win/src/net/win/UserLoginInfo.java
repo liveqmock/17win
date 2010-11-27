@@ -8,6 +8,8 @@ public class UserLoginInfo {
 	/**
 	 * 基本信息
 	 */
+	private Long adminID;
+	
 	private Long id;
 	// 用户名
 	private String username;
@@ -179,5 +181,13 @@ public class UserLoginInfo {
 
 	public void setVipGrowValue(Integer vipGrowValue) {
 		this.vipGrowValue = vipGrowValue;
+	}
+
+	public Long getAdminID() {
+		return adminID;
+	}
+
+	public void setAdminID(Long adminID) {
+		this.adminID = adminID;
 	}
 }
