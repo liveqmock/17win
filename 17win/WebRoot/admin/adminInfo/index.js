@@ -14,7 +14,7 @@ function validateform() {
 	var password = $("#passwordID").val();
 	var repassword = $("#repasswordID").val();
 	var code = $("#codeID").val();
-	if (Validater.isPassword(password)) {
+	if (!Validater.isPassword(password)) {
 		alert("密码必须为6-12的字符！");
 		return false;
 	}

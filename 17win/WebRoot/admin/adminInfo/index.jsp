@@ -4,7 +4,7 @@
 	<head>
 		<s:include value="/admin/common/header.jsp"></s:include>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<script type="text/javascript" src="index.js"></script>
+		<script type="text/javascript" src="adminInfo/index.js"></script>
 	</head>
 	<body>
 		<s:form theme="simple" action="/adminManager/admin!updatePassword.php" onsubmit="return validateform();">
@@ -43,6 +43,5 @@
 				</Tr>
 			</table>
 		</s:form>
-		<s:property value="#request.msg" escape="false" />
 	</body>
 </html>

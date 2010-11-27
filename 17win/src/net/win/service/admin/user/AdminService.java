@@ -82,7 +82,7 @@ public class AdminService extends BaseService {
 			return "updatePassword";
 		}
 		AdminEntity adminEntity = adminDAO.get(getLoginUser().getAdminID());
-		String password = getByParam("passsword");
+		String password = getByParam("password");
 		if (StringUtils.isBlank(password)) {
 			putAlertMsg("密码不能为空!");
 			return "updatePassword";

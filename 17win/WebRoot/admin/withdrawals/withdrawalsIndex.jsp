@@ -5,8 +5,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<s:include value="/admin/common/header.jsp"></s:include>
-		<SCRIPT type="text/javascript"
-			src="withdrawals/withdrawalsIndex.js"></SCRIPT>
+		<SCRIPT type="text/javascript" src="withdrawals/withdrawalsIndex.js"></SCRIPT>
 	</head>
 
 	<body>
@@ -224,7 +223,7 @@
 		</s:form>
 
 		<div id="updateTableDIV" title="修改状态">
-			<form onsubmit="return validateUpdateForm();" id="updateForm"
+			<s:form onsubmit="return validateUpdateForm();" id="updateForm"
 				action="adminWithdrawalsManager/adminWithdrawals!updateLog.php">
 				<table cellpadding="0" cellspacing="0" border="0">
 					<tr class="sellerClass">
@@ -238,13 +237,13 @@
 								name="withdrawalsVO.statusDesc">
 						</td>
 					</tr>
+					<tr>
+						<td valign="middle" colspan="2">
+							<input type="submit" value="修改	">
+						</td>
+					</tr>
 				</table>
-				<tr>
-					<td valign="middle" colspan="2">
-						<input type="submit" value="修改	">
-					</td>
-				</tr>
-			</form>
+			</s:form>
 		</div>
 	</body>
 </html>
