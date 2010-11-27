@@ -214,9 +214,9 @@ img {
 																	<s:elseif test="#withdrawals.shopType==2">
 																		拍拍
 																	</s:elseif>
-																	<s:else>
+																	<s:elseif test="#withdrawals.shopType==3">
 																		有啊
-																	</s:else>
+																	</s:elseif>
 																</s:if>
 																<s:else>
 																	-
