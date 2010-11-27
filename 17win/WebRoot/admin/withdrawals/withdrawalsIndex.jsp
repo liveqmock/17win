@@ -6,7 +6,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<s:include value="/admin/common/header.jsp"></s:include>
 		<SCRIPT type="text/javascript"
-			src="withdrawalsIndex/withdrawalsIndex.js"></SCRIPT>
+			src="withdrawals/withdrawalsIndex.js"></SCRIPT>
 	</head>
 
 	<body>
@@ -30,14 +30,19 @@
 						</s:textfield>
 					</td>
 					<td>
-						提现金额：
-						<s:textfield name="withdrawalsVO.startMoney" id="startMoney"
-							cssStyle="width:40px">
-						</s:textfield>
-						至
-						<s:textfield name="withdrawalsVO.endMoney" id="endMoney"
-							cssStyle="width:40px">
-						</s:textfield>
+						提现类型：
+						<s:select id="withdrawalsType" listKey="key" listValue="value"
+							name="withdrawalsVO.type" headerKey="" headerValue="--请选择--"
+							list="#{'1':'店铺地址提现','2':'支付宝提现','3':'财付通提现'}">
+						</s:select>
+
+						<span
+							<s:if test="withdrawalsVO.type!=1">style="display: none"</s:if>
+							id="shopType"> &nbsp;&nbsp;店铺类型：<s:select
+								name="withdrawalsVO.shopType" listKey="key" listValue="value"
+								headerKey="" headerValue="--请选择--"
+								list="#{'1':'淘宝','2':'拍拍','3':'有啊'}">
+							</s:select> </span>
 					</td>
 				</tr>
 				<tr>
