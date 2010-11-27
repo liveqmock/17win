@@ -38,7 +38,7 @@ public class AdminWithdrawlsAction extends BaseAction {
 	@Action("/adminWithdrawals")
 	public String execute() throws Exception {
 		// TODO Auto-generated method stub
-		return INPUT;
+		return super.execute();
 	}
 
 	/**

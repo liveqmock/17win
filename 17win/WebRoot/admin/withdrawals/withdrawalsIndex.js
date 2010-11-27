@@ -1,4 +1,11 @@
 $(document).ready(function() {
+			$("#withdrawalsType").change(function() {
+						if ($(this).val() == "1") {
+							$("#shopType").show();
+						} else {
+							$("#shopType").hide();
+						}
+					});
 			$("#updateTableDIV").dialog({
 						autoOpen : false,
 						draggable : false,
@@ -7,11 +14,11 @@ $(document).ready(function() {
 						resizable : false,
 						show : 'slide',
 						width : 500
-
+ 
 					});
 		});
 
-function updateLog(id,flagID) {
+function updateLog(id, flagID) {
 	$("#withdrawalsVOID").val(id);
 	$("#flagID").val(flagID);
 	$("#updateTableDIV").dialog("open");

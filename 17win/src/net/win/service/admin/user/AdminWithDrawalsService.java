@@ -45,10 +45,10 @@ public class AdminWithDrawalsService extends BaseService {
 		List<Object> paramValues = new ArrayList<Object>();
 		// 用户名
 		if (!StringUtils.isBlank(withdrawalsVO.getUsername())) {
-			resultHQL.append(" and _u.username=:username ");
-			countHQL.append(" and _u.username=:username ");
+			resultHQL.append(" and _u.username like:username ");
+			countHQL.append(" and _u.username like:username ");
 			paramNames.add("username");
-			paramValues.add(withdrawalsVO.getUsername());
+			paramValues.add("%"+withdrawalsVO.getUsername()+"%");
 		}
 		// 类型
 		if (!StringUtils.isBlank(withdrawalsVO.getType())) {
