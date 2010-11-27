@@ -25,7 +25,6 @@ public class AjaxAction extends BaseAction {
 	@Resource
 	private AjaxService ajaxService;
 
- 
 	@Resource
 	private UserDAO userDAO;
 
@@ -74,6 +73,7 @@ public class AjaxAction extends BaseAction {
 		// 自动获取
 		if ("0".equals(type)) {
 			String shopType = HttpB2CUtils.obtainShopType(url);
+			type = shopType;
 			if (!"0".equals(shopType)) {
 				seller = HttpB2CUtils.obtainSellerByShop(url, shopType);
 			} else {
@@ -96,6 +96,7 @@ public class AjaxAction extends BaseAction {
 		// 自动获取
 		if ("0".equals(type)) {
 			String shopType = HttpB2CUtils.obtainShopType(url);
+			type = shopType;
 			if (!"0".equals(shopType)) {
 				seller = HttpB2CUtils.obtainSellerByItem(url, shopType);
 			} else {
@@ -117,8 +118,6 @@ public class AjaxAction extends BaseAction {
 		bool = ajaxService.updateFindPassword(username, telephone);
 		return JSON;
 	}
-
-	 
 
 	/**
 	 * 验证用户

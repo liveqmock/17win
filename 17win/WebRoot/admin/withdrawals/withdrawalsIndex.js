@@ -1,61 +1,41 @@
 $(document).ready(function() {
-	$("#myTable").tablesorter();
-	$("#updateMoneyDIV").dialog({
-		autoOpen : false,
-		draggable : true,
-		hide : 'slide',
-		modal : true,
-		resizable : false,
-		show : 'slide',
-		width : 400,
-		buttons : {
-			"保存" : function() {
-				if (Validater.isBlank($("#moneyId").val())
-						|| isNaN($("#moneyId").val())) {
-					alert("金额格式不对");
-				} else {
-					$("#moneyForm").submit();
-				}
-			}
-		}
-	});
-});
+			$("#updateTableDIV").dialog({
+						autoOpen : false,
+						draggable : false,
+						hide : 'slide',
+						modal : true,
+						resizable : false,
+						show : 'slide',
+						width : 500
 
-// 删除
+					});
+		});
 
-function deleteMoney(id) {
-	if (confirm("确认是否删除？")) {
-		window.location.href = "adminPaidManager/adminPaid!deleteMoney.php?payId="
-				+ id;
+function updateLog(id,flagID) {
+	$("#withdrawalsVOID").val(id);
+	$("#flagID").val(flagID);
+	$("#updateTableDIV").dialog("open");
 
+}
+
+function validateUpdateForm() {
+	if (Validater.isBlank($("#statusDesc").val())) {
+		alert("状态描述不能为空!");
+		return false;
 	}
-}
-
-// 充值
-function addMoney(id) {
-	if (confirm("确认是否充值？")) {
-		window.location.href = "adminPaidManager/adminPaid!addMoney.php?payId="
-				+ id;
-	}
-}
-// 浏览
-function brower(id, read) {
-	if (!read) {
-		$.post("smsManager/sms!updateSms.php?smsVO.id=" + id);
-	}
-	$("#title").val($("#a_" + id).attr("title"));
-	$("#content").text($("#a_" + id).attr("content"));
-	$("#browerSms").dialog("open");
+	return true;
 
 }
-// 回复
-function reply(fromUsername) {
-	window.open("smsManager/sms!initSendSms.php?toUser=" + fromUsername,
-			"_blank");
-}
+
 function validateForm() {
-	var startDate = $("#startDate").val();
-	var endDate = $("#endDate").val();
+	var startMoeny = $("input[name='withdrawalsVO.startMoney']").val();
+	var endMoney = $("input[name='withdrawalsVO.endMoney']").val();
+	var startDate = $("input[name='withdrawalsVO.startDate']").val();
+	var endDate = $("input[name='withdrawalsVO.endDate']").val();
+	if (parseFloat(startMoeny) > parseFloat(endMoney)) {
+		alert("【结束金额】必须大于等于【开始金额】！");
+		return false;
+	}
 	if (Validater.compareDate(startDate, endDate)) {
 		alert("【结束时间】必须大于等于【开始时间】！");
 		return false;

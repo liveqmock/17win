@@ -45,6 +45,15 @@ public class WithdrawalsVO extends BaseVO {
 	private Double endMoney;
 	private Date startDate;
 	private Date endDate;
+	private String username;
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
 	public String getType() {
 		return type;
@@ -149,6 +158,5 @@ public class WithdrawalsVO extends BaseVO {
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-	
 
 }

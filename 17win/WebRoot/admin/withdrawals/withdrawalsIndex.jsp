@@ -5,33 +5,64 @@
 	<head>
 		<s:include value="/admin/common/header.jsp"></s:include>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<SCRIPT type="text/javascript" src="withdrawalsIndex/withdrawalsIndex.js"></SCRIPT>
+		<SCRIPT type="text/javascript"
+			src="withdrawalsIndex/withdrawalsIndex.js"></SCRIPT>
 	</head>
 
 	<body>
-		<s:form action="adminPaidManager/adminPaid!queryPay.php"
-			theme="simple">
+		<s:form action="adminWithdrawalsManager/adminWithdrawals!queryLog.php"
+			onsubmit="return validateForm();" theme="simple">
 			<table width="100%" cellpadding="1" cellspacing="1" border="0px"
 				style="background: #DDEDFA">
 				<tr>
-					<td nowrap="nowrap">
-						用&nbsp;&nbsp;户&nbsp;&nbsp;名：
-						<s:textfield name="adminPayVO.username">
-						</s:textfield>
+					<td>
+						用户名：
+						<s:textfield name="withdrawalsVO.username" id="username"></s:textfield>
 					</td>
-					<td nowrap="nowrap">
-						注册日期：
-						<s:textfield name="adminPayVO.startDate"
-							onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})"
-							readonly="true" cssStyle="width:80px">
+					<td>
+						提现金额：
+						<s:textfield name="withdrawalsVO.startMoney" id="startMoney"
+							cssStyle="width:40px">
 						</s:textfield>
 						至
-						<s:textfield name="adminPayVO.endDate" readonly="true"
-							onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})"
-							cssStyle="width:80px">
+						<s:textfield name="withdrawalsVO.endMoney" id="endMoney"
+							cssStyle="width:40px">
 						</s:textfield>
 					</td>
-					<td nowrap="nowrap">
+					<td>
+						提现金额：
+						<s:textfield name="withdrawalsVO.startMoney" id="startMoney"
+							cssStyle="width:40px">
+						</s:textfield>
+						至
+						<s:textfield name="withdrawalsVO.endMoney" id="endMoney"
+							cssStyle="width:40px">
+						</s:textfield>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						操作日期：
+						<s:textfield name="withdrawalsVO.startDate" id="startDate"
+							readonly="true"
+							onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})"
+							cssStyle="width:110px">
+						</s:textfield>
+						至
+						<s:textfield name="withdrawalsVO.endDate" id="endDate"
+							readonly="true"
+							onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})"
+							cssStyle="width:110px">
+						</s:textfield>
+					</td>
+					<td>
+						状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态：
+						<s:select name="withdrawalsVO.status" listKey="key"
+							listValue="value" headerKey="" headerValue="--请选择--"
+							list="#{'1':'申请中','4':'被驳回','3':'已完成'}">
+						</s:select>
+					</td>
+					<td>
 						<input type="submit" value="查&nbsp;&nbsp;询"
 							style="cursor: pointer;">
 					</td>
@@ -46,13 +77,25 @@
 							用户名
 						</th>
 						<th nowrap="nowrap" style="font-size: 12px;">
+							提现类型
+						</th>
+						<th nowrap="nowrap" style="font-size: 12px;">
+							平台类型
+						</th>
+						<th nowrap="nowrap" style="font-size: 12px;">
+							提现链接
+						</th>
+						<th nowrap="nowrap" style="font-size: 12px;">
+							提现金额
+						</th>
+						<th nowrap="nowrap" style="font-size: 12px;">
+							操作日期
+						</th>
+						<th nowrap="nowrap" style="font-size: 12px;">
 							状态
 						</th>
 						<th nowrap="nowrap" style="font-size: 12px;">
-							余额
-						</th>
-						<th nowrap="nowrap" style="font-size: 12px;">
-							时间
+							描述
 						</th>
 						<th nowrap="nowrap" style="font-size: 12px;">
 							操作
@@ -60,43 +103,79 @@
 					</tr>
 				</thead>
 				<tbody>
-					<s:iterator value="#request.result" id="payVO">
-						<tr>
+					<s:iterator value="#request.result" id="withdrawals">
+						<tr <s:if test="#status.odd"> style="background: #FFC278"</s:if>>
 							<td>
-								<s:property value="#payVO.username" />
+								<s:property value="#withdrawals.username" />
 							</td>
 							<td>
-								<s:if test="#payVO.status==1">
-									申请中
+								<s:if test="#withdrawals.type==1">
+																	店铺地址提现
+																</s:if>
+								<s:elseif test="#withdrawals.type==2">
+																	支付宝提现
+																</s:elseif>
+								<s:else>
+																	财付通提现
+																</s:else>
+							</td>
+							<td>
+								<s:if test="#withdrawals.type==1">
+									<s:if test="#withdrawals.shopType==1">
+																		淘宝
+																	</s:if>
+									<s:elseif test="#withdrawals.shopType==2">
+																		拍拍
+																	</s:elseif>
+									<s:elseif test="#withdrawals.shopType==3">
+																		有啊
+																	</s:elseif>
 								</s:if>
 								<s:else>
-									完成
-								</s:else>
+																	-
+																</s:else>
 							</td>
 							<td>
-								<s:property value="#payVO.money" />
+								<s:property value="#withdrawals.realIdentity" />
 							</td>
 							<td>
-								<s:date name="#payVO.payDate" format="yyyy-MM-dd HH:mm:ss" />
+								<s:property value="#withdrawals.money" />
 							</td>
 							<td>
-								<s:if test="#payVO.status==1">
+								<s:date name="#withdrawals.operationDate"
+									format="yyyy-MM-dd HH-mm-ss" />
+							</td>
+							<td>
+								<s:if test="#withdrawals.status==1">
+																		申请中
+																	</s:if>
+								<s:elseif test="#withdrawals.status==2">
+																		被驳回
+																	</s:elseif>
+								<s:else>
+																		已完成
+																	</s:else>
+							</td>
+							<td>
+								<s:property value="#withdrawals.statusDesc" />
+							</td>
+							<td nowrap="nowrap">
+								<s:if test="#withdrawals.status==1">
 									<a
-										href="javascript:addMoney('<s:property value="#payVO.id" />')">充值</a>
+										href="javascript:updateLog('<s:property value="#withdrawals.id" />','reject');">驳回</a>
 									<a
-										href="javascript:deleteMoney('<s:property value="#payVO.id" />')">删除</a>
+										href="adminWithdrawalsManager/adminWithdrawals!updateLog.php?flag=over">完成</a>
 								</s:if>
 								<s:else>
-									已完成
+									N/A
 								</s:else>
-
 							</td>
 						</tr>
 					</s:iterator>
 				</tbody>
 				<s:if test="#request.result.size()==0">
 					<tr>
-						<th colspan="5" align="center">
+						<th colspan="9" align="center">
 							没有充值记录！
 						</th>
 					</tr>
@@ -138,5 +217,29 @@
 				</s:else>
 			</table>
 		</s:form>
+
+		<div id="updateTableDIV" title="修改状态">
+			<form onsubmit="return validateUpdateForm();" id="updateForm"
+				action="adminWithdrawalsManager/adminWithdrawals!updateLog.php">
+				<table cellpadding="0" cellspacing="0" border="0">
+					<tr class="sellerClass">
+						<td valign="middle">
+							<font color="red">*</font>状态描述：
+						</td>
+						<td valign="middle">
+							<input name="flag" id="flagID" type="hidden">
+							<input name="withdrawalsVO.id" id="withdrawalsVOID" type="hidden">
+							<input type="text" id="statusDesc"
+								name="withdrawalsVO.statusDesc">
+						</td>
+					</tr>
+				</table>
+				<tr>
+					<td valign="middle" colspan="2">
+						<input type="submit" value="修改	">
+					</td>
+				</tr>
+			</form>
+		</div>
 	</body>
 </html>
