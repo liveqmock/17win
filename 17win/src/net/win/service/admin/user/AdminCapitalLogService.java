@@ -40,7 +40,7 @@ public class AdminCapitalLogService extends BaseService {
 	public String queryLogs(CapitalLogVO capitalLogVO) throws Exception {
 		UserLoginInfo userLoginInfo = getLoginUser();
 		StringBuffer resultHQL = new StringBuffer(
-				"select  _c  from CapitalLogEntity _c inner join _c.user as _u  where  1=1  ");
+				"select  _c ,_u.username from CapitalLogEntity _c inner join _c.user as _u  where  1=1  ");
 		StringBuffer countHQL = new StringBuffer(
 				"select  count(*)  from CapitalLogEntity _c inner join _c.user as _u  where 1=1  ");
 		List<String> paramNames = new ArrayList<String>();
@@ -49,8 +49,8 @@ public class AdminCapitalLogService extends BaseService {
 		if (!StringUtils.isBlank(capitalLogVO.getUsername())) {
 			resultHQL.append(" and _u.username like :username ");
 			countHQL.append(" and _u.username like :username ");
-			paramNames.add("type");
-			paramValues.add(capitalLogVO.getUsername());
+			paramNames.add("username");
+			paramValues.add("%"+capitalLogVO.getUsername()+"%");
 		}
 		// 类型
 		if (!StringUtils.isBlank(capitalLogVO.getType())) {
@@ -103,7 +103,7 @@ public class AdminCapitalLogService extends BaseService {
 			paramNames.add("endDate");
 			paramValues.add(capitalLogVO.getEndDate());
 		}
-		resultHQL.append("order by  _c.logTime");
+		resultHQL.append(" order by  _c.logTime");
 		Long count = (Long) capitalLogDAO.uniqueResultObject(countHQL
 				.toString(), paramNames.toArray(paramNames
 				.toArray(new String[paramNames.size()])), paramValues
@@ -111,17 +111,18 @@ public class AdminCapitalLogService extends BaseService {
 		List<CapitalLogVO> result = new ArrayList<CapitalLogVO>();
 		if (count > 0) {
 			capitalLogVO.setDataCount(count.intValue());
-			List<CapitalLogEntity> resultTemp = capitalLogDAO.pageQuery(
+			List<Object[]> resultTemp = capitalLogDAO.pageQuery(
 					resultHQL.toString(), paramNames.toArray(paramNames
 							.toArray(new String[paramNames.size()])),
 					paramValues.toArray(new Object[paramValues.size()]),
 					capitalLogVO.getStart(), capitalLogVO.getLimit());
 
 			CapitalLogVO capitalLogVOTEMP = null;
-			for (CapitalLogEntity capitalLogEntityTEMP : resultTemp) {
+			for (Object[] objs : resultTemp) {
 				capitalLogVOTEMP = new CapitalLogVO();
 				BeanUtils
-						.copyProperties(capitalLogVOTEMP, capitalLogEntityTEMP);
+						.copyProperties(capitalLogVOTEMP, objs[0]);
+				capitalLogVOTEMP.setUsername(objs[1].toString());
 				result.add(capitalLogVOTEMP);
 			}
 		}
