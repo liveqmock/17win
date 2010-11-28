@@ -168,7 +168,7 @@
 									<a
 										href="javascript:updateLog('<s:property value="#withdrawals.id" />','reject');">驳回</a>
 									<a
-										href="adminWithdrawalsManager/adminWithdrawals!updateLog.php?flag=over">完成</a>
+										href="adminWithdrawalsManager/adminWithdrawals!updateLog.php?flag=over&withdrawalsVO.id=<s:property value="#withdrawals.id" />">完成</a>
 								</s:if>
 								<s:else>
 									N/A

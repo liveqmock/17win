@@ -56,7 +56,7 @@ $(document).ready(function() {
 						+ "			</td> "
 						+ "			<td> "
 						+ "				<input type='text' style='width: 60px;' id='verificationCode' value='' maxlength='4' size='30' name='userVO.verificationCode'> "
-						+ "				<img style='cursor: pointer;' title='点击图片刷新验证码' onclick='changeValidateCode(this)' src='verify/verificationCode.php'> "
+						+ "				<img style='cursor: pointer;' title='点击图片刷新验证码' onclick='changeValidateCode(this)' src='verify/verificationCode.php?time="+new Date().getTime()+"'> "
 						+ "				<span> </span> "
 						+ "			</td> "
 						+ "		</tr> "

@@ -48,7 +48,7 @@ public class AdminWithDrawalsService extends BaseService {
 			resultHQL.append(" and _u.username like:username ");
 			countHQL.append(" and _u.username like:username ");
 			paramNames.add("username");
-			paramValues.add("%"+withdrawalsVO.getUsername()+"%");
+			paramValues.add("%" + withdrawalsVO.getUsername() + "%");
 		}
 		// 类型
 		if (!StringUtils.isBlank(withdrawalsVO.getType())) {
@@ -155,10 +155,8 @@ public class AdminWithDrawalsService extends BaseService {
 		// 完成
 		if ("1".equals(withdrawalsEntity.getStatus())
 				&& "over".equalsIgnoreCase(flag)) {
-			if (userEntity.getMoney() > withdrawalsEntity.getMoney()) {
-				withdrawalsEntity.setStatus("3");
-				withdrawalsEntity.setStatusDesc("提款成功!");
-			}
+			withdrawalsEntity.setStatus("3");
+			withdrawalsEntity.setStatusDesc("提款成功!");
 		} else if ("1".equals(withdrawalsEntity.getStatus())
 				&& "reject".equalsIgnoreCase(flag)) {
 			withdrawalsEntity.setStatusDesc(withdrawalsVO.getStatusDesc());
@@ -167,6 +165,10 @@ public class AdminWithDrawalsService extends BaseService {
 					withdrawalsEntity.getMoney()));
 			logMoneyCapital(withDrawalsDAO, withdrawalsEntity.getMoney(),
 					"提款被驳回,原因:" + withdrawalsVO.getStatusDesc(), userEntity);
+		} else {
+			putJumpPage("adminWithdrawalsManager/adminWithdrawals!queryLog.php");
+			putAlertMsg("操作失败");
+			return JUMP;
 		}
 		putJumpPage("adminWithdrawalsManager/adminWithdrawals!queryLog.php");
 		putAlertMsg("操作成功");
