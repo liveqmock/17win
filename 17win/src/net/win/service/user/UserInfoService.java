@@ -190,7 +190,18 @@ public class UserInfoService extends BaseService {
 				putJumpPage("userInfoManager/info!initSellerAndBuyer.php");
 				return JUMP;
 			}
-
+			
+			Boolean buyerExists = (0 == (Long) buyerDAO
+					.uniqueResultObject(
+							"select count(*) from  BuyerEntity as _buyer where _buyer.name=:buyerName and _buyer.type=:platformType",
+							new String[] { "buyerName", "platformType" },
+							new Object[] { sellerEntity.getName(),
+									platformTypeParam }));
+			if (!buyerExists) {
+				putAlertMsg("不能绑定和买号相同的卖号！");
+				putJumpPage("userInfoManager/info!initSellerAndBuyer.php");
+				return JUMP;
+			}
 			// 判断当前的级别是否可以用友多个卖号
 			Long count = (Long) sellerDAO
 					.uniqueResultObject(
@@ -236,11 +247,22 @@ public class UserInfoService extends BaseService {
 			}
 			Boolean sellerExists = (0 == (Long) buyerDAO
 					.uniqueResultObject(
+							"select count(*) from  SellerEntity as _seller where _seller.name=:sellerName and _seller.type=:platformType",
+							new String[] { "sellerName", "platformType" },
+							new Object[] { buyerEntity.getName(),
+									platformTypeParam }));
+
+			if (!sellerExists) {
+				putAlertMsg("不能绑定和卖号相同的买号！");
+				return "insertSellerAndBuyer";
+			}
+			Boolean buyerExists = (0 == (Long) buyerDAO
+					.uniqueResultObject(
 							"select count(*) from  BuyerEntity as _buyer where _buyer.name=:buyerName and _buyer.type=:platformType",
 							new String[] { "buyerName", "platformType" },
 							new Object[] { buyerEntity.getName(),
 									platformTypeParam }));
-			if (!sellerExists) {
+			if (!buyerExists) {
 				putAlertMsg(buyerEntity.getName() + "已被使用！");
 				return "insertSellerAndBuyer";
 			}

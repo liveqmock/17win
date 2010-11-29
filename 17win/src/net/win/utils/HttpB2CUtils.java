@@ -278,7 +278,7 @@ public final class HttpB2CUtils {
 			} else {
 				List<Node> nodes = getMutliNodeByDom4j(
 						url,
-						"//xmlns:A[starts-with(@href,'http://store.taobao.com/shop/')]|//xmlns:A[@id='J_BuyerRate']|a[@id='J_BuyerRate']",
+						"//xmlns:DIV[@class='skin-gray']/xmlns:DIV[@class='box']/xmlns:DIV[@class='bd']/xmlns:DL/xmlns:DD[1]/xmlns:A|//xmlns:A[@id='J_BuyerRate']",
 						nameSpaces);
 				if (nodes.size() != 2) {
 					return -1;

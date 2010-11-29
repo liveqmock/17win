@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.bytecode.use_reflection_optimizer">
+			true
+		</property>
+		<property name="hibernate.connection.driver_class">
+			com.mysql.jdbc.Driver
+			<!--		net.sourceforge.jtds.jdbc.Driver  -->
+		</property>
+
+		<property name="hibernate.connection.url">
+			jdbc:mysql://localhost:3306/windb
+			<!-- jdbc:jtds:sqlserver://localhost:1433/windb; -->
+		</property>
+		<property name="hibernate.connection.username">windb</property>
+		<property name="hibernate.connection.password">8868829xgj</property>
+		<!-- 方言  	-->
+		<property name="hibernate.dialect">
+			org.hibernate.dialect.MySQLDialect
+			<!-- 	org.hibernate.dialect.SQLServerDialect   -->
+		</property>
+
+		<property name="hibernate.connection.charSet">UTF-8</property>
+		<property name="hibernate.connection.characterEncoding">
+			UTF-8
+		</property>
+		<!--
+			防止出现MySql过夜错误 <property name="hibernate.connection.release_mode">
+			after_transaction </property> <property
+			name="hibernate.connection.release_mode">on_close</property>
+		-->
+		<!--
+			将Session扔到线程里去处理 <property
+			name="current_session_context_class">thread</property>
+		-->
+		<!-- 在控制台打印SQL语句 -->
+		<property name="show_sql">false</property>
+		<!-- 自动把实体类与属性映射成数据库中的表与列 -->
+		<!-- create  删除以前的，从新建.
+			create-drop 根据model类生成表,但是sessionFactory一关闭,表就自动删除 .
+			update 最常用的属性，也根据model类生成表,即使表结构改变了,表中的行仍然存在,不会删除以前的行
+			validate : 只会和数据库中的表进行比较,不会创建新表,但是会插入新值 
+		-->
+		<property name="hbm2ddl.auto">update</property>
+		<!--
+			Simple memory-only cache-->
+		<property name="hibernate.cache.provider_class">
+			org.hibernate.cache.HashtableCacheProvider
+		</property>
+		<!-- 使用C3P0连接池 -->
+		<property name="hibernate.connection.provider_class">
+			org.hibernate.connection.C3P0ConnectionProvider
+		</property>
+		<!-- 最大连接数 -->
+		<property name="hibernate.c3p0.max_size">150</property>
+
+		<!-- 最小连接数 -->
+		<property name="hibernate.c3p0.min_size">10</property>
+
+		<!-- 获得连接的超时时间,如果超过这个时间,会抛出异常，单位毫秒 -->
+		<property name="hibernate.c3p0.timeout">120</property>
+
+		<!-- 最大的PreparedStatement的数量 -->
+		<property name="hibernate.c3p0.max_statements">100</property>
+
+		<!-- 每隔120秒检查连接池里的空闲连接 ，单位是秒-->
+		<property name="hibernate.c3p0.idle_test_period">120</property>
+
+		<!-- 当连接池里面的连接用完的时候，C3P0一下获取的新的连接数 -->
+		<property name="hibernate.c3p0.acquire_increment">5</property>
+
+		<!-- 每次都验证连接是否可用 -->
+		<property name="hibernate.c3p0.validate">true</property>
+		<!-- logging properties -->
+		<property name="hibernate.format_sql">true</property>
+		<property name="hibernate.use_sql_comments">true</property>
+		<!--
+			+ | 在数据插入数据库之后，允许使用JDBC3 PreparedStatement.getGeneratedKeys() |
+			来获取数据库生成的key(键)。需要JDBC3+驱动和JRE1.4+, | 如果你的数据库驱动在使用Hibernate的标
+			识生成器时遇到问题，请将此值设为false. | 默认情况下将使用连接的元数据来判定驱动的能力. + <property
+			name="hibernate.jdbc.use_get_generated_keys"> true </property>
+		-->
+
+		<!-- 配置信息 -->
+		<mapping package="net.win.entity" />
+		<mapping class="net.win.entity.AppealEntity" />
+		<mapping class="net.win.entity.BaseEntity" />
+		<mapping class="net.win.entity.TaskBaseEntity" />
+		<mapping class="net.win.entity.UserEntity" />
+		<mapping class="net.win.entity.SellerEntity" />
+		<mapping class="net.win.entity.BuyerEntity" />
+		<mapping class="net.win.entity.CreditTaskEntity" />
+		<mapping class="net.win.entity.WithdrawalsEntity" />
+		<mapping class="net.win.entity.CreditTaskRepositoryEntity" />
+		<mapping class="net.win.entity.VipEntity" />
+		<mapping class="net.win.entity.SmsEntity" />
+		<mapping class="net.win.entity.AdminEntity" />
+		<mapping class="net.win.entity.PayEntity" />
+		<mapping class="net.win.entity.NewsEntity" />
+		<mapping class="net.win.entity.NewsTypeEntity" />
+		<mapping class="net.win.entity.VipBidUserEntity" />
+		<mapping class="net.win.entity.CapitalLogEntity" />
+	</session-factory>
+</hibernate-configuration>
