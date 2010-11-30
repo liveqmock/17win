@@ -494,7 +494,7 @@ public class UserInfoService extends BaseService {
 		}
 		if (getByRequest("div") == null) {
 			updateUserLoginInfo(userEntity);
-			putDIV("恭喜您，充值成功！<a>点击此处</a>跳转到淘宝互刷区！");
+			putDIV("恭喜您，充值成功！<a href='taskManager/task!initTask.php?platformType=1'>点击此处</a>跳转到淘宝互刷区！");
 			putByRequest("executeFlag", "success");
 		}
 		return "updateBuyDot";
@@ -540,19 +540,21 @@ public class UserInfoService extends BaseService {
 					"from  UserEntity where username=:username", "username",
 					username);
 			if (releaseDot > userEntity.getReleaseDot()) {
-				WinUtils.throwIllegalityException("违法的操作，试图越过兑换发布点验证");
+				putAlertMsg("赠送的发布点不能大于您拥有的发布点！");
+				return "updateExchange";
 			}
 			if (username.equals(userEntity.getUsername())) {
-				WinUtils.throwIllegalityException("违法的操作，试图越过兑换发布点验证");
+				putAlertMsg("不能赠送给自己！");
+				return "updateExchange";
 			}
 			if (touser == null) {
 				putAlertMsg(username + "用户不存在");
 				return "updateExchange";
 			}
-			userEntity.setReleaseDot(ArithUtils.sub(touser.getReleaseDot(),
+			userEntity.setReleaseDot(ArithUtils.sub(userEntity.getReleaseDot(),
 					releaseDot));
-			touser.setReleaseDot(ArithUtils.add(touser.getMoney(), releaseDot));
-
+			touser.setReleaseDot(ArithUtils.add(touser.getReleaseDot(), releaseDot));
+			updateOtherUserLoginInfo(touser);
 			logDotCapital(userDAO, 0 - releaseDot, "赠送发布点给"
 					+ touser.getUsername(), userEntity);
 			logDotCapital(userDAO, releaseDot, userEntity.getUsername()

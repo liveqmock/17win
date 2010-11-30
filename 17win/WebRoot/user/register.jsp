@@ -3,6 +3,17 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML>
 	<HEAD>
+		<META http-equiv=Content-Type content="text/html; charset=UTF-8">
+		<%
+			//让浏览器不缓存jsp页面 
+			response.setHeader("Pragma", "No-cache");// http1.0 
+			response.setHeader("Cache-Control", "no-store,no-cache"); //http1.1 
+			response.setHeader("Expires", "0");
+			response.setDateHeader("Expires", 0);// 这个是针对代理的？但我设置后还是没达到效果。不解！！
+		%>
+		<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+		<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+		<META HTTP-EQUIV="Expires" CONTENT="0">
 		<s:include value="../common/header.jsp"></s:include>
 		<LINK rev=Stylesheet href="css/global.css" type=text/css
 			rel=Stylesheet>
@@ -78,7 +89,7 @@ td {
 										<font color="#FF0000">*&nbsp;</font>
 									</td>
 									<td>
-										<s:password id="password"  maxlength="20"
+										<s:password id="password" maxlength="20"
 											name="userVO.userEntity.loginPassword" size="30"
 											cssStyle="width:210px"></s:password>
 										<br />
@@ -95,8 +106,8 @@ td {
 										<font color="#FF0000">*&nbsp;</font>
 									</td>
 									<td>
-										<input type="password" id="rePassword" size="30"  maxlength="20" 
-											style="width: 210px">
+										<input type="password" id="rePassword" size="30"
+											maxlength="20" style="width: 210px">
 										<br />
 										重复上面的密码
 									</td>
@@ -111,7 +122,7 @@ td {
 										<font color="#FF0000">*&nbsp;</font>
 									</td>
 									<td>
-										<s:password id="opertationCode"  maxlength="20"
+										<s:password id="opertationCode" maxlength="20"
 											name="userVO.userEntity.opertationCode" size="30"
 											cssStyle="width:210px"></s:password>
 										<br />
@@ -128,8 +139,8 @@ td {
 										<font color="#FF0000">*&nbsp;</font>
 									</td>
 									<td align="left" class="red-bcolor">
-										<input type="password" id="reOperationCode" size="30"  maxlength="20"
-											style="width: 210px" />  
+										<input type="password" id="reOperationCode" size="30"
+											maxlength="20" style="width: 210px" />
 										<br />
 										重复上面的操作密码
 									</td>
@@ -146,8 +157,8 @@ td {
 									</td>
 
 									<td>
-										<s:textfield name="userVO.userEntity.qq" id="qq" size="30"  maxlength="11"
-											cssStyle="width:210px"></s:textfield>
+										<s:textfield name="userVO.userEntity.qq" id="qq" size="30"
+											maxlength="11" cssStyle="width:210px"></s:textfield>
 										<br />
 										刷信誉时必用
 									</td>
@@ -162,8 +173,8 @@ td {
 										<font color="#FF0000">*&nbsp;</font>
 									</td>
 									<td align="left" class="red-bcolor">
-										<s:textfield id="telephone" name="userVO.userEntity.telephone"  maxlength="11"
-											size="30" cssStyle="width:210px"></s:textfield>
+										<s:textfield id="telephone" name="userVO.userEntity.telephone"
+											maxlength="11" size="30" cssStyle="width:210px"></s:textfield>
 										<br />
 										可凭手机找回密码
 									</td>
@@ -372,8 +383,8 @@ td {
 								<tr>
 									<td colspan="3" align="center">
 										<INPUT id="sumbitBtn"
-											style="FONT-WEIGHT: bold;   CURSOR: pointer;"
-											timeId="10" disabled="true" type="submit" value="同意协议并注册(10)">
+											style="FONT-WEIGHT: bold; CURSOR: pointer;" timeId="10"
+											disabled="true" type="submit" value="同意协议并注册(10)">
 									</td>
 								</tr>
 							</table>

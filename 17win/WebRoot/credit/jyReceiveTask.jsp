@@ -3,14 +3,22 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML>
 	<HEAD>
+		<META http-equiv=Content-Type content="text/html; charset=UTF-8">
+		<%
+			//让浏览器不缓存jsp页面 
+			response.setHeader("Pragma", "No-cache");// http1.0 
+			response.setHeader("Cache-Control", "no-store,no-cache"); //http1.1 
+			response.setHeader("Expires", "0");
+			response.setDateHeader("Expires", 0);// 这个是针对代理的？但我设置后还是没达到效果。不解！！
+		%>
+		<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+		<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+		<META HTTP-EQUIV="Expires" CONTENT="0">
 		<s:if test="#request.autoRefresh!=null">
 			<meta http-equiv="refresh"
 				content="<s:property value="#request.autoRefresh"/>">
 		</s:if>
 		<s:include value="../common/header.jsp"></s:include>
-		<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
-		<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
-		<META HTTP-EQUIV="Expires" CONTENT="0">
 
 		<LINK href="css/Css.css" type=text/css rel=stylesheet>
 		<LINK href="css/header.css" type=text/css rel=stylesheet>
@@ -239,8 +247,8 @@
 							<Tr>
 								<td colspan="3" valign="top" align="left">
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<font color="red" style="font-weight: bold;">快递单号：<s:property
-											value="#task[22]" /> </font>
+									<font color="red" style="font-weight: bold;">快递单号：只有发布方可看！<!-- 22 -->
+										 </font>
 								</td>
 								<td colspan="3" align="left">
 									<font color="red" style="font-weight: bold;">打分/好评： <s:if

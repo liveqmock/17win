@@ -9,6 +9,7 @@
 %>
 <html>
 	<head>
+		<META http-equiv=Content-Type content="text/html; charset=UTF-8">
 		<%
 			//让浏览器不缓存jsp页面 
 			response.setHeader("Pragma", "No-cache");// http1.0 
@@ -16,6 +17,9 @@
 			response.setHeader("Expires", "0");
 			response.setDateHeader("Expires", 0);// 这个是针对代理的？但我设置后还是没达到效果。不解！！
 		%>
+		<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+		<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+		<META HTTP-EQUIV="Expires" CONTENT="0">
 		<s:include value="../common/header.jsp"></s:include>
 		<LINK href="css/index.css" type=text/css rel=stylesheet>
 		<LINK href="css/main.css" type=text/css rel=stylesheet>

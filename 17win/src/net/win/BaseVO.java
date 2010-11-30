@@ -8,6 +8,17 @@ public class BaseVO {
 	private Integer dataCount = 0;
 	private Long id;
 	
+	private Boolean checkFlag=true;
+	
+	
+	public Boolean getCheckFlag() {
+		return checkFlag;
+	}
+
+	public void setCheckFlag(Boolean checkFlag) {
+		this.checkFlag = checkFlag;
+	}
+
 	public Long getId() {
 		return id;
 	}

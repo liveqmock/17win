@@ -274,7 +274,8 @@ public class CreditTaskService extends BaseService {
 
 		Long taskId = Long.parseLong(getByParam("taskId"));
 		CreditTaskEntity creditTask = creditTaskDAO.get(taskId);
-		Long buyeId = Long.parseLong(getByParam("buyerId"));
+		BuyerEntity buyerEntitiy = buyerDAO.get(Long
+				.parseLong(getByParam("buyerId")));
 		UserEntity userEntity = userDAO.get(loginInfo.getId());
 		if (!userEntity.getStatus().equals("1")) {
 			switch (Integer.parseInt(userEntity.getStatus())) {
@@ -308,11 +309,21 @@ public class CreditTaskService extends BaseService {
 		// 验证状态
 		if (!platformType.equals(creditTask.getType())
 				|| !TaskMananger.STEP_ONE_STATUS.equals(creditTask.getStatus())
-				|| buyeId == null) {
+				|| buyerEntitiy == null) {
 			WinUtils.throwIllegalityException(loginInfo.getUsername()
 					+ "试图越过【接受任务】操作！ 任务ID是:" + taskId);
 		}
 
+		/**
+		 * 验证卖号和买号是否同一个人
+		 */
+		if (buyerEntitiy.getName().equalsIgnoreCase(
+				creditTask.getSeller().getName())) {
+			putAlertMsg("买号和卖号不能相同！");
+			putJumpPage("taskManager/task!initReceivedTast.php?platformType="
+					+ platformType);
+			return JUMP;
+		}
 		/**
 		 * 验证IP
 		 */
@@ -330,13 +341,15 @@ public class CreditTaskService extends BaseService {
 		Integer month = Calendar.getInstance().get(Calendar.MONTH);
 		Boolean refuseFlag = (Long) creditTaskDAO
 				.uniqueResultObject(hqlOne, new String[] { "bid", "receiveIP",
-						"year", "month", "itemUrl" }, new Object[] { buyeId,
-						ip, year, month, creditTask.getItemUrl() }) == 1;
+						"year", "month", "itemUrl" }, new Object[] {
+						buyerEntitiy.getId(), ip, year, month,
+						creditTask.getItemUrl() }) == 1;
 		if (!refuseFlag) {
 			refuseFlag = (Long) creditTaskDAO.uniqueResultObject(hqlSix,
 					new String[] { "bid", "receiveIP", "year", "month",
-							"shopUrl" }, new Object[] { buyeId, ip, year,
-							month, creditTask.getSeller().getShopURL() }) == 6;
+							"shopUrl" }, new Object[] { buyerEntitiy.getId(),
+							ip, year, month,
+							creditTask.getSeller().getShopURL() }) == 6;
 		}
 		if (refuseFlag) {
 			putJumpPage("taskManager/task!initReceivedTast.php?platformType="
@@ -351,9 +364,7 @@ public class CreditTaskService extends BaseService {
 		creditTask.setReceivePerson(userEntity);
 		// Ip
 		creditTask.setReceiveIP(ip);
-		BuyerEntity buyerEntity = new BuyerEntity();
-		buyerEntity.setId(buyeId);
-		creditTask.setBuyer(buyerEntity);
+		creditTask.setBuyer(buyerEntitiy);
 		creditTask.setRemainTime(20);
 		creditTask.setReceiveDate(new Date());
 		// 保护就到审核状态
@@ -455,8 +466,6 @@ public class CreditTaskService extends BaseService {
 					+ receieveScore);
 			receiveUser.setConvertScore(receiveUser.getConvertScore()
 					+ receieveScore);
-			UserLoginInfo userLoginInfo = WinContext.getInstance()
-					.getUserLoginInfo(receiveUser.getUsername());
 			/**
 			 * 计算发布和任务数
 			 */
@@ -514,7 +523,7 @@ public class CreditTaskService extends BaseService {
 
 			// 更新信息
 			updateUserLoginInfo(releaEntity);
-			updateUserLoginInfo(receiveUser, userLoginInfo);
+			updateOtherUserLoginInfo(receiveUser);
 			return JUMP;
 		}
 	}
@@ -1162,10 +1171,10 @@ public class CreditTaskService extends BaseService {
 		// 完成对金钱进行修改,登陆名的也需要
 		updateUserLoginInfo(userEntity);
 
-		logMoneyCapital(userDAO, 0 - (creditTask.getMoney()
-				+ creditTask.getAddtionMoney()), "发布任务", userEntity);
-		logDotCapital(userDAO, 0 - (creditTaskDot
-				+ creditTaskVO.getAddtionReleaseDot()), "发布任务", userEntity);
+		logMoneyCapital(userDAO, 0 - (creditTask.getMoney() + creditTask
+				.getAddtionMoney()), "发布任务", userEntity);
+		logDotCapital(userDAO, 0 - (creditTaskDot + creditTaskVO
+				.getAddtionReleaseDot()), "发布任务", userEntity);
 
 		putDIV("");
 		return "insertReleaseTaskSuccess";
