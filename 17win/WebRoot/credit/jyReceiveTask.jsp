@@ -184,7 +184,12 @@
 													卖家已发货<br>等待您确认好评
 												</s:if>
 										<s:else>
-											<font color="red"><s:property value="#task[13]" /> </font>小时后好评
+											<font color="red"><s:if test="#task[13]>1">
+													<s:property value="#task[13]" />
+												</s:if> <s:else>
+													<s:property value="%{#task[13]*60}" />
+												</s:else>
+											</font>小时后好评
 												</s:else>
 									</s:elseif>
 									<s:elseif test="#task[12]==5">
@@ -196,13 +201,11 @@
 								</td>
 								<td valign="top" align="center">
 									<s:if test="#task[12]==-2">
-										<span class="anniu">等待审核</span>
+										可联系对方加时
 										<br>
 										<a title="退出任务" class="anniu"
 											href="javascript:quitTask('<s:property value="#task[19]"/>')">退出任务</a>
-										<br>
-												可联系对方加时
-											</s:if>
+									</s:if>
 									<s:elseif test="#task[12]==-1">
 												此任务被申述中
 											</s:elseif>
@@ -248,7 +251,7 @@
 								<td colspan="3" valign="top" align="left">
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									<font color="red" style="font-weight: bold;">快递单号：只有发布方可看！<!-- 22 -->
-										 </font>
+									</font>
 								</td>
 								<td colspan="3" align="left">
 									<font color="red" style="font-weight: bold;">打分/好评： <s:if

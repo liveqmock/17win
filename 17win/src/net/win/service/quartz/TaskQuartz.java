@@ -36,14 +36,14 @@ public class TaskQuartz {
 					+ "   RECEIVE_IP_=null,"
 					+ "    BUYER_ID_=null,"
 					+ "       STATUS_='1',"
-					+ "  REMAIN_TIME_=null,"
+					+ "  REMAIN_TIME_=0,"
 					+ "  RECEIVE_PERSON_=null "
 					+ "   where"
 					+ "     ("
 					+ "       STATUS_='2' "
 					+ "      or STATUS_='-2'"
 					+ "    ) "
-					+ "  and (SEC_TO_TIME(UNIX_TIMESTAMP(now())- UNIX_TIMESTAMP(RECEIVE_DATE_))>=REMAIN_TIME_)";
+					+ "  and (UNIX_TIMESTAMP(sysdate())- UNIX_TIMESTAMP(RECEIVE_DATE_)>=REMAIN_TIME_*60)";
 			query = session.createSQLQuery(sql);
 			query.executeUpdate();
 			session.getTransaction().commit();
@@ -55,7 +55,7 @@ public class TaskQuartz {
 					+ "   set"
 					+ "       STATUS_='1' "
 					+ "   where"
-					+ "       STATUS_='0'  and  (UNIX_TIMESTAMP(now())-   UNIX_TIMESTAMP(TIMEING_TIME_)>=0)";
+					+ "       STATUS_='0'  and  (UNIX_TIMESTAMP(sysdate())-   UNIX_TIMESTAMP(TIMEING_TIME_)>=0)";
 			query = session.createSQLQuery(sql2);
 			query.executeUpdate();
 			session.getTransaction().commit();
