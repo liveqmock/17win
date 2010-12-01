@@ -190,10 +190,10 @@
 												</s:if>
 										<s:else>
 											<font color="red"><s:if test="#task[13]>1">
-													<s:property value="#task[13]" />
+													<s:property value="#task[13]" />小时后好评
 												</s:if> <s:else>
-													<s:property value="%{#task[13]*60}" />
-												</s:else> </font>小时后好评
+													<s:property value="%{#task[13]*60}" />分钟后好评
+												</s:else> </font>
 												</s:else>
 									</s:elseif>
 									<s:elseif test="#task[12]==5">

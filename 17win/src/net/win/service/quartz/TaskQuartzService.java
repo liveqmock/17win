@@ -75,7 +75,7 @@ public class TaskQuartzService {
 		Session session = null;
 		try {
 			List<BuyerEntity> buyers = buyerDAO
-					.list("from BuyerEntity where enable=false and  type in (1,2) ");
+					.list("from BuyerEntity where enable=true and  type in (1,2) ");
 			Integer value = 0;
 			for (BuyerEntity buyerEntity : buyers) {
 				value = HttpB2CUtils.obtainCreditValue(buyerEntity.getName(),

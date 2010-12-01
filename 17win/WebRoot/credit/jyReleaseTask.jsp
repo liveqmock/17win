@@ -218,12 +218,12 @@
 										<s:else>
 											<font color="red">
 											<s:if test="#task[12]>1">
-												<s:property value="#task[12]" /> 
+												<s:property value="#task[12]" />小时后好评 
 											</s:if>
 											<s:else>
-												<s:property value="%{#task[12]*60}" /> 
+												<s:property value="%{#task[12]*60}" />分钟后好评
 											</s:else>
-											</font>小时后好评
+											</font>
 												</s:else>
 									</s:elseif>
 									<s:elseif test="#task[7]==5">

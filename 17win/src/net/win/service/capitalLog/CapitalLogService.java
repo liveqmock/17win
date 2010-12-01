@@ -100,7 +100,8 @@ public class CapitalLogService extends BaseService {
 			paramNames.add("endDate");
 			paramValues.add(capitalLogVO.getEndDate());
 		}
-
+		
+		resultHQL.append("  order by  _c.logTime desc");
 		Long count = (Long) capitalLogDAO.uniqueResultObject(countHQL
 				.toString(), paramNames.toArray(paramNames
 				.toArray(new String[paramNames.size()])), paramValues

@@ -91,12 +91,6 @@ public class CreditTaskService extends BaseService {
 				WinUtils.throwIllegalityException(getLoginUser().getUsername()
 						+ "试图越过【买家好评】操作！任务ID是：" + taskId);
 			}
-			if (!creditTask.getGoodTimeType().equals("1")) {
-				Long tempTime = System.currentTimeMillis()
-						- creditTask.getDispatchDate().getTime();
-				WinUtils.throwIllegalityException(getLoginUser().getUsername()
-						+ "试图越过【买家好评】的时间操作！任务ID是：" + taskId);
-			}
 			/**
 			 * 验证
 			 */
@@ -277,6 +271,11 @@ public class CreditTaskService extends BaseService {
 		BuyerEntity buyerEntitiy = buyerDAO.get(Long
 				.parseLong(getByParam("buyerId")));
 		UserEntity userEntity = userDAO.get(loginInfo.getId());
+		if(creditTask==null){
+			putAlertMsg("任务已经不存在！");
+			putJumpPage("userInfoManager/info!initActiave.php");
+			return JUMP;
+		}
 		if (!userEntity.getStatus().equals("1")) {
 			switch (Integer.parseInt(userEntity.getStatus())) {
 			case 0:
@@ -454,7 +453,7 @@ public class CreditTaskService extends BaseService {
 			 * 发布点
 			 */
 			Double releaseDot = creditTask.getReleaseDot()
-					* StrategyUtils.getTaskOverDotRate(releaEntity,
+					* StrategyUtils.getTaskOverDotRate(receiveUser,
 							receiveUserVip, receiveUser.getVipEnable());
 			receiveUser.setReleaseDot(ArithUtils.add(receiveUser
 					.getReleaseDot(), releaseDot

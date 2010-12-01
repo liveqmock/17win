@@ -139,7 +139,7 @@ img {
 														刷客级别：
 														<img style="cursor: pointer;"
 															src="images/<s:property value="#session.userLogin.levelImg"/>"
-															alt="您的刷客级别为：<s:property value="#session.userLogin.level"/>"
+															alt="您的刷客级别为：<s:property value="#session.userLogin.level"/>,升级积分<s:property value="#session.userLogin.upgradeScore"/>"
 															align="top">
 
 													</td>

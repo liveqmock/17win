@@ -115,7 +115,7 @@ public class AdminWithDrawalsService extends BaseService {
 			paramNames.add("status");
 			paramValues.add(withdrawalsVO.getStatus());
 		}
-		resultHQL.append(" order by _w.operationDate");
+		resultHQL.append(" order by _w.operationDate desc");
 		Long count = (Long) withDrawalsDAO.uniqueResultObject(countHQL
 				.toString(), paramNames.toArray(paramNames
 				.toArray(new String[paramNames.size()])), paramValues

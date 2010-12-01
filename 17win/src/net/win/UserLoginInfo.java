@@ -31,6 +31,8 @@ public class UserLoginInfo {
 	private String levelImg;
 	// 操作码激活状态 true 当前会话激活， false当前会话没激活
 	private Boolean operationCodeStatus = false;
+	
+	private Integer upgradeScore;
 	// 状态
 	private String status;
 	// 钱
@@ -189,5 +191,13 @@ public class UserLoginInfo {
 
 	public void setAdminID(Long adminID) {
 		this.adminID = adminID;
+	}
+
+	public Integer getUpgradeScore() {
+		return upgradeScore;
+	}
+
+	public void setUpgradeScore(Integer upgradeScore) {
+		this.upgradeScore = upgradeScore;
 	}
 }
