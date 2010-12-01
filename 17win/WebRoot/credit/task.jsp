@@ -121,8 +121,8 @@
 								</td>
 								<td valign="top" align="center">
 									<SPAN style="Z-INDEX: 20; POSITION: relative"> <a
-										href="../user/send_message.asp?sendname=shengjun0911"
-										title="发送站内信息" target="_blank"><s:property
+										href="javascript:reply('<s:property value='#task[2]' />');"
+										title="发送站内信息" ><s:property
 												value="#task[2]" /> </a> </SPAN>
 									<br>
 									<img

@@ -856,7 +856,7 @@ public class UserInfoService extends BaseService {
 		// 短信数
 		Long smsCount = (Long) userDAO
 				.uniqueResultObject(
-						"select count(*) from SmsEntity  _sms where _sms.fromUser.id=:userid and _sms.read=:read",
+						"select count(*) from SmsEntity  _sms where _sms.toUser.id=:userid and _sms.read=:read",
 						new String[] { "userid", "read" }, new Object[] {
 								userLoginInfo.getId(), false });
 		putByRequest("smsCount", smsCount);

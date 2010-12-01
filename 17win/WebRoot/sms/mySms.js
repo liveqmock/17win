@@ -30,8 +30,9 @@ function deleteSms(id) {
 }
 // 浏览
 function brower(id, read) {
+	$("#td_"+id).text($("#td_"+id).attr("fromUserName"));
 	if (!read) {
-		$.post("smsManager/sms!updateSms.php?smsVO.id=" + id);
+		$.post("smsManager/sms!updateSms.php?smsVO.id=" + id+"&timeFlag="+new Date().getTime());
 	}
 	$("#title").val($("#a_"+id).attr("title"));
 	$("#content").text($("#a_"+id).attr("content"));
@@ -40,7 +41,7 @@ function brower(id, read) {
 }
 // 回复
 function reply(fromUsername) {
-	window.open("smsManager/sms!initSendSms.php?toUser=" + fromUsername,
+	window.open("smsManager/sms!initSendSms.php?toUser=" + fromUsername+"&timeFlag="+new Date().getTime(),
 			"_blank");
 }
 function validateForm() {

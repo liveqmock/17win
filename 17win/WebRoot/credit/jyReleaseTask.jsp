@@ -154,13 +154,14 @@
 												暂无接收人
 											</s:if>
 										<s:else>
-
-											<a href="#" title="发送站内信息" target="_blank"><s:property
-													value="#task[8]" /> </a>
-											<br>
-											<img
-												src="images/<s:property value="@net.win.utils.StrategyUtils@getLevelImg(#task[11])" />"
-												alt="刷客经验积分：<s:property value="#task[11]" />">
+											 <SPAN style="Z-INDEX: 20; POSITION: relative"> <a
+										href="javascript:reply('<s:property value='#task[8]' />');"
+										title="发送站内信息"  ><s:property
+												value="#task[8]" /> </a> </SPAN>
+									<br>
+									<img
+										src="images/<s:property value="@net.win.utils.StrategyUtils@getLevelImg(#task[11])" />"
+										alt="刷客经验积分：<s:property value="#task[11]" />">
 										</s:else>
 									</s:else>
 								</td>

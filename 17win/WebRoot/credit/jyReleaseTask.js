@@ -38,6 +38,12 @@ $(document).ready(function() {
 
 			});
 });
+
+// 回复
+function reply(fromUsername) {
+	window.open("smsManager/sms!initSendSms.php?toUser=" + fromUsername+"&timeFlag="+new Date().getTime(),
+			"_blank");
+}
 // 审核卖家
 function clearReceiver(id) {
 	var platformType = $("#platformType").val();

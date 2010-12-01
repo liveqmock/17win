@@ -35,7 +35,7 @@ public class SmsService extends BaseService {
 	 * @throws Exception
 	 */
 	public String initSendSms(SmsVO smsVO) throws Exception {
-		String toUsername = getByParam("toUser");
+		String toUsername = new String(getByParam("toUser").getBytes("ISO-8859-1"),"UTF-8");
 		smsVO.setToUserName(toUsername);
 		return "initSendSms";
 	}
@@ -236,14 +236,12 @@ public class SmsService extends BaseService {
 			paramValues.add(smsVO.getStartDate());
 		} else if (smsVO.getEndDate() != null) {
 
-			resultFromHQL.append(" and   _w.sendDate<=:endDate ");
-			countFromHQL.append(" and   _w.sendDate<=:endDate  ");
+			resultFromHQL.append(" and   _sms.sendDate<=:endDate ");
+			countFromHQL.append(" and   _sms.sendDate<=:endDate  ");
 
-			resultToHQL.append(" and   _w.sendDate<=:endDate  ");
-			countToHQL.append(" and   _w.sendDate<=:endDate   ");
+			resultToHQL.append(" and   _sms.sendDate<=:endDate  ");
+			countToHQL.append(" and   _sms.sendDate<=:endDate   ");
 
-			paramNames.add("startDate");
-			paramValues.add(smsVO.getStartDate());
 
 			paramNames.add("endDate");
 			paramValues.add(smsVO.getEndDate());

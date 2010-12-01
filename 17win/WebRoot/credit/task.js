@@ -49,6 +49,12 @@ $(document).ready(function() {
 	});
 
 });
+
+// 回复
+function reply(fromUsername) {
+	window.open("smsManager/sms!initSendSms.php?toUser=" + fromUsername+"&timeFlag="+new Date().getTime(),
+			"_blank");
+}
 // 接手任务
 function receiveTask(id) {
 	if ($("#noBuyerId").val() == "true") {

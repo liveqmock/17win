@@ -13,7 +13,7 @@ import net.win.utils.LoggerUtils;
 import org.hibernate.Query;
 import org.hibernate.Session;
 @SuppressWarnings({"unchecked","unused"})
-public class TaskQuartz {
+public class TaskQuartzService {
 	@Resource
 	private CreditTaskDAO creditTaskDAO;
 	@Resource
@@ -22,7 +22,7 @@ public class TaskQuartz {
 	/**
 	 * 分钟任务 改变加时状态
 	 */
-	public void minuteTask() {
+	public void quartzMinuteTask() {
 		Query query;
 		Session session = null;
 		try {
@@ -37,6 +37,7 @@ public class TaskQuartz {
 					+ "    BUYER_ID_=null,"
 					+ "       STATUS_='1',"
 					+ "  REMAIN_TIME_=0,"
+					+"  RELEASE_DATE = sysdate(),"
 					+ "  RECEIVE_PERSON_=null "
 					+ "   where"
 					+ "     ("
@@ -69,7 +70,7 @@ public class TaskQuartz {
 	/**
 	 * 每晚24点任务
 	 */
-	public void clock24OfDayTask() {
+	public void quartzClock24OfDayTask() {
 		Query query;
 		Session session = null;
 		try {

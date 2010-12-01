@@ -121,9 +121,14 @@
 									<s:date name="#task[1]" format="yyyy-MM-dd HH-mm-ss" />
 								</td>
 								<td valign="top" align="center">
-									<s:property value="#task[2]" />
+									<SPAN style="Z-INDEX: 20; POSITION: relative"> <a
+										href="javascript:reply('<s:property value='#task[2]' />');"
+										title="发送站内信息"  ><s:property
+												value="#task[2]" /> </a> </SPAN>
 									<br>
-									<img src="images/xin_1.gif" alt=刷客经验积分：2779>
+									<img
+										src="images/<s:property value="@net.win.utils.StrategyUtils@getLevelImg(#task[25])" />"
+										alt="刷客经验积分：<s:property value="#task[25]" />">
 								</td>
 								<td valign="top" align="center">
 									<font color="red"><s:property value="#task[4]" /> </font><font
@@ -188,8 +193,7 @@
 													<s:property value="#task[13]" />
 												</s:if> <s:else>
 													<s:property value="%{#task[13]*60}" />
-												</s:else>
-											</font>小时后好评
+												</s:else> </font>小时后好评
 												</s:else>
 									</s:elseif>
 									<s:elseif test="#task[12]==5">

@@ -45,6 +45,7 @@
 			<tx:method name="insert*"
 				rollback-for="java.lang.Exception" />
 			<tx:method name="input*" rollback-for="java.lang.Exception" />
+			<tx:method name="quartz*" rollback-for="java.lang.Exception" />
 			<tx:method name="merge*" rollback-for="java.lang.Exception" />
 			<tx:method name="*" read-only="true" propagation="SUPPORTS" />
 		</tx:attributes>
@@ -108,18 +109,18 @@
 
 	<!-- quartz -->
 	<!-- 要调用的工作类 -->
-	<bean id="taskQuartz" class="net.win.service.quartz.TaskQuartz">
+	<bean id="taskQuartzService" class="net.win.service.quartz.TaskQuartzService">
 	</bean>
 	<!-- 定义调用对象和调用对象的方法 分钟 -->
 	<bean id="minuteTask"
 		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		<!-- 调用的类 -->
 		<property name="targetObject">
-			<ref bean="taskQuartz" />
+			<ref bean="taskQuartzService" />
 		</property>
 		<!-- 调用类中的方法 -->
 		<property name="targetMethod">
-			<value>minuteTask</value>
+			<value>quartzMinuteTask</value>
 		</property>
 	</bean>
 
@@ -128,11 +129,11 @@
 		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		<!-- 调用的类 -->
 		<property name="targetObject">
-			<ref bean="taskQuartz" />
+			<ref bean="taskQuartzService" />
 		</property>
 		<!-- 调用类中的方法 -->
 		<property name="targetMethod">
-			<value>clock24OfDayTask</value>
+			<value>quartzClock24OfDayTask</value>
 		</property>
 	</bean>
 	<!-- 定义触发任务状态更新，每分钟-->

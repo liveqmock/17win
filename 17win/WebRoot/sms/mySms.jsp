@@ -160,7 +160,7 @@ img {
 											<tbody>
 												<s:iterator value="#request.result" id="sms">
 													<tr>
-														<td>
+														<td id="td_<s:property value="#sms.id"/>" fromUserName="<s:property value="#sms.fromUserName" />">
 															<s:if
 																test="!#sms.read &&  #sms.fromUserName!=#session.userLogin.username">
 																<b>*<s:property value="#sms.fromUserName" />
