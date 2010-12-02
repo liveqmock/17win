@@ -145,10 +145,14 @@ public class BaseService {
 	 * @param userEntity
 	 * @throws Exception
 	 */
-	protected void updateOtherUserLoginInfo(UserEntity userEntity) throws Exception {
+	protected void updateOtherUserLoginInfo(UserEntity userEntity)
+			throws Exception {
 		// ///
 		UserLoginInfo userLoginInfo = WinContext.getInstance()
 				.getUserLoginInfo(userEntity.getUsername());
+		if (userLoginInfo == null) {
+			return;
+		}
 		BeanUtils.copyProperties(userLoginInfo, userEntity);
 		userLoginInfo.setLevel(StrategyUtils.getLevel(userEntity
 				.getUpgradeScore()));

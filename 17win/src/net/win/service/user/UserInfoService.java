@@ -543,7 +543,7 @@ public class UserInfoService extends BaseService {
 				putAlertMsg("赠送的发布点不能大于您拥有的发布点！");
 				return "updateExchange";
 			}
-			if (username.equals(userEntity.getUsername())) {
+			if (username.equalsIgnoreCase(userEntity.getUsername())) {
 				putAlertMsg("不能赠送给自己！");
 				return "updateExchange";
 			}

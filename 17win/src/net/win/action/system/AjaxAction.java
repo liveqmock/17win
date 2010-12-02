@@ -126,6 +126,7 @@ public class AjaxAction extends BaseAction {
 	 * @throws Exception
 	 */
 	public String userExists() throws Exception {
+		username = username.toLowerCase();
 		Long id = (Long) userDAO
 				.uniqueResultObject(
 						"select id from UserEntity  as _u where  _u.username=:username",
@@ -156,6 +157,7 @@ public class AjaxAction extends BaseAction {
 	 * @throws Exception
 	 */
 	public String emailExists() throws Exception {
+		email = email.toLowerCase();
 		Long id = (Long) userDAO.uniqueResultObject(
 				"select id from UserEntity  as _u where  _u.email=:email",
 				"email", email);

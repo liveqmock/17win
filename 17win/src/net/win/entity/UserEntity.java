@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -164,6 +165,16 @@ public class UserEntity extends BaseEntity {
 	@JoinColumn(name = "To_User_ID_")
 	@Cascade(CascadeType.ALL)
 	private List<SmsEntity> toSms;
+
+	// // 我发送的物流信息
+	@OneToMany(targetEntity = LogisticsEntity.class, fetch = FetchType.LAZY)
+	@JoinColumn(name = "User_ID_")
+	@Cascade(CascadeType.ALL)
+	private List<LogisticsEntity> releaseLogistics;
+
+	// // 我接受的物流信息
+	@ManyToMany(mappedBy="receieveUsers")
+	private List<LogisticsEntity> receieveLogistics;
 
 	// VIP
 	@ManyToOne(targetEntity = VipEntity.class, fetch = FetchType.LAZY)
@@ -466,6 +477,22 @@ public class UserEntity extends BaseEntity {
 
 	public void setRefereeMoney(Integer refereeMoney) {
 		this.refereeMoney = refereeMoney;
+	}
+
+	public List<LogisticsEntity> getReleaseLogistics() {
+		return releaseLogistics;
+	}
+
+	public void setReleaseLogistics(List<LogisticsEntity> releaseLogistics) {
+		this.releaseLogistics = releaseLogistics;
+	}
+
+	public List<LogisticsEntity> getReceieveLogistics() {
+		return receieveLogistics;
+	}
+
+	public void setReceieveLogistics(List<LogisticsEntity> receieveLogistics) {
+		this.receieveLogistics = receieveLogistics;
 	}
 
 }

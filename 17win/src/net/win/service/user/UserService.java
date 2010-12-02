@@ -244,6 +244,10 @@ public class UserService extends BaseService {
 			putAlertMsg("密码和操作码不能相同！");
 			return INPUT;
 		}
+		if(userDAO.findUserByName(userEntity.getUsername().toLowerCase())!=null){
+			putAlertMsg("用户已经存在！");
+			return INPUT;
+		}
 		// 改变密码
 		userEntity.setLoginPassword(StringUtils.processPwd(userEntity
 				.getLoginPassword()));
