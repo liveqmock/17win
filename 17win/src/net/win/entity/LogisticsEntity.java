@@ -10,7 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
@@ -26,10 +25,10 @@ import org.hibernate.annotations.CascadeType;
 @Table(name = "Tb_Logicstics")
 public class LogisticsEntity extends BaseEntity {
 	// 运货单号
-	@Column(name = "WAYBILL_", nullable = false, unique = true)
+	@Column(name = "WAYBILL_", length = 25, nullable = false, unique = true)
 	private String waybill;
 	// 发货时间
-	@Column(name = "SEND_DATE_")
+	@Column(name = "SEND_DATE_", nullable = false)
 	private Date sendDate;
 	// 收货信息
 	@Column(name = "RECEIEVE_INFO_", nullable = false)
@@ -46,6 +45,10 @@ public class LogisticsEntity extends BaseEntity {
 	// 备注
 	@Column(name = "REMARK_")
 	private String remark;
+
+	// 记录日期
+	@Column(name = "LOG_DATE_", nullable = false)
+	private Date logDate;
 
 	// 发送者
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = UserEntity.class)
@@ -128,6 +131,14 @@ public class LogisticsEntity extends BaseEntity {
 
 	public void setReceieveUsers(List<UserEntity> receieveUsers) {
 		this.receieveUsers = receieveUsers;
+	}
+
+	public Date getLogDate() {
+		return logDate;
+	}
+
+	public void setLogDate(Date logDate) {
+		this.logDate = logDate;
 	}
 
 }

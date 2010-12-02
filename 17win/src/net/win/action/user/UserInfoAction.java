@@ -37,7 +37,8 @@ import org.springframework.stereotype.Controller;
 		@Result(name = "updateSeller", type = "chain", location = "/userInfoManager/info!initSellerAndBuyer.php"),
 		@Result(name = "insertSellerAndBuyer", type = "chain", location = "/userInfoManager/info!initSellerAndBuyer.php"),
 		@Result(name = "initFindPassword", location = "/system/initFindPassword.jsp"),
-		@Result(name = "updateFindPassword", location = "/system/initFindPassword.jsp")
+		@Result(name = "updateFindPassword", location = "/system/initFindPassword.jsp"),
+		@Result(name = "updateExchange", location = "/user/exchange.jsp")
 
 })
 @Namespace("/userInfoManager")

@@ -165,7 +165,40 @@
 							</td>
 						</tr>
 					</table>
+					<table cellpadding=0 cellspacing=0 width=158 align=center>
+						<tr>
+							<td height=25 class="menu_title"
+								onmouseover="this.className=
+															'menu_title2';"
+								onmouseout="this.className=
+															'menu_title';"
+								background="images/membertitle.gif" id="menuTitle8"
+								onClick="showsubmenu(24)" style="cursor: hand;">
+								<span>物流管理</span>
+							</td>
+						</tr>
+						<tr>
+							<td id='submenu24'>
+								<div class=sec_menu style="width: 158">
+									<table cellpadding=0 cellspacing=0 align=center width=130
+										class=LeftNews>
+										<tr>
 
+											<td height=20>
+												<a href="smsManager/sms!initSendSms.php">发送物流</a>
+											</td>
+										</tr>
+										<tr>
+											<td height=20>
+												<a href="smsManager/sms!querySms.php">我的物流</a>
+											</td>
+
+										</tr>
+									</table>
+								</div>
+							</td>
+						</tr>
+					</table>
 					<table cellpadding=0 cellspacing=0 width=158 align=center>
 						<tr>
 							<td height=25 class="menu_title"

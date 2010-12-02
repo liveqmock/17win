@@ -237,9 +237,9 @@ public final class StrategyUtils {
 		int idIndex = random.nextInt(idSize);
 		StringBuffer result = new StringBuffer();
 		result.append(Address.addressList.get(addressIndex) + " ");
-		result.append(Address.nameList.get(nameIndex) + " ");
-		result.append(Address.makePhone() + " ");
-		result.append(Address.idList.get(idIndex));
+		result.append("姓名："+Address.nameList.get(nameIndex) + " ");
+		result.append("电话: "+Address.makePhone() + " ");
+		result.append("身份证: "+Address.idList.get(idIndex));
 		return result.toString();
 
 	}
