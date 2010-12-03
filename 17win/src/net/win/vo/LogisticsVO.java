@@ -12,6 +12,8 @@ public class LogisticsVO extends BaseVO {
 	private String waybill;
 	// 发货时间
 	private Date sendDate;
+	// 发货信息
+	private String releaseInfo;
 	// 收货信息
 	private String receieveInfo;
 	// 快递公司
@@ -19,9 +21,35 @@ public class LogisticsVO extends BaseVO {
 	// 使用数
 	private Integer useCount = 0;
 	// 总收益
-	private Double money = 0D;
+	private Double releaseDotCount = 0D;
 	// 备注
 	private String remark;
+
+	private Date arrivalDate;
+
+	// 记录日期
+	private Date logDate = new Date();
+
+	private Boolean deleteFlag = true;
+
+	private Date startDate;
+	private Date endDate;
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
 
 	public String getWaybill() {
 		return waybill;
@@ -63,14 +91,6 @@ public class LogisticsVO extends BaseVO {
 		this.useCount = useCount;
 	}
 
-	public Double getMoney() {
-		return money;
-	}
-
-	public void setMoney(Double money) {
-		this.money = money;
-	}
-
 	public String getRemark() {
 		return remark;
 	}
@@ -79,12 +99,52 @@ public class LogisticsVO extends BaseVO {
 		this.remark = remark;
 	}
 
+	public String getReleaseInfo() {
+		return releaseInfo;
+	}
+
+	public void setReleaseInfo(String releaseInfo) {
+		this.releaseInfo = releaseInfo;
+	}
+
+	public Double getReleaseDotCount() {
+		return releaseDotCount;
+	}
+
+	public void setReleaseDotCount(Double releaseDotCount) {
+		this.releaseDotCount = releaseDotCount;
+	}
+
+	public Date getLogDate() {
+		return logDate;
+	}
+
+	public void setLogDate(Date logDate) {
+		this.logDate = logDate;
+	}
+
 	public LogisticsEntity getLogistics() {
 		return logistics;
 	}
 
 	public void setLogistics(LogisticsEntity logistics) {
 		this.logistics = logistics;
+	}
+
+	public Date getArrivalDate() {
+		return arrivalDate;
+	}
+
+	public void setArrivalDate(Date arrivalDate) {
+		this.arrivalDate = arrivalDate;
+	}
+
+	public Boolean getDeleteFlag() {
+		return deleteFlag;
+	}
+
+	public void setDeleteFlag(Boolean deleteFlag) {
+		this.deleteFlag = deleteFlag;
 	}
 
 }

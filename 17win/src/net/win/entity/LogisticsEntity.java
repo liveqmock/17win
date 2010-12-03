@@ -11,6 +11,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -28,8 +30,16 @@ public class LogisticsEntity extends BaseEntity {
 	@Column(name = "WAYBILL_", length = 25, nullable = false, unique = true)
 	private String waybill;
 	// 发货时间
+	@Temporal(TemporalType.DATE)
 	@Column(name = "SEND_DATE_", nullable = false)
 	private Date sendDate;
+	// 到达时间
+	@Column(name = "ARRIVAL_DATE_")
+	@Temporal(TemporalType.DATE)
+	private Date arrivalDate;
+	// 发货信息
+	@Column(name = "RELEASE_INFO_", nullable = false)
+	private String releaseInfo;
 	// 收货信息
 	@Column(name = "RECEIEVE_INFO_", nullable = false)
 	private String receieveInfo;
@@ -40,15 +50,15 @@ public class LogisticsEntity extends BaseEntity {
 	@Column(name = "USE_COUNT_", nullable = false)
 	private Integer useCount = 0;
 	// 总收益
-	@Column(name = "MONEY_", nullable = false)
-	private Double money = 0D;
+	@Column(name = "ReleaseDot_Count_", nullable = false)
+	private Double releaseDotCount = 0D;
 	// 备注
 	@Column(name = "REMARK_")
 	private String remark;
 
 	// 记录日期
 	@Column(name = "LOG_DATE_", nullable = false)
-	private Date logDate;
+	private Date logDate = new Date();
 
 	// 发送者
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = UserEntity.class)
@@ -101,12 +111,12 @@ public class LogisticsEntity extends BaseEntity {
 		this.useCount = useCount;
 	}
 
-	public Double getMoney() {
-		return money;
+	public Double getReleaseDotCount() {
+		return releaseDotCount;
 	}
 
-	public void setMoney(Double money) {
-		this.money = money;
+	public void setReleaseDotCount(Double releaseDotCount) {
+		this.releaseDotCount = releaseDotCount;
 	}
 
 	public String getRemark() {
@@ -139,6 +149,26 @@ public class LogisticsEntity extends BaseEntity {
 
 	public void setLogDate(Date logDate) {
 		this.logDate = logDate;
+	}
+
+	public String getReleaseInfo() {
+		return releaseInfo;
+	}
+
+	public void setReleaseInfo(String releaseInfo) {
+		this.releaseInfo = releaseInfo;
+	}
+
+	public void addReceieveUser(UserEntity receieveUsers) {
+		getReceieveUsers().add(receieveUsers);
+	}
+
+	public Date getArrivalDate() {
+		return arrivalDate;
+	}
+
+	public void setArrivalDate(Date arrivalDate) {
+		this.arrivalDate = arrivalDate;
 	}
 
 }

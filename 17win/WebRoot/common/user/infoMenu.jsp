@@ -185,12 +185,12 @@
 										<tr>
 
 											<td height=20>
-												<a href="smsManager/sms!initSendSms.php">发送物流</a>
+												<a href="logisticsManager/logistics!initLogistics.php">发送物流</a>
 											</td>
 										</tr>
 										<tr>
 											<td height=20>
-												<a href="smsManager/sms!querySms.php">我的物流</a>
+												<a href="logisticsManager/logistics!logisticsLog.php">我的物流</a>
 											</td>
 
 										</tr>

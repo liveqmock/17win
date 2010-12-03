@@ -1,19 +1,18 @@
 package net.win.service.logistics;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import net.win.BaseService;
+import net.win.dao.LogisticsDAO;
 import net.win.dao.UserDAO;
+import net.win.entity.LogisticsEntity;
 import net.win.entity.UserEntity;
-import net.win.entity.WithdrawalsEntity;
 import net.win.utils.ArithUtils;
 import net.win.utils.StringUtils;
-import net.win.utils.WinUtils;
-import net.win.vo.WithdrawalsVO;
+import net.win.vo.LogisticsVO;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -24,156 +23,183 @@ public class LogisticsService extends BaseService {
 	@Resource
 	private UserDAO userDAO;
 	@Resource
+	private LogisticsDAO logisticsDAO;
+	@Resource
 	private LogisticsService logisticsService;
 
 	/**
-	 * 提现记录
+	 * 添加物流
 	 * 
 	 * @param userVO
 	 * @return
 	 * @throws Exception
 	 */
-	public String withdrawalsLog(WithdrawalsVO withdrawalsVO) throws Exception {
-		UserEntity userEntity = getLoginUserEntity(userDAO);
-		StringBuffer resultHQL = new StringBuffer(
-				"select  _w  from WithdrawalsEntity _w inner join _w.user as _u  where _u.id=:userId  ");
-		StringBuffer countHQL = new StringBuffer(
-				"select  count(*)  from WithdrawalsEntity _w inner join _w.user as _u  where _u.id=:userId  ");
-		List<String> paramNames = new ArrayList<String>();
-		paramNames.add("userId");
-		List<Object> paramValues = new ArrayList<Object>();
-		paramValues.add(userEntity.getId());
-		// 类型
-		if (!StringUtils.isBlank(withdrawalsVO.getType())) {
-			resultHQL.append(" and _w.type=:type ");
-			countHQL.append(" and _w.type=:type ");
-			paramNames.add("type");
-			paramValues.add(withdrawalsVO.getType());
-		}
-		// 店铺类型
-		if (!StringUtils.isBlank(withdrawalsVO.getShopType())) {
-			resultHQL.append(" and _w.shopType=:shopType ");
-			countHQL.append(" and _w.shopType=:shopType ");
-			paramNames.add("shopType");
-			paramValues.add(withdrawalsVO.getShopType());
-		}
-		// /钱
-		if (withdrawalsVO.getStartMoney() != null
-				&& withdrawalsVO.getEndMoney() != null) {
-			resultHQL
-					.append(" and (_w.money>=:startMoney and _w.money<=:endMoney) ");
-			countHQL
-					.append(" and (_w.money>=:startMoney and _w.money<=:endMoney) ");
-			paramNames.add("startMoney");
-			paramNames.add("endMoney");
-			paramValues.add(withdrawalsVO.getStartMoney());
-			paramValues.add(withdrawalsVO.getEndMoney());
-		} else if (withdrawalsVO.getStartMoney() != null) {
-			resultHQL.append(" and _w.money>=:startMoney  ");
-			countHQL.append(" and  _w.money>=:startMoney   ");
-			paramNames.add("startMoney");
-			paramValues.add(withdrawalsVO.getStartMoney());
-		} else if (withdrawalsVO.getEndMoney() != null) {
-			resultHQL.append(" and   _w.money<=:endMoney  ");
-			countHQL.append(" and   _w.money<=:endMoney  ");
-			paramNames.add("endMoney");
-			paramValues.add(withdrawalsVO.getEndMoney());
-		}
-		// 时间
-		if (withdrawalsVO.getStartDate() != null
-				&& withdrawalsVO.getEndDate() != null) {
-			resultHQL
-					.append(" and (_w.operationDate>=:startDate and _w.operationDate<=:endDate) ");
-			countHQL
-					.append(" and (_w.operationDate>=:startDate and _w.operationDate<=:endDate) ");
-			paramNames.add("startDate");
-			paramNames.add("endDate");
-			paramValues.add(withdrawalsVO.getStartDate());
-			paramValues.add(withdrawalsVO.getEndDate());
-		} else if (withdrawalsVO.getStartDate() != null) {
-			resultHQL.append(" and _w.operationDate>=:startDate  ");
-			countHQL.append(" and  _w.operationDate>=:startDate   ");
-			paramNames.add("startDate");
-			paramValues.add(withdrawalsVO.getStartDate());
-		} else if (withdrawalsVO.getEndDate() != null) {
-			resultHQL.append(" and   _w.operationDate<=:endDate  ");
-			countHQL.append(" and   _w.operationDate<=:endDate  ");
-			paramNames.add("endDate");
-			paramValues.add(withdrawalsVO.getEndDate());
-		}
-		// 状态
-		if (!StringUtils.isBlank(withdrawalsVO.getStatus())) {
-			resultHQL.append(" and _w.status=:status ");
-			countHQL.append(" and _w.status=:status ");
-			paramNames.add("status");
-			paramValues.add(withdrawalsVO.getStatus());
-		}
-
-		resultHQL.append(" order by _w.operationDate  desc ");
-		Long count = (Long) withDrawalsDAO.uniqueResultObject(countHQL
-				.toString(), paramNames.toArray(paramNames
-				.toArray(new String[paramNames.size()])), paramValues
-				.toArray(new Object[paramValues.size()]));
-		List<WithdrawalsVO> result = new ArrayList<WithdrawalsVO>();
+	public String insertLogistics(LogisticsVO logisticsVO) throws Exception {
+		putJumpPage("logisticsManager/logistics!initLogistics.php");
+		LogisticsEntity logisticsEntity = logisticsVO.getLogistics();
+		Long count = (Long) logisticsDAO.uniqueResultObject(
+				"select count(*) from LogisticsEntity where waybill=:waybill ",
+				new String[] { "waybill" }, new Object[] { logisticsEntity
+						.getWaybill() });
 		if (count > 0) {
-			withdrawalsVO.setDataCount(count.intValue());
-			List<WithdrawalsEntity> resultTemp = withDrawalsDAO.pageQuery(
-					resultHQL.toString(), paramNames.toArray(paramNames
-							.toArray(new String[paramNames.size()])),
-					paramValues.toArray(new Object[paramValues.size()]),
-					withdrawalsVO.getStart(), withdrawalsVO.getLimit());
-
-			WithdrawalsVO withdrawalsVOTEMP = null;
-			for (WithdrawalsEntity withdrawalsEntity : resultTemp) {
-				withdrawalsVOTEMP = new WithdrawalsVO();
-				BeanUtils.copyProperties(withdrawalsVOTEMP, withdrawalsEntity);
-				result.add(withdrawalsVOTEMP);
-			}
+			putAlertMsg("订单号已经存在！");
+			return JUMP;
 		}
-		putByRequest("result", result);
-		return "withdrawalsLog";
+		UserEntity userEntity = getLoginUserEntity(userDAO);
+		logisticsEntity.setReleaseUser(userEntity);
+		logisticsDAO.save(logisticsEntity);
+		putAlertMsg("添加成功！");
+		return JUMP;
 	}
 
 	/**
-	 * 提现
+	 * 删除
 	 * 
 	 * @param userVO
 	 * @return
 	 * @throws Exception
 	 */
-	public String insertWithdrawals(WithdrawalsVO withdrawalsVO)
-			throws Exception {
-		putJumpPage("withdrawalsManager/withdrawals!initWithdrawals.php");
-		UserEntity userEntity = getLoginUserEntity(userDAO);
-		WithdrawalsEntity withdrawalsEntity = new WithdrawalsEntity();
-		BeanUtils.copyProperties(withdrawalsEntity, withdrawalsVO);
-		if (!userEntity.getOpertationCode().equals(
-				StringUtils.processPwd(withdrawalsVO.getOperationCode()))) {
-			putAlertMsg("操作码不正确！");
-		} else {
-			if (withdrawalsEntity.getMoney() < 100) {
-				WinUtils.throwIllegalityException("视图越过提现大于100的操作！");
-			}
-			if (withdrawalsEntity.getMoney() > userEntity.getMoney()) {
-				putAlertMsg("提现错误！您的17win余额不够" + withdrawalsEntity.getMoney());
-				return JUMP;
-			}
-			if (StringUtils.isBlank(withdrawalsEntity.getRealName())) {
-				putAlertMsg("名字或账号不能为空!");
-				return JUMP;
-			}
-			userEntity.setMoney(ArithUtils.sub(userEntity.getMoney(),
-					withdrawalsEntity.getMoney()));
-			logMoneyCapital(withDrawalsDAO, 0 - withdrawalsEntity.getMoney(),
-					"提现操作", userEntity);
-			withdrawalsEntity.setUser(userEntity);
-			withdrawalsEntity.setStatus("1");
-			withdrawalsEntity.setStatusDesc("进入提现流程");
-			withdrawalsEntity.setOperationDate(new Date());
-			updateUserLoginInfo(userEntity);
-			withDrawalsDAO.save(withdrawalsEntity);
-			putAlertMsg("操作成功，您的操作已经进入提现流程，我们会马上完成您的提现然后邮件通知您！");
+	public String deleteLogistics(LogisticsVO logisticsVO) throws Exception {
+		putJumpPage("logisticsManager/logistics!logisticsLog.php");
+		String logisticsID = getByParam("logisticsID");
+		Long logisticsIDLong = Long.parseLong(logisticsID);
+		if (logisticsID == null) {
+			putAlertMsg("请选择物流数据");
+			return "error";
 		}
-		return JUMP;
+		LogisticsEntity logisticsEntity = logisticsDAO.get(logisticsIDLong);
+		if (!logisticsEntity.getReleaseUser().getId().equals(getLoginUser().getId())) {
+			putAlertMsg("请选择物流数据");
+			return JUMP;
+		}
+		if (logisticsEntity.getUseCount()> 0) {
+			putAlertMsg("该物流已经被人使用不能删除！");
+			return JUMP;
+		} else {
+			logisticsDAO.delete(logisticsEntity);
+			putAlertMsg("删除成功!");
+			return JUMP;
+		}
+	}
+
+	/**
+	 * 使用
+	 * 
+	 * @param userVO
+	 * @return
+	 * @throws Exception
+	 */
+	public String updateUseLogistics() throws Exception {
+		String logisticsID = getByParam("logisticsID");
+		UserEntity userEntity = getLoginUserEntity(userDAO);
+		Long logisticsIDLong = Long.parseLong(logisticsID);
+		if (logisticsID == null) {
+			putAlertMsg("请选择物流数据");
+			return "error";
+		}
+		Long count = (Long) logisticsDAO
+				.uniqueResultObject(
+						"select count(*) from LogisticsEntity as _l inner join _l.receieveUsers as _ru where _ru.id=:userID and _l.id=:logistisID",
+						new String[] { "userID", "logistisID" }, new Object[] {
+								getLoginUser().getId(), logisticsIDLong });
+		if (count > 0) {
+			return "true";
+		} else {
+			if (userEntity.getReleaseDot() < 0.1) {
+				return "false";
+			} else {
+				LogisticsEntity logisticsEntity = logisticsDAO
+						.get(logisticsIDLong);
+				logisticsEntity.addReceieveUser(userEntity);
+				logisticsEntity.setUseCount(logisticsEntity.getUseCount() + 1);
+				logisticsEntity.setReleaseDotCount(logisticsEntity
+						.getReleaseDotCount() + 0.1);
+				userEntity.setReleaseDot(ArithUtils.sub(userEntity
+						.getReleaseDot(), 0.1));
+				logisticsEntity.getReleaseUser().setReleaseDot(
+						ArithUtils.add(logisticsEntity.getReleaseUser()
+								.getReleaseDot(), 0.1));
+				logDotCapital(userDAO, 0 - 0.1, "获取物流（快递单号"
+						+ logisticsEntity.getWaybill() + ")扣发布点", userEntity);
+				logDotCapital(userDAO, 0.1, logisticsEntity.getWaybill()
+						+ "物流被别人使用得到发布点", logisticsEntity.getReleaseUser());
+				return "true";
+			}
+		}
+	}
+
+	/**
+	 * 物流记录
+	 * 
+	 * @param userVO
+	 * @return
+	 * @throws Exception
+	 */
+	public String logisticsLog(LogisticsVO logisticsVO) throws Exception {
+		StringBuffer resultHQL = new StringBuffer(
+				"select  _l  from LogisticsEntity _l inner join _l.releaseUser as _u  where _u.id=:userId  ");
+		StringBuffer countHQL = new StringBuffer(
+				"select  count(*)  from LogisticsEntity _l inner join _l.releaseUser as _u  where _u.id=:userId  ");
+		List<String> paramNames = new ArrayList<String>();
+		paramNames.add("userId");
+		List<Object> paramValues = new ArrayList<Object>();
+		paramValues.add(getLoginUser().getId());
+		// 时间
+		if (logisticsVO.getStartDate() != null
+				&& logisticsVO.getEndDate() != null) {
+			resultHQL
+					.append(" and (_l.sendDate>=:startDate and _l.sendDate<=:endDate) ");
+			countHQL
+					.append(" and (_l.sendDate>=:startDate and _l.sendDate<=:endDate) ");
+			paramNames.add("startDate");
+			paramNames.add("endDate");
+			paramValues.add(logisticsVO.getStartDate());
+			paramValues.add(logisticsVO.getEndDate());
+		} else if (logisticsVO.getStartDate() != null) {
+			resultHQL.append(" and _l.sendDate>=:startDate  ");
+			countHQL.append(" and  _l.sendDate>=:startDate   ");
+			paramNames.add("startDate");
+			paramValues.add(logisticsVO.getStartDate());
+		} else if (logisticsVO.getEndDate() != null) {
+			resultHQL.append(" and   _l.sendDate<=:endDate  ");
+			countHQL.append(" and   _l.sendDate<=:endDate  ");
+			paramNames.add("endDate");
+			paramValues.add(logisticsVO.getEndDate());
+		}
+		// 单号
+		if (!StringUtils.isBlank(logisticsVO.getWaybill())) {
+			resultHQL.append(" and (_l.waybill like :waybill");
+			countHQL.append(" and (_l.waybill like :waybill");
+			paramNames.add("waybill");
+			paramValues.add(logisticsVO.getWaybill());
+		}
+		resultHQL.append(" order by _l.sendDate  desc ");
+		Long count = (Long) logisticsDAO.uniqueResultObject(
+				countHQL.toString(), paramNames.toArray(paramNames
+						.toArray(new String[paramNames.size()])), paramValues
+						.toArray(new Object[paramValues.size()]));
+		List<LogisticsVO> result = new ArrayList<LogisticsVO>();
+		if (count > 0) {
+			logisticsVO.setDataCount(count.intValue());
+			List<LogisticsEntity> resultTemp = logisticsDAO.pageQuery(resultHQL
+					.toString(), paramNames.toArray(paramNames
+					.toArray(new String[paramNames.size()])), paramValues
+					.toArray(new Object[paramValues.size()]), logisticsVO
+					.getStart(), logisticsVO.getLimit());
+
+			LogisticsVO logisticsVOTEMP = null;
+			for (LogisticsEntity logisticsEntityTemmp : resultTemp) {
+				logisticsVOTEMP = new LogisticsVO();
+				BeanUtils.copyProperties(logisticsVOTEMP, logisticsEntityTemmp);
+				if (logisticsEntityTemmp.getUseCount() > 0) {
+					logisticsVOTEMP.setDeleteFlag(false);
+				} else {
+					logisticsVOTEMP.setDeleteFlag(true);
+				}
+				result.add(logisticsVOTEMP);
+			}
+		}
+		putByRequest("result", result);
+		return "logisticsLog";
 	}
 }

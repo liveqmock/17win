@@ -9,6 +9,16 @@
 %>
 <HTML>
 	<HEAD>
+		<%
+			//让浏览器不缓存jsp页面 
+			response.setHeader("Pragma", "No-cache");// http1.0 
+			response.setHeader("Cache-Control", "no-store,no-cache"); //http1.1 
+			response.setHeader("Expires", "0");
+			response.setDateHeader("Expires", 0);// 这个是针对代理的？但我设置后还是没达到效果。不解！！
+		%>
+		<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+		<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+		<META HTTP-EQUIV="Expires" CONTENT="0">
 		<s:include value="../common/header.jsp"></s:include>
 		<LINK href="css/style.css" type="text/css" rel="stylesheet">
 		<LINK href="css/index.css" type="text/css" rel="stylesheet">
@@ -23,7 +33,7 @@
 		<SCRIPT src="js/validater.js" type="text/javascript"></SCRIPT>
 		<script src="<%=basePath%>js/My97DatePicker/WdatePicker.js"
 			type="text/javascript"></script>
-		<SCRIPT src="user/withdrawalsLog.js" type="text/javascript"></SCRIPT>
+		<SCRIPT src="logistics/logisticsLog.js" type="text/javascript"></SCRIPT>
 
 		<style type="text/css">
 body {
@@ -69,7 +79,7 @@ img {
 
 	</HEAD>
 	<BODY>
-		<s:form action="withdrawalsManager/withdrawals!withdrawalsLog.php"
+		<s:form action="logisticsManager/logistics!logisticsLog.php"
 			onsubmit="return validateForm()" theme="simple">
 			<s:include value="../common/title.jsp"></s:include>
 			<table width="760" border="0" align="center" cellpadding="0"
@@ -97,55 +107,24 @@ img {
 									<div class="pp9">
 										<div style="padding-bottom: 15px; width: 97%;">
 											<div class="pp7">
-												您现在的位置是：个人中心 &gt;&gt; 财物管理 &gt;&gt; 提现记录 &gt;&gt;
+												您现在的位置是：个人中心 &gt;&gt; 物流管理 &gt;&gt;
 											</div>
 											<div class="pp8">
-												<strong>提现列表</strong>
+												<strong>我的物流</strong>
 											</div>
 											<br>
 											<table width="100%" cellpadding="1" cellspacing="1"
 												border="0px" style="background: #DDEDFA">
 												<tr>
 													<td>
-														提现类型：
-														<s:select id="withdrawalsType" listKey="key"
-															listValue="value" name="withdrawalsVO.type" headerKey=""
-															headerValue="--请选择--"
-															list="#{'1':'店铺地址提现','2':'支付宝提现','3':'财付通提现'}">
-														</s:select>
-		
-														<span
-														<s:if test="withdrawalsVO.type!=1">style="display: none"</s:if>
-														
-															id="shopType"> &nbsp;&nbsp;店铺类型：<s:select
-																name="withdrawalsVO.shopType" listKey="key"
-																listValue="value" headerKey="" headerValue="--请选择--"
-																list="#{'1':'淘宝','2':'拍拍','3':'有啊'}">
-															</s:select> </span>
-													</td>
-													<td>
-														提现金额：
-														<s:textfield name="withdrawalsVO.startMoney"
-															id="startMoney" cssStyle="width:40px">
-														</s:textfield>
-														至
-														<s:textfield name="withdrawalsVO.endMoney" id="endMoney"
-															cssStyle="width:40px">
-														</s:textfield>
-													</td>
-													<td>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														操作日期：
-														<s:textfield name="withdrawalsVO.startDate" id="startDate"
+														发货日期：
+														<s:textfield name="logisticsVO.startDate" id="startDate"
 															readonly="true"
 															onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})"
 															cssStyle="width:110px">
 														</s:textfield>
 														至
-														<s:textfield name="withdrawalsVO.endDate" id="endDate"
+														<s:textfield name="logisticsVO.endDate" id="endDate"
 															readonly="true"
 															onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})"
 															cssStyle="width:110px">
@@ -153,10 +132,7 @@ img {
 													</td>
 													<td>
 														状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态：
-														<s:select name="withdrawalsVO.status" listKey="key"
-															listValue="value" headerKey="" headerValue="--请选择--"
-															list="#{'1':'申请中','4':'被驳回','3':'已完成'}">
-														</s:select>
+														<s:textfield name="logisticsVO.waybill"></s:textfield>
 													</td>
 													<td>
 														<input type="submit" value="查&nbsp;&nbsp;询"
@@ -169,97 +145,93 @@ img {
 												<thead>
 													<tr>
 														<th style="font-size: 12px" nowrap="nowrap">
-															提现类型
+															物流公司
 														</th>
 														<th style="font-size: 12px" nowrap="nowrap">
-															平台类型
+															物流单号
 														</th>
 														<th style="font-size: 12px" nowrap="nowrap">
-															提现链接
+															发货时间
 														</th>
 														<th style="font-size: 12px" nowrap="nowrap">
-															提现金额
+															预计收货时间
 														</th>
 														<th style="font-size: 12px" nowrap="nowrap">
-															操作日期
+															发货信息
 														</th>
 														<th style="font-size: 12px" nowrap="nowrap">
-															状态
+															收货信息
 														</th>
 														<th style="font-size: 12px" nowrap="nowrap">
-															描述
+															使用数
+														</th>
+														<th style="font-size: 12px" nowrap="nowrap">
+															总收益
+														</th>
+														<th style="font-size: 12px" nowrap="nowrap">
+															备注
+														</th>
+														<th style="font-size: 12px" nowrap="nowrap">
+															操作
 														</th>
 													</tr>
 												</thead>
 												<tbody>
-													<s:iterator value="#request.result" id="withdrawals">
+													<s:iterator value="#request.result" id="logistics">
 														<tr
 															<s:if test="#status.odd"> style="background: #FFC278"</s:if>>
 															<td>
-																<s:if test="#withdrawals.type==1">
-																	店铺地址提现
+																<s:property value="#logistics.expressCompany" />
+															</td>
+															<td>
+																<s:property value="#logistics.waybill" />
+															</td>
+															<td>
+																<s:date name="#logistics.sendDate" format="yyyy-MM-dd" />
+															</td>
+															<td>
+																<s:date name="#logistics.arrivalDate"
+																	format="yyyy-MM-dd" />
+															</td>
+															<td>
+																<s:property value="#logistics.releaseInfo" />
+															</td>
+															<td>
+																<s:property value="#logistics.receieveInfo" />
+															</td>
+															<td>
+																<s:property value="#logistics.useCount" />
+															</td>
+															<td>
+																<s:property value="#logistics.releaseDotCount" />
+																个发布点
+															</td>
+															<td>
+																<s:property value="#logistics.remark" />
+															</td>
+															<td>
+																<s:if test="#logistics.deleteFlag">
+																	<a
+																		href="logisticsManager/logistics!deleteLogistics.php?logisticsID=<s:property value="#logistics.id" />">删除</a>
 																</s:if>
-																<s:elseif test="#withdrawals.type==2">
-																	支付宝提现
-																</s:elseif>
 																<s:else>
-																	财付通提现
+																	N/A
 																</s:else>
-															</td>
-															<td>
-																<s:if test="#withdrawals.type==1">
-																	<s:if test="#withdrawals.shopType==1">
-																		淘宝
-																	</s:if>
-																	<s:elseif test="#withdrawals.shopType==2">
-																		拍拍
-																	</s:elseif>
-																	<s:elseif test="#withdrawals.shopType==3">
-																		有啊
-																	</s:elseif>
-																</s:if>
-																<s:else>
-																	-
-																</s:else>
-															</td>
-															<td>
-																<s:property value="#withdrawals.realIdentity" />
-															</td>
-															<td>
-																<s:property value="#withdrawals.money" />
-															</td>
-															<td>
-																<s:date name="#withdrawals.operationDate"
-																	format="yyyy-MM-dd HH-mm-ss" />
-															</td>
-															<td>
-																<s:if test="#withdrawals.status==1">
-																		申请中
-																	</s:if>
-																<s:elseif test="#withdrawals.status==2">
-																		被驳回
-																	</s:elseif>
-																<s:else>
-																		已完成
-																	</s:else>
-															</td>
-															<td>
-																<s:property value="#withdrawals.statusDesc" />
 															</td>
 														</tr>
 													</s:iterator>
 												</tbody>
 												<s:if test="#request.result.size()==0">
 													<tr>
-														<th colspan="9" align="center">
-															您目前还没有进行过提现！
+														<th colspan="10" align="center">
+															您目前还没有物流信息！
 														</th>
 													</tr>
 												</s:if>
 												<s:else>
 													<tfoot>
 														<tr>
-															<th colspan="7">
+															<th colspan="10">
 																<div style="float: left;">
 																	<a href="javascript:firstPage()">首页</a>
 																	<a href="javascript:prevPage()">上一页</a>&nbsp;
@@ -267,13 +239,13 @@ img {
 																	<a href="javascript:lastPage()">尾页</a>&nbsp;
 																</div>
 																<div style="float: left;">
-																	<s:property value="withdrawalsVO.nowPage" />
+																	<s:property value="logisticsVO.nowPage" />
 																	/
-																	<s:property value="withdrawalsVO.pageCount" />
+																	<s:property value="logisticsVO.pageCount" />
 																	跳转到
 																	<select id='toPageSelect' size='1'
 																		onchange="jumpPage()">
-																		<s:iterator begin="1" end="withdrawalsVO.pageCount"
+																		<s:iterator begin="1" end="logisticsVO.pageCount"
 																			step="1" var="index">
 																			<option value="<s:property value="#index" />">
 																				第
@@ -283,13 +255,13 @@ img {
 																		</s:iterator>
 																	</select>
 																</div>
-																<input type="hidden" name="withdrawalsVO.nowPage"
+																<input type="hidden" name="logisticsVO.nowPage"
 																	value="<s:property
-											value="withdrawalsVO.nowPage" />"
+											value="logisticsVO.nowPage" />"
 																	id="nowPage">
 																<input type="hidden"
 																	value="<s:property
-										value="withdrawalsVO.pageCount" />"
+										value="logisticsVO.pageCount" />"
 																	id="pageCount">
 															</th>
 														</tr>
