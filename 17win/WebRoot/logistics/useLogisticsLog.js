@@ -1,7 +1,6 @@
 $(document).ready(function() {
 			$("#myTable").tablesorter();
 		});
-
 function toCopy(id) {
 	if (!$.browser.msie) {
 		alert("仅在IE浏览器中支持！");

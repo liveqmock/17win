@@ -190,9 +190,13 @@
 										</tr>
 										<tr>
 											<td height=20>
-												<a href="logisticsManager/logistics!logisticsLog.php">我的物流</a>
+												<a href="logisticsManager/logistics!logisticsLog.php">我提交的物流</a>
 											</td>
-
+										</tr>
+										<tr>
+											<td height=20>
+												<a href="logisticsManager/logistics!useLogisticsLog.php">我使用的物流</a>
+											</td>
 										</tr>
 									</table>
 								</div>

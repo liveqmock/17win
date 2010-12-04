@@ -33,7 +33,7 @@
 		<SCRIPT src="js/validater.js" type="text/javascript"></SCRIPT>
 		<script src="<%=basePath%>js/My97DatePicker/WdatePicker.js"
 			type="text/javascript"></script>
-		<SCRIPT src="logistics/logisticsLog.js" type="text/javascript"></SCRIPT>
+		<SCRIPT src="logistics/useLogisticsLog.js" type="text/javascript"></SCRIPT>
 
 		<style type="text/css">
 body {
@@ -79,7 +79,7 @@ img {
 
 	</HEAD>
 	<BODY>
-		<s:form action="logisticsManager/logistics!logisticsLog.php"
+		<s:form action="logisticsManager/logistics!useLogisticsLog.php"
 			onsubmit="return validateForm()" theme="simple">
 			<s:include value="../common/title.jsp"></s:include>
 			<table width="760" border="0" align="center" cellpadding="0"
@@ -110,7 +110,7 @@ img {
 												您现在的位置是：个人中心 &gt;&gt; 物流管理 &gt;&gt;
 											</div>
 											<div class="pp8">
-												<strong>我提交的物流 </strong>
+												<strong>我使用的物流 </strong>
 											</div>
 											<br>
 											<table width="100%" cellpadding="1" cellspacing="1"
@@ -163,12 +163,6 @@ img {
 															收货信息
 														</th>
 														<th style="font-size: 12px" nowrap="nowrap">
-															使用数
-														</th>
-														<th style="font-size: 12px" nowrap="nowrap">
-															总收益(发布点)
-														</th>
-														<th style="font-size: 12px" nowrap="nowrap">
 															备注
 														</th>
 														<th style="font-size: 12px" nowrap="nowrap">
@@ -183,7 +177,7 @@ img {
 															<td class='toCopy_<s:property value="#logistics.id"/>'>
 																<s:property value="#logistics.expressCompany" />
 															</td>
-															<td class='toCopy_<s:property value="#logistics.id"/>'>
+															<td class="toCopy_<s:property value="#logistics.id"/>">
 																<s:property value="#logistics.waybill" />
 															</td>
 															<td>
@@ -193,32 +187,18 @@ img {
 																<s:date name="#logistics.arrivalDate"
 																	format="yyyy-MM-dd" />
 															</td>
-															<td>
+															<td >
 																<s:property value="#logistics.releaseInfo" />
 															</td>
 															<td class="toCopy_<s:property value="#logistics.id"/>">
 																<s:property value="#logistics.receieveInfo" />
 															</td>
 															<td>
-																<s:property value="#logistics.useCount" />
-															</td>
-															<td>
-																<s:property value="#logistics.releaseDotCount" />
-															</td>
-															<td>
 																<s:property value="#logistics.remark" />
 															</td>
-															<td  nowrap="nowrap">
-																<s:if test="#logistics.deleteFlag">
-																	<a
-																		href="logisticsManager/logistics!deleteLogistics.php?logisticsID=<s:property value="#logistics.id" />">删除</a>
-																	<a
+															<td nowrap="nowrap">
+																<a
 																		href="javascript:toCopy('<s:property value="#logistics.id" />')">复制</a>
-																</s:if>
-																<s:else>
-																	<a
-																		href="javascript:toCopy('<s:property value="#logistics.id" />')">复制</a>
-																</s:else>
 															</td>
 														</tr>
 													</s:iterator>
@@ -226,7 +206,7 @@ img {
 												<s:if test="#request.result.size()==0">
 													<tr>
 														<th colspan="10" align="center">
-															您目前还没有提交任何物流信息！
+															您目前还没有使用任何物流信息！
 														</th>
 													</tr>
 												</s:if>

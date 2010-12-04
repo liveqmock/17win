@@ -22,7 +22,8 @@ import org.springframework.stereotype.Controller;
 		@Result(name = "input", location = "/logistics/logistics.jsp"),
 		@Result(name = "initLogistics", location = "/logistics/logistics.jsp"),
 		@Result(name = "logistics", location = "/logistics/logistics.jsp"),
-		@Result(name = "logisticsLog", location = "/logistics/logisticsLog.jsp") })
+		@Result(name = "logisticsLog", location = "/logistics/logisticsLog.jsp"),
+		@Result(name = "useLogisticsLog", location = "/logistics/useLogisticsLog.jsp") })
 @Namespace("/logisticsManager")
 public class LogisticsAction extends BaseAction {
 	@Resource
@@ -41,6 +42,7 @@ public class LogisticsAction extends BaseAction {
 	public String execute() throws Exception {
 		return INPUT;
 	}
+
 	/**
 	 * 填写物流
 	 * 
@@ -50,6 +52,7 @@ public class LogisticsAction extends BaseAction {
 	public String insertLogistics() throws Exception {
 		return logisticsService.insertLogistics(logisticsVO);
 	}
+
 	/**
 	 * 删除物流
 	 * 
@@ -59,8 +62,9 @@ public class LogisticsAction extends BaseAction {
 	public String deleteLogistics() throws Exception {
 		return logisticsService.deleteLogistics(logisticsVO);
 	}
+
 	/**
-	 * 查找物流
+	 * 查找提交物流
 	 * 
 	 * @return
 	 * @throws Exception
@@ -69,7 +73,16 @@ public class LogisticsAction extends BaseAction {
 		return logisticsService.logisticsLog(logisticsVO);
 	}
 
-	
+	/**
+	 * 查找使用物流
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String useLogisticsLog() throws Exception {
+		return logisticsService.useLogisticsLog(logisticsVO);
+	}
+
 	/**
 	 * 初始化提现
 	 * 

@@ -68,11 +68,12 @@ public class LogisticsService extends BaseService {
 			return "error";
 		}
 		LogisticsEntity logisticsEntity = logisticsDAO.get(logisticsIDLong);
-		if (!logisticsEntity.getReleaseUser().getId().equals(getLoginUser().getId())) {
+		if (!logisticsEntity.getReleaseUser().getId().equals(
+				getLoginUser().getId())) {
 			putAlertMsg("请选择物流数据");
 			return JUMP;
 		}
-		if (logisticsEntity.getUseCount()> 0) {
+		if (logisticsEntity.getUseCount() > 0) {
 			putAlertMsg("该物流已经被人使用不能删除！");
 			return JUMP;
 		} else {
@@ -129,7 +130,77 @@ public class LogisticsService extends BaseService {
 	}
 
 	/**
-	 * 物流记录
+	 * 使用的物流记录
+	 * 
+	 * @param userVO
+	 * @return
+	 * @throws Exception
+	 */
+	public String useLogisticsLog(LogisticsVO logisticsVO) throws Exception {
+		StringBuffer resultHQL = new StringBuffer(
+				"select  _l  from LogisticsEntity _l inner join _l.receieveUsers as _u  where _u.id=:userId  ");
+		StringBuffer countHQL = new StringBuffer(
+				"select  count(*)  from LogisticsEntity _l inner join _l.receieveUsers as _u  where _u.id=:userId  ");
+		List<String> paramNames = new ArrayList<String>();
+		paramNames.add("userId");
+		List<Object> paramValues = new ArrayList<Object>();
+		paramValues.add(getLoginUser().getId());
+		// 时间
+		if (logisticsVO.getStartDate() != null
+				&& logisticsVO.getEndDate() != null) {
+			resultHQL
+					.append(" and (_l.sendDate>=:startDate and _l.sendDate<=:endDate) ");
+			countHQL
+					.append(" and (_l.sendDate>=:startDate and _l.sendDate<=:endDate) ");
+			paramNames.add("startDate");
+			paramNames.add("endDate");
+			paramValues.add(logisticsVO.getStartDate());
+			paramValues.add(logisticsVO.getEndDate());
+		} else if (logisticsVO.getStartDate() != null) {
+			resultHQL.append(" and _l.sendDate>=:startDate  ");
+			countHQL.append(" and  _l.sendDate>=:startDate   ");
+			paramNames.add("startDate");
+			paramValues.add(logisticsVO.getStartDate());
+		} else if (logisticsVO.getEndDate() != null) {
+			resultHQL.append(" and   _l.sendDate<=:endDate  ");
+			countHQL.append(" and   _l.sendDate<=:endDate  ");
+			paramNames.add("endDate");
+			paramValues.add(logisticsVO.getEndDate());
+		}
+		// 单号
+		if (!StringUtils.isBlank(logisticsVO.getWaybill())) {
+			resultHQL.append(" and _l.waybill like :waybill");
+			countHQL.append(" and _l.waybill like :waybill");
+			paramNames.add("waybill");
+			paramValues.add("%" + logisticsVO.getWaybill() + "%");
+		}
+		resultHQL.append(" order by _l.sendDate  desc ");
+		Long count = (Long) logisticsDAO.uniqueResultObject(
+				countHQL.toString(), paramNames.toArray(paramNames
+						.toArray(new String[paramNames.size()])), paramValues
+						.toArray(new Object[paramValues.size()]));
+		List<LogisticsVO> result = new ArrayList<LogisticsVO>();
+		if (count > 0) {
+			logisticsVO.setDataCount(count.intValue());
+			List<LogisticsEntity> resultTemp = logisticsDAO.pageQuery(resultHQL
+					.toString(), paramNames.toArray(paramNames
+					.toArray(new String[paramNames.size()])), paramValues
+					.toArray(new Object[paramValues.size()]), logisticsVO
+					.getStart(), logisticsVO.getLimit());
+
+			LogisticsVO logisticsVOTEMP = null;
+			for (LogisticsEntity logisticsEntityTemmp : resultTemp) {
+				logisticsVOTEMP = new LogisticsVO();
+				BeanUtils.copyProperties(logisticsVOTEMP, logisticsEntityTemmp);
+				result.add(logisticsVOTEMP);
+			}
+		}
+		putByRequest("result", result);
+		return "useLogisticsLog";
+	}
+
+	/**
+	 * 提交的物流记录
 	 * 
 	 * @param userVO
 	 * @return
@@ -168,10 +239,10 @@ public class LogisticsService extends BaseService {
 		}
 		// 单号
 		if (!StringUtils.isBlank(logisticsVO.getWaybill())) {
-			resultHQL.append(" and (_l.waybill like :waybill");
-			countHQL.append(" and (_l.waybill like :waybill");
+			resultHQL.append(" and _l.waybill like :waybill");
+			countHQL.append(" and _l.waybill like :waybill");
 			paramNames.add("waybill");
-			paramValues.add(logisticsVO.getWaybill());
+			paramValues.add("%" + logisticsVO.getWaybill() + "%");
 		}
 		resultHQL.append(" order by _l.sendDate  desc ");
 		Long count = (Long) logisticsDAO.uniqueResultObject(

@@ -136,7 +136,7 @@ img {
 															<font color="red">(*)</font>：
 														</td>
 														<td align="left" class="red-bcolor">
-															<s:textfield    readonly="true"
+															<s:textfield readonly="true"
 																name="logisticsVO.logistics.sendDate" id="sendDate"></s:textfield>
 															<img style="cursor: pointer;"
 																onclick="WdatePicker({'minDate':'%y-%M-%d','alwaysUseStartDate':false,'el':'sendDate','isShowClear':true,startDate:'%y-%M-%d',dateFmt:'yyyy-MM-dd','skin':'blue'})"
@@ -165,10 +165,17 @@ img {
 															<font color="red">(*)</font>：
 														</td>
 														<td>
-															<s:textfield id="releaseInfo" cssStyle="width:400px"
-																name="logisticsVO.logistics.releaseInfo" maxlength="255"></s:textfield>
+															发货地址
+															<input type="text" style="width: 316px" id="fhdz">
 															<br>
-															<font color="red">包括发货物品的价格，发货地等</font>
+															邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;编
+															<input type="text" style="width: 60px" id="fhyb">
+															&nbsp;联系人
+															<input type="text" style="width: 60px" id="fhlxr">
+															&nbsp;电话
+															<input type="text" style="width: 100px" id="fhdh">
+															<s:hidden id="releaseInfo"
+																name="logisticsVO.logistics.releaseInfo"></s:hidden>
 														</td>
 													</tr>
 													<tr>
@@ -177,11 +184,17 @@ img {
 															<font color="red">(*)</font>：
 														</td>
 														<td>
-															<s:textfield id="receieveInfo" cssStyle="width:400px"
-																name="logisticsVO.logistics.receieveInfo"
-																maxlength="255"></s:textfield>
+															收货地址
+															<input type="text" style="width: 316px" id="shdz">
 															<br>
-															<font color="red">包括收货人的相信地址，姓名，电话等</font>
+															邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;编
+															<input type="text" style="width: 60px" id="shyb">
+															&nbsp;联系人
+															<input type="text" style="width: 60px" id="shlxr">
+															&nbsp;电话
+															<input type="text" style="width: 100px" id="shdh">
+															<s:hidden id="receieveInfo"
+																name="logisticsVO.logistics.receieveInfo"></s:hidden>
 														</td>
 													</tr>
 													<tr>
