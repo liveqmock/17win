@@ -34,6 +34,19 @@ public class LogisticsVO extends BaseVO {
 
 	private Date startDate;
 	private Date endDate;
+	
+	private Integer startUseCount;
+	private Integer endUseCount;
+	
+	private String releaseUsername;
+
+	public String getReleaseUsername() {
+		return releaseUsername;
+	}
+
+	public void setReleaseUsername(String releaseUsername) {
+		this.releaseUsername = releaseUsername;
+	}
 
 	public Date getStartDate() {
 		return startDate;
@@ -145,6 +158,22 @@ public class LogisticsVO extends BaseVO {
 
 	public void setDeleteFlag(Boolean deleteFlag) {
 		this.deleteFlag = deleteFlag;
+	}
+
+	public Integer getStartUseCount() {
+		return startUseCount;
+	}
+
+	public void setStartUseCount(Integer startUseCount) {
+		this.startUseCount = startUseCount;
+	}
+
+	public Integer getEndUseCount() {
+		return endUseCount;
+	}
+
+	public void setEndUseCount(Integer endUseCount) {
+		this.endUseCount = endUseCount;
 	}
 
 }

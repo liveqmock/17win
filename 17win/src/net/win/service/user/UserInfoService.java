@@ -190,7 +190,7 @@ public class UserInfoService extends BaseService {
 				putJumpPage("userInfoManager/info!initSellerAndBuyer.php");
 				return JUMP;
 			}
-			
+
 			Boolean buyerExists = (0 == (Long) buyerDAO
 					.uniqueResultObject(
 							"select count(*) from  BuyerEntity as _buyer where _buyer.name=:buyerName and _buyer.type=:platformType",
@@ -553,7 +553,8 @@ public class UserInfoService extends BaseService {
 			}
 			userEntity.setReleaseDot(ArithUtils.sub(userEntity.getReleaseDot(),
 					releaseDot));
-			touser.setReleaseDot(ArithUtils.add(touser.getReleaseDot(), releaseDot));
+			touser.setReleaseDot(ArithUtils.add(touser.getReleaseDot(),
+					releaseDot));
 			updateOtherUserLoginInfo(touser);
 			logDotCapital(userDAO, 0 - releaseDot, "赠送发布点给"
 					+ touser.getUsername(), userEntity);
@@ -574,6 +575,7 @@ public class UserInfoService extends BaseService {
 			userEntity
 					.setConvertScore(userEntity.getConvertScore() - tempScore);
 
+			logScoreCapital(userDAO, 0.0 - tempScore, "积分兑换发布点", userEntity);
 			logDotCapital(userDAO, releaseDot, "积分兑换发布点", userEntity);
 		}
 		updateUserLoginInfo(userEntity);

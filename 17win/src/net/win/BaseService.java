@@ -298,7 +298,18 @@ public class BaseService {
 		capitalLogEntity.setLogTime(new Date());
 		baseDAO.save(capitalLogEntity);
 	}
-
+	
+	// 保存积分
+	protected void logScoreCapital(BaseDAO baseDAO, Double value, String desc,
+			UserEntity userEntity) throws Exception {
+		CapitalLogEntity capitalLogEntity = new CapitalLogEntity();
+		capitalLogEntity.setType("3");
+		capitalLogEntity.setValue(value);
+		capitalLogEntity.setDesc(desc);
+		capitalLogEntity.setUser(userEntity);
+		capitalLogEntity.setLogTime(new Date());
+		baseDAO.save(capitalLogEntity);
+	}
 	// 保存发布点记录
 	protected void logDotCapital(BaseDAO baseDAO, Double value, String desc,
 			UserEntity userEntity) throws Exception {

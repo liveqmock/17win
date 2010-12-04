@@ -1,33 +1,32 @@
 $(document).ready(function() {
-			$("#myTable").tablesorter({
-						widthFixed : true,
-						sortList : [[0, 0]]
-
-					});
+			$("#myTable").tablesorter();
 		});
-
 function validateForm() {
-	var startValue = $("#startValue").val();
-	var endValue = $("#endValue").val();
-	var startDate = $("#startDate").val();
-	var endDate = $("#endDate").val();
-	try {
-		if(isNaN(startValue) || isNaN(endValue)){
-			alert("必须输入数值！");
-			return false;
-		}
-		if (parseFloat(startValue) > parseFloat(endValue)) {
-			alert("【结束金额】必须大于等于【开始金额】！");
-			return false;
-		}
-		if (Validater.compareDate(startDate, endDate)) {
-			alert("【结束时间】必须大于等于【开始时间】！");
-			return false;
-		}
-	} catch (err) {
-		alert("输入的数据不正确！");
+	var startValue = $("#startUseCount").val();
+	var endValue = $("#endUseCount").val();
+	var startDate = $("input[name='logisticsVO.startDate']").val();
+	var endDate = $("input[name='logisticsVO.endDate']").val();
+	if (isNaN(startValue) || isNaN(endValue)) {
+		alert("必须输入数值！");
+		return false;
 	}
+	if (parseInt(startValue) > parseInt(endValue)) {
+		alert("【结束金额】必须大于等于【开始金额】！");
+		return false;
+	}
+	if (Validater.compareDate(startDate, endDate)) {
+		alert("【结束时间】必须大于等于【开始时间】！");
+		return false;
+	}
+
 	return true;
+}
+
+function toUse(id) {
+	if (confirm("确认是否使用该物流信息，使用后将扣除您的0.2个发布点给提交人！")) {
+		window.location.href = "logisticsManager/logistics!useLogistics.php?logisticsID="+
+		id;
+	}
 }
 
 // ///分页

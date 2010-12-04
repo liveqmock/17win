@@ -271,7 +271,7 @@ public class CreditTaskService extends BaseService {
 		BuyerEntity buyerEntitiy = buyerDAO.get(Long
 				.parseLong(getByParam("buyerId")));
 		UserEntity userEntity = userDAO.get(loginInfo.getId());
-		if(creditTask==null){
+		if (creditTask == null) {
 			putAlertMsg("任务已经不存在！");
 			putJumpPage("userInfoManager/info!initActiave.php");
 			return JUMP;
@@ -428,6 +428,8 @@ public class CreditTaskService extends BaseService {
 					+ releaseScore);
 			releaEntity.setConvertScore(releaEntity.getConvertScore()
 					+ releaseScore);
+			logScoreCapital(userDAO, releaseScore + 0.0, "您发起的"
+					+ creditTask.getTestID() + "任务完成，获得积分", releaEntity);
 			// 有会员
 			if (releaEntity.getVipEnable() && releaseUserVip != null) {
 				releaseVipBidUser.setGrowValue(releaseVipBidUser.getGrowValue()
@@ -465,6 +467,8 @@ public class CreditTaskService extends BaseService {
 					+ receieveScore);
 			receiveUser.setConvertScore(receiveUser.getConvertScore()
 					+ receieveScore);
+			logScoreCapital(userDAO, receieveScore + 0.0, "您接手的"
+					+ creditTask.getTestID() + "任务完成获得积分!", receiveUser);
 			/**
 			 * 计算发布和任务数
 			 */
@@ -508,9 +512,7 @@ public class CreditTaskService extends BaseService {
 			updateRefreeMoneyByTask(userDAO, receiveUser);
 			// 通过你的宣传链接注册的会员积分每上升1000
 			// 你的收益=100积分
-			ScoreStrategy.updateRefreeScoreByScore(receiveUser);
-			ScoreStrategy.updateRefreeScoreByScore(releaEntity);
-
+			ScoreStrategy.updateRefreeScoreByScore(userDAO, receiveUser);
 			// 记录 信息
 
 			logMoneyCapital(userDAO, creditTask.getMoney()

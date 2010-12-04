@@ -19,7 +19,7 @@
 				</Tr>
 				<Tr>
 					<td>
-						登录名:
+						密码:
 					</td>
 					<td>
 						<input type="password" name="password">

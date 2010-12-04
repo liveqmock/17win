@@ -165,6 +165,7 @@
 					href="payManager/pay!initPay.php" id="a5" onmouseover="Mea(5);"
 					testclass="">账号充值</A>
 			</LI>
+			<!-- 
 			<LI class=white>
 				<A
 					<s:if test="#request.showIndexType==7">
@@ -176,6 +177,7 @@
 					href="userInfoManager/info!initExchange.php" id="a6"
 					onmouseover="Mea(6);" testclass="">赠送兑换</A>
 			</LI>
+			 -->
 			<LI class=white>
 				<A
 					<s:if test="#request.showIndexType==8">
@@ -218,6 +220,16 @@
 						class="li0 "
 				</s:else> href="help/index.html"
 					id="a9" onmouseover="Mea(9);" testclass="">新手入门</A>
+			</LI>
+			<LI class=white>
+				<A
+					<s:if test="#request.showIndexType==11">
+					class="li1 white"  	style="COLOR: #000000"
+				</s:if>
+					<s:else>
+						class="li0 "
+				</s:else> href="logisticsManager/logistics!queryLogisticsLog.php"
+					id="a9" onmouseover="Mea(10);" testclass="">物流信息</A>
 			</LI>
 		</UL>
 	</DIV>

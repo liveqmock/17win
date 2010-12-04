@@ -23,7 +23,9 @@ import org.springframework.stereotype.Controller;
 		@Result(name = "initLogistics", location = "/logistics/logistics.jsp"),
 		@Result(name = "logistics", location = "/logistics/logistics.jsp"),
 		@Result(name = "logisticsLog", location = "/logistics/logisticsLog.jsp"),
-		@Result(name = "useLogisticsLog", location = "/logistics/useLogisticsLog.jsp") })
+		@Result(name = "useLogisticsLog", location = "/logistics/useLogisticsLog.jsp"),
+		@Result(name = "queryLogisticsLog", location = "/logistics/titleLogistics.jsp")
+})
 @Namespace("/logisticsManager")
 public class LogisticsAction extends BaseAction {
 	@Resource
@@ -42,7 +44,16 @@ public class LogisticsAction extends BaseAction {
 	public String execute() throws Exception {
 		return INPUT;
 	}
-
+	
+	/**
+	 * 物流信息
+	 * @return
+	 * @throws Exception
+	 */
+	public String queryLogisticsLog() throws Exception {
+		return logisticsService.queryLogisticsLog(logisticsVO);
+	}
+	
 	/**
 	 * 填写物流
 	 * 
@@ -52,7 +63,10 @@ public class LogisticsAction extends BaseAction {
 	public String insertLogistics() throws Exception {
 		return logisticsService.insertLogistics(logisticsVO);
 	}
-
+	
+	public String useLogistics()throws Exception {
+		return logisticsService.updateUseLogistics(logisticsVO);
+	}
 	/**
 	 * 删除物流
 	 * 

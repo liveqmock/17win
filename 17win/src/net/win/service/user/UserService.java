@@ -121,8 +121,9 @@ public class UserService extends BaseService {
 	 * @throws Exception
 	 */
 	public String updateLogin(UserVO userVO) throws Exception {
+		final int LOGIN_SCORE = 5;
 		if (userVO.getVerificationCode() == null
-				||  !userVO.getVerificationCode().equals(
+				|| !userVO.getVerificationCode().equals(
 						getBySession(Constant.VERIFY_CODE))) {
 			putAlertMsg("验证码不正确！");
 			userVO.setVerificationCode(null);
@@ -181,13 +182,17 @@ public class UserService extends BaseService {
 							+ vip.getLoginScore());
 					userEntity.setConvertScore(userEntity.getConvertScore()
 							+ vip.getLoginScore());
+					logScoreCapital(userDAO, 0.0 + vip.getLoginScore(),
+							"每天登录一次获得积分,VIP" + vip.getType(), userEntity);
 				}
 			} else {
 				if (!oldDateStr.equals(newDateStr)) {
-					userEntity
-							.setUpgradeScore(userEntity.getUpgradeScore() + 5);
-					userEntity
-							.setConvertScore(userEntity.getConvertScore() + 5);
+					userEntity.setUpgradeScore(userEntity.getUpgradeScore()
+							+ LOGIN_SCORE);
+					userEntity.setConvertScore(userEntity.getConvertScore()
+							+ LOGIN_SCORE);
+					logScoreCapital(userDAO, 0.0 + LOGIN_SCORE, "每天登录一次",
+							userEntity);
 				}
 			}
 
@@ -198,7 +203,7 @@ public class UserService extends BaseService {
 			}
 			// 通过你的宣传链接注册的会员积分每上升1000
 			// 你的收益=100积分
-			ScoreStrategy.updateRefreeScoreByScore(userEntity);
+			ScoreStrategy.updateRefreeScoreByScore(userDAO, userEntity);
 			updateUserLoginInfo(userEntity);
 			if (vipUpdate) {
 				putAlertMsg("恭喜您，会员升级！");
@@ -244,7 +249,7 @@ public class UserService extends BaseService {
 			putAlertMsg("密码和操作码不能相同！");
 			return INPUT;
 		}
-		if(userDAO.findUserByName(userEntity.getUsername().toLowerCase())!=null){
+		if (userDAO.findUserByName(userEntity.getUsername().toLowerCase()) != null) {
 			putAlertMsg("用户已经存在！");
 			return INPUT;
 		}
