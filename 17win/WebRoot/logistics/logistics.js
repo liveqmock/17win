@@ -4,17 +4,17 @@ $(document).ready(function() {
 function validateForm() {
 	var expressCompany = $("#expressCompany").val();
 	var waybill = $("#waybill").val();
-	
-	var fhdz=$("#fhdz").val();
-	var fhyb=$("#fhyb").val();
-	var fhlxr=$("#fhlxr").val();
-	var fhdh=$("#fhdh").val();
-	
-	var shdz=$("#shdz").val();
-	var shyb=$("#shyb").val();
-	var shlxr=$("#shlxr").val();
-	var shdh=$("#shdh").val();
-	
+
+	var fhdz = $("#fhdz").val();
+	var fhyb = $("#fhyb").val();
+	var fhlxr = $("#fhlxr").val();
+	var fhdh = $("#fhdh").val();
+
+	var shdz = $("#shdz").val();
+	var shyb = $("#shyb").val();
+	var shlxr = $("#shlxr").val();
+	var shdh = $("#shdh").val();
+
 	var startDate = $("#sendDate").val();
 	var endDate = $("#arrivalDate").val();
 
@@ -26,7 +26,7 @@ function validateForm() {
 		alert("运货单号不能为空");
 		return false;
 	}
-	
+
 	if (Validater.isBlank(startDate)) {
 		alert("发货时间不能为空");
 		return false;
@@ -37,7 +37,7 @@ function validateForm() {
 			return false;
 		}
 	}
-	
+
 	// /
 	if (Validater.isBlank(fhdz)) {
 		alert("发货地址不能为空");
@@ -56,7 +56,7 @@ function validateForm() {
 		return false;
 	}
 	// /
-	
+
 	// /
 	if (Validater.isBlank(shdz)) {
 		alert("收货地址不能为空");
@@ -75,10 +75,10 @@ function validateForm() {
 		return false;
 	}
 	// /
-	
-	 $("#releaseInfo").val(fhdz+" "+fhyb+" "+fhlxr+" "+fhdh);
-     $("#receieveInfo").val(shdz+" "+shyb+" "+shlxr+" "+shdh);
-	
-	return true;
+
+	$("#releaseInfo").val(fhdz + " " + fhyb + " " + fhlxr + " " + fhdh);
+	$("#receieveInfo").val(shdz + " " + shyb + " " + shlxr + " " + shdh);
+
+	return confirm("请认真审核您的信息，如果被人举报虚假物流信息，我们将严惩！");
 
 }
