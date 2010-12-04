@@ -21,7 +21,7 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Service;
 
 @SuppressWarnings( { "unused", "unchecked" })
-@Service("logisticsService")
+@Service("adminLogisticsService")
 public class AdminLogisticsService extends BaseService {
 	@Resource
 	private UserDAO userDAO;
