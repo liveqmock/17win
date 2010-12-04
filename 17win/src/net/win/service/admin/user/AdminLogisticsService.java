@@ -75,11 +75,12 @@ public class AdminLogisticsService extends BaseService {
 						+ logisticsEntity.getWaybill()
 						+ "不真实，被人举报。由于您的发布点不够，使您的账号被冻结，请联系客户！");
 				logisticsEntity.setStatus("2");
+				putAlertMsg("撤销失败，因为发布点不够！");
+				return JUMP;
 			}
 		} else {
 			logisticsDAO.delete(logisticsEntity);
 		}
-
 		return JUMP;
 	}
 
@@ -97,7 +98,6 @@ public class AdminLogisticsService extends BaseService {
 				"select  count(*)  from LogisticsEntity _l inner join _l.releaseUser as _u  where 1=1  ");
 		List<String> paramNames = new ArrayList<String>();
 		List<Object> paramValues = new ArrayList<Object>();
-
 		// 使用次数
 		if (logisticsVO.getStartUseCount() != null
 				&& logisticsVO.getEndUseCount() != null) {

@@ -5,7 +5,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<s:include value="/admin/common/header.jsp"></s:include>
-		
+
 		<SCRIPT type="text/javascript" src="user/userIndex.js"></SCRIPT>
 	</head>
 
@@ -139,6 +139,9 @@
 							状态
 						</th>
 						<th nowrap="nowrap" style="font-size: 12px;">
+							状态描述
+						</th>
+						<th nowrap="nowrap" style="font-size: 12px;">
 							发布点
 						</th>
 						<th nowrap="nowrap" style="font-size: 12px;">
@@ -181,6 +184,9 @@
 								<s:elseif test="#user[11]==2">冻结</s:elseif>
 								<s:elseif test="#user[11]==3">找密码</s:elseif>
 							</td>
+							<th>
+								<s:property value="#user[13]" />
+							</th>
 							<td>
 								<s:property value="#user[1]" />
 							</td>
@@ -206,6 +212,10 @@
 								<s:property value="#user[10]" />
 							</td>
 							<td>
+								<s:if test="#user[11]==0">
+									激活
+								</s:if>
+								<s:elseif test="#user[11]==2">解冻</s:elseif>
 								<a
 									href="javascript:addMoney('<s:property value="#user[12]" />')">充值</a>
 							</td>

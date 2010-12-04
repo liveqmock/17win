@@ -4,7 +4,6 @@ import javax.annotation.Resource;
 
 import net.win.BaseAction;
 import net.win.service.admin.user.AdminLogisticsService;
-import net.win.service.logistics.LogisticsService;
 import net.win.vo.LogisticsVO;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -20,12 +19,8 @@ import org.springframework.stereotype.Controller;
 @Scope("prototype")
 @ParentPackage("17win-default")
 @Results( {
-		@Result(name = "input", location = "/logistics/logistics.jsp"),
-		@Result(name = "initLogistics", location = "/logistics/logistics.jsp"),
-		@Result(name = "logistics", location = "/logistics/logistics.jsp"),
-		@Result(name = "logisticsLog", location = "/logistics/logisticsLog.jsp"),
-		@Result(name = "useLogisticsLog", location = "/logistics/useLogisticsLog.jsp"),
-		@Result(name = "queryLogisticsLog", location = "/logistics/titleLogistics.jsp") })
+		@Result(name = "input", location = "/admin//logistics/index.jsp"),
+		@Result(name = "queryLogisticsLog", location = "/admin//logistics/index.jsp") })
 @Namespace("/adminLogisticsManager")
 public class AdminLogisticsAction extends BaseAction {
 	@Resource
@@ -40,9 +35,19 @@ public class AdminLogisticsAction extends BaseAction {
 		this.logisticsVO = logisticsVO;
 	}
 
-	@Action("/logistics")
+	@Action("/adminLogistics")
 	public String execute() throws Exception {
 		return INPUT;
+	}
+
+	/**
+	 * 撤销
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String redoLogistics() throws Exception {
+		return adminLogisticsService.updateRedoLogistics(logisticsVO);
 	}
 
 	/**
@@ -54,6 +59,5 @@ public class AdminLogisticsAction extends BaseAction {
 	public String queryLogisticsLog() throws Exception {
 		return adminLogisticsService.queryLogisticsLog(logisticsVO);
 	}
-
 
 }

@@ -42,7 +42,7 @@ public class AdminUserService extends BaseService {
 		StringBuffer resultHQL = new StringBuffer(
 				"select  _user.username,_user.releaseDot,_user.money,_user.registerTime,_user.email,_user.telephone," // 5
 						+ "_user.spreadScore,_user.spreadScore,_user.releaseTaskCount,_user.receiveTaskCount,_user.vipEnable ,"// 10
-						+ " _user.status,_user.id" // 12
+						+ " _user.status,_user.id,_user.status" // 13
 						+ " from UserEntity   as _user  where 1=1 ");
 		StringBuffer countHQL = new StringBuffer(
 				"select  count(*)  from UserEntity  as _user  where 1=1  ");
