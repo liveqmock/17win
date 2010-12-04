@@ -23,7 +23,7 @@
 						记录类型：
 						<s:select listKey="key" listValue="value" name="capitalLogVO.type"
 							headerKey="" headerValue="--请选择--"
-							list="#{'1':'金额记录','2':'发布点记录'}">
+							list="#{'1':'金额记录','2':'发布点记录','3':'积分记录'}">
 						</s:select>
 					</td>
 					<td>
@@ -91,6 +91,9 @@
 																</s:if>
 								<s:elseif test="#capitalLog.type==2">
 																	发布点
+																</s:elseif>
+								<s:elseif test="#capitalLog.type==3">
+																	积分
 																</s:elseif>
 							</td>
 							<td>
