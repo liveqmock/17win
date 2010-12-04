@@ -30,7 +30,7 @@ public class LogisticsEntity extends BaseEntity {
 	@Column(name = "WAYBILL_", length = 25, nullable = false, unique = true)
 	private String waybill;
 	// 1 正常 2不能使用(处于纠纷中)
-	@Column(name = "STATUS_", columnDefinition = "char(1)", nullable = false)
+	@Column(name = "STATUS_", columnDefinition = "char(1)",nullable=false)
 	private String status = "1";
 	// 发货时间
 	@Temporal(TemporalType.DATE)
@@ -70,8 +70,7 @@ public class LogisticsEntity extends BaseEntity {
 
 	// 接受者者
 	@ManyToMany(fetch = FetchType.LAZY)
-	@Cascade(CascadeType.ALL)
-	@JoinTable(name = "Tb_Logistics_Bid_User", joinColumns = { @JoinColumn(name = "USER_ID_", referencedColumnName = "ID_") }, inverseJoinColumns = { @JoinColumn(name = "Logistics_ID", referencedColumnName = "ID_") })
+	@JoinTable(name = "Tb_Logistics_Bid_User", joinColumns = { @JoinColumn(name = "USER_ID_", referencedColumnName = "ID_") }, inverseJoinColumns = { @JoinColumn(name = "Logistics_ID_", referencedColumnName = "ID_") })
 	private List<UserEntity> receieveUsers;
 
 	public String getWaybill() {

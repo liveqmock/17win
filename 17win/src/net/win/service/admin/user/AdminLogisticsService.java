@@ -27,8 +27,6 @@ public class AdminLogisticsService extends BaseService {
 	private UserDAO userDAO;
 	@Resource
 	private LogisticsDAO logisticsDAO;
-	@Resource
-	private AdminLogisticsService logisticsService;
 
 	/**
 	 * 撤销
@@ -68,6 +66,14 @@ public class AdminLogisticsService extends BaseService {
 						0 - logisticsEntity.getReleaseDotCount(), "您发的快递单号为"
 								+ logisticsEntity.getWaybill()
 								+ "为虚假信息扣除您根据此单号获得的所有发布点", releaseUser);
+				logisticsDAO
+						.deleteBySQL(
+								"delete from tb_logistics_bid_user where Logistics_ID_=:logisticsID",
+								new String[] { "logisticsID" },
+								new Object[] { logisticsEntity.getId() });
+				logisticsDAO.deleteBySQL("delete from tb_logicstics",
+						new String[] { "logisticsID" },
+						new Object[] { logisticsEntity.getId() });
 				logisticsDAO.delete(logisticsEntity);
 			} else {
 				releaseUser.setStatus("2");
@@ -75,11 +81,19 @@ public class AdminLogisticsService extends BaseService {
 						+ logisticsEntity.getWaybill()
 						+ "不真实，被人举报。由于您的发布点不够，使您的账号被冻结，请联系客户！");
 				logisticsEntity.setStatus("2");
-				putAlertMsg("撤销失败，因为发布点不够！");
+				putAlertMsg("撤销失败，因为发布点不够被冻结！");
 				return JUMP;
 			}
 		} else {
-			logisticsDAO.delete(logisticsEntity);
+			logisticsDAO
+					.deleteBySQL(
+							"delete from tb_logistics_bid_user where Logistics_ID_=:logisticsID",
+							new String[] { "logisticsID" },
+							new Object[] { logisticsEntity.getId() });
+			logisticsDAO.deleteBySQL("delete from tb_logicstics where id_=:logisticsID",
+					new String[] { "logisticsID" },
+					new Object[] { logisticsEntity.getId() });
+			putAlertMsg("撤销成功,物流信息被删除！");
 		}
 		return JUMP;
 	}

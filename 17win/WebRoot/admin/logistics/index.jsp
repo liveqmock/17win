@@ -59,7 +59,7 @@
 				</tr>
 			</table>
 			<br>
-			<table id="myTable" class="tablesorter" cellpadding="1">
+			<table id="myTable" class="tablesorter" cellpadding="1" style="font-size: 12px;">
 				<thead>
 					<tr>
 						<th style="font-size: 12px" nowrap="nowrap">
@@ -107,9 +107,9 @@
 								<s:if test="#logistics.status==1">
 									正常
 								</s:if>
-								<s:else test="#logistics.status==2">
+								<s:elseif test="#logistics.status==2">
 									冻结
-								</s:else>
+								</s:elseif>
 							</td>
 							<td>
 								<s:property value="#logistics.expressCompany" />
@@ -136,22 +136,22 @@
 								<s:property value="#logistics.remark" />
 							</td>
 							<td nowrap="nowrap">
-								撤销
+								<a href="javascript:redo('<s:property value="#logistics.id"/>')">撤销</a>
 							</td>
 						</tr>
 					</s:iterator>
 				</tbody>
 				<s:if test="#request.result.size()==0">
 					<tr>
-						<th colspan="10" align="center">
+						<th colspan="11" align="center" style="font-size: 12px;">
 							没有记录！
 						</th>
 					</tr>
 				</s:if>
 				<s:else>
 					<tfoot>
-						<tr>
-							<th colspan="10">
+						<tr style="font-size: 12px;">
+							<th colspan="11" style="font-size: 12px;">
 								<div style="float: left;">
 									<a href="javascript:firstPage()">首页</a>
 									<a href="javascript:prevPage()">上一页</a>&nbsp;

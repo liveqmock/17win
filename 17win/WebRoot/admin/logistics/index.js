@@ -6,13 +6,20 @@ $(document).ready(function() {
 					});
 		});
 
+function redo(id) {
+	if (confirm("是否确认要撤销？")) {
+		window.location.href = "adminLogisticsManager/adminLogistics!redoLogistics.php?logisticsID="+
+		id;
+	}
+} 
+
 function validateForm() {
 	var startValue = $("#startValue").val();
 	var endValue = $("#endValue").val();
 	var startDate = $("#startDate").val();
 	var endDate = $("#endDate").val();
 	try {
-		if(isNaN(startValue) || isNaN(endValue)){
+		if (isNaN(startValue) || isNaN(endValue)) {
 			alert("必须输入数值！");
 		}
 		if (parseFloat(startValue) > parseFloat(endValue)) {

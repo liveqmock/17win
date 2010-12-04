@@ -59,7 +59,7 @@
 				</tr>
 			</table>
 			<br>
-			<table id="myTable" class="tablesorter" cellpadding="1">
+			<table id="myTable"  style="font-size: 12px;"  class="tablesorter" cellpadding="1">
 				<thead>
 					<tr>
 						<th style="font-size: 12px" nowrap="nowrap">

@@ -35,7 +35,7 @@ public class AdminUserVO extends BaseVO {
 	private Integer startReceieveTaskCount;
 	private Integer endReceieveTaskCount;
 	// 是否VIP
-	private Boolean vipEnable;
+	private String vipEnable;
 	// VIP成长值
 	private Integer startVipGrowValue;
 	private Integer endVipGrowValue;
@@ -45,6 +45,16 @@ public class AdminUserVO extends BaseVO {
 	// 最后一次登录时间
 	private Date startLiatLogin;
 	private Date endLiatLogin;
+
+	private String status;
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	public String getUsername() {
 		return username;
@@ -166,11 +176,11 @@ public class AdminUserVO extends BaseVO {
 		this.endReceieveTaskCount = endReceieveTaskCount;
 	}
 
-	public Boolean getVipEnable() {
+	public String getVipEnable() {
 		return vipEnable;
 	}
 
-	public void setVipEnable(Boolean vipEnable) {
+	public void setVipEnable(String vipEnable) {
 		this.vipEnable = vipEnable;
 	}
 

@@ -43,7 +43,7 @@ public class LogisticsService extends BaseService {
 				DateUtils.DATE_FORMAT);
 		putByRequest("minDate", minDate);
 		putByRequest("maxDate1", maxDate1);
-		putByRequest("maxDate", maxDate2);
+		putByRequest("maxDate2", maxDate2);
 		return "initLogistics";
 	}
 

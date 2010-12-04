@@ -20,7 +20,7 @@ public class AdminUserService extends BaseService {
 	@Resource
 	private UserDAO userDAO;
 
-	/** 
+	/**
 	 * 改变用户状态
 	 * 
 	 * @param adminUserVO
@@ -34,6 +34,7 @@ public class AdminUserService extends BaseService {
 		UserEntity userEntity = userDAO.get(id);
 		userEntity.setStatus(status);
 		userEntity.setStatusDesc(statusDesc);
+		queryUser(adminUserVO);
 		putAlertMsg("修改成功！");
 		return "updateStatus";
 	}
@@ -67,7 +68,7 @@ public class AdminUserService extends BaseService {
 		StringBuffer resultHQL = new StringBuffer(
 				"select  _user.username,_user.releaseDot,_user.money,_user.registerTime,_user.email,_user.telephone," // 5
 						+ "_user.spreadScore,_user.spreadScore,_user.releaseTaskCount,_user.receiveTaskCount,_user.vipEnable ,"// 10
-						+ " _user.status,_user.id,_user.status" // 13
+						+ " _user.status,_user.id,_user.statusDesc" // 13
 						+ " from UserEntity   as _user  where 1=1 ");
 		StringBuffer countHQL = new StringBuffer(
 				"select  count(*)  from UserEntity  as _user  where 1=1  ");
@@ -235,11 +236,18 @@ public class AdminUserService extends BaseService {
 			paramValues.add(adminUserVO.getEndReceieveTaskCount());
 		}
 		// 是否VIP
-		if (adminUserVO.getVipEnable() != null) {
+		if (!StringUtils.isBlank(adminUserVO.getVipEnable())) {
 			resultHQL.append(" and _user.vipEnable=:vipEnable ");
 			countHQL.append(" and _user.vipEnable=:vipEnable ");
 			paramNames.add("vipEnable");
-			paramValues.add(adminUserVO.getVipEnable());
+			paramValues.add(new Boolean(adminUserVO.getVipEnable()));
+		}
+		// 状态
+		if (!StringUtils.isBlank(adminUserVO.getStatus())) {
+			resultHQL.append(" and _user.status=:status ");
+			countHQL.append(" and _user.status=:status ");
+			paramNames.add("status");
+			paramValues.add(adminUserVO.getStatus());
 		}
 		// // 成长值
 		// if (adminUserVO.getStartVipGrowValue() != null

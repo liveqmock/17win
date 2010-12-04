@@ -142,6 +142,7 @@ img {
 																onclick="WdatePicker({'minDate':'<s:property value="#request.minDate"/>','maxDate':'<s:property value="#request.maxDate1"/>','alwaysUseStartDate':false,'el':'sendDate','isShowClear':true,startDate:'%y-%M-%d',dateFmt:'yyyy-MM-dd','skin':'blue'})"
 																src="js/My97DatePicker/skin/datePicker.gif" width="16"
 																height="22 align="absmiddle">
+															<font color="red" style="font-size: 12px">发货时间的范围是昨天，今天，或则明天的单号</font>
 														</td>
 													</tr>
 													<tr>
@@ -157,6 +158,7 @@ img {
 																onclick="WdatePicker({'minDate':'#F{$dp.$D(\'sendDate\')}','maxDate':'<s:property value="#request.maxDate2"/>','alwaysUseStartDate':false,'el':'arrivalDate','isShowClear':true,startDate:'%y-%M-%d',dateFmt:'yyyy-MM-dd','skin':'blue'})"
 																src="js/My97DatePicker/skin/datePicker.gif" width="16"
 																height="22 align="absmiddle">
+															<font color="red" style="font-size: 12px">预计时间必须大于等于您的发货时间，小于发货时间+15天的日期</font>
 														</td>
 													</tr>
 													<tr>

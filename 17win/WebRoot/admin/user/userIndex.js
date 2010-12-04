@@ -42,8 +42,8 @@ $(document).ready(function() {
 
 // 修改状态
 function updateStatus(id,status) {
-	if (confirm("确认是否充值？")) {
-		$("#userIdId").val(id);
+	if (confirm("确认修改状态？")) {
+		$("#useForUpdateStatusId").val(id);
 		$("#statusID").val(status);
 		$("#updateStatusDIV").dialog("open");
 	}
@@ -96,7 +96,7 @@ function firstPage() {
 	}
 	$("#nowPage").val(1);
 	if (validateForm()) {
-		$("form").submit();
+		$("#queryForm").submit();
 	}
 }
 function prevPage() {
@@ -107,7 +107,7 @@ function prevPage() {
 	}
 	$("#nowPage").val(nowPage - 1);
 	if (validateForm()) {
-		$("form").submit();
+		$("#queryForm").submit();
 	}
 }
 function nextPage() {
@@ -119,7 +119,7 @@ function nextPage() {
 	}
 	$("#nowPage").val(nowPage + 1);
 	if (validateForm()) {
-		$("form").submit();
+		$("#queryForm").submit();
 	}
 }
 function lastPage() {
@@ -132,13 +132,13 @@ function lastPage() {
 	}
 	$("#nowPage").val(page);
 	if (validateForm()) {
-		$("form").submit();
+		$("#queryForm").submit();
 	}
 }
 function jumpPage() {
 	var page = parseInt($("#toPageSelect").val());
 	$("#nowPage").val(page);
 	if (validateForm()) {
-		$("form").submit();
+		$("#queryForm").submit();
 	}
 }

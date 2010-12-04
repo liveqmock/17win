@@ -10,7 +10,7 @@
 	</head>
 
 	<body>
-		<s:form action="adminUserManager/adminUser!queryUser.php"
+		<s:form action="adminUserManager/adminUser!queryUser.php"  id="queryForm"
 			onsubmit="return validateForm()" theme="simple">
 			<table width="100%" cellpadding="1" cellspacing="1" border="0px"
 				style="background: #DDEDFA">
@@ -107,20 +107,15 @@
 						</s:select>
 					</td>
 					<td nowrap="nowrap">
-						<input type="submit" value="查&nbsp;&nbsp;询"
-							style="cursor: pointer;">
+						状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态：
+						<s:select listKey="key" listValue="value"
+							name="adminUserVO.status" headerKey="" headerValue="--请选择--"
+							list="#{'0':'未激活','1':'正常','2':'冻结','3':'找密码中'}">
+						</s:select>
 					</td>
 					<td nowrap="nowrap">
-						<!-- 
-						VIP成长值：
-						<s:textfield name="adminUserVO.startVipGrowValue;"
-							cssStyle="width:40px">
-						</s:textfield>
-						至
-						<s:textfield name="adminUserVO.endVipGrowValue"
-							cssStyle="width:40px">
-						</s:textfield>
-						 -->
+						<input type="submit" value="查&nbsp;&nbsp;询"
+							style="cursor: pointer;">
 					</td>
 				</tr>
 				<tr>
@@ -184,9 +179,9 @@
 								<s:elseif test="#user[11]==2">冻结</s:elseif>
 								<s:elseif test="#user[11]==3">找密码</s:elseif>
 							</td>
-							<th>
+							<td>
 								<s:property value="#user[13]" />
-							</th>
+							</td>
 							<td>
 								<s:property value="#user[1]" />
 							</td>
@@ -209,7 +204,12 @@
 								<s:property value="#user[9]" />
 							</td>
 							<td>
-								<s:property value="#user[10]" />
+								<s:if test="#user[10]">
+									是
+								</s:if>
+								<s:else>
+									否
+								</s:else>
 							</td>
 							<td>
 								<s:if test="#user[11]==0">
@@ -241,7 +241,7 @@
 				<s:else>
 					<tfoot>
 						<tr>
-							<th colspan="11" style="font-size: 12px;">
+							<th colspan="12" style="font-size: 12px;">
 								<div style="float: left;">
 									<a href="javascript:firstPage()">首页</a>
 									<a href="javascript:prevPage()">上一页</a>&nbsp;
@@ -304,7 +304,7 @@
 						<td>
 							<input type="text" name="statusDesc" id="statusDescID"
 								id" style="width: 200px" maxlength="255">
-							<input type="hidden" name="userId" id="userIdId">
+							<input type="hidden" name="userId" id="useForUpdateStatusId">
 							<input type="hidden" name="status" id="statusID">
 						</td>
 					</tr>
