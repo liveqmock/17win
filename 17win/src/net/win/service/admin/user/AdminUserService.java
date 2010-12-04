@@ -20,6 +20,31 @@ public class AdminUserService extends BaseService {
 	@Resource
 	private UserDAO userDAO;
 
+	/**
+	 * 改变用户状态
+	 * 
+	 * @param adminUserVO
+	 * @return
+	 * @throws Exception
+	 */
+	public String updateStatus(AdminUserVO adminUserVO) throws Exception {
+		Long id = Long.parseLong(getByParam("userId"));
+		String status = getByParam("status");
+		String statusDesc = getByParam("statusDesc");
+		UserEntity userEntity = userDAO.get(id);
+		userEntity.setStatus(status);
+		userEntity.setStatusDesc(statusDesc);
+		putAlertMsg("修改成功！");
+		return "updateStatus";
+	}
+
+	/**
+	 * 充值
+	 * 
+	 * @param adminUserVO
+	 * @return
+	 * @throws Exception
+	 */
 	public String updateUserMoney(AdminUserVO adminUserVO) throws Exception {
 		Double money = Double.parseDouble(getByParam("money"));
 		Long id = Long.parseLong(getByParam("userId"));

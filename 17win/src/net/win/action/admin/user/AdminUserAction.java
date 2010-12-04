@@ -20,7 +20,8 @@ import org.springframework.stereotype.Controller;
 @ParentPackage("17win-default")
 @Results( {
 		@Result(name = "queryUser", location = "/admin/user/userIndex.jsp"),
-		@Result(name = "updateUserMoney", location = "/admin/user/userIndex.jsp"), })
+		@Result(name = "updateUserMoney", location = "/admin/user/userIndex.jsp"),
+		@Result(name = "updateStatus", location = "/admin/user/userIndex.jsp") })
 @Namespace("/adminUserManager")
 public class AdminUserAction extends BaseAction {
 	@Resource
@@ -42,6 +43,16 @@ public class AdminUserAction extends BaseAction {
 		return super.execute();
 	}
 
+	/**
+	 * 改变用户状态
+	 * 
+	 * @param userVO
+	 * @return
+	 * @throws Exception
+	 */
+	public String updateStatus() throws Exception {
+		return adminUserService.updateStatus(adminUserVO);
+	}
 
 	/**
 	 * 充值
