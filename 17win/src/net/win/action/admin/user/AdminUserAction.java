@@ -16,7 +16,7 @@ import org.springframework.stereotype.Controller;
 
 @SuppressWarnings("serial")
 @Controller
-@Scope("prototype")
+@Scope("prototype") 
 @ParentPackage("17win-default")
 @Results( {
 		@Result(name = "queryUser", location = "/admin/user/userIndex.jsp"),
