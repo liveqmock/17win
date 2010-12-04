@@ -126,61 +126,66 @@
 		</TD>
 	</TR>
 </TABLE>
-	<div class="service2  service serviceA "   id="divSerWin">
-			<div class="service-open" id="divMySer">
-				<div onclick="ClickSer();" class="service-button"></div>
-				<div class="service-inside">
-					<dl>
-						<dt>
-							客服工作时间
-						</dt>
-						<dd class="esp_4">
-							周一至周五
-						</dd>
-						<dd class="esp_4" >
-							9:00 - 18:30
-						</dd>
-						<dd class="esp_5">
-							<!--<a href="#" target="_blank">自助服务</a>-->
-						</dd>
-						<dt>
-							客服团队
-						</dt>
-						<dd>
-							<a class="serviceA" href="tencent://message/?uin=1348001415">新手帮助</a>
-						</dd>
-						<dd>
-							<a class="serviceA" href="tencent://message/?uin=1181045171">客服一号</a>
-						</dd>
-						<dd>
-							<a href="tencent://message/?uin=1395324789">客服二号</a>
-						</dd>
-						<dd>
-							<a href="tencent://message/?uin=1348001415">客服三号</a>
-						</dd>
-						<dd>
-							<a href="tencent://message/?uin=1181045171">客服四号</a>
-						</dd>
-						<dd>
-							<a href="tencent://message/?uin=1395324789">充值帮助</a>
-						</dd>
-						<dd>
-							<a href="tencent://message/?uin=1097238420">提现帮助</a>
-						</dd>
-						<dd class="esp_1">
-							<a href="tencent://message/?uin=2750697">投诉建议</a>
-						</dd>
-						<dt>
-							QQ交流群
-						</dt>
-						<dd class="esp_2">
-							1-23群已满
-						</dd>
-						<dd class="esp_3">
-							24群：120645229
-						</dd>
-					</dl>
-				</div>
-			</div>
+	<div class="service2  service serviceA " id="divSerWin">
+	<div class="service-open" id="divMySer">
+		<div onclick="ClickSer();" class="service-button"></div>
+		<div class="service-inside">
+			<dl>
+				<dt>
+					客服工作时间
+				</dt>
+				<dd class="esp_4">
+					周一至周五
+				</dd>
+				<dd class="esp_4">
+					9:00 - 18:30
+				</dd>
+				<dd class="esp_5">
+					<!--<a href="#" target="_blank">自助服务</a>-->
+				</dd>
+				<dt>
+					客服团队
+				</dt>
+				<dd>
+
+					<!-- 1348001415 -->
+					<a class="serviceA" href="tencent://message/?uin=1442418675">新手帮助</a>
+				</dd>
+				<dd>
+					<a class="serviceA" href="tencent://message/?uin=1632630010">客服帮助</a>
+				</dd>
+				<dd>
+					<a href="tencent://message/?uin=1637708507">充值帮助</a>
+				</dd>
+				<dd>
+					<a href="tencent://message/?uin=1637708507">提现帮助</a>
+				</dd>
+				<dd class="esp_1">
+					<a href="tencent://message/?uin=1206418689">投诉建议</a>
+				</dd>
+				<dt>
+					QQ交流群
+				</dt>
+				<dd class="esp_3">
+					交流群：100103766
+				</dd>
+				<dt >
+					我们的宗旨
+				</dt>
+				<dd class="esp_4">
+					安全第一
+				</dd>
+				<dd class="esp_4">
+					和谐刷钻
+				</dd>
+				<dd class="esp_4">
+					大家互赢
+				</dd>
+				<dd class="esp_4">
+					互相监督
+				</dd>
+			</dl>
 		</div>
+	</div>
+</div>
 <s:property value="#request.msg" escape="false" />
