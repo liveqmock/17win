@@ -77,6 +77,7 @@ public class UserService extends BaseService {
 			// 如果状态是修改密码。那么就把状态换成上一次状态
 			if ("3".equals(userEntity.getStatus())) {
 				userEntity.setStatusAndLastStatus(userEntity.getLastStatus());
+				userEntity.setStatus("找回密码完成,修改成成，变回以前的状态！");
 			}
 			userEntity.setLoginPassword(StringUtils.processPwd(userVO
 					.getUserEntity().getLoginPassword()));

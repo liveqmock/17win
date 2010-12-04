@@ -65,6 +65,10 @@ public class UserEntity extends BaseEntity {
 	// 状态(0,未激活，1正常,2冻结,3找密码,)
 	@Column(name = "STATUS_", columnDefinition = "CHAR(1)", nullable = false)
 	private String status = "0";
+
+	// 状态描述
+	@Column(name = "STATUS_DESC_", length = 255)
+	private String statusDesc = "未激活";
 	// 钱
 	@Column(name = "MONEY_", nullable = false)
 	private Double money = 1.0D;
@@ -173,7 +177,7 @@ public class UserEntity extends BaseEntity {
 	private List<LogisticsEntity> releaseLogistics;
 
 	// // 我接受的物流信息
-	@ManyToMany(mappedBy="receieveUsers")
+	@ManyToMany(mappedBy = "receieveUsers")
 	private List<LogisticsEntity> receieveLogistics;
 
 	// VIP
@@ -493,6 +497,14 @@ public class UserEntity extends BaseEntity {
 
 	public void setReceieveLogistics(List<LogisticsEntity> receieveLogistics) {
 		this.receieveLogistics = receieveLogistics;
+	}
+
+	public String getStatusDesc() {
+		return statusDesc;
+	}
+
+	public void setStatusDesc(String statusDesc) {
+		this.statusDesc = statusDesc;
 	}
 
 }

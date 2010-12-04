@@ -9,7 +9,6 @@ import org.dom4j.io.SAXReader;
 public final class Constant {
 	private Constant() {
 	}
-
 	static {
 		initMetatData();
 	}
@@ -25,8 +24,7 @@ public final class Constant {
 	// EMAIL的发送地址
 	public static final String FROM_EMAIL = "30756500@qq.com";
 
-	// 一些参数配置
-
+	// 一些参数配置 (数据库)
 	/**
 	 * 价格
 	 */
@@ -84,6 +82,7 @@ public final class Constant {
 	 * 初始化
 	 */
 	private synchronized static void initMetatData() {
+		
 		URL url = Thread.currentThread().getContextClassLoader().getResource(
 				"win-metadata.xml");
 		SAXReader saxReader = new SAXReader(); // 使用SAXReader方式读取XML文件

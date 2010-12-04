@@ -12,6 +12,8 @@ public class LogisticsVO extends BaseVO {
 	private String waybill;
 	// 发货时间
 	private Date sendDate;
+
+	private String status;
 	// 发货信息
 	private String releaseInfo;
 	// 收货信息
@@ -34,10 +36,10 @@ public class LogisticsVO extends BaseVO {
 
 	private Date startDate;
 	private Date endDate;
-	
+
 	private Integer startUseCount;
 	private Integer endUseCount;
-	
+
 	private String releaseUsername;
 
 	public String getReleaseUsername() {
@@ -174,6 +176,14 @@ public class LogisticsVO extends BaseVO {
 
 	public void setEndUseCount(Integer endUseCount) {
 		this.endUseCount = endUseCount;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }

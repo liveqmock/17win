@@ -208,17 +208,22 @@ img {
 															<td>
 																<s:property value="#logistics.remark" />
 															</td>
-															<td  nowrap="nowrap">
-																<s:if test="#logistics.deleteFlag">
-																	<a
-																		href="logisticsManager/logistics!deleteLogistics.php?logisticsID=<s:property value="#logistics.id" />">删除</a>
-																	<a
-																		href="javascript:toCopy('<s:property value="#logistics.id" />')">复制</a>
+															<td nowrap="nowrap">
+																<s:if test="#logistics.status==1">
+																	<s:if test="#logistics.deleteFlag">
+																		<a
+																			href="logisticsManager/logistics!deleteLogistics.php?logisticsID=<s:property value="#logistics.id" />">删除</a>
+																		<a
+																			href="javascript:toCopy('<s:property value="#logistics.id" />')">复制</a>
+																	</s:if>
+																	<s:else>
+																		<a
+																			href="javascript:toCopy('<s:property value="#logistics.id" />')">复制</a>
+																	</s:else>
 																</s:if>
-																<s:else>
-																	<a
-																		href="javascript:toCopy('<s:property value="#logistics.id" />')">复制</a>
-																</s:else>
+																<s:elseif test="#logistics.status==2">
+																	不能使用，当前被冻结
+																</s:elseif>
 															</td>
 														</tr>
 													</s:iterator>

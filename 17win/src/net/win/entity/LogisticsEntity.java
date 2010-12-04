@@ -29,6 +29,9 @@ public class LogisticsEntity extends BaseEntity {
 	// 运货单号
 	@Column(name = "WAYBILL_", length = 25, nullable = false, unique = true)
 	private String waybill;
+	// 1 正常 2不能使用(处于纠纷中)
+	@Column(name = "STATUS_", columnDefinition = "char(1)", nullable = false)
+	private String status = "1";
 	// 发货时间
 	@Temporal(TemporalType.DATE)
 	@Column(name = "SEND_DATE_", nullable = false)
@@ -169,6 +172,14 @@ public class LogisticsEntity extends BaseEntity {
 
 	public void setArrivalDate(Date arrivalDate) {
 		this.arrivalDate = arrivalDate;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }

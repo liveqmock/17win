@@ -91,6 +91,7 @@ public class UserInfoService extends BaseService {
 				+ username64 + "&t=" + nowTime65;
 
 		userEntity.setStatusAndLastStatus("3");
+		userEntity.setStatusDesc("找回密码中！");
 
 		MailUtils.sendPasswordMail(mailSender, freeMarkerCfj, userEntity
 				.getUsername(), userEntity.getEmail(), content);

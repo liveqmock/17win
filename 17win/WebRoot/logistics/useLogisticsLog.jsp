@@ -187,7 +187,7 @@ img {
 																<s:date name="#logistics.arrivalDate"
 																	format="yyyy-MM-dd" />
 															</td>
-															<td >
+															<td>
 																<s:property value="#logistics.releaseInfo" />
 															</td>
 															<td class="toCopy_<s:property value="#logistics.id"/>">
@@ -197,8 +197,13 @@ img {
 																<s:property value="#logistics.remark" />
 															</td>
 															<td nowrap="nowrap">
-																<a
+																<s:if test="#logistics.status==1">
+																	<a
 																		href="javascript:toCopy('<s:property value="#logistics.id" />')">复制</a>
+																</s:if>
+																<s:elseif test="#logistics.status==2">
+																	不能使用，当前被冻结
+																</s:elseif>
 															</td>
 														</tr>
 													</s:iterator>

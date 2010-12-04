@@ -169,9 +169,9 @@ public class LogisticsService extends BaseService {
 	 */
 	public String queryLogisticsLog(LogisticsVO logisticsVO) throws Exception {
 		StringBuffer resultHQL = new StringBuffer(
-				"select  _l ,_u.username from LogisticsEntity _l inner join _l.releaseUser as _u  where 1=1  ");
+				"select  _l ,_u.username from LogisticsEntity _l inner join _l.releaseUser as _u  where 1=1  and  _l.status='1'  ");
 		StringBuffer countHQL = new StringBuffer(
-				"select  count(*)  from LogisticsEntity _l inner join _l.releaseUser as _u  where 1=1  ");
+				"select  count(*)  from LogisticsEntity _l inner join _l.releaseUser as _u  where 1=1  and  _l.status='1' ");
 		List<String> paramNames = new ArrayList<String>();
 		List<Object> paramValues = new ArrayList<Object>();
 
