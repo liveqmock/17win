@@ -20,7 +20,7 @@ public class AdminUserService extends BaseService {
 	@Resource
 	private UserDAO userDAO;
 
-	/**
+	/** 
 	 * 改变用户状态
 	 * 
 	 * @param adminUserVO
