@@ -213,9 +213,18 @@
 							</td>
 							<td>
 								<s:if test="#user[11]==0">
-									激活
+									<a
+										href="javascript:updateStatus('<s:property value="#user[12]" />','1')">激活</a>
 								</s:if>
-								<s:elseif test="#user[11]==2">解冻</s:elseif>
+								<s:elseif test="#user[11]==2">
+									<a
+										href="javascript:updateStatus('<s:property value="#user[12]" />','1')">解冻</a>
+								</s:elseif>
+								<s:elseif test="#user[11]==1">
+									<a
+										href="javascript:updateStatus('<s:property value="#user[12]" />','2')">冻结</a>
+								</s:elseif>
+
 								<a
 									href="javascript:addMoney('<s:property value="#user[12]" />')">充值</a>
 							</td>
@@ -279,6 +288,25 @@
 							<input type="hidden" name="userId" id="userIdId">
 						</td>
 
+					</tr>
+				</table>
+			</s:form>
+		</div>
+
+		<div id="updateStatusDIV" title="状态">
+			<s:form action="adminUserManager/adminUser!updateStatus.php"
+				id="statusForm" theme="simple">
+				<table cellpadding="0" cellspacing="0" border="0">
+					<tr class="sellerClass">
+						<td valign="middle">
+							描述：
+						</td>
+						<td>
+							<input type="text" name="statusDesc" id="statusDescID"
+								id" style="width: 200px" maxlength="255">
+							<input type="hidden" name="userId" id="userIdId">
+							<input type="hidden" name="status" id="statusID">
+						</td>
 					</tr>
 				</table>
 			</s:form>

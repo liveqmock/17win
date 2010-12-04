@@ -19,7 +19,35 @@ $(document).ready(function() {
 			}
 		}
 	});
+
+	$("#updateStatusDIV").dialog({
+				autoOpen : false,
+				draggable : true,
+				hide : 'slide',
+				modal : true,
+				resizable : false,
+				show : 'slide',
+				width : 400,
+				buttons : {
+					"保存" : function() {
+						if (Validater.isBlank($("#statusDescID").val())) {
+							alert("描述不能为空！");
+						} else {
+							$("#statusForm").submit();
+						}
+					}
+				}
+			});
 });
+
+// 修改状态
+function updateStatus(id,status) {
+	if (confirm("确认是否充值？")) {
+		$("#userIdId").val(id);
+		$("#statusID").val(status);
+		$("#updateStatusDIV").dialog("open");
+	}
+}
 
 // 充值
 function addMoney(id) {
