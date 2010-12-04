@@ -104,7 +104,7 @@ public class LogisticsAction extends BaseAction {
 	 * @throws Exception
 	 */
 	public String initLogistics() throws Exception {
-		return "initLogistics";
+		return logisticsService.initLogistics(logisticsVO);
 	}
 
 }

@@ -1,6 +1,7 @@
 package net.win.service.logistics;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -11,6 +12,7 @@ import net.win.dao.UserDAO;
 import net.win.entity.LogisticsEntity;
 import net.win.entity.UserEntity;
 import net.win.utils.ArithUtils;
+import net.win.utils.DateUtils;
 import net.win.utils.StringUtils;
 import net.win.vo.LogisticsVO;
 
@@ -26,6 +28,24 @@ public class LogisticsService extends BaseService {
 	private LogisticsDAO logisticsDAO;
 	@Resource
 	private LogisticsService logisticsService;
+
+	public String initLogistics(LogisticsVO logisticsVO) throws Exception {
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(calendar.DAY_OF_YEAR, -1);
+		String minDate = DateUtils.format(calendar.getTime(),
+				DateUtils.DATE_FORMAT);
+		calendar.add(calendar.DAY_OF_YEAR, 2);
+		String maxDate1 = DateUtils.format(calendar.getTime(),
+				DateUtils.DATE_FORMAT);
+		calendar.add(calendar.DAY_OF_YEAR, -1);
+		calendar.add(calendar.DAY_OF_YEAR, 15);
+		String maxDate2 = DateUtils.format(calendar.getTime(),
+				DateUtils.DATE_FORMAT);
+		putByRequest("minDate", minDate);
+		putByRequest("maxDate1", maxDate1);
+		putByRequest("maxDate", maxDate2);
+		return "initLogistics";
+	}
 
 	/**
 	 * 添加物流
@@ -129,7 +149,7 @@ public class LogisticsService extends BaseService {
 			logisticsEntity.getReleaseUser().setReleaseDot(
 					ArithUtils.add(logisticsEntity.getReleaseUser()
 							.getReleaseDot(), RELEASE_DOT));
-			
+
 			updateUserLoginInfo(userEntity);
 			logDotCapital(userDAO, 0 - RELEASE_DOT, "获取物流（快递单号"
 					+ logisticsEntity.getWaybill() + "）扣发布点", userEntity);

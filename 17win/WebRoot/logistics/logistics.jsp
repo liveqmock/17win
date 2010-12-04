@@ -139,7 +139,7 @@ img {
 															<s:textfield readonly="true"
 																name="logisticsVO.logistics.sendDate" id="sendDate"></s:textfield>
 															<img style="cursor: pointer;"
-																onclick="WdatePicker({'minDate':'%y-%M-%d','alwaysUseStartDate':false,'el':'sendDate','isShowClear':true,startDate:'%y-%M-%d',dateFmt:'yyyy-MM-dd','skin':'blue'})"
+																onclick="WdatePicker({'minDate':'<s:property value="#request.minDate"/>','maxDate':'<s:property value="#request.maxDate1"/>','alwaysUseStartDate':false,'el':'sendDate','isShowClear':true,startDate:'%y-%M-%d',dateFmt:'yyyy-MM-dd','skin':'blue'})"
 																src="js/My97DatePicker/skin/datePicker.gif" width="16"
 																height="22 align="absmiddle">
 														</td>
@@ -154,7 +154,7 @@ img {
 																name="logisticsVO.logistics.arrivalDate"
 																id="arrivalDate"></s:textfield>
 															<img style="cursor: pointer;"
-																onclick="WdatePicker({'minDate':'%y-%M-%d','alwaysUseStartDate':false,'el':'arrivalDate','isShowClear':true,startDate:'%y-%M-%d',dateFmt:'yyyy-MM-dd','skin':'blue'})"
+																onclick="WdatePicker({'minDate':'#F{$dp.$D(\'sendDate\')}','maxDate':'<s:property value="#request.maxDate2"/>','alwaysUseStartDate':false,'el':'arrivalDate','isShowClear':true,startDate:'%y-%M-%d',dateFmt:'yyyy-MM-dd','skin':'blue'})"
 																src="js/My97DatePicker/skin/datePicker.gif" width="16"
 																height="22 align="absmiddle">
 														</td>
