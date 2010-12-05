@@ -273,7 +273,7 @@ public class UserInfoService extends BaseService {
 				putAlertMsg("您输入的地址有问题或地址和买号不同，如果有疑问请联系客户！");
 				return "insertSellerAndBuyer";
 			}
-			if (score > 250) {
+			if (score > Constant.getCreditValueLimit()) {
 				putAlertMsg("您的买号级别过高，请换一个号！");
 				return "insertSellerAndBuyer";
 			}
@@ -408,7 +408,7 @@ public class UserInfoService extends BaseService {
 		String flag = getByParam("flag");
 		UserEntity userEntity = getLoginUserEntity(userDAO);
 		String operaCode = userVO.getOperationCode();
-		Double releaseDot = userVO.getReleaseDot();
+		Double releaseDotCount = userVO.getReleaseDot();
 		// 判断操作码
 		if (!userEntity.getOpertationCode().equals(
 				StringUtils.processPwd(operaCode))) {
@@ -418,22 +418,32 @@ public class UserInfoService extends BaseService {
 		if ("1".equals(flag)) {
 			// 购买单个发布点
 			if (userEntity.getMoney() >= Constant.getFabudianPrice()
-					* releaseDot) {
+					* releaseDotCount) {
 				userEntity.setMoney(ArithUtils.sub(userEntity.getMoney(),
-						0.5 * releaseDot));
+						Constant.getFabudianPrice() * releaseDotCount));
 				userEntity.setReleaseDot(ArithUtils.add(userEntity
-						.getReleaseDot(), releaseDot));
-				logMoneyCapital(userDAO, 0 - (0.5 * releaseDot), "购买发布点",
-						userEntity);
-				logDotCapital(userDAO, releaseDot, "购买发布点", userEntity);
+						.getReleaseDot(), releaseDotCount));
+				logMoneyCapital(userDAO,
+						0 - (Constant.getFabudianPrice() * releaseDotCount),
+						"购买发布点", userEntity);
+				logDotCapital(userDAO, releaseDotCount, "购买发布点", userEntity);
+				// 推广人
 				if (userEntity.getReferee() != null) {
 					userEntity.getReferee().setMoney(
 							userEntity.getReferee().getMoney()
-									+ (0.5 * releaseDot * 0.1));
+									+ (Constant.getFabudianPrice()
+											* releaseDotCount * Constant
+											.getBuyReleaseDotRebateToRefree()));
+					logMoneyCapital(userDAO, (Constant.getFabudianPrice()
+							* releaseDotCount * Constant
+							.getBuyReleaseDotRebateToRefree()), "您推荐的"
+							+ userEntity.getUsername() + "用户购买了"
+							+ Constant.getFabudianPrice() * releaseDotCount
+							+ "多钱的发布点,您获得0.01" + "倍的回报", userEntity
+							.getReferee());
 				}
-
 			} else {
-				putDIV("您的钱不够支付购买" + releaseDot + "个发布点的费用，<a>点击此处充值！</a>");
+				putDIV("您的钱不够支付购买" + releaseDotCount + "个发布点的费用，<a>点击此处充值！</a>");
 			}
 		} else if ("2".equals(flag)) {
 			// 购买皇冠卡
@@ -446,9 +456,16 @@ public class UserInfoService extends BaseService {
 				logMoneyCapital(userDAO, 0 - money, "购买皇冠卡", userEntity);
 				logDotCapital(userDAO, Constant.getHuangguanNumber()
 						.doubleValue(), "购买皇冠卡", userEntity);
+				// 推广人
 				if (userEntity.getReferee() != null) {
 					userEntity.getReferee().setMoney(
-							userEntity.getReferee().getMoney() + (money * 0.1));
+							userEntity.getReferee().getMoney()
+									+ (money * Constant
+											.getBuyReleaseDotRebateToRefree()));
+					logMoneyCapital(userDAO, money
+							* Constant.getBuyReleaseDotRebateToRefree(), "您推荐的"
+							+ userEntity.getUsername() + "用户购买了皇冠卡,您获得0.01"
+							+ "倍的回报", userEntity.getReferee());
 				}
 			} else {
 				putDIV("您的钱不够支付购买皇冠卡，<a>点击此处充值！</a>");
@@ -465,9 +482,16 @@ public class UserInfoService extends BaseService {
 				logMoneyCapital(userDAO, 0 - money, "购买双钻卡", userEntity);
 				logDotCapital(userDAO, Constant.getShuangzuanNumber()
 						.doubleValue(), "购买双钻卡", userEntity);
+				// 推荐人
 				if (userEntity.getReferee() != null) {
 					userEntity.getReferee().setMoney(
-							userEntity.getReferee().getMoney() + (money * 0.1));
+							userEntity.getReferee().getMoney()
+									+ (money * Constant
+											.getBuyReleaseDotRebateToRefree()));
+					logMoneyCapital(userDAO, money
+							* Constant.getBuyReleaseDotRebateToRefree(), "您推荐的"
+							+ userEntity.getUsername() + "用户购买了双钻卡,您获得0.01"
+							+ "倍的回报", userEntity.getReferee());
 				}
 			} else {
 				putDIV("您的钱不够支付购买双钻卡，<a>点击此处充值！</a>");
@@ -484,14 +508,21 @@ public class UserInfoService extends BaseService {
 				logMoneyCapital(userDAO, 0 - money, "购买一钻卡", userEntity);
 				logDotCapital(userDAO, Constant.getZuanshiNumber()
 						.doubleValue(), "购买一钻卡", userEntity);
+
+				// 推荐人
 				if (userEntity.getReferee() != null) {
 					userEntity.getReferee().setMoney(
-							userEntity.getReferee().getMoney() + (money * 0.1));
+							userEntity.getReferee().getMoney()
+									+ (money * Constant
+											.getBuyReleaseDotRebateToRefree()));
+					logMoneyCapital(userDAO, money
+							* Constant.getBuyReleaseDotRebateToRefree(), "您推荐的"
+							+ userEntity.getUsername() + "用户购买了钻石卡,您获得0.01"
+							+ "倍的回报", userEntity.getReferee());
 				}
 			} else {
 				putDIV("您的钱不够支付购买一钻卡，<a>点击此处充值！</a>");
 			}
-
 		}
 		if (getByRequest("div") == null) {
 			updateUserLoginInfo(userEntity);
@@ -528,11 +559,12 @@ public class UserInfoService extends BaseService {
 			userEntity.setReleaseDot(ArithUtils.sub(userEntity.getReleaseDot(),
 					releaseDot));
 			userEntity.setMoney(ArithUtils.add(userEntity.getMoney(),
-					ArithUtils.mul(releaseDot, 0.5)));
+					ArithUtils.mul(releaseDot, Constant
+							.getReleaseDotChangeMoney())));
 
 			logDotCapital(userDAO, 0 - releaseDot, "发布点兑换金额", userEntity);
-			logMoneyCapital(userDAO, ArithUtils.mul(releaseDot, 0.5),
-					"发布点兑换金额", userEntity);
+			logMoneyCapital(userDAO, ArithUtils.mul(releaseDot, Constant
+					.getReleaseDotChangeMoney()), "发布点兑换金额", userEntity);
 		} else if ("2".equals(flag)) {
 			// 赠送
 			Double releaseDot = userVO.getReleaseDot();
@@ -567,12 +599,15 @@ public class UserInfoService extends BaseService {
 			if (releaseDot > userEntity.getReleaseDot()) {
 				WinUtils.throwIllegalityException("违法的操作，试图越过兑换发布点验证");
 			}
-			if (releaseDot * 200 > userEntity.getConvertScore()) {
-				putAlertMsg("兑换失败！您的积分不够" + releaseDot * 200);
+			if (releaseDot * Constant.getScoreChangeReleaseDot() > userEntity
+					.getConvertScore()) {
+				putAlertMsg("兑换失败！您的积分不够" + releaseDot
+						* Constant.getScoreChangeReleaseDot());
 			}
 			userEntity.setReleaseDot(ArithUtils.add(userEntity.getReleaseDot(),
 					releaseDot));
-			Integer tempScore = ((Double) (releaseDot * 200)).intValue();
+			Integer tempScore = ((Double) (releaseDot * Constant
+					.getScoreChangeReleaseDot())).intValue();
 			userEntity
 					.setConvertScore(userEntity.getConvertScore() - tempScore);
 

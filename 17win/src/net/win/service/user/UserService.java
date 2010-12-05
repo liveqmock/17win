@@ -122,7 +122,7 @@ public class UserService extends BaseService {
 	 * @throws Exception
 	 */
 	public String updateLogin(UserVO userVO) throws Exception {
-		final int LOGIN_SCORE = 5;
+		final int LOGIN_SCORE = Constant.getLoginScore().intValue();
 		if (userVO.getVerificationCode() == null
 				|| !userVO.getVerificationCode().equals(
 						getBySession(Constant.VERIFY_CODE))) {

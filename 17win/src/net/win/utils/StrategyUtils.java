@@ -122,7 +122,7 @@ public final class StrategyUtils {
 			if (getLevel(userEntity.getUpgradeScore()).equals(1)) {
 				return 1D;
 			} else {
-				return 0.8;
+				return Constant.getReceieveTaskDotRate();
 			}
 		} else {
 			return 1D;

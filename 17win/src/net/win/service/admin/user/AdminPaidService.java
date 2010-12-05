@@ -59,7 +59,7 @@ public class AdminPaidService extends BaseService {
 		PayEntity payEntity = payDAO.get(Long.parseLong(getByParam("payId")));
 		UserEntity userEntity = payEntity.getUser();
 		if (!payEntity.getStatus().equals("1")) {
-			WinUtils.throwIllegalityException("充值漏洞");
+			WinUtils.throwIllegalityException("系统错误 ，充值");
 		}
 		userEntity.setMoney(ArithUtils.add(userEntity.getMoney(), payEntity
 				.getMoney()));

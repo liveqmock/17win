@@ -12,6 +12,7 @@ import net.win.dao.UserDAO;
 import net.win.entity.LogisticsEntity;
 import net.win.entity.UserEntity;
 import net.win.utils.ArithUtils;
+import net.win.utils.Constant;
 import net.win.utils.DateUtils;
 import net.win.utils.StringUtils;
 import net.win.vo.LogisticsVO;
@@ -111,7 +112,7 @@ public class LogisticsService extends BaseService {
 	 * @throws Exception
 	 */
 	public String updateUseLogistics(LogisticsVO logisticsVO) throws Exception {
-		final double RELEASE_DOT = 0.2D;
+		final double RELEASE_DOT = Constant.getLogisticsDotCount();
 		putJumpOutterPage("logisticsManager/logistics!queryLogisticsLog.php");
 		String logisticsID = getByParam("logisticsID");
 		UserEntity userEntity = getLoginUserEntity(userDAO);
@@ -168,6 +169,7 @@ public class LogisticsService extends BaseService {
 	 * @throws Exception
 	 */
 	public String queryLogisticsLog(LogisticsVO logisticsVO) throws Exception {
+		putIndexShowType("13");
 		StringBuffer resultHQL = new StringBuffer(
 				"select  _l ,_u.username from LogisticsEntity _l inner join _l.releaseUser as _u  where 1=1  and  _l.status='1'  ");
 		StringBuffer countHQL = new StringBuffer(

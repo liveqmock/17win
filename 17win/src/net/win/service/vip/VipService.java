@@ -58,7 +58,7 @@ public class VipService extends BaseService {
 		}
 
 		Double money = 0D;
-		if (monthCount.equals(12)) {
+		if (monthCount>12) {
 			money = monthCount * Constant.getYearVipPrice();
 		} else {
 			money = monthCount * Constant.getVipPrice();
@@ -85,19 +85,17 @@ public class VipService extends BaseService {
 		vipBidUserDAO.save(vipBidUserEntity);
 
 		// 通过你的宣传链接注册的会员购买VIP
-		// 你的收益=20个发布点
+		// 你的收益=10个发布点
 		if (userEntity.getReferee() != null) {
 			userEntity.getReferee().setReleaseDot(
-					userEntity.getReferee().getReleaseDot() + 20);
-			logDotCapital(userDAO, 20D, "你推荐的名为：" + userEntity.getUsername()
-					+ "购买VIP。你获得的20个发布点！", userEntity.getReferee());
+					userEntity.getReferee().getReleaseDot() + Constant.getRefreeByVipReleaseDot());
+			logDotCapital(userDAO, Constant.getRefreeByVipReleaseDot(), "你推荐的名为：" + userEntity.getUsername()
+					+ "购买VIP。", userEntity.getReferee());
 		}
 		updateUserLoginInfo(userEntity);
 		getLoginUser().setVipEndDate(vipBidUserEntity.getEndDate());
 		getLoginUser().setVipGrowValue(vipBidUserEntity.getGrowValue());
-
 		logMoneyCapital(userDAO, 0 - money, "购买VIP", userEntity);
-
 		putAlertMsg("恭喜您加入VIP，快去体验吧！");
 		return "insertVip";
 	}

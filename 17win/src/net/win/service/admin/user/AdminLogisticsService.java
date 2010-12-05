@@ -12,6 +12,7 @@ import net.win.dao.UserDAO;
 import net.win.entity.LogisticsEntity;
 import net.win.entity.UserEntity;
 import net.win.utils.ArithUtils;
+import net.win.utils.Constant;
 import net.win.utils.DateUtils;
 import net.win.utils.LoggerUtils;
 import net.win.utils.StringUtils;
@@ -36,7 +37,7 @@ public class AdminLogisticsService extends BaseService {
 	 * @throws Exception
 	 */
 	public String updateRedoLogistics(LogisticsVO logisticsVO) throws Exception {
-		final double LOGISTICS_DOT = 0.2;
+		final double LOGISTICS_DOT = Constant.getLogisticsDotCount();
 		putJumpPage("adminLogisticsManager/adminLogistics!queryLogisticsLog.php");
 		String logisticsID = getByParam("logisticsID");
 		if (StringUtils.isBlank(logisticsID)) {

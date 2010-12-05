@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import net.win.dao.BuyerDAO;
 import net.win.dao.CreditTaskDAO;
 import net.win.entity.BuyerEntity;
+import net.win.utils.Constant;
 import net.win.utils.HttpB2CUtils;
 import net.win.utils.LoggerUtils;
 
@@ -81,9 +82,9 @@ public class TaskQuartzService {
 				value = HttpB2CUtils.obtainCreditValue(buyerEntity.getName(),
 						buyerEntity.getCreditURL(), buyerEntity.getType());
 				buyerEntity.setScore(value);
-				if (value > 250) {
+				if (value > Constant.getCreditValueLimit()) {
 					buyerEntity.setEnable(false);
-				}
+				} 
 			}
 		} catch (Exception e) {
 			session.getTransaction().rollback();
