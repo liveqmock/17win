@@ -55,6 +55,9 @@ public class UserEntity extends BaseEntity {
 	// 升级用的积分，不能兑换发布点
 	@Column(name = "UPGRADE_SCORE_", nullable = false)
 	private Integer upgradeScore = 0;
+	// 记录一千，主要是给推广用
+	@Column(name = "RECORD_1000_SCORE_COUNT_")
+	private Integer record1000ScoreCount = 0;
 	// 注册时间
 	@Column(name = "REGISTERTIME_", nullable = false)
 	private Date registerTime = new Date();
@@ -505,6 +508,14 @@ public class UserEntity extends BaseEntity {
 
 	public void setStatusDesc(String statusDesc) {
 		this.statusDesc = statusDesc;
+	}
+
+	public Integer getRecord1000ScoreCount() {
+		return record1000ScoreCount;
+	}
+
+	public void setRecord1000ScoreCount(Integer record1000ScoreCount) {
+		this.record1000ScoreCount = record1000ScoreCount;
 	}
 
 }

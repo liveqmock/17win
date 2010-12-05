@@ -87,9 +87,9 @@ public class VipService extends BaseService {
 		// 通过你的宣传链接注册的会员购买VIP
 		// 你的收益=10个发布点
 		if (userEntity.getReferee() != null) {
-			userEntity.getReferee().setReleaseDot(
-					userEntity.getReferee().getReleaseDot() + Constant.getRefreeByVipReleaseDot());
-			logDotCapital(userDAO, Constant.getRefreeByVipReleaseDot(), "你推荐的名为：" + userEntity.getUsername()
+			userEntity.getReferee().setMoney(
+					userEntity.getReferee().getMoney() + Constant.getRefreeByVipMoney());
+			logMoneyCapital(userDAO, Constant.getRefreeByVipMoney(), "你推荐的名为：" + userEntity.getUsername()
 					+ "购买VIP。", userEntity.getReferee());
 		}
 		updateUserLoginInfo(userEntity);

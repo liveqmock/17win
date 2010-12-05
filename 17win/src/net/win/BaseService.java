@@ -298,7 +298,7 @@ public class BaseService {
 		capitalLogEntity.setLogTime(new Date());
 		baseDAO.save(capitalLogEntity);
 	}
-	
+
 	// 保存积分
 	protected void logScoreCapital(BaseDAO baseDAO, Double value, String desc,
 			UserEntity userEntity) throws Exception {
@@ -310,6 +310,7 @@ public class BaseService {
 		capitalLogEntity.setLogTime(new Date());
 		baseDAO.save(capitalLogEntity);
 	}
+
 	// 保存发布点记录
 	protected void logDotCapital(BaseDAO baseDAO, Double value, String desc,
 			UserEntity userEntity) throws Exception {
@@ -337,9 +338,11 @@ public class BaseService {
 		if (userEntity.getReceiveTaskCount() % 100 == 0) {
 			UserEntity refereeUser = userEntity.getReferee();
 			if (refereeUser != null) {
-				refereeUser.setMoney(10 + refereeUser.getMoney());
-				logDotCapital(baseDAO, 10D, "你推广的用户接受了100个任务你获得10元！",
-						refereeUser);
+				refereeUser.setMoney(Constant.getTask100RefreeMoney()
+						+ refereeUser.getMoney());
+				logMoneyCapital(baseDAO, Constant.getTask100RefreeMoney(),
+						"你推广的用户接受了100个任务你获得" + Constant.getTask100RefreeMoney()
+								+ "元！", refereeUser);
 			}
 		}
 	}

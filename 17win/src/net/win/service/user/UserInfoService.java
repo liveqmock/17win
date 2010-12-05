@@ -439,8 +439,9 @@ public class UserInfoService extends BaseService {
 							.getBuyReleaseDotRebateToRefree()), "您推荐的"
 							+ userEntity.getUsername() + "用户购买了"
 							+ Constant.getFabudianPrice() * releaseDotCount
-							+ "多钱的发布点,您获得0.01" + "倍的回报", userEntity
-							.getReferee());
+							+ "多钱的发布点,您获得"
+							+ Constant.getBuyReleaseDotRebateToRefree()
+							+ "倍金额的回报", userEntity.getReferee());
 				}
 			} else {
 				putDIV("您的钱不够支付购买" + releaseDotCount + "个发布点的费用，<a>点击此处充值！</a>");
@@ -464,8 +465,9 @@ public class UserInfoService extends BaseService {
 											.getBuyReleaseDotRebateToRefree()));
 					logMoneyCapital(userDAO, money
 							* Constant.getBuyReleaseDotRebateToRefree(), "您推荐的"
-							+ userEntity.getUsername() + "用户购买了皇冠卡,您获得0.01"
-							+ "倍的回报", userEntity.getReferee());
+							+ userEntity.getUsername() + "用户购买了皇冠卡,您获得"
+							+ Constant.getBuyReleaseDotRebateToRefree()
+							+ "倍金额的回报", userEntity.getReferee());
 				}
 			} else {
 				putDIV("您的钱不够支付购买皇冠卡，<a>点击此处充值！</a>");
@@ -490,8 +492,9 @@ public class UserInfoService extends BaseService {
 											.getBuyReleaseDotRebateToRefree()));
 					logMoneyCapital(userDAO, money
 							* Constant.getBuyReleaseDotRebateToRefree(), "您推荐的"
-							+ userEntity.getUsername() + "用户购买了双钻卡,您获得0.01"
-							+ "倍的回报", userEntity.getReferee());
+							+ userEntity.getUsername() + "用户购买了双钻卡,您获得"
+							+ Constant.getBuyReleaseDotRebateToRefree()
+							+ "倍金额的回报", userEntity.getReferee());
 				}
 			} else {
 				putDIV("您的钱不够支付购买双钻卡，<a>点击此处充值！</a>");
@@ -517,8 +520,9 @@ public class UserInfoService extends BaseService {
 											.getBuyReleaseDotRebateToRefree()));
 					logMoneyCapital(userDAO, money
 							* Constant.getBuyReleaseDotRebateToRefree(), "您推荐的"
-							+ userEntity.getUsername() + "用户购买了钻石卡,您获得0.01"
-							+ "倍的回报", userEntity.getReferee());
+							+ userEntity.getUsername() + "用户购买了钻石卡,您获得"
+							+ Constant.getBuyReleaseDotRebateToRefree()
+							+ "倍金额的回报", userEntity.getReferee());
 				}
 			} else {
 				putDIV("您的钱不够支付购买一钻卡，<a>点击此处充值！</a>");

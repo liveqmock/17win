@@ -273,37 +273,42 @@
 							客服团队
 						</dt>
 						<dd>
-							<a class="serviceA" href="tencent://message/?uin=1348001415">新手帮助</a>
+
+							<!-- 1348001415 -->
+							<a class="serviceA" href="tencent://message/?uin=1442418675">新手帮助</a>
 						</dd>
 						<dd>
-							<a class="serviceA" href="tencent://message/?uin=1181045171">客服一号</a>
+							<a class="serviceA" href="tencent://message/?uin=1632630010">客户帮助</a>
 						</dd>
 						<dd>
-							<a href="tencent://message/?uin=1395324789">客服二号</a>
+							<a href="tencent://message/?uin=1637708507">充值帮助</a>
 						</dd>
 						<dd>
-							<a href="tencent://message/?uin=1348001415">客服三号</a>
-						</dd>
-						<dd>
-							<a href="tencent://message/?uin=1181045171">客服四号</a>
-						</dd>
-						<dd>
-							<a href="tencent://message/?uin=1395324789">充值帮助</a>
-						</dd>
-						<dd>
-							<a href="tencent://message/?uin=1097238420">提现帮助</a>
+							<a href="tencent://message/?uin=1637708507">提现帮助</a>
 						</dd>
 						<dd class="esp_1">
-							<a href="tencent://message/?uin=2750697">投诉建议</a>
+							<a href="tencent://message/?uin=1206418689">投诉建议</a>
 						</dd>
 						<dt>
 							QQ交流群
 						</dt>
-						<dd class="esp_2">
-							1-23群已满
-						</dd>
 						<dd class="esp_3">
-							24群：120645229
+							交流群：100103766
+						</dd>
+						<dt>
+							我们的宗旨
+						</dt>
+						<dd class="esp_4">
+							安全第一
+						</dd>
+						<dd class="esp_4">
+							和谐刷钻
+						</dd>
+						<dd class="esp_4">
+							大家互赢
+						</dd>
+						<dd class="esp_4">
+							互相监督
 						</dd>
 					</dl>
 				</div>

@@ -152,7 +152,7 @@
 					<a class="serviceA" href="tencent://message/?uin=1442418675">新手帮助</a>
 				</dd>
 				<dd>
-					<a class="serviceA" href="tencent://message/?uin=1632630010">客服帮助</a>
+					<a class="serviceA" href="tencent://message/?uin=1632630010">客户帮助</a>
 				</dd>
 				<dd>
 					<a href="tencent://message/?uin=1637708507">充值帮助</a>

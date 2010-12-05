@@ -203,7 +203,7 @@ public class UserService extends BaseService {
 				getLoginUser().setVipType(vip.getType());
 			}
 			// 通过你的宣传链接注册的会员积分每上升1000
-			// 你的收益=100积分
+			// 你的收益=N积分
 			ScoreStrategy.updateRefreeScoreByScore(userDAO, userEntity);
 			updateUserLoginInfo(userEntity);
 			if (vipUpdate) {

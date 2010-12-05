@@ -62,19 +62,24 @@ public final class Constant {
 	private static Double receieveTaskDotRate;
 	// 物流发布点个数
 	private static Double logisticsDotCount;
-	//信誉值上限
+	// 信誉值上限
 	private static Double creditValueLimit;
-	//发布点兑换成金额
+	// 发布点兑换成金额
 	private static Double releaseDotChangeMoney;
-	//积分兑换发布点
+	// 积分兑换发布点
 	private static Double scoreChangeReleaseDot;
-	//登录时获得的积分，非会员
+	// 登录时获得的积分，非会员
 	private static Double loginScore;
-	//通过你的宣传链接注册的会员购买VIP，获得10个发布点
-	private static Double refreeByVipReleaseDot;
-	
-	//当购买发布点的时候，推广人所得金额为，他推荐人买的发布点的金额的0.01
+	// 通过你的宣传链接注册的会员购买VIP，你获得的金额
+	private static Double refreeByVipMoney;
+
+	// 当购买发布点的时候，推广人所得金额为，他推荐人买的发布点的金额的0.01
 	private static Double buyReleaseDotRebateToRefree;
+
+	// 积累接受100个任务 推广人获取10元钱
+	private static Double task100RefreeMoney;
+	//通过你的宣传链接注册的会员积分每上升1000 ，你的收益=100积分
+	private static Double score1000Refree;
 
 	public static Double getFabudianPrice() {
 		return fabudian_P;
@@ -245,33 +250,41 @@ public final class Constant {
 				else if ("receieveTaskDotRate".equalsIgnoreCase(name)) {
 					receieveTaskDotRate = numberValue;
 				}
-				//物流发布点个数
+				// 物流发布点个数
 				else if ("logisticsDotCount".equalsIgnoreCase(name)) {
 					logisticsDotCount = numberValue;
 				}
-				//信誉值上限
+				// 信誉值上限
 				else if ("creditValueLimit".equalsIgnoreCase(name)) {
 					creditValueLimit = numberValue;
 				}
-				//当购买发布点的时候，推广人所得金额为，他推荐人买的发布点的金额的0.01
+				// 当购买发布点的时候，推广人所得金额为，他推荐人买的发布点的金额的0.01
 				else if ("buyReleaseDotRebateToRefree".equalsIgnoreCase(name)) {
 					buyReleaseDotRebateToRefree = numberValue;
 				}
-				//发布点兑换成金额
+				// 发布点兑换成金额
 				else if ("releaseDotChangeMoney".equalsIgnoreCase(name)) {
 					releaseDotChangeMoney = numberValue;
 				}
-				//积分兑换成发布点
+				// 积分兑换成发布点
 				else if ("releaseDotChangeMoney".equalsIgnoreCase(name)) {
 					scoreChangeReleaseDot = numberValue;
 				}
-				//积分兑换成发布点
+				// 积分兑换成发布点
 				else if ("loginScore".equalsIgnoreCase(name)) {
 					loginScore = numberValue;
 				}
-				//通过你的宣传链接注册的会员购买VIP，获得10个发布点
-				else if ("refreeByVipReleaseDot".equalsIgnoreCase(name)) {
-					refreeByVipReleaseDot = numberValue;
+				// 通过你的宣传链接注册的会员购买VIP，获得n元
+				else if ("refreeByVipMoney".equalsIgnoreCase(name)) {
+					refreeByVipMoney = numberValue;
+				}
+				// 积累接受100个任务 推广人获取N元钱
+				else if ("task100RefreeMoney".equalsIgnoreCase(name)) {
+					task100RefreeMoney = numberValue;
+				}
+				// 通过你的宣传链接注册的会员积分每上升1000 ，你的收益=N积分
+				else if ("score1000Refree".equalsIgnoreCase(name)) {
+					score1000Refree = numberValue;
 				}
 			}
 		} catch (SQLException e) {
@@ -305,8 +318,16 @@ public final class Constant {
 		return loginScore;
 	}
 
-	public static Double getRefreeByVipReleaseDot() {
-		return refreeByVipReleaseDot;
+	public static Double getRefreeByVipMoney() {
+		return refreeByVipMoney;
+	}
+
+	public static Double getTask100RefreeMoney() {
+		return task100RefreeMoney;
+	}
+
+	public static Double getScore1000Refree() {
+		return score1000Refree;
 	}
 
 }
