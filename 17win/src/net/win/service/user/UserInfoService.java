@@ -360,6 +360,7 @@ public class UserInfoService extends BaseService {
 			return "updateActiave";
 		} else {
 			userEntity.setStatusAndLastStatus("1");
+			userEntity.setStatusDesc("已激活");
 			putAlertMsg("激活成功！快去体验吧！");
 			putByRequest("activeCode", "1");
 			updateUserLoginInfo(userEntity);

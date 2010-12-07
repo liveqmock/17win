@@ -130,6 +130,10 @@ public class LogisticsService extends BaseService {
 			putAlertMsg("您已经使用过该物流信息，去您的【个人中心】→【我使用的物流】可以查找到，本次操作不会扣除您的发布点！");
 			return JUMP;
 		} else {
+			if (userEntity.getStatus().equals("0")) {
+				putAlertMsg("您的账号还没激活！");
+				return JUMP;
+			}
 			if (userEntity.getReleaseDot() < RELEASE_DOT) {
 				putAlertMsg("您当前的发布点不够" + RELEASE_DOT + "，不能使用！");
 				return JUMP;

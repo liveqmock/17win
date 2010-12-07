@@ -123,8 +123,7 @@
 								<td valign="top" align="center">
 									<SPAN style="Z-INDEX: 20; POSITION: relative"> <a
 										href="javascript:reply('<s:property value='#task[2]' />');"
-										title="发送站内信息"  ><s:property
-												value="#task[2]" /> </a> </SPAN>
+										title="发送站内信息"><s:property value="#task[2]" /> </a> </SPAN>
 									<br>
 									<img
 										src="images/<s:property value="@net.win.utils.StrategyUtils@getLevelImg(#task[25])" />"
@@ -194,7 +193,7 @@
 												</s:if> <s:else>
 													<s:property value="%{#task[13]*60}" />分钟后好评
 												</s:else> </font>
-												</s:else>
+										</s:else>
 									</s:elseif>
 									<s:elseif test="#task[12]==5">
 												您已确认好评<br>等待卖家确认好评
@@ -254,8 +253,8 @@
 							<Tr>
 								<td colspan="3" valign="top" align="left">
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<font color="red" style="font-weight: bold;">快递单号：只有发布方可看！<!-- 22 -->
-									</font>
+									<font color="red" style="font-weight: bold;">快递单号：<s:property
+											value="#task[22]" /> </font>
 								</td>
 								<td colspan="3" align="left">
 									<font color="red" style="font-weight: bold;">打分/好评： <s:if

@@ -104,8 +104,7 @@ img {
 															当前成长值：<s:property value="#session.userLogin.vipGrowValue" />
 															</s:if> <s:else>
 														您还没有加入VIP
-														</s:else>)<b><br />(注册时间：<s:date
-																	format="yyyy-MM-dd hh:mm:ss"
+														</s:else>)<b><br />(注册时间：<s:date format="yyyy-MM-dd hh:mm:ss"
 																	name="#session.userLogin.registerTime" />)</b> </Font>
 													</td>
 													<td width="63%" align="left" class="borderc">
@@ -197,7 +196,7 @@ img {
 																	等待我付款
 																</th>
 																<th style="background: #D1ECF9">
-																	等待卖家发货
+																	等待买家发货
 																</th>
 																<th style="background: #D1ECF9">
 																	等待我收货好评
@@ -209,11 +208,12 @@ img {
 																	合计
 																</th>
 															</tr>
-															<s:iterator value="#request.sellTasks" id="selltask">
+															<s:iterator status="indexI" value="#request.sellTasks"
+																id="selltask">
 																<tr>
-																	<s:iterator value="selltask" id="task">
+																	<s:iterator value="selltask" id="task" status="indexJ">
 																		<td align="center" />
-																			<s:property value="task" />
+																				<s:property value="task" />
 																		</td>
 																	</s:iterator>
 																</tr>
@@ -258,11 +258,12 @@ img {
 																	合计
 																</th>
 															</tr>
-															<s:iterator value="#request.buyTasks" id="buyTask">
+															<s:iterator value="#request.buyTasks" status="indexI"
+																id="buyTask">
 																<tr>
-																	<s:iterator value="buyTask" id="task">
+																	<s:iterator value="buyTask" id="task" status="indexJ">
 																		<td align="center"">
-																			<s:property value="task" />
+																				<s:property value="task" />
 																		</td>
 																	</s:iterator>
 																</tr>
