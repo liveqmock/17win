@@ -431,7 +431,7 @@ public class CreditTaskService extends BaseService {
 			logScoreCapital(userDAO, releaseScore + 0.0, "您发起的"
 					+ creditTask.getTestID() + "任务完成，获得积分", releaEntity);
 			 
-			// 有会员
+			// 是会员
 			if (releaEntity.getVipEnable() && releaseUserVip != null) {
 				releaseVipBidUser.setGrowValue(releaseVipBidUser.getGrowValue()
 						+ releaseUserVip.getReleaseGrowValue());
