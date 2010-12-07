@@ -20,14 +20,8 @@
 		<LINK href="css/Css.css" type="text/css" rel="stylesheet">
 
 		<LINK href="css/center.css" type="text/css" rel="stylesheet">
-
-		<link href="css/excite-bike/jquery-ui-1.8.4.custom.css"
-			rel="stylesheet" type="text/css" />
-
-		<SCRIPT src="js/jquery-ui-1.8.4.custom.min.js" type="text/javascript"></SCRIPT>
-		<SCRIPT src="js/utils.js" type="text/javascript"></SCRIPT>
+ 		<SCRIPT src="js/utils.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="user/buyDot.js" type="text/javascript"></SCRIPT>
-
 		<style type="text/css">
 body {
 	
@@ -69,6 +63,7 @@ img {
 	font-weight: bold;
 }
 </style>
+
 
 	</HEAD>
 	<BODY>
@@ -248,24 +243,5 @@ img {
 			</tr>
 		</table>
 		<s:include value="../common/footDuan.jsp"></s:include>
-
-		<s:if test="#request.div!=null">
-			<div id="showDIV"
-				title="
-		<s:if test="#request.executeFlag==success">
-	操作成功
-</s:if>
- <s:else>
- 	操作失败
- </s:else>">
-				<table border="0" cellpadding="0" cellspacing="0">
-					<tr>
-						<td>
-							<s:property value="#request.div" escape="false" />
-						</td>
-					</tr>
-				</table>
-			</div>
-		</s:if>
 	</BODY>
 </HTML>

@@ -54,11 +54,12 @@ public class VipService extends BaseService {
 		if (!userEntity.getOpertationCode().equals(
 				StringUtils.processPwd(operationCode))) {
 			putAlertMsg("操作码不正确！");
-			return "insertVip";
+			putJumpPage("vipManager/vip!initVip.php");
+			return JUMP;
 		}
 
 		Double money = 0D;
-		if (monthCount>12) {
+		if (monthCount > 12) {
 			money = monthCount * Constant.getYearVipPrice();
 		} else {
 			money = monthCount * Constant.getVipPrice();
@@ -66,7 +67,8 @@ public class VipService extends BaseService {
 
 		if (userEntity.getMoney() < money) {
 			putAlertMsg("您当前的余额不足" + money + "！");
-			return "insertVip";
+			putJumpPage("vipManager/vip!initVip.php");
+			return JUMP;
 		}
 
 		VipEntity vipEntity = vipDAO.getVIP1();
@@ -84,20 +86,24 @@ public class VipService extends BaseService {
 		vipBidUserEntity.setUser(userEntity);
 		vipBidUserDAO.save(vipBidUserEntity);
 
+		userEntity.setVipBidUserEntity(vipBidUserEntity);
+
 		// 通过你的宣传链接注册的会员购买VIP
 		// 你的收益=10个发布点
 		if (userEntity.getReferee() != null) {
 			userEntity.getReferee().setMoney(
-					userEntity.getReferee().getMoney() + Constant.getRefreeByVipMoney());
-			logMoneyCapital(userDAO, Constant.getRefreeByVipMoney(), "你推荐的名为：" + userEntity.getUsername()
-					+ "购买VIP。", userEntity.getReferee());
+					userEntity.getReferee().getMoney()
+							+ Constant.getRefreeByVipMoney());
+			logMoneyCapital(userDAO, Constant.getRefreeByVipMoney(), "你推荐的名为："
+					+ userEntity.getUsername() + "购买VIP。", userEntity
+					.getReferee());
 		}
 		updateUserLoginInfo(userEntity);
 		getLoginUser().setVipEndDate(vipBidUserEntity.getEndDate());
 		getLoginUser().setVipGrowValue(vipBidUserEntity.getGrowValue());
 		logMoneyCapital(userDAO, 0 - money, "购买VIP", userEntity);
-		putAlertMsg("恭喜您加入VIP，快去体验吧！");
-		return "insertVip";
+		putJumpPage("vipManager/vip!initVip.php");
+		return JUMP;
 	}
 
 	/**
@@ -115,7 +121,8 @@ public class VipService extends BaseService {
 		if (!userEntity.getOpertationCode().equals(
 				StringUtils.processPwd(operationCode))) {
 			putAlertMsg("操作码不正确！");
-			return "insertRenewalVip";
+			putJumpPage("vipManager/vip!initVip.php");
+			return JUMP;
 		}
 
 		Double money = 0D;
@@ -127,7 +134,8 @@ public class VipService extends BaseService {
 
 		if (userEntity.getMoney() < money) {
 			putAlertMsg("您当前的余额不足" + money + "！");
-			return "insertRenewalVip";
+			putJumpPage("vipManager/vip!initVip.php");
+			return JUMP;
 		}
 		Calendar calendar = Calendar.getInstance();
 		// VIP已经失效
@@ -145,7 +153,7 @@ public class VipService extends BaseService {
 		getLoginUser().setVipEndDate(vipBidUserEntity.getEndDate());
 		getLoginUser().setVipGrowValue(vipBidUserEntity.getGrowValue());
 		putAlertMsg("恭喜您续费成功！");
-		return "insertRenewalVip";
-
+		putJumpPage("vipManager/vip!initVip.php");
+		return JUMP;
 	}
 }

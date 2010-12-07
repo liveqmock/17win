@@ -148,7 +148,7 @@ public class UserInfoAction extends BaseAction {
 	 * @throws Exception
 	 */
 	public String buyDot() throws Exception {
-		return userInfoService.updateBuyDot(userVO);
+		return  userInfoService.updateBuyDot(userVO);
 	}
 
 	/**

@@ -406,6 +406,8 @@ public class UserInfoService extends BaseService {
 	 * @throws Exception
 	 */
 	public String updateBuyDot(UserVO userVO) throws Exception {
+		putJumpPage("userInfoManager/info!initBuyDot.php");
+		putAlertMsg("充值成功！");
 		String flag = getByParam("flag");
 		UserEntity userEntity = getLoginUserEntity(userDAO);
 		String operaCode = userVO.getOperationCode();
@@ -414,7 +416,7 @@ public class UserInfoService extends BaseService {
 		if (!userEntity.getOpertationCode().equals(
 				StringUtils.processPwd(operaCode))) {
 			putAlertMsg("操作码不正确！");
-			return "updateBuyDot";
+			return JUMP;
 		}
 		if ("1".equals(flag)) {
 			// 购买单个发布点
@@ -428,6 +430,7 @@ public class UserInfoService extends BaseService {
 						0 - (Constant.getFabudianPrice() * releaseDotCount),
 						"购买发布点", userEntity);
 				logDotCapital(userDAO, releaseDotCount, "购买发布点", userEntity);
+				updateUserLoginInfo(userEntity);
 				// 推广人
 				if (userEntity.getReferee() != null) {
 					userEntity.getReferee().setMoney(
@@ -445,7 +448,8 @@ public class UserInfoService extends BaseService {
 							+ "倍金额的回报", userEntity.getReferee());
 				}
 			} else {
-				putDIV("您的钱不够支付购买" + releaseDotCount + "个发布点的费用，<a>点击此处充值！</a>");
+				putAlertMsg("您的钱不够支付购买" + releaseDotCount + "个发布点的费用!>");
+				return JUMP;
 			}
 		} else if ("2".equals(flag)) {
 			// 购买皇冠卡
@@ -458,6 +462,7 @@ public class UserInfoService extends BaseService {
 				logMoneyCapital(userDAO, 0 - money, "购买皇冠卡", userEntity);
 				logDotCapital(userDAO, Constant.getHuangguanNumber()
 						.doubleValue(), "购买皇冠卡", userEntity);
+				updateUserLoginInfo(userEntity);
 				// 推广人
 				if (userEntity.getReferee() != null) {
 					userEntity.getReferee().setMoney(
@@ -471,7 +476,8 @@ public class UserInfoService extends BaseService {
 							+ "倍金额的回报", userEntity.getReferee());
 				}
 			} else {
-				putDIV("您的钱不够支付购买皇冠卡，<a>点击此处充值！</a>");
+				putAlertMsg("您的钱不够支付购买皇冠卡!");
+				return JUMP;
 			}
 
 		} else if ("3".equals(flag)) {
@@ -485,6 +491,7 @@ public class UserInfoService extends BaseService {
 				logMoneyCapital(userDAO, 0 - money, "购买双钻卡", userEntity);
 				logDotCapital(userDAO, Constant.getShuangzuanNumber()
 						.doubleValue(), "购买双钻卡", userEntity);
+				updateUserLoginInfo(userEntity);
 				// 推荐人
 				if (userEntity.getReferee() != null) {
 					userEntity.getReferee().setMoney(
@@ -498,9 +505,9 @@ public class UserInfoService extends BaseService {
 							+ "倍金额的回报", userEntity.getReferee());
 				}
 			} else {
-				putDIV("您的钱不够支付购买双钻卡，<a>点击此处充值！</a>");
-			}
-
+				putAlertMsg("您的钱不够支付购买双钻卡!");
+				return JUMP;
+			}  
 		} else if ("4".equals(flag)) {
 			// 购买一钻卡
 			Double money = Constant.getZuanshiPrice();
@@ -512,7 +519,7 @@ public class UserInfoService extends BaseService {
 				logMoneyCapital(userDAO, 0 - money, "购买一钻卡", userEntity);
 				logDotCapital(userDAO, Constant.getZuanshiNumber()
 						.doubleValue(), "购买一钻卡", userEntity);
-
+				updateUserLoginInfo(userEntity);
 				// 推荐人
 				if (userEntity.getReferee() != null) {
 					userEntity.getReferee().setMoney(
@@ -526,15 +533,12 @@ public class UserInfoService extends BaseService {
 							+ "倍金额的回报", userEntity.getReferee());
 				}
 			} else {
-				putDIV("您的钱不够支付购买一钻卡，<a>点击此处充值！</a>");
+				putAlertMsg("您的钱不够支付购买一钻卡!");
+				return JUMP;
 			}
 		}
-		if (getByRequest("div") == null) {
-			updateUserLoginInfo(userEntity);
-			putDIV("恭喜您，充值成功！<a href='taskManager/task!initTask.php?platformType=1'>点击此处</a>跳转到淘宝互刷区！");
-			putByRequest("executeFlag", "success");
-		}
-		return "updateBuyDot";
+		putAlertMsg("充值成功！");
+		return JUMP;
 	}
 
 	/**
