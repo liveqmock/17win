@@ -78,8 +78,13 @@ public final class Constant {
 
 	// 积累接受100个任务 推广人获取10元钱
 	private static Double task100RefreeMoney;
-	//通过你的宣传链接注册的会员积分每上升1000 ，你的收益=100积分
+	// 通过你的宣传链接注册的会员积分每上升1000 ，你的收益=100积分
 	private static Double score1000Refree;
+
+	// 初始化用户金额
+	private static Double initUserMoney;
+	// 初始化用户发布点
+	private static Double initUserReleaseDot;
 
 	public static Double getFabudianPrice() {
 		return fabudian_P;
@@ -120,6 +125,50 @@ public final class Constant {
 
 	public static Double getLogisticsDotCount() {
 		return logisticsDotCount;
+	}
+
+	public static Double getReceieveTaskDotRate() {
+		return receieveTaskDotRate;
+	}
+
+	public static Double getCreditValueLimit() {
+		return creditValueLimit;
+	}
+
+	public static Double getBuyReleaseDotRebateToRefree() {
+		return buyReleaseDotRebateToRefree;
+	}
+
+	public static Double getReleaseDotChangeMoney() {
+		return releaseDotChangeMoney;
+	}
+
+	public static Double getScoreChangeReleaseDot() {
+		return scoreChangeReleaseDot;
+	}
+
+	public static Double getLoginScore() {
+		return loginScore;
+	}
+
+	public static Double getRefreeByVipMoney() {
+		return refreeByVipMoney;
+	}
+
+	public static Double getTask100RefreeMoney() {
+		return task100RefreeMoney;
+	}
+
+	public static Double getScore1000Refree() {
+		return score1000Refree;
+	}
+
+	public static Double getInitUserMoney() {
+		return initUserMoney;
+	}
+
+	public static Double getInitUserReleaseDot() {
+		return initUserReleaseDot;
 	}
 
 	/**
@@ -286,48 +335,20 @@ public final class Constant {
 				else if ("score1000Refree".equalsIgnoreCase(name)) {
 					score1000Refree = numberValue;
 				}
+				//
+				else if ("initUserMoney".equalsIgnoreCase(name)) {
+					initUserMoney = numberValue;
+				}
+				//
+				else if ("initUserReleaseDot".equalsIgnoreCase(name)) {
+					initUserReleaseDot = numberValue;
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			closeJDBC(rs, st, conn);
 		}
-	}
-
-	public static Double getReceieveTaskDotRate() {
-		return receieveTaskDotRate;
-	}
-
-	public static Double getCreditValueLimit() {
-		return creditValueLimit;
-	}
-
-	public static Double getBuyReleaseDotRebateToRefree() {
-		return buyReleaseDotRebateToRefree;
-	}
-
-	public static Double getReleaseDotChangeMoney() {
-		return releaseDotChangeMoney;
-	}
-
-	public static Double getScoreChangeReleaseDot() {
-		return scoreChangeReleaseDot;
-	}
-
-	public static Double getLoginScore() {
-		return loginScore;
-	}
-
-	public static Double getRefreeByVipMoney() {
-		return refreeByVipMoney;
-	}
-
-	public static Double getTask100RefreeMoney() {
-		return task100RefreeMoney;
-	}
-
-	public static Double getScore1000Refree() {
-		return score1000Refree;
 	}
 
 }

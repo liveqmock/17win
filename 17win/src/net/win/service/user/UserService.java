@@ -267,6 +267,18 @@ public class UserService extends BaseService {
 			userEntity.setReferee(userDAO.findUserByName(userEntity
 					.getReferee().getUsername()));
 		}
+		//
+		userEntity.setReleaseDot(Constant.getInitUserReleaseDot());
+		if (Constant.getInitUserReleaseDot() > 0.0) {
+			logDotCapital(userDAO, Constant.getInitUserReleaseDot(), "注册用户获得"
+					+ Constant.getInitUserReleaseDot() + "个发布点", userEntity);
+		}
+		userEntity.setMoney(Constant.getInitUserMoney());
+		if (Constant.getInitUserMoney() > 0.0) {
+			logMoneyCapital(userDAO, Constant.getInitUserMoney(), "注册用户获得"
+					+ Constant.getInitUserMoney() + "金额", userEntity);
+		}
+		userEntity.setReleaseDot(Constant.getInitUserReleaseDot());
 		userDAO.save(userEntity);
 		try {
 			MailUtils.sendRegisterMail(mailSender, freeMarkerCfj, userEntity

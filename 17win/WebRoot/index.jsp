@@ -602,7 +602,7 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 							QQ交流群
 						</dt>
 						<dd class="esp_3">
-							交流群：100103766
+							100103766
 						</dd>
 						<dt>
 							我们的宗旨

@@ -42,7 +42,7 @@ public class UserEntity extends BaseEntity {
 	private String qq;
 	// 发布点
 	@Column(name = "RELEASE_DOT_", nullable = false)
-	private Double releaseDot = 2.0;
+	private Double releaseDot;
 	// 电子邮箱
 	@Column(name = "EMAIL_", length = 24, unique = true, nullable = false)
 	private String email;
@@ -74,7 +74,7 @@ public class UserEntity extends BaseEntity {
 	private String statusDesc = "未激活";
 	// 钱
 	@Column(name = "MONEY_", nullable = false)
-	private Double money = 1.0D;
+	private Double money;
 	// 推广积分
 	@Column(name = "SPREAD_SCORE_", nullable = false)
 	private Integer spreadScore = 0;
