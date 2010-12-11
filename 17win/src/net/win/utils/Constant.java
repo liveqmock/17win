@@ -115,7 +115,7 @@ public final class Constant {
 		return zuanshi_N;
 	}
 
-	public static Double getYearVipPrice() {
+	public static Double getVipYearRebate() {
 		return vipYearRebate;
 	}
 

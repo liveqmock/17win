@@ -113,8 +113,8 @@ img {
 														</td>
 														<td>
 															<input style="width: 80px" id="monthCount" name="monthC">
-															月/20元(
-															<font color="red">注意:输入12个月为年付，打8折</font>)
+															月/<s:property value="#request.vipPrice"/>元(
+															<font color="red">注意:输入12个月为年付，打<s:property value="#request.vipYearRebate"/>折</font>)
 														</td>
 													</tr>
 													<tr style="background: #EDF6FF;">
@@ -288,7 +288,7 @@ img {
 																接任务获得的发布点
 															</td>
 															<td id="chat_0" class="self">
-																任务总发布点×0.8
+																任务总发布点×<s:property value="#request.receieveTaskDotRate"/>
 																<br>
 																<font color="red">(一心以上用户)</font>
 															</td>

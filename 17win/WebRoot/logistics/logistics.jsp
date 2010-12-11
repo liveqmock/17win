@@ -99,7 +99,7 @@ img {
 											</div>
 											<div>
 												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												<font color="red">注意：请认真填写以下信息，如果有人举报您填写的信息与真实信息不符合，我们将严惩！</font>
+												<font color="red">注意：请认真填写以下信息，如果有人举报您填写的信息与真实信息不符合，我们将严惩！别人使用您的物流信息时，您会获得<s:property value="#request.logisticsDotCount"/>个发布点</font>
 											</div>
 
 											<table width="99%" cellspacing="0" cellpadding="0" border="0"

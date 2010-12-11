@@ -37,6 +37,10 @@ public class VipService extends BaseService {
 	 */
 	public String initVip(VipVO vipVO) throws Exception {
 		putIndexShowType("9");
+		putByRequest("vipPrice", Constant.getVipPrice());
+		putByRequest("vipYearRebate", Constant.getVipYearRebate()*10);
+		putByRequest("receieveTaskDotRate", Constant.getReceieveTaskDotRate());
+		 
 		return INPUT;
 	}
 
@@ -60,7 +64,7 @@ public class VipService extends BaseService {
 
 		Double money = 0D;
 		if (monthCount > 12) {
-			money = monthCount * Constant.getYearVipPrice();
+			money = monthCount * Constant.getVipYearRebate();
 		} else {
 			money = monthCount * Constant.getVipPrice();
 		}
@@ -126,8 +130,8 @@ public class VipService extends BaseService {
 		}
 
 		Double money = 0D;
-		if (monthCount.equals(12)) {
-			money = monthCount * Constant.getYearVipPrice();
+		if (monthCount>12) {
+			money = monthCount * Constant.getVipYearRebate();
 		} else {
 			money = monthCount * Constant.getVipPrice();
 		}

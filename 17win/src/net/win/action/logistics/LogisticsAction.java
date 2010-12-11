@@ -98,7 +98,7 @@ public class LogisticsAction extends BaseAction {
 	}
 
 	/**
-	 * 初始化提现
+	 * 初始化物流
 	 * 
 	 * @return
 	 * @throws Exception

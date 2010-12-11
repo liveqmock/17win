@@ -45,6 +45,8 @@ public class LogisticsService extends BaseService {
 		putByRequest("minDate", minDate);
 		putByRequest("maxDate1", maxDate1);
 		putByRequest("maxDate2", maxDate2);
+		
+		putByRequest("logisticsDotCount", Constant.getLogisticsDotCount());
 		return "initLogistics";
 	}
 
