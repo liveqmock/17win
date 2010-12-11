@@ -327,23 +327,4 @@ public class BaseService {
 		return base.getId() == null;
 	}
 
-	/**
-	 * 积累接受100个任务 推广人获取10元钱
-	 * 
-	 * @param userEntity
-	 * @throws Exception
-	 */
-	protected void updateRefreeMoneyByTask(BaseDAO baseDAO,
-			UserEntity userEntity) throws Exception {
-		if (userEntity.getReceiveTaskCount() % 100 == 0) {
-			UserEntity refereeUser = userEntity.getReferee();
-			if (refereeUser != null) {
-				refereeUser.setMoney(Constant.getTask100RefreeMoney()
-						+ refereeUser.getMoney());
-				logMoneyCapital(baseDAO, Constant.getTask100RefreeMoney(),
-						"你推广的用户接受了100个任务你获得" + Constant.getTask100RefreeMoney()
-								+ "元！", refereeUser);
-			}
-		}
-	}
 }

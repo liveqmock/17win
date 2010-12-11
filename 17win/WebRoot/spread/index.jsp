@@ -174,7 +174,7 @@
 													<td width="45%" valign="middle" class="union_line">
 														通过你的宣传链接注册的会员累计接受100次任务
 														<br />
-														<span class="STYLE5">你的收益=10元</span>
+														<span class="STYLE5">你的收益=<s:property value="#request.task100RefreeMoney"/>元</span>
 													</td>
 													<td width="38%" valign="middle">
 														<img src="images/g1.jpg" width="249" height="76" />
@@ -196,7 +196,7 @@
 													<td width="45%" valign="middle" class="union_line">
 														通过你的宣传链接注册的会员积分每上升1000
 														<br />
-														<span class="STYLE5">你的收益=100积分</span>
+														<span class="STYLE5">你的收益=<s:property value="#request.score1000Refree"/>积分</span>
 													</td>
 													<td width="38%" valign="middle">
 														<img src="images/g2.jpg" width="243" height="67" />
@@ -218,7 +218,7 @@
 													<td width="45%" valign="middle" class="union_line">
 														通过你的宣传链接注册的会员购买VIP
 														<br />
-														<span class="STYLE5">你的收益=5元</span>
+														<span class="STYLE5">你的收益=<s:property value="#request.refreeByVipMoney"/>元</span>
 													</td>
 													<td width="38%" valign="middle">
 														<img src="images/g3.jpg" width="233" height="65" />
@@ -240,7 +240,7 @@
 													<td width="45%" valign="middle" class="union_line">
 														通过你的宣传链接注册的会员购买点卡
 														<br />
-														<span class="STYLE5">你的收益=点卡金额*10%</span>
+														<span class="STYLE5">你的收益=点卡金额*(<s:property value="#request.buyReleaseDotRebateToRefree"/>倍)</span>
 													</td>
 													<td width="38%" valign="middle">
 														<img src="images/g4.jpg" width="241" height="66" />

@@ -125,7 +125,19 @@ public class UserInfoService extends BaseService {
 		putByRequest("userCount", userCount);
 		putByRequest("refereeMoney", refereeMoney);
 		putByRequest("vipCount", vipCount);
-
+		
+		//当购买发布点的时候，推广人所得金额为，他推荐人买的发布点的金额的0.1倍 
+		putByRequest("buyReleaseDotRebateToRefree", Constant
+				.getBuyReleaseDotRebateToRefree());
+		// 通过你的宣传链接注册的会员购买VIP，获得5元
+		putByRequest("refreeByVipMoney", Constant
+				.getRefreeByVipMoney());
+		//积累接受100个任务 推广人获取10元钱 
+		putByRequest("task100RefreeMoney", Constant
+				.getTask100RefreeMoney());
+//		通过你的宣传链接注册的会员积分每上升1000 ，你的收益=100积分  
+		putByRequest("score1000Refree", Constant
+				.getScore1000Refree());
 		return "referee";
 	}
 
@@ -157,7 +169,8 @@ public class UserInfoService extends BaseService {
 
 	public String initExchange(UserVO userVO) throws Exception {
 		putIndexShowType("7");
-		putByRequest("releaseDotChangeMoney", Constant.getReleaseDotChangeMoney());
+		putByRequest("releaseDotChangeMoney", Constant
+				.getReleaseDotChangeMoney());
 		return "initExchange";
 	}
 
@@ -337,7 +350,7 @@ public class UserInfoService extends BaseService {
 			putAlertMsg("您还没有绑定卖号，请绑定！");
 		}
 		putByRequest("sellers", sellerResult);
-
+		putByRequest("creditValueLimit", Constant.getCreditValueLimit());
 		putByRequest("buyers", buyerResult);
 
 		return "initSellerAndBuyer";
@@ -398,30 +411,30 @@ public class UserInfoService extends BaseService {
 		}
 		return "initActiave";
 	}
-	
-	
+
 	/**
 	 * 初始化买发布点
+	 * 
 	 * @param userVO
 	 * @return
 	 * @throws Exception
 	 */
 	public String initBuyDot() throws Exception {
-		//皇冠
-		putByRequest("huangguanCount",Constant.getHuangguanNumber());
-		putByRequest("huangguanPrice",Constant.getHuangguanPrice());
-		//一个发布点
-		putByRequest("fabudianPrice",Constant.getFabudianPrice());
-		//双钻
-		putByRequest("shuangzuanPrice",Constant.getShuangzuanPrice());
-		putByRequest("shuangzuanCount",Constant.getShuangzuanNumber());
-		
-		//一钻
-		putByRequest("zuanshikaPrice",Constant.getZuanshiPrice());
-		putByRequest("zuanshiCount",Constant.getZuanshiNumber());
+		// 皇冠
+		putByRequest("huangguanCount", Constant.getHuangguanNumber());
+		putByRequest("huangguanPrice", Constant.getHuangguanPrice());
+		// 一个发布点
+		putByRequest("fabudianPrice", Constant.getFabudianPrice());
+		// 双钻
+		putByRequest("shuangzuanPrice", Constant.getShuangzuanPrice());
+		putByRequest("shuangzuanCount", Constant.getShuangzuanNumber());
+
+		// 一钻
+		putByRequest("zuanshikaPrice", Constant.getZuanshiPrice());
+		putByRequest("zuanshiCount", Constant.getZuanshiNumber());
 		return "initBuyDot";
 	}
-	
+
 	/**
 	 * 购买发布点
 	 * 

@@ -510,7 +510,16 @@ public class CreditTaskService extends BaseService {
 			 * 计算推广
 			 */
 			// 积累接受100个任务
-			updateRefreeMoneyByTask(userDAO, receiveUser);
+			if (receiveUser.getReceiveTaskCount() % 100 == 0) {
+				UserEntity refereeUser = receiveUser.getReferee();
+				if (refereeUser != null) {
+					refereeUser.setMoney(Constant.getTask100RefreeMoney()
+							+ refereeUser.getMoney());
+					logMoneyCapital(userDAO, Constant.getTask100RefreeMoney(),
+							"你推广的用户接受了100个任务你获得" + Constant.getTask100RefreeMoney()
+									+ "元！", refereeUser);
+				}
+			}
 			// 通过你的宣传链接注册的会员积分每上升1000
 			// 你的收益=100积分
 			ScoreStrategy.updateRefreeScoreByScore(userDAO, receiveUser);
