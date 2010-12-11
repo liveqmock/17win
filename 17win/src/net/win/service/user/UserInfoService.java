@@ -171,6 +171,9 @@ public class UserInfoService extends BaseService {
 		putIndexShowType("7");
 		putByRequest("releaseDotChangeMoney", Constant
 				.getReleaseDotChangeMoney());
+		
+		putByRequest("scoreChangeReleaseDot", Constant
+				.getScoreChangeReleaseDot());
 		return "initExchange";
 	}
 

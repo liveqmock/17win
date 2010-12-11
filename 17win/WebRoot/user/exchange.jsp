@@ -291,7 +291,7 @@ img {
 															</td>
 															<td width="480">
 																<s:textfield name="userVO.releaseDot" id="releaseDot_3"></s:textfield>
-																个发布点( 每200积分可兑换1个发布点)
+																个发布点( 每<s:property value="#request.scoreChangeReleaseDot"/>积分可兑换1个发布点)
 															</td>
 														</tr>
 														<tr>

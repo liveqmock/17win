@@ -316,7 +316,7 @@ public final class Constant {
 					releaseDotChangeMoney = numberValue;
 				}
 				// 积分兑换成发布点
-				else if ("releaseDotChangeMoney".equalsIgnoreCase(name)) {
+				else if ("scoreChangeReleaseDot".equalsIgnoreCase(name)) {
 					scoreChangeReleaseDot = numberValue;
 				}
 				// 积分兑换成发布点
