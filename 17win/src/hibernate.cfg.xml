@@ -105,5 +105,6 @@
 		<mapping class="net.win.entity.VipBidUserEntity" />
 		<mapping class="net.win.entity.CapitalLogEntity" />
 		<mapping class="net.win.entity.LogisticsEntity" />
+		<mapping class="net.win.entity.PropertyEntity" />
 	</session-factory>
 </hibernate-configuration>

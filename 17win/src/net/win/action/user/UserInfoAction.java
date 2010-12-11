@@ -39,7 +39,7 @@ import org.springframework.stereotype.Controller;
 		@Result(name = "initFindPassword", location = "/system/initFindPassword.jsp"),
 		@Result(name = "updateFindPassword", location = "/system/initFindPassword.jsp"),
 		@Result(name = "updateExchange", location = "/user/exchange.jsp"),
-		@Result(name = "refreshUser", location = "/user/index.jsp")
+		@Result(name = "refreshUser",type="redirect", location = "/userInfoManager/info!init.php")
 })
 @Namespace("/userInfoManager")
 public class UserInfoAction extends BaseAction {
