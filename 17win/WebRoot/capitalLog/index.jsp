@@ -154,7 +154,10 @@ img {
 															资产类型
 														</th>
 														<th style="font-size: 12px" nowrap="nowrap">
-															值
+															流动资产
+														</th>
+														<th style="font-size: 12px" nowrap="nowrap">
+															剩余资产
 														</th>
 														<th style="font-size: 12px" nowrap="nowrap">
 															操作日期
@@ -183,6 +186,9 @@ img {
 																<s:property value="#capitalLog.value" />
 															</td>
 															<td>
+																<s:property value="#capitalLog.remainValue" />
+															</td>
+															<td>
 																<s:date name="#capitalLog.logTime"
 																	format="yyyy-MM-dd HH-mm-ss" />
 															</td>
@@ -194,7 +200,7 @@ img {
 												</tbody>
 												<s:if test="#request.result.size()==0">
 													<tr>
-														<th colspan="9" align="center">
+														<th colspan="5" align="center">
 															没有数据！
 														</th>
 													</tr>
@@ -202,7 +208,7 @@ img {
 												<s:else>
 													<tfoot>
 														<tr>
-															<th colspan="7">
+															<th colspan="5">
 																<div style="float: left;">
 																	<a href="javascript:firstPage()">首页</a>
 																	<a href="javascript:prevPage()">上一页</a>&nbsp;

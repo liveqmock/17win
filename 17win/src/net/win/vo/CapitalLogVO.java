@@ -24,6 +24,9 @@ public class CapitalLogVO extends BaseVO {
 	//
 
 	private Double value;
+	
+	private Double remainValue;
+	
 	// 查询
 	private Date startDate;
 	private Date endDate;
@@ -103,6 +106,14 @@ public class CapitalLogVO extends BaseVO {
 
 	public void setValue(Double value) {
 		this.value = value;
+	}
+
+	public Double getRemainValue() {
+		return remainValue;
+	}
+
+	public void setRemainValue(Double remainValue) {
+		this.remainValue = remainValue;
 	}
 
 }

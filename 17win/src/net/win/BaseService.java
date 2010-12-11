@@ -293,6 +293,7 @@ public class BaseService {
 		CapitalLogEntity capitalLogEntity = new CapitalLogEntity();
 		capitalLogEntity.setType("1");
 		capitalLogEntity.setValue(value);
+		capitalLogEntity.setRemainValue(userEntity.getMoney());
 		capitalLogEntity.setDesc(desc);
 		capitalLogEntity.setUser(userEntity);
 		capitalLogEntity.setLogTime(new Date());
@@ -305,6 +306,8 @@ public class BaseService {
 		CapitalLogEntity capitalLogEntity = new CapitalLogEntity();
 		capitalLogEntity.setType("3");
 		capitalLogEntity.setValue(value);
+		capitalLogEntity.setRemainValue(userEntity.getConvertScore()
+				.doubleValue());
 		capitalLogEntity.setDesc(desc);
 		capitalLogEntity.setUser(userEntity);
 		capitalLogEntity.setLogTime(new Date());
@@ -317,6 +320,7 @@ public class BaseService {
 		CapitalLogEntity capitalLogEntity = new CapitalLogEntity();
 		capitalLogEntity.setType("2");
 		capitalLogEntity.setValue(value);
+		capitalLogEntity.setRemainValue(userEntity.getReleaseDot());
 		capitalLogEntity.setDesc(desc);
 		capitalLogEntity.setUser(userEntity);
 		capitalLogEntity.setLogTime(new Date());

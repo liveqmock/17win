@@ -3,6 +3,16 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML>
 	<HEAD>
+		<%
+			//让浏览器不缓存jsp页面 
+			response.setHeader("Pragma", "No-cache");// http1.0 
+			response.setHeader("Cache-Control", "no-store,no-cache"); //http1.1 
+			response.setHeader("Expires", "0");
+			response.setDateHeader("Expires", 0);// 这个是针对代理的？但我设置后还是没达到效果。不解！！
+		%>
+		<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+		<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+		<META HTTP-EQUIV="Expires" CONTENT="0">
 		<s:include value="../common/header.jsp"></s:include>
 		<LINK href="css/style.css" type="text/css" rel="stylesheet">
 		<LINK href="css/index.css" type="text/css" rel="stylesheet">
@@ -94,7 +104,7 @@ img {
 												<table style="background: white;" cellpadding="1px"
 													width="99%" cellspacing="1px">
 													<tr style="background: #EDF6FF;">
-														<td colspan="2" >
+														<td colspan="2">
 															<s:if test="#session.userLogin.vipEnable">
 																<img
 																	src="images/vip/<s:property value="@net.win.utils.StrategyUtils@getVipImg(#session.userLogin.vipType,#session.userLogin.vipEnable)" />" />
@@ -113,8 +123,11 @@ img {
 														</td>
 														<td>
 															<input style="width: 80px" id="monthCount" name="monthC">
-															月/<s:property value="#request.vipPrice"/>元(
-															<font color="red">注意:输入12个月为年付，打<s:property value="#request.vipYearRebate"/>折</font>)
+															月/
+															<s:property value="#request.vipPrice" />
+															元(
+															<font color="red">注意:输入12个月为年付，打<s:property
+																	value="#request.vipYearRebate" />折</font>)
 														</td>
 													</tr>
 													<tr style="background: #EDF6FF;">
@@ -288,7 +301,8 @@ img {
 																接任务获得的发布点
 															</td>
 															<td id="chat_0" class="self">
-																任务总发布点×<s:property value="#request.receieveTaskDotRate"/>
+																任务总发布点×
+																<s:property value="#request.receieveTaskDotRate" />
 																<br>
 																<font color="red">(一心以上用户)</font>
 															</td>

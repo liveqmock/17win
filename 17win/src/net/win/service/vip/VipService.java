@@ -153,6 +153,7 @@ public class VipService extends BaseService {
 			vipBidUserEntity.setEndDate(calendar.getTime());
 		}
 		userEntity.setMoney(ArithUtils.sub(userEntity.getMoney(), money));
+		logMoneyCapital(userDAO, 0-money, "续费"+monthCount+"个月的VIP", userEntity);
 		updateUserLoginInfo(userEntity);
 		getLoginUser().setVipEndDate(vipBidUserEntity.getEndDate());
 		getLoginUser().setVipGrowValue(vipBidUserEntity.getGrowValue());

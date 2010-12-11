@@ -56,6 +56,7 @@ public final class ScoreStrategy {
 		CapitalLogEntity capitalLogEntity = new CapitalLogEntity();
 		capitalLogEntity.setType("3");
 		capitalLogEntity.setValue(value);
+		capitalLogEntity.setRemainValue(userEntity.getConvertScore().doubleValue());
 		capitalLogEntity.setDesc(desc);
 		capitalLogEntity.setUser(userEntity);
 		capitalLogEntity.setLogTime(new Date());

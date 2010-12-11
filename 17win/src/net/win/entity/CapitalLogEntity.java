@@ -32,7 +32,10 @@ public class CapitalLogEntity extends BaseEntity {
 	// 金额 或则发布点的值
 	@Column(name = "Value_", nullable = false)
 	private Double value;
-
+	
+	// 剩余资产
+	@Column(name = "Remain_Value_", nullable = false)
+	private Double remainValue;
 	// 描述
 	@Column(name = "Desc_", length = 200, nullable = false)
 	private String desc;
@@ -75,6 +78,14 @@ public class CapitalLogEntity extends BaseEntity {
 
 	public void setValue(Double value) {
 		this.value = value;
+	}
+
+	public Double getRemainValue() {
+		return remainValue;
+	}
+
+	public void setRemainValue(Double remainValue) {
+		this.remainValue = remainValue;
 	}
 
 }
