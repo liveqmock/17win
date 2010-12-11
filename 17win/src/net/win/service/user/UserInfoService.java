@@ -507,7 +507,7 @@ public class UserInfoService extends BaseService {
 			} else {
 				putAlertMsg("您的钱不够支付购买双钻卡!");
 				return JUMP;
-			}  
+			}
 		} else if ("4".equals(flag)) {
 			// 购买一钻卡
 			Double money = Constant.getZuanshiPrice();
@@ -728,6 +728,19 @@ public class UserInfoService extends BaseService {
 		UserEntity userEntity = userDAO.get(userLoginInfo.getId());
 		userVO.setUserEntity(userEntity);
 		return "initUpdateInfo";
+	}
+
+	/**
+	 * 刷新用户信息
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String refreshUser(UserVO userVO) throws Exception {
+		UserLoginInfo userLoginInfo = getLoginUser();
+		UserEntity userEntity = userDAO.get(userLoginInfo.getId());
+		updateUserLoginInfo(userEntity);
+		return "refreshUser";
 	}
 
 	/**

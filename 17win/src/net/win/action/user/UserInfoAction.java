@@ -38,8 +38,8 @@ import org.springframework.stereotype.Controller;
 		@Result(name = "insertSellerAndBuyer", type = "chain", location = "/userInfoManager/info!initSellerAndBuyer.php"),
 		@Result(name = "initFindPassword", location = "/system/initFindPassword.jsp"),
 		@Result(name = "updateFindPassword", location = "/system/initFindPassword.jsp"),
-		@Result(name = "updateExchange", location = "/user/exchange.jsp")
-
+		@Result(name = "updateExchange", location = "/user/exchange.jsp"),
+		@Result(name = "refreshUser", location = "/user/index.jsp")
 })
 @Namespace("/userInfoManager")
 public class UserInfoAction extends BaseAction {
@@ -148,7 +148,7 @@ public class UserInfoAction extends BaseAction {
 	 * @throws Exception
 	 */
 	public String buyDot() throws Exception {
-		return  userInfoService.updateBuyDot(userVO);
+		return userInfoService.updateBuyDot(userVO);
 	}
 
 	/**
@@ -258,6 +258,16 @@ public class UserInfoAction extends BaseAction {
 	 */
 	public String init() throws Exception {
 		return userInfoService.initUserInfo(userVO);
+	}
+
+	/**
+	 * 刷新用户信息
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String refreshUser() throws Exception {
+		return userInfoService.refreshUser(userVO);
 	}
 
 	public void setUserVO(UserVO userVO) {

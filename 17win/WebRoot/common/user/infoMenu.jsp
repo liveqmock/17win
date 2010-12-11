@@ -78,6 +78,11 @@
 										</tr>
 										<tr>
 											<td nowrap="nowrap">
+												<a href="userInfoManager/info!refreshUser.php">点击此处刷新用户信息</a>
+											</td>
+										</tr>
+										<tr>
+											<td nowrap="nowrap">
 												<a href="userInfoManager/info!init.php">点击此处进入个人中心</a>
 											</td>
 										</tr>

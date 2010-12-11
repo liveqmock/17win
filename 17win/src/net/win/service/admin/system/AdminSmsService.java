@@ -20,7 +20,7 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Service;
 
 @SuppressWarnings( { "unchecked" })
-@Service("smsService")
+@Service("adminSmsService")
 public class AdminSmsService extends BaseService {
 	@Resource
 	private SmsDAO smsDAO;

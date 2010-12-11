@@ -3,6 +3,7 @@ package net.win.action.admin.system;
 import javax.annotation.Resource;
 
 import net.win.BaseAction;
+import net.win.service.admin.system.AdminSmsService;
 import net.win.service.sms.SmsService;
 import net.win.vo.SmsVO;
 
@@ -18,7 +19,7 @@ import org.springframework.stereotype.Controller;
 @Controller
 @Scope("prototype")
 @ParentPackage("17win-default")
-@Namespace("/smsManager")
+@Namespace("/adminSmsManager")
 @Results( { @Result(name = "initSendSms", location = "/sms/sms.jsp"),
 		@Result(name = "insertSms", location = "/sms/sms.jsp"),
 		@Result(name = "input", location = "/sms/sms.jsp"),
@@ -30,7 +31,7 @@ import org.springframework.stereotype.Controller;
 })
 public class AdminSmsAction extends BaseAction {
 	@Resource
-	private SmsService smsService;
+	private AdminSmsService adminSmsService;
 
 	private SmsVO smsVO = new SmsVO();
 
@@ -42,20 +43,10 @@ public class AdminSmsAction extends BaseAction {
 		this.smsVO = smsVO;
 	}
 
-	@Action("/sms")
+	@Action("/adminSms")
 	public String execute() throws Exception {
 		// TODO Auto-generated method stub
 		return INPUT;
-	}
-
-	/**
-	 * 初始化
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	public String initSendSms() throws Exception {
-		return smsService.initSendSms(smsVO);
 	}
 
 	/**
@@ -65,56 +56,7 @@ public class AdminSmsAction extends BaseAction {
 	 * @throws Exception
 	 */
 	public String addSms() throws Exception {
-		return smsService.insertSms(smsVO);
+		return adminSmsService.insertSms(smsVO);
 	}
 
-	/**
-	 * 
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	public String initSendTelphone() throws Exception {
-		return smsService.initSendTelphone();
-	}
-
-	/**
-	 * 
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	public String sendTelphone() throws Exception {
-		return smsService.updateSendTelphone();
-	}
-
-	/**
-	 * 查询
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	public String querySms() throws Exception {
-		return smsService.querySms(smsVO);
-	}
-
-	/**
-	 * 删除
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	public String deleteSms() throws Exception {
-		return smsService.deleteSms(smsVO);
-	}
-
-	/**
-	 * 修改已读标记
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	public String updateSms() throws Exception {
-		return smsService.updateSms(smsVO);
-	}
 }
