@@ -138,7 +138,7 @@ img {
 															购买数量：
 															<s:textfield name="userVO.releaseDot" id="releaseDot"
 																value="10" cssStyle="width:40px"></s:textfield>
-															个/每个0.5元
+															个/每个<s:property value="#request.fabudianPrice"/>元
 															<br>
 															操作密码：
 															<s:password name="userVO.operationCode"
@@ -160,11 +160,11 @@ img {
 														theme="simple">
 														<div
 															style="float: left; width: 200px; line-height: 150%; padding-top: 20px;">
-															<span style="color: red;">刷出皇冠，10001个发布点
+															<span style="color: red;">刷出皇冠，<s:property value="#request.huangguanCount"/>个发布点
 																至高荣誉，皇冠在手。</span>
 															<br>
 															<br>
-															皇冠卡：5000元
+															皇冠卡：<s:property value="#request.huangguanPrice"/>元
 															<br>
 															操作密码：
 															<s:password name="userVO.operationCode"
@@ -186,11 +186,11 @@ img {
 														theme="simple">
 														<div
 															style="float: left; width: 200px; line-height: 150%; padding-top: 20px;">
-															<span style="color: red;">刷出二钻，550个发布点，可获得550个好评
+															<span style="color: red;">刷出二钻，<s:property value="#request.shuangzuanCount"/>个发布点，
 																一次投入立即进入双钻卖家的行列！</span>
 															<br>
 															<br>
-															二钻卡：275元
+															二钻卡：<s:property value="#request.shuangzuanPrice"/>元
 															<br>
 															操作密码：
 															<s:password name="userVO.operationCode"
@@ -212,11 +212,11 @@ img {
 														theme="simple">
 														<div
 															style="float: left; width: 200px; line-height: 150%; padding-top: 20px;">
-															<span style="color: red;">刷出一钻，270个发布点，可获得270个好评
+															<span style="color: red;">刷出一钻，<s:property value="#request.zuanshiCount"/>个发布点，
 																一次投入立即进入钻石卖家的行列！</span>
 															<br>
 															<br>
-															一钻卡：135元
+															一钻卡：<s:property value="#request.zuanshikaPrice"/>元
 															<br>
 															操作密码：
 															<s:password name="userVO.operationCode"

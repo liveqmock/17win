@@ -92,6 +92,7 @@ public class AdminPropertyService extends BaseService {
 	public String refreshConstant(PropertyVO propertyVO) throws Exception {
 		Constant.initMetatData();
 		putAlertMsg("更新成功！");
-		return "refreshConstant";
+		putJumpPage("adminPropertyManager/adminProperty!queryProperty.php");
+		return JUMP;
 	}
 }

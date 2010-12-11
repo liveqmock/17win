@@ -398,7 +398,30 @@ public class UserInfoService extends BaseService {
 		}
 		return "initActiave";
 	}
-
+	
+	
+	/**
+	 * 初始化买发布点
+	 * @param userVO
+	 * @return
+	 * @throws Exception
+	 */
+	public String initBuyDot() throws Exception {
+		//皇冠
+		putByRequest("huangguanCount",Constant.getHuangguanNumber());
+		putByRequest("huangguanPrice",Constant.getHuangguanPrice());
+		//一个发布点
+		putByRequest("fabudianPrice",Constant.getFabudianPrice());
+		//双钻
+		putByRequest("shuangzuanPrice",Constant.getShuangzuanPrice());
+		putByRequest("shuangzuanCount",Constant.getShuangzuanNumber());
+		
+		//一钻
+		putByRequest("zuanshikaPrice",Constant.getZuanshiPrice());
+		putByRequest("zuanshiCount",Constant.getZuanshiNumber());
+		return "initBuyDot";
+	}
+	
 	/**
 	 * 购买发布点
 	 * 

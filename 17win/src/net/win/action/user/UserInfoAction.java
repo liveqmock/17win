@@ -158,7 +158,7 @@ public class UserInfoAction extends BaseAction {
 	 * @throws Exception
 	 */
 	public String initBuyDot() throws Exception {
-		return "initBuyDot";
+		return userInfoService.initBuyDot(); 
 	}
 
 	/**

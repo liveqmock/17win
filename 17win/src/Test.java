@@ -8,6 +8,8 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.win.utils.StringUtils;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -71,8 +73,7 @@ public class Test {
 	}
 
 	public static void main(String[] argv) throws Exception {
-     String x="<a href='http:[/\\\\]{2}shop\\d+\\.paipai\\.com[/\\\\]cgi\\-bin[/\\\\]credit_info\\?uin=\\d+' target='_blank'>(\\d+)</a>";
-     System.out.println("<a href='http://shop1.paipai.com/cgi-bin/credit_info?uin=380712448' target='_blank'>17</a>".matches(x));
+			System.out.println(StringUtils.processPwd("123456"));
 
 	}
 
