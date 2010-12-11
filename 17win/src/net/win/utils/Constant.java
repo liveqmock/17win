@@ -28,6 +28,8 @@ public final class Constant {
 
 	// 登陆用户的信息
 	public static final String USER_LOGIN_INFO = "userLogin";
+	
+	public static final String WIN17_TOKEN = "win17_token";
 
 	// 登陆用户的信息
 	public static final String USER_ACTIVE_CODE_INFO = "userActiveCode";

@@ -6,8 +6,11 @@ import java.security.NoSuchAlgorithmException;
 import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.hibernate.id.GUIDGenerator;
 
 import sun.misc.BASE64Encoder;
 
@@ -157,7 +160,14 @@ public final class StringUtils {
 			return false;
 		}
 	}
-
+	/**
+	 * 生成GUID
+	 * @param str
+	 * @return
+	 */
+	public static String createGUID() {
+		return UUID.randomUUID().toString();
+	}
 	/**
 	 * 计算千分比
 	 */

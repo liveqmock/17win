@@ -314,6 +314,28 @@ public class BaseService {
 		baseDAO.save(capitalLogEntity);
 	}
 
+	/**
+	 * 存放UUID
+	 * 
+	 * @param base
+	 * @return
+	 */
+	protected void putUUIDBySession() {
+		putBySession(Constant.WIN17_TOKEN, StringUtils.createGUID());
+	}
+	/**
+	 * 存放UUID
+	 * 
+	 * @param base
+	 * @return
+	 */
+	protected Boolean isTokenPass() {
+		if( getByParam(Constant.WIN17_TOKEN)==null){
+			return false;
+		}
+		return getByParam(Constant.WIN17_TOKEN).equals(getBySession(Constant.WIN17_TOKEN));
+	}
+
 	// 保存发布点记录
 	protected void logDotCapital(BaseDAO baseDAO, Double value, String desc,
 			UserEntity userEntity) throws Exception {
