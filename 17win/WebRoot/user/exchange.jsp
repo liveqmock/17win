@@ -153,7 +153,9 @@ img {
 														</td>
 														<td width="505">
 															<s:textfield name="userVO.releaseDot" id="releaseDot_1"></s:textfield>
-															个发布点来兑换金钱(每1个发布点可以兑换 0.4元,10个发布点起兑换)
+															个发布点来兑换金钱(每1个发布点可以兑换
+															<s:property value="#request.releaseDotChangeMoney" />
+															元,10个发布点起兑换)
 														</td>
 													</tr>
 													<tr>

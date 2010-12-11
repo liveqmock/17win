@@ -22,6 +22,8 @@
 					<td nowrap="nowrap">
 						<input type="submit" value="查&nbsp;&nbsp;询"
 							style="cursor: pointer;">
+						<input type="button"  onclick="javascript:window.location.href='adminPropertyManager/adminProperty!refreshConstant.php'" value="刷新Constant"
+							style="cursor: pointer;">
 					</td>
 				</tr>
 			</table>

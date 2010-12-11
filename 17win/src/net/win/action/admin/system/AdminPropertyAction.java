@@ -22,8 +22,11 @@ import org.springframework.stereotype.Controller;
 @Results( {
 		@Result(name = "input", location = "/admin/property/property.jsp"),
 		@Result(name = "queryProperty", location = "/admin/property/property.jsp"),
+		@Result(name = "refreshConstant", location = "/admin/property/property.jsp"),
 		@Result(name = "updateProperty", location = "/admin/property/updateProperty.jsp"),
-		@Result(name = "initUpdateProperty", location = "/admin/property/updateProperty.jsp") })
+		@Result(name = "initUpdateProperty", location = "/admin/property/updateProperty.jsp")
+
+})
 public class AdminPropertyAction extends BaseAction {
 	@Resource
 	private AdminPropertyService adminPropertyService;
@@ -75,4 +78,13 @@ public class AdminPropertyAction extends BaseAction {
 		return adminPropertyService.initUpdateProperty(propertyVO);
 	}
 
+	/**
+	 * 刷新Constant
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String refreshConstant() throws Exception {
+		return adminPropertyService.refreshConstant(propertyVO);
+	}
 }

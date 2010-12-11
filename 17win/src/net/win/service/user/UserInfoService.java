@@ -157,6 +157,7 @@ public class UserInfoService extends BaseService {
 
 	public String initExchange(UserVO userVO) throws Exception {
 		putIndexShowType("7");
+		putByRequest("releaseDotChangeMoney", Constant.getReleaseDotChangeMoney());
 		return "initExchange";
 	}
 

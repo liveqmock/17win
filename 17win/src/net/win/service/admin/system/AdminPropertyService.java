@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import net.win.BaseService;
 import net.win.dao.PropertyDAO;
 import net.win.entity.PropertyEntity;
+import net.win.utils.Constant;
 import net.win.utils.StringUtils;
 import net.win.vo.PropertyVO;
 
@@ -79,5 +80,18 @@ public class AdminPropertyService extends BaseService {
 		PropertyEntity propertyEntity = propertyDAO.get(propertyVO.getId());
 		BeanUtils.copyProperties(propertyVO, propertyEntity);
 		return "initUpdateProperty";
+	}
+
+	/**
+	 * 刷新constant
+	 * 
+	 * @param smsVO
+	 * @return
+	 * @throws Exception
+	 */
+	public String refreshConstant(PropertyVO propertyVO) throws Exception {
+		Constant.initMetatData();
+		putAlertMsg("更新成功！");
+		return "refreshConstant";
 	}
 }
