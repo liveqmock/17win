@@ -181,12 +181,12 @@ public class UserEntity extends BaseEntity {
 
 	// // 我接受的物流信息
 	@ManyToMany(mappedBy = "receieveUsers")
+	@Cascade(CascadeType.ALL)
 	private List<LogisticsEntity> receieveLogistics;
 
 	// VIP
 	@ManyToOne(targetEntity = VipEntity.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "VIP_ID_")
-	@Cascade(CascadeType.ALL)
 	private VipEntity vip;
 
 	// VIP信息

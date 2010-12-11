@@ -18,6 +18,10 @@ public class NewsEntity extends BaseEntity {
 	// 内容
 	@Column(name = "Content_", columnDefinition = "text", nullable = false)
 	private String content;
+
+	// 是否置顶
+	@Column(name = "TOP_")
+	private Boolean top;
 	// URL
 	@Column(name = "Url_", unique = true)
 	private String url;
@@ -81,6 +85,14 @@ public class NewsEntity extends BaseEntity {
 
 	public void setPageDate(Date pageDate) {
 		this.pageDate = pageDate;
+	}
+
+	public Boolean getTop() {
+		return top;
+	}
+
+	public void setTop(Boolean top) {
+		this.top = top;
 	}
 
 }

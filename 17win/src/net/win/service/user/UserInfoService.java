@@ -377,7 +377,7 @@ public class UserInfoService extends BaseService {
 	 */
 	public String sendActiave(UserVO userVO) throws Exception {
 		putBySession(Constant.USER_ACTIVE_CODE_INFO, "123456");
-		putAlertMsg("激活码已成功的发送到您手机上，请核对后天输入！");
+		putAlertMsg("激活码已成功的发送到您手机上，请查看后输入！");
 		putByRequest("activeCode", "3");
 		return "sendActiave";
 	}

@@ -5,7 +5,7 @@
 	<head>
 		<s:include value="/admin/common/header.jsp"></s:include>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<SCRIPT type="text/javascript" src="news/addNews.js"></SCRIPT>
+		<SCRIPT type="text/javascript" src="sms/addSms.js"></SCRIPT>
 	</head>
 
 	<body>
@@ -14,12 +14,12 @@
 			<table cellpadding="1" cellspacing="1" border="0px">
 				<tr>
 					<td nowrap="nowrap">
-						类型：
+						对方ID：
 					</td>
 					<td>
-						<s:select name="newsVO.typeId" list="#request.newsTpyes"
-							listKey="id" listValue="name">
-						</s:select>
+						<s:textfield maxlength="12" name="smsVO.toUserName"
+							id="toUsername">
+						</s:textfield>
 					</td>
 				</tr>
 				<tr>
@@ -27,17 +27,8 @@
 						标题
 					</td>
 					<td>
-						<s:textfield name="newsVO.title"></s:textfield>
-					</td>
-				</tr>
-				<tr>
-					<td nowrap="nowrap">
-						置顶
-					</td>
-					<td>
-						<s:select listKey="key" listValue="value" name="newsVO.top"
-							list="#{'true':'是','false':'否'}">
-						</s:select>
+						<s:textfield maxlength="50" name="smsVO.title" id="title">
+						</s:textfield>
 					</td>
 				</tr>
 				<tr>
@@ -45,16 +36,16 @@
 						内容：
 					</td>
 					<td>
-						<s:textarea name="newsVO.content"></s:textarea>
+						<s:textarea name="smsVO.content" id="content" cols="50" rows="8">
+						</s:textarea>
+						<br>
+						<font id="showTip" color="red">0/200</font>
+						暂时不要的功能
 					</td>
 				</tr>
 				<tr>
 					<td nowrap="nowrap" colspan="2" align="center">
 						<input type="submit" value="提交">
-						<input type="reset" value="重置">
-						<input type="button"
-							onclick="javascript:window.location.href ='adminNewsManager/adminNews!queryNews.php'"
-							value="返回">
 					</td>
 				</tr>
 			</table>

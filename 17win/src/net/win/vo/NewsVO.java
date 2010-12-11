@@ -13,6 +13,8 @@ public class NewsVO extends BaseVO {
 	private String content;
 	// URL
 	private String url;
+	//置顶
+	private Boolean top;
 	// 发布时间
 	private Date date;
 	
@@ -21,7 +23,7 @@ public class NewsVO extends BaseVO {
 	
 	// 查询
 
-	
+	private String topFlag;
 	private Date startDate;
 	private Date endDate;
 	private Long typeId;
@@ -104,5 +106,21 @@ public class NewsVO extends BaseVO {
 
 	public void setTypeName(String typeName) {
 		this.typeName = typeName;
+	}
+
+	public Boolean getTop() {
+		return top;
+	}
+
+	public void setTop(Boolean top) {
+		this.top = top;
+	}
+
+	public String getTopFlag() {
+		return topFlag;
+	}
+
+	public void setTopFlag(String topFlag) {
+		this.topFlag = topFlag;
 	}
 }

@@ -26,6 +26,13 @@
 						</s:select>
 					</td>
 					<td nowrap="nowrap">
+						置顶：
+						<s:select listKey="key" listValue="value" name="newsVO.topFlag"
+							headerKey="" headerValue="--请选择--"
+							list="#{'true':'是','false':'否'}">
+						</s:select>
+					</td>
+					<td nowrap="nowrap">
 						添加日期：
 						<s:textfield name="newsVO.startDate"
 							onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})"
@@ -61,6 +68,9 @@
 							URL
 						</th>
 						<th nowrap="nowrap" style="font-size: 12px;">
+							置顶
+						</th>
+						<th nowrap="nowrap" style="font-size: 12px;">
 							时间
 						</th>
 						<th nowrap="nowrap" style="font-size: 12px;">
@@ -81,6 +91,14 @@
 								<s:property value="#newsVO.url" />
 							</td>
 							<td>
+								<s:if test="#newsVO.top">
+									是
+								</s:if>
+								<s:else>
+									否
+								</s:else>
+							</td>
+							<td>
 								<s:date name="#newsVO.date" format="yyyy-MM-dd HH:mm:ss" />
 							</td>
 							<td>
@@ -96,7 +114,7 @@
 				</tbody>
 				<s:if test="#request.result.size()==0">
 					<tr>
-						<th colspan="5" align="center">
+						<th colspan="6" align="center">
 							没有记录！
 						</th>
 					</tr>
@@ -104,7 +122,7 @@
 				<s:else>
 					<tfoot>
 						<tr>
-							<th colspan="5" style="font-size: 12px;">
+							<th colspan="6" style="font-size: 12px;">
 								<div style="float: left;">
 									<a href="javascript:firstPage()">首页</a>
 									<a href="javascript:prevPage()">上一页</a>&nbsp;

@@ -185,7 +185,7 @@
 										<tr>
 
 											<td height=20>
-												<a href="logisticsManager/logistics!initLogistics.php">发送物流</a>
+												<a href="logisticsManager/logistics!initLogistics.php">添加物流信息</a>
 											</td>
 										</tr>
 										<tr>

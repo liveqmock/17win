@@ -31,12 +31,22 @@
 					</td>
 				</tr>
 				<tr>
+					<td nowrap="nowrap">
+						置顶
+					</td>
+					<td>
+						<s:select listKey="key" listValue="value" name="newsVO.top"
+							list="#{'true':'是','false':'否'}">
+						</s:select>
+					</td>
+				</tr>
+				<tr>
 					<td nowrap="nowrap" valign="top">
 						内容：
 					</td>
 					<td>
 						<s:textarea name="newsVO.content"></s:textarea>
-						<s:hidden name="newsVO.id"/>
+						<s:hidden name="newsVO.id" />
 					</td>
 				</tr>
 				<tr>

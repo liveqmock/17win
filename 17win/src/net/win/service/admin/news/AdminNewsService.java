@@ -38,11 +38,11 @@ public class AdminNewsService extends BaseService {
 	public String detailNews(NewsVO newsVO) throws Exception {
 		List<NewsEntity> newses1 = newsDAO
 				.pageQuery(
-						"from NewsEntity as _news where _news.type.name='网站公告'  order by _news.date desc",
+						"from NewsEntity as _news where _news.type.name='网站公告'  order by _news.top desc,_news.date desc",
 						0, 5);
 		List<NewsEntity> newses2 = newsDAO
 				.pageQuery(
-						"from NewsEntity as _news where _news.type.name='推荐文章'  order by _news.date desc",
+						"from NewsEntity as _news where _news.type.name='推荐文章'  order by _news.top desc,_news.date desc",
 						0, 10);
 		List<NewsVO> wzResult = new ArrayList<NewsVO>();
 		List<NewsVO> tjResult = new ArrayList<NewsVO>();
@@ -102,11 +102,11 @@ public class AdminNewsService extends BaseService {
 	public String listNews(NewsVO newsVO) throws Exception {
 		List<NewsEntity> newses1 = newsDAO
 				.pageQuery(
-						"from NewsEntity as _news where _news.type.name='网站公告'  order by _news.date desc",
+						"from NewsEntity as _news where _news.type.name='网站公告'  order by _news.top desc,_news.date desc",
 						0, 5);
 		List<NewsEntity> newses2 = newsDAO
 				.pageQuery(
-						"from NewsEntity as _news where _news.type.name='推荐文章'  order by _news.date desc",
+						"from NewsEntity as _news where _news.type.name='推荐文章'  order by _news.top desc,_news.date desc",
 						0, 10);
 		List<NewsVO> wzResult = new ArrayList<NewsVO>();
 		List<NewsVO> tjResult = new ArrayList<NewsVO>();
@@ -126,7 +126,7 @@ public class AdminNewsService extends BaseService {
 
 		Long count = (Long) newsDAO
 				.uniqueResultObject(
-						"select count(*) from NewsEntity as _news where _news.type.name=:typeName  order by _news.date desc",
+						"select count(*) from NewsEntity as _news where _news.type.name=:typeName  order by _news.top desc,_news.date desc",
 						new String[] { "typeName" }, new String[] { newsVO
 								.getTypeName() });
 		List<NewsVO> result = new ArrayList<NewsVO>();
@@ -161,43 +161,43 @@ public class AdminNewsService extends BaseService {
 		putIndexShowType("10");
 		List<NewsEntity> newses1 = newsDAO
 				.pageQuery(
-						"from NewsEntity as _news where _news.type.name='网站公告'  order by _news.date desc",
+						"from NewsEntity as _news where _news.type.name='网站公告'  order by _news.top desc,_news.date desc",
 						0, 5);
 		List<NewsEntity> newses2 = newsDAO
 				.pageQuery(
-						"from NewsEntity as _news where _news.type.name='推荐文章'  order by _news.date desc",
+						"from NewsEntity as _news where _news.type.name='推荐文章'  order by _news.top desc,_news.date desc",
 						0, 10);
 		List<NewsEntity> newses3 = newsDAO
 				.pageQuery(
-						"from NewsEntity as _news where _news.type.name='新手入门'  order by _news.date desc",
+						"from NewsEntity as _news where _news.type.name='新手入门'  order by _news.top desc,_news.date desc",
 						0, 5);
 		List<NewsEntity> newses4 = newsDAO
 				.pageQuery(
-						"from NewsEntity as _news where _news.type.name='卖家必读'  order by _news.date desc",
+						"from NewsEntity as _news where _news.type.name='卖家必读'  order by _news.top desc,_news.date desc",
 						0, 5);
 		List<NewsEntity> newses5 = newsDAO
 				.pageQuery(
-						"from NewsEntity as _news where _news.type.name='店铺推广'  order by _news.date desc",
+						"from NewsEntity as _news where _news.type.name='店铺推广'  order by _news.top desc,_news.date desc",
 						0, 5);
 		List<NewsEntity> newses6 = newsDAO
 				.pageQuery(
-						"from NewsEntity as _news where _news.type.name='网络营销'  order by _news.date desc",
+						"from NewsEntity as _news where _news.type.name='网络营销'  order by _news.top desc,_news.date desc",
 						0, 5);
 		List<NewsEntity> newses7 = newsDAO
 				.pageQuery(
-						"from NewsEntity as _news where _news.type.name='刷客必读'  order by _news.date desc",
+						"from NewsEntity as _news where _news.type.name='刷客必读'  order by _news.top desc,_news.date desc",
 						0, 5);
 		List<NewsEntity> newses8 = newsDAO
 				.pageQuery(
-						"from NewsEntity as _news where _news.type.name='买家必读'  order by _news.date desc",
+						"from NewsEntity as _news where _news.type.name='买家必读'  order by _news.top desc,_news.date desc",
 						0, 5);
 		List<NewsEntity> newses9 = newsDAO
 				.pageQuery(
-						"from NewsEntity as _news where _news.type.name='赚钱窍门'  order by _news.date desc",
+						"from NewsEntity as _news where _news.type.name='赚钱窍门'  order by _news.top desc,_news.date desc",
 						0, 5);
 		List<NewsEntity> newses10 = newsDAO
 				.pageQuery(
-						"from NewsEntity as _news where _news.type.name='服务项目'  order by _news.date desc",
+						"from NewsEntity as _news where _news.type.name='服务项目'  order by _news.top desc,_news.date desc",
 						0, 5);
 		List<NewsVO> wzResult = new ArrayList<NewsVO>();
 		List<NewsVO> tjResult = new ArrayList<NewsVO>();
@@ -287,12 +287,12 @@ public class AdminNewsService extends BaseService {
 				"select  count(*)   from NewsEntity as _news  inner join _news.type as _type where 1=1");
 		List<String> paramNames = new ArrayList<String>();
 		List<Object> paramValues = new ArrayList<Object>();
-		// 用户名
-		if (!StringUtils.isBlank(newsVO.getTitle())) {
-			resultHQL.append(" and _news.title like :title ");
-			countHQL.append(" and _news.title like :title ");
-			paramNames.add("title");
-			paramValues.add("%" + newsVO.getTitle() + "%");
+		// 是否置顶
+		if (!StringUtils.isBlank(newsVO.getTopFlag())) {
+			resultHQL.append(" and _news.top =:top ");
+			countHQL.append(" and _news.top=:top ");
+			paramNames.add("top");
+			paramValues.add(new Boolean(newsVO.getTopFlag()));
 		}
 		// 类型
 		if (newsVO.getTypeId() != null) {
@@ -301,6 +301,7 @@ public class AdminNewsService extends BaseService {
 			paramNames.add("typeId");
 			paramValues.add(newsVO.getTypeId());
 		}
+
 		// 时间
 		if (newsVO.getStartDate() != null && newsVO.getEndDate() != null) {
 
@@ -325,8 +326,15 @@ public class AdminNewsService extends BaseService {
 			paramNames.add("endDate");
 			paramValues.add(newsVO.getEndDate());
 		}
+		// 用户名
+		if (!StringUtils.isBlank(newsVO.getTitle())) {
+			resultHQL.append(" and _news.title like :title ");
+			countHQL.append(" and _news.title like :title ");
+			paramNames.add("title");
+			paramValues.add("%" + newsVO.getTitle() + "%");
+		}
 
-		resultHQL.append("order by _news.date desc");
+		resultHQL.append("order by  _news.top desc,  _news.date desc");
 		Long count = (Long) newsDAO.uniqueResultObject(countHQL.toString(),
 				paramNames.toArray(paramNames.toArray(new String[paramNames
 						.size()])), paramValues.toArray(new Object[paramValues
