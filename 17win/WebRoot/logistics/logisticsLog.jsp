@@ -231,7 +231,7 @@ img {
 												<s:if test="#request.result.size()==0">
 													<tr>
 														<th colspan="10" align="center">
-															您目前还没有提交任何物流信息！
+															没有记录！
 														</th>
 													</tr>
 												</s:if>

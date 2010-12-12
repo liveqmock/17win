@@ -213,7 +213,15 @@ img {
 																<tr>
 																	<s:iterator value="selltask" id="task" status="indexJ">
 																		<td align="center" />
+																			<s:if test="#indexI.index<3 && #indexJ.index>0">
+																				<a href="#" buyer='buyer' target="_blank"
+																					row='<s:property value="#indexI.index"/>'
+																					col='<s:property value="#indexJ.index"/>'><s:property
+																						value="task" /> </a>
+																			</s:if>
+																			<s:else>
 																				<s:property value="task" />
+																			</s:else>
 																		</td>
 																	</s:iterator>
 																</tr>
@@ -240,7 +248,7 @@ img {
 																	等待审核
 																</th>
 																<th style="background: #D1ECF9">
-																	等待卖家付款
+																	等待买家付款
 																</th>
 																<th style="background: #D1ECF9">
 																	等待我发货
@@ -263,7 +271,15 @@ img {
 																<tr>
 																	<s:iterator value="buyTask" id="task" status="indexJ">
 																		<td align="center"">
+																			<s:if test="#indexI.index<3 && #indexJ.index>0">
+																				<a href="#" seller='seller' target="_blank"
+																					row='<s:property value="#indexI.index"/>'
+																					col='<s:property value="#indexJ.index"/>'><s:property
+																						value="task" /> </a>
+																			</s:if>
+																			<s:else>
 																				<s:property value="task" />
+																			</s:else>
 																		</td>
 																	</s:iterator>
 																</tr>

@@ -201,7 +201,7 @@ img {
 												<s:if test="#request.result.size()==0">
 													<tr>
 														<th colspan="5" align="center">
-															没有数据！
+															没有记录！
 														</th>
 													</tr>
 												</s:if>
