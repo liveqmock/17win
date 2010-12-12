@@ -17,7 +17,9 @@
 			<!-- jdbc:jtds:sqlserver://localhost:1433/windb; -->
 		</property>
 		<property name="hibernate.connection.username">windb</property>
-		<property name="hibernate.connection.password">8868829xgj</property>
+		<property name="hibernate.connection.password">
+			8868829xgj
+		</property>
 		<!-- 方言  	-->
 		<property name="hibernate.dialect">
 			org.hibernate.dialect.MySQLDialect
@@ -105,5 +107,6 @@
 		<mapping class="net.win.entity.VipBidUserEntity" />
 		<mapping class="net.win.entity.CapitalLogEntity" />
 		<mapping class="net.win.entity.LogisticsEntity" />
+		<mapping class="net.win.entity.PropertyEntity" />
 	</session-factory>
 </hibernate-configuration>

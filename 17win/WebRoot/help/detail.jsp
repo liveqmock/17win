@@ -66,7 +66,7 @@ body {
 													</TR>
 
 													<TR>
-														<TD class="K_mtcontent"
+														<TD class="K_mtcontent" width="260"
 															style="PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 10px; PADDING-TOP: 10px"
 															colspan="99">
 															<TABLE class=LeftNews cellSpacing=0 cellPadding=0
@@ -120,7 +120,7 @@ body {
 														</TD>
 													</TR>
 													<TR>
-														<TD class="K_mtcontent"
+														<TD class="K_mtcontent" width="260"
 															style="PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 10px; PADDING-TOP: 10px"
 															colspan="99">
 															<TABLE class=LeftNews cellSpacing=0 cellPadding=0
