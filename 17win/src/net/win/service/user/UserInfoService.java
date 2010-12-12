@@ -125,19 +125,16 @@ public class UserInfoService extends BaseService {
 		putByRequest("userCount", userCount);
 		putByRequest("refereeMoney", refereeMoney);
 		putByRequest("vipCount", vipCount);
-		
-		//当购买发布点的时候，推广人所得金额为，他推荐人买的发布点的金额的0.1倍 
+
+		// 当购买发布点的时候，推广人所得金额为，他推荐人买的发布点的金额的0.1倍
 		putByRequest("buyReleaseDotRebateToRefree", Constant
 				.getBuyReleaseDotRebateToRefree());
 		// 通过你的宣传链接注册的会员购买VIP，获得5元
-		putByRequest("refreeByVipMoney", Constant
-				.getRefreeByVipMoney());
-		//积累接受100个任务 推广人获取10元钱 
-		putByRequest("task100RefreeMoney", Constant
-				.getTask100RefreeMoney());
-//		通过你的宣传链接注册的会员积分每上升1000 ，你的收益=100积分  
-		putByRequest("score1000Refree", Constant
-				.getScore1000Refree());
+		putByRequest("refreeByVipMoney", Constant.getRefreeByVipMoney());
+		// 积累接受100个任务 推广人获取10元钱
+		putByRequest("task100RefreeMoney", Constant.getTask100RefreeMoney());
+		// 通过你的宣传链接注册的会员积分每上升1000 ，你的收益=100积分
+		putByRequest("score1000Refree", Constant.getScore1000Refree());
 		return "referee";
 	}
 
@@ -171,7 +168,7 @@ public class UserInfoService extends BaseService {
 		putIndexShowType("7");
 		putByRequest("releaseDotChangeMoney", Constant
 				.getReleaseDotChangeMoney());
-		
+
 		putByRequest("scoreChangeReleaseDot", Constant
 				.getScoreChangeReleaseDot());
 		return "initExchange";
@@ -199,10 +196,11 @@ public class UserInfoService extends BaseService {
 			// 判断当前卖号是否被注册过
 			Boolean sellerExists = (0 == (Long) sellerDAO
 					.uniqueResultObject(
-							"select count(*) from  SellerEntity as _seller where _seller.name=:sellerName and _seller.type=:platformType",
-							new String[] { "sellerName", "platformType" },
-							new Object[] { sellerEntity.getName(),
-									platformTypeParam }));
+							"select count(*) from  SellerEntity as _seller where _seller.name=:sellerName and _seller.type=:platformType and _seller.user.id=:userID",
+							new String[] { "sellerName", "platformType",
+									"userID" }, new Object[] {
+									sellerEntity.getName(), platformTypeParam,
+									userEntity.getId() }));
 			if (!sellerExists) {
 				putAlertMsg(sellerEntity.getName() + "已被使用！");
 				putJumpPage("userInfoManager/info!initSellerAndBuyer.php");
@@ -211,10 +209,11 @@ public class UserInfoService extends BaseService {
 
 			Boolean buyerExists = (0 == (Long) buyerDAO
 					.uniqueResultObject(
-							"select count(*) from  BuyerEntity as _buyer where _buyer.name=:buyerName and _buyer.type=:platformType",
-							new String[] { "buyerName", "platformType" },
-							new Object[] { sellerEntity.getName(),
-									platformTypeParam }));
+							"select count(*) from  BuyerEntity as _buyer where _buyer.name=:buyerName and _buyer.type=:platformType and _buyer.user.id=:userID",
+							new String[] { "buyerName", "platformType",
+									"userID" }, new Object[] {
+									sellerEntity.getName(), platformTypeParam,
+									userEntity.getId() }));
 			if (!buyerExists) {
 				putAlertMsg("不能绑定和买号相同的卖号！");
 				putJumpPage("userInfoManager/info!initSellerAndBuyer.php");
@@ -224,7 +223,7 @@ public class UserInfoService extends BaseService {
 			Long count = (Long) sellerDAO
 					.uniqueResultObject(
 							"select count(*) from SellerEntity as _seller "
-									+ "where _seller.user.id=:userId and type=:platformType",
+									+ "where _seller.user.id=:userId and type=:platformType ",
 							new String[] { "userId", "platformType" },
 							new Object[] { getLoginUser().getId(),
 									platformTypeParam });
@@ -265,10 +264,11 @@ public class UserInfoService extends BaseService {
 			}
 			Boolean sellerExists = (0 == (Long) buyerDAO
 					.uniqueResultObject(
-							"select count(*) from  SellerEntity as _seller where _seller.name=:sellerName and _seller.type=:platformType",
-							new String[] { "sellerName", "platformType" },
-							new Object[] { buyerEntity.getName(),
-									platformTypeParam }));
+							"select count(*) from  SellerEntity as _seller where _seller.name=:sellerName and _seller.type=:platformType and _seller.user.id=:userID",
+							new String[] { "sellerName", "platformType",
+									"userID" }, new Object[] {
+									buyerEntity.getName(), platformTypeParam,
+									userEntity.getId() }));
 
 			if (!sellerExists) {
 				putAlertMsg("不能绑定和卖号相同的买号！");
@@ -276,10 +276,10 @@ public class UserInfoService extends BaseService {
 			}
 			Boolean buyerExists = (0 == (Long) buyerDAO
 					.uniqueResultObject(
-							"select count(*) from  BuyerEntity as _buyer where _buyer.name=:buyerName and _buyer.type=:platformType",
-							new String[] { "buyerName", "platformType" },
+							"select count(*) from  BuyerEntity as _buyer where _buyer.name=:buyerName and _buyer.type=:platformType and _buyer.user.id=:userID",
+							new String[] { "buyerName", "platformType","userID" },
 							new Object[] { buyerEntity.getName(),
-									platformTypeParam }));
+									platformTypeParam ,userEntity.getId()}));
 			if (!buyerExists) {
 				putAlertMsg(buyerEntity.getName() + "已被使用！");
 				return "insertSellerAndBuyer";
