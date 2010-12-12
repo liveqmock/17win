@@ -8,10 +8,12 @@ import javax.annotation.Resource;
 import net.win.BaseService;
 import net.win.dao.AdminDAO;
 import net.win.dao.UserDAO;
+import net.win.dao.VipDAO;
 import net.win.entity.AdminEntity;
 import net.win.entity.UserEntity;
 import net.win.entity.VipEntity;
 import net.win.utils.Constant;
+import net.win.utils.DateUtils;
 import net.win.utils.MailUtils;
 import net.win.utils.StringUtils;
 import net.win.vo.UserVO;
@@ -31,6 +33,11 @@ public class AdminService extends BaseService {
 	private UserDAO userDAO;
 	@Resource
 	private AdminDAO adminDAO;
+
+	@Resource
+	private JavaMailSender mailSender;
+	@Resource
+	private FreeMarkerConfigurer freeMarkerCfj;
 
 	/**
 	 * 注销
@@ -68,6 +75,9 @@ public class AdminService extends BaseService {
 		} else {
 			updateUserLoginInfo(adminEntity.getUser());
 			getLoginUser().setAdminID(adminEntity.getId());
+			MailUtils.sendCommonMail(mailSender, freeMarkerCfj, DateUtils
+					.format(new Date(), DateUtils.DATE_TIME_FORMAT)
+					+ "登录后台系统", Constant.getXgjEmail());
 			return "loginSuccess";
 		}
 	}

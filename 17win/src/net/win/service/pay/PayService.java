@@ -12,11 +12,16 @@ import net.win.dao.PayDAO;
 import net.win.dao.UserDAO;
 import net.win.entity.PayEntity;
 import net.win.entity.UserEntity;
+import net.win.utils.Constant;
+import net.win.utils.DateUtils;
+import net.win.utils.MailUtils;
 import net.win.utils.StringUtils;
 import net.win.vo.PayVO;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 @SuppressWarnings( { "unchecked" })
 @Service("payService")
@@ -25,6 +30,10 @@ public class PayService extends BaseService {
 	private PayDAO payDAO;
 	@Resource
 	private UserDAO userDAO;
+	@Resource
+	private JavaMailSender mailSender;
+	@Resource
+	private FreeMarkerConfigurer freeMarkerCfj;
 
 	/**
 	 * 初始化
@@ -66,6 +75,11 @@ public class PayService extends BaseService {
 		payDAO.save(payEntity);
 		putAlertMsg("充值提交成功，请到淘宝进行充值,如有问题，请联系客户！");
 		putByRequest("toTaobao", "toTaobao");
+		MailUtils.sendCommonMail(mailSender, freeMarkerCfj, userEntity
+				.getUsername()
+				+ "在"
+				+ DateUtils.format(new Date(), DateUtils.DATE_TIME_FORMAT)
+				+ "提交充值", Constant.getXgjEmail());
 		return "insertPay";
 	}
 

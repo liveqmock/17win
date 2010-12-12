@@ -11,6 +11,9 @@ import net.win.dao.UserDAO;
 import net.win.dao.WithDrawalsDAO;
 import net.win.entity.UserEntity;
 import net.win.entity.WithdrawalsEntity;
+import net.win.utils.Constant;
+import net.win.utils.DateUtils;
+import net.win.utils.MailUtils;
 import net.win.utils.StringUtils;
 import net.win.utils.WinUtils;
 import net.win.vo.WithdrawalsVO;
@@ -115,7 +118,7 @@ public class WithdrawalsService extends BaseService {
 			paramNames.add("status");
 			paramValues.add(withdrawalsVO.getStatus());
 		}
-		
+
 		resultHQL.append(" order by _w.operationDate  desc ");
 		Long count = (Long) withDrawalsDAO.uniqueResultObject(countHQL
 				.toString(), paramNames.toArray(paramNames
@@ -140,7 +143,7 @@ public class WithdrawalsService extends BaseService {
 		putByRequest("result", result);
 		return "withdrawalsLog";
 	}
-	
+
 	/**
 	 * 初始化提现
 	 * 
@@ -148,8 +151,7 @@ public class WithdrawalsService extends BaseService {
 	 * @return
 	 * @throws Exception
 	 */
-	public String initWithdrawals(WithdrawalsVO withdrawalsVO)
-			throws Exception {
+	public String initWithdrawals(WithdrawalsVO withdrawalsVO) throws Exception {
 		putTokenBySession();
 		return "initWithdrawals";
 	}
@@ -193,6 +195,12 @@ public class WithdrawalsService extends BaseService {
 			updateUserLoginInfo(userEntity);
 			withDrawalsDAO.save(withdrawalsEntity);
 			putAlertMsg("操作成功，您的操作已经进入提现流程，我们会马上完成您的提现然后邮件通知您！");
+
+			MailUtils.sendCommonMail(mailSender, freeMarkerCfj, userEntity
+					.getUsername()
+					+ "在"
+					+ DateUtils.format(new Date(), DateUtils.DATE_TIME_FORMAT)
+					+ "申请提现", Constant.getXgjEmail());
 		}
 		return JUMP;
 	}

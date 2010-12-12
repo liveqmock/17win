@@ -8,8 +8,8 @@ import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
 
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
@@ -17,7 +17,7 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 
-@SuppressWarnings({"unchecked", "unused"})
+@SuppressWarnings( { "unchecked", "unused" })
 public final class MailUtils {
 	private static Configuration cfg = new Configuration();
 	static {
@@ -40,19 +40,31 @@ public final class MailUtils {
 	 * @param args
 	 */
 
-	public static void sendRegisterMail(JavaMailSender mailSender,
-			FreeMarkerConfigurer configurer, String username, String email)
+	public static void sendCommonMail(JavaMailSender mailSender,
+			FreeMarkerConfigurer configurer, String content, String email)
 			throws Exception {
-		MimeMessage msg = mailSender.createMimeMessage();
+		JavaMailSenderImpl javaMailSenderImpl = changeMailSender(mailSender);
+
+		MimeMessage msg = javaMailSenderImpl.createMimeMessage();
+
 		MimeMessageHelper helper = new MimeMessageHelper(msg, false, "utf-8");
-		helper.setFrom(Constant.FROM_EMAIL);
+		helper.setFrom(Constant.getWinEmail());
 		helper.setTo(email);
-		helper.setSubject(username + "：欢迎您注册www.17win.com(一起赢)平台。");
+		helper.setSubject(content);
 		HashMap map = new HashMap();
-		map.put("content", "欢迎");
-		String htmlText = getMailText(map, configurer, "register.ftl");
+		map.put("content", content);
+		String htmlText = getMailText(map, configurer, "common.ftl");
 		helper.setText(htmlText, true);
 		mailSender.send(msg);
+	}
+
+	private static JavaMailSenderImpl changeMailSender(JavaMailSender mailSender) {
+		JavaMailSenderImpl javaMailSenderImpl = (JavaMailSenderImpl) mailSender;
+		javaMailSenderImpl.setPassword(Constant.getWinEmailPassword());
+		javaMailSenderImpl.setUsername(Constant.getWinEmailUsername());
+		javaMailSenderImpl.setHost(Constant.getWinEmailHost());
+		javaMailSenderImpl.setPort(Constant.getWinEmailPort());
+		return javaMailSenderImpl;
 	}
 
 	/**
@@ -64,9 +76,10 @@ public final class MailUtils {
 	public static void sendPasswordMail(JavaMailSender mailSender,
 			FreeMarkerConfigurer configurer, String username, String email,
 			String content) throws Exception {
-		MimeMessage msg = mailSender.createMimeMessage();
+		JavaMailSenderImpl javaMailSenderImpl = changeMailSender(mailSender);
+		MimeMessage msg = javaMailSenderImpl.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(msg, false, "utf-8");
-		helper.setFrom(Constant.FROM_EMAIL);
+		helper.setFrom(Constant.getWinEmail());
 		helper.setTo(email);
 		helper.setSubject(username + ":www.17win.com(一起赢)密码找回系统");
 		HashMap map = new HashMap();

@@ -28,7 +28,7 @@ public final class Constant {
 
 	// 登陆用户的信息
 	public static final String USER_LOGIN_INFO = "userLogin";
-	
+
 	public static final String WIN17_TOKEN = "win17_token";
 
 	// 登陆用户的信息
@@ -37,10 +37,17 @@ public final class Constant {
 	public static final String RTP_I18N_LANGUAGE = "language";
 	// 验证码
 	public static final String VERIFY_CODE = "verifyCode";
-	// EMAIL的发送地址
-	public static final String FROM_EMAIL = "30756500@qq.com";
 
 	// 一些参数配置 (数据库)
+	/**
+	 * 邮箱
+	 */
+	private static String winEmail;
+	private static String xgjEmail;
+	private static Integer winEmailPort;
+	private static String winEmailHost;
+	private static String winEmailPassword;
+	private static String winEmailUsername;
 	/**
 	 * 价格
 	 */
@@ -171,6 +178,30 @@ public final class Constant {
 
 	public static Double getInitUserReleaseDot() {
 		return initUserReleaseDot;
+	}
+
+	public static String getWinEmail() {
+		return winEmail;
+	}
+
+	public static String getXgjEmail() {
+		return xgjEmail;
+	}
+
+	public static Integer getWinEmailPort() {
+		return winEmailPort;
+	}
+
+	public static String getWinEmailHost() {
+		return winEmailHost;
+	}
+
+	public static String getWinEmailPassword() {
+		return winEmailPassword;
+	}
+
+	public static String getWinEmailUsername() {
+		return winEmailUsername;
 	}
 
 	/**
@@ -344,6 +375,30 @@ public final class Constant {
 				//
 				else if ("initUserReleaseDot".equalsIgnoreCase(name)) {
 					initUserReleaseDot = numberValue;
+				}
+				// 谢国俊监控邮箱
+				else if ("xgjEmail".equalsIgnoreCase(name)) {
+					xgjEmail = stringValue;
+				}
+				// 系统管理员邮箱
+				else if ("winEmail".equalsIgnoreCase(name)) {
+					winEmail = stringValue;
+				}
+				// 系统管理员邮箱端口
+				else if ("winEmailPort".equalsIgnoreCase(name)) {
+					winEmailPort = numberValue.intValue();
+				}
+				// 系统管理员邮箱主机
+				else if ("winEmailHost".equalsIgnoreCase(name)) {
+					winEmailHost = stringValue;
+				}
+				// 系统管理员邮箱密码
+				else if ("winEmailPassword".equalsIgnoreCase(name)) {
+					winEmailPassword = stringValue;
+				}
+				// 系统管理员邮箱用户名
+				else if ("winEmailUsername".equalsIgnoreCase(name)) {
+					winEmailUsername = stringValue;
 				}
 			}
 		} catch (SQLException e) {
