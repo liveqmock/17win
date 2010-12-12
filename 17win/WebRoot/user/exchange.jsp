@@ -176,6 +176,9 @@ img {
 														<td>
 															<input type="submit" value="开始兑换" id="button"
 																name="button">
+
+															<input type="hidden" name="win17_token"
+																value="<s:property value="#session.win17_token"/>">
 														</td>
 													</tr>
 												</tbody>
@@ -249,6 +252,9 @@ img {
 															<td>
 																<input type="submit" value="开始赠送" id="button"
 																	name="button">
+
+																<input type="hidden" name="win17_token"
+																	value="<s:property value="#session.win17_token"/>">
 															</td>
 														</tr>
 													</tbody>
@@ -291,7 +297,9 @@ img {
 															</td>
 															<td width="480">
 																<s:textfield name="userVO.releaseDot" id="releaseDot_3"></s:textfield>
-																个发布点( 每<s:property value="#request.scoreChangeReleaseDot"/>积分可兑换1个发布点)
+																个发布点( 每
+																<s:property value="#request.scoreChangeReleaseDot" />
+																积分可兑换1个发布点)
 															</td>
 														</tr>
 														<tr>
@@ -312,6 +320,9 @@ img {
 															<td>
 																<input type="submit" value="开始兑换" id="button"
 																	name="button">
+																	
+<input type="hidden" name="win17_token"
+																					value="<s:property value="#session.win17_token"/>">
 															</td>
 														</tr>
 													</tbody>

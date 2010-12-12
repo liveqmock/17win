@@ -171,6 +171,8 @@ public class UserInfoService extends BaseService {
 
 		putByRequest("scoreChangeReleaseDot", Constant
 				.getScoreChangeReleaseDot());
+		
+		putTokenBySession();
 		return "initExchange";
 	}
 
@@ -435,6 +437,9 @@ public class UserInfoService extends BaseService {
 		// 一钻
 		putByRequest("zuanshikaPrice", Constant.getZuanshiPrice());
 		putByRequest("zuanshiCount", Constant.getZuanshiNumber());
+		
+		putTokenBySession();
+		
 		return "initBuyDot";
 	}
 

@@ -140,6 +140,19 @@ public class WithdrawalsService extends BaseService {
 		putByRequest("result", result);
 		return "withdrawalsLog";
 	}
+	
+	/**
+	 * 初始化提现
+	 * 
+	 * @param userVO
+	 * @return
+	 * @throws Exception
+	 */
+	public String initWithdrawals(WithdrawalsVO withdrawalsVO)
+			throws Exception {
+		putTokenBySession();
+		return "initWithdrawals";
+	}
 
 	/**
 	 * 提现

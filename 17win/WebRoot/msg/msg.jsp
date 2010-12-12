@@ -167,6 +167,8 @@ img {
 																</s:if>
 																style="height: 30px; width: 50px;" id="button"
 																name="button">
+															<input type="hidden" name="win17_token"
+																value="<s:property value="#session.win17_token"/>">
 														</td>
 													</tr>
 												</tbody>

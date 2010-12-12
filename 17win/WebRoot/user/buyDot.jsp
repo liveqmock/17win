@@ -144,6 +144,8 @@ img {
 															<s:password name="userVO.operationCode"
 																cssStyle="width:80px" id="operationCode_1"></s:password>
 															<br>
+															<input type="hidden" name="win17_token"
+																					value="<s:property value="#session.win17_token"/>">
 															<input type="image" name="ImageButton1"
 																src="images/buy1.png"
 																onclick="return validateForm('1');" id="ImageButton1">
@@ -170,6 +172,8 @@ img {
 															<s:password name="userVO.operationCode"
 																cssStyle="width:80px" id="operationCode_2"></s:password>
 															<br>
+															<input type="hidden" name="win17_token"
+																					value="<s:property value="#session.win17_token"/>">
 															<input type="image" name="ImageButton2"
 																src="images/buy1.png"
 																onclick="return validateForm('2');" id="ImageButton2">
@@ -196,6 +200,8 @@ img {
 															<s:password name="userVO.operationCode"
 																cssStyle="width:80px" id="operationCode_3"></s:password>
 															<br>
+															<input type="hidden" name="win17_token"
+																					value="<s:property value="#session.win17_token"/>">
 															<input type="image" name="ImageButton2"
 																src="images/buy1.png"
 																onclick="return validateForm('3');" id="ImageButton2">
@@ -222,6 +228,8 @@ img {
 															<s:password name="userVO.operationCode"
 																cssStyle="width:80px" id="operationCode_3"></s:password>
 															<br>
+															<input type="hidden" name="win17_token"
+																					value="<s:property value="#session.win17_token"/>">
 															<input type="image" name="ImageButton3"
 																src="images/buy1.png"
 																onclick="return validateForm('4');" id="ImageButton2">

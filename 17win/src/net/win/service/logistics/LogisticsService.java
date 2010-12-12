@@ -47,6 +47,9 @@ public class LogisticsService extends BaseService {
 		putByRequest("maxDate2", maxDate2);
 		
 		putByRequest("logisticsDotCount", Constant.getLogisticsDotCount());
+		
+		putTokenBySession();
+		
 		return "initLogistics";
 	}
 

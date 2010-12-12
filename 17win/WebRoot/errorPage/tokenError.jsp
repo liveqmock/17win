@@ -23,7 +23,7 @@
 						<DIV
 							style="PADDING-RIGHT: 20px; PADDING-LEFT: 20px; PADDING-BOTTOM: 20px; WIDTH: 700px; PADDING-TOP: 20px; TEXT-ALIGN: left">
 							<DIV style="FONT-WEIGHT: bolder; FONT-SIZE: 18px; COLOR: red">
-								不要重复提交！
+								不要重复提交,<a href="javascript:history.go(-1)">点击此处返回</a>！
 							</DIV>
 						</DIV>
 					</DIV>

@@ -69,7 +69,7 @@ public class WithdrawalsAction extends BaseAction {
 	 * @throws Exception
 	 */
 	public String initWithdrawals() throws Exception {
-		return "initWithdrawals";
+		return withdrawalsService.initWithdrawals(withdrawalsVO);
 	}
 
 }

@@ -320,7 +320,7 @@ public class BaseService {
 	 * @param base
 	 * @return
 	 */
-	protected void putUUIDBySession() {
+	protected void putTokenBySession() {
 		putBySession(Constant.WIN17_TOKEN, StringUtils.createGUID());
 	}
 	/**

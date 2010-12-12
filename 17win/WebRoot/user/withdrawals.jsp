@@ -147,8 +147,8 @@ img {
 																	提现人：
 																	<input name="withdrawalsVO.type" type="hidden"
 																		value="1">
-																	<input name="withdrawalsVO.shopType" id="shopType" type="hidden"
-																		value="1">
+																	<input name="withdrawalsVO.shopType" id="shopType"
+																		type="hidden" value="1">
 																</Td>
 																<Td>
 																	<s:property value="#session.userLogin.username" />
@@ -179,8 +179,8 @@ img {
 																	掌柜：
 																</Td>
 																<Td>
-																	<s:textfield name="withdrawalsVO.realName"  readonly="true"
-																		id="realname_1"></s:textfield>
+																	<s:textfield name="withdrawalsVO.realName"
+																		readonly="true" id="realname_1"></s:textfield>
 																	(系统自动获取)
 																</Td>
 															</tr>
@@ -189,14 +189,17 @@ img {
 																	操作密码：
 																</Td>
 																<Td>
-																	<s:password name="withdrawalsVO.operationCode" maxlength="20"
-																		id="operationCode_1"></s:password> 
+																	<s:password name="withdrawalsVO.operationCode"
+																		maxlength="20" id="operationCode_1"></s:password>
 																</Td>
 															</tr>
 															<tr>
 																<Td colspan="2" align="center">
 																	<input type="submit" class="buttonFlag"
 																		value="提&nbsp;&nbsp;交">
+
+																	<input type="hidden" name="win17_token"
+																		value="<s:property value="#session.win17_token"/>">
 																</Td>
 
 															</tr>
@@ -251,13 +254,16 @@ img {
 																	操作密码：
 																</Td>
 																<Td>
-																	<s:password name="withdrawalsVO.operationCode" maxlength="20"
-																		id="operationCode_2"></s:password>
+																	<s:password name="withdrawalsVO.operationCode"
+																		maxlength="20" id="operationCode_2"></s:password>
 																</Td>
 															</tr>
 															<tr>
 																<Td colspan="2" align="center">
 																	<input type="submit" value="提&nbsp;&nbsp;交">
+
+																	<input type="hidden" name="win17_token"
+																		value="<s:property value="#session.win17_token"/>">
 																</Td>
 
 															</tr>
@@ -312,13 +318,16 @@ img {
 																	操作密码：
 																</Td>
 																<Td>
-																	<s:password name="withdrawalsVO.operationCode" maxlength="20"
-																		id="operationCode_3"></s:password>
+																	<s:password name="withdrawalsVO.operationCode"
+																		maxlength="20" id="operationCode_3"></s:password>
 																</Td>
 															</tr>
 															<tr>
 																<Td colspan="2" align="center">
 																	<input type="submit" value="提&nbsp;&nbsp;交">
+
+																	<input type="hidden" name="win17_token"
+																		value="<s:property value="#session.win17_token"/>">
 																</Td>
 
 															</tr>

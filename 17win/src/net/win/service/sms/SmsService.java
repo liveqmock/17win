@@ -76,6 +76,8 @@ public class SmsService extends BaseService {
 		} else {
 			putByRequest("notVIP", "noVIP");
 		}
+		
+		putTokenBySession();
 		return "initSendTelphone";
 	}
 
@@ -144,7 +146,7 @@ public class SmsService extends BaseService {
 				putAlertMsg("操作码不正确！");
 				return "sendTelphone";
 			}
-			if (getLoginUser().getVipEnable()) {
+			if (!userEntity.getVipEnable()) {
 				putAlertMsg("发送失败，您不是会员！");
 				return "sendTelphone";
 			}

@@ -35,6 +35,7 @@ public class PayService extends BaseService {
 	 */
 	public String initPay(PayVO payVO) throws Exception {
 		putIndexShowType("6");
+		putTokenBySession();
 		return "initPay";
 	}
 

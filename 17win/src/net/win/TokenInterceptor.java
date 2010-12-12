@@ -24,9 +24,16 @@ public class TokenInterceptor extends AbstractInterceptor {
 	 */
 	private static final Set<String> INCLUDE_TOKEN_VALIDATION_URL = new HashSet<String>();
 	static {
-		// vip
 		INCLUDE_TOKEN_VALIDATION_URL.add("vipManager/vip!buyVip.php");
 		INCLUDE_TOKEN_VALIDATION_URL.add("vipManager/vip!renewalVip.php");
+		INCLUDE_TOKEN_VALIDATION_URL
+				.add("logisticsManager/logistics!insertLogistics.php");
+		INCLUDE_TOKEN_VALIDATION_URL.add("payManager/pay!addPaid.php");
+		INCLUDE_TOKEN_VALIDATION_URL.add("userInfoManager/info!buyDot.php");
+		INCLUDE_TOKEN_VALIDATION_URL.add("userInfoManager/info!exchange.php");
+		INCLUDE_TOKEN_VALIDATION_URL
+				.add("withdrawalsManager/withdrawals!withdrawals.php");
+		INCLUDE_TOKEN_VALIDATION_URL.add("smsManager/sms!sendTelphone.php");
 	}
 
 	@Override

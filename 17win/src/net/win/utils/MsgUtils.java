@@ -54,9 +54,11 @@ public final class MsgUtils {
 
 		BufferedReader br = new BufferedReader(new InputStreamReader(response
 				.getEntity().getContent()));
-		if (!"000".equals(br.readLine())) {
-			throw new RuntimeException("错误，错误代码:" + br.readLine());
+		String result = br.readLine();
+		if (result != null && !"000".equals(br.readLine())) {
+			throw new RuntimeException("发送手机错误 代码列表查看MsgUtils类，错误，错误代码:" + br.readLine());
 		}
+		br.close();
 		httpclient.getConnectionManager().shutdown();
 	}
 }
