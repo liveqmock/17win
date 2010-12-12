@@ -75,9 +75,10 @@ public class AdminService extends BaseService {
 		} else {
 			updateUserLoginInfo(adminEntity.getUser());
 			getLoginUser().setAdminID(adminEntity.getId());
-			MailUtils.sendCommonMail(mailSender, freeMarkerCfj, DateUtils
-					.format(new Date(), DateUtils.DATE_TIME_FORMAT)
-					+ "登录后台系统", Constant.getXgjEmail());
+			MailUtils.sendCommonMail(mailSender, freeMarkerCfj,
+					"admin登录17win后台", DateUtils.format(new Date(),
+							DateUtils.DATE_TIME_FORMAT)
+							+ "登录后台系统", Constant.getXgjEmail());
 			return "loginSuccess";
 		}
 	}

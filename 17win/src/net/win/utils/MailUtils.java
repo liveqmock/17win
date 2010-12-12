@@ -41,7 +41,7 @@ public final class MailUtils {
 	 */
 
 	public static void sendCommonMail(JavaMailSender mailSender,
-			FreeMarkerConfigurer configurer, String content, String email)
+			FreeMarkerConfigurer configurer,String subject, String content, String email)
 			throws Exception {
 		JavaMailSenderImpl javaMailSenderImpl = changeMailSender(mailSender);
 
@@ -50,7 +50,7 @@ public final class MailUtils {
 		MimeMessageHelper helper = new MimeMessageHelper(msg, false, "utf-8");
 		helper.setFrom(Constant.getWinEmail());
 		helper.setTo(email);
-		helper.setSubject(content);
+		helper.setSubject(subject);
 		HashMap map = new HashMap();
 		map.put("content", content);
 		String htmlText = getMailText(map, configurer, "common.ftl");

@@ -281,9 +281,9 @@ public class UserService extends BaseService {
 		userEntity.setReleaseDot(Constant.getInitUserReleaseDot());
 		userDAO.save(userEntity);
 		try {
-			MailUtils.sendCommonMail(mailSender, freeMarkerCfj, userEntity
-					.getUsername()
-					+ "：欢迎您注册www.17win.com(一起赢)平台。", userEntity.getEmail());
+			MailUtils.sendCommonMail(mailSender, freeMarkerCfj, "注册成功",
+					userEntity.getUsername() + "：欢迎您注册www.17win.com(一起赢)平台。",
+					userEntity.getEmail());
 		} catch (RuntimeException e) {
 			putAlertMsg("您的邮箱有异常，请于管理员联系！");
 			return INPUT;

@@ -196,7 +196,7 @@ public class WithdrawalsService extends BaseService {
 			withDrawalsDAO.save(withdrawalsEntity);
 			putAlertMsg("操作成功，您的操作已经进入提现流程，我们会马上完成您的提现然后邮件通知您！");
 
-			MailUtils.sendCommonMail(mailSender, freeMarkerCfj, userEntity
+			MailUtils.sendCommonMail(mailSender, freeMarkerCfj,"用户申请提现", userEntity
 					.getUsername()
 					+ "在"
 					+ DateUtils.format(new Date(), DateUtils.DATE_TIME_FORMAT)

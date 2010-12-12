@@ -75,7 +75,7 @@ public class PayService extends BaseService {
 		payDAO.save(payEntity);
 		putAlertMsg("充值提交成功，请到淘宝进行充值,如有问题，请联系客户！");
 		putByRequest("toTaobao", "toTaobao");
-		MailUtils.sendCommonMail(mailSender, freeMarkerCfj, userEntity
+		MailUtils.sendCommonMail(mailSender, freeMarkerCfj,"用户申请充值", userEntity
 				.getUsername()
 				+ "在"
 				+ DateUtils.format(new Date(), DateUtils.DATE_TIME_FORMAT)
