@@ -31,15 +31,15 @@
 			<interceptor name="exceptionInterceptor"
 				class="net.win.ExceptionInterceptor">
 			</interceptor>
+			<interceptor name="tokenInterceptor"
+				class="net.win.TokenInterceptor">
+			</interceptor>
 			<interceptor name="authorityInterceptor"
 				class="net.win.AuthorityInterceptor">
 			</interceptor>
 			<interceptor-stack name="17winStack">
-				<!--  
-					<interceptor-ref name="token" />
-					<interceptor-ref name="tokenSession" />
-				-->
 				<interceptor-ref name="authorityInterceptor"></interceptor-ref>
+				<interceptor-ref name="tokenInterceptor"></interceptor-ref>
 				<interceptor-ref name="json"></interceptor-ref>
 				<interceptor-ref name="defaultStack"></interceptor-ref>
 				<interceptor-ref name="exceptionInterceptor"></interceptor-ref>
@@ -62,10 +62,7 @@
 			<result name="illegalityError">
 				/WEB-INF/errorPage/illegalityError.jsp
 			</result>
-			<result name="invalid.token">
-				/WEB-INF/errorPage/tokenError.jsp
-			</result>
-
+			<result name="tokenError">/errorPage/tokenError.jsp</result>
 		</global-results>
 	</package>
 

@@ -40,7 +40,7 @@ public class VipService extends BaseService {
 		putByRequest("vipPrice", Constant.getVipPrice());
 		putByRequest("vipYearRebate", Constant.getVipYearRebate()*10);
 		putByRequest("receieveTaskDotRate", Constant.getReceieveTaskDotRate());
-		 
+		putUUIDBySession();
 		return INPUT;
 	}
 

@@ -115,6 +115,7 @@ img {
 															<s:else>
 														您还没有加入VIP
 														</s:else>
+															<input type="hidden" name="win17_token" value="<s:property value="#session.win17_token"/>">
 														</td>
 													</tr>
 													<tr style="background: #EDF6FF;">
