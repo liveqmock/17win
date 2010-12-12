@@ -37,7 +37,7 @@ public class AdminLogisticsService extends BaseService {
 	 * @throws Exception
 	 */
 	public String updateRedoLogistics(LogisticsVO logisticsVO) throws Exception {
-		final double LOGISTICS_DOT = Constant.getLogisticsDotCount();
+
 		putJumpPage("adminLogisticsManager/adminLogistics!queryLogisticsLog.php");
 		String logisticsID = getByParam("logisticsID");
 		if (StringUtils.isBlank(logisticsID)) {
@@ -49,13 +49,6 @@ public class AdminLogisticsService extends BaseService {
 		UserEntity releaseUser = logisticsEntity.getReleaseUser();
 		List<UserEntity> reveieveUsers = logisticsEntity.getReceieveUsers();
 		if (reveieveUsers.size() > 0) {
-			for (UserEntity userEntity : reveieveUsers) {
-				userEntity.setReleaseDot(ArithUtils.add(userEntity
-						.getReleaseDot(), LOGISTICS_DOT));
-				logDotCapital(userDAO, LOGISTICS_DOT, "因为"
-						+ releaseUser.getUsername() + "发送的物流信息是虚假的，所以退还发布点",
-						userEntity);
-			}
 			// 如果有多余的发布点扣除，就扣发布点
 			if (releaseUser.getReleaseDot() > logisticsEntity
 					.getReleaseDotCount()) {
@@ -76,6 +69,16 @@ public class AdminLogisticsService extends BaseService {
 						new String[] { "logisticsID" },
 						new Object[] { logisticsEntity.getId() });
 				logisticsDAO.delete(logisticsEntity);
+
+				double logistics_dot = logisticsEntity.getReleaseDotCount()
+						/ reveieveUsers.size();
+				for (UserEntity userEntity : reveieveUsers) {
+					userEntity.setReleaseDot(ArithUtils.add(userEntity
+							.getReleaseDot(), logistics_dot));
+					logDotCapital(userDAO, logistics_dot,
+							"经查实，因为" + releaseUser.getUsername()
+									+ "发送的物流信息是虚假的，所以退还发布点", userEntity);
+				}
 			} else {
 				releaseUser.setStatus("2");
 				releaseUser.setStatusDesc("您发送的快递单号为:"
@@ -91,7 +94,8 @@ public class AdminLogisticsService extends BaseService {
 							"delete from tb_logistics_bid_user where Logistics_ID_=:logisticsID",
 							new String[] { "logisticsID" },
 							new Object[] { logisticsEntity.getId() });
-			logisticsDAO.deleteBySQL("delete from tb_logicstics where id_=:logisticsID",
+			logisticsDAO.deleteBySQL(
+					"delete from tb_logicstics where id_=:logisticsID",
 					new String[] { "logisticsID" },
 					new Object[] { logisticsEntity.getId() });
 			putAlertMsg("撤销成功,物流信息被删除！");

@@ -20,7 +20,7 @@ public class NewsEntity extends BaseEntity {
 	private String content;
 
 	// 是否置顶
-	@Column(name = "TOP_")
+	@Column(name = "TOP_", nullable = false)
 	private Boolean top;
 	// URL
 	@Column(name = "Url_", unique = true)
