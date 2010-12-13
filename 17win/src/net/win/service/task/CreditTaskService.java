@@ -1423,6 +1423,9 @@ public class CreditTaskService extends BaseService {
 			if ("8".equals(type)) {
 				return " and _task.status='-2' ";
 			}
+			if ("9".equals(type)) {
+				return " and _task.status='0' ";
+			}
 			return "";
 		} else {
 			// 默认时间排列
@@ -1456,6 +1459,10 @@ public class CreditTaskService extends BaseService {
 			// 等待审核
 			if ("8".equals(type)) {
 				return " and _task.status='-2'  order by   _task.releaseDate desc ";
+			}
+			// 定时
+			if ("9".equals(type)) {
+				return " and _task.status='0'  order by   _task.releaseDate desc ";
 			}
 			return " order by   _task.releaseDate desc";
 		}

@@ -173,6 +173,11 @@ function sort8() {
 	$("#queryType").val("8");
 	query(1);
 }
+function sort9() {
+	$("#queryType").val("9");
+	query(1);
+}
+
 // 查询
 function query(page) {
 	var pageCount = parseInt($("#pageCount").val());

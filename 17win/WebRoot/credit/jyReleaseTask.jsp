@@ -48,6 +48,7 @@
 							</DIV>
 							<DIV style="MARGIN-TOP: 12px; FLOAT: left; MARGIN-LEFT: 10px">
 								<A href="javascript:sort1()"><SPAN class=anniu>全部任务</SPAN> </A>
+								<A href="javascript:sort9()"><SPAN class=anniu>定时任务</SPAN> </A>
 								<A href="javascript:sort7()"><SPAN class=anniu>等待接手</SPAN> </A>
 								<A href="javascript:sort8()"><SPAN class=anniu>等待审核</SPAN> </A>
 								<A href="javascript:sort2()"><SPAN class=anniu>等待支付</SPAN> </A>

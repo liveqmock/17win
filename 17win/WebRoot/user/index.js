@@ -24,8 +24,8 @@ $(document).ready(function() {
 			col = 8;
 		} else if (col == 8) {
 			col = 1;
-		} else if (col == 7) {
-			col = 1;
+		} else if (col == 7) { 
+			col = 9;  
 		} else {
 			col = col - 1;
 		}
