@@ -430,7 +430,7 @@ public class CreditTaskService extends BaseService {
 					+ releaseScore);
 			logScoreCapital(userDAO, releaseScore + 0.0, "您发起的"
 					+ creditTask.getTestID() + "任务完成，获得积分", releaEntity);
-			 
+
 			// 是会员
 			if (releaEntity.getVipEnable() && releaseUserVip != null) {
 				releaseVipBidUser.setGrowValue(releaseVipBidUser.getGrowValue()
@@ -516,8 +516,9 @@ public class CreditTaskService extends BaseService {
 					refereeUser.setMoney(Constant.getTask100RefreeMoney()
 							+ refereeUser.getMoney());
 					logMoneyCapital(userDAO, Constant.getTask100RefreeMoney(),
-							"你推广的用户接受了100个任务你获得" + Constant.getTask100RefreeMoney()
-									+ "元！", refereeUser);
+							"你推广的用户接受了100个任务你获得"
+									+ Constant.getTask100RefreeMoney() + "元！",
+							refereeUser);
 				}
 			}
 			// 通过你的宣传链接注册的会员积分每上升1000
@@ -1232,7 +1233,10 @@ public class CreditTaskService extends BaseService {
 				putJumpPage("userInfoManager/info!initActiave.php");
 				return JUMP;
 			}
-			List<SellerEntity> sellers = userEntity.getSellers();
+			List<SellerEntity> sellers = sellerDAO
+					.list(
+							"select _s   from SellerEntity  as _s where _s.type=:type ",
+							"type", platformType);
 			List<SellerVO> resultSellers = new ArrayList<SellerVO>(sellers
 					.size());
 			if (sellers.size() > 0) {
@@ -1240,10 +1244,13 @@ public class CreditTaskService extends BaseService {
 					SellerVO sellerVO = new SellerVO();
 					BeanUtils.copyProperties(sellerVO, sellerEntity);
 					resultSellers.add(sellerVO);
-				}
+				}  
 			} else {
-				putAlertMsg("您还没有绑定卖号，请先添加！");
-				return "noSellerPage";
+				putAlertMsg("您还没有为【"
+						+ WinUtils.changeType2Platform(platformType)
+						+ "】平台绑定卖号，请先添加！");
+				putJumpPage("userInfoManager/info!initSellerAndBuyer.php");
+				return JUMP;
 			}
 			List<CreditTaskRepositoryEntity> creditTaskResitorys = creditTaskRepositoryDAO
 					.list(

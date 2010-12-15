@@ -61,7 +61,7 @@ public final class HttpB2CUtils {
 
 	// 信誉地址验证
 	private static final String TAOBAO_CREDIT_URL = "^http:[/\\\\]{2}rate\\.taobao\\.com[/\\\\]rate.htm\\?user_id=\\d+";
-	private static final String PAIPAI_CREDIT_URL = "^http:[/\\\\]{2}shop\\d+\\.paipai\\.com[/\\\\]cgi\\-bin[/\\\\]credit_info\\?uin=\\d+&";
+	private static final String PAIPAI_CREDIT_URL = "^http:[/\\\\]{2}shop\\d+\\.paipai\\.com[/\\\\]cgi\\-bin[/\\\\]credit_info\\?uin=\\d+&?";
 
 	private HttpB2CUtils() {
 
@@ -171,16 +171,18 @@ public final class HttpB2CUtils {
 		}
 		// 拍拍
 		else if ("2".equals(type)) {
-			Pattern pattern = Pattern.compile(PAIPAI_USER_REGEX);
-			Matcher matcher;
-			OUTTER: while ((line = br.readLine()) != null) {
-				line = StringUtils.replaceBlank(line.replaceAll("\"", "'"));
-				matcher = pattern.matcher(line);
-				while (matcher.find()) {
-					seller = URLDecoder.decode(matcher.group(1), "UTF-8");
-					break OUTTER;
-				}
-			}
+			String[] temps = url.split("/", 0);
+			seller = temps[temps.length-1];
+			// Pattern pattern = Pattern.compile(PAIPAI_USER_REGEX);
+			// Matcher matcher;
+			// OUTTER: while ((line = br.readLine()) != null) {
+			// line = StringUtils.replaceBlank(line.replaceAll("\"", "'"));
+			// matcher = pattern.matcher(line);
+			// while (matcher.find()) {
+			// seller = URLDecoder.decode(matcher.group(1), "UTF-8");
+			// break OUTTER;
+			// }
+			// }
 		}
 		// 有啊
 		else if ("3".equals(type)) {
@@ -293,6 +295,7 @@ public final class HttpB2CUtils {
 		}
 		// 拍拍
 		else if ("2".equals(type)) {
+//				http://shop1.paipai.com/cgi-bin/credit_info?uin=30756500&
 			if (!url.matches(PAIPAI_CREDIT_URL)) {
 				return -1;
 			} else {

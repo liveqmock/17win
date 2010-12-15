@@ -124,13 +124,11 @@
 								</td>
 								<td valign="top" align="center">
 									<font color="red"><s:property value="#task[2]" /> </font><font
-										color="blue">+<s:property value="#task[24]" /> 元
-									<s:if test="#test[3]">(需改价格)</s:if>
-									<s:else>(全额相等)</s:else>
-									<br>
+										color="blue">+<s:property value="#task[24]" /> 元 <s:if
+											test="#test[3]">(需改价格)</s:if> <s:else>(全额相等)</s:else> <br>
 
-									<font color="red"><s:property value="#task[4]" /> </font><font
-										color="blue">+<s:property value="#task[25]" /> 个发布点
+										<font color="red"><s:property value="#task[4]" /> </font><font
+										color="blue">+<s:property value="#task[25]" /> 个发布点 
 								</td>
 								<td valign="top" align="center">
 									<input type="text" readonly="readonly"
@@ -155,14 +153,12 @@
 												暂无接收人
 											</s:if>
 										<s:else>
-											 <SPAN style="Z-INDEX: 20; POSITION: relative"> <a
-										href="javascript:reply('<s:property value='#task[8]' />');"
-										title="发送站内信息"  ><s:property
-												value="#task[8]" /> </a> </SPAN>
-									<br>
-									<img
-										src="images/<s:property value="@net.win.utils.StrategyUtils@getLevelImg(#task[11])" />"
-										alt="刷客经验积分：<s:property value="#task[11]" />">
+											<SPAN style="Z-INDEX: 20; POSITION: relative"> <a
+												href="javascript:reply('<s:property value='#task[8]' />');"
+												title="发送站内信息"><s:property value="#task[8]" /> </a> </SPAN>
+											<br>
+											<img alt="刷客经验积分：<s:property value="#task[11]" />"
+												src="images/<s:property value="@net.win.utils.StrategyUtils@getLevelImg(#task[11])" />" />
 										</s:else>
 									</s:else>
 								</td>
@@ -217,15 +213,12 @@
 													等待买家确认好评
 												</s:if>
 										<s:else>
-											<font color="red">
-											<s:if test="#task[12]>1">
-												<s:property value="#task[12]" />小时后好评 
-											</s:if>
-											<s:else>
-												<s:property value="%{#task[12]*60}" />分钟后好评
-											</s:else>
-											</font>
-												</s:else>
+											<font color="red"> <s:if test="#task[12]>1">
+													<s:property value="#task[12]" />小时后好评 
+											</s:if> <s:else>
+													<s:property value="%{#task[12]*60}" />分钟后好评
+											</s:else> </font>
+										</s:else>
 									</s:elseif>
 									<s:elseif test="#task[7]==5">
 												等待您确认好评

@@ -157,10 +157,7 @@
 									<font color="#FF0000"><s:property value="#task[10]" />
 									</font>
 									<br>
-									<img
-										alt="
-										刷客经验积分：
-													<s:property value="@net.win.utils.StrategyUtils@getLevelImg(#task[11])" />"
+									<img alt="刷客经验积分：<s:property value="#task[11]" />"
 										src="images/<s:property value="@net.win.utils.StrategyUtils@getLevelImg(#task[11])" />" />
 								</td>
 								<td valign="top" align="center">

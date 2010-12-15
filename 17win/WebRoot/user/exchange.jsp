@@ -176,7 +176,6 @@ img {
 														<td>
 															<input type="submit" value="开始兑换" id="button"
 																name="button">
-
 															<input type="hidden" name="win17_token"
 																value="<s:property value="#session.win17_token"/>">
 														</td>

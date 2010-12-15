@@ -172,6 +172,7 @@ public class UserInfoService extends BaseService {
 		putByRequest("scoreChangeReleaseDot", Constant
 				.getScoreChangeReleaseDot());
 		
+		
 		putTokenBySession();
 		return "initExchange";
 	}
@@ -350,7 +351,6 @@ public class UserInfoService extends BaseService {
 				list.add(buyerVO);
 			}
 		}
-
 		if (getByParam("noSellerDirect") != null) {
 			putAlertMsg("您还没有绑定卖号，请绑定！");
 		}

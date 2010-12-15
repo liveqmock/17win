@@ -182,9 +182,9 @@ Validater.isShop = function(url, type) {
 	if ("1" == type) {
 		regName = new RegExp("^http:[/\\\\]{2}\\w+\\-*\\w+\\.taobao\\.com[/\\\\]?");
 	} else if ("2" == type) {
-		regName = new RegExp("^http:[/\\\\]{2}\\w+\\-*\\w+\\.taobao\\.com[/\\\\]?");
+		regName = new RegExp("^http:[/\\\\]{2}\\w+\\-*\\w+\\.paipai\\.com[/\\\\]?");
 	} else if ("3" == type) {
-		regName = new RegExp("^http:[/\\\\]{2}\\w+\\-*\\w+\\.taobao\\.com[/\\\\]?");
+		regName = new RegExp("^http:[/\\\\]{2}\\w+\\-*\\w+\\.youa.baidu\\.com[/\\\\]?");
 	}
 	return url.search(regName) != -1;
 }

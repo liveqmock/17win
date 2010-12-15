@@ -2,13 +2,13 @@
 
 $(document).ready(function() {
 			$("form input").bind("focus", function() {
-						if ($(this).attr("type") != "submit") {
+						if ($(this).attr("type") != "submit" &&  $(this).attr("type") != "hidden") {
 							$(this).val("");
 						}
 					});
 
 			$("form input").each(function() {
-						if ($(this).attr("type") != "submit") {
+						if ($(this).attr("type") != "submit"  && $(this).attr("type") != "hidden") {
 							$(this).val("");
 						}
 					});
