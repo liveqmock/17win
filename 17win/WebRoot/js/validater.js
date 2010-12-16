@@ -184,7 +184,7 @@ Validater.isShop = function(url, type) {
 	} else if ("2" == type) {
 		regName = new RegExp("^http:[/\\\\]{2}\\w+\\-*\\w+\\.paipai\\.com[/\\\\]?");
 	} else if ("3" == type) {
-		regName = new RegExp("^http:[/\\\\]{2}\\w+\\-*\\w+\\.youa.baidu\\.com[/\\\\]?");
+		regName = new RegExp("^http:[/\\\\]{2}youa.baidu\\.com[/\\\\]?");
 	}
 	return url.search(regName) != -1;
 }

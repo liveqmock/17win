@@ -209,7 +209,9 @@ img {
 											<tbody>
 												<tr>
 													<td width="100%" align="left" class="font12b2">
-														<font color="red">注意：为了您和他人的安全，买号信誉在<s:property value="#request.creditValueLimit"/>（包含<s:property value="#request.creditValueLimit"/>）以上的账号，我们讲停用！</font>
+														<font color="red">注意：为了您和他人的安全，买号信誉在<s:property
+																value="#request.creditValueLimit" />（包含<s:property
+																value="#request.creditValueLimit" />）以上的账号，我们讲停用！</font>
 													</td>
 												</tr>
 											</tbody>
@@ -223,8 +225,8 @@ img {
 			</tr>
 		</table>
 		<div id="addtableDIV" title="卖号/买号增加">
-			<s:form action="userInfoManager/info!sellerAndBuyer.php"     onsubmit="return validateForm();"
-				theme="simple" id="addForm">
+			<s:form action="userInfoManager/info!sellerAndBuyer.php"
+				onsubmit="return validateForm();" theme="simple" id="addForm">
 				<table cellpadding="0" cellspacing="0" border="0">
 					<tr>
 						<td valign="middle">
@@ -302,15 +304,16 @@ img {
 						<td valign="middle">
 							<input type="text" id="buyerName" onblur="obtainBuyer(this)"
 								name="userVO.buyer.name">
+							<font color="red">(拍拍的买号名为信誉页面的QQ的昵称)</font>
 						</td>
 					</tr>
 					<tr style="display: none" class="buyerClass">
-						<td valign="middle" nowrap="nowrap">
+						<td valign="top" nowrap="nowrap">
 							&nbsp;信誉地址：
 						</td>
 						<td valign="middle">
 							<input type="text" id="creditURL" name="userVO.buyer.creditURL">
-							<font color="red">(仅支持淘宝,拍拍，有问题联系客户)</font>
+							<font color="red">(仅支持淘宝,拍拍，有问题联系客户,拍拍不能为掌柜)</font>
 						</td>
 					</tr>
 					<tr>

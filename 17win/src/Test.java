@@ -7,6 +7,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import net.win.utils.StringUtils;
 
@@ -73,7 +75,15 @@ public class Test {
 	}
 
 	public static void main(String[] argv) throws Exception {
-			System.out.println(StringUtils.processPwd("123456"));
+		String str = "<span tagvar='buyer'  score='20' tag='userGrade' >";
+		Pattern scorePattern = Pattern
+				.compile("<span tagvar='buyer'  score='(\\d+)' tag='userGrade' >");
+
+		Matcher matcher = scorePattern.matcher(str);
+		while (matcher.find()) {
+			System.out.println(matcher.group(1));
+		}
+		System.out.println("over");
 
 	}
 
