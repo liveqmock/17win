@@ -60,6 +60,10 @@ $(document).ready(function() {
 				$(obj).data("nowUrl", $.trim($(obj).val()));
 			});
 	$("#itemUrl").bind("blur", function() {
+		if (typeof($(this).data("oldURL")) != "undefined"
+				&& $(this).data("oldURL") == $(this).val()) {
+			return;
+		}
 		// 如果有被选中的
 		if ($("input[name='creditTaskVO.sellerID']:checked").size() > 0) {
 			$("input[name='creditTaskVO.sellerID']").attr("disabled", false);
@@ -69,6 +73,7 @@ $(document).ready(function() {
 		var platformType = $("#platformType").val();
 		// 去掉空格
 		$(obj).val($.trim($(obj).val()));
+		$("#itemUrl").data("oldURL", $(obj).val());
 		// 获取seller input
 		if (!Validater.isItem($(obj).val(), platformType)) {
 			submitFlag = false;

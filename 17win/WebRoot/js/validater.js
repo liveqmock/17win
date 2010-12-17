@@ -208,7 +208,8 @@ Validater.isItem = function(url, type) {
 	if ("1" == type) {
 		regName = new RegExp("^http:[/\\\\]{2}item\\.taobao\\.com[/\\\\]item.htm");
 	} else if ("2" == type) {
-		regName = new RegExp("^http:[/\\\\]{2}auction1\\.paipai\\.com[/\\\\]search");
+		//		http://auction1.paipai.com/299731360000000000293A5406F9AA7F
+		regName = new RegExp("^http:[/\\\\]{2}auction\\d\\.paipai\\.com[/\\\\]");
 	} else if ("3" == type) {
 		regName = new RegExp("^http:[/\\\\]{2}youa.baidu\\.com[/\\\\]item");
 	}

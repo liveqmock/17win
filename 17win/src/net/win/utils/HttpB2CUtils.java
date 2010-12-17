@@ -38,6 +38,7 @@ import org.dom4j.xpath.DefaultXPath;
 import org.jaxen.SimpleNamespaceContext;
 import org.xml.sax.SAXException;
 
+@SuppressWarnings("unchecked")
 public final class HttpB2CUtils {
 	private static HttpClient taobaoHttpClient = createHttpClient("taobao");
 	private static HttpClient paipaiHttpClient = createHttpClient("paipai");
@@ -50,13 +51,15 @@ public final class HttpB2CUtils {
 
 	// 商品地址验证
 	private static final String TAOBAO_ITEM_REGEX = "^http:[/\\\\]{2}item\\.taobao\\.com[/\\\\]item.htm";
-	private static final String PAIPAI_ITEM_REGEX = "^http:[/\\\\]{2}auction1\\.paipai\\.com[/\\\\]search";
+	private static final String PAIPAI_ITEM_REGEX = "^http:[/\\\\]{2}auction\\d\\.paipai\\.com[/\\\\]";
 	private static final String YOUA_ITEM_REGEX = "^http:[/\\\\]{2}youa.baidu\\.com[/\\\\]item";
 
 	// 账号获取
 	private static final String TAOBAO_USER_REGEX = "data\\-nick=\"(.+)\" data-tnick=";
-	private static final String PAIPAI_USER_REGEX = "<litagid='HOME_PAGE'><ahref='http://(\\d+)\\.paipai\\.com/";
-	private static final String YOUA_USER_REGEX = "uname=\"([[\u0391-\uFFE5]\\w_]+)\"";
+	// private static final String PAIPAI_USER_REGEX =
+	// "<litagid='HOME_PAGE'><ahref='http://(\\d+)\\.paipai\\.com/";
+	// private static final String YOUA_USER_REGEX =
+	// "uname=\"([[\u0391-\uFFE5]\\w_]+)\"";
 
 	// 信誉地址验证
 	private static final String TAOBAO_CREDIT_URL = "^http:[/\\\\]{2}rate\\.taobao\\.com[/\\\\]rate.htm\\?user_id=\\d+";
@@ -210,12 +213,12 @@ public final class HttpB2CUtils {
 		if (!obtainItemType(url).equals(type)) {
 			return "";
 		}
-		HttpEntity entity = getContext(url, type);
-		BufferedReader br = new BufferedReader(new InputStreamReader(entity
-				.getContent(), "GBK"));
-		String line;
 		// 淘宝
 		if ("1".equals(type)) {
+			HttpEntity entity = getContext(url, type);
+			BufferedReader br = new BufferedReader(new InputStreamReader(entity
+					.getContent(), "GBK"));
+			String line;
 			Pattern pattern = Pattern.compile(TAOBAO_USER_REGEX);
 			Matcher matcher;
 			OUTTER: while ((line = br.readLine()) != null) {
@@ -225,34 +228,32 @@ public final class HttpB2CUtils {
 					break OUTTER;
 				}
 			}
+			if (br != null) {
+				br.close();
+			}
+			if (entity != null) {
+				entity.consumeContent();
+			}
 		}
 		// 拍拍
 		else if ("2".equals(type)) {
-			Pattern pattern = Pattern.compile(PAIPAI_USER_REGEX);
-			Matcher matcher;
-			OUTTER: while ((line = br.readLine()) != null) {
-				line = StringUtils.replaceBlank(line.replaceAll("\"", "'"));
-				matcher = pattern.matcher(line);
-				while (matcher.find()) {
-					seller = URLDecoder.decode(matcher.group(1), "UTF-8");
-					break OUTTER;
-				}
+			Map nameSpaces = new HashMap();
+			nameSpaces.put("xmlns", "http://www.w3.org/1999/xhtml");
+			Node node = getOneNodeByDom4j(
+					url,
+					"//xmlns:UL[@class='ulist_basic']/xmlns:LI[1]/xmlns:SPAN[@class='uc nickname']",
+					nameSpaces);
+			if (node != null) {
+				seller = node.getText().trim().replaceAll("[\\(\\)]", "");
 			}
 		}
 		// 有啊
 		else if ("3".equals(type)) {
-			Pattern pattern = Pattern.compile(YOUA_USER_REGEX);
-			Matcher matcher;
-			OUTTER: while ((line = br.readLine()) != null) {
-				matcher = pattern.matcher(line);
-				while (matcher.find()) {
-					seller = URLDecoder.decode(matcher.group(1), "UTF-8");
-					break OUTTER;
-				}
+			Node node = getOneNodeByDom4j(url, "//LI[@class='uname']/A[1]",
+					null);
+			if (node != null) {
+				seller = node.getText().trim();
 			}
-		}
-		if (entity != null) {
-			entity.consumeContent();
 		}
 		return seller;
 	}
@@ -328,7 +329,9 @@ public final class HttpB2CUtils {
 						break OUTTER;
 					}
 				}
-				br.close();
+				if (br != null) {
+					br.close();
+				}
 				httpget.abort();
 				httpclient.getConnectionManager().shutdown();
 			}

@@ -63,6 +63,7 @@ $(document).ready(function() {
 					});
 			// 类型选择
 			$("#platformType").bind("change", function() {
+						//清除地址绑定的数据
 						if ($("[name='type']").val() == "1") {
 							if ($("#platformType").val() == "3") {
 								$("#creditURL").attr("disabled", true);
@@ -168,9 +169,6 @@ function obtainSellerByShop(type, obj) {
 		changeStyle(obj, '0', '您输入的格式不地址格式不正确，最好复制在浏览器地址栏里面复制后粘贴,如还有疑问，请联系客户！');
 		return;
 	}
-	if ($(obj).data("nowUrl") == shopURL) {
-		return;
-	}
 	if ($("input[platformType='" + type + "'][shopUrl='" + shopURL + "']")
 			.size() > 0) {
 		changeStyle(obj, '0', '已经存在该店铺！');
@@ -199,7 +197,6 @@ function obtainSellerByShop(type, obj) {
 						$("#huoquUser").text("(失败)");
 					}
 					changeStyle(obj, '1', '该地址可以使用！');
-					$(obj).data("nowUrl", $(obj).val());
 					input.val(data.seller);
 					$("#huoquUser").text("");
 					$("#huoquUser").hide();

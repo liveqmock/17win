@@ -316,9 +316,7 @@
 							<tr
 								style="WIDTH: 98%; LINE-HEIGHT: 40px; PADDING-TOP: 10px; HEIGHT: 40px; TEXT-ALIGN: center">
 								<td colspan="7">
-									您当前还没有在
-									<s:property value="#request.platform" />
-									发布区接手过任务，
+									没有记录！
 									<font color="red"><a
 										href="taskManager/task!initTask.php?platformType=<s:property value="#request.platformType"/>">点此进入发布任务</a>
 									</font>

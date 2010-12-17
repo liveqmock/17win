@@ -113,7 +113,7 @@
 						</tr>
 						<s:iterator value="#request.result" status="status" id="task">
 							<tr
-								<s:if test="#task[14]!=null">  style="background: #FFA1A1" </s:if>>
+								<s:if test="#task[14]!=null">  style="background: #FFEAEA" </s:if>>
 								<td valign="top" align="center">
 									<s:property value="#task[0]" />
 									<br>
@@ -190,7 +190,7 @@
 							</tr>
 
 							<TR
-								<s:if test="#task[14]!=null">  style="background: #FFA1A1" </s:if>>
+								<s:if test="#task[14]!=null">  style="background: #FFEAEA" </s:if>>
 								<TD align="left" colspan="6">
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									<font color="red" style="font-weight: bold;"> 任务描述：<s:property
