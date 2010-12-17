@@ -165,16 +165,16 @@ img {
 														</td>
 													</tr>
 													<tr style="background: #EDF6FF">
-														<th height="10" nowrap="nowrap" align="center"
-															width="33.3%">
+														<th height="10" nowrap="nowrap" align="center" width="25%">
 															买号
 														</th>
-														<th height="10" nowrap="nowrap" align="center"
-															width="33.3%">
+														<th height="10" nowrap="nowrap" align="center" width="25%">
 															信誉值
 														</th>
-														<th height="10" nowrap="nowrap" align="center"
-															width="33.3%">
+														<th height="10" nowrap="nowrap" align="center" width="25%">
+															信誉地址
+														</th>
+														<th height="10" nowrap="nowrap" align="center" width="25%">
 															是否可用
 														</th>
 													</tr>
@@ -188,6 +188,14 @@ img {
 															</td>
 															<td height="10" align="center">
 																<s:property value="#buyer.score" />
+															</td>
+															<td height="10" align="center">
+																<s:if test="#buyer.creditURL==null  || #buyer.creditURL==''">
+																			N/A
+																</s:if>
+																<s:else>
+																	<s:property value="#buyer.creditURL" />
+																</s:else>
 															</td>
 															<td height="10" align="center">
 																<s:if test="#buyer.enable">
@@ -273,6 +281,7 @@ img {
 							<input type="text" id="sellerName" name="userVO.seller.name"
 								readonly="readonly">
 							<span id="huoquUser" style="display: none"></span>
+							<font color="red">(拍拍为QQ号码)</font>
 						</td>
 					</tr>
 					<tr class="sellerClass">
@@ -304,7 +313,7 @@ img {
 						<td valign="middle">
 							<input type="text" id="buyerName" onblur="obtainBuyer(this)"
 								name="userVO.buyer.name">
-							<font color="red">(拍拍的买号名为信誉页面的QQ的昵称)</font>
+							<font color="red">(拍拍为QQ号码)</font>
 						</td>
 					</tr>
 					<tr style="display: none" class="buyerClass">
@@ -313,7 +322,7 @@ img {
 						</td>
 						<td valign="middle">
 							<input type="text" id="creditURL" name="userVO.buyer.creditURL">
-							<font color="red">(仅支持淘宝,拍拍，有问题联系客户,拍拍不能为掌柜)</font>
+							<font color="red">(仅支持淘宝，拍拍，有问题联系客户,拍拍买好不能同时为掌柜)</font>
 						</td>
 					</tr>
 					<tr>

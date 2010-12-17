@@ -48,12 +48,27 @@ $(document).ready(function() {
 							$('.buyerClass input select').attr("disabled",
 									false);
 						} else {
+							if ($("#platformType").val() == "3") {
+								$("#creditURL").attr("disabled", true);
+							} else {
+								$("#creditURL").attr("disabled", false);
+							}
 							$('.sellerClass').hide();
 							$('.buyerClass').show();
 							$('.sellerClass input select').attr("disabled",
 									false);
 							$('.buyerClass input select')
 									.attr("disabled", true);
+						}
+					});
+			// 类型选择
+			$("#platformType").bind("change", function() {
+						if ($("[name='type']").val() == "1") {
+							if ($("#platformType").val() == "3") {
+								$("#creditURL").attr("disabled", true);
+							} else {
+								$("#creditURL").attr("disabled", false);
+							}
 						}
 					});
 
@@ -103,6 +118,17 @@ function validateForm() {
 		}
 	} else {
 		$(".buyerClass input[type='text']").blur();
+		if ($("#platformType").val() == "2") {
+			var creditURL = $("#creditURL").val();
+			var buyerName = $("#buyerName").val();
+			if (creditURL.endWith("&")) {
+				buyerName = buyerName + "&";
+			}
+			if (!creditURL.endWith(buyerName)) {
+				alert("QQ号码和你的信誉地址不同！");
+				return false;
+			}
+		}
 		if (!submitFlag) {
 			alert("填写的资料不正确！");
 			return false;

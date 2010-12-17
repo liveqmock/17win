@@ -322,15 +322,7 @@ public final class HttpB2CUtils {
 				Matcher matcher2;
 				OUTTER: while ((line = br.readLine()) != null) {
 					line = line.replaceAll("\"", "'");
-					matcher = buyerPattern.matcher(line);
 					matcher2 = scorePattern.matcher(line);
-					while (matcher.find()) {
-						buyer = matcher.group(1);
-						if (!buyer.equals(username)) {
-							score = -1;
-							break OUTTER;
-						}
-					}
 					while (matcher2.find()) {
 						score = Integer.parseInt(matcher2.group(1));
 						break OUTTER;
