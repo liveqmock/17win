@@ -198,17 +198,17 @@ var files = "";
 var links = "";
 var texts = "";
 
-linkarr[1] = "user/login.html";
-picarr[1] = "images/indexSlider/20098138353780097.gif";
-textarr[1] = "新平台更加稳定，更加人性化，操作更方便！";
-linkarr[2] = "user/login.html";
-picarr[2] = "images/indexSlider/20098138453136263.gif";
-textarr[2] = "想刷就刷，刷的开心，刷的放心！";
+linkarr[1] = "taskManager/task!initTask.php?platformType=1";
+picarr[1] = "images/indexSlider/slider1.gif";
+textarr[1] = "新平台更加稳定，更加人性化，操作更方便"; 
+linkarr[2] = "logisticsManager/logistics!queryLogisticsLog.php";
+picarr[2] = "images/indexSlider/slider2.gif";
+textarr[2] = "真实物流信息您做主！";
 linkarr[3] = "user/login.html";
-picarr[3] = "images/indexSlider/20098138461028694.gif";
+picarr[3] = "images/indexSlider/slider3.gif";
 textarr[3] = "互刷改变你生活，永久免费";
-linkarr[4] = "user/login.html";
-picarr[4] = "images/indexSlider/20098138463632056.gif";
+linkarr[4] = "taskManager/task!initTask.php?platformType=1";
+picarr[4] = "images/indexSlider/slider4.gif";
 textarr[4] = "边做生意边刷信誉";
 for(i=1;i<picarr.length;i++){
   if(files=="") files = picarr[i];
