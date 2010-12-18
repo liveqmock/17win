@@ -34,6 +34,8 @@ public class TokenInterceptor extends AbstractInterceptor {
 		INCLUDE_TOKEN_VALIDATION_URL
 				.add("withdrawalsManager/withdrawals!withdrawals.php");
 		INCLUDE_TOKEN_VALIDATION_URL.add("smsManager/sms!sendTelphone.php");
+
+		INCLUDE_TOKEN_VALIDATION_URL.add("taskManager/task!releaseTask.php");
 	}
 
 	@Override
@@ -59,9 +61,7 @@ public class TokenInterceptor extends AbstractInterceptor {
 				} else {
 					flag = tokenValue.equals(session
 							.getAttribute(Constant.WIN17_TOKEN));
-					if (flag) {
-						session.removeAttribute(Constant.WIN17_TOKEN);
-					}
+					session.removeAttribute(Constant.WIN17_TOKEN);
 				}
 				break;
 			}

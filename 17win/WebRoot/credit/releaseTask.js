@@ -60,29 +60,18 @@ $(document).ready(function() {
 				$(obj).data("nowUrl", $.trim($(obj).val()));
 			});
 	$("#itemUrl").bind("blur", function() {
-		if (typeof($(this).data("oldURL")) != "undefined"
-				&& $(this).data("oldURL") == $(this).val()) {
-			return;
-		}
-		// 如果有被选中的
-		if ($("input[name='creditTaskVO.sellerID']:checked").size() > 0) {
-			$("input[name='creditTaskVO.sellerID']").attr("disabled", false);
-			return;
-		}
+
 		var obj = this;
 		var platformType = $("#platformType").val();
 		// 去掉空格
 		$(obj).val($.trim($(obj).val()));
-		$("#itemUrl").data("oldURL", $(obj).val());
+
 		// 获取seller input
 		if (!Validater.isItem($(obj).val(), platformType)) {
 			submitFlag = false;
 			alert("您输入的格式不地址格式不正确，最好复制在浏览器地址栏里面复制后粘贴,如还有疑问，请联系客户！");
 			changeStyle(obj, '0',
 					'您输入的格式不地址格式不正确，最好复制在浏览器地址栏里面复制后粘贴,如还有疑问，请联系客户！');
-			return;
-		}
-		if ($(obj).data("nowUrl") == $(obj).val()) {
 			return;
 		}
 		// 获取用户地址
@@ -92,8 +81,8 @@ $(document).ready(function() {
 				}, function(data) {
 					if (data.seller == null || data.seller == "") {
 						submitFlag = false;
-						alert("您输入的地址不正确！");
-						changeStyle(obj, '0', '您输入的地址不正确！');
+						alert("您输入的地址和您的掌柜不匹配！");
+						changeStyle(obj, '0', '您输入的地址和您的掌柜不匹配！');
 					} else {
 						var flag = false;
 						var selectRadio = null;
@@ -106,14 +95,11 @@ $(document).ready(function() {
 									}
 								});
 						if (flag) {
-							$("input[name='creditTaskVO.sellerID']").attr(
-									"disabled", false);
 							changeStyle(obj, '1', '');
 							selectRadio.attr("checked", true);
-							$(obj).data("nowUrl", $(obj).val());
 						} else {
-							alert("输入的地址和您的卖家账号不相同！");
-							changeStyle(obj, '0', '输入的地址和您的卖家账号不相同！');
+							alert("您输入的地址和您的掌柜不匹配！");
+							changeStyle(obj, '0', '您输入的地址和您的掌柜不匹配！');
 							submitFlag = false;
 						}
 					}
@@ -214,12 +200,13 @@ function validateForm() {
 		return false;
 	}
 	submitFlag = true;
-	$("input").blur();
+	$("input[name!='creditTaskVO.itemUrl']").blur();
 	// 验证和第一次加载都为真
 	if (submitFlag) {
-		var action = $("form").attr("action") + "?platformType="
-				+ $("#platformType").val();
-		$("form").attr("action", action);
+		$("input[name='creditTaskVO.sellerID']").attr("disabled", false);
+		// var action = $("form").attr("action") + "?platformType="
+		// + $("#platformType").val();
+		// $("form").attr("action", action);
 		return true;
 	} else {
 		alert("您填写的信息不正确，请检查！");

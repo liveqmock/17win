@@ -1,5 +1,7 @@
 package net.win.service.task;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -1094,7 +1096,8 @@ public class CreditTaskService extends BaseService {
 			return "insertReleaseTaskFail";
 		}
 		if (StringUtils.isBlank(platFormType)) {
-			WinUtils.throwIllegalityException("视图越过发布任务的任务类型验证！");
+			WinUtils.throwIllegalityException(userEntity.getUsername()
+					+ "视图越过发布任务的任务类型验证！");
 			return "insertReleaseTaskFail";
 		}
 		if (creditTask.getMoney() + creditTask.getAddtionMoney() > userEntity
@@ -1187,9 +1190,9 @@ public class CreditTaskService extends BaseService {
 				.getAddtionMoney()), "发布任务", userEntity);
 		logDotCapital(userDAO, 0 - (creditTaskDot + creditTaskVO
 				.getAddtionReleaseDot()), "发布任务", userEntity);
-
-		putDIV("");
-		return "insertReleaseTaskSuccess";
+		putJumpOutterPage("taskManager/task!initReleaseTask.php?platformType="+platFormType);
+		putAlertMsg("发布任务成功!");
+		return JUMP; 
 	}
 
 	/**
@@ -1199,6 +1202,7 @@ public class CreditTaskService extends BaseService {
 	 * @return
 	 */
 	public String initReleaseTask(CreditTaskVO creditTaskVO) throws Exception {
+
 		// 没有操作码验证就验证
 		String platformType = getPlatformType();
 		if ("1".equals(platformType)) {
@@ -1244,7 +1248,7 @@ public class CreditTaskService extends BaseService {
 					SellerVO sellerVO = new SellerVO();
 					BeanUtils.copyProperties(sellerVO, sellerEntity);
 					resultSellers.add(sellerVO);
-				}  
+				}
 			} else {
 				putAlertMsg("您还没有为【"
 						+ WinUtils.changeType2Platform(platformType)
@@ -1271,6 +1275,7 @@ public class CreditTaskService extends BaseService {
 			putPlatformTypeByRequest(platformType);
 			putByRequest("sellers", resultSellers);
 			putByRequest("resultTaskReps", resultTaskReps);
+			putTokenBySession();
 			return "initReleaseTask";
 		}
 	}

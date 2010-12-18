@@ -146,6 +146,8 @@
 																		<s:textfield name="creditTaskVO.money" size="10"
 																			id="money" maxlength="6"
 																			onkeyup="if(isNaN(value))execCommand('undo')"></s:textfield>
+																		<input type="hidden" name="win17_token"
+																			value="<s:property value="#session.win17_token"/>">
 																		元(最长6位)&nbsp;&nbsp;
 																		<font color="red">注意：此价格是包含运费的总价格
 																			1-40元，扣一个发布点；40-100元(扣2个发布点；100-200元(扣3个发布点)
@@ -320,8 +322,9 @@
 																		附加金额：
 																	</td>
 																	<td colspan="2">
-																		<s:textfield name="creditTaskVO.addtionMoney"  maxLength="3"
-																			cssStyle="width:40px" id="addtionMoneyId"></s:textfield>
+																		<s:textfield name="creditTaskVO.addtionMoney"
+																			maxLength="3" cssStyle="width:40px"
+																			id="addtionMoneyId"></s:textfield>
 																		<span class="red-bcolor">可以附加金额给接手方</span>
 																	</td>
 																</tr>
@@ -330,8 +333,9 @@
 																		附加发布点：
 																	</td>
 																	<td colspan="2">
-																		<s:textfield name="creditTaskVO.addtionReleaseDot" maxLength="3"
-																			cssStyle="width:40px" id="addtionReleaseDotId"></s:textfield>
+																		<s:textfield name="creditTaskVO.addtionReleaseDot"
+																			maxLength="3" cssStyle="width:40px"
+																			id="addtionReleaseDotId"></s:textfield>
 																		<span class="red-bcolor">可以附加发布点给接手方</span>
 																	</td>
 																</tr>
@@ -408,28 +412,5 @@
 			</table>
 			<s:include value="../common/footDuan.jsp"></s:include>
 		</s:form>
-		<s:if test="#request.div!=null">
-			<div id="releaseDIV" title="发布任务成功">
-				<table border="0" cellpadding="0" cellspacing="0">
-					<tr>
-						<td nowrap="nowrap" colspan="2">
-							您的任务发布已经发布成功！
-						</td>
-					</tr>
-					<tr>
-						<td align="center">
-							<a id="toTaskPage" class="btnClass"
-								href="taskManager/task!initTask.php?platformType=<s:property value="#request.platformType"/>">跳转到互动区</a>
-
-						</td>
-						<td align="center">
-							<input type="button" class="btnClass" id="closeDIVBtn"
-								value="继续发布任务" />
-						</td>
-
-					</tr>
-				</table>
-			</div>
-		</s:if>
 	</BODY>
 </html>
