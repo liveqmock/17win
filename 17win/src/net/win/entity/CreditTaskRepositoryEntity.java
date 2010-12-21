@@ -32,7 +32,7 @@ public class CreditTaskRepositoryEntity extends BaseEntity {
 	@Column(name = "PROTECT_", nullable = false)
 	private Boolean protect;
 	// 商品地址
-	@Column(name = "ITEM_URL_", length = 50, nullable = false)
+	@Column(name = "ITEM_URL_", length = 255, nullable = false)
 	private String itemUrl;
 	// 是否修改价格
 	@Column(name = "UPDATE_PRICE_", nullable = false)
