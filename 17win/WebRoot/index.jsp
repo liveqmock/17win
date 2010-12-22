@@ -75,11 +75,11 @@
 											class="LeftNews">
 											<tbody>
 												<tr>
-													<td>
+													<td> 
 														用户名：
 													</td>
 													<td>
-														<input type="text" name="userVO.userEntity.username"
+														<input type="text" name="userVO.userEntity.username"  
 															size="30" maxlength="12" value="" tabindex="0"
 															id="username" style="width: 120px;">
 														<span><img title="验证成功" src="images/icon_ok.gif">

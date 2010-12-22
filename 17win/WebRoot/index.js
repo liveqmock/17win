@@ -24,83 +24,10 @@ $(document).ready(function() {
 	// //// ajax
 	$.getJSON("userManager/base!getLoginUser.php?time=" + new Date().getTime(),
 			function(data) {
-				if (data == null) {
+				if (data == null || data.loginInfo==null) {
 					return;
 				}
-				var user = data.loginInfo;
-				var tdNo = "<span class='yell_font'>您还没登录！</span> "
-						+ "	<a target='_top' href='user/login.html'>登陆</a> | <a target='_top' href='userManager/base!initRegister.php'>注册</a> | "
-						+ " <a  href='javascript:window.external.addFavorite(\"http://www.17win.net\",\"淘宝刷信誉\");'	title='添加到收藏夹'>[收藏本站]</a> ";
-				var tableNo = "<table width='100%' cellspacing='0' cellpadding='0' border='0' class='LeftNews'>"
-						+ "		<tbody><tr> "
-						+ "			<td> "
-						+ "				用户名： "
-						+ "			</td> "
-						+ "			<td> "
-						+ "				<input type='text' style='width: 120px;' id='username' tabindex='0' value='' maxlength='12' size='30' name='userVO.userEntity.username'> "
-						+ "				<span><img src='images/icon_ok.gif' title='验证成功'></span> "
-						+ "			</td> "
-						+ "		</tr> "
-						+ "		<tr> "
-						+ "			<td> "
-						+ "				密 码： "
-						+ "			</td> "
-						+ "		<td> "
-						+ "				<input type='password' style='width: 120px;' id='password' maxlength='20' size='30' name='userVO.userEntity.loginPassword'> "
-						+ "				<span> </span> "
-						+ "			</td> "
-						+ "		</tr> "
-						+ "		<tr> "
-						+ "			<td> "
-						+ "				验证码： "
-						+ "			</td> "
-						+ "			<td> "
-						+ "				<input type='text' style='width: 60px;' id='verificationCode' value='' maxlength='4' size='30' name='userVO.verificationCode'> "
-						+ "				<img style='cursor: pointer;' title='点击图片刷新验证码' onclick='changeValidateCode(this)' src='verify/verificationCode.php?time="+new Date().getTime()+"'> "
-						+ "				<span> </span> "
-						+ "			</td> "
-						+ "		</tr> "
-						+ "	 <tr> "
-						+ "	<td nowrap='nowrap' colspan='2'> "
-						+ "		<input type='image' border='0' onfocus='this.blur()' src='images/login-q_r4_c3.gif' name='imageField'> "
-						+ "		<a href='userManager/base!initRegister.php'><img vspace='0' hspace='5' border='0' src='images/login-q_r4_c31.gif'> </a> "
-						+ "		<a border='0' id='findPWA' href='javascript:void(0);'>找回密码</a> "
-						+ "	</td> " + "	</tr>  	</tbody></table>";
-				if (user == null) {
-					$("#userLoginId").html(tdNo);
-					$("#tableLoginUserInfoID").html(tableNo);
-					$("#username").focus();
-					// 用户名
-					$("#username").bind("blur", function() {
-								var obj = this;
-								if (Validater.isName($(this).val(), 4, 12)) {
-									validateSuccess(obj);
-								} else {
-									validateError(this,
-											"用户名必须4-12个字符的字母、汉字、数字、下划线！");
-									submitFlag = false;
-								}
-							});
-					// 密码
-					$("#password").bind("blur", function() {
-								if (Validater.isPassword($(this).val())) {
-									validateSuccess(this);
-								} else {
-									validateError(this, "密码格式不正确，必须为6至20位字符！");
-									submitFlag = false;
-								}
-							});
-					// 验证码
-					$("#verificationCode").bind("blur", function() {
-								if ($(this).val().length == 4) {
-									validateSuccess(this);
-								} else {
-									submitFlag = false;
-								}
-							});
-					return;
-				}
-
+				var user=data.loginInfo;
 				var tdYes = "<span class='yell_font'>欢迎您！</span> "
 						+ "			<font color='red'><b>"
 						+ user.username

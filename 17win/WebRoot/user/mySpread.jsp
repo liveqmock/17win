@@ -154,12 +154,7 @@ img {
 												<th style="font-size: 12px">
 													注册时间
 												</th>
-												<th style="font-size: 12px">
-													现在积分
-												</th>
-												<th style="font-size: 12px">
-													现在发布点
-												</th>
+											 
 											</tr>
 										</thead>
 										<tbody>
@@ -184,17 +179,11 @@ img {
 														<td>
 															<s:property value="#user.registerTime" />
 														</td>
-														<td>
-															<s:property value="#user.convertScore" />
-														</td>
-														<td>
-															<s:property value="#user.releaseDot" />
-														</td>
 													</tr>
 												</s:iterator>
 												<tfoot>
 													<tr>
-														<th colspan="8">
+														<th colspan="5">
 															首页&nbsp;&nbsp;上一页&nbsp;&nbsp;下一页&nbsp;&nbsp;末页
 														</th>
 													</tr>
@@ -203,7 +192,7 @@ img {
 											<s:else>
 												<tfoot>
 													<tr>
-														<th colspan="7" style="font-size: 12px" align="center">
+														<th colspan="5" style="font-size: 12px" align="center">
 															<A href="userInfoManager/info!referee.php"
 																target="_blank">您当前没有推广:现在马上就去推广吧!</A>
 														</th>

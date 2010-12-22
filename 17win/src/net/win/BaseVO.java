@@ -54,7 +54,7 @@ public class BaseVO {
 	}
 
 	public Integer getPageCount() {
-		pageCount = (dataCount + eachPage) / eachPage;
+		pageCount = (dataCount + eachPage-1) / eachPage;
 		return pageCount;
 	}
 

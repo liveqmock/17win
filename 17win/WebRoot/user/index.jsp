@@ -196,7 +196,7 @@ img {
 																	等待我付款
 																</th>
 																<th style="background: #D1ECF9">
-																	等待买家发货
+																	等待卖家发货
 																</th>
 																<th style="background: #D1ECF9">
 																	等待我收货好评

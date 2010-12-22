@@ -399,7 +399,7 @@ public class CreditTaskService extends BaseService {
 			Long taskId = Long.parseLong(getByParam("taskId"));
 			CreditTaskEntity creditTask = creditTaskDAO.get(taskId);
 			UserEntity receiveUser = creditTask.getReceivePerson();
-			UserEntity releaEntity = creditTask.getReleasePerson();
+			UserEntity releaseUser = creditTask.getReleasePerson();
 			if (creditTask.getStatus().equals(TaskMananger.STEP_SIX_STATUS)) {
 				putAlertMsg("已经好评，不要重复提交！");
 				putJumpPage("taskManager/task!initReleasedTast.php?platformType="
@@ -421,20 +421,20 @@ public class CreditTaskService extends BaseService {
 			/**
 			 * 修改积分发送人
 			 */
-			VipEntity releaseUserVip = releaEntity.getVip();
-			VipBidUserEntity releaseVipBidUser = releaEntity
+			VipEntity releaseUserVip = releaseUser.getVip();
+			VipBidUserEntity releaseVipBidUser = releaseUser
 					.getVipBidUserEntity();
 			Integer releaseScore = StrategyUtils.getReleaseUserTaskScore(
-					releaseUserVip, releaEntity.getVipEnable());
-			releaEntity.setUpgradeScore(releaEntity.getUpgradeScore()
+					releaseUserVip, releaseUser.getVipEnable());
+			releaseUser.setUpgradeScore(releaseUser.getUpgradeScore()
 					+ releaseScore);
-			releaEntity.setConvertScore(releaEntity.getConvertScore()
+			releaseUser.setConvertScore(releaseUser.getConvertScore()
 					+ releaseScore);
 			logScoreCapital(userDAO, releaseScore + 0.0, "您发起的"
-					+ creditTask.getTestID() + "任务完成，获得积分", releaEntity);
+					+ creditTask.getTestID() + "任务完成，获得积分", releaseUser);
 
 			// 是会员
-			if (releaEntity.getVipEnable() && releaseUserVip != null) {
+			if (releaseUser.getVipEnable() && releaseUserVip != null) {
 				releaseVipBidUser.setGrowValue(releaseVipBidUser.getGrowValue()
 						+ releaseUserVip.getReleaseGrowValue());
 			}
@@ -475,20 +475,20 @@ public class CreditTaskService extends BaseService {
 			/**
 			 * 计算发布和任务数
 			 */
-			releaEntity
-					.setReleaseTaskCount(releaEntity.getReleaseTaskCount() + 1);
+			releaseUser
+					.setReleaseTaskCount(releaseUser.getReleaseTaskCount() + 1);
 			receiveUser
-					.setReceiveTaskCount(releaEntity.getReceiveTaskCount() + 1);
+					.setReceiveTaskCount(receiveUser.getReceiveTaskCount() + 1);
 			/**
 			 * 计算会员成长值 和升级
 			 */
-			if (releaseUserVip != null && releaEntity.getVipEnable()) {
+			if (releaseUserVip != null && releaseUser.getVipEnable()) {
 				releaseVipBidUser.setGrowValue(releaseVipBidUser.getGrowValue()
 						+ StrategyUtils.getReleaseGrowValue(releaseUserVip));
 				String vipType = StrategyUtils.getVipType(releaseVipBidUser
 						.getGrowValue());
 				if (!releaseUserVip.getType().equals(vipType)) {
-					releaEntity.setVip(vipDAO.getVIPByType(vipType));
+					releaseUser.setVip(vipDAO.getVIPByType(vipType));
 				}
 			}
 			if (receiveUserVip != null && receiveUser.getVipEnable()) {
@@ -536,7 +536,7 @@ public class CreditTaskService extends BaseService {
 					receiveUser);
 
 			// 更新信息
-			updateUserLoginInfo(releaEntity);
+			updateUserLoginInfo(releaseUser);
 			updateOtherUserLoginInfo(receiveUser);
 			return JUMP;
 		}
