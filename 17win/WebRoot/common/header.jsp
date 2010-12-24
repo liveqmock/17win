@@ -5,6 +5,7 @@
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
+<link href="http://www.17win.net/favicon.ico" rel="shortcut icon" />
 <META http-equiv=Content-Type content="text/html; charset=UTF-8">
 <base href="<%=basePath%>">
 <title>淘宝刷信誉 -淘宝刷钻 _刷钻平台_互刷平台_免费刷钻首选17win平台</title>

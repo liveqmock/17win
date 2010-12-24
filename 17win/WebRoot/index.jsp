@@ -17,6 +17,7 @@
 			response.setHeader("Expires", "0");
 			response.setDateHeader("Expires", 0);// 这个是针对代理的？但我设置后还是没达到效果。不解！！
 		%>
+		<link href="http://www.17win.net/favicon.ico" rel="shortcut icon" />
 		<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
 		<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
 		<META HTTP-EQUIV="Expires" CONTENT="0">
