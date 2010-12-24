@@ -2,6 +2,7 @@ package net.win.utils;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +42,7 @@ public final class MsgUtils {
 	public static void sendMsg(String telphone, String msg) throws Exception {
 		// http://service.winic.org:8009/sys_port/gateway/?id=userid&pwd=password&to=接收短信手机号码&content=短信内容
 		DefaultHttpClient httpclient = new DefaultHttpClient();
+		msg = URLEncoder.encode(msg);
 		HttpGet httpget = new HttpGet(
 				"http://service.winic.org:8009/sys_port/gateway/?id=xgj1988&pwd=8868829xgj&to="
 						+ telphone + "&content=" + msg);
@@ -55,8 +57,10 @@ public final class MsgUtils {
 		BufferedReader br = new BufferedReader(new InputStreamReader(response
 				.getEntity().getContent()));
 		String result = br.readLine();
-		if (result != null && !"000".equals(br.readLine())) {
-			throw new RuntimeException("发送手机错误 代码列表查看MsgUtils类，错误，错误代码:" + br.readLine());
+		if (result != null && "null".equals(result)
+				&& !"000".equals(br.readLine())) {
+			throw new RuntimeException("发送手机错误 代码列表查看MsgUtils类，错误，错误代码:"
+					+ br.readLine());
 		}
 		br.close();
 		httpclient.getConnectionManager().shutdown();

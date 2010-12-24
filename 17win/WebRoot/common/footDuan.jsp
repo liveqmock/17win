@@ -110,8 +110,8 @@
 		</TD>
 		<TD align=middle width=539>
 			<div align="center">
-				CopyRight 2009-2010, jieducm.cn, Inc. All Rights Reserved
-				豫ICP备05329849号
+				CopyRight 2010-2011, www.17win.net, Inc. All Rights Reserved
+				黔ICP备1020110
 				<br />
 				本站服务导航:
 				<a href="http://www.17win.net/" target="_blank">淘宝刷信誉</a>|

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.TreeMap;
 
 import javax.annotation.Resource;
@@ -22,6 +23,7 @@ import net.win.utils.ArithUtils;
 import net.win.utils.Constant;
 import net.win.utils.HttpB2CUtils;
 import net.win.utils.MailUtils;
+import net.win.utils.MsgUtils;
 import net.win.utils.StrategyUtils;
 import net.win.utils.StringUtils;
 import net.win.utils.TotalUtils;
@@ -171,8 +173,7 @@ public class UserInfoService extends BaseService {
 
 		putByRequest("scoreChangeReleaseDot", Constant
 				.getScoreChangeReleaseDot());
-		
-		
+
 		putTokenBySession();
 		return "initExchange";
 	}
@@ -280,9 +281,10 @@ public class UserInfoService extends BaseService {
 			Boolean buyerExists = (0 == (Long) buyerDAO
 					.uniqueResultObject(
 							"select count(*) from  BuyerEntity as _buyer where _buyer.name=:buyerName and _buyer.type=:platformType and _buyer.user.id=:userID",
-							new String[] { "buyerName", "platformType","userID" },
-							new Object[] { buyerEntity.getName(),
-									platformTypeParam ,userEntity.getId()}));
+							new String[] { "buyerName", "platformType",
+									"userID" }, new Object[] {
+									buyerEntity.getName(), platformTypeParam,
+									userEntity.getId() }));
 			if (!buyerExists) {
 				putAlertMsg(buyerEntity.getName() + "已被使用！");
 				return "insertSellerAndBuyer";
@@ -395,7 +397,12 @@ public class UserInfoService extends BaseService {
 	 * @throws Exception
 	 */
 	public String sendActiave(UserVO userVO) throws Exception {
-		putBySession(Constant.USER_ACTIVE_CODE_INFO, "123456");
+		UserEntity user = getLoginUserEntity(userDAO);
+		Random random = new Random();
+		String value = random.nextInt(1000000)+"";
+		putBySession(Constant.USER_ACTIVE_CODE_INFO, value);
+		MsgUtils.sendMsg(user.getTelephone(), user.getUsername() + "您好，这里是来至www.17win.net的信息(一起赢刷钻网)，您的激活码是："
+				+ value+"");
 		putAlertMsg("激活码已成功的发送到您手机上，请查看后输入！");
 		putByRequest("activeCode", "3");
 		return "sendActiave";
@@ -437,9 +444,9 @@ public class UserInfoService extends BaseService {
 		// 一钻
 		putByRequest("zuanshikaPrice", Constant.getZuanshiPrice());
 		putByRequest("zuanshiCount", Constant.getZuanshiNumber());
-		
+
 		putTokenBySession();
-		
+
 		return "initBuyDot";
 	}
 

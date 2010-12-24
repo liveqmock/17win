@@ -7,17 +7,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Random;
 
-import net.win.utils.StringUtils;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicHeader;
 import org.cyberneko.html.parsers.DOMParser;
 import org.dom4j.Document;
 import org.dom4j.Node;
@@ -75,16 +66,9 @@ public class Test {
 	}
 
 	public static void main(String[] argv) throws Exception {
-		String str = "<span tagvar='buyer'  score='20' tag='userGrade' >";
-		Pattern scorePattern = Pattern
-				.compile("<span tagvar='buyer'  score='(\\d+)' tag='userGrade' >");
-
-		Matcher matcher = scorePattern.matcher(str);
-		while (matcher.find()) {
-			System.out.println(matcher.group(1));
-		}
-		System.out.println("over");
-
+		Random a = new Random();
+		System.out.println(a.nextInt(1000000));
+ 
 	}
 
 	public static Document getDoc(String url) {
