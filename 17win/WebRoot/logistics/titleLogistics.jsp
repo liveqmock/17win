@@ -16,9 +16,9 @@
 			response.setHeader("Expires", "0");
 			response.setDateHeader("Expires", 0);// 这个是针对代理的？但我设置后还是没达到效果。不解！！
 		%>
-		 <link href="favicon.ico" rel="shortcut icon" />
-	 
-	 
+		<link href="favicon.ico" rel="shortcut icon" />
+
+
 		<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
 		<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
 		<META HTTP-EQUIV="Expires" CONTENT="0">
@@ -139,6 +139,20 @@ img {
 							<td>
 								提&nbsp;&nbsp;交&nbsp;&nbsp;人：
 								<s:textfield name="logisticsVO.releaseUsername"></s:textfield>
+							</td>
+							<td>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								发货信息：
+								<s:textfield name="logisticsVO.releaseInfo" id="releaseInfo"
+									 >
+								</s:textfield>
+							</td>
+							<td>
+								收货信息：
+								<s:textfield name="logisticsVO.receieveInfo" id="receieveInfo"></s:textfield>
 							</td>
 							<td>
 								<input type="submit" value="查&nbsp;&nbsp;询"

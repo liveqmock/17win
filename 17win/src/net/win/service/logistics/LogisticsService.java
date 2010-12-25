@@ -45,11 +45,11 @@ public class LogisticsService extends BaseService {
 		putByRequest("minDate", minDate);
 		putByRequest("maxDate1", maxDate1);
 		putByRequest("maxDate2", maxDate2);
-		
+
 		putByRequest("logisticsDotCount", Constant.getLogisticsDotCount());
-		
+
 		putTokenBySession();
-		
+
 		return "initLogistics";
 	}
 
@@ -243,6 +243,20 @@ public class LogisticsService extends BaseService {
 			countHQL.append(" and _l.waybill like :waybill");
 			paramNames.add("waybill");
 			paramValues.add("%" + logisticsVO.getWaybill() + "%");
+		}
+		// 发货信息
+		if (!StringUtils.isBlank(logisticsVO.getReleaseInfo())) {
+			resultHQL.append(" and _l.releaseInfo like :releaseInfo");
+			countHQL.append(" and _l.releaseInfo like :releaseInfo");
+			paramNames.add("releaseInfo");
+			paramValues.add("%" + logisticsVO.getReleaseInfo() + "%");
+		}
+		// 收货信息
+		if (!StringUtils.isBlank(logisticsVO.getReceieveInfo())) {
+			resultHQL.append(" and _l.receieveInfo like :receieveInfo");
+			countHQL.append(" and _l.receieveInfo like :receieveInfo");
+			paramNames.add("receieveInfo");
+			paramValues.add("%" + logisticsVO.getReceieveInfo() + "%");
 		}
 		resultHQL.append(" order by _l.sendDate  desc ");
 		Long count = (Long) logisticsDAO.uniqueResultObject(

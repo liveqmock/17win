@@ -35,11 +35,12 @@ public class SmsService extends BaseService {
 	 * @throws Exception
 	 */
 	public String initSendSms(SmsVO smsVO) throws Exception {
-		String toUsername = new String(getByParam("toUser"));
-		if (toUsername != null) {
+		String toUser = getByParam("toUser");
+		if (toUser != null) {
+			String toUsername = new String(getByParam("toUser"));
 			toUsername = new String(toUsername.getBytes("ISO-8859-1"), "UTF-8");
+			smsVO.setToUserName(toUsername);
 		}
-		smsVO.setToUserName(toUsername);
 		return "initSendSms";
 	}
 
@@ -76,7 +77,7 @@ public class SmsService extends BaseService {
 		} else {
 			putByRequest("notVIP", "noVIP");
 		}
-		
+
 		putTokenBySession();
 		return "initSendTelphone";
 	}
@@ -101,15 +102,16 @@ public class SmsService extends BaseService {
 	 * @throws Exception
 	 */
 	public String insertSms(SmsVO smsVO) throws Exception {
+		putJumpPage("smsManager/sms!initSendSms.php");
 		SmsEntity smsEntity = new SmsEntity();
 		UserEntity toUser = userDAO.findUserByName(smsVO.getToUserName());
 		if (smsVO.getToUserName().equals(getLoginUser().getUsername())) {
 			putAlertMsg("不能给自己发送短信！");
-			return "insertSms";
+			return JUMP;
 		}
 		if (toUser == null) {
 			putAlertMsg("没有该接收人！");
-			return "insertSms";
+			return JUMP;
 		}
 		BeanUtils.copyProperties(smsEntity, smsVO);
 		smsEntity.setSendDate(new Date());
@@ -120,7 +122,7 @@ public class SmsService extends BaseService {
 		smsDAO.save(smsEntity);
 		putAlertMsg("发送成功！");
 		smsVO.setToUserName("");
-		return "insertSms";
+		return JUMP;
 	}
 
 	/**
@@ -131,6 +133,7 @@ public class SmsService extends BaseService {
 	 * @throws Exception
 	 */
 	public String updateSendTelphone() throws Exception {
+		putJumpPage("smsManager/sms!initSendTelphone.php");
 		try {
 			String telphone = getByParam("telehpne");
 			String content = getByParam("content");
@@ -139,29 +142,29 @@ public class SmsService extends BaseService {
 			UserEntity userEntity = getLoginUserEntity(userDAO);
 			if (content.trim().length() > 70) {
 				putAlertMsg("内容过长！");
-				return "sendTelphone";
+				return JUMP;
 			}
 			if (!userEntity.getOpertationCode().equals(
 					StringUtils.processPwd(opertaionCode))) {
 				putAlertMsg("操作码不正确！");
-				return "sendTelphone";
+				return JUMP;
 			}
 			if (!userEntity.getVipEnable()) {
 				putAlertMsg("发送失败，您不是会员！");
-				return "sendTelphone";
+				return JUMP;
 			}
 			if (sendType.equals("1")) {
 				UserEntity toUser = userDAO.findUserByName(telphone);
 				if (toUser == null) {
 					putAlertMsg("用户不存在！");
-					return "sendTelphone";
+					return JUMP;
 				} else {
 					telphone = toUser.getTelephone();
 				}
 			}
 			if (userEntity.getVipBidUserEntity().getRemainMsgCount() == 0) {
 				putAlertMsg("发送失败，您所剩的短信数量不够！");
-				return "sendTelphone";
+				return JUMP;
 			} else {
 				userEntity.getVipBidUserEntity()
 						.setRemainMsgCount(
@@ -176,7 +179,7 @@ public class SmsService extends BaseService {
 			LoggerUtils.error(e);
 			putAlertMsg("发送失败，请联系管理员！");
 		}
-		return "sendTelphone";
+		return JUMP;
 	}
 
 	/**

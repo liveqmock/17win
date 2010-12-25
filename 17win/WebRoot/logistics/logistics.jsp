@@ -9,6 +9,16 @@
 %>
 <HTML>
 	<HEAD>
+		<%
+			//让浏览器不缓存jsp页面 
+			response.setHeader("Pragma", "No-cache");// http1.0 
+			response.setHeader("Cache-Control", "no-store,no-cache"); //http1.1 
+			response.setHeader("Expires", "0");
+			response.setDateHeader("Expires", 0);// 这个是针对代理的？但我设置后还是没达到效果。不解！！
+		%>
+		<link href="http://www.17win.net/favicon.ico" rel="shortcut icon" />
+		<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+		<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
 		<s:include value="../common/header.jsp"></s:include>
 		<LINK href="css/style.css" type="text/css" rel="stylesheet">
 		<LINK href="css/index.css" type="text/css" rel="stylesheet">
@@ -171,14 +181,18 @@ img {
 														</td>
 														<td>
 															发货地址
-															<input type="text" style="width: 316px" id="fhdz">
+															<input type="text" style="width: 316px" id="fhdz"
+																maxlength="215">
 															<br>
 															邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;编
-															<input type="text" style="width: 60px" id="fhyb">
+															<input type="text" style="width: 60px" id="fhyb"
+																maxlength="10">
 															&nbsp;联系人
-															<input type="text" style="width: 60px" id="fhlxr">
+															<input type="text" style="width: 60px" id="fhlxr"
+																maxlength="10">
 															&nbsp;电话
-															<input type="text" style="width: 100px" id="fhdh">
+															<input type="text" style="width: 100px" id="fhdh"
+																maxlength="15">
 															<s:hidden id="releaseInfo"
 																name="logisticsVO.logistics.releaseInfo"></s:hidden>
 														</td>
@@ -190,14 +204,18 @@ img {
 														</td>
 														<td>
 															收货地址
-															<input type="text" style="width: 316px" id="shdz">
+															<input type="text" style="width: 316px" id="shdz"
+																maxlength="215">
 															<br>
 															邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;编
-															<input type="text" style="width: 60px" id="shyb">
+															<input type="text" style="width: 60px" id="shyb"
+																maxlength="10">
 															&nbsp;联系人
-															<input type="text" style="width: 60px" id="shlxr">
+															<input type="text" style="width: 60px" id="shlxr"
+																maxlength="10">
 															&nbsp;电话
-															<input type="text" style="width: 100px" id="shdh">
+															<input type="text" style="width: 100px" id="shdh"
+																maxlength="15">
 															<s:hidden id="receieveInfo"
 																name="logisticsVO.logistics.receieveInfo"></s:hidden>
 														</td>

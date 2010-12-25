@@ -56,6 +56,7 @@ public class PayService extends BaseService {
 	 * @throws Exception
 	 */
 	public String insertPay(PayVO payVO) throws Exception {
+		putTokenBySession();
 		String opertationCode = getByParam("opertationCode");
 		String verificationCode = getByParam("verificationCode");
 		UserEntity userEntity = getLoginUserEntity(userDAO);
@@ -75,11 +76,14 @@ public class PayService extends BaseService {
 		payDAO.save(payEntity);
 		putAlertMsg("充值提交成功，请到淘宝进行充值,如有问题，请联系客户！");
 		putByRequest("toTaobao", "toTaobao");
-		MailUtils.sendCommonMail(mailSender, freeMarkerCfj,"用户申请充值", userEntity
-				.getUsername()
-				+ "在"
-				+ DateUtils.format(new Date(), DateUtils.DATE_TIME_FORMAT)
-				+ "提交充值", Constant.getXgjEmail());
+		putByRequest("toPayPage", Constant.getToPayPage());
+
+		MailUtils.sendCommonMail(mailSender, freeMarkerCfj, "用户申请充值",
+				userEntity.getUsername()
+						+ "在"
+						+ DateUtils.format(new Date(),
+								DateUtils.DATE_TIME_FORMAT) + "提交充值", Constant
+						.getXgjEmail());
 		return "insertPay";
 	}
 

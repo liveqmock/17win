@@ -94,6 +94,8 @@ public final class Constant {
 	private static Double initUserMoney;
 	// 初始化用户发布点
 	private static Double initUserReleaseDot;
+	//
+	private static String toPayPage;
 
 	public static Double getFabudianPrice() {
 		return fabudian_P;
@@ -400,12 +402,20 @@ public final class Constant {
 				else if ("winEmailUsername".equalsIgnoreCase(name)) {
 					winEmailUsername = stringValue;
 				}
+				// 充值页面
+				else if ("toPayPage".equalsIgnoreCase(name)) {
+					toPayPage = stringValue;
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			closeJDBC(rs, st, conn);
 		}
+	}
+
+	public static String getToPayPage() {
+		return toPayPage;
 	}
 
 }

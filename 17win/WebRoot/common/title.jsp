@@ -11,11 +11,8 @@
 						<MARQUEE onmouseover=this.stop() onmouseout=this.start()
 							scrollAmount=2 direction=left height=18>
 
-							<a href='news.asp?/1302.html' target="_blank" title='公告'><FONT
-								color=#ff0000>8月11日起每天发10个任务当天即送5个发布点,结束时间再通知.&nbsp;&nbsp;
-									接发任务时严禁用旺旺联系</FONT> </a>
-
-
+							<a href='help/detail_61.html' target="_blank" title='公告'><FONT
+								color=#ff0000>推广送U盘+VIP+发布点</FONT> </a>
 						</MARQUEE>
 					</TD>
 				</TR>

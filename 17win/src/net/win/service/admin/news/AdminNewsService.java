@@ -36,6 +36,7 @@ public class AdminNewsService extends BaseService {
 	 * @throws Exception
 	 */
 	public String detailNews(NewsVO newsVO) throws Exception {
+		NewsEntity newsEntity = newsDAO.get(newsVO.getId());
 		List<NewsEntity> newses1 = newsDAO
 				.pageQuery(
 						"from NewsEntity as _news where _news.type.name='网站公告'  order by _news.top desc,_news.date desc",
@@ -47,27 +48,31 @@ public class AdminNewsService extends BaseService {
 		List<NewsVO> wzResult = new ArrayList<NewsVO>();
 		List<NewsVO> tjResult = new ArrayList<NewsVO>();
 		NewsVO newsVOTemp = null;
-		for (NewsEntity newsEntity : newses1) {
+		for (NewsEntity news : newses1) {
 			newsVOTemp = new NewsVO();
-			BeanUtils.copyProperties(newsVOTemp, newsEntity);
+			BeanUtils.copyProperties(newsVOTemp, news);
 			wzResult.add(newsVOTemp);
 		}
-		for (NewsEntity newsEntity : newses2) {
+		for (NewsEntity news : newses2) {
 			newsVOTemp = new NewsVO();
-			BeanUtils.copyProperties(newsVOTemp, newsEntity);
+			BeanUtils.copyProperties(newsVOTemp, news);
 			tjResult.add(newsVOTemp);
 		}
 		putByRequest("wzResult", wzResult);
 		putByRequest("tjResult", tjResult);
 
-		List<NewsEntity> prevNews = newsDAO.pageQuery(
-				"from NewsEntity  where  id <:newsID  order by  id desc ",
-				new String[] { "newsID" }, new Object[] { newsVO.getId() }, 0,
-				1);
-		List<NewsEntity> afterNews = newsDAO.pageQuery(
-				"from NewsEntity  where  id >:newsID  order by  id asc ",
-				new String[] { "newsID" }, new Object[] { newsVO.getId() }, 0,
-				1);
+		List<NewsEntity> prevNews = newsDAO
+				.pageQuery(
+						"from NewsEntity  as _user  where  id <:newsID  and _user.type.id=:typeID order by  id desc  ",
+						new String[] { "newsID", "typeID" }, new Object[] {
+								newsVO.getId(), newsEntity.getType().getId() },
+						0, 1);
+		List<NewsEntity> afterNews = newsDAO
+				.pageQuery(
+						"from NewsEntity  as _user  where  id >:newsID   and _user.type.id=:typeID order by  id asc ",
+						new String[] { "newsID", "typeID" }, new Object[] {
+								newsVO.getId(), newsEntity.getType().getId() },
+						0, 1);
 		if (prevNews.size() > 0) {
 			newsVOTemp = new NewsVO();
 			BeanUtils.copyProperties(newsVOTemp, prevNews.get(0));
@@ -84,7 +89,6 @@ public class AdminNewsService extends BaseService {
 			putByRequest("prevNews", null);
 		}
 
-		NewsEntity newsEntity = newsDAO.get(newsVO.getId());
 		newsVOTemp = new NewsVO();
 		BeanUtils.copyProperties(newsVOTemp, newsEntity);
 		newsVOTemp.setTypeName(newsEntity.getType().getName());
@@ -447,6 +451,7 @@ public class AdminNewsService extends BaseService {
 		putByRequest("newsTpyes", result);
 		NewsEntity newsEntity = newsDAO.get(newsVO.getId());
 		BeanUtils.copyProperties(newsVO, newsEntity);
+		newsVO.setTypeId(newsEntity.getType().getId());
 		putByRequest("newsVO", newsVO);
 		return "initUpdateNews";
 	}

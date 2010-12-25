@@ -5,6 +5,7 @@
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
+<META HTTP-EQUIV="Expires" CONTENT="0">
 <link href="http://www.17win.net/favicon.ico" rel="shortcut icon" />
 <META http-equiv=Content-Type content="text/html; charset=UTF-8">
 <base href="<%=basePath%>">

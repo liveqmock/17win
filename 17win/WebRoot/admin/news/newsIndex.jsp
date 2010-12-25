@@ -3,7 +3,16 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
-		<s:include value="/admin/common/header.jsp"></s:include>
+		<%
+			//让浏览器不缓存jsp页面 
+			response.setHeader("Pragma", "No-cache");// http1.0 
+			response.setHeader("Cache-Control", "no-store,no-cache"); //http1.1 
+			response.setHeader("Expires", "0");
+			response.setDateHeader("Expires", 0);// 这个是针对代理的？但我设置后还是没达到效果。不解！！
+		%>
+		<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+		<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+		<s:include value="/admin/common/header.jsp"></s:include>  
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<SCRIPT type="text/javascript" src="news/newsIndex.js"></SCRIPT>
 	</head>
