@@ -1,10 +1,9 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%
-	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
+			+ "/";
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML>
@@ -174,7 +173,8 @@
 													<td width="45%" valign="middle" class="union_line">
 														通过你的宣传链接注册的会员累计接受100次任务
 														<br />
-														<span class="STYLE5">你的收益=<s:property value="#request.task100RefreeMoney"/>元</span>
+														<span class="STYLE5">你的收益=<s:property
+																value="#request.task100RefreeMoney" />元</span>
 													</td>
 													<td width="38%" valign="middle">
 														<img src="images/g1.jpg" width="249" height="76" />
@@ -196,7 +196,8 @@
 													<td width="45%" valign="middle" class="union_line">
 														通过你的宣传链接注册的会员积分每上升1000
 														<br />
-														<span class="STYLE5">你的收益=<s:property value="#request.score1000Refree"/>积分</span>
+														<span class="STYLE5">你的收益=<s:property
+																value="#request.score1000Refree" />积分</span>
 													</td>
 													<td width="38%" valign="middle">
 														<img src="images/g2.jpg" width="243" height="67" />
@@ -218,7 +219,8 @@
 													<td width="45%" valign="middle" class="union_line">
 														通过你的宣传链接注册的会员购买VIP
 														<br />
-														<span class="STYLE5">你的收益=<s:property value="#request.refreeByVipMoney"/>元</span>
+														<span class="STYLE5">你的收益=<s:property
+																value="#request.refreeByVipMoney" />元</span>
 													</td>
 													<td width="38%" valign="middle">
 														<img src="images/g3.jpg" width="233" height="65" />
@@ -240,7 +242,8 @@
 													<td width="45%" valign="middle" class="union_line">
 														通过你的宣传链接注册的会员购买点卡
 														<br />
-														<span class="STYLE5">你的收益=点卡金额*(<s:property value="#request.buyReleaseDotRebateToRefree"/>倍)</span>
+														<span class="STYLE5">你的收益=点卡金额*(<s:property
+																value="#request.buyReleaseDotRebateToRefree" />倍)</span>
 													</td>
 													<td width="38%" valign="middle">
 														<img src="images/g4.jpg" width="241" height="66" />
@@ -593,66 +596,66 @@
 		</table>
 
 		<div class="service2  service serviceA " id="divSerWin">
-	<div class="service-open" id="divMySer">
-		<div onclick="ClickSer();" class="service-button"></div>
-		<div class="service-inside">
-			<dl>
-				<dt>
-					客服工作时间
-				</dt>
-				<dd class="esp_4">
-					周一至周五
-				</dd>
-				<dd class="esp_4">
-					9:00 - 18:30
-				</dd>
-				<dd class="esp_5">
-					<!--<a href="#" target="_blank">自助服务</a>-->
-				</dd>
-				<dt>
-					客服团队
-				</dt>
-				<dd>
+			<div class="service-open" id="divMySer">
+				<div onclick="ClickSer();" class="service-button"></div>
+				<div class="service-inside">
+					<dl>
+						<dt>
+							客服工作时间
+						</dt>
+						<dd class="esp_4">
+							周一至周五
+						</dd>
+						<dd class="esp_4">
+							9:00 - 18:30
+						</dd>
+						<dd class="esp_5">
+							<!--<a href="#" target="_blank">自助服务</a>-->
+						</dd>
+						<dt>
+							客服团队
+						</dt>
+						<dd>
 
-					<!-- 1348001415 -->
-					<a class="serviceA" href="tencent://message/?uin=1442418675">新手帮助</a>
-				</dd>
-				<dd>
-					<a class="serviceA" href="tencent://message/?uin=1632630010">客户帮助</a>
-				</dd>
-				<dd>
-					<a href="tencent://message/?uin=1637708507">充值帮助</a>
-				</dd>
-				<dd>
-					<a href="tencent://message/?uin=1637708507">提现帮助</a>
-				</dd>
-				<dd class="esp_1">
-					<a href="tencent://message/?uin=1206418689">投诉建议</a>
-				</dd>
-				<dt>
-					QQ交流群
-				</dt>
-				<dd class="esp_3">
-					100103766
-				</dd>
-				<dt >
-					我们的宗旨
-				</dt>
-				<dd class="esp_4">
-					安全第一
-				</dd>
-				<dd class="esp_4">
-					和谐刷钻
-				</dd>
-				<dd class="esp_4">
-					大家互赢
-				</dd>
-				<dd class="esp_4">
-					互相监督
-				</dd>
-			</dl>
+							<!-- 1348001415 -->
+							<a class="serviceA" href="tencent://message/?uin=1442418675">新手帮助</a>
+						</dd>
+						<dd>
+							<a class="serviceA" href="tencent://message/?uin=1632630010">客户帮助</a>
+						</dd>
+						<dd>
+							<a href="tencent://message/?uin=1637708507">充值帮助</a>
+						</dd>
+						<dd>
+							<a href="tencent://message/?uin=1637708507">提现帮助</a>
+						</dd>
+						<dd class="esp_1">
+							<a href="tencent://message/?uin=1206418689">投诉建议</a>
+						</dd>
+						<dt>
+							QQ交流群
+						</dt>
+						<dd class="esp_3">
+							100103766
+						</dd>
+						<dt>
+							我们的宗旨
+						</dt>
+						<dd class="esp_4">
+							安全第一
+						</dd>
+						<dd class="esp_4">
+							和谐刷钻
+						</dd>
+						<dd class="esp_4">
+							大家互赢
+						</dd>
+						<dd class="esp_4">
+							互相监督
+						</dd>
+					</dl>
+				</div>
+			</div>
 		</div>
-	</div>
-</div>
 	</BODY>
 </HTML>

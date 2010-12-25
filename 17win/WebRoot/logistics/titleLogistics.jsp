@@ -2,10 +2,9 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
 <%
-	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
+			+ "/";
 %>
 <HTML>
 	<HEAD>
@@ -146,8 +145,7 @@ img {
 						<tr>
 							<td>
 								发货信息：
-								<s:textfield name="logisticsVO.releaseInfo" id="releaseInfo"
-									 >
+								<s:textfield name="logisticsVO.releaseInfo" id="releaseInfo">
 								</s:textfield>
 							</td>
 							<td>

@@ -2,10 +2,9 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
 <%
-	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
+			+ "/";
 %>
 <HTML>
 	<HEAD>
@@ -160,11 +159,11 @@ img {
 											<tbody>
 												<s:iterator value="#request.result" id="sms">
 													<tr>
-														<td id="td_<s:property value="#sms.id"/>" fromUserName="<s:property value="#sms.fromUserName" />">
+														<td id="td_<s:property value="#sms.id"/>"
+															fromUserName="<s:property value="#sms.fromUserName" />">
 															<s:if
 																test="!#sms.read &&  #sms.fromUserName!=#session.userLogin.username">
-																<b>*<s:property value="#sms.fromUserName" />
-																</b>
+																<b>*<s:property value="#sms.fromUserName" /> </b>
 															</s:if>
 															<s:else>
 																<s:property value="#sms.fromUserName" />
@@ -190,7 +189,8 @@ img {
 														</td>
 														<td>
 															<a content="<s:property value="#sms.content"/>"
-																title="<s:property value="#sms.title"/>"  id="a_<s:property value="#sms.id"/>"
+																title="<s:property value="#sms.title"/>"
+																id="a_<s:property value="#sms.id"/>"
 																href="javascript:brower(<s:property value="#sms.id" />,<s:property value="#sms.read" />,this);">浏览</a>
 															<s:if
 																test="#sms.type==2 && #sms.fromUserName!=#session.userLogin.username">

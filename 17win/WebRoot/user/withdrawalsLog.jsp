@@ -2,10 +2,9 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
 <%
-	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
+			+ "/";
 %>
 <HTML>
 	<HEAD>
@@ -113,10 +112,9 @@ img {
 															headerValue="--请选择--"
 															list="#{'1':'店铺地址提现','2':'支付宝提现','3':'财付通提现'}">
 														</s:select>
-		
+
 														<span
-														<s:if test="withdrawalsVO.type!=1">style="display: none"</s:if>
-														
+															<s:if test="withdrawalsVO.type!=1">style="display: none"</s:if>
 															id="shopType"> &nbsp;&nbsp;店铺类型：<s:select
 																name="withdrawalsVO.shopType" listKey="key"
 																listValue="value" headerKey="" headerValue="--请选择--"

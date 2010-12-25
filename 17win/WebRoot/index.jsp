@@ -1,10 +1,9 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%
-	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
+			+ "/";
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
 <HTML>
@@ -76,11 +75,11 @@
 											class="LeftNews">
 											<tbody>
 												<tr>
-													<td> 
+													<td>
 														用户名：
 													</td>
 													<td>
-														<input type="text" name="userVO.userEntity.username"  
+														<input type="text" name="userVO.userEntity.username"
 															size="30" maxlength="12" value="" tabindex="0"
 															id="username" style="width: 120px;">
 														<span><img title="验证成功" src="images/icon_ok.gif">
@@ -160,7 +159,7 @@
 								</TD>
 							</TR>
 							<TR>
-								<TD class="K_mtcontent"  width="260"
+								<TD class="K_mtcontent" width="260"
 									style="PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 10px; PADDING-TOP: 10px"
 									colSpan="99">
 									<TABLE class="LeftNews" cellSpacing=0 cellPadding=0

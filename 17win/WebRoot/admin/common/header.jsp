@@ -1,13 +1,11 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%
-	String path = request.getContextPath();
 	String basePathRoot = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path;
+			+ request.getServerName() + ":" + request.getServerPort();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/admin/";
+			+ "/admin/";
 %>
 <META http-equiv=Content-Type content="text/html; charset=UTF-8">
 <base href="<%=basePath%>">
@@ -24,7 +22,8 @@
 </script>
 <script type="text/javascript" src="<%=basePathRoot%>/js/utils.js">
 </script>
-<script type="text/javascript" src="<%=basePathRoot%>/ckeditor/ckeditor.js"></script>
+<script type="text/javascript"
+	src="<%=basePathRoot%>/ckeditor/ckeditor.js"></script>
 <script type="text/javascript"
 	src="<%=basePathRoot%>/js/My97DatePicker/WdatePicker.js">
 </script>

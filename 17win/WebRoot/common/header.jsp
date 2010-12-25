@@ -1,9 +1,8 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
-	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
+			+ "/";
 %>
 <META HTTP-EQUIV="Expires" CONTENT="0">
 <link href="http://www.17win.net/favicon.ico" rel="shortcut icon" />
