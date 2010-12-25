@@ -41,21 +41,26 @@ public final class MailUtils {
 	 */
 
 	public static void sendCommonMail(JavaMailSender mailSender,
-			FreeMarkerConfigurer configurer,String subject, String content, String email)
-			throws Exception {
-		JavaMailSenderImpl javaMailSenderImpl = changeMailSender(mailSender);
+			FreeMarkerConfigurer configurer, String subject, String content,
+			String email) throws Exception {
+		try {
+			JavaMailSenderImpl javaMailSenderImpl = changeMailSender(mailSender);
 
-		MimeMessage msg = javaMailSenderImpl.createMimeMessage();
+			MimeMessage msg = javaMailSenderImpl.createMimeMessage();
 
-		MimeMessageHelper helper = new MimeMessageHelper(msg, false, "utf-8");
-		helper.setFrom(Constant.getWinEmail());
-		helper.setTo(email);
-		helper.setSubject(subject);
-		HashMap map = new HashMap();
-		map.put("content", content);
-		String htmlText = getMailText(map, configurer, "common.ftl");
-		helper.setText(htmlText, true);
-		mailSender.send(msg);
+			MimeMessageHelper helper = new MimeMessageHelper(msg, false,
+					"utf-8");
+			helper.setFrom(Constant.getWinEmail());
+			helper.setTo(email);
+			helper.setSubject(subject);
+			HashMap map = new HashMap();
+			map.put("content", content);
+			String htmlText = getMailText(map, configurer, "common.ftl");
+			helper.setText(htmlText, true);
+			mailSender.send(msg);
+		} catch (Exception e) {
+			LoggerUtils.error(e);
+		}
 	}
 
 	private static JavaMailSenderImpl changeMailSender(JavaMailSender mailSender) {
@@ -76,17 +81,22 @@ public final class MailUtils {
 	public static void sendPasswordMail(JavaMailSender mailSender,
 			FreeMarkerConfigurer configurer, String username, String email,
 			String content) throws Exception {
-		JavaMailSenderImpl javaMailSenderImpl = changeMailSender(mailSender);
-		MimeMessage msg = javaMailSenderImpl.createMimeMessage();
-		MimeMessageHelper helper = new MimeMessageHelper(msg, false, "utf-8");
-		helper.setFrom(Constant.getWinEmail());
-		helper.setTo(email);
-		helper.setSubject(username + ":www.17win.com(一起赢)密码找回系统");
-		HashMap map = new HashMap();
-		map.put("content", content);
-		String htmlText = getMailText(map, configurer, "findPassword.ftl");
-		helper.setText(htmlText, true);
-		mailSender.send(msg);
+		try {
+			JavaMailSenderImpl javaMailSenderImpl = changeMailSender(mailSender);
+			MimeMessage msg = javaMailSenderImpl.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(msg, false,
+					"utf-8");
+			helper.setFrom(Constant.getWinEmail());
+			helper.setTo(email);
+			helper.setSubject(username + ":www.17win.com(一起赢)密码找回系统");
+			HashMap map = new HashMap();
+			map.put("content", content);
+			String htmlText = getMailText(map, configurer, "findPassword.ftl");
+			helper.setText(htmlText, true);
+			mailSender.send(msg);
+		} catch (Exception e) {
+			LoggerUtils.error(e);
+		}
 	}
 
 	/**
