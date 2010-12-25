@@ -117,6 +117,7 @@
 				<a href="http://www.17win.net/" target="_blank">淘宝刷信誉</a>|
 				<a href="http://www.17win.net/" target="_blank">刷钻平台</a>|
 				<a href="http://www.17win.net/" target="_blank">淘宝刷钻</a>|
+				<script src="http://s16.cnzz.com/stat.php?id=2694599&web_id=2694599&show=pic" language="JavaScript"></script>
 			</div>
 		</TD>
 		<TD width=211>

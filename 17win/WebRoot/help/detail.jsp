@@ -77,7 +77,7 @@ body {
 																		<tr>
 																			<td nowrap="nowrap" width="100%"
 																				style="overflow: hidden; text-overflow: ellipsis;">
-																				<a href='#' target="_blank"
+																				<a href='help/<s:property value="#obj.url"/>' target="_blank"
 																					title='<s:property value="#obj.title"/>'><font
 																					style="font-size: 12px"> <s:property
 																							value="#obj.title" /> </font> </a>
@@ -131,7 +131,7 @@ body {
 																		<tr>
 																			<td nowrap="nowrap" width="100%"
 																				style="overflow: hidden; text-overflow: ellipsis;">
-																				<a href='#' target="_blank"
+																				<a href='help/<s:property value="#obj.url"/>' target="_blank"
 																					title='<s:property value="#obj.title"/>'><font
 																					style="font-size: 12px"><s:property
 																							value="#obj.title" /> </font> </a>

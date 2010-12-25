@@ -219,7 +219,7 @@ img {
 													<td width="100%" align="left" class="font12b2">
 														<font color="red">注意：为了您和他人的安全，买号信誉在<s:property
 																value="#request.creditValueLimit" />（包含<s:property
-																value="#request.creditValueLimit" />）以上的账号，我们讲停用！</font>
+																value="#request.creditValueLimit" />）以上的账号，我们将停用！</font>
 													</td>
 												</tr>
 											</tbody>
