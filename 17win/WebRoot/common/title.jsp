@@ -226,7 +226,7 @@
 					<s:else>
 						class="li0 "
 				</s:else> href="logisticsManager/logistics!queryLogisticsLog.php"
-					id="a9" onmouseover="Mea(10);" testclass="">物流信息</A>
+					id="a9" onmouseover="Mea(10);" testclass="">真实物流</A>
 			</LI>
 		</UL>
 	</DIV>

@@ -104,7 +104,7 @@ img {
 												您现在的位置是：个人中心 &gt;&gt; 物流管理 &gt;&gt;
 											</div>
 											<div class="pp8">
-												<strong>发送物流信息</strong>
+												<strong>发送真实物流</strong>
 											</div>
 											<div>
 												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

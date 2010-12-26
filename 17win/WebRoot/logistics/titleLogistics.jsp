@@ -95,7 +95,7 @@ img {
 				<div style="width: 100%">
 					<div>
 						&nbsp;&nbsp;&nbsp;&nbsp;
-						<font color="red"><a href="help/detail_60.html">点此了解【物流信息】功能</a>
+						<font color="red"><a href="help/detail_60.html">点此了解【真实物流】功能</a>
 						</font>
 					</div>
 					<br>

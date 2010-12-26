@@ -190,7 +190,7 @@
 										<tr>
 
 											<td height=20>
-												<a href="logisticsManager/logistics!initLogistics.php">添加物流信息</a>
+												<a href="logisticsManager/logistics!initLogistics.php">添加真实物流</a>
 											</td>
 										</tr>
 										<tr>
