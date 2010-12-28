@@ -21,11 +21,11 @@
 		<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
 		<META HTTP-EQUIV="Expires" CONTENT="0">
 		<base href="<%=basePath%>">
-		<title>淘宝刷信誉 -淘宝刷钻 _刷钻平台_互刷平台_免费刷钻首选一起赢(17win)刷客平台</title>
+		<title>淘宝刷信誉 -淘宝刷钻 _刷钻平台_互刷平台_免费刷钻_真实快递首选一起赢(17win)刷客平台</title>
 		<meta
-			content="淘宝刷信誉,淘宝刷钻,刷钻平台,互刷平台,免费刷钻首选一起赢(17win)刷客平台.第三方担保,保证用户在淘宝刷信誉,淘宝刷钻的资金安全。一起赢(17win)互刷平台更可免费刷钻。"
+			content="淘宝刷信誉,淘宝刷钻,刷钻平台,互刷平台,免费刷钻,真实快递首选一起赢(17win)刷客平台.第三方担保,保证用户在淘宝刷信誉,淘宝刷钻的资金安全。一起赢(17win)互刷平台更可免费刷钻。"
 			name="description" />
-		<meta content="淘宝刷信誉,淘宝刷钻,刷钻平台,互刷平台,免费刷钻" name="keywords" />
+		<meta content="淘宝刷信誉,淘宝刷钻,刷钻平台,互刷平台,免费刷钻,真实快递" name="keywords" />
 		<LINK href="css/Css.css" type=text/css rel=stylesheet>
 		<LINK href="css/top_bottom.css" type=text/css rel=stylesheet>
 		<link href="css/excite-bike/jquery-ui-1.8.4.custom.css"
@@ -203,7 +203,7 @@ picarr[1] = "images/indexSlider/slider1.gif";
 textarr[1] = "新平台更加稳定，更加人性化，操作更方便"; 
 linkarr[2] = "logisticsManager/logistics!queryLogisticsLog.php";
 picarr[2] = "images/indexSlider/slider2.gif";
-textarr[2] = "真实物流信息您做主！";
+textarr[2] = "真实快递信息您做主！";
 linkarr[3] = "user/login.html";
 picarr[3] = "images/indexSlider/slider3.gif";
 textarr[3] = "互刷改变你生活，永久免费";
