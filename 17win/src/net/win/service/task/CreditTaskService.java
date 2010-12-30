@@ -1190,9 +1190,10 @@ public class CreditTaskService extends BaseService {
 				.getAddtionMoney()), "发布任务", userEntity);
 		logDotCapital(userDAO, 0 - (creditTaskDot + creditTaskVO
 				.getAddtionReleaseDot()), "发布任务", userEntity);
-		putJumpOutterPage("taskManager/task!initReleaseTask.php?platformType="+platFormType);
+		putJumpOutterPage("taskManager/task!initReleaseTask.php?platformType="
+				+ platFormType);
 		putAlertMsg("发布任务成功!");
-		return JUMP; 
+		return JUMP;
 	}
 
 	/**
@@ -1239,8 +1240,9 @@ public class CreditTaskService extends BaseService {
 			}
 			List<SellerEntity> sellers = sellerDAO
 					.list(
-							"select _s   from SellerEntity  as _s where _s.type=:type ",
-							"type", platformType);
+							"select _s   from SellerEntity  as _s where _s.type=:type and _s.user.id=:userID",
+							new String[] { "type", "userID" }, new Object[] {
+									platformType, userEntity.getId() });
 			List<SellerVO> resultSellers = new ArrayList<SellerVO>(sellers
 					.size());
 			if (sellers.size() > 0) {
