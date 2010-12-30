@@ -8,7 +8,7 @@
 	<!-- 设置属性 -->
 	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
 	<constant name="struts.objectFactory" value="spring" />
-	<constant name="struts.devMode" value="true" />
+	<constant name="struts.devMode" value="false" />
 	<constant name="struts.configuration.xm.reload" value="true" />
 	<constant name="struts.i18n.encoding" value="UTF-8" />
 	<constant name="struts.i18n.reload" value="true" />
