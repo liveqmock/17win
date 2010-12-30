@@ -77,11 +77,11 @@ function validateForm() {
 	// /
 	var releaseInfo=fhdz + " " + fhyb + " " + fhlxr + " " + fhdh;
 	var receieveInfo=shdz + " " + shyb + " " + shlxr + " " + shdh;
-	if(releaseInfo.length()>255){
+	if(releaseInfo.length>255){
 		alert("发货信息（发货地址+邮编+联系人+电话）长度不能大于255，一般发货信息不会大于这个多，如果确实大于请和客户联系！");
 		return false
 	}
-		if(receieveInfo.length()>255){
+		if(receieveInfo.length>255){
 		alert("收货信息（收货地址 +邮编+联系人+电话）长度不能大于255，一般发货信息不会大于这个多，如果确实大于请和客户联系！");
 		return false
 	}
