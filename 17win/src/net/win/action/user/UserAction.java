@@ -112,7 +112,7 @@ public class UserAction extends BaseAction {
 	 * @throws Exception
 	 */
 	public String initLogin() throws Exception {
-		return "initLogin";
+		return userService.initLogin(userVO);
 	}
 
 	/**
