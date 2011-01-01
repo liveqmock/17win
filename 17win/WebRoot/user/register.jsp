@@ -282,6 +282,8 @@ td {
 										<INPUT id="sumbitBtn"
 											style="FONT-WEIGHT: bold; CURSOR: pointer;" timeId="10"
 											disabled="true" type="submit" value="同意协议并注册(10)">
+										<input type="hidden" name="win17_token"
+											value="<s:property value="#session.win17_token"/>">
 									</td>
 								</tr>
 							</table>
