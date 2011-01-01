@@ -159,6 +159,7 @@ function validateForm() {
 	submitFlag = true;
 	$("input").blur();
 	if (submitFlag) {
+		$("#sumbitBtn").attr("disabled", true);
 		return true;
 	} else {
 		alert("您填写的资料不正确！");

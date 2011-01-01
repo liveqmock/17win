@@ -242,8 +242,6 @@ td {
 										<img src="verify/verificationCode.php"
 											onclick="changeValidateCode(this)" title="点击图片刷新验证码"
 											style="cursor: pointer;" />
-										<br />
-										为防止恶意注册请输入验证码
 									</td>
 									<td valign="top">
 
