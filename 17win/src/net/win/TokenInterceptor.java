@@ -20,7 +20,7 @@ public class TokenInterceptor extends AbstractInterceptor {
 	 */
 	private static final long serialVersionUID = -6896151123159541897L;
 	/**
-	 * 不包含的用户登录路径
+	 * 包含的用户登录路径
 	 */
 	private static final Set<String> INCLUDE_TOKEN_VALIDATION_URL = new HashSet<String>();
 	static {
@@ -34,6 +34,10 @@ public class TokenInterceptor extends AbstractInterceptor {
 		INCLUDE_TOKEN_VALIDATION_URL
 				.add("withdrawalsManager/withdrawals!withdrawals.php");
 		INCLUDE_TOKEN_VALIDATION_URL.add("smsManager/sms!sendTelphone.php");
+
+		INCLUDE_TOKEN_VALIDATION_URL.add("taskManager/task!releaseTask.php");
+
+		INCLUDE_TOKEN_VALIDATION_URL.add("userManager/base!register.php");
 
 		INCLUDE_TOKEN_VALIDATION_URL.add("taskManager/task!releaseTask.php");
 	}
