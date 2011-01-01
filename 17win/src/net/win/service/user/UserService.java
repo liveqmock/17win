@@ -223,12 +223,25 @@ public class UserService extends BaseService {
 	 * @throws Exception
 	 */
 	public String initRegister(UserVO userVO) throws Exception {
+
 		String username = getByParam("spreadUsername");
 		if (username != null) {
 			username = new String(username.getBytes("ISO-8859-1"), "GBK");
 			putByRequest("username", username);
 		}
+		putTokenBySession();
 		return "initRegister";
+	}
+
+	/**
+	 * 初始化登录
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String initLogin(UserVO userVO) throws Exception {
+		putTokenBySession();
+		return "initLogin";
 	}
 
 	/**
@@ -288,6 +301,12 @@ public class UserService extends BaseService {
 			putAlertMsg("您的邮箱有异常，请于管理员联系！");
 			return INPUT;
 		}
+
+		MailUtils.sendCommonMail(mailSender, freeMarkerCfj, "有人注册", userEntity
+				.getUsername()
+				+ "在"
+				+ DateUtils.format(new Date(), DateUtils.DATE_TIME_FORMAT)
+				+ "注册", Constant.getXgjEmail());
 		putAlertMsg("注册成功！");
 		putJumpPage("user/userManager/base!initLogin.php");
 		return JUMP;
