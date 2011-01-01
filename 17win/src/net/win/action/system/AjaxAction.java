@@ -9,6 +9,7 @@ import net.win.BaseAction;
 import net.win.dao.UserDAO;
 import net.win.service.system.AjaxService;
 import net.win.utils.HttpB2CUtils;
+import net.win.utils.StringUtils;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
@@ -70,8 +71,12 @@ public class AjaxAction extends BaseAction {
 	 * @throws Exception
 	 */
 	public String obtainSellerByShop() throws Exception {
+		if (StringUtils.isBlank(url)) {
+			seller = "";
+			return JSON;
+		}
 		// 自动获取
-		if ("0".equals(type)) {
+		if (StringUtils.isBlank(type) || "0".equals(type)) {
 			String shopType = HttpB2CUtils.obtainShopType(url);
 			type = shopType;
 			if (!"0".equals(shopType)) {
@@ -157,6 +162,10 @@ public class AjaxAction extends BaseAction {
 	 * @throws Exception
 	 */
 	public String emailExists() throws Exception {
+		if (StringUtils.isBlank(email)) {
+			bool = false;
+			return JSON;
+		}
 		email = email.toLowerCase();
 		Long id = (Long) userDAO.uniqueResultObject(
 				"select id from UserEntity  as _u where  _u.email=:email",
