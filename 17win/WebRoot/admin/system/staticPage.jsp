@@ -11,11 +11,12 @@
 			<tr>
 				<td nowrap="nowrap">
 					<input type="button"
-						onclick="window.location.href='adminSystemManager/adminSystem!staticNews2Page.php'"
-						value="生成新闻首页">
-					<input type="button"
 						onclick="window.location.href='adminSystemManager/adminSystem!staticNewsPage.php'"
 						value="生成新闻">
+					<input type="button"
+						onclick="window.location.href='adminSystemManager/adminSystem!staticNews2Page.php'"
+						value="生成新闻首页">
+
 					<input type="button"
 						onclick="window.location.href='adminSystemManager/adminSystem!staticIndexPage.php'"
 						value="生成首页">
