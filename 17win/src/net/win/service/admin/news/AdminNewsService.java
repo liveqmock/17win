@@ -490,7 +490,8 @@ public class AdminNewsService extends BaseService {
 		newsDAO.deleteById(newsVO.getId());
 		queryNews(newsVO);
 		putAlertMsg("删除成功！");
-		return "deleteNews";
+		putJumpPage("adminNewsManager/adminNews!queryNews.php");
+		return JUMP;
 	}
 
 	// ///----------------------------------------------------------------------
