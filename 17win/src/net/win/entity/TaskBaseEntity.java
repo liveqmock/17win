@@ -28,7 +28,7 @@ public class TaskBaseEntity extends BaseEntity {
 	@JoinColumn(name = "RECEIVE_PERSON_")
 	private UserEntity receivePerson;
 	// 描述
-	@Column(name = "DESC_", length = 50)
+	@Column(name = "DESC_", length = 255)
 	private String desc;
 
 	public String getTestID() {
