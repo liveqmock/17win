@@ -649,7 +649,6 @@ public class UserInfoService extends BaseService {
 					releaseDot));
 			touser.setReleaseDot(ArithUtils.add(touser.getReleaseDot(),
 					releaseDot));
-			updateOtherUserLoginInfo(touser);
 			logDotCapital(userDAO, 0 - releaseDot, "赠送发布点给"
 					+ touser.getUsername(), userEntity);
 			logDotCapital(userDAO, releaseDot, userEntity.getUsername()

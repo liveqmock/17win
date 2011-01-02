@@ -1,7 +1,5 @@
 package net.win.service.task;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -13,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import net.win.BaseService;
 import net.win.TaskMananger;
 import net.win.UserLoginInfo;
-import net.win.WinContext;
 import net.win.dao.BuyerDAO;
 import net.win.dao.CreditTaskDAO;
 import net.win.dao.CreditTaskRepositoryDAO;
@@ -537,7 +534,6 @@ public class CreditTaskService extends BaseService {
 
 			// 更新信息
 			updateUserLoginInfo(releaseUser);
-			updateOtherUserLoginInfo(receiveUser);
 			return JUMP;
 		}
 	}
