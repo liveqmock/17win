@@ -79,30 +79,30 @@ public class AdminNewsService extends BaseService {
 
 		List<NewsEntity> prevNews = newsDAO
 				.pageQuery(
-						"from NewsEntity  as _user  where  id <:newsID  and _user.type.id=:typeID order by  id desc  ",
-						new String[] { "newsID", "typeID" }, new Object[] {
-								newsVO.getId(), newsEntity.getType().getId() },
-						0, 1);
+						"from NewsEntity  as _user  where  _user.sort <:sort  and _user.type.id=:typeID order by  id desc  ",
+						new String[] { "sort", "typeID" }, new Object[] {
+								newsEntity.getSort(),
+								newsEntity.getType().getId() }, 0, 1);
 		List<NewsEntity> afterNews = newsDAO
 				.pageQuery(
-						"from NewsEntity  as _user  where  id >:newsID   and _user.type.id=:typeID order by  id asc ",
-						new String[] { "newsID", "typeID" }, new Object[] {
-								newsVO.getId(), newsEntity.getType().getId() },
-						0, 1);
+						"from NewsEntity  as _user  where  _user.sort  >:sort   and _user.type.id=:typeID order by  id asc ",
+						new String[] { "sort", "typeID" }, new Object[] {
+								newsEntity.getSort(),
+								newsEntity.getType().getId() }, 0, 1);
 		if (prevNews.size() > 0) {
 			newsVOTemp = new NewsVO();
 			BeanUtils.copyProperties(newsVOTemp, prevNews.get(0));
-			putByRequest("afterNews", newsVOTemp);
+			putByRequest("prevNews", newsVOTemp);
 		} else {
-			putByRequest("afterNews", null);
+			putByRequest("prevNews", null);
 		}
 
 		if (afterNews.size() > 0) {
 			newsVOTemp = new NewsVO();
 			BeanUtils.copyProperties(newsVOTemp, afterNews.get(0));
-			putByRequest("prevNews", newsVOTemp);
+			putByRequest("afterNews", newsVOTemp);
 		} else {
-			putByRequest("prevNews", null);
+			putByRequest("afterNews", null);
 		}
 
 		newsVOTemp = new NewsVO();
