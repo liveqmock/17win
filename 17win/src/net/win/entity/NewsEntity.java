@@ -20,8 +20,8 @@ public class NewsEntity extends BaseEntity {
 	private String content;
 
 	// 是否置顶
-	@Column(name = "TOP_", nullable = false)
-	private Boolean top;
+	@Column(name = "SORT_", nullable = false)
+	private Integer sort;
 	// URL
 	@Column(name = "Url_", unique = true)
 	private String url;
@@ -87,12 +87,12 @@ public class NewsEntity extends BaseEntity {
 		this.pageDate = pageDate;
 	}
 
-	public Boolean getTop() {
-		return top;
+	public Integer getSort() {
+		return sort;
 	}
 
-	public void setTop(Boolean top) {
-		this.top = top;
+	public void setSort(Integer sort) {
+		this.sort = sort;
 	}
 
 }
