@@ -40,7 +40,7 @@
 					href="taskRepositoryManager/taskRepository!queryRepositories.php?platformType=<s:property value="#request.platformType"/>">任务仓库</A>
 			</LI>
 			<LI>
-				<A href="userInfoManager/info!initSellerAndBuyer.php">绑定店铺</A>
+				<A href="userInfoManager/info!initSellerAndBuyer.php">绑定卖号</A>
 			</LI>
 
 			<LI>
