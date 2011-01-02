@@ -66,16 +66,27 @@ VhostAop.divAOP.ajaxParam3 = function(url, data, callback) {
 	this.ajax(url, data, callback);
 };
 VhostAop.divAOP.ajax = function(url, data, callback) {
-	var aop = VhostAop.divAOP;
-	aop.before();
-	if (url.indexOf("?") != -1) {
-		url = url + "&time=" + new Date().getTime();
-	} else {
-		url = url + "?time=" + new Date().getTime();
+
+	try {
+		var aop = VhostAop.divAOP;
+		aop.before();
+		if (url.indexOf("?") != -1) {
+			url = url + "&time=" + new Date().getTime();
+		} else {
+			url = url + "?time=" + new Date().getTime();
+		}
+		$.post(url, data, function(data) {
+					try {
+						callback(data);
+						aop.after();
+					} catch (err) {
+						aop.after();
+						alert("系统错误!");
+					}
+				});
+	} catch (err) {
+		aop.after();
+		alert("系统错误!");
 	}
-	$.post(url, data, function(data) {
-				callback(data);
-				aop.after();
-			});
 };
 VhostAop.divAOP.init();
