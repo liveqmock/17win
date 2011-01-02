@@ -136,30 +136,7 @@ public class BaseService {
 				.getUpgradeScore()));
 		userLoginInfo.setLevelImg(StrategyUtils.getLevelImg(userEntity
 				.getUpgradeScore()));
-		WinContext.getInstance().putUserLoginInfo(userLoginInfo.getUsername(),
-				userLoginInfo);
 	}
-
-	/**
-	 * 
-	 * @param userEntity
-	 * @throws Exception
-	 */
-	protected void updateOtherUserLoginInfo(UserEntity userEntity)
-			throws Exception {
-		// ///
-		UserLoginInfo userLoginInfo = WinContext.getInstance()
-				.getUserLoginInfo(userEntity.getUsername());
-		if (userLoginInfo == null) {
-			return;
-		}
-		BeanUtils.copyProperties(userLoginInfo, userEntity);
-		userLoginInfo.setLevel(StrategyUtils.getLevel(userEntity
-				.getUpgradeScore()));
-		userLoginInfo.setLevelImg(StrategyUtils.getLevelImg(userEntity
-				.getUpgradeScore()));
-	}
-
 	/**
 	 * 把数据存放在request里面
 	 * 
@@ -323,6 +300,7 @@ public class BaseService {
 	protected void putTokenBySession() {
 		putBySession(Constant.WIN17_TOKEN, StringUtils.createGUID());
 	}
+
 	/**
 	 * 存放UUID
 	 * 
@@ -330,10 +308,11 @@ public class BaseService {
 	 * @return
 	 */
 	protected Boolean isTokenPass() {
-		if( getByParam(Constant.WIN17_TOKEN)==null){
+		if (getByParam(Constant.WIN17_TOKEN) == null) {
 			return false;
 		}
-		return getByParam(Constant.WIN17_TOKEN).equals(getBySession(Constant.WIN17_TOKEN));
+		return getByParam(Constant.WIN17_TOKEN).equals(
+				getBySession(Constant.WIN17_TOKEN));
 	}
 
 	// 保存发布点记录
