@@ -17,7 +17,7 @@
 						类型：
 					</td>
 					<td>
-						<s:select name="newsVO.typeId" list="#request.newsTpyes"
+						<s:select name="newsVO.typeId" list="#request.newsTpyes"  id="typeID"
 							listKey="id" listValue="name">
 						</s:select>
 					</td>
@@ -32,12 +32,10 @@
 				</tr>
 				<tr>
 					<td nowrap="nowrap">
-						置顶
+						顺序
 					</td>
 					<td>
-						<s:select listKey="key" listValue="value" name="newsVO.top"
-							list="#{'true':'是','false':'否'}">
-						</s:select>
+						<s:textfield name="newsVO.sort" value="%{#request.maxSortResult}" id="sort"></s:textfield>
 					</td>
 				</tr>
 				<tr>
@@ -49,7 +47,9 @@
 					</td>
 				</tr>
 				<tr>
+	
 					<td nowrap="nowrap" colspan="2" align="center">
+										
 						<input type="submit" value="提交">
 						<input type="reset" value="重置">
 						<input type="button"

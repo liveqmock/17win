@@ -43,4 +43,8 @@
 <script type="text/javascript"
 	src="<%=basePathRoot%>/js/jquery.tablesorter.min.js">
 </script>
+<script type="text/javascript"
+	src="<%=basePathRoot%>/js/aop.js">
+</script>
+
 <s:property value="#request.msg" escape="false" />

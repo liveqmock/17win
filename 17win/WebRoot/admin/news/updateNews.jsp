@@ -17,7 +17,7 @@
 						类型：
 					</td>
 					<td>
-						<s:select name="newsVO.typeId" list="#request.newsTpyes"
+						<s:select name="newsVO.typeId" list="#request.newsTpyes" id="typeID"
 							listKey="id" listValue="name">
 						</s:select>
 					</td>
@@ -32,12 +32,10 @@
 				</tr>
 				<tr>
 					<td nowrap="nowrap">
-						置顶
+						顺序
 					</td>
 					<td>
-						<s:select listKey="key" listValue="value" name="newsVO.top"
-							list="#{'true':'是','false':'否'}">
-						</s:select>
+						<s:textfield name="newsVO.sort"  id="sort"></s:textfield>
 					</td>
 				</tr>
 				<tr>
