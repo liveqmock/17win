@@ -29,6 +29,22 @@ public class AdminNewsService extends BaseService {
 	private NewsTypeDAO newsTypeDAO;
 
 	/**
+	 * ajax获取sort
+	 * 
+	 * @param newsVO
+	 * @return
+	 * @throws Exception
+	 */
+	public Integer ajaxObtainSort(NewsVO newsVO) throws Exception {
+		Integer maxSort = 1 + (Integer) newsDAO
+				.uniqueResultObject(
+						"select max(sort) from NewsEntity  as _news where _news.type.id=:typeID",
+						new String[] { "typeID" }, new Object[] { newsVO
+								.getTypeId() });
+		return maxSort;
+	}
+
+	/**
 	 * 详细信息
 	 * 
 	 * @param newsVO
@@ -39,11 +55,11 @@ public class AdminNewsService extends BaseService {
 		NewsEntity newsEntity = newsDAO.get(newsVO.getId());
 		List<NewsEntity> newses1 = newsDAO
 				.pageQuery(
-						"from NewsEntity as _news where _news.type.name='网站公告'  order by _news.top desc,_news.date desc",
+						"from NewsEntity as _news where _news.type.name='网站公告'  order by _news.sort asc,_news.date desc",
 						0, 5);
 		List<NewsEntity> newses2 = newsDAO
 				.pageQuery(
-						"from NewsEntity as _news where _news.type.name='推荐文章'  order by _news.top desc,_news.date desc",
+						"from NewsEntity as _news where _news.type.name='推荐文章'  order by _news.sort asc,_news.date desc",
 						0, 10);
 		List<NewsVO> wzResult = new ArrayList<NewsVO>();
 		List<NewsVO> tjResult = new ArrayList<NewsVO>();
@@ -106,11 +122,11 @@ public class AdminNewsService extends BaseService {
 	public String listNews(NewsVO newsVO) throws Exception {
 		List<NewsEntity> newses1 = newsDAO
 				.pageQuery(
-						"from NewsEntity as _news where _news.type.name='网站公告'  order by _news.top desc,_news.date desc",
+						"from NewsEntity as _news where _news.type.name='网站公告'  order by _news.sort asc,_news.date desc",
 						0, 5);
 		List<NewsEntity> newses2 = newsDAO
 				.pageQuery(
-						"from NewsEntity as _news where _news.type.name='推荐文章'  order by _news.top desc,_news.date desc",
+						"from NewsEntity as _news where _news.type.name='推荐文章'  order by _news.sort asc,_news.date desc",
 						0, 10);
 		List<NewsVO> wzResult = new ArrayList<NewsVO>();
 		List<NewsVO> tjResult = new ArrayList<NewsVO>();
@@ -130,7 +146,7 @@ public class AdminNewsService extends BaseService {
 
 		Long count = (Long) newsDAO
 				.uniqueResultObject(
-						"select count(*) from NewsEntity as _news where _news.type.name=:typeName  order by _news.top desc,_news.date desc",
+						"select count(*) from NewsEntity as _news where _news.type.name=:typeName  order by _news.sort asc,_news.date desc",
 						new String[] { "typeName" }, new String[] { newsVO
 								.getTypeName() });
 		List<NewsVO> result = new ArrayList<NewsVO>();
@@ -165,43 +181,43 @@ public class AdminNewsService extends BaseService {
 		putIndexShowType("10");
 		List<NewsEntity> newses1 = newsDAO
 				.pageQuery(
-						"from NewsEntity as _news where _news.type.name='网站公告'  order by _news.top desc,_news.date desc",
+						"from NewsEntity as _news where _news.type.name='网站公告'  order by _news.sort asc,_news.date desc",
 						0, 5);
 		List<NewsEntity> newses2 = newsDAO
 				.pageQuery(
-						"from NewsEntity as _news where _news.type.name='推荐文章'  order by _news.top desc,_news.date desc",
+						"from NewsEntity as _news where _news.type.name='推荐文章'  order by _news.sort asc,_news.date desc",
 						0, 10);
 		List<NewsEntity> newses3 = newsDAO
 				.pageQuery(
-						"from NewsEntity as _news where _news.type.name='新手入门'  order by _news.top desc,_news.date desc",
+						"from NewsEntity as _news where _news.type.name='新手入门'  order by _news.sort asc,_news.date desc",
 						0, 5);
 		List<NewsEntity> newses4 = newsDAO
 				.pageQuery(
-						"from NewsEntity as _news where _news.type.name='卖家必读'  order by _news.top desc,_news.date desc",
+						"from NewsEntity as _news where _news.type.name='卖家必读'  order by _news.sort asc,_news.date desc",
 						0, 5);
 		List<NewsEntity> newses5 = newsDAO
 				.pageQuery(
-						"from NewsEntity as _news where _news.type.name='店铺推广'  order by _news.top desc,_news.date desc",
+						"from NewsEntity as _news where _news.type.name='店铺推广'  order by _news.sort asc,_news.date desc",
 						0, 5);
 		List<NewsEntity> newses6 = newsDAO
 				.pageQuery(
-						"from NewsEntity as _news where _news.type.name='网络营销'  order by _news.top desc,_news.date desc",
+						"from NewsEntity as _news where _news.type.name='网络营销'  order by _news.sort asc,_news.date desc",
 						0, 5);
 		List<NewsEntity> newses7 = newsDAO
 				.pageQuery(
-						"from NewsEntity as _news where _news.type.name='刷客必读'  order by _news.top desc,_news.date desc",
+						"from NewsEntity as _news where _news.type.name='刷客必读'  order by _news.sort asc,_news.date desc",
 						0, 5);
 		List<NewsEntity> newses8 = newsDAO
 				.pageQuery(
-						"from NewsEntity as _news where _news.type.name='买家必读'  order by _news.top desc,_news.date desc",
+						"from NewsEntity as _news where _news.type.name='买家必读'  order by _news.sort asc,_news.date desc",
 						0, 5);
 		List<NewsEntity> newses9 = newsDAO
 				.pageQuery(
-						"from NewsEntity as _news where _news.type.name='赚钱窍门'  order by _news.top desc,_news.date desc",
+						"from NewsEntity as _news where _news.type.name='赚钱窍门'  order by _news.sort asc,_news.date desc",
 						0, 5);
 		List<NewsEntity> newses10 = newsDAO
 				.pageQuery(
-						"from NewsEntity as _news where _news.type.name='服务项目'  order by _news.top desc,_news.date desc",
+						"from NewsEntity as _news where _news.type.name='服务项目'  order by _news.sort asc,_news.date desc",
 						0, 5);
 		List<NewsVO> wzResult = new ArrayList<NewsVO>();
 		List<NewsVO> tjResult = new ArrayList<NewsVO>();
@@ -338,7 +354,7 @@ public class AdminNewsService extends BaseService {
 			paramValues.add("%" + newsVO.getTitle() + "%");
 		}
 
-		resultHQL.append("order by  _news.top desc,  _news.date desc");
+		resultHQL.append("order by  _news.sort asc,  _news.date desc");
 		Long count = (Long) newsDAO.uniqueResultObject(countHQL.toString(),
 				paramNames.toArray(paramNames.toArray(new String[paramNames
 						.size()])), paramValues.toArray(new Object[paramValues
@@ -391,6 +407,16 @@ public class AdminNewsService extends BaseService {
 			BeanUtils.copyProperties(typeVO, newsTypeEntity);
 			result.add(typeVO);
 		}
+		Integer maxSortResult = 1;
+		if (newsTypes.size() > 0) {
+			NewsTypeEntity newsTypeEntityTemp = newsTypes.get(0);
+			maxSortResult = 1 + (Integer) newsDAO
+					.uniqueResultObject(
+							"select max(sort) from NewsEntity  as _news where _news.type.id=:typeID",
+							new String[] { "typeID" },
+							new Object[] { newsTypeEntityTemp.getId() });
+		}
+		putByRequest("maxSortResult", maxSortResult);
 		putByRequest("newsTpyes", result);
 		return "initAddNews";
 	}
@@ -416,8 +442,18 @@ public class AdminNewsService extends BaseService {
 	 * @throws Exception
 	 */
 	public String addNews(NewsVO newsVO) throws Exception {
+		List<NewsEntity> newses = newsDAO.list(
+				"from NewsEntity where type.id=:typeID and sort>=:sort",
+				new String[] { "typeID", "sort" }, new Object[] {
+						newsVO.getTypeId(), newsVO.getSort() });
+		Integer sortTemp = newsVO.getSort() + 1;
+		for (NewsEntity newsEntity2 : newses) {
+			newsEntity2.setSort(sortTemp++);
+		}
+
 		NewsEntity newsEntity = new NewsEntity();
 		BeanUtils.copyProperties(newsEntity, newsVO);
+
 		NewsTypeEntity newsTypeEntity = new NewsTypeEntity();
 		newsTypeEntity.setId(newsVO.getTypeId());
 		newsEntity.setType(newsTypeEntity);
@@ -425,6 +461,7 @@ public class AdminNewsService extends BaseService {
 		newsEntity.setUrl("detail_null.html");
 		Long id = newsDAO.save(newsEntity);
 		newsEntity.setUrl("detail_" + id + ".html");
+
 		putAlertMsg("增加成功！");
 		putJumpPage("adminNewsManager/adminNews!queryNews.php");
 		newsDAO.flushSession();
@@ -464,6 +501,16 @@ public class AdminNewsService extends BaseService {
 	 * @throws Exception
 	 */
 	public String updateNews(NewsVO newsVO) throws Exception {
+
+		List<NewsEntity> newses = newsDAO.list(
+				"from NewsEntity where type.id=:typeID and sort>=:sort",
+				new String[] { "typeID", "sort" }, new Object[] {
+						newsVO.getTypeId(), newsVO.getSort() });
+		Integer sortTemp = newsVO.getSort() + 1;
+		for (NewsEntity newsEntity2 : newses) {
+			newsEntity2.setSort(sortTemp++);
+		}
+
 		NewsEntity newsEntity = newsDAO.get(newsVO.getId());
 		BeanUtils.copyProperties(newsEntity, newsVO);
 
@@ -472,6 +519,7 @@ public class AdminNewsService extends BaseService {
 		newsEntity.setType(newsTypeEntity);
 		newsEntity.setDate(new Date());
 		newsEntity.setUrl("detail_" + newsVO.getId() + ".html");
+
 		putJumpPage("adminNewsManager/adminNews!queryNews.php");
 		putAlertMsg("修改成功！");
 		newsDAO.flushSession();
