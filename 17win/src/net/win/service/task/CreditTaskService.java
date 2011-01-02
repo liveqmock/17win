@@ -847,6 +847,8 @@ public class CreditTaskService extends BaseService {
 	 */
 	@SuppressWarnings("unchecked")
 	public String initReceivedTast(CreditTaskVO creditTaskVO) throws Exception {
+		UserEntity userEntity = getLoginUserEntity(userDAO);
+		updateUserLoginInfo(userEntity);
 		// 没有操作码验证就验证
 		String platformType = getPlatformType();
 		if ("1".equals(platformType)) {
@@ -951,6 +953,9 @@ public class CreditTaskService extends BaseService {
 	 * @return
 	 */
 	public String initReleasedTast(CreditTaskVO creditTaskVO) throws Exception {
+		UserEntity userEntity = getLoginUserEntity(userDAO);
+		updateUserLoginInfo(userEntity);
+
 		// 没有操作码验证就验证
 		String platformType = getPlatformType();
 		if ("1".equals(platformType)) {
@@ -1286,6 +1291,8 @@ public class CreditTaskService extends BaseService {
 	 */
 
 	public String initTask(CreditTaskVO creditTaskVO) throws Exception {
+		UserEntity userEntity = getLoginUserEntity(userDAO);
+		updateUserLoginInfo(userEntity);
 		String platformType = getPlatformType();
 		if ("1".equals(platformType)) {
 			putIndexShowType("2");
