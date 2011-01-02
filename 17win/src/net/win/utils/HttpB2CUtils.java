@@ -50,7 +50,7 @@ public final class HttpB2CUtils {
 	private static final String YOUA_SHOP_REGEX = "^http:[/\\\\]{2}youa.baidu\\.com[/\\\\]?";
 
 	// 商品地址验证
-	private static final String TAOBAO_ITEM_REGEX = "^http:[/\\\\]{2}item\\.taobao\\.com[/\\\\]item.htm";
+	private static final String TAOBAO_ITEM_REGEX = "((^http:[/\\\\]{2}item\\.taobao\\.com[/\\\\]item.htm)|(^http:[/\\\\]{2}item\\.taobao\\.com[/\\\\]auction[/\\\\]item))";
 	private static final String PAIPAI_ITEM_REGEX = "^http:[/\\\\]{2}auction\\d\\.paipai\\.com[/\\\\]";
 	private static final String YOUA_ITEM_REGEX = "^http:[/\\\\]{2}youa.baidu\\.com[/\\\\]item";
 

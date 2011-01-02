@@ -206,7 +206,7 @@ Validater.isItem = function(url, type) {
 		}
 	}
 	if ("1" == type) {
-		regName = new RegExp("^http:[/\\\\]{2}item\\.taobao\\.com[/\\\\]item.htm");
+		regName = new RegExp("((^http:[/\\\\]{2}item\\.taobao\\.com[/\\\\]item.htm)|(^http:[/\\\\]{2}item\\.taobao\\.com[/\\\\]auction[/\\\\]item))");
 	} else if ("2" == type) {
 		//		http://auction1.paipai.com/299731360000000000293A5406F9AA7F
 		regName = new RegExp("^http:[/\\\\]{2}auction\\d\\.paipai\\.com[/\\\\]");
