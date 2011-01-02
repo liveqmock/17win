@@ -31,22 +31,22 @@ public class MenuService extends BaseService {
 		ServletActionContext.getRequest().setAttribute("showIndexType", "1");
 		List<NewsEntity> newses1 = newsDAO
 				.pageQuery(
-						"from NewsEntity as _news where _news.type.name='新手入门'  order by _news.top desc,_news.date desc",
+						"from NewsEntity as _news where _news.type.name='新手入门'  order by _news.sort asc,_news.date desc",
 						0, 12);
 
 		List<NewsEntity> newses2 = newsDAO
 				.pageQuery(
-						"from NewsEntity as _news where _news.type.name='卖家必读'  order by _news.top desc,_news.date desc",
+						"from NewsEntity as _news where _news.type.name='卖家必读'  order by _news.sort asc,_news.date desc",
 						0, 5);
 
 		List<NewsEntity> newses3 = newsDAO
 				.pageQuery(
-						"from NewsEntity as _news where _news.type.name='买家必读'  order by _news.top desc,_news.date desc",
+						"from NewsEntity as _news where _news.type.name='买家必读'  order by _news.sort asc,_news.date desc",
 						0, 5);
 
 		List<NewsEntity> newses4 = newsDAO
 				.pageQuery(
-						"from NewsEntity as _news where _news.type.name='网站公告'  order by _news.top desc,_news.date desc",
+						"from NewsEntity as _news where _news.type.name='网站公告'  order by _news.sort asc,_news.date desc",
 						0, 3);
 
 		List<NewsVO> xsResult = new ArrayList<NewsVO>();
