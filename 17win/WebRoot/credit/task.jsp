@@ -251,7 +251,7 @@
 		</s:if>
 		<s:else>
 			<input value="false" id="noBuyerId" type="hidden" />
-			<div id="buyerDIV" title="选择接手小号">
+			<div id="buyerDIV" title="选择接手买号">
 				<s:iterator value="#request.resultBuyers" id="buyer" status="status">
 					<s:if test="#status.index==0">
 						<input type="radio" value="<s:property value="#buyer.id" />"
