@@ -13,14 +13,13 @@ public class NewsVO extends BaseVO {
 	private String content;
 	// URL
 	private String url;
-	//置顶
-	private Boolean top;
+	// 顺序
+	private Integer sort;
 	// 发布时间
 	private Date date;
-	
+
 	private String typeName;
 
-	
 	// 查询
 
 	private String topFlag;
@@ -108,19 +107,19 @@ public class NewsVO extends BaseVO {
 		this.typeName = typeName;
 	}
 
-	public Boolean getTop() {
-		return top;
-	}
-
-	public void setTop(Boolean top) {
-		this.top = top;
-	}
-
 	public String getTopFlag() {
 		return topFlag;
 	}
 
 	public void setTopFlag(String topFlag) {
 		this.topFlag = topFlag;
+	}
+
+	public Integer getSort() {
+		return sort;
+	}
+
+	public void setSort(Integer sort) {
+		this.sort = sort;
 	}
 }
