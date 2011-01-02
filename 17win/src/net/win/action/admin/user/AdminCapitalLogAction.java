@@ -4,7 +4,6 @@ import javax.annotation.Resource;
 
 import net.win.BaseAction;
 import net.win.service.admin.user.AdminCapitalLogService;
-import net.win.service.capitalLog.CapitalLogService;
 import net.win.vo.CapitalLogVO;
 
 import org.apache.struts2.convention.annotation.Action;
