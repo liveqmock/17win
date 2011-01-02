@@ -12,6 +12,7 @@ import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
+import org.apache.struts2.json.annotations.JSON;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -43,12 +44,15 @@ import org.springframework.stereotype.Controller;
 
 		@Result(name = "detailNews", location = "/help/detail.jsp") })
 public class AdminNewsAction extends BaseAction {
+
+	private Integer sort;
 	@Resource
 	private AdminNewsService adminNewsService;
 
 	private NewsVO newsVO = new NewsVO();
 	private NewsTypeVO newsTypeVO = new NewsTypeVO();
 
+	@JSON(serialize=false)
 	public NewsVO getNewsVO() {
 		return newsVO;
 	}
@@ -56,7 +60,7 @@ public class AdminNewsAction extends BaseAction {
 	public void setNewsVO(NewsVO newsVO) {
 		this.newsVO = newsVO;
 	}
-
+	@JSON(serialize=false)
 	public NewsTypeVO getNewsTypeVO() {
 		return newsTypeVO;
 	}
@@ -70,6 +74,16 @@ public class AdminNewsAction extends BaseAction {
 	public String execute() throws Exception {
 		// TODO Auto-generated method stub
 		return super.execute();
+	}
+
+	/**
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String ajaxObtainSort() throws Exception {
+		sort = adminNewsService.ajaxObtainSort(newsVO);
+		return JSON;
 	}
 
 	/**
@@ -209,6 +223,10 @@ public class AdminNewsAction extends BaseAction {
 	 */
 	public String deleteNewsType() throws Exception {
 		return adminNewsService.deleteNewsType(newsTypeVO);
+	}
+
+	public Integer getSort() {
+		return sort;
 	}
 
 }
