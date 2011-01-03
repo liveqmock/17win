@@ -94,8 +94,10 @@ public final class Constant {
 	private static Double initUserMoney;
 	// 初始化用户发布点
 	private static Double initUserReleaseDot;
-	//
+	// 支付界面
 	private static String toPayPage;
+	// 最大注册数
+	public static Double maxRegisterCount;
 
 	public static Double getFabudianPrice() {
 		return fabudian_P;
@@ -406,6 +408,10 @@ public final class Constant {
 				else if ("toPayPage".equalsIgnoreCase(name)) {
 					toPayPage = stringValue;
 				}
+				// 最大注册数
+				else if ("maxRegisterCount".equalsIgnoreCase(name)) {
+					maxRegisterCount = numberValue;
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -416,6 +422,10 @@ public final class Constant {
 
 	public static String getToPayPage() {
 		return toPayPage;
+	}
+
+	public static Double getMaxRegisterCount() {
+		return maxRegisterCount;
 	}
 
 }
