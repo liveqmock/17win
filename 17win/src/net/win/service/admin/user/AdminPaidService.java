@@ -55,11 +55,14 @@ public class AdminPaidService extends BaseService {
 	 * @throws Exception
 	 */
 	public String updateUserMoney(AdminPayVO adminPayVO) throws Exception {
+		putJumpPage("admin/adminPaidManager/adminPaid!queryPay.php");
 		UserEntity adminEntity = getLoginUserEntity(userDAO);
 		PayEntity payEntity = payDAO.get(Long.parseLong(getByParam("payId")));
 		UserEntity userEntity = payEntity.getUser();
 		if (!payEntity.getStatus().equals("1")) {
 			WinUtils.throwIllegalityException("系统错误 ，充值");
+			putAlertMsg("系统出错，状态已改变！");
+			return JUMP;
 		}
 		userEntity.setMoney(ArithUtils.add(userEntity.getMoney(), payEntity
 				.getMoney()));
@@ -78,7 +81,7 @@ public class AdminPaidService extends BaseService {
 		logMoneyCapital(smsDAO, payEntity.getMoney(), "账号充值", userEntity);
 		queryPay(adminPayVO);
 		putAlertMsg("充值成功！");
-		return "updateUserMoney";
+		return JUMP;
 	}
 
 	/**

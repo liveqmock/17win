@@ -36,11 +36,12 @@ public class AdminUserService extends BaseService {
 		userEntity.setStatusDesc(statusDesc);
 		queryUser(adminUserVO);
 		putAlertMsg("修改成功！");
-		return "updateStatus";
+		putJumpPage("admin/adminUserManager/adminUser!queryUser.php");
+		return JUMP;
 	}
 
 	/**
-	 * 充值
+	 * 充值金额
 	 * 
 	 * @param adminUserVO
 	 * @return
@@ -48,13 +49,37 @@ public class AdminUserService extends BaseService {
 	 */
 	public String updateUserMoney(AdminUserVO adminUserVO) throws Exception {
 		Double money = Double.parseDouble(getByParam("money"));
+		String desc = getByParam("moneyDesc");
 		Long id = Long.parseLong(getByParam("userId"));
 		UserEntity userEntity = userDAO.get(id);
 		userEntity.setMoney(ArithUtils.add(userEntity.getMoney(), money));
 		queryUser(adminUserVO);
-		logMoneyCapital(userDAO, money, "账号充值", userEntity);
-		putAlertMsg("充值成功！");
-		return "updateUserMoney";
+		logMoneyCapital(userDAO, money, desc, userEntity);
+		putAlertMsg("充值金额成功！");
+		putJumpPage("admin/adminUserManager/adminUser!queryUser.php");
+		return JUMP;
+	}
+
+	/**
+	 * 充值发布点
+	 * 
+	 * @param adminUserVO
+	 * @return
+	 * @throws Exception
+	 */
+	public String updateUserReleaseDot(AdminUserVO adminUserVO)
+			throws Exception {
+		Double releaseDot = Double.parseDouble(getByParam("releaseDot"));
+		String desc = getByParam("releaseDotDesc");
+		Long id = Long.parseLong(getByParam("userId"));
+		UserEntity userEntity = userDAO.get(id);
+		userEntity.setReleaseDot(ArithUtils.add(userEntity.getReleaseDot(),
+				releaseDot));
+		queryUser(adminUserVO);
+		logDotCapital(userDAO, releaseDot, desc, userEntity);
+		putAlertMsg("充值发布点成功！");
+		putJumpPage("admin/adminUserManager/adminUser!queryUser.php");
+		return JUMP;
 	}
 
 	/**
