@@ -6,7 +6,7 @@ function releaseRepository(id) {
 }
 
 // 删除
-function deleteRepository(url) {
+function deleteRepository(id) {
 	if (confirm("您确定要把该任务从任务仓库中移出？")) {
 		var platformType = $("#platformType").val();
 		window.location.href = "taskRepositoryManager/taskRepository!deleteRepository.php?taskReId="
