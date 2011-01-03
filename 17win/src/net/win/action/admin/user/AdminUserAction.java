@@ -21,6 +21,7 @@ import org.springframework.stereotype.Controller;
 @Results( {
 		@Result(name = "queryUser", location = "/admin/user/userIndex.jsp"),
 		@Result(name = "updateUserMoney", location = "/admin/user/userIndex.jsp"),
+		@Result(name = "updateUserReleaseDot", location = "/admin/user/userIndex.jsp"),
 		@Result(name = "updateStatus", location = "/admin/user/userIndex.jsp") })
 @Namespace("/adminUserManager")
 public class AdminUserAction extends BaseAction {
@@ -55,7 +56,7 @@ public class AdminUserAction extends BaseAction {
 	}
 
 	/**
-	 * 充值
+	 * 充值金额
 	 * 
 	 * @param userVO
 	 * @return
@@ -64,7 +65,16 @@ public class AdminUserAction extends BaseAction {
 	public String addMoney() throws Exception {
 		return adminUserService.updateUserMoney(adminUserVO);
 	}
-
+	/**
+	 * 充值发布点
+	 * 
+	 * @param userVO
+	 * @return
+	 * @throws Exception
+	 */
+	public String addReleaseDot() throws Exception {
+		return adminUserService.updateUserReleaseDot(adminUserVO);
+	}
 	/**
 	 * 查询用户
 	 * 
