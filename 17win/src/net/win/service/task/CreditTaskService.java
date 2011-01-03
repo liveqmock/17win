@@ -1068,6 +1068,11 @@ public class CreditTaskService extends BaseService {
 		TaskMananger taskMananger = TaskMananger.getInstance();
 
 		String platFormType = getPlatformType();
+		
+		
+		putJumpOutterPage("taskManager/task!initReleaseTask.php?platformType="
+				+ platFormType);
+		
 		BeanUtils.copyProperties(creditTask, creditTaskVO);
 
 		// 把天转换成时间
@@ -1094,36 +1099,36 @@ public class CreditTaskService extends BaseService {
 				putAlertMsg("您当前的【状态】不是【正常状态】，不能发布任务！");
 				break;
 			}
-			return "insertReleaseTaskFail";
+			return JUMP;
 		}
 		if (StringUtils.isBlank(platFormType)) {
 			WinUtils.throwIllegalityException(userEntity.getUsername()
 					+ "视图越过发布任务的任务类型验证！");
-			return "insertReleaseTaskFail";
+			return JUMP;
 		}
 		if (creditTask.getMoney() + creditTask.getAddtionMoney() > userEntity
 				.getMoney()) {
 			creditTaskVO.setMoney(null);
 			putAlertMsg("您当前的余额为不够发布这个任务！");
-			return "insertReleaseTaskFail";
+			return JUMP;
 		}
 
 		if (creditTaskVO.getMoney() < 1) {
 			putAlertMsg("不能发布小于1元的任务！");
-			return "insertReleaseTaskFail";
+			return JUMP;
 		}
 		if (creditTaskDot + creditTaskVO.getAddtionReleaseDot() > userEntity
 				.getReleaseDot()) {
 			putAlertMsg("您当前的发布点不够" + creditTaskDot
 					+ creditTaskVO.getAddtionReleaseDot() + "，不能发布此任务！");
-			return "insertReleaseTaskFail";
+			return JUMP;
 		}
 		// 设置发布人，发布账号
 		// Long buyerID = creditTaskVO.getBuyerID();
 		Long sellerID = creditTaskVO.getSellerID();
 		if (sellerID == null) {
 			putAlertMsg("掌柜名和商品地址不对应！");
-			return "insertReleaseTaskFail";
+			return JUMP;
 		}
 		SellerEntity seller = new SellerEntity();
 		seller.setId(sellerID);
@@ -1138,7 +1143,7 @@ public class CreditTaskService extends BaseService {
 			if (creditTask.getTimeingTime().getTime() < System
 					.currentTimeMillis()) {
 				putAlertMsg("定时任务时间必须大于当前的时间！");
-				return "insertReleaseTaskFail";
+				return JUMP;
 			}
 			creditTask.setStatus(TaskMananger.TIMING_STATUS);
 		}
@@ -1191,8 +1196,7 @@ public class CreditTaskService extends BaseService {
 				.getAddtionMoney()), "发布任务", userEntity);
 		logDotCapital(userDAO, 0 - (creditTaskDot + creditTaskVO
 				.getAddtionReleaseDot()), "发布任务", userEntity);
-		putJumpOutterPage("taskManager/task!initReleaseTask.php?platformType="
-				+ platFormType);
+		
 		putAlertMsg("发布任务成功!");
 		return JUMP;
 	}
