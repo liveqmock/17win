@@ -292,7 +292,7 @@ public class UserInfoService extends BaseService {
 			Integer score = HttpB2CUtils.obtainCreditValue(buyerEntity
 					.getName(), buyerEntity.getCreditURL(), platformTypeParam);
 			if (score == -1) {
-				putAlertMsg("您输入的地址有问题或地址和买号不同，如果有疑问请联系客户！");
+				putAlertMsg("您输入的信誉地址和买号不同，如果有疑问请联系新手帮助客户！");
 				return "insertSellerAndBuyer";
 			}
 			if (score > Constant.getCreditValueLimit()) {
@@ -399,10 +399,10 @@ public class UserInfoService extends BaseService {
 	public String sendActiave(UserVO userVO) throws Exception {
 		UserEntity user = getLoginUserEntity(userDAO);
 		Random random = new Random();
-		String value = random.nextInt(1000000)+"";
+		String value = random.nextInt(1000000) + "";
 		putBySession(Constant.USER_ACTIVE_CODE_INFO, value);
-		MsgUtils.sendMsg(user.getTelephone(), user.getUsername() + "您好，这里是来至www.17win.net的信息(一起赢刷钻网)，您的激活码是："
-				+ value+"");
+		MsgUtils.sendMsg(user.getTelephone(), user.getUsername()
+				+ "您好，这里是来至www.17win.net的信息(一起赢刷钻网)，您的激活码是：" + value + "");
 		putAlertMsg("激活码已成功的发送到您手机上，请查看后输入！");
 		putByRequest("activeCode", "3");
 		return "sendActiave";
