@@ -10,8 +10,8 @@
 	</head>
 
 	<body>
-		<s:form action="adminUserManager/adminUser!queryUser.php"  id="queryForm"
-			onsubmit="return validateForm()" theme="simple">
+		<s:form action="adminUserManager/adminUser!queryUser.php"
+			id="queryForm" onsubmit="return validateForm()" theme="simple">
 			<table width="100%" cellpadding="1" cellspacing="1" border="0px"
 				style="background: #DDEDFA">
 				<tr>
@@ -137,10 +137,10 @@
 							状态描述
 						</th>
 						<th nowrap="nowrap" style="font-size: 12px;">
-							发布点
+							余额
 						</th>
 						<th nowrap="nowrap" style="font-size: 12px;">
-							余额
+							发布点
 						</th>
 						<th nowrap="nowrap" style="font-size: 12px;">
 							注册时间
@@ -182,11 +182,12 @@
 							<td>
 								<s:property value="#user[13]" />
 							</td>
-							<td>
-								<s:property value="#user[1]" />
-							</td>
+
 							<td>
 								<s:property value="#user[2]" />
+							</td>
+							<td>
+								<s:property value="#user[1]" />
 							</td>
 							<td>
 								<s:date name="#user[3]" format="yyyy-MM-dd" />
@@ -211,7 +212,7 @@
 									否
 								</s:else>
 							</td>
-							<td>
+							<td align="center">
 								<s:if test="#user[11]==0">
 									<a
 										href="javascript:updateStatus('<s:property value="#user[12]" />','1')">激活</a>
@@ -224,9 +225,12 @@
 									<a
 										href="javascript:updateStatus('<s:property value="#user[12]" />','2')">冻结</a>
 								</s:elseif>
-
+								<br>
 								<a
-									href="javascript:addMoney('<s:property value="#user[12]" />')">充值</a>
+									href="javascript:addMoney('<s:property value="#user[12]" />')">充值金额</a>
+								<br>
+								<a
+									href="javascript:addReleaseDot('<s:property value="#user[12]" />')">充值发布点</a>
 							</td>
 						</tr>
 					</s:iterator>
@@ -275,17 +279,54 @@
 				</s:else>
 			</table>
 		</s:form>
-		<div id="updateMoneyDIV" title="充值">
+		<div id="updateMoneyDIV" title="充值金额">
 			<s:form action="adminUserManager/adminUser!addMoney.php"
 				id="moneyForm" theme="simple">
 				<table cellpadding="0" cellspacing="0" border="0">
 					<tr class="sellerClass">
-						<td valign="middle">
+						<td valign="middle" nowrap="nowrap">
 							金额：
 						</td>
 						<td>
 							<input type="text" name="money" id="moneyId" style="width: 80px">
-							<input type="hidden" name="userId" id="userIdId">
+							<input type="hidden" name="userId" id="moneyUserIdId">
+						</td>
+					</tr>
+					<tr class="sellerClass">
+						<td valign="middle" nowrap="nowrap">
+							描述：
+						</td>
+						<td>
+							<input type="text" name="moneyDesc" id="moneyDescID"
+								style="width: 400px">
+						</td>
+
+					</tr>
+				</table>
+			</s:form>
+		</div>
+
+		<div id="updateReleaseDotDIV" title="充值发布点">
+			<s:form action="adminUserManager/adminUser!addReleaseDot.php"
+				id="releaseDotForm" theme="simple">
+				<table cellpadding="0" cellspacing="0" border="0">
+					<tr class="sellerClass">
+						<td valign="middle" nowrap="nowrap">
+							发布点：
+						</td>
+						<td>
+							<input type="text" name="releaseDot" id="releaseDotId"
+								style="width: 80px">
+							<input type="hidden" name="userId" id="releaseDotUserIdId">
+						</td>
+					</tr>
+					<tr class="sellerClass">
+						<td valign="middle" nowrap="nowrap">
+							描述：
+						</td>
+						<td>
+							<input type="text" name="releaseDotDesc" id="releaseDotDescID"
+								style="width: 400px">
 						</td>
 
 					</tr>
@@ -298,7 +339,7 @@
 				id="statusForm" theme="simple">
 				<table cellpadding="0" cellspacing="0" border="0">
 					<tr class="sellerClass">
-						<td valign="middle">
+						<td valign="middle" nowrap="nowrap">
 							描述：
 						</td>
 						<td>

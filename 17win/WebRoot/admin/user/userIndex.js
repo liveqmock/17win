@@ -10,11 +10,39 @@ $(document).ready(function() {
 		width : 400,
 		buttons : {
 			"保存" : function() {
+				if (Validater.isBlank($("#moneyDescID").val())) {
+					alert("描述不能为空！");
+					return;
+				}
 				if (Validater.isBlank($("#moneyId").val())
 						|| isNaN($("#moneyId").val())) {
 					alert("金额格式不对");
 				} else {
 					$("#moneyForm").submit();
+				}
+			}
+		}
+	});
+
+	$("#updateReleaseDotDIV").dialog({
+		autoOpen : false,
+		draggable : true,
+		hide : 'slide',
+		modal : true,
+		resizable : false,
+		show : 'slide',
+		width : 400,
+		buttons : {
+			"保存" : function() {
+				if (Validater.isBlank($("#releaseDotDescID").val())) {
+					alert("描述不能为空！");
+					return;
+				}
+				if (Validater.isBlank($("#releaseDotId").val())
+						|| isNaN($("#releaseDotId").val())) {
+					alert("发布点格式不对");
+				} else {
+					$("#releaseDotForm").submit();
 				}
 			}
 		}
@@ -41,7 +69,7 @@ $(document).ready(function() {
 });
 
 // 修改状态
-function updateStatus(id,status) {
+function updateStatus(id, status) {
 	if (confirm("确认修改状态？")) {
 		$("#useForUpdateStatusId").val(id);
 		$("#statusID").val(status);
@@ -49,13 +77,25 @@ function updateStatus(id,status) {
 	}
 }
 
-// 充值
+// 充值金额
 function addMoney(id) {
+	$("#moneyId").val("");
+	$("#moneyDescID").val("");
 	if (confirm("确认是否充值？")) {
-		$("#userIdId").val(id);
+		$("#moneyUserIdId").val(id);
 		$("#updateMoneyDIV").dialog("open");
 	}
 }
+// 充值发布点
+function addReleaseDot(id) {
+	$("#releaseDotId").val("");
+	$("#releaseDotDescID").val("");
+	if (confirm("确认是否充值？")) {
+		$("#releaseDotUserIdId").val(id);
+		$("#updateReleaseDotDIV").dialog("open");
+	}
+}
+addReleaseDot
 // 删除
 function deleteSms(id) {
 	if (confirm("您确认要删除此短信！")) {
