@@ -63,7 +63,7 @@ $(document).ready(function() {
 					});
 			// 类型选择
 			$("#platformType").bind("change", function() {
-						//清除地址绑定的数据
+						// 清除地址绑定的数据
 						if ($("[name='type']").val() == "1") {
 							if ($("#platformType").val() == "3") {
 								$("#creditURL").attr("disabled", true);
@@ -119,8 +119,14 @@ function validateForm() {
 		}
 	} else {
 		$(".buyerClass input[type='text']").blur();
+		var creditURL = $("#creditURL").val();
+		if ($("#platformType").val() == "2" || $("#platformType").val() == "1") {
+			if (Validater.isBlank(creditURL)) {
+				alert("淘宝或拍拍必须填写信誉地址！");
+				return false;
+			}
+		}
 		if ($("#platformType").val() == "2") {
-			var creditURL = $("#creditURL").val();
 			var buyerName = $("#buyerName").val();
 			if (creditURL.endWith("&")) {
 				buyerName = buyerName + "&";
