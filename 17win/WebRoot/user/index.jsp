@@ -109,7 +109,7 @@ img {
 													</td>
 													<td width="63%" align="left" class="borderc">
 														&nbsp;
-														<a href="md5_pay.asp"><img src="images/congzhi.jpg"
+														<a href="payManager/pay!initPay.php"><img src="images/congzhi.jpg"
 																title="我要充值" width="140" height="40" border="0" /> </a>&nbsp;&nbsp;&nbsp;
 													</td>
 												</tr>
