@@ -137,6 +137,7 @@ public class BaseService {
 		userLoginInfo.setLevelImg(StrategyUtils.getLevelImg(userEntity
 				.getUpgradeScore()));
 	}
+
 	/**
 	 * 把数据存放在request里面
 	 * 
@@ -251,7 +252,18 @@ public class BaseService {
 	 * @param value
 	 */
 	protected String getByParam(String key) {
+
 		return ServletActionContext.getRequest().getParameter(key);
+	}
+
+	/**
+	 * 从param取出数据
+	 * 
+	 * @param name
+	 * @param value
+	 */
+	protected String[] getByParams(String key) {
+		return ServletActionContext.getRequest().getParameterValues(key);
 	}
 
 	/**
