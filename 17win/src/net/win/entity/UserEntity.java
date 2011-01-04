@@ -127,6 +127,13 @@ public class UserEntity extends BaseEntity {
 	@JoinColumn(name = "RECEIVE_PERSON_")
 	@Cascade(CascadeType.ALL)
 	private List<CreditTaskEntity> receiveCreditTasks;
+	
+	
+	// 我
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "USER_ID_")
+	@Cascade(CascadeType.ALL)
+	private List<CapitalLogEntity> capitalLogs;
 
 	// 提现的记录
 	@OneToMany(fetch = FetchType.LAZY)
@@ -516,6 +523,14 @@ public class UserEntity extends BaseEntity {
 
 	public void setRecord1000ScoreCount(Integer record1000ScoreCount) {
 		this.record1000ScoreCount = record1000ScoreCount;
+	}
+
+	public List<CapitalLogEntity> getCapitalLogs() {
+		return capitalLogs;
+	}
+
+	public void setCapitalLogs(List<CapitalLogEntity> capitalLogs) {
+		this.capitalLogs = capitalLogs;
 	}
 
 }
