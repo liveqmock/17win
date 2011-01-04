@@ -1,24 +1,36 @@
 package net.win.service.admin.user;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import net.win.BaseService;
+import net.win.dao.SmsDAO;
 import net.win.dao.UserDAO;
+import net.win.entity.SmsEntity;
 import net.win.entity.UserEntity;
 import net.win.utils.ArithUtils;
+import net.win.utils.MailUtils;
 import net.win.utils.StringUtils;
 import net.win.vo.AdminUserVO;
 
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 @SuppressWarnings( { "unchecked" })
 @Service("adminUserService")
 public class AdminUserService extends BaseService {
 	@Resource
 	private UserDAO userDAO;
+	@Resource
+	private SmsDAO smsDAO;
+	@Resource
+	private JavaMailSender mailSender;
+	@Resource
+	private FreeMarkerConfigurer freeMarkerCfj;
 
 	/**
 	 * 改变用户状态
@@ -36,6 +48,86 @@ public class AdminUserService extends BaseService {
 		userEntity.setStatusDesc(statusDesc);
 		queryUser(adminUserVO);
 		putAlertMsg("修改成功！");
+		putJumpPage("admin/adminUserManager/adminUser!queryUser.php");
+		return JUMP;
+	}
+
+	/**
+	 * 删除人员
+	 * 
+	 * @param adminUserVO
+	 * @return
+	 * @throws Exception
+	 */
+	public String deleteUser(AdminUserVO adminUserVO) throws Exception {
+		String[] userIDs = getByParams("userIDs");
+		if (userIDs != null && userIDs.length > 0) {
+			for (String userID : userIDs) {
+				userDAO.deleteById(Long.parseLong(userID));
+			}
+			putAlertMsg("删除成功！");
+		} else {
+			putAlertMsg("请选择用户！");
+		}
+		putJumpPage("admin/adminUserManager/adminUser!queryUser.php");
+		return JUMP;
+	}
+
+	/**
+	 * 发送邮件
+	 * 
+	 * @param adminUserVO
+	 * @return
+	 * @throws Exception
+	 */
+	public String sendMail(AdminUserVO adminUserVO) throws Exception {
+		String userIDs = getByParam("userIdses");
+		String content = getByParam("mailContent");
+		String subject = getByParam("mailSubjct");
+		if (userIDs != null) {
+			for (String userID : userIDs.split(",")) {
+				UserEntity userEntity = userDAO.get(Long.parseLong(userID));
+				MailUtils.sendCommonMail(mailSender, freeMarkerCfj, subject,
+						content, userEntity.getEmail());
+			}
+			putAlertMsg("发送成功！");
+		} else {
+			putAlertMsg("请选择用户！");
+		}
+		putJumpPage("admin/adminUserManager/adminUser!queryUser.php");
+		return JUMP;
+	}
+
+	/**
+	 * 发送邮件
+	 * 
+	 * @param adminUserVO
+	 * @return
+	 * @throws Exception
+	 */
+	public String insertSendSms(AdminUserVO adminUserVO) throws Exception {
+		String userIDs = getByParam("userSmsIdses");
+		String smsTitle = getByParam("smsTitle");
+		String smsContent = getByParam("smsContent");
+		UserEntity fromUser = getLoginUserEntity(userDAO);
+		if (userIDs != null) {
+			SmsEntity smsEntity = null;
+			for (String userID : userIDs.split(",")) {
+				smsEntity = new SmsEntity();
+				UserEntity userEntity = userDAO.get(Long.parseLong(userID));
+				smsEntity.setFromUser(fromUser);
+				smsEntity.setRead(false);
+				smsEntity.setContent(smsContent);
+				smsEntity.setTitle(smsTitle);
+				smsEntity.setToUser(userEntity);
+				smsEntity.setType("1");
+				smsEntity.setSendDate(new Date());
+				smsDAO.save(smsEntity);
+			}
+			putAlertMsg("发送成功！");
+		} else {
+			putAlertMsg("请选择用户！");
+		}
 		putJumpPage("admin/adminUserManager/adminUser!queryUser.php");
 		return JUMP;
 	}
