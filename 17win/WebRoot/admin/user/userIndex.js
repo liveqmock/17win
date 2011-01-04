@@ -1,5 +1,12 @@
+var ckeditorObj = null;
 $(document).ready(function() {
-	$("#myTable").tablesorter();
+	$("#myTable").tablesorter({
+				headers : {
+					0 : {
+						sorter : false
+					}
+				}
+			});
 	$("#updateMoneyDIV").dialog({
 		autoOpen : false,
 		draggable : true,
@@ -66,8 +73,120 @@ $(document).ready(function() {
 					}
 				}
 			});
+
+	ckeditorObj = CKEDITOR.replace("mailContent", {
+				toolbar : 'Full',
+				uiColor : '#9AB8F3'
+			});
+
+	$("#sendMailDIV").dialog({
+				autoOpen : false,
+				draggable : true,
+				hide : 'slide',
+				modal : true,
+				resizable : true,
+				show : 'slide',
+				width : 800,
+				buttons : {
+					"保存" : function() {
+						if ($("[selectUserName]:checked").size() <= 0) {
+							alert("必须选择人员！");
+							return;
+						}
+						var userIds = "";
+						$("[selectUserName]:checked").each(function(i) {
+									userIds += $(this).val() + ",";
+								});
+						$("#userIdsesId").val(userIds);
+
+						if (Validater.isBlank($("#userIdsesId").val())) {
+							alert("必须选择人员！");
+							return;
+						}
+						if (Validater.isBlank($("#mailSubjctID").val())) {
+							alert("主题不能为空！");
+							return;
+						}
+						var value = ckeditorObj.document.getBody().getHtml();
+						if (Validater.isBlank(value)) {
+							alert("内容不能为空！");
+							return;
+						}
+						$("#sendMailForm").submit();
+					}
+				}
+			});
+
+	$("#sendSmsDIV").dialog({
+		autoOpen : false,
+		draggable : true,
+		hide : 'slide',
+		modal : true,
+		resizable : true,
+		show : 'slide',
+		width : 400,
+		buttons : {
+			"保存" : function() {
+				if ($("[selectUserName]:checked").size() <= 0) {
+					alert("必须选择人员！");
+					return;
+				}
+				var userIds = "";
+				$("[selectUserName]:checked").each(function(i) {
+							userIds += $(this).val() + ",";
+						});
+				$("#userIdsesSmsId").val(userIds);
+
+				if (Validater.isBlank($("#userIdsesSmsId").val())) {
+					alert("必须选择人员！");
+					return;
+				}
+				if (Validater.isBlank($("#smsTitleId").val())) {
+					alert("标题不能为空！");
+					return;
+				}
+				if (Validater.isBlank($("#smsContentID").text())
+						&& $("#smsContentID").text().length > 200) {
+					alert("内容不能为空,并且长度不能大于200！");
+					return;
+				}
+				$("#sendSmsForm").submit();
+			}
+		}
+	});
 });
 
+// 删除
+function deleteUser() {
+	if (!confirm("确认是否删除！")) {
+		return;
+	}
+	if ($("[selectUserName]:checked").size() > 0) {
+		$("#queryForm").attr("action",
+				"adminUserManager/adminUser!deleteUser.php");
+		$("#queryForm").submit();
+	} else {
+		$("#queryForm").attr("action",
+				"adminUserManager/adminUser!queryUser.php");
+		alert("选择要删除的人员!");
+	}
+}
+// 打开邮件kuang
+function openMsgDiv() {
+	if ($("[selectUserName]:checked").size() <= 0) {
+		alert("必须选择人员！");
+		return;
+	}
+	$("#sendMailDIV").dialog("open");
+}
+// 打开站内信框
+function openSmsDiv() {
+	if ($("[selectUserName]:checked").size() <= 0) {
+		alert("必须选择人员！");
+		return;
+	}
+	$("#sendSmsDIV").dialog("open");
+}
 // 修改状态
 function updateStatus(id, status) {
 	if (confirm("确认修改状态？")) {

@@ -116,6 +116,12 @@
 					<td nowrap="nowrap">
 						<input type="submit" value="查&nbsp;&nbsp;询"
 							style="cursor: pointer;">
+						<input type="button" value="删&nbsp;&nbsp;除" onclick="deleteUser()"
+							style="cursor: pointer; color: red">
+						<input type="button" value="邮&nbsp;&nbsp;件" onclick="openMsgDiv()"
+							style="cursor: pointer; color: red">
+						<input type="button" value="站内信" onclick="openSmsDiv()"
+							style="cursor: pointer; color: red">
 					</td>
 				</tr>
 				<tr>
@@ -127,6 +133,9 @@
 				style="font-size: 12px;" style="table-layout: fixed;">
 				<thead>
 					<tr>
+						<th nowrap="nowrap" style="font-size: 12px;">
+							<input type="checkbox" onclick="selectAll(this,'selectUserName')">
+						</th>
 						<th nowrap="nowrap" style="font-size: 12px;">
 							用户名
 						</th>
@@ -169,9 +178,22 @@
 					<s:iterator value="#request.result" id="user">
 						<tr>
 							<td>
+								<input name="userIDs" type="checkbox"
+									value="<s:property value="#user[12]" />"
+									selectUserName="selectUserName" />
+							</td>
+							<td title="<s:property value="#user[0]" />">
 								<s:property value="#user[0]" />
 							</td>
-							<td>
+							<td
+								title="
+								<s:if test="#user[11]==0">
+									未激活
+								</s:if>
+								<s:elseif test="#user[11]==1">正常</s:elseif>
+								<s:elseif test="#user[11]==2">冻结</s:elseif>
+								<s:elseif test="#user[11]==3">找密码</s:elseif>
+							">
 								<s:if test="#user[11]==0">
 									未激活
 								</s:if>
@@ -179,32 +201,40 @@
 								<s:elseif test="#user[11]==2">冻结</s:elseif>
 								<s:elseif test="#user[11]==3">找密码</s:elseif>
 							</td>
-							<td>
+							<td title="<s:property value="#user[13]" />">
 								<s:property value="#user[13]" />
 							</td>
 
-							<td>
+							<td title="<s:property value="#user[2]" />">
 								<s:property value="#user[2]" />
 							</td>
-							<td>
+							<td title="<s:property value="#user[1]" />">
 								<s:property value="#user[1]" />
 							</td>
-							<td>
+							<td title="<s:date name="#user[3]" format="yyyy-MM-dd" />">
 								<s:date name="#user[3]" format="yyyy-MM-dd" />
 							</td>
-							<td>
+							<td title="<s:property value="#user[4]" />">
 								<s:property value="#user[4]" />
 							</td>
-							<td>
+							<td title="<s:property value="#user[5]" />">
 								<s:property value="#user[5]" />
 							</td>
-							<td>
+							<td title="<s:property value="#user[8]" />">
 								<s:property value="#user[8]" />
 							</td>
-							<td>
+							<td title="<s:property value="#user[9]" />">
 								<s:property value="#user[9]" />
 							</td>
-							<td>
+							<td
+								title="
+								<s:if test="#user[10]">
+									是
+								</s:if>
+								<s:else>
+									否
+								</s:else>
+							">
 								<s:if test="#user[10]">
 									是
 								</s:if>
@@ -237,7 +267,7 @@
 				</tbody>
 				<s:if test="#request.result.size()==0">
 					<tr>
-						<th colspan="12" align="center">
+						<th colspan="13" align="center">
 							没有用户！
 						</th>
 					</tr>
@@ -245,12 +275,16 @@
 				<s:else>
 					<tfoot>
 						<tr>
-							<th colspan="12" style="font-size: 12px;">
+							<th colspan="13" style="font-size: 12px;">
 								<div style="float: left;">
 									<a href="javascript:firstPage()">首页</a>
 									<a href="javascript:prevPage()">上一页</a>&nbsp;
 									<a href="javascript:nextPage()">下一页</a>&nbsp;
-									<a href="javascript:lastPage()">尾页</a>&nbsp;
+									<a href="javascript:lastPage()">尾页</a>&nbsp; 当前人数:
+									<s:property value="adminUserVO.dataCount" />
+									&nbsp; 每页显示：
+									<s:textfield name="adminUserVO.eachPage" cssStyle="width:40px"></s:textfield>
+									&nbsp;
 								</div>
 								<div style="float: left;">
 									跳转到
@@ -297,7 +331,7 @@
 							描述：
 						</td>
 						<td>
-							<input type="text" name="moneyDesc" id="moneyDescID"
+							<input type="text" name="moneyDesc" id="moneyDescID" maxlength="200"
 								style="width: 400px">
 						</td>
 
@@ -325,7 +359,7 @@
 							描述：
 						</td>
 						<td>
-							<input type="text" name="releaseDotDesc" id="releaseDotDescID"
+							<input type="text" name="releaseDotDesc" id="releaseDotDescID"  maxlength="200"
 								style="width: 400px">
 						</td>
 
@@ -334,7 +368,7 @@
 			</s:form>
 		</div>
 
-		<div id="updateStatusDIV" title="状态">
+		<div id="updateStatusDIV" title="状态切换">
 			<s:form action="adminUserManager/adminUser!updateStatus.php"
 				id="statusForm" theme="simple">
 				<table cellpadding="0" cellspacing="0" border="0">
@@ -347,6 +381,59 @@
 								id" style="width: 200px" maxlength="255">
 							<input type="hidden" name="userId" id="useForUpdateStatusId">
 							<input type="hidden" name="status" id="statusID">
+						</td>
+					</tr>
+				</table>
+			</s:form>
+		</div>
+
+		<!--  邮件 -->
+		<div id="sendMailDIV" title="发送邮件">
+			<s:form action="adminUserManager/adminUser!sendMail.php"
+				id="sendMailForm" theme="simple">
+				<table cellpadding="0" cellspacing="0" border="0">
+					<tr class="sellerClass">
+						<td valign="middle" nowrap="nowrap">
+							主题：
+						</td>
+						<td>
+							<input name="mailSubjct" id="mailSubjctID">
+						</td>
+					</tr>
+					<tr class="sellerClass">
+						<td valign="middle" nowrap="nowrap">
+							邮件内容：
+						</td>
+						<td>
+							<textarea name="mailContent" id="mailContentID"></textarea>
+							<input type="hidden" name="userIdses" id="userIdsesId">
+						</td>
+					</tr>
+				</table>
+			</s:form>
+		</div>
+
+
+		<!--  站内信 -->
+		<div id="sendSmsDIV" title="发站内信">
+			<s:form action="adminUserManager/adminUser!sendSms.php"
+				id="sendSmsForm" theme="simple">
+				<table cellpadding="0" cellspacing="0" border="0">
+					<tr class="sellerClass">
+						<td valign="middle" nowrap="nowrap">
+							标题：
+						</td>
+						<td>
+							<input name="smsTitle" id="smsTitleId" maxlength="50">
+						</td>
+					</tr>
+					<tr class="sellerClass">
+						<td valign="middle" nowrap="nowrap">
+							内容：
+						</td>
+						<td>
+							<textarea name="smsContent" cols="20" rows="3" id="smsContentID"></textarea>
+							<input type="hidden" name="userSmsIdses" id="userIdsesSmsId">
 						</td>
 					</tr>
 				</table>
