@@ -223,8 +223,9 @@ public class UserService extends BaseService {
 	 * @throws Exception
 	 */
 	public String initRegister(UserVO userVO) throws Exception {
-		Long maxRegisterCount = (Long) userDAO
-				.uniqueResultObject("select count(*) from UserEntity");
+		Long maxRegisterCount = (Long) userDAO.uniqueResultObject(
+				"select count(*) from UserEntity where status<>:status ",
+				new String[] { "status" }, new Object[] { "0" });
 		if (maxRegisterCount.doubleValue() >= Constant.getMaxRegisterCount()) {
 			putJumpPage("index.html");
 			putAlertMsg("允许注册的用户数已经最大了,如有问题联系客服！");
