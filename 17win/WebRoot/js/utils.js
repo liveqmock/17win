@@ -195,6 +195,11 @@ function dynamicMsg(str) {
 	return str;
 }
 
+// 全选/反选
+function selectAll(obj, name) {
+	$("["+name+"]").attr("checked", $(obj).attr("checked"));
+}
+
 // 获取用户信息
 function getUserLogin() {
 	$.getJSON("userManager/base!getLoginUser.php?time=" + new Date().getTime(),
