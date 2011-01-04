@@ -16,7 +16,7 @@ import org.springframework.stereotype.Controller;
 
 @SuppressWarnings("serial")
 @Controller
-@Scope("prototype") 
+@Scope("prototype")
 @ParentPackage("17win-default")
 @Results( {
 		@Result(name = "queryUser", location = "/admin/user/userIndex.jsp"),
@@ -56,6 +56,37 @@ public class AdminUserAction extends BaseAction {
 	}
 
 	/**
+	 * 删除用户
+	 * 
+	 * @param userVO
+	 * @return
+	 * @throws Exception
+	 */
+	public String deleteUser() throws Exception {
+		return adminUserService.deleteUser(adminUserVO);
+	}
+
+	/**
+	 * 发送邮件
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String sendMail() throws Exception {
+		return adminUserService.sendMail(adminUserVO);
+	}
+
+	/**
+	 * 发送站内信
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String sendSms() throws Exception {
+		return adminUserService.insertSendSms(adminUserVO);
+	}
+
+	/**
 	 * 充值金额
 	 * 
 	 * @param userVO
@@ -65,6 +96,7 @@ public class AdminUserAction extends BaseAction {
 	public String addMoney() throws Exception {
 		return adminUserService.updateUserMoney(adminUserVO);
 	}
+
 	/**
 	 * 充值发布点
 	 * 
@@ -75,6 +107,7 @@ public class AdminUserAction extends BaseAction {
 	public String addReleaseDot() throws Exception {
 		return adminUserService.updateUserReleaseDot(adminUserVO);
 	}
+
 	/**
 	 * 查询用户
 	 * 
