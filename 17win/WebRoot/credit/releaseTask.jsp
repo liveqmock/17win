@@ -44,8 +44,8 @@
 }
 </style>
 	<body>
-		<s:form action="taskManager/task!releaseTask.php" theme="simple" method="post"
-			id="addtaskForm" onsubmit="return validateForm()">
+		<s:form action="taskManager/task!releaseTask.php" theme="simple"
+			method="post" id="addtaskForm" onsubmit="return validateForm()">
 			<s:include value="../common/title.jsp"></s:include>
 			<s:include value="../common/task/title.jsp"></s:include>
 			<div align="center">
@@ -177,13 +177,14 @@
 																</tr>
 																<tr>
 																	<td class="font14b4" align="right">
-																		特殊任务：
+																		特定任务：
 																	</td>
 																	<td colspan="4">
 																		<input type="checkbox" id="assignUserCheckedBox">
 																		<s:textfield name="creditTaskVO.assignUser"
 																			disabled="true" id="assignUserID" maxlength="12"></s:textfield>
-																		输入指定人的名字，只有指定的人可以接你的任务，发特殊任务发布点为0
+																		<font color="red">输入指定人的名字，只有指定的人可以接你的任务，发特特定任务不需要发布点
+																		</font>
 																	</td>
 																</tr>
 																<tr>
