@@ -169,9 +169,6 @@
 									</s:else>
 								</td>
 								<td valign="top" align="center">
-									<s:if test="#task[17]!=null">
-											dsfsfs
-									</s:if>
 									<s:if test="#task[8]==1">
 										<s:if test="#task[2]==#session.userLogin.username">
 											<font color="red"> 不能接自己的任务</font>
@@ -179,17 +176,20 @@
 										<s:else>
 											<s:if
 												test="#task[17]!=null && #task[17]!=#session.userLogin.username">
-												<font color="blue" style="font-weight: bold;">特殊任务,你不是指定人</font>
+												<font color="blue" style="font-weight: bold;">特定任务,你不是指定人</font>
 											</s:if>
-											<s:if
-												test="#task[17]!=null && #task[17]!=#session.userLogin.username">
-												<font color="blue" style="font-weight: bold;">特殊任务,你不是指定人</font>
-											</s:if>
+											<s:elseif
+												test="#task[17]!=null && #task[17]==#session.userLogin.username ">
+												<font color="blue" style="font-weight: bold;">你的特定任务</font>
+												<br>
+												<a title="接手，并完成任务可获得存款和发布点" style="CURSOR: pointer"
+													onClick="receiveTask('<s:property value="#task[12]"/>')">
+													<span class="anniu">接手任务</span> </a>
+											</s:elseif>
 											<s:else>
 												<a title="接手，并完成任务可获得存款和发布点" style="CURSOR: pointer"
 													onClick="receiveTask('<s:property value="#task[12]"/>')">
 													<span class="anniu">接手任务</span> </a>
-
 											</s:else>
 										</s:else>
 									</s:if>
