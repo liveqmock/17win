@@ -176,6 +176,13 @@ $(document).ready(function() {
 
 							// 附加时间
 							$("#addtionMoney").val(obj.addtionMoney);
+							if (obj.assignUser != null) {
+								$("#assignUserID").attr("disabled", false);
+								$("#assignUserCheckedBox")
+										.attr("checked", true);
+								// 指定用户
+								$("#assignUserID").val(obj.assignUser);
+							}
 							// 附加发布点
 							$("#addtionReleaseDotId")
 									.val(obj.addtionReleaseDot);
@@ -193,6 +200,16 @@ $(document).ready(function() {
 	$("#closeDIVBtn").bind("click", function() {
 				$("#releaseDIV").dialog("close");
 			});
+
+	// 选择指定人
+	$("#assignUserCheckedBox").bind("click", function() {
+				if ($(this).attr("checked")) {
+					$("#assignUserID").attr("disabled", false);
+				} else {
+					$("#assignUserID").attr("disabled", true);
+				}
+			});
+
 });
 function validateForm() {
 	if ($("input[name='creditTaskVO.sellerID']:checked").size() == 0) {
@@ -204,9 +221,13 @@ function validateForm() {
 	// 验证和第一次加载都为真
 	if (submitFlag) {
 		$("input[name='creditTaskVO.sellerID']").attr("disabled", false);
-		// var action = $("form").attr("action") + "?platformType="
-		// + $("#platformType").val();
-		// $("form").attr("action", action);
+		if ($("#assignUserCheckedBox").attr("checked")) {
+			$("#addtaskForm").attr("action",
+					"taskManager/task!releaseTaskAssign.php");
+		} else {
+			$("#addtaskForm")
+					.attr("action", "taskManager/task!releaseTask.php");
+		}
 		return true;
 	} else {
 		alert("您填写的信息不正确，请检查！");

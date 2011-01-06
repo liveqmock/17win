@@ -2,8 +2,6 @@ package net.win.vo;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-
 import net.win.BaseVO;
 
 public class CreditTaskRepositoryVO extends BaseVO {
@@ -20,6 +18,8 @@ public class CreditTaskRepositoryVO extends BaseVO {
 	private String itemUrl;
 	// 是否修改价格
 	private Boolean updatePrice;
+	// 指定某人
+	private String assignUser;
 	// 动态评分(x:默认好评，x:全部5分 ...)
 	private String grade;
 	// 好评时间类型(1 马上 2:24小时 3:48小时 ，4：72小时，5 ：自定义)
@@ -45,7 +45,7 @@ public class CreditTaskRepositoryVO extends BaseVO {
 	// 现实
 	// 发布人的卖家号名字
 	private String sellerName;
-	
+
 	// 附加金额、
 	private Integer addtionMoney = 0;
 	// 附加发布点
@@ -193,6 +193,14 @@ public class CreditTaskRepositoryVO extends BaseVO {
 
 	public void setAddtionReleaseDot(Integer addtionReleaseDot) {
 		this.addtionReleaseDot = addtionReleaseDot;
+	}
+
+	public String getAssignUser() {
+		return assignUser;
+	}
+
+	public void setAssignUser(String assignUser) {
+		this.assignUser = assignUser;
 	}
 
 }

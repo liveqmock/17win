@@ -38,6 +38,8 @@ import net.win.vo.SellerVO;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import freemarker.template.utility.StringUtil;
+
 /**
  * 
  * @author xgj
@@ -103,7 +105,7 @@ public class CreditTaskService extends BaseService {
 	}
 
 	/**
-	 * 撤销支付
+	 * 取消支付
 	 * 
 	 * @param creditTaskVO
 	 * @return
@@ -158,7 +160,7 @@ public class CreditTaskService extends BaseService {
 	}
 
 	/**
-	 * 已经支付
+	 * 付款操作
 	 * 
 	 * @param creditTaskVO
 	 * @return
@@ -256,7 +258,7 @@ public class CreditTaskService extends BaseService {
 	}
 
 	/*
-	 * 接受任务
+	 * 接手任务
 	 * 
 	 * @param userVO @return
 	 */
@@ -273,6 +275,12 @@ public class CreditTaskService extends BaseService {
 		if (creditTask == null) {
 			putAlertMsg("任务已经不存在！");
 			putJumpPage("userInfoManager/info!initActiave.php");
+			return JUMP;
+		}
+		if (!StringUtils.isBlank(creditTask.getAssignUser())
+				&& !creditTask.getAssignUser().equals(userEntity.getUsername())) {
+			putAlertMsg("任务已经不存在！");
+			putJumpPage("这是特殊任务，您不是指定的人！");
 			return JUMP;
 		}
 		if (!userEntity.getStatus().equals("1")) {
@@ -500,10 +508,6 @@ public class CreditTaskService extends BaseService {
 			/**
 			 * 会员升级
 			 */
-			creditTask.setStatus(TaskMananger.STEP_SIX_STATUS);
-			putAlertMsg("好评成功，任务完成！");
-			putJumpPage("taskManager/task!initReleasedTast.php?platformType="
-					+ platformType);
 
 			/**
 			 * 计算推广
@@ -534,6 +538,10 @@ public class CreditTaskService extends BaseService {
 
 			// 更新信息
 			updateUserLoginInfo(releaseUser);
+			creditTask.setStatus(TaskMananger.STEP_SIX_STATUS);
+			putAlertMsg("好评成功，任务完成！");
+			putJumpPage("taskManager/task!initReleasedTast.php?platformType="
+					+ platformType);
 			return JUMP;
 		}
 	}
@@ -1055,6 +1063,162 @@ public class CreditTaskService extends BaseService {
 	}
 
 	/**
+	 * 发布任务 指定人
+	 * 
+	 * @param userVO
+	 * @return
+	 */
+	public String insertReleaseTaskAssign(CreditTaskVO creditTaskVO)
+			throws Exception {
+		// 基本数据
+		UserEntity userEntity = getLoginUserEntity(userDAO);
+		UserLoginInfo userLoginInfo = getLoginUser();
+		CreditTaskEntity creditTask = new CreditTaskEntity();
+		TaskMananger taskMananger = TaskMananger.getInstance();
+
+		String platFormType = getPlatformType();
+
+		putJumpOutterPage("taskManager/task!initReleaseTask.php?platformType="
+				+ platFormType);
+
+		BeanUtils.copyProperties(creditTask, creditTaskVO);
+
+		// 把天转换成时间
+		if (!creditTaskVO.getGoodTimeType().equals("5")) {
+			creditTaskVO.setIntervalHour(StrategyUtils
+					.getIntervalHourByGoodType(creditTaskVO.getGoodTimeType()));
+		}
+		// 算发布点
+		double creditTaskDot = 0;
+		// 验证
+		UserEntity assignUser = userDAO.findUserByName(creditTaskVO
+				.getAssignUser());
+		if (assignUser == null) {
+			putAlertMsg("指定的人员不存在！");
+			return JUMP;
+		}
+		if (assignUser.getUsername().equals(userEntity.getUsername())) {
+			putAlertMsg("不能指定自己！");
+			return JUMP;
+		}
+		if (!userEntity.getStatus().equals("1")) {
+			switch (Integer.parseInt(userEntity.getStatus())) {
+			case 0:
+				putAlertMsg("您当前的【状态】为【未激活状态】，请到个人中心激活！");
+				break;
+			case 2:
+				putAlertMsg("您当前的【状态】为【冻结状态】，不能发布任务！");
+				break;
+			case 3:
+				putAlertMsg("您当前的【状态】为【找密码状态】，可能有人试图盗取您的秘密，请联系管理员，不能发布任务！");
+				break;
+			default:
+				putAlertMsg("您当前的【状态】不是【正常状态】，不能发布任务！");
+				break;
+			}
+			return JUMP;
+		}
+		if (StringUtils.isBlank(platFormType)) {
+			WinUtils.throwIllegalityException(userEntity.getUsername()
+					+ "视图越过发布任务的任务类型验证！");
+			return JUMP;
+		}
+		if (creditTask.getMoney() + creditTask.getAddtionMoney() > userEntity
+				.getMoney()) {
+			creditTaskVO.setMoney(null);
+			putAlertMsg("您当前的余额为不够发布这个任务！");
+			return JUMP;
+		}
+
+		if (creditTaskVO.getMoney() < 1) {
+			putAlertMsg("不能发布小于1元的任务！");
+			return JUMP;
+		}
+		if (creditTaskDot + creditTaskVO.getAddtionReleaseDot() > userEntity
+				.getReleaseDot()) {
+			putAlertMsg("您当前的发布点不够" + creditTaskDot
+					+ creditTaskVO.getAddtionReleaseDot() + "，不能发布此任务！");
+			return JUMP;
+		}
+		// 设置发布人，发布账号
+		// Long buyerID = creditTaskVO.getBuyerID();
+		Long sellerID = creditTaskVO.getSellerID();
+		if (sellerID == null) {
+			putAlertMsg("掌柜名和商品地址不对应！");
+			return JUMP;
+		}
+		SellerEntity seller = new SellerEntity();
+		seller.setId(sellerID);
+		/**
+		 * 保存任务
+		 */
+		// 是否是定时任务
+		if (creditTask.getTimeingTime() == null) {
+			creditTask.setStatus(TaskMananger.STEP_ONE_STATUS);
+		} else {
+			// 验证定时时间是否 小于 当前的系统时间
+			if (creditTask.getTimeingTime().getTime() < System
+					.currentTimeMillis()) {
+				putAlertMsg("定时任务时间必须大于当前的时间！");
+				return JUMP;
+			}
+			creditTask.setStatus(TaskMananger.TIMING_STATUS);
+		}
+		creditTask.setSeller(seller);
+		creditTask.setReleasePerson(userEntity);
+		// 生成testID
+		creditTask.setTestID(taskMananger.generateTaskID());
+		// 生成地址
+		creditTask.setAddress(createAddress(creditTaskVO, taskMananger,
+				sellerID));
+		creditTask.setReleaseDot(creditTaskDot);
+		creditTask.setReleaseDate(new Date());
+		creditTask.setReleasePerson(userEntity);
+		creditTask.setType(platFormType);
+		creditTask.setIntervalHour(creditTaskVO.getIntervalHour());
+		creditTask.setWaybill(StrategyUtils.makeWaybill());
+		creditTaskDAO.save(creditTask);
+		/**
+		 * 保存任务仓库
+		 */
+		// 任务仓库
+		if (creditTaskVO.getRepository()) {
+			CreditTaskRepositoryEntity creditTaskRepository = new CreditTaskRepositoryEntity();
+			BeanUtils.copyProperties(creditTaskRepository, creditTaskVO);
+			creditTaskRepository.setUser(userEntity);
+			creditTaskRepository.setType(platFormType);
+			creditTaskRepository.setReleaseDot(creditTaskDot);
+			creditTaskRepository
+					.setGoodTimeType(creditTaskVO.getGoodTimeType());
+			if (StringUtils.isBlank(creditTaskVO.getRespositoryName())) {
+				creditTaskRepository.setName(creditTask.getTestID());
+			} else {
+				creditTaskRepository.setName(creditTaskVO.getRespositoryName());
+
+			}
+			creditTaskRepositoryDAO.save(creditTaskRepository);
+		}
+		/**
+		 * 改变用户金钱和发布点
+		 */
+		userEntity.setMoney(ArithUtils.sub(userEntity.getMoney(), creditTask
+				.getMoney()
+				+ creditTask.getAddtionMoney()));
+		userEntity.setReleaseDot(ArithUtils.sub(userEntity.getReleaseDot(),
+				creditTaskDot + creditTaskVO.getAddtionReleaseDot()));
+		// 完成对金钱进行修改,登陆名的也需要
+		updateUserLoginInfo(userEntity);
+
+		logMoneyCapital(userDAO, 0 - (creditTask.getMoney() + creditTask
+				.getAddtionMoney()), "发布任务", userEntity);
+		logDotCapital(userDAO, 0 - (creditTaskDot + creditTaskVO
+				.getAddtionReleaseDot()), "发布任务", userEntity);
+
+		putAlertMsg("发布任务成功!");
+		return JUMP;
+	}
+
+	/**
 	 * 发布任务
 	 * 
 	 * @param userVO
@@ -1068,11 +1232,10 @@ public class CreditTaskService extends BaseService {
 		TaskMananger taskMananger = TaskMananger.getInstance();
 
 		String platFormType = getPlatformType();
-		
-		
+
 		putJumpOutterPage("taskManager/task!initReleaseTask.php?platformType="
 				+ platFormType);
-		
+
 		BeanUtils.copyProperties(creditTask, creditTaskVO);
 
 		// 把天转换成时间
@@ -1196,7 +1359,7 @@ public class CreditTaskService extends BaseService {
 				.getAddtionMoney()), "发布任务", userEntity);
 		logDotCapital(userDAO, 0 - (creditTaskDot + creditTaskVO
 				.getAddtionReleaseDot()), "发布任务", userEntity);
-		
+
 		putAlertMsg("发布任务成功!");
 		return JUMP;
 	}
@@ -1338,7 +1501,7 @@ public class CreditTaskService extends BaseService {
 		List<Object[]> result = creditTaskDAO
 				.pageQuery(
 						"select _task.testID , _task.releaseDate ,_user.username,_user.upgradeScore,_task.money,_task.updatePrice, "
-								+ "_task.goodTimeType,_task.releaseDot,_task.status ,_task.intervalHour,_task.desc,_task.address,_task.id,_task.grade ,_vip.type,_task.addtionMoney,_task.addtionReleaseDot" // index=16
+								+ "_task.goodTimeType,_task.releaseDot,_task.status ,_task.intervalHour,_task.desc,_task.address,_task.id,_task.grade ,_vip.type,_task.addtionMoney,_task.addtionReleaseDot,_task.assignUser" // index=17
 								+ " from CreditTaskEntity as _task inner join _task.releasePerson as _user  left join _user.vip as _vip  where _task.status not  in ('0','-1')   and   _task.type=:platformType "
 								+ orderAndWhereInitTaskStr(queryType, false),
 						"platformType", platformType, creditTaskVO.getStart(),

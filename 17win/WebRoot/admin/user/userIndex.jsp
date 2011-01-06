@@ -282,6 +282,10 @@
 									<a href="javascript:nextPage()">下一页</a>&nbsp;
 									<a href="javascript:lastPage()">尾页</a>&nbsp; 当前人数:
 									<s:property value="adminUserVO.dataCount" />
+									&nbsp;
+									<s:property value="adminUserVO.nowPage" />
+									/
+									<s:property value="adminUserVO.pageCount" />
 									&nbsp; 每页显示：
 									<s:textfield name="adminUserVO.eachPage" cssStyle="width:40px"></s:textfield>
 									&nbsp;
@@ -331,8 +335,8 @@
 							描述：
 						</td>
 						<td>
-							<input type="text" name="moneyDesc" id="moneyDescID" maxlength="200"
-								style="width: 400px">
+							<input type="text" name="moneyDesc" id="moneyDescID"
+								maxlength="200" style="width: 400px">
 						</td>
 
 					</tr>
@@ -359,8 +363,8 @@
 							描述：
 						</td>
 						<td>
-							<input type="text" name="releaseDotDesc" id="releaseDotDescID"  maxlength="200"
-								style="width: 400px">
+							<input type="text" name="releaseDotDesc" id="releaseDotDescID"
+								maxlength="200" style="width: 400px">
 						</td>
 
 					</tr>

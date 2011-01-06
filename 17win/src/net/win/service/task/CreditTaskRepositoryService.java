@@ -125,6 +125,8 @@ public class CreditTaskRepositoryService extends BaseService {
 			creditTaskEntity.setGrade(creditTaskRepositoryEntity.getGrade());
 			creditTaskEntity.setDesc(creditTaskRepositoryEntity.getDesc());
 			creditTaskEntity.setWaybill(StrategyUtils.makeWaybill());
+			creditTaskEntity.setAssignUser(creditTaskRepositoryEntity
+					.getAssignUser());
 			creditTaskDAO.save(creditTaskEntity);
 			// 改变人
 			user.setMoney(ArithUtils.sub(user.getMoney(),

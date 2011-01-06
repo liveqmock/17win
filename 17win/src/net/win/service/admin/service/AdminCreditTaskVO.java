@@ -1,10 +1,10 @@
-package net.win.vo;
+package net.win.service.admin.service;
 
 import java.util.Date;
 
 import net.win.BaseVO;
 
-public class CreditTaskVO extends BaseVO {
+public class AdminCreditTaskVO extends BaseVO {
 	// 类型 ( 1:淘宝，2：拍拍，3有啊)
 	private String type;
 	// 价格
@@ -15,14 +15,14 @@ public class CreditTaskVO extends BaseVO {
 	private String status;
 	// 商品地址
 	private String itemUrl;
+
+	private Date releaseDate;
 	// 是否修改价格
 	private Boolean updatePrice;
 	// 动态评分(x:默认好评，x:全部5分 ...)
 	private String grade;
 	// 间隔几个小时(x*24[勾选]或则X[自定义])
 	private Integer intervalHour;
-	// 指定某人
-	private String assignUser;
 	// 剩余时间
 	private Integer remainTime;
 	// 运货单号
@@ -49,9 +49,13 @@ public class CreditTaskVO extends BaseVO {
 
 	// 任务保护
 	private Boolean protect;
+
 	/**
 	 * 和entity无关的数据
 	 */
+	private String releaseUser;
+	private String receiveUser;
+
 	private Boolean repository;
 	private Boolean address;
 	private Long sellerID;
@@ -255,12 +259,28 @@ public class CreditTaskVO extends BaseVO {
 		this.addtionReleaseDot = addtionReleaseDot;
 	}
 
-	public String getAssignUser() {
-		return assignUser;
+	public String getReleaseUser() {
+		return releaseUser;
 	}
 
-	public void setAssignUser(String assignUser) {
-		this.assignUser = assignUser;
+	public void setReleaseUser(String releaseUser) {
+		this.releaseUser = releaseUser;
+	}
+
+	public String getReceiveUser() {
+		return receiveUser;
+	}
+
+	public void setReceiveUser(String receiveUser) {
+		this.receiveUser = receiveUser;
+	}
+
+	public Date getReleaseDate() {
+		return releaseDate;
+	}
+
+	public void setReleaseDate(Date releaseDate) {
+		this.releaseDate = releaseDate;
 	}
 
 }

@@ -192,7 +192,16 @@
 									<a href="javascript:firstPage()">首页</a>
 									<a href="javascript:prevPage()">上一页</a>&nbsp;
 									<a href="javascript:nextPage()">下一页</a>&nbsp;
-									<a href="javascript:lastPage()">尾页</a>&nbsp;
+									<a href="javascript:lastPage()">尾页</a>&nbsp; 当前任务数:
+									<s:property value="withdrawalsVO.dataCount" />
+									&nbsp;
+									<s:property value="withdrawalsVO.nowPage" />
+									/
+									<s:property value="withdrawalsVO.pageCount" />
+
+									&nbsp; 每页显示：
+									<s:textfield name="withdrawalsVO.eachPage" cssStyle="width:40px"></s:textfield>
+									&nbsp;
 								</div>
 								<div style="float: left;">
 									跳转到

@@ -10,7 +10,8 @@
 	</head>
 
 	<body>
-		<s:form action="adminLogisticsManager/adminLogistics!queryLogisticsLog.php"
+		<s:form
+			action="adminLogisticsManager/adminLogistics!queryLogisticsLog.php"
 			onsubmit="return validateForm()" theme="simple">
 			<table width="100%" cellpadding="1" cellspacing="1" border="0px"
 				style="background: #DDEDFA">
@@ -59,7 +60,8 @@
 				</tr>
 			</table>
 			<br>
-			<table id="myTable" class="tablesorter" cellpadding="1" style="font-size: 12px;">
+			<table id="myTable" class="tablesorter" cellpadding="1"
+				style="font-size: 12px;">
 				<thead>
 					<tr>
 						<th style="font-size: 12px" nowrap="nowrap">
@@ -156,7 +158,16 @@
 									<a href="javascript:firstPage()">首页</a>
 									<a href="javascript:prevPage()">上一页</a>&nbsp;
 									<a href="javascript:nextPage()">下一页</a>&nbsp;
-									<a href="javascript:lastPage()">尾页</a>&nbsp;
+									<a href="javascript:lastPage()">尾页</a>&nbsp; 当前任务数:
+									<s:property value="newsVO.dataCount" />
+									&nbsp;
+									<s:property value="newsVO.nowPage" />
+									/
+									<s:property value="newsVO.pageCount" />
+
+									&nbsp; 每页显示：
+									<s:textfield name="newsVO.eachPage" cssStyle="width:40px"></s:textfield>
+									&nbsp;
 								</div>
 								<div style="float: left;">
 									<s:property value="logisticsVO.nowPage" />

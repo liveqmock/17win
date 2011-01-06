@@ -37,6 +37,9 @@ public class CreditTaskRepositoryEntity extends BaseEntity {
 	// 是否修改价格
 	@Column(name = "UPDATE_PRICE_", nullable = false)
 	private Boolean updatePrice;
+	// 指定接任务的人
+	@Column(name = "ASSIGN_USER_", length = 12)
+	private String assignUser;
 	// 上次发布时间
 	@Column(name = "lastDispathDate_")
 	private Date lastDispathDate;
@@ -223,6 +226,14 @@ public class CreditTaskRepositoryEntity extends BaseEntity {
 
 	public void setAddtionReleaseDot(Integer addtionReleaseDot) {
 		this.addtionReleaseDot = addtionReleaseDot;
+	}
+
+	public String getAssignUser() {
+		return assignUser;
+	}
+
+	public void setAssignUser(String assignUser) {
+		this.assignUser = assignUser;
 	}
 
 }

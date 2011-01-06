@@ -12,7 +12,7 @@
 		%>
 		<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
 		<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
-		<s:include value="/admin/common/header.jsp"></s:include>  
+		<s:include value="/admin/common/header.jsp"></s:include>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<SCRIPT type="text/javascript" src="news/newsIndex.js"></SCRIPT>
 	</head>
@@ -124,7 +124,16 @@
 									<a href="javascript:firstPage()">首页</a>
 									<a href="javascript:prevPage()">上一页</a>&nbsp;
 									<a href="javascript:nextPage()">下一页</a>&nbsp;
-									<a href="javascript:lastPage()">尾页</a>&nbsp;
+									<a href="javascript:lastPage()">尾页</a>&nbsp;   当前任务数:
+									<s:property value="newsVO.dataCount" />
+									&nbsp;
+									<s:property value="newsVO.nowPage" />
+									/
+									<s:property value="newsVO.pageCount" />
+									&nbsp; 每页显示：
+									<s:textfield name="newsVO.eachPage"
+										cssStyle="width:40px"></s:textfield>
+									&nbsp;
 								</div>
 								<div style="float: left;">
 									跳转到

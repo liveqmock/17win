@@ -110,6 +110,16 @@
 									<a href="javascript:prevPage()">上一页</a>&nbsp;
 									<a href="javascript:nextPage()">下一页</a>&nbsp;
 									<a href="javascript:lastPage()">尾页</a>&nbsp;
+									&nbsp; 当前任务数:
+									<s:property value="adminPayVO.dataCount" />
+									&nbsp;
+									<s:property value="adminPayVO.nowPage" />
+									/
+									<s:property value="adminPayVO.pageCount" />
+
+									&nbsp; 每页显示：
+									<s:textfield name="adminPayVO.eachPage" cssStyle="width:40px"></s:textfield>
+									&nbsp;
 								</div>
 								<div style="float: left;">
 									跳转到

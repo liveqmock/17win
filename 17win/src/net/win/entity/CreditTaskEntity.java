@@ -58,6 +58,10 @@ public class CreditTaskEntity extends TaskBaseEntity {
 	@Column(name = "ADDRESS_", length = 100)
 	private String address;
 
+	// 指定接任务的人
+	@Column(name = "ASSIGN_USER_", length = 12)
+	private String assignUser;
+
 	// 附加金额、
 	@Column(name = "ADDTATION_MONEY", nullable = false)
 	private Integer addtionMoney = 0;
@@ -249,6 +253,14 @@ public class CreditTaskEntity extends TaskBaseEntity {
 
 	public void setAddtionReleaseDot(Integer addtionReleaseDot) {
 		this.addtionReleaseDot = addtionReleaseDot;
+	}
+
+	public String getAssignUser() {
+		return assignUser;
+	}
+
+	public void setAssignUser(String assignUser) {
+		this.assignUser = assignUser;
 	}
 
 }
