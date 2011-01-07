@@ -93,7 +93,7 @@ td {
 											name="userVO.userEntity.loginPassword" size="30"
 											cssStyle="width:210px"></s:password>
 										<br />
-										登录时需要使用密码，可以是6至20位字符
+										登录时需要使用密码，6至20位字符
 									</td>
 									<td valign="top">
 
@@ -109,7 +109,6 @@ td {
 										<input type="password" id="rePassword" size="30"
 											maxlength="20" style="width: 210px">
 										<br />
-										重复上面的密码
 									</td>
 									<td valign="top">
 
@@ -126,7 +125,7 @@ td {
 											name="userVO.userEntity.opertationCode" size="30"
 											cssStyle="width:210px"></s:password>
 										<br />
-										互刷时必用 6-20位！
+										互刷时必用,6至20位字符！
 									</td>
 									<td valign="top">
 
@@ -142,7 +141,6 @@ td {
 										<input type="password" id="reOperationCode" size="30"
 											maxlength="20" style="width: 210px" />
 										<br />
-										重复上面的操作密码
 									</td>
 									<td valign="top">
 
@@ -160,7 +158,6 @@ td {
 										<s:textfield name="userVO.userEntity.qq" id="qq" size="30"
 											maxlength="11" cssStyle="width:210px"></s:textfield>
 										<br />
-										刷信誉时必用
 									</td>
 									<td valign="top">
 
@@ -176,7 +173,6 @@ td {
 										<s:textfield id="telephone" name="userVO.userEntity.telephone"
 											maxlength="11" size="30" cssStyle="width:210px"></s:textfield>
 										<br />
-										可凭手机找回密码
 									</td>
 									<td valign="top">
 
@@ -191,7 +187,6 @@ td {
 										<s:textfield id="email" name="userVO.userEntity.email"
 											size="30" cssStyle="width:210px"></s:textfield>
 										<br />
-										取回密码使用！
 									</td>
 									<td valign="top">
 
