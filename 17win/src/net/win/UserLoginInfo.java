@@ -2,14 +2,12 @@ package net.win;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-
 public class UserLoginInfo {
 	/**
 	 * 基本信息
 	 */
 	private Long adminID;
-	
+
 	private Long id;
 	// 用户名
 	private String username;
@@ -31,7 +29,7 @@ public class UserLoginInfo {
 	private String levelImg;
 	// 操作码激活状态 true 当前会话激活， false当前会话没激活
 	private Boolean operationCodeStatus = false;
-	
+
 	private Integer upgradeScore;
 	// 状态
 	private String status;
@@ -48,6 +46,9 @@ public class UserLoginInfo {
 
 	// VIP状态 true 表示没失效，false表示失效
 	private Boolean vipEnable;
+
+	// 是否发送手机验证
+	private Boolean sendMsgTOValiate = false;
 
 	public String getUsername() {
 		return username;
@@ -199,5 +200,13 @@ public class UserLoginInfo {
 
 	public void setUpgradeScore(Integer upgradeScore) {
 		this.upgradeScore = upgradeScore;
+	}
+
+	public Boolean getSendMsgTOValiate() {
+		return sendMsgTOValiate;
+	}
+
+	public void setSendMsgTOValiate(Boolean sendMsgTOValiate) {
+		this.sendMsgTOValiate = sendMsgTOValiate;
 	}
 }

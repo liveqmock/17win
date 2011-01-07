@@ -364,7 +364,7 @@ public class UserInfoService extends BaseService {
 	}
 
 	/**
-	 * 发送激活号码
+	 * 激活
 	 * 
 	 * @param userVO
 	 * @return
@@ -382,10 +382,10 @@ public class UserInfoService extends BaseService {
 		} else {
 			userEntity.setStatusAndLastStatus("1");
 			userEntity.setStatusDesc("已激活");
-			putAlertMsg("激活成功！快去体验吧！");
-			putByRequest("activeCode", "1");
 			updateUserLoginInfo(userEntity);
-			return "updateActiave";
+			putAlertMsg("激活成功！快去体验吧！");
+			putJumpPage("userInfoManager/info!initActiave.php");
+			return JUMP;
 		}
 	}
 
@@ -397,10 +397,21 @@ public class UserInfoService extends BaseService {
 	 * @throws Exception
 	 */
 	public String sendActiave(UserVO userVO) throws Exception {
+		if (getLoginUser().getSendMsgTOValiate()) {
+			putAlertMsg("已经发送，不要重复发送！");
+			putJumpPage("userInfoManager/info!initActiave.php");
+			return JUMP;
+		}
+		getLoginUser().setSendMsgTOValiate(true);
 		UserEntity user = getLoginUserEntity(userDAO);
 		Random random = new Random();
 		String value = random.nextInt(1000000) + "";
 		putBySession(Constant.USER_ACTIVE_CODE_INFO, value);
+		if (!user.getStatus().equals("0")) {
+			putAlertMsg("已经激活！");
+			putJumpPage("userInfoManager/info!initActiave.php");
+			return JUMP;
+		}
 		MsgUtils.sendMsg(user.getTelephone(), user.getUsername()
 				+ "您好，这里是来至www.17win.net的信息(一起赢刷钻网)，您的激活码是：" + value + "");
 		putAlertMsg("激活码已成功的发送到您手机上，请查看后输入！");
