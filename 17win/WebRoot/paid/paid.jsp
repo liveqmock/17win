@@ -111,7 +111,7 @@ img {
 											</ul>
 										</div>
 										<div class="pp8">
-											<strong>淘宝店铺充值</strong><font color="red">(只充值50,100,200,300,500)</font>
+											<strong>淘宝店铺充值</strong><font color="red">(只充值1,10,50,100)</font>
 										</div>
 										<div style="margin-top: 10px; line-height: 200%;">
 											<table width="100%" cellspacing="0" cellpadding="0"
@@ -135,20 +135,17 @@ img {
 																			</td>
 																			<td>
 																				<select name="payVO.money" id="money">
+																					<option value="1">
+																						1元
+																					</option>
+																					<option value="10">
+																						10元
+																					</option>
 																					<option value="50">
 																						50元
 																					</option>
 																					<option value="100">
 																						100元
-																					</option>
-																					<option value="200">
-																						200元
-																					</option>
-																					<option value="300">
-																						300元
-																					</option>
-																					<option value="500">
-																						500元
 																					</option>
 																				</select>
 																				<input type="hidden" name="win17_token"
