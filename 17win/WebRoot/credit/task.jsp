@@ -172,6 +172,8 @@
 									<s:if test="#task[8]==1">
 										<s:if test="#task[2]==#session.userLogin.username">
 											<font color="red"> 不能接自己的任务</font>
+											<br>
+											<font color="blue" style="font-weight: bold;">特定任务</font>
 										</s:if>
 										<s:else>
 											<s:if

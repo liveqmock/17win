@@ -142,15 +142,13 @@
 																		<input
 																			value="<s:property value="#session.userLogin.money" />"
 																			id="currMoney" type="hidden" />
+																		<input type="hidden" name="win17_token"
+																			value="<s:property value="#session.win17_token"/>">
 																		<s:textfield name="creditTaskVO.money" size="10"
 																			id="money" maxlength="6"
 																			onkeyup="if(isNaN(value))execCommand('undo')"></s:textfield>
-																		<input type="hidden" name="win17_token"
-																			value="<s:property value="#session.win17_token"/>">
-																		元(最长6位)&nbsp;&nbsp;
-																		<font color="red">注意：此价格是包含运费的总价格
-																			1-40元，扣一个发布点；40-100元(扣2个发布点；100-200元(扣3个发布点)
-																			200-500元(扣4个发布点；500元以上(扣5个发布点)</font>
+																		元&nbsp;&nbsp;
+																		<font color="red">注意：此价格是包含运费的总价格1-60元，扣一个发布点；60-100元(扣2个发布点；100-200元(扣3个发布点),200-500元(扣4个发布点；500元以上(扣5个发布点)</font>
 																	</td>
 																</tr>
 																<tr>
@@ -160,7 +158,6 @@
 																	<td colspan="4">
 																		<s:textfield name="creditTaskVO.itemUrl" id="itemUrl"
 																			maxlength="255"></s:textfield>
-																		<span class="font12l">自动检测宝贝地址和掌柜名是否相符</span>
 																	</td>
 																</tr>
 																<tr>
@@ -180,11 +177,20 @@
 																		特定任务：
 																	</td>
 																	<td colspan="4">
-																		<input type="checkbox" id="assignUserCheckedBox">
-																		<s:textfield name="creditTaskVO.assignUser"
-																			disabled="true" id="assignUserID" maxlength="12"></s:textfield>
-																		<font color="red">输入指定人的名字，只有指定的人可以接你的任务，发特特定任务不需要发布点
-																		</font>
+																		<s:if test="creditTaskVO.assignUser==null">
+																			<input type="checkbox" id="assignUserCheckedBox">
+																			<s:textfield name="creditTaskVO.assignUser"
+																				title="输入指定人的用户名，只有指定的人可以接你的任务，发特特定任务不需要发布点"
+																				disabled="true" id="assignUserID" maxlength="12"></s:textfield>
+
+																		</s:if>
+																		<s:else>
+																			<input type="checkbox" checked="checked"
+																				id="assignUserCheckedBox">
+																			<s:textfield name="creditTaskVO.assignUser"
+																				title="输入指定人的用户名，只有指定的人可以接你的任务，发特特定任务不需要发布点"
+																				id="assignUserID" maxlength="12"></s:textfield>
+																		</s:else>
 																	</td>
 																</tr>
 																<tr>
@@ -230,15 +236,6 @@
 																	<td>
 																	</td>
 
-																</tr>
-																<tr>
-																	<td height="30" align="right">
-																		&nbsp;
-																	</td>
-																	<td colspan="2">
-																		<a href="#" target="_blank"><font color="#FF0000"><strong>发布延时收货的任务，平台免费提供物流单号，并强制买家延时收货</strong>
-																		</font> </a>
-																	</td>
 																</tr>
 																<tr>
 																	<td width="129" height="30" align="right">
@@ -323,8 +320,7 @@
 																	</td>
 																	<td colspan="2">
 																		<s:checkbox name="creditTaskVO.protect" value="false"
-																			fieldValue="true" />
-																		<span class="red-bcolor">什么是任务保护</span>
+																			title="接手人需要您审核" fieldValue="true" />
 																	</td>
 
 																</tr>
@@ -334,9 +330,8 @@
 																	</td>
 																	<td colspan="2">
 																		<s:textfield name="creditTaskVO.addtionMoney"
-																			maxLength="3" cssStyle="width:40px"
-																			id="addtionMoneyId"></s:textfield>
-																		<span class="red-bcolor">可以附加金额给接手方</span>
+																			title="可以附加金额给接手方" maxLength="3"
+																			cssStyle="width:40px" id="addtionMoneyId"></s:textfield>
 																	</td>
 																</tr>
 																<tr>
@@ -345,9 +340,8 @@
 																	</td>
 																	<td colspan="2">
 																		<s:textfield name="creditTaskVO.addtionReleaseDot"
-																			maxLength="3" cssStyle="width:40px"
-																			id="addtionReleaseDotId"></s:textfield>
-																		<span class="red-bcolor">可以附加发布点给接手方</span>
+																			title="可以附加发布点给接手方" maxLength="3"
+																			cssStyle="width:40px" id="addtionReleaseDotId"></s:textfield>
 																	</td>
 																</tr>
 																<tr>
@@ -357,11 +351,10 @@
 																	<td colspan="2">
 																		<s:textfield name="creditTaskVO.timeingTime"
 																			readonly="true" id="tasktimingDate"></s:textfield>
-																		<img style="cursor: pointer;"
+																		<img style="cursor: pointer;" title="只精确到分钟"
 																			onclick="WdatePicker({'minDate':'%y-%M-%d %H:%m:%s','alwaysUseStartDate':false,'el':'tasktimingDate','isShowClear':true,startDate:'%y-%M-%d %H:%m:%s',dateFmt:'yyyy-MM-dd HH:mm:ss','skin':'blue'})"
 																			src="js/My97DatePicker/skin/datePicker.gif"
 																			width="16" height="22 align="absmiddle">
-																		<span class="red-bcolor">只精确到分钟</span>
 																	</td>
 																</tr>
 																<tr>
@@ -373,8 +366,8 @@
 																			id="respository" value="false" fieldValue="true" />
 																		<span style="display: none" id="respositoryName">
 																			<s:textfield name="creditTaskVO.respositoryName"
-																				id="itemUrl" maxlength="20"></s:textfield> 默认为任务ID </span>
-																		<span class="red-bcolor">什么是任务仓库</span>
+																				title="放入任务仓库下次方便使用" id="itemUrl" maxlength="20"></s:textfield>
+																			默认为任务ID </span>
 																	</td>
 																</tr>
 																<tr>
@@ -382,9 +375,8 @@
 																		收货地址：
 																	</td>
 																	<td colspan="2">
-																		<s:checkbox name="creditTaskVO.address"
+																		<s:checkbox name="creditTaskVO.address" title="实物任务有用"
 																			fieldValue="true" />
-																		<span class="red-bcolor">什么是自动生成收货地址信息（实物任务有用）</span>
 																	</td>
 																</tr>
 																<tr>
@@ -393,8 +385,7 @@
 																	</td>
 																	<td colspan="2">
 																		<s:textfield maxlength="255" name="creditTaskVO.desc"
-																			size="70"></s:textfield>
-																		<span class="red-bcolor">要对接手人说的话</span>
+																			title="要对接手人说的话" size="70"></s:textfield>
 																	</td>
 																</tr>
 																<tr>
