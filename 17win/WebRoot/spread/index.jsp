@@ -29,12 +29,8 @@
 		<script type="text/javascript">
 		$(document).ready(function() {
 			$("#copyBtn").bind("click",function(){ 
-				if (!$.browser.msie) {
-							alert("仅在IE浏览器中支持！");
-							return;
-				}else{
-				copy_code($("#page_url").val());
-				alert("复制成功，请粘贴到你的QQ/QQ空间/MSN上推荐给你的好友"); }
+				copyToClipboard($("#page_url").val(),"复制成功，请粘贴到你的QQ/QQ空间/MSN上推荐给你的好友");
+				
 				 });
 				
 			});

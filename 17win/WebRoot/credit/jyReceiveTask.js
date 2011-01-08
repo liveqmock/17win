@@ -1,5 +1,5 @@
 $(document).ready(function() {
-
+	$(".qqConnection").tooltip();
 	intText("autoreFresh");
 	$("#autoreFresh").focus(function() {
 				$(this).data("oldValue", $(this).val());
@@ -35,6 +35,38 @@ $(document).ready(function() {
 
 			});
 });
+ 
+// 弹出发送手机短信层
+function openTelephoneDiv(telphone, username) {
+	$("#telphoneID").val(telphone);
+	$("#contentID").text("这里是来自www.17win.net【" + username + "】用户的消息，你发布的任务");
+	$("#showTip").text($("#contentID").text().length);
+	$("#sendSmsDIV").dialog({
+		autoOpen : false,
+		draggable : true,
+		hide : 'slide',
+		modal : true,
+		resizable : false,
+		show : 'slide',
+		width : 400,
+		buttons : {
+			"保存" : function() {
+				if (Validater.isBlank($("#contentID").text())
+						&& $("#contentID").text().length > 200) {
+					alert("内容不能为空,并且长度不能大于200！");
+					return;
+				}
+				$("#sendSmsDIV").dialog("close");
+				$("#sendSmsForm").submit();
+			}
+		},
+		close : function(event, ui) {
+			$(this).dialog("destroy");
+		}
+	});
+	$("#sendSmsDIV").dialog("open");
+}
+
 // 回复
 function reply(fromUsername) {
 	window.open("smsManager/sms!initSendSms.php?toUser=" + fromUsername+"&timeFlag="+new Date().getTime(),

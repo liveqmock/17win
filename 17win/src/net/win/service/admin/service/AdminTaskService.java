@@ -108,7 +108,7 @@ public class AdminTaskService extends BaseService {
 	 */
 	public String updateRollbackPay(AdminCreditTaskVO adminCreditTaskVO)
 			throws Exception {
-		putJumpPage("adminTaskManager/adminTask!initCreditTask.php");
+		putJumpSelfPage("adminTaskManager/adminTask!initCreditTask.php");
 		CreditTaskEntity creditTask = creditTaskDAO.get(adminCreditTaskVO
 				.getId());
 		if (!creditTask.getStatus().equals(TaskMananger.STEP_THREE_STATUS)) {
@@ -135,7 +135,7 @@ public class AdminTaskService extends BaseService {
 	 */
 	public String updateDispatch(AdminCreditTaskVO adminCreditTaskVO)
 			throws Exception {
-		putJumpPage("adminTaskManager/adminTask!initCreditTask.php");
+		putJumpSelfPage("adminTaskManager/adminTask!initCreditTask.php");
 		// 没有操作码验证就验证
 		CreditTaskEntity creditTask = creditTaskDAO.get(adminCreditTaskVO
 				.getId());
@@ -165,7 +165,7 @@ public class AdminTaskService extends BaseService {
 	 */
 	public String updatePayTask(AdminCreditTaskVO adminCreditTaskVO)
 			throws Exception {
-		putJumpPage("adminTaskManager/adminTask!initCreditTask.php");
+		putJumpSelfPage("adminTaskManager/adminTask!initCreditTask.php");
 		CreditTaskEntity creditTask = creditTaskDAO.get(adminCreditTaskVO
 				.getId());
 		if (!creditTask.getStatus().equals(TaskMananger.STEP_FOUR_STATUS)) {
@@ -186,7 +186,7 @@ public class AdminTaskService extends BaseService {
 	 */
 	public String updateBuyerEvaluate(AdminCreditTaskVO adminCreditTaskVO)
 			throws Exception {
-		putJumpPage("adminTaskManager/adminTask!initCreditTask.php");
+		putJumpSelfPage("adminTaskManager/adminTask!initCreditTask.php");
 		CreditTaskEntity creditTask = creditTaskDAO.get(adminCreditTaskVO
 				.getId());
 		if (!creditTask.getStatus().equals(TaskMananger.STEP_FOUR_STATUS)) {
@@ -207,7 +207,7 @@ public class AdminTaskService extends BaseService {
 	 */
 	public String updateSellerEvaluate(AdminCreditTaskVO adminCreditTaskVO)
 			throws Exception {
-		putJumpPage("adminTaskManager/adminTask!initCreditTask.php");
+		putJumpSelfPage("adminTaskManager/adminTask!initCreditTask.php");
 		// 没有操作码验证就验证
 		CreditTaskEntity creditTask = creditTaskDAO.get(adminCreditTaskVO
 				.getId());

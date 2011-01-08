@@ -20,7 +20,6 @@
 		<LINK href="css/Css.css" type="text/css" rel="stylesheet">
 
 		<LINK href="css/center.css" type="text/css" rel="stylesheet">
-		<SCRIPT src="js/jieducm_pupu.js" type="text/javascript"></SCRIPT>
 		<script src="js/validater.js" type="text/javascript"></script>
 		<script src="js/utils.js" type="text/javascript"></script>
 		<script src="paid/paid.js" type="text/javascript"></script>
@@ -124,7 +123,7 @@ img {
 													</tr>
 													<tr>
 														<td>
-															<s:form action="payManager/pay!addPaid.php"
+															<s:form action="payManager/pay!addPaid.php"  target="_blank"
 																onsubmit="return validateForm()" theme="simple">
 																<table width="90%" cellspacing="0" cellpadding="0"
 																	border="0">
@@ -134,20 +133,10 @@ img {
 																				金&nbsp;&nbsp;&nbsp;&nbsp;额：
 																			</td>
 																			<td>
-																				<select name="payVO.money" id="money">
-																					<option value="1">
-																						1元
-																					</option>
-																					<option value="10">
-																						10元
-																					</option>
-																					<option value="50">
-																						50元
-																					</option>
-																					<option value="100">
-																						100元
-																					</option>
-																				</select>
+																				<s:select listKey="key" listValue="value" id="money"
+																					name="payVO.money"
+																					list="#{'1':'1元','10':'10元','50':'50元','100':'100元'}">
+																				</s:select>
 																				<input type="hidden" name="win17_token"
 																					value="<s:property value="#session.win17_token"/>">
 																			</td>
@@ -210,7 +199,7 @@ img {
 		</table>
 		<s:include value="../common/footDuan.jsp"></s:include>
 		<s:if test="#request.toTaobao!=null">
-	
+
 			<script language="javascript">
 				window.open("<s:property value="#request.toPayPage"/>","_blank");
 			</script>

@@ -23,11 +23,44 @@
 		<LINK href="css/Css.css" type=text/css rel=stylesheet>
 		<LINK href="css/header.css" type=text/css rel=stylesheet>
 		<LINK href="css/index.css" type=text/css rel=stylesheet>
+		<link href="css/excite-bike/jquery-ui-1.8.4.custom.css"
+			rel="stylesheet" type="text/css" />
 		<LINK href="css/top_bottom.css" type="text/css" rel="stylesheet">
 		<SCRIPT src="js/jieducm_pupu.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="js/validater.js" type="text/javascript"></SCRIPT>
-		<SCRIPT src="js/utils.js" type="text/javascript"></SCRIPT>
+		<SCRIPT src="js/utils.js" type="text/javascript"></SCRIPT> 
+		<script type="text/javascript" src="js/jquery-ui-1.8.4.custom.min.js">
+		</script>
+		<script
+			src="http://cdn.jquerytools.org/1.2.1/tiny/jquery.tools.min.js"></script>
 		<SCRIPT src="credit/jyReceiveTask.js" type="text/javascript"></SCRIPT>
+		<style>
+/* trigger button */
+.qqConnection {
+	cursor: pointer;
+	overflow: hidden;
+}
+
+/* mouseover state */
+.qqConnection :hover {
+	background-position: 0 -44px;
+}
+
+/* clicked state */
+.qqConnection :focus {
+	background-position: 0 -88px;
+}
+
+/* tooltip styling */
+.tooltip {
+	display: none;
+	height: 60px;
+	width: 117px;
+	font-size: 11px;
+	font-weight: bold;
+}
+</style>
+
 	</HEAD>
 	<BODY>
 		<s:include value="../common/title.jsp"></s:include>
@@ -274,12 +307,29 @@
 											</s:elseif> </font>
 								</td>
 								<td align="left" valign="top">
-									<font color="red" style="font-weight: bold;">Q&nbsp;&nbsp;Q联系：</font>
+									<font color="red" style="font-weight: bold;">普通联系：</font>
+									<img width="25" height="17" border="0" class="qqConnection"
+										style="vertical-align: middle;" class="tip"
+										src="http://wpa.qq.com/pa?p=1:<s:property value="#task[3]" />:17">
+									<div class="tooltip"
+										style="background-image: url('images/blackArrowBig.png');">
+										<table style="margin-top: 8px">
+											<tr>
+												<td align="center" style="color: #ffffff">
+													<a style="color: white; text-decoration: underline;"
+														href="tencent://message/?uin=<s:property value="#task[3]" />">【临时会话】</a>
+													<br>
+													<a style="color: white; text-decoration: underline;"
+														onclick="copyToClipboard('<s:property value="#task[3]" />');"
+														href="javascript:void(0)">复制QQ号码</a>
+												</td>
+											</tr>
+										</table>
+									</div>
 									<a
-										href="tencent://message/?uin=<s:property value="#task[3]" />">
-										<img border="0"
-											src="http://wpa.qq.com/pa?p=1:<s:property value="#task[3]" />:41">
-									</a>
+										href="javascript:openTelephoneDiv('<s:property value="#task[27]" />','<s:property value="#task[28]" />')"><img
+											title="发送手机短信" style="vertical-align: middle;"
+											src="images/sendTelphone.png"> </a>
 								</td>
 							</Tr>
 							<Tr>
@@ -354,6 +404,39 @@
 					</table>
 				</div>
 		</s:form>
+		<div id="sendSmsDIV" title="发送手机短信" style="display: none">
+			<s:form action="taskManager/task!sendMsg.php" target="_blank"
+				id="sendSmsForm" theme="simple">
+				<table cellpadding="0" cellspacing="0" border="0" width="100%">
+					<tr>
+						<td nowrap="nowrap">
+							手机号码：
+						</td>
+						<td>
+							<input name="telphone" id="telphoneID" readonly="readonly"
+								maxlength="50">
+						</td>
+					</tr>
+					<tr>
+						<td valign="top" nowrap="nowrap">
+							发送内容：
+						</td>
+						<td>
+							<textarea name="content" cols="40" rows="4" id="contentID"></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td valign="top" nowrap="nowrap">
+							&nbsp;
+						</td>
+						<td>
+							<span id="showTip">0</span>个字
+							<font color="red">（一条短信收取0.1元，字数为70个字）</font>
+						</td>
+					</tr>
+				</table>
+			</s:form>
+		</div>
 		<s:include value="../common/footDuan.jsp"></s:include>
 	</BODY>
 </HTML>

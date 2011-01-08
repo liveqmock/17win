@@ -186,7 +186,7 @@ public class UserInfoService extends BaseService {
 	 * @throws Exception
 	 */
 	public String insertSellerAndBuyer(UserVO userVO) throws Exception {
-		putJumpPage("userInfoManager/info!initSellerAndBuyer.php");
+		putJumpSelfPage("userInfoManager/info!initSellerAndBuyer.php");
 		String type = getByParam("type");
 		String platformTypeParam = getByParam("platformTypeParam");
 		UserEntity userEntity = getLoginUserEntity(userDAO);
@@ -396,7 +396,7 @@ public class UserInfoService extends BaseService {
 			userEntity.setStatusDesc("已激活");
 			updateUserLoginInfo(userEntity);
 			putAlertMsg("激活成功！快去体验吧！");
-			putJumpPage("userInfoManager/info!initActiave.php");
+			putJumpSelfPage("userInfoManager/info!initActiave.php");
 			return JUMP;
 		}
 	}
@@ -411,7 +411,7 @@ public class UserInfoService extends BaseService {
 	public String sendActiave(UserVO userVO) throws Exception {
 		if (getLoginUser().getSendMsgTOValiate()) {
 			putAlertMsg("已经发送，不要重复发送，或则重新登录激活！");
-			putJumpPage("userInfoManager/info!initActiave.php");
+			putJumpSelfPage("userInfoManager/info!initActiave.php");
 			return JUMP;
 		}
 		getLoginUser().setSendMsgTOValiate(true);
@@ -421,7 +421,7 @@ public class UserInfoService extends BaseService {
 		putBySession(Constant.USER_ACTIVE_CODE_INFO, value);
 		if (!user.getStatus().equals("0")) {
 			putAlertMsg("已经激活！");
-			putJumpPage("userInfoManager/info!initActiave.php");
+			putJumpSelfPage("userInfoManager/info!initActiave.php");
 			return JUMP;
 		}
 		MsgUtils.sendMsg(user.getTelephone(), user.getUsername()
@@ -481,7 +481,7 @@ public class UserInfoService extends BaseService {
 	 * @throws Exception
 	 */
 	public String updateBuyDot(UserVO userVO) throws Exception {
-		putJumpPage("userInfoManager/info!initBuyDot.php");
+		putJumpSelfPage("userInfoManager/info!initBuyDot.php");
 		putAlertMsg("充值成功！");
 		String flag = getByParam("flag");
 		UserEntity userEntity = getLoginUserEntity(userDAO);
@@ -699,7 +699,7 @@ public class UserInfoService extends BaseService {
 		}
 		updateUserLoginInfo(userEntity);
 		putAlertMsg("操作成功！");
-		putJumpPage("userInfoManager/info!initExchange.php");
+		putJumpSelfPage("userInfoManager/info!initExchange.php");
 		return JUMP;
 	}
 

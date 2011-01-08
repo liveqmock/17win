@@ -61,7 +61,7 @@ public class LogisticsService extends BaseService {
 	 * @throws Exception
 	 */
 	public String insertLogistics(LogisticsVO logisticsVO) throws Exception {
-		putJumpPage("logisticsManager/logistics!initLogistics.php");
+		putJumpSelfPage("logisticsManager/logistics!initLogistics.php");
 		LogisticsEntity logisticsEntity = logisticsVO.getLogistics();
 		Long count = (Long) logisticsDAO.uniqueResultObject(
 				"select count(*) from LogisticsEntity where waybill=:waybill ",
@@ -86,7 +86,7 @@ public class LogisticsService extends BaseService {
 	 * @throws Exception
 	 */
 	public String deleteLogistics(LogisticsVO logisticsVO) throws Exception {
-		putJumpPage("logisticsManager/logistics!logisticsLog.php");
+		putJumpSelfPage("logisticsManager/logistics!logisticsLog.php");
 		String logisticsID = getByParam("logisticsID");
 		if (StringUtils.isBlank(logisticsID)) {
 			putAlertMsg("请选择物流数据");

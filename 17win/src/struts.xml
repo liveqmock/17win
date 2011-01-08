@@ -56,7 +56,7 @@
 				/errorPage/systemError.jsp
 			</result>
 			<result name="noPageError">
-				/errorPage/noPageError.jsp
+				/index.html
 			</result>
 			<result name="noRightsError">/user/login.html</result>
 			<result name="illegalityError">

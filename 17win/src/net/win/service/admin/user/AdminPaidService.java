@@ -55,7 +55,7 @@ public class AdminPaidService extends BaseService {
 	 * @throws Exception
 	 */
 	public String updateUserMoney(AdminPayVO adminPayVO) throws Exception {
-		putJumpPage("admin/adminPaidManager/adminPaid!queryPay.php");
+		putJumpSelfPage("admin/adminPaidManager/adminPaid!queryPay.php");
 		UserEntity adminEntity = getLoginUserEntity(userDAO);
 		PayEntity payEntity = payDAO.get(Long.parseLong(getByParam("payId")));
 		UserEntity userEntity = payEntity.getUser();

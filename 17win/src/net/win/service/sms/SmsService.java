@@ -102,7 +102,7 @@ public class SmsService extends BaseService {
 	 * @throws Exception
 	 */
 	public String insertSms(SmsVO smsVO) throws Exception {
-		putJumpPage("smsManager/sms!initSendSms.php");
+		putJumpSelfPage("smsManager/sms!initSendSms.php");
 		SmsEntity smsEntity = new SmsEntity();
 		UserEntity toUser = userDAO.findUserByName(smsVO.getToUserName());
 		if (smsVO.getToUserName().equals(getLoginUser().getUsername())) {
@@ -133,7 +133,7 @@ public class SmsService extends BaseService {
 	 * @throws Exception
 	 */
 	public String updateSendTelphone() throws Exception {
-		putJumpPage("smsManager/sms!initSendTelphone.php");
+		putJumpSelfPage("smsManager/sms!initSendTelphone.php");
 		try {
 			String telphone = getByParam("telehpne");
 			String content = getByParam("content");

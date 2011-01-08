@@ -294,7 +294,7 @@ img {
 							<input type="text" id="sellerName" name="userVO.seller.name"
 								readonly="readonly">
 							<span id="huoquUser" style="display: none"></span>
-							<font color="red">(自动获取地址)</font>
+							<font color="red">(系统自动获取)</font>
 						</td>
 					</tr>
 					<tr class="sellerClass">

@@ -24,7 +24,7 @@ import org.springframework.stereotype.Controller;
 		@Result(name = "initReleaseTask", location = "/credit/releaseTask.jsp"),
 		@Result(name = "operationValidate", location = "/system/operationValidate.jsp"),
 		@Result(name = "insertReleaseTaskFail", type = "chain", location = "/taskManager/task!initReleaseTask.php"),
-//		@Result(name = "insertReleaseTaskSuccess", type = "chain", location = "/taskManager/task!initReleaseTask.php"),
+		//		@Result(name = "insertReleaseTaskSuccess", type = "chain", location = "/taskManager/task!initReleaseTask.php"),
 		@Result(name = "initReleaseTaskFail", type = "chain", location = "/taskManager/task!initTask.php"),
 		@Result(name = "initReleasedTast", location = "/credit/jyReleaseTask.jsp"),
 		@Result(name = "cancelTask", type = "chain", location = "/taskManager/task!initReleaseTask.php"),
@@ -185,7 +185,6 @@ public class CreditTaskAction extends BaseAction {
 		return creditTaskService.insertReleaseTask(creditTaskVO);
 	}
 
-
 	/**
 	 * 发布任务 指定
 	 * 
@@ -196,7 +195,16 @@ public class CreditTaskAction extends BaseAction {
 		return creditTaskService.insertReleaseTaskAssign(creditTaskVO);
 	}
 
-	
+	/**
+	 * 发送手机短信
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String sendMsg() throws Exception {
+		return creditTaskService.updateSendMsg(creditTaskVO);
+	}
+
 	/**
 	 * 初始化任务
 	 * 

@@ -166,11 +166,11 @@ public class AdminWithDrawalsService extends BaseService {
 			logMoneyCapital(withDrawalsDAO, withdrawalsEntity.getMoney(),
 					"提款被驳回,原因:" + withdrawalsVO.getStatusDesc(), userEntity);
 		} else {
-			putJumpPage("adminWithdrawalsManager/adminWithdrawals!queryLog.php");
+			putJumpSelfPage("adminWithdrawalsManager/adminWithdrawals!queryLog.php");
 			putAlertMsg("操作失败");
 			return JUMP;
 		}
-		putJumpPage("adminWithdrawalsManager/adminWithdrawals!queryLog.php");
+		putJumpSelfPage("adminWithdrawalsManager/adminWithdrawals!queryLog.php");
 		putAlertMsg("操作成功");
 		return JUMP;
 	}

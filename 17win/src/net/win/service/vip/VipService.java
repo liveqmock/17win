@@ -58,7 +58,7 @@ public class VipService extends BaseService {
 		if (!userEntity.getOpertationCode().equals(
 				StringUtils.processPwd(operationCode))) {
 			putAlertMsg("操作码不正确！");
-			putJumpPage("vipManager/vip!initVip.php");
+			putJumpSelfPage("vipManager/vip!initVip.php");
 			return JUMP;
 		}
 
@@ -71,7 +71,7 @@ public class VipService extends BaseService {
 
 		if (userEntity.getMoney() < money) {
 			putAlertMsg("您当前的余额不足" + money + "！");
-			putJumpPage("vipManager/vip!initVip.php");
+			putJumpSelfPage("vipManager/vip!initVip.php");
 			return JUMP;
 		}
 
@@ -106,7 +106,7 @@ public class VipService extends BaseService {
 		getLoginUser().setVipEndDate(vipBidUserEntity.getEndDate());
 		getLoginUser().setVipGrowValue(vipBidUserEntity.getGrowValue());
 		logMoneyCapital(userDAO, 0 - money, "购买VIP", userEntity);
-		putJumpPage("vipManager/vip!initVip.php");
+		putJumpSelfPage("vipManager/vip!initVip.php");
 		return JUMP;
 	}
 
@@ -125,7 +125,7 @@ public class VipService extends BaseService {
 		if (!userEntity.getOpertationCode().equals(
 				StringUtils.processPwd(operationCode))) {
 			putAlertMsg("操作码不正确！");
-			putJumpPage("vipManager/vip!initVip.php");
+			putJumpSelfPage("vipManager/vip!initVip.php");
 			return JUMP;
 		}
 
@@ -138,7 +138,7 @@ public class VipService extends BaseService {
 
 		if (userEntity.getMoney() < money) {
 			putAlertMsg("您当前的余额不足" + money + "！");
-			putJumpPage("vipManager/vip!initVip.php");
+			putJumpSelfPage("vipManager/vip!initVip.php");
 			return JUMP;
 		}
 		Calendar calendar = Calendar.getInstance();
@@ -158,7 +158,7 @@ public class VipService extends BaseService {
 		getLoginUser().setVipEndDate(vipBidUserEntity.getEndDate());
 		getLoginUser().setVipGrowValue(vipBidUserEntity.getGrowValue());
 		putAlertMsg("恭喜您续费成功！");
-		putJumpPage("vipManager/vip!initVip.php");
+		putJumpSelfPage("vipManager/vip!initVip.php");
 		return JUMP;
 	}
 }

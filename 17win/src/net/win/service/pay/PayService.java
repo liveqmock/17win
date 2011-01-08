@@ -56,17 +56,20 @@ public class PayService extends BaseService {
 	 * @throws Exception
 	 */
 	public String insertPay(PayVO payVO) throws Exception {
-		putTokenBySession();
+
 		String opertationCode = getByParam("opertationCode");
 		String verificationCode = getByParam("verificationCode");
 		UserEntity userEntity = getLoginUserEntity(userDAO);
 		if (!userEntity.getOpertationCode().equals(
 				StringUtils.processPwd(opertationCode))) {
 			putAlertMsg("操作码不正确！");
+			putJumpSelfPage("payManager/pay!initPay.php");
+			return JUMP;
 		}
 		if (!getVerifyCode().equals(verificationCode)) {
 			putAlertMsg("验证码不正确！");
-			return "insertPay";
+			putJumpSelfPage("payManager/pay!initPay.php");
+			return JUMP;
 		}
 		PayEntity payEntity = new PayEntity();
 		BeanUtils.copyProperties(payEntity, payVO);
@@ -74,17 +77,30 @@ public class PayService extends BaseService {
 		payEntity.setPayDate(new Date());
 		payEntity.setUser(userEntity);
 		payDAO.save(payEntity);
-		putAlertMsg("充值提交成功，请到淘宝进行充值,如有问题，请联系客户！");
-		putByRequest("toTaobao", "toTaobao");
-		putByRequest("toPayPage", Constant.getToPayPage());
-
+		String toTaobao = null;
+		switch (payVO.getMoney().intValue()) {
+		case 1:
+			toTaobao = "http://item.taobao.com/auction/item_detail.htm?item_num_id=9027703346";
+			break;
+		case 10:
+			toTaobao = "http://item.taobao.com/item.htm?id=9027758246";
+			break;
+		case 50:
+			toTaobao = "http://item.taobao.com/auction/item_detail.htm?item_num_id=9020022672";
+			break;
+		case 100:
+			toTaobao = "http://item.taobao.com/auction/item_detail.htm?item_num_id=9027716018";
+			break;
+		}
 		MailUtils.sendCommonMail(mailSender, freeMarkerCfj, "用户申请充值",
 				userEntity.getUsername()
 						+ "在"
 						+ DateUtils.format(new Date(),
 								DateUtils.DATE_TIME_FORMAT) + "提交充值", Constant
 						.getXgjEmail());
-		return "insertPay";
+		putJumpOutterPage(toTaobao);
+		putAlertMsg("充值提交成功，请到淘宝进行充值,如有问题，请联系客户！");
+		return JUMP;
 	}
 
 	/**

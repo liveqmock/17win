@@ -19,24 +19,44 @@ String.prototype.startWith = function(str) {
 		return false;
 	return true;
 }
-
-// firefox 复制
-function copy_code(copyText) {
+// 赋值到剪切板
+function copyToClipboard(txt, msg) {
 	if (window.clipboardData) {
-		window.clipboardData.setData("Text", copyText)
-	} else {
-		var flashcopier = 'flashcopier';
-		if (!document.getElementById(flashcopier)) {
-			var divholder = document.createElement('div');
-			divholder.id = flashcopier;
-			document.body.appendChild(divholder);
+		window.clipboardData.clearData();
+		window.clipboardData.setData("Text", txt);
+	} else if (navigator.userAgent.indexOf("Opera") != -1) {
+		window.location = txt;
+	} else if (window.netscape) {
+		try {
+			netscape.security.PrivilegeManager
+					.enablePrivilege("UniversalXPConnect");
+		} catch (e) {
+			alert("被浏览器拒绝！\n请在浏览器地址栏输入'about:config'并回车\n然后将 'signed.applets.codebase_principal_support'设置为'true'");
+
 		}
-		document.getElementById(flashcopier).innerHTML = '';
-		var divinfo = '<embed src="js/_clipboard.swf" FlashVars="clipboard='
-				+ encodeURIComponent(copyText)
-				+ '" width="0" height="0" type="application/x-shockwave-flash"></embed>';
-		document.getElementById(flashcopier).innerHTML = divinfo;
+		var clip = Components.classes['@mozilla.org/widget/clipboard;1']
+				.createInstance(Components.interfaces.nsIClipboard);
+		if (!clip)
+			return;
+		var trans = Components.classes['@mozilla.org/widget/transferable;1']
+				.createInstance(Components.interfaces.nsITransferable);
+		if (!trans)
+			return;
+		trans.addDataFlavor('text/unicode');
+		var str = new Object();
+		var len = new Object();
+		var str = Components.classes["@mozilla.org/supports-string;1"]
+				.createInstance(Components.interfaces.nsISupportsString);
+		var copytext = txt;
+		str.data = copytext;
+		trans.setTransferData("text/unicode", str, copytext.length * 2);
+		var clipid = Components.interfaces.nsIClipboard;
+		if (!clip)
+			return false;
+		clip.setData(trans, null, clipid.kGlobalClipboard);
 	}
+	msg = (typeof(msg) == "undefined") ? '赋值成功!' : msg;
+	alert(msg + '!');
 }
 
 /**
@@ -197,7 +217,7 @@ function dynamicMsg(str) {
 
 // 全选/反选
 function selectAll(obj, name) {
-	$("["+name+"]").attr("checked", $(obj).attr("checked"));
+	$("[" + name + "]").attr("checked", $(obj).attr("checked"));
 }
 
 // 获取用户信息

@@ -165,7 +165,7 @@ public class WithdrawalsService extends BaseService {
 	 */
 	public String insertWithdrawals(WithdrawalsVO withdrawalsVO)
 			throws Exception {
-		putJumpPage("withdrawalsManager/withdrawals!initWithdrawals.php");
+		putJumpSelfPage("withdrawalsManager/withdrawals!initWithdrawals.php");
 		UserEntity userEntity = getLoginUserEntity(userDAO);
 		WithdrawalsEntity withdrawalsEntity = new WithdrawalsEntity();
 		BeanUtils.copyProperties(withdrawalsEntity, withdrawalsVO);

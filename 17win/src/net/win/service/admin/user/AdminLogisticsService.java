@@ -38,7 +38,7 @@ public class AdminLogisticsService extends BaseService {
 	 */
 	public String updateRedoLogistics(LogisticsVO logisticsVO) throws Exception {
 
-		putJumpPage("adminLogisticsManager/adminLogistics!queryLogisticsLog.php");
+		putJumpSelfPage("adminLogisticsManager/adminLogistics!queryLogisticsLog.php");
 		String logisticsID = getByParam("logisticsID");
 		if (StringUtils.isBlank(logisticsID)) {
 			putAlertMsg("请选择物流数据");

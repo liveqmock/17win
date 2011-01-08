@@ -208,7 +208,7 @@ public class UserService extends BaseService {
 			updateUserLoginInfo(userEntity);
 			if (vipUpdate) {
 				putAlertMsg("恭喜您，会员升级！");
-				putJumpPage("/userInfoManager/info!init.php");
+				putJumpSelfPage("/userInfoManager/info!init.php");
 				return JUMP;
 			} else {
 				return "loginSuccess";
@@ -227,7 +227,7 @@ public class UserService extends BaseService {
 				"select count(*) from UserEntity where status<>:status ",
 				new String[] { "status" }, new Object[] { "0" });
 		if (maxRegisterCount.doubleValue() >= Constant.getMaxRegisterCount()) {
-			putJumpPage("index.html");
+			putJumpSelfPage("index.html");
 			putAlertMsg("允许注册的用户数已经最大了,如有问题联系客服！");
 			return JUMP;
 		}
@@ -315,7 +315,7 @@ public class UserService extends BaseService {
 				+ DateUtils.format(new Date(), DateUtils.DATE_TIME_FORMAT)
 				+ "注册", Constant.getXgjEmail());
 		putAlertMsg("注册成功！");
-		putJumpPage("user/userManager/base!initLogin.php");
+		putJumpSelfPage("user/userManager/base!initLogin.php");
 		return JUMP;
 	}
 }

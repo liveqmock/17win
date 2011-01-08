@@ -67,7 +67,7 @@ public class CreditTaskRepositoryService extends BaseService {
 			if (creditTaskRepositoryEntity.getMoney()
 					+ creditTaskRepositoryEntity.getAddtionMoney() > user
 					.getMoney()) {
-				putJumpPage("taskRepositoryManager/taskRepository!queryRepositories.php?platformType="
+				putJumpSelfPage("taskRepositoryManager/taskRepository!queryRepositories.php?platformType="
 						+ platformType);
 				putAlertMsg("您当前的余额不够发布此任务！");
 				return JUMP;
@@ -75,7 +75,7 @@ public class CreditTaskRepositoryService extends BaseService {
 			if (creditTaskRepositoryEntity.getReleaseDot()
 					+ creditTaskRepositoryEntity.getAddtionReleaseDot() > user
 					.getReleaseDot()) {
-				putJumpPage("taskRepositoryManager/taskRepository!queryRepositories.php?platformType="
+				putJumpSelfPage("taskRepositoryManager/taskRepository!queryRepositories.php?platformType="
 						+ platformType);
 				putAlertMsg("您当前的发布点不够发布此任务！");
 				return JUMP;
@@ -144,7 +144,7 @@ public class CreditTaskRepositoryService extends BaseService {
 							.getDispathCount() + 1);
 			creditTaskRepositoryEntity.setLastDispathDate(new Date());
 			updateUserLoginInfo(user);
-			putJumpPage("taskRepositoryManager/taskRepository!queryRepositories.php?platformType="
+			putJumpSelfPage("taskRepositoryManager/taskRepository!queryRepositories.php?platformType="
 					+ platformType);
 
 			logMoneyCapital(
@@ -186,7 +186,7 @@ public class CreditTaskRepositoryService extends BaseService {
 			} else {
 				putAlertMsg("已经被删除,不要重复提交！");
 			}
-			putJumpPage("taskRepositoryManager/taskRepository!queryRepositories.php?platformType="
+			putJumpSelfPage("taskRepositoryManager/taskRepository!queryRepositories.php?platformType="
 					+ platformType);
 			return JUMP;
 		}

@@ -30,12 +30,7 @@
 		$(document).ready(function() {
 			$("input[id*=copyBtn]").bind("click",function(){ 
 				 var index=$(this).attr("id").split("_")[1];
-				 	if (!$.browser.msie) {
-							alert("仅在IE浏览器中支持！");
-							return;
-				}else{
-						copy_code($("#copyTxt"+"_"+index).val());
-						alert("复制成功，请粘贴到你的QQ/QQ空间/MSN上推荐给你的好友"); }});
+						copyToClipboard($("#copyTxt"+"_"+index).val(),"复制成功，请粘贴到你的QQ/QQ空间/MSN上推荐给你的好友");
 				
 			});
 		</script>

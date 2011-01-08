@@ -463,7 +463,7 @@ public class AdminNewsService extends BaseService {
 		newsEntity.setUrl("detail_" + id + ".html");
 
 		putAlertMsg("增加成功！");
-		putJumpPage("adminNewsManager/adminNews!queryNews.php");
+		putJumpSelfPage("adminNewsManager/adminNews!queryNews.php");
 		newsDAO.flushSession();
 		newsDAO.clearSession();
 		return JUMP;
@@ -520,7 +520,7 @@ public class AdminNewsService extends BaseService {
 		newsEntity.setDate(new Date());
 		newsEntity.setUrl("detail_" + newsVO.getId() + ".html");
 
-		putJumpPage("adminNewsManager/adminNews!queryNews.php");
+		putJumpSelfPage("adminNewsManager/adminNews!queryNews.php");
 		putAlertMsg("修改成功！");
 		newsDAO.flushSession();
 		newsDAO.clearSession();
@@ -538,7 +538,7 @@ public class AdminNewsService extends BaseService {
 		newsDAO.deleteById(newsVO.getId());
 		queryNews(newsVO);
 		putAlertMsg("删除成功！");
-		putJumpPage("adminNewsManager/adminNews!queryNews.php");
+		putJumpSelfPage("adminNewsManager/adminNews!queryNews.php");
 		return JUMP;
 	}
 

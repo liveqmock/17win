@@ -28,8 +28,8 @@
 		<link href="css/excite-bike/jquery-ui-1.8.4.custom.css"
 			rel="stylesheet" type="text/css" />
 		<SCRIPT src="js/jquery-ui-1.8.4.custom.min.js" type="text/javascript"></SCRIPT>
-		<script src="<%=basePath%>js/My97DatePicker/WdatePicker.js"  defer="defer" 
-			type="text/javascript"></script>
+		<script src="<%=basePath%>js/My97DatePicker/WdatePicker.js"
+			defer="defer" type="text/javascript"></script>
 		<script type="text/javascript" src="js/aop.js">
 		</script>
 		<script type="text/javascript" src="js/utils.js">
@@ -147,8 +147,9 @@
 																		<s:textfield name="creditTaskVO.money" size="10"
 																			id="money" maxlength="6"
 																			onkeyup="if(isNaN(value))execCommand('undo')"></s:textfield>
-																		元&nbsp;&nbsp;
-																		<font color="red">注意：此价格是包含运费的总价格1-60元，扣一个发布点；60-100元(扣2个发布点；100-200元(扣3个发布点),200-500元(扣4个发布点；500元以上(扣5个发布点)</font>
+																		元
+																		<img src="images/tip.gif"
+																			title="注意：此价格是包含运费的总价格1-60元，扣一个发布点；60-100元(扣2个发布点；100-200元(扣3个发布点),200-500元(扣4个发布点；500元以上(扣5个发布点)">
 																	</td>
 																</tr>
 																<tr>
@@ -158,6 +159,7 @@
 																	<td colspan="4">
 																		<s:textfield name="creditTaskVO.itemUrl" id="itemUrl"
 																			maxlength="255"></s:textfield>
+																		<img src="images/tip.gif" title="商品地址">
 																	</td>
 																</tr>
 																<tr>
@@ -169,6 +171,7 @@
 																			<s:radio list="#request.sellers" listKey="id"
 																				disabled="true" name="creditTaskVO.sellerID"
 																				listValue="name"></s:radio>
+																			<img src="images/tip.gif" title="系统自动根据商品地址获取！">
 																		</s:if>
 																	</td>
 																</tr>
@@ -180,16 +183,17 @@
 																		<s:if test="creditTaskVO.assignUser==null">
 																			<input type="checkbox" id="assignUserCheckedBox">
 																			<s:textfield name="creditTaskVO.assignUser"
-																				title="输入指定人的用户名，只有指定的人可以接你的任务，发特特定任务不需要发布点"
 																				disabled="true" id="assignUserID" maxlength="12"></s:textfield>
-
+																			<img src="images/tip.gif"
+																				title="输入指定人的用户名，只有指定的人可以接你的任务，发特特定任务不需要发布点!">
 																		</s:if>
 																		<s:else>
 																			<input type="checkbox" checked="checked"
 																				id="assignUserCheckedBox">
 																			<s:textfield name="creditTaskVO.assignUser"
-																				title="输入指定人的用户名，只有指定的人可以接你的任务，发特特定任务不需要发布点"
 																				id="assignUserID" maxlength="12"></s:textfield>
+																			<img src="images/tip.gif"
+																				title="输入指定人的用户名，只有指定的人可以接你的任务，发特特定任务不需要发布点!">
 																		</s:else>
 																	</td>
 																</tr>
@@ -320,7 +324,9 @@
 																	</td>
 																	<td colspan="2">
 																		<s:checkbox name="creditTaskVO.protect" value="false"
-																			title="接手人需要您审核" fieldValue="true" />
+																			fieldValue="true" />
+																		<img src="images/tip.gif"
+																			title="接手人需要您审核过后才能发布任务，审核方式可以通过QQ进行一些特定的交流！对方过意即同意他接任务，否则不准他接任务!">
 																	</td>
 
 																</tr>
@@ -330,8 +336,9 @@
 																	</td>
 																	<td colspan="2">
 																		<s:textfield name="creditTaskVO.addtionMoney"
-																			title="可以附加金额给接手方" maxLength="3"
-																			cssStyle="width:40px" id="addtionMoneyId"></s:textfield>
+																			maxLength="3" cssStyle="width:40px"
+																			id="addtionMoneyId"></s:textfield>
+																		<img src="images/tip.gif" title="可以附加金额给接手方">
 																	</td>
 																</tr>
 																<tr>
@@ -340,8 +347,9 @@
 																	</td>
 																	<td colspan="2">
 																		<s:textfield name="creditTaskVO.addtionReleaseDot"
-																			title="可以附加发布点给接手方" maxLength="3"
-																			cssStyle="width:40px" id="addtionReleaseDotId"></s:textfield>
+																			maxLength="3" cssStyle="width:40px"
+																			id="addtionReleaseDotId"></s:textfield>
+																		<img src="images/tip.gif" title="可以附加发布点给接手方">
 																	</td>
 																</tr>
 																<tr>
@@ -355,6 +363,7 @@
 																			onclick="WdatePicker({'minDate':'%y-%M-%d %H:%m:%s','alwaysUseStartDate':false,'el':'tasktimingDate','isShowClear':true,startDate:'%y-%M-%d %H:%m:%s',dateFmt:'yyyy-MM-dd HH:mm:ss','skin':'blue'})"
 																			src="js/My97DatePicker/skin/datePicker.gif"
 																			width="16" height="22 align="absmiddle">
+																		<img src="images/tip.gif" title="到时间系统帮你发任务！">
 																	</td>
 																</tr>
 																<tr>
@@ -366,8 +375,8 @@
 																			id="respository" value="false" fieldValue="true" />
 																		<span style="display: none" id="respositoryName">
 																			<s:textfield name="creditTaskVO.respositoryName"
-																				title="放入任务仓库下次方便使用" id="itemUrl" maxlength="20"></s:textfield>
-																			默认为任务ID </span>
+																				id="itemUrl" maxlength="20"></s:textfield> 默认为任务ID </span>
+																		<img src="images/tip.gif" title="放入任务仓库下次方便使用！">
 																	</td>
 																</tr>
 																<tr>
@@ -375,8 +384,9 @@
 																		收货地址：
 																	</td>
 																	<td colspan="2">
-																		<s:checkbox name="creditTaskVO.address" title="实物任务有用"
+																		<s:checkbox name="creditTaskVO.address"
 																			fieldValue="true" />
+																		<img src="images/tip.gif" title="实物任务有用!">
 																	</td>
 																</tr>
 																<tr>
@@ -385,7 +395,8 @@
 																	</td>
 																	<td colspan="2">
 																		<s:textfield maxlength="255" name="creditTaskVO.desc"
-																			title="要对接手人说的话" size="70"></s:textfield>
+																			size="70"></s:textfield>
+																		<img src="images/tip.gif" title="要对接手人说的话!">
 																	</td>
 																</tr>
 																<tr>

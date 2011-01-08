@@ -210,7 +210,8 @@ public class BaseService {
 	 * @param message
 	 * @throws Exception
 	 */
-	protected void putJumpPage(String page) throws Exception {
+	protected void putJumpSelfPage(String page) throws Exception {
+		putByRequest("jumpPageType", "selfPage");
 		putByRequest(JUMP, page);
 	}
 
@@ -221,7 +222,20 @@ public class BaseService {
 	 * @throws Exception
 	 */
 	protected void putJumpOutterPage(String page) throws Exception {
-		putByRequest("outter", true);
+		putByRequest("jumpPageType", "outterPage");
+		putByRequest(JUMP, page);
+	}
+
+	/**
+	 * outteer 是否是其他网站
+	 * 
+	 * @param message
+	 * @throws Exception
+	 */
+	protected void putJumpOutterPage(String page, Boolean close)
+			throws Exception {
+		putByRequest("jumpPageType", "outterPage");
+		putByRequest("closeed", close);
 		putByRequest(JUMP, page);
 	}
 

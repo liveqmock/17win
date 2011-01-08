@@ -19,5 +19,6 @@ function validateForm() {
 		return false;
 	}
 	$("#submitadd").attr("disabled", true);
+	location.reload() ;
 	return true;
 }

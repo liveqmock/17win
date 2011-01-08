@@ -27,6 +27,7 @@ import net.win.entity.VipEntity;
 import net.win.stragegy.ScoreStrategy;
 import net.win.utils.ArithUtils;
 import net.win.utils.Constant;
+import net.win.utils.MsgUtils;
 import net.win.utils.StrategyUtils;
 import net.win.utils.StringUtils;
 import net.win.utils.WinUtils;
@@ -37,8 +38,6 @@ import net.win.vo.SellerVO;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Service;
-
-import freemarker.template.utility.StringUtil;
 
 /**
  * 
@@ -80,7 +79,7 @@ public class CreditTaskService extends BaseService {
 			// 如果发布人不是当前的登陆人就报错
 			if (creditTask.getStatus().equals(TaskMananger.STEP_FIVE_STATUS)) {
 				putAlertMsg("已经好评，不要重复提交！");
-				putJumpPage("taskManager/task!initReceivedTast.php?platformType="
+				putJumpSelfPage("taskManager/task!initReceivedTast.php?platformType="
 						+ platformType);
 				return JUMP;
 			}
@@ -97,7 +96,7 @@ public class CreditTaskService extends BaseService {
 			 */
 			creditTask.setStatus(TaskMananger.STEP_FIVE_STATUS);
 			putAlertMsg("好评成功，通知卖家好评吧！");
-			putJumpPage("taskManager/task!initReceivedTast.php?platformType="
+			putJumpSelfPage("taskManager/task!initReceivedTast.php?platformType="
 					+ platformType);
 
 			return JUMP;
@@ -122,12 +121,12 @@ public class CreditTaskService extends BaseService {
 			CreditTaskEntity creditTask = creditTaskDAO.get(taskId);
 			if (creditTask.getStatus().equals(TaskMananger.STEP_TWO_STATUS)) {
 				putAlertMsg("已经撤销，不要重复提交！");
-				putJumpPage("taskManager/task!initReceivedTast.php?platformType="
+				putJumpSelfPage("taskManager/task!initReceivedTast.php?platformType="
 						+ platformType);
 				return JUMP;
 			}
 			if (creditTask.getStatus().equals(TaskMananger.STEP_FOUR_STATUS)) {
-				putJumpPage("taskManager/task!initReceivedTast.php?platformType="
+				putJumpSelfPage("taskManager/task!initReceivedTast.php?platformType="
 						+ platformType);
 				putAlertMsg("撤销失败，卖家已发货！");
 				return JUMP;
@@ -154,7 +153,7 @@ public class CreditTaskService extends BaseService {
 			creditTask.setStatus(TaskMananger.STEP_TWO_STATUS);
 			putAlertMsg("撤销成功！");
 		}
-		putJumpPage("taskManager/task!initReceivedTast.php?platformType="
+		putJumpSelfPage("taskManager/task!initReceivedTast.php?platformType="
 				+ platformType);
 		return JUMP;
 	}
@@ -177,7 +176,7 @@ public class CreditTaskService extends BaseService {
 			CreditTaskEntity creditTask = creditTaskDAO.get(taskId);
 			if (creditTask.getStatus().equals(TaskMananger.STEP_THREE_STATUS)) {
 				putAlertMsg("已经支付，不要重复提交！");
-				putJumpPage("taskManager/task!initReceivedTast.php?platformType="
+				putJumpSelfPage("taskManager/task!initReceivedTast.php?platformType="
 						+ platformType);
 				return JUMP;
 			}
@@ -196,7 +195,7 @@ public class CreditTaskService extends BaseService {
 			creditTask.setRemainTime(0);
 			creditTask.setStatus(TaskMananger.STEP_THREE_STATUS);
 		}
-		putJumpPage("taskManager/task!initReceivedTast.php?platformType="
+		putJumpSelfPage("taskManager/task!initReceivedTast.php?platformType="
 				+ platformType);
 		putAlertMsg("支付成功！");
 		return JUMP;
@@ -221,7 +220,7 @@ public class CreditTaskService extends BaseService {
 			UserEntity receiveUser = creditTask.getReceivePerson();
 			if (creditTask.getStatus().equals(TaskMananger.STEP_ONE_STATUS)) {
 				putAlertMsg("已经退出，不要重复提交！");
-				putJumpPage("taskManager/task!initReceivedTast.php?platformType="
+				putJumpSelfPage("taskManager/task!initReceivedTast.php?platformType="
 						+ platformType);
 				return JUMP;
 			}
@@ -251,7 +250,7 @@ public class CreditTaskService extends BaseService {
 			creditTask.setStatus(TaskMananger.STEP_ONE_STATUS);
 			updateUserLoginInfo(receiveUser);
 		}
-		putJumpPage("taskManager/task!initReceivedTast.php?platformType="
+		putJumpSelfPage("taskManager/task!initReceivedTast.php?platformType="
 				+ platformType);
 		putAlertMsg("已经退出任务！");
 		return JUMP;
@@ -274,13 +273,13 @@ public class CreditTaskService extends BaseService {
 		UserEntity userEntity = userDAO.get(loginInfo.getId());
 		if (creditTask == null) {
 			putAlertMsg("任务已经不存在！");
-			putJumpPage("userInfoManager/info!initActiave.php");
+			putJumpSelfPage("userInfoManager/info!initActiave.php");
 			return JUMP;
 		}
 		if (!StringUtils.isBlank(creditTask.getAssignUser())
 				&& !creditTask.getAssignUser().equals(userEntity.getUsername())) {
 			putAlertMsg("任务已经不存在！");
-			putJumpPage("这是特殊任务，您不是指定的人！");
+			putJumpSelfPage("这是特殊任务，您不是指定的人！");
 			return JUMP;
 		}
 		if (!userEntity.getStatus().equals("1")) {
@@ -298,7 +297,7 @@ public class CreditTaskService extends BaseService {
 				putAlertMsg("您当前的【状态】不是【正常状态】，不能发布任务！");
 				break;
 			}
-			putJumpPage("userInfoManager/info!initActiave.php");
+			putJumpSelfPage("userInfoManager/info!initActiave.php");
 			return JUMP;
 		}
 		if (creditTask.getStatus().equals(TaskMananger.STEP_TWO_STATUS)) {
@@ -308,7 +307,7 @@ public class CreditTaskService extends BaseService {
 			} else {
 				putAlertMsg("任务已经被人别抢先接受！！");
 			}
-			putJumpPage("taskManager/task!initReceivedTast.php?platformType="
+			putJumpSelfPage("taskManager/task!initReceivedTast.php?platformType="
 					+ platformType);
 			return JUMP;
 		}
@@ -326,7 +325,7 @@ public class CreditTaskService extends BaseService {
 		if (buyerEntitiy.getName().equalsIgnoreCase(
 				creditTask.getSeller().getName())) {
 			putAlertMsg("买号和卖号不能相同！");
-			putJumpPage("taskManager/task!initReceivedTast.php?platformType="
+			putJumpSelfPage("taskManager/task!initReceivedTast.php?platformType="
 					+ platformType);
 			return JUMP;
 		}
@@ -358,7 +357,7 @@ public class CreditTaskService extends BaseService {
 							creditTask.getSeller().getShopURL() }) == 6;
 		}
 		if (refuseFlag) {
-			putJumpPage("taskManager/task!initReceivedTast.php?platformType="
+			putJumpSelfPage("taskManager/task!initReceivedTast.php?platformType="
 					+ platformType);
 			putAlertMsg("为了您和他人的安全，同一商品买号在一个月内只能接手一次，同一店铺的商品买号最多只能接受6次！");
 			return JUMP;
@@ -380,7 +379,7 @@ public class CreditTaskService extends BaseService {
 			creditTask.setStatus(TaskMananger.STEP_TWO_STATUS);
 		}
 
-		putJumpPage("taskManager/task!initReceivedTast.php?platformType="
+		putJumpSelfPage("taskManager/task!initReceivedTast.php?platformType="
 				+ platformType);
 		putAlertMsg("恭喜您，你已经抢到了此任务！");
 		return JUMP;
@@ -407,7 +406,7 @@ public class CreditTaskService extends BaseService {
 			UserEntity releaseUser = creditTask.getReleasePerson();
 			if (creditTask.getStatus().equals(TaskMananger.STEP_SIX_STATUS)) {
 				putAlertMsg("已经好评，不要重复提交！");
-				putJumpPage("taskManager/task!initReleasedTast.php?platformType="
+				putJumpSelfPage("taskManager/task!initReleasedTast.php?platformType="
 						+ platformType);
 				return JUMP;
 			}
@@ -545,7 +544,7 @@ public class CreditTaskService extends BaseService {
 			updateUserLoginInfo(releaseUser);
 			creditTask.setStatus(TaskMananger.STEP_SIX_STATUS);
 			putAlertMsg("好评成功，任务完成！");
-			putJumpPage("taskManager/task!initReleasedTast.php?platformType="
+			putJumpSelfPage("taskManager/task!initReleasedTast.php?platformType="
 					+ platformType);
 			return JUMP;
 		}
@@ -566,7 +565,7 @@ public class CreditTaskService extends BaseService {
 			CreditTaskEntity creditTask = creditTaskDAO.get(taskId);
 			if (creditTask.getStatus().equals(TaskMananger.STEP_FOUR_STATUS)) {
 				putAlertMsg("已经发货，不要重复提交！");
-				putJumpPage("taskManager/task!initReleasedTast.php?platformType="
+				putJumpSelfPage("taskManager/task!initReleasedTast.php?platformType="
 						+ platformType);
 				return JUMP;
 			}
@@ -594,7 +593,7 @@ public class CreditTaskService extends BaseService {
 				creditTask.setStatus(TaskMananger.STEP_FOUR_STATUS);
 				putAlertMsg("发货成功！");
 			}
-			putJumpPage("taskManager/task!initReleasedTast.php?platformType="
+			putJumpSelfPage("taskManager/task!initReleasedTast.php?platformType="
 					+ platformType);
 			return JUMP;
 		}
@@ -617,12 +616,12 @@ public class CreditTaskService extends BaseService {
 			CreditTaskEntity creditTask = creditTaskDAO.get(taskId);
 			if (creditTask.getStatus().equals(TaskMananger.STEP_ONE_STATUS)) {
 				putAlertMsg("已经清理，不要重复提交！");
-				putJumpPage("taskManager/task!initReleasedTast.php?platformType="
+				putJumpSelfPage("taskManager/task!initReleasedTast.php?platformType="
 						+ platformType);
 				return JUMP;
 			}
 			if (creditTask.getStatus().equals(TaskMananger.STEP_ONE_STATUS)) {
-				putJumpPage("taskManager/task!initReleasedTast.php?platformType="
+				putJumpSelfPage("taskManager/task!initReleasedTast.php?platformType="
 						+ platformType);
 				putAlertMsg("清理成功！");
 				return JUMP;
@@ -647,7 +646,7 @@ public class CreditTaskService extends BaseService {
 			creditTask.setReceiveDate(null);
 			creditTask.setStatus(TaskMananger.STEP_ONE_STATUS);
 			putAlertMsg("清理买家成功！");
-			putJumpPage("taskManager/task!initReleasedTast.php?platformType="
+			putJumpSelfPage("taskManager/task!initReleasedTast.php?platformType="
 					+ platformType);
 			return JUMP;
 		}
@@ -669,7 +668,7 @@ public class CreditTaskService extends BaseService {
 			CreditTaskEntity creditTask = creditTaskDAO.get(taskId);
 			if (creditTask.getStatus().equals(TaskMananger.STEP_TWO_STATUS)) {
 				putAlertMsg("已经审核，不要重复提交！");
-				putJumpPage("taskManager/task!initReleasedTast.php?platformType="
+				putJumpSelfPage("taskManager/task!initReleasedTast.php?platformType="
 						+ platformType);
 				return JUMP;
 			}
@@ -687,7 +686,7 @@ public class CreditTaskService extends BaseService {
 			 */
 			creditTask.setStatus(TaskMananger.STEP_TWO_STATUS);
 			putAlertMsg("审核完成，联系买家付款吧！");
-			putJumpPage("taskManager/task!initReleasedTast.php?platformType="
+			putJumpSelfPage("taskManager/task!initReleasedTast.php?platformType="
 					+ platformType);
 			return JUMP;
 		}
@@ -708,7 +707,7 @@ public class CreditTaskService extends BaseService {
 			UserEntity userEntity = userDAO.get(getLoginUser().getId());
 			CreditTaskEntity creditTask = creditTaskDAO.get(taskId);
 			if (creditTask.getStatus().equals(TaskMananger.STEP_ONE_STATUS)) {
-				putJumpPage("taskManager/task!initReleasedTast.php?platformType="
+				putJumpSelfPage("taskManager/task!initReleasedTast.php?platformType="
 						+ platformType);
 				putAlertMsg("加时失败，买家已经退出！");
 				return JUMP;
@@ -736,7 +735,7 @@ public class CreditTaskService extends BaseService {
 				creditTask.setRemainTime(minuties + 20);
 				putAlertMsg("加时成功！");
 			}
-			putJumpPage("taskManager/task!initReleasedTast.php?platformType="
+			putJumpSelfPage("taskManager/task!initReleasedTast.php?platformType="
 					+ platformType);
 
 			return JUMP;
@@ -796,14 +795,14 @@ public class CreditTaskService extends BaseService {
 			CreditTaskEntity creditTask = creditTaskDAO.get(taskId);
 			if (creditTask == null) {
 				putAlertMsg("已经取消了任务，不要重复提交！");
-				putJumpPage("taskManager/task!initReleasedTast.php?platformType="
+				putJumpSelfPage("taskManager/task!initReleasedTast.php?platformType="
 						+ platformType);
 				return JUMP;
 			}
 			if (creditTask.getStatus().equals(TaskMananger.STEP_TWO_STATUS)
 					|| creditTask.getStatus().equals(TaskMananger.AUDIT_STATUS)) {
 				putAlertMsg("取消失败，任务已被接受！");
-				putJumpPage("taskManager/task!initReleasedTast.php?platformType="
+				putJumpSelfPage("taskManager/task!initReleasedTast.php?platformType="
 						+ platformType);
 				return JUMP;
 			}
@@ -923,7 +922,7 @@ public class CreditTaskService extends BaseService {
 					.pageQuery(
 							"select _task.testID , _task.releaseDate ,_fbuser.username,_fbuser.qq,_task.money,_task.updatePrice ,_task.releaseDot "// 6
 									+ ", _task.itemUrl , _seller.name,_seller.shopURL,_buyer.name,_jsuser.upgradeScore,_task.status" // 12
-									+ ", _task.remainTime,_task.goodTimeType ,_task.intervalHour,_task.desc,_task.address ,_task.grade,_task.id ,_task.dispatchDate,_fbuser.ww,_task.waybill,_task.addtionMoney,_task.addtionReleaseDot,_fbuser.upgradeScore,_task.assignUser" // index=26
+									+ ", _task.remainTime,_task.goodTimeType ,_task.intervalHour,_task.desc,_task.address ,_task.grade,_task.id ,_task.dispatchDate,_fbuser.ww,_task.waybill,_task.addtionMoney,_task.addtionReleaseDot,_fbuser.upgradeScore,_task.assignUser,_fbuser.telephone,_jsuser.username" // index=28
 									+ " from CreditTaskEntity as _task inner join _task.releasePerson as _fbuser  inner join _task.seller as _seller left join _task.receivePerson as _jsuser left join _task.buyer as _buyer  where     _jsuser.id=:userId and   _task.type=:platformType "
 									+ orderAndWhereReceivedTaskStr(queryType,
 											false), new String[] { "userId",
@@ -1030,7 +1029,7 @@ public class CreditTaskService extends BaseService {
 					.pageQuery(
 							"select _task.testID , _task.releaseDate ,_task.money,_task.updatePrice ,_task.releaseDot, _task.itemUrl , _seller.name,_task.status "// 7
 									+ ", _jsuser.username,_buyer.name,_jsuser.qq,_jsuser.upgradeScore" // 11
-									+ ", _task.remainTime,_task.goodTimeType ,_task.intervalHour,_task.desc,_task.address ,_task.grade,_task.id,_seller.shopURL ,_task.dispatchDate,_jsuser.ww,_task.waybill,_task.timeingTime,_task.addtionMoney,_task.addtionReleaseDot ,_task.assignUser" // index=26
+									+ ", _task.remainTime,_task.goodTimeType ,_task.intervalHour,_task.desc,_task.address ,_task.grade,_task.id,_seller.shopURL ,_task.dispatchDate,_jsuser.ww,_task.waybill,_task.timeingTime,_task.addtionMoney,_task.addtionReleaseDot ,_task.assignUser,_jsuser.telephone,_fbuser.username" // index=28
 									+ " from CreditTaskEntity as _task inner join _task.releasePerson as _fbuser  inner join _task.seller as _seller left join _task.receivePerson as _jsuser left join _task.buyer as _buyer  where     _fbuser.id=:userId and   _task.type=:platformType "
 									+ orderAndWhereReleasedTaskStr(queryType,
 											false), new String[] { "userId",
@@ -1408,7 +1407,7 @@ public class CreditTaskService extends BaseService {
 					putAlertMsg("您当前的【状态】不是【正常状态】，不能发布任务！");
 					break;
 				}
-				putJumpPage("userInfoManager/info!initActiave.php");
+				putJumpSelfPage("userInfoManager/info!initActiave.php");
 				return JUMP;
 			}
 			List<SellerEntity> sellers = sellerDAO
@@ -1428,7 +1427,7 @@ public class CreditTaskService extends BaseService {
 				putAlertMsg("您还没有为【"
 						+ WinUtils.changeType2Platform(platformType)
 						+ "】平台绑定卖号，请先添加！");
-				putJumpPage("userInfoManager/info!initSellerAndBuyer.php");
+				putJumpSelfPage("userInfoManager/info!initSellerAndBuyer.php");
 				return JUMP;
 			}
 			List<CreditTaskRepositoryEntity> creditTaskResitorys = creditTaskRepositoryDAO
@@ -1535,6 +1534,30 @@ public class CreditTaskService extends BaseService {
 			return "initTask";
 		}
 		return "initTask";
+	}
+
+	/**
+	 * 发送短信
+	 * 
+	 * @param creditTaskVO
+	 * @return
+	 */
+	public String updateSendMsg(CreditTaskVO creditTaskVO) throws Exception {
+		putJumpOutterPage("",true);
+		String telphone = getByParam("telphone");
+		String content = getByParam("content");
+		UserEntity userEntity = getLoginUserEntity(userDAO);
+		Double money = 0.1*  ((content.length()+69) / 70);
+		if (userEntity.getMoney() < money) {
+			putAlertMsg("您当前的余额不足！");
+		} else {
+			MsgUtils.sendMsg(telphone, content);
+			userEntity.setMoney(ArithUtils.sub(userEntity.getMoney(), money));
+			logMoneyCapital(userDAO, 0-money, "发送长度为"+content.length()+"的短信花费"+money+"元", userEntity);
+			updateUserLoginInfo(userEntity);
+			putAlertMsg("发送成功，请点击个人中心的【点击此处刷新用户信息 】刷新信息！");
+		}
+		return JUMP;
 	}
 
 	/**

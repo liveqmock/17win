@@ -48,7 +48,7 @@ public class AdminUserService extends BaseService {
 		userEntity.setStatusDesc(statusDesc);
 		queryUser(adminUserVO);
 		putAlertMsg("修改成功！");
-		putJumpPage("admin/adminUserManager/adminUser!queryUser.php");
+		putJumpSelfPage("admin/adminUserManager/adminUser!queryUser.php");
 		return JUMP;
 	}
 
@@ -69,7 +69,7 @@ public class AdminUserService extends BaseService {
 		} else {
 			putAlertMsg("请选择用户！");
 		}
-		putJumpPage("admin/adminUserManager/adminUser!queryUser.php");
+		putJumpSelfPage("admin/adminUserManager/adminUser!queryUser.php");
 		return JUMP;
 	}
 
@@ -94,7 +94,7 @@ public class AdminUserService extends BaseService {
 		} else {
 			putAlertMsg("请选择用户！");
 		}
-		putJumpPage("admin/adminUserManager/adminUser!queryUser.php");
+		putJumpSelfPage("admin/adminUserManager/adminUser!queryUser.php");
 		return JUMP;
 	}
 
@@ -128,7 +128,7 @@ public class AdminUserService extends BaseService {
 		} else {
 			putAlertMsg("请选择用户！");
 		}
-		putJumpPage("admin/adminUserManager/adminUser!queryUser.php");
+		putJumpSelfPage("admin/adminUserManager/adminUser!queryUser.php");
 		return JUMP;
 	}
 
@@ -148,7 +148,7 @@ public class AdminUserService extends BaseService {
 		queryUser(adminUserVO);
 		logMoneyCapital(userDAO, money, desc, userEntity);
 		putAlertMsg("充值金额成功！");
-		putJumpPage("admin/adminUserManager/adminUser!queryUser.php");
+		putJumpSelfPage("admin/adminUserManager/adminUser!queryUser.php");
 		return JUMP;
 	}
 
@@ -170,7 +170,7 @@ public class AdminUserService extends BaseService {
 		queryUser(adminUserVO);
 		logDotCapital(userDAO, releaseDot, desc, userEntity);
 		putAlertMsg("充值发布点成功！");
-		putJumpPage("admin/adminUserManager/adminUser!queryUser.php");
+		putJumpSelfPage("admin/adminUserManager/adminUser!queryUser.php");
 		return JUMP;
 	}
 
