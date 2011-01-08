@@ -31,6 +31,7 @@ import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpParams;
 import org.cyberneko.html.parsers.DOMParser;
 import org.dom4j.Document;
+import org.dom4j.Element;
 import org.dom4j.Node;
 import org.dom4j.XPath;
 import org.dom4j.io.DOMReader;
@@ -56,14 +57,11 @@ public final class HttpB2CUtils {
 
 	// 账号获取
 	private static final String TAOBAO_USER_REGEX = "data\\-nick=\"(.+)\" data-tnick=";
+
 	// private static final String PAIPAI_USER_REGEX =
 	// "<litagid='HOME_PAGE'><ahref='http://(\\d+)\\.paipai\\.com/";
 	// private static final String YOUA_USER_REGEX =
 	// "uname=\"([[\u0391-\uFFE5]\\w_]+)\"";
-
-	// 信誉地址验证
-	private static final String TAOBAO_CREDIT_URL = "^http:[/\\\\]{2}rate\\.taobao\\.com[/\\\\]rate.htm\\?user_id=\\d+";
-	private static final String PAIPAI_CREDIT_URL = "^http:[/\\\\]{2}shop\\d+\\.paipai\\.com[/\\\\]cgi\\-bin[/\\\\]credit_info\\?uin=\\d+&?";
 
 	private HttpB2CUtils() {
 
@@ -265,76 +263,62 @@ public final class HttpB2CUtils {
 	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer obtainCreditValue(String username, String url,
-			String type) throws Exception {
+	public static Integer obtainCreditValue(String url, String type)
+			throws Exception {
 		Map nameSpaces = new HashMap();
 		nameSpaces.put("xmlns", "http://www.w3.org/1999/xhtml");
 		// 淘宝
 		if ("1".equals(type)) {
-			if (!url.matches(TAOBAO_CREDIT_URL)) {
+			Node node = getOneNodeByDom4j(url,
+					"//xmlns:LI[@class='credit']/xmlns:A[1]", nameSpaces);
+			if (node == null) {
 				return -1;
 			} else {
-				List<Node> nodes = getMutliNodeByDom4j(
-						url,
-						"//xmlns:DIV[@class='skin-gray']/xmlns:DIV[@class='box']/xmlns:DIV[@class='bd']/xmlns:DL/xmlns:DD[1]/xmlns:A|//xmlns:A[@id='J_BuyerRate']",
-						nameSpaces);
-				if (nodes.size() != 2) {
-					return -1;
-				} else {
-					if (!username.equals(nodes.get(0).getText().trim())) {
-						return -1;
-					} else {
-						return Integer.parseInt(nodes.get(1).getText().trim());
-					}
-				}
+				return Integer.parseInt(node.getText().trim());
 			}
 		}
 		// 拍拍
 		else if ("2".equals(type)) {
 			Integer score = -1;
 			// http://shop1.paipai.com/cgi-bin/credit_info?uin=30756500&
-			if (!url.matches(PAIPAI_CREDIT_URL)) {
-				return -1;
-			} else {
-				HttpClient httpclient = new DefaultHttpClient();
-				HttpGet httpget = new HttpGet(url);
-				httpget
-						.setHeader(new BasicHeader(
-								"Cookie",
-								"	PPRD_S=PVS.USER-PVSE.1; pvid=3194253992; flv=10.1 r53; pgv=pgvReferrer=&ssid=s9049088248; visitkey=3625640881013513"));
+			HttpClient httpclient = new DefaultHttpClient();
+			HttpGet httpget = new HttpGet(url);
+			httpget
+					.setHeader(new BasicHeader(
+							"Cookie",
+							"	PPRD_S=PVS.USER-PVSE.1; pvid=3194253992; flv=10.1 r53; pgv=pgvReferrer=&ssid=s9049088248; visitkey=3625640881013513"));
 
-				HttpResponse response = httpclient.execute(httpget);
-				HttpEntity entity = response.getEntity();
-				BufferedReader br = new BufferedReader(new InputStreamReader(
-						entity.getContent(), "GBK"));
-				String buyer = null;
-				String line;
+			HttpResponse response = httpclient.execute(httpget);
+			HttpEntity entity = response.getEntity();
+			BufferedReader br = new BufferedReader(new InputStreamReader(entity
+					.getContent(), "GBK"));
+			String buyer = null;
+			String line;
 
-				// <li id="userNickname"><span
-				// class="name">买家昵称：</span><strong>Dreamway<span
-				// class="imstatic"></span></strong></li>
-				Pattern buyerPattern = Pattern
-						.compile("<li id='userNickname'><span class='name'>买家昵称：</span><strong>(.+)<span class='imstatic'></span></strong></li>");
+			// <li id="userNickname"><span
+			// class="name">买家昵称：</span><strong>Dreamway<span
+			// class="imstatic"></span></strong></li>
+			Pattern buyerPattern = Pattern
+					.compile("<li id='userNickname'><span class='name'>买家昵称：</span><strong>(.+)<span class='imstatic'></span></strong></li>");
 
-				// <span tagvar="buyer" score="20" tag="userGrade" ></span>
-				Pattern scorePattern = Pattern
-						.compile("<span tagvar='buyer'  score='(\\d+)' tag='userGrade' >");
-				Matcher matcher;
-				Matcher matcher2;
-				OUTTER: while ((line = br.readLine()) != null) {
-					line = line.replaceAll("\"", "'");
-					matcher2 = scorePattern.matcher(line);
-					while (matcher2.find()) {
-						score = Integer.parseInt(matcher2.group(1));
-						break OUTTER;
-					}
+			// <span tagvar="buyer" score="20" tag="userGrade" ></span>
+			Pattern scorePattern = Pattern
+					.compile("<span tagvar='buyer'  score='(\\d+)' tag='userGrade' >");
+			Matcher matcher;
+			Matcher matcher2;
+			OUTTER: while ((line = br.readLine()) != null) {
+				line = line.replaceAll("\"", "'");
+				matcher2 = scorePattern.matcher(line);
+				while (matcher2.find()) {
+					score = Integer.parseInt(matcher2.group(1));
+					break OUTTER;
 				}
-				if (br != null) {
-					br.close();
-				}
-				httpget.abort();
-				httpclient.getConnectionManager().shutdown();
 			}
+			if (br != null) {
+				br.close();
+			}
+			httpget.abort();
+			httpclient.getConnectionManager().shutdown();
 			return score;
 		}
 		// 有啊
@@ -342,6 +326,25 @@ public final class HttpB2CUtils {
 			return 0;
 		}
 		return -1;
+	}
+
+	/**
+	 * 获取淘宝的信誉地址
+	 * 
+	 * @param url
+	 * @return
+	 */
+	public static String getTaobaoCreditURL(String url) {
+		Map nameSpaces = new HashMap();
+		nameSpaces.put("xmlns", "http://www.w3.org/1999/xhtml");
+		Element node = (Element) getOneNodeByDom4j(url,
+				"//xmlns:UL[@class='TabBarLevel1']/xmlns:LI[2]/xmlns:A",
+				nameSpaces);
+		if (node == null) {
+			return null;
+		} else {
+			return node.attributeValue("href");
+		}
 	}
 
 	/**

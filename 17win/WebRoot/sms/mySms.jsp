@@ -19,7 +19,7 @@
 			rel="stylesheet" type="text/css" />
 		<SCRIPT src="js/jquery-ui-1.8.4.custom.min.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="js/jquery.tablesorter.min.js" type="text/javascript"></SCRIPT>
-		<script src="<%=basePath%>js/My97DatePicker/WdatePicker.js"
+		<script src="<%=basePath%>js/My97DatePicker/WdatePicker.js"  defer="defer" 
 			type="text/javascript"></script>
 		<script src="sms/mySms.js" type="text/javascript"></script>
 		<style type="text/css">

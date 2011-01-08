@@ -34,9 +34,7 @@
 </script>
 <script type="text/javascript"
 	src="<%=basePathRoot%>/ckeditor/ckeditor.js"></script>
-<script type="text/javascript"
-	src="<%=basePathRoot%>/js/My97DatePicker/WdatePicker.js">
-</script>
+
 <script type="text/javascript"
 	src="<%=basePathRoot%>/js/jquery-ui-1.8.4.custom.min.js">
 </script>
@@ -46,5 +44,8 @@
 <script type="text/javascript"
 	src="<%=basePathRoot%>/js/aop.js">
 </script>
-
+<script type="text/javascript"
+	src="<%=basePathRoot%>/js/My97DatePicker/WdatePicker.js"  defer="defer" >
+</script>
 <s:property value="#request.msg" escape="false" />
+

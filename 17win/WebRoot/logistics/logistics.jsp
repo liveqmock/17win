@@ -28,7 +28,7 @@
 		<SCRIPT src="js/aop.js" type=text/javascript></SCRIPT>
 		<SCRIPT src="js/utils.js" type=text/javascript></SCRIPT>
 		<SCRIPT src="logistics/logistics.js" type=text/javascript></SCRIPT>
-		<script src="<%=basePath%>js/My97DatePicker/WdatePicker.js"
+		<script src="<%=basePath%>js/My97DatePicker/WdatePicker.js"  defer="defer" 
 			type="text/javascript"></script>
 		<style type="text/css">
 body {

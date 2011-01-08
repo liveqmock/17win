@@ -13,7 +13,8 @@ import net.win.utils.LoggerUtils;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
-@SuppressWarnings({"unchecked","unused"})
+
+@SuppressWarnings( { "unchecked", "unused" })
 public class TaskQuartzService {
 	@Resource
 	private CreditTaskDAO creditTaskDAO;
@@ -38,7 +39,7 @@ public class TaskQuartzService {
 					+ "    BUYER_ID_=null,"
 					+ "       STATUS_='1',"
 					+ "  REMAIN_TIME_=0,"
-					+"  RELEASE_DATE = sysdate(),"
+					+ "  RELEASE_DATE = sysdate(),"
 					+ "  RECEIVE_PERSON_=null "
 					+ "   where"
 					+ "     ("
@@ -79,12 +80,12 @@ public class TaskQuartzService {
 					.list("from BuyerEntity where enable=true and  type in (1,2) ");
 			Integer value = 0;
 			for (BuyerEntity buyerEntity : buyers) {
-				value = HttpB2CUtils.obtainCreditValue(buyerEntity.getName(),
-						buyerEntity.getCreditURL(), buyerEntity.getType());
+				value = HttpB2CUtils.obtainCreditValue(buyerEntity
+						.getCreditURL(), buyerEntity.getType());
 				buyerEntity.setScore(value);
 				if (value > Constant.getCreditValueLimit()) {
 					buyerEntity.setEnable(false);
-				} 
+				}
 			}
 		} catch (Exception e) {
 			session.getTransaction().rollback();

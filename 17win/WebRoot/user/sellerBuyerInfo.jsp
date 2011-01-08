@@ -97,7 +97,7 @@ img {
 												id="addBtn">
 										</div>
 										<s:iterator value="#request.sellers.keys" id="type">
-											<table width="100%" cellspacing="0" cellpadding="0"
+											<table width="100%" cellspacing="0" cellpadding="0"  style="table-layout: fixed"
 												border="0" align="center">
 												<tbody id="sellerTable<s:property value="#type"/>">
 													<tr>
@@ -125,7 +125,7 @@ img {
 													</tr>
 													<s:iterator value="#request.sellers.get(#type)" id="seller">
 														<tr class="sellerTr">
-															<td align='center'>
+															<td align="left" nowrap="nowrap" 	style="overflow: hidden; text-overflow: ellipsis;" width="100%">
 																<input type="hidden"
 																	platformType="<s:property value="#type"/>"
 																	shopUrl="<s:property value="#seller.shopURL" />" />
@@ -153,8 +153,8 @@ img {
 										<s:iterator value="#request.buyers.keys" id="type">
 											<s:set name="platformName"
 												value="#type==1?'淘宝':#type==2?'拍拍':'有啊'"></s:set>
-											<table width="99%" cellspacing="0" cellpadding="0" border="0"
-												align="center">
+											<table width="%" cellspacing="0" cellpadding="0" border="0"  
+										style="table-layout: fixed"		align="center">
 												<tbody id="buyerTable<s:property value="#type"/>">
 													<tr>
 														<td width="16%" colspan="2" height="40" align="left"
@@ -187,10 +187,23 @@ img {
 																<s:property value="#buyer.name" />
 															</td>
 															<td height="10" align="center">
-																<s:property value="#buyer.score" />
+																<s:if test="#buyer.score>=0 && #buyer.score<=100">
+																	<font style="color: #9ACD34;font-weight: bold;" title="此买号安全!" ><s:property
+																			value="#buyer.score" /> </font>
+																</s:if>
+																<s:elseif test="#buyer.score>100 && #buyer.score<=200">
+																	<font style="color: #FFCC01;font-weight: bold;"  title="此买号还算安全！"><s:property
+																			value="#buyer.score" /> </font>
+																</s:elseif>
+																<s:else>
+																	<font style="color: #FE0001;font-weight: bold;"  title="此买号已经要达到黄钻，建议换号！"> <s:property
+																			value="#buyer.score" /> </font>
+																</s:else>
+
 															</td>
-															<td height="10" align="center">
-																<s:if test="#buyer.creditURL==null  || #buyer.creditURL==''">
+															<td height="10" align="left" nowrap="nowrap" 	style="overflow: hidden; text-overflow: ellipsis;" width="100%">
+																<s:if
+																	test="#buyer.creditURL==null  || #buyer.creditURL==''">
 																			N/A
 																</s:if>
 																<s:else>
@@ -281,7 +294,7 @@ img {
 							<input type="text" id="sellerName" name="userVO.seller.name"
 								readonly="readonly">
 							<span id="huoquUser" style="display: none"></span>
-							<font color="red">(拍拍为QQ号码)</font>
+							<font color="red">(自动获取地址)</font>
 						</td>
 					</tr>
 					<tr class="sellerClass">
@@ -314,15 +327,6 @@ img {
 							<input type="text" id="buyerName" onblur="obtainBuyer(this)"
 								name="userVO.buyer.name">
 							<font color="red">(拍拍为QQ号码)</font>
-						</td>
-					</tr>
-					<tr style="display: none" class="buyerClass">
-						<td valign="top" nowrap="nowrap">
-							&nbsp;信誉地址：
-						</td>
-						<td valign="middle">
-							<input type="text" id="creditURL" name="userVO.buyer.creditURL">
-							<font color="red">(仅支持淘宝，拍拍，有问题联系客户,拍拍买好不能同时为掌柜)</font>
 						</td>
 					</tr>
 					<tr>

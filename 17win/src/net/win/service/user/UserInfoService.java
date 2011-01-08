@@ -186,15 +186,14 @@ public class UserInfoService extends BaseService {
 	 * @throws Exception
 	 */
 	public String insertSellerAndBuyer(UserVO userVO) throws Exception {
+		putJumpPage("userInfoManager/info!initSellerAndBuyer.php");
 		String type = getByParam("type");
 		String platformTypeParam = getByParam("platformTypeParam");
-
 		UserEntity userEntity = getLoginUserEntity(userDAO);
 		if ("1".equals(type)) {
 			SellerEntity sellerEntity = userVO.getSeller();
 			if (StringUtils.isBlank(sellerEntity.getName())) {
 				putAlertMsg("名字不能为空！");
-				putJumpPage("userInfoManager/info!initSellerAndBuyer.php");
 				return JUMP;
 			}
 			// 判断当前卖号是否被注册过
@@ -207,7 +206,6 @@ public class UserInfoService extends BaseService {
 									userEntity.getId() }));
 			if (!sellerExists) {
 				putAlertMsg(sellerEntity.getName() + "已被使用！");
-				putJumpPage("userInfoManager/info!initSellerAndBuyer.php");
 				return JUMP;
 			}
 
@@ -220,7 +218,6 @@ public class UserInfoService extends BaseService {
 									userEntity.getId() }));
 			if (!buyerExists) {
 				putAlertMsg("不能绑定和买号相同的卖号！");
-				putJumpPage("userInfoManager/info!initSellerAndBuyer.php");
 				return JUMP;
 			}
 			// 判断当前的级别是否可以用友多个卖号
@@ -240,7 +237,6 @@ public class UserInfoService extends BaseService {
 							.changeType2Platform(platformTypeParam);
 					putAlertMsg("您当前在" + platform + "平台最多只能拥有"
 							+ sellerCountFlag + "个账号");
-					putJumpPage("userInfoManager/info!initSellerAndBuyer.php");
 					return JUMP;
 				}
 			}
@@ -264,7 +260,7 @@ public class UserInfoService extends BaseService {
 			BuyerEntity buyerEntity = userVO.getBuyer();
 			if (StringUtils.isBlank(buyerEntity.getName())) {
 				putAlertMsg("名字不能为空！");
-				return "insertSellerAndBuyer";
+				return JUMP;
 			}
 			Boolean sellerExists = (0 == (Long) buyerDAO
 					.uniqueResultObject(
@@ -276,7 +272,7 @@ public class UserInfoService extends BaseService {
 
 			if (!sellerExists) {
 				putAlertMsg("不能绑定和卖号相同的买号！");
-				return "insertSellerAndBuyer";
+				return JUMP;
 			}
 			Boolean buyerExists = (0 == (Long) buyerDAO
 					.uniqueResultObject(
@@ -287,17 +283,34 @@ public class UserInfoService extends BaseService {
 									userEntity.getId() }));
 			if (!buyerExists) {
 				putAlertMsg(buyerEntity.getName() + "已被使用！");
-				return "insertSellerAndBuyer";
+				return JUMP;
+			}
+			if ("1".equals(platformTypeParam)) {
+				// 淘宝
+				String creditURL = "http://member1.taobao.com/member/user_profile.jhtml?userID="
+						+ buyerEntity.getName();
+				creditURL = HttpB2CUtils.getTaobaoCreditURL(creditURL);
+				if (creditURL == null) {
+					putAlertMsg("淘宝用户不存在，请注意区分大小写！");
+					return JUMP;
+				} else {
+					buyerEntity.setCreditURL(creditURL);
+				}
+			} else if ("2".equals(platformTypeParam)) {
+				// 拍拍
+				buyerEntity
+						.setCreditURL("http://shop1.paipai.com/cgi-bin/credit_info?uin="
+								+ buyerEntity.getName());
 			}
 			Integer score = HttpB2CUtils.obtainCreditValue(buyerEntity
-					.getName(), buyerEntity.getCreditURL(), platformTypeParam);
+					.getCreditURL(), platformTypeParam);
 			if (score == -1) {
-				putAlertMsg("您输入的信誉地址和买号不同，如果有疑问请联系新手帮助客户！");
-				return "insertSellerAndBuyer";
+				putAlertMsg("获取信誉失败，出现这个错误有以下情况：1,QQ必须输入QQ号码。2,拍拍买家不能同时为掌柜。 3,注意区分大小写，前后空格。还有疑问请联系客户！");
+				return JUMP;
 			}
 			if (score > Constant.getCreditValueLimit()) {
 				putAlertMsg("您的买号级别过高，请换一个号！");
-				return "insertSellerAndBuyer";
+				return JUMP;
 			}
 			buyerEntity.setScore(score);
 			buyerEntity.setType(platformTypeParam);
@@ -305,9 +318,8 @@ public class UserInfoService extends BaseService {
 			buyerEntity.setEnable(true);
 			buyerDAO.save(buyerEntity);
 		}
-		initSellerAndBuyer(userVO);
 		putAlertMsg("添加成功！");
-		return "insertSellerAndBuyer";
+		return JUMP;
 	}
 
 	/**
@@ -398,7 +410,7 @@ public class UserInfoService extends BaseService {
 	 */
 	public String sendActiave(UserVO userVO) throws Exception {
 		if (getLoginUser().getSendMsgTOValiate()) {
-			putAlertMsg("已经发送，不要重复发送！");
+			putAlertMsg("已经发送，不要重复发送，或则重新登录激活！");
 			putJumpPage("userInfoManager/info!initActiave.php");
 			return JUMP;
 		}

@@ -30,7 +30,7 @@
 		<SCRIPT src="js/jquery.tablesorter.min.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="js/utils.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="js/validater.js" type="text/javascript"></SCRIPT>
-		<script src="<%=basePath%>js/My97DatePicker/WdatePicker.js"
+		<script src="<%=basePath%>js/My97DatePicker/WdatePicker.js"  defer="defer" 
 			type="text/javascript"></script>
 		<SCRIPT src="logistics/logisticsLog.js" type="text/javascript"></SCRIPT>
 

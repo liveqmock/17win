@@ -48,28 +48,12 @@ $(document).ready(function() {
 							$('.buyerClass input select').attr("disabled",
 									false);
 						} else {
-							if ($("#platformType").val() == "3") {
-								$("#creditURL").attr("disabled", true);
-							} else {
-								$("#creditURL").attr("disabled", false);
-							}
 							$('.sellerClass').hide();
 							$('.buyerClass').show();
 							$('.sellerClass input select').attr("disabled",
 									false);
 							$('.buyerClass input select')
 									.attr("disabled", true);
-						}
-					});
-			// 类型选择
-			$("#platformType").bind("change", function() {
-						// 清除地址绑定的数据
-						if ($("[name='type']").val() == "1") {
-							if ($("#platformType").val() == "3") {
-								$("#creditURL").attr("disabled", true);
-							} else {
-								$("#creditURL").attr("disabled", false);
-							}
 						}
 					});
 
@@ -119,23 +103,6 @@ function validateForm() {
 		}
 	} else {
 		$(".buyerClass input[type='text']").blur();
-		var creditURL = $("#creditURL").val();
-		if ($("#platformType").val() == "2" || $("#platformType").val() == "1") {
-			if (Validater.isBlank(creditURL)) {
-				alert("淘宝或拍拍必须填写信誉地址！");
-				return false;
-			}
-		}
-		if ($("#platformType").val() == "2") {
-			var buyerName = $("#buyerName").val();
-			if (creditURL.endWith("&")) {
-				buyerName = buyerName + "&";
-			}
-			if (!creditURL.endWith(buyerName)) {
-				alert("QQ号码和你的信誉地址不同！");
-				return false;
-			}
-		}
 		if (!submitFlag) {
 			alert("填写的资料不正确！");
 			return false;
