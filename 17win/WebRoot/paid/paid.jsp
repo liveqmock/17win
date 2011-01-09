@@ -176,17 +176,8 @@ img {
 															</s:form>
 														</td>
 													</tr>
-													<tr>
-														<td>
-															注：拍下充值卡商品并支付，在您确认收货后，联系客服获得密码，请拍下、支付、确认收货、平台充值
-														</td>
-													</tr>
 												</tbody>
 											</table>
-										</div>
-
-										<div class="pp8">
-											<strong>其他金额充值，请联系我们的客户！</strong>
 										</div>
 									</div>
 								</div>
