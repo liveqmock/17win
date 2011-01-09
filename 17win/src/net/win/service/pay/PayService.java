@@ -56,7 +56,6 @@ public class PayService extends BaseService {
 	 * @throws Exception
 	 */
 	public String insertPay(PayVO payVO) throws Exception {
-
 		String opertationCode = getByParam("opertationCode");
 		String verificationCode = getByParam("verificationCode");
 		UserEntity userEntity = getLoginUserEntity(userDAO);
@@ -98,8 +97,8 @@ public class PayService extends BaseService {
 						+ DateUtils.format(new Date(),
 								DateUtils.DATE_TIME_FORMAT) + "提交充值", Constant
 						.getXgjEmail());
-		putJumpOutterPage(toTaobao);
-		putAlertMsg("充值提交成功，请到淘宝进行充值,如有问题，请联系客户！");
+		putJumpOutterPage(toTaobao, false, true);
+		putAlertMsg("充值提交成功，现在到淘宝进行支付！");
 		return JUMP;
 	}
 
