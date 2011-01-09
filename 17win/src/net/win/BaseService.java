@@ -222,8 +222,7 @@ public class BaseService {
 	 * @throws Exception
 	 */
 	protected void putJumpOutterPage(String page) throws Exception {
-		putByRequest("jumpPageType", "outterPage");
-		putByRequest(JUMP, page);
+		putJumpOutterPage(page, false, false);
 	}
 
 	/**
@@ -232,13 +231,13 @@ public class BaseService {
 	 * @param message
 	 * @throws Exception
 	 */
-	protected void putJumpOutterPage(String page, Boolean close)
+	protected void putJumpOutterPage(String page, Boolean close,Boolean refushSelf)
 			throws Exception {
 		putByRequest("jumpPageType", "outterPage");
 		putByRequest("closeed", close);
+		putByRequest("refushSelf", refushSelf);
 		putByRequest(JUMP, page);
 	}
-
 	/**
 	 * 显示DIV
 	 * 
