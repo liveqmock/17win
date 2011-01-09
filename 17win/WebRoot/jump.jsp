@@ -21,18 +21,15 @@
 		</s:if>
 		<s:elseif test="#request.jumpPageType=='outterPage'">
 			<script language="javascript">
-			window.open("<s:property value="#request.jump" />","_self");
-			</script>
+				   window.open("<s:property value="#request.jump" />","_self");
+					<s:if test="#request.closeed">
+						window.close();
+					</s:if>
+					<s:if test="#request.refushSelf">
+					    self.opener.location.reload(); 
+					</s:if>
+		 	</script>
 		</s:elseif>
-		<s:if test="#request.closeed!=null && #request.closeed">
-			<script language="javascript">
-			window.opener.location.href=window.opener.location.href;window.close();
-			window.opener.location.replace(window.opener.document.referrer);window.close();
-			window.open('','_parent','');
-            window.top.opener = null;
-            window.close();
-            </script>
-		</s:if>
 	</head>
 </html>
 
