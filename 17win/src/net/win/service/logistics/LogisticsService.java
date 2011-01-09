@@ -165,7 +165,8 @@ public class LogisticsService extends BaseService {
 					+ logisticsEntity.getWaybill() + "）扣发布点", userEntity);
 			logDotCapital(userDAO, RELEASE_DOT, logisticsEntity.getWaybill()
 					+ "物流被别人使用得到发布点", logisticsEntity.getReleaseUser());
-			putAlertMsg("使用成功，您可以去您的【个人中心】→【我使用的物流】查看使用的信息！");
+			putJumpOutterPage("logisticsManager/logistics!useLogisticsLog.php");
+			putAlertMsg("使用成功！");
 			return JUMP;
 		}
 	}
