@@ -1543,7 +1543,7 @@ public class CreditTaskService extends BaseService {
 	 * @return
 	 */
 	public String updateSendMsg(CreditTaskVO creditTaskVO) throws Exception {
-		putJumpOutterPage("",true);
+		putJumpOutterPage("",true,true);
 		String telphone = getByParam("telphone");
 		String content = getByParam("content");
 		UserEntity userEntity = getLoginUserEntity(userDAO);
@@ -1555,7 +1555,7 @@ public class CreditTaskService extends BaseService {
 			userEntity.setMoney(ArithUtils.sub(userEntity.getMoney(), money));
 			logMoneyCapital(userDAO, 0-money, "发送长度为"+content.length()+"的短信花费"+money+"元", userEntity);
 			updateUserLoginInfo(userEntity);
-			putAlertMsg("发送成功，请点击个人中心的【点击此处刷新用户信息 】刷新信息！");
+			putAlertMsg("发送成功！");
 		}
 		return JUMP;
 	}
