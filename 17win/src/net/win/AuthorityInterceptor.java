@@ -32,9 +32,9 @@ public class AuthorityInterceptor extends AbstractInterceptor {
 		EXINCLUDE_USER_LOGIN_PATH.add("ajaxManager/ajax!phoneExists.php");
 		EXINCLUDE_USER_LOGIN_PATH.add("ajaxManager/ajax!emailExists.php");
 		EXINCLUDE_USER_LOGIN_PATH.add("adminManager/admin!login.php");
-		EXINCLUDE_USER_LOGIN_PATH.add("logisticsManager/logistics!queryLogisticsLog.php");
-		
-		
+		EXINCLUDE_USER_LOGIN_PATH
+				.add("logisticsManager/logistics!queryLogisticsLog.php");
+
 		EXINCLUDE_USER_LOGIN_PATH
 				.add("adminNewsManager/adminNews!showHelp.php");
 		EXINCLUDE_USER_LOGIN_PATH
@@ -67,14 +67,10 @@ public class AuthorityInterceptor extends AbstractInterceptor {
 		EXINCLUDE_ACTIVATE_PATH.add("userInfoManager/info!initActiave.php");
 		EXINCLUDE_ACTIVATE_PATH.add("usermanager/base!getloginuser.php");
 		EXINCLUDE_ACTIVATE_PATH.add("userManager/base!loginOut.php");
-		EXINCLUDE_ACTIVATE_PATH.add("userInfoManager/info!initUpdatePassword.php");
+		EXINCLUDE_ACTIVATE_PATH
+				.add("userInfoManager/info!initUpdatePassword.php");
 		EXINCLUDE_ACTIVATE_PATH.add("userInfoManager/info!init.php");
 		EXINCLUDE_ACTIVATE_PATH.add("userInfoManager/info!initUpdateInfo.php");
-		
-		
-		
-		
-		
 
 	}
 	/**
@@ -88,6 +84,9 @@ public class AuthorityInterceptor extends AbstractInterceptor {
 			if (validateUserActive(invocation)) {
 				return invocation.invoke();
 			} else {
+
+				ServletActionContext.getRequest().setAttribute("jumpPageType",
+						"selfPage");
 				ServletActionContext.getRequest().setAttribute("msg",
 						"<script>alert('" + "您的账号还没激活！" + "');</script>");
 				ServletActionContext.getRequest().setAttribute("jump",
@@ -96,6 +95,8 @@ public class AuthorityInterceptor extends AbstractInterceptor {
 			}
 
 		} else {
+			ServletActionContext.getRequest().setAttribute("jumpPageType",
+					"selfPage");
 			ServletActionContext.getRequest().setAttribute("msg",
 					"<script>alert('" + "没有登录,请登录！" + "');</script>");
 			ServletActionContext.getRequest().setAttribute("jump",

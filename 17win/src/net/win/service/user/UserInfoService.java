@@ -439,6 +439,11 @@ public class UserInfoService extends BaseService {
 	 * @throws Exception
 	 */
 	public String initActiave(UserVO userVO) throws Exception {
+		Boolean senfFlag = getLoginUser().getSendMsgTOValiate();
+		if (getLoginUser().getStatus().equals("0") && senfFlag) {
+			putByRequest("activeCode", "3");
+			return "initActiave";
+		}
 		if (!getLoginUser().getStatus().equals("0")) {
 			putByRequest("activeCode", "1");
 		} else {
