@@ -2,6 +2,8 @@ package net.win.vo;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+
 import net.win.BaseVO;
 
 public class CreditTaskVO extends BaseVO {
@@ -19,6 +21,8 @@ public class CreditTaskVO extends BaseVO {
 	private Boolean updatePrice;
 	// 动态评分(x:默认好评，x:全部5分 ...)
 	private String grade;
+	// 好评时间类型(1 虚拟任务 2，实体任务 3，套餐任务)
+	private String taskType;
 	// 间隔几个小时(x*24[勾选]或则X[自定义])
 	private Integer intervalHour;
 	// 指定某人
@@ -236,8 +240,6 @@ public class CreditTaskVO extends BaseVO {
 	}
 
 	public Integer getAddtionMoney() {
-		if (addtionMoney == null)
-			return 0;
 		return addtionMoney;
 	}
 
@@ -246,8 +248,6 @@ public class CreditTaskVO extends BaseVO {
 	}
 
 	public Integer getAddtionReleaseDot() {
-		if (addtionReleaseDot == null)
-			return 0;
 		return addtionReleaseDot;
 	}
 
@@ -261,6 +261,14 @@ public class CreditTaskVO extends BaseVO {
 
 	public void setAssignUser(String assignUser) {
 		this.assignUser = assignUser;
+	}
+
+	public String getTaskType() {
+		return taskType;
+	}
+
+	public void setTaskType(String taskType) {
+		this.taskType = taskType;
 	}
 
 }

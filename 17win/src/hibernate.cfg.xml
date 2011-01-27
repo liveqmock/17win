@@ -91,7 +91,6 @@
 		<mapping package="net.win.entity" />
 		<mapping class="net.win.entity.AppealEntity" />
 		<mapping class="net.win.entity.BaseEntity" />
-		<mapping class="net.win.entity.TaskBaseEntity" />
 		<mapping class="net.win.entity.UserEntity" />
 		<mapping class="net.win.entity.SellerEntity" />
 		<mapping class="net.win.entity.BuyerEntity" />

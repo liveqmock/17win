@@ -29,27 +29,27 @@ public class TaskQuartzService {
 		Session session = null;
 		try {
 			session = creditTaskDAO.obtainSession();
-			session.beginTransaction();
-			// 修改发布任务 审核 或者等待买家付款
-			String sql = "update"
-					+ " Tb_CreditTask "
-					+ "   set"
-					+ "     RECEIVE_DATE_=null,"
-					+ "   RECEIVE_IP_=null,"
-					+ "    BUYER_ID_=null,"
-					+ "       STATUS_='1',"
-					+ "  REMAIN_TIME_=0,"
-					+ "  RELEASE_DATE = sysdate(),"
-					+ "  RECEIVE_PERSON_=null "
-					+ "   where"
-					+ "     ("
-					+ "       STATUS_='2' "
-					+ "      or STATUS_='-2'"
-					+ "    ) "
-					+ "  and (UNIX_TIMESTAMP(sysdate())- UNIX_TIMESTAMP(RECEIVE_DATE_)>=REMAIN_TIME_*60)";
-			query = session.createSQLQuery(sql);
-			query.executeUpdate();
-			session.getTransaction().commit();
+//			session.beginTransaction();
+//			// 修改发布任务 审核 或者等待买家付款
+//			String sql = "update"
+//					+ " Tb_CreditTask "
+//					+ "   set"
+//					+ "     RECEIVE_DATE_=null,"
+//					+ "   RECEIVE_IP_=null,"
+//					+ "    BUYER_ID_=null,"
+//					+ "       STATUS_='1',"
+//					+ "  REMAIN_TIME_=0,"
+//					+ "  RELEASE_DATE = sysdate(),"
+//					+ "  RECEIVE_PERSON_=null "
+//					+ "   where"
+//					+ "     ("
+//					+ "       STATUS_='2' "
+//					+ "      or STATUS_='-2'"
+//					+ "    ) "
+//					+ "  and (UNIX_TIMESTAMP(sysdate())- UNIX_TIMESTAMP(RECEIVE_DATE_)>=REMAIN_TIME_*60)";
+//			query = session.createSQLQuery(sql);
+//			query.executeUpdate();
+//			session.getTransaction().commit();
 
 			// / 修改定时任务
 			session.beginTransaction();

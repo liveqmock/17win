@@ -87,8 +87,7 @@ public class CreditTaskRepositoryService extends BaseService {
 			creditTaskEntity.setReleaseDot(creditTaskRepositoryEntity
 					.getReleaseDot());
 			creditTaskEntity.setMoney(creditTaskRepositoryEntity.getMoney());
-			creditTaskEntity.setGoodTimeType(creditTaskRepositoryEntity
-					.getGoodTimeType());
+			 
 			creditTaskEntity.setAddtionMoney(creditTaskRepositoryEntity
 					.getAddtionMoney());
 			creditTaskEntity.setAddtionReleaseDot(creditTaskRepositoryEntity
@@ -96,15 +95,15 @@ public class CreditTaskRepositoryService extends BaseService {
 
 			creditTaskEntity
 					.setProtect(creditTaskRepositoryEntity.getProtect());
-			// 状态 到时间
-			if (!creditTaskEntity.getGoodTimeType().equals("5")) {
-				creditTaskEntity.setIntervalHour(StrategyUtils
-						.getIntervalHourByGoodType(creditTaskEntity
-								.getGoodTimeType()));
-			} else {
-				creditTaskEntity.setIntervalHour(creditTaskRepositoryEntity
-						.getIntervalHour());
-			}
+//			// 状态 到时间
+//			if (!creditTaskEntity.getGoodTimeType().equals("5")) {
+//				creditTaskEntity.setIntervalHour(StrategyUtils
+//						.getIntervalHourByGoodType(creditTaskEntity
+//								.getGoodTimeType()));
+//			} else {
+//				creditTaskEntity.setIntervalHour(creditTaskRepositoryEntity
+//						.getIntervalHour());
+//			}
 			// 有地址
 			if (creditTaskRepositoryEntity.getAddress()) {
 				creditTaskEntity.setAddress(seller.getAddress() + " "
@@ -123,7 +122,7 @@ public class CreditTaskRepositoryService extends BaseService {
 			creditTaskEntity.setSeller(seller);
 			creditTaskEntity.setReleasePerson(user);
 			creditTaskEntity.setGrade(creditTaskRepositoryEntity.getGrade());
-			creditTaskEntity.setDesc(creditTaskRepositoryEntity.getDesc());
+			creditTaskEntity.setComment(creditTaskRepositoryEntity.getCommon());
 			creditTaskEntity.setWaybill(StrategyUtils.makeWaybill());
 			creditTaskEntity.setAssignUser(creditTaskRepositoryEntity
 					.getAssignUser());

@@ -123,8 +123,9 @@ img {
 													</tr>
 													<tr>
 														<td>
-															<s:form action="payManager/pay!addPaid.php"  target="_blank"
-																onsubmit="return validateForm()" theme="simple">
+															<s:form action="payManager/pay!addPaid.php"
+																target="_blank" onsubmit="return validateForm()"
+																theme="simple">
 																<table width="90%" cellspacing="0" cellpadding="0"
 																	border="0">
 																	<tbody>
@@ -171,9 +172,16 @@ img {
 																				<input type="submit" value="提交" id="submitadd">
 																			</td>
 																		</tr>
-																	</tbody>
 																</table>
 															</s:form>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<a target="_blak"
+																href="http://shop62179252.taobao.com/?order=&queryType=cat&browseType=grid&searchWord=im%C9%E7%C7%F8&price1=&price2=">
+																淘宝充值连接：http://shop62179252.taobao.com/?order=&queryType=cat&browseType=grid&searchWord=im%C9%E7%C7%F8&price1=&price2=
+															</a>
 														</td>
 													</tr>
 												</tbody>

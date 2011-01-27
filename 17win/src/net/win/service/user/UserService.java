@@ -77,11 +77,13 @@ public class UserService extends BaseService {
 			// 如果状态是修改密码。那么就把状态换成上一次状态
 			if ("3".equals(userEntity.getStatus())) {
 				userEntity.setStatusAndLastStatus(userEntity.getLastStatus());
-				userEntity.setStatus("找回密码完成,修改成成，变回以前的状态！");
+				userEntity.setStatusDesc("找回密码完成,修改成成，变回以前的状态！");
 			}
 			userEntity.setLoginPassword(StringUtils.processPwd(userVO
 					.getUserEntity().getLoginPassword()));
-			putAlertMsg("密码修改成功！");
+			userEntity.setOpertationCode(StringUtils.processPwd(userVO
+					.getUserEntity().getOpertationCode()));
+			putAlertMsg("操作密码修改成功！");
 			return "findPasswordSuccess";
 		}
 	}

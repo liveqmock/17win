@@ -35,9 +35,13 @@
 							</DIV>
 							<BR>
 							<DIV>
-								<P>
-								</P>
-								密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：
+								操作密码：
+								<s:password id="opertationCode" name="userVO.userEntity.opertationCode"
+									maxLength="16"></s:password>
+								<br>
+								确认密码：
+								<input type="password" id="reOpertationCode" maxLength="16">
+								<br>登录密码：
 								<s:password id="password" name="userVO.userEntity.loginPassword"
 									maxLength="16"></s:password>
 								<s:hidden name="userVO.userEntity.username"></s:hidden>
@@ -47,6 +51,7 @@
 								<input type="hidden" name="preURL" size="30"
 									value="<%="?" + request.getQueryString()%>"
 									style="width: 210px">
+
 							</DIV>
 							<BR>
 							<DIV>

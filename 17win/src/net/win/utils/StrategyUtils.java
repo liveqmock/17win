@@ -182,7 +182,6 @@ public final class StrategyUtils {
 		if ("4".equals(goodType)) {
 			return 72;
 		}
-		WinUtils.throwIllegalityException("试图越过发布点的时间计算操作");
 		return 0;
 	}
 

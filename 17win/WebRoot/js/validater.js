@@ -159,7 +159,7 @@ Validater.isEmail = function(str) {
 
 // 手机
 Validater.isTelphone = function(str) {
-	var reg = /^(13[0-9]|15[1|0|3|6|7|8|9]|18[8|9])\d{8}$/;
+	var reg = /^(13[0-9]|15[0-9]|18[0-9])\d{8}$/;
 	return reg.test(str);
 };
 

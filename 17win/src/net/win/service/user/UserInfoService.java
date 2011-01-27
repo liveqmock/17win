@@ -92,11 +92,17 @@ public class UserInfoService extends BaseService {
 		String content = basePath + "userManager/base!initFindPassword.php?u="
 				+ username64 + "&t=" + nowTime65;
 
+		try {
+			MailUtils.sendPasswordMail(mailSender, freeMarkerCfj, userEntity
+					.getUsername(), userEntity.getEmail(), content);
+		} catch (Exception e) {
+			putJumpSelfPage("userInfoManager/info!findPassword.php");
+			putAlertMsg("发送邮件失败，请确认您的邮件支持STMP,POP3。如有问题联系客户！");
+			return JUMP;
+		}
+
 		userEntity.setStatusAndLastStatus("3");
 		userEntity.setStatusDesc("找回密码中！");
-
-		MailUtils.sendPasswordMail(mailSender, freeMarkerCfj, userEntity
-				.getUsername(), userEntity.getEmail(), content);
 		putAlertMsg("邮件已经发送到您的邮箱里面，请根据邮件找回密码！");
 		return "updateFindPassword";
 	}

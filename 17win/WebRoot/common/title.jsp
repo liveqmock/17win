@@ -28,8 +28,22 @@
 			<TABLE width=969 border=0 align=center cellPadding=2 cellSpacing=0>
 				<TR>
 					<TD width=433>
-						<A href="http://www.17win.net" title="淘宝刷信誉,淘宝刷钻,刷钻平台"><IMG
-								alt="淘宝刷信誉,淘宝刷钻,刷钻平台" src="images/logo.gif" border=0> </A>
+						<div style="width: 350px;" id="logo">
+							<a href="http://www.17win.net/" style="float: left;"><img border="0"
+									alt="刷钻网" src="images/logo.gif">
+							</a>
+							<div style="float: left; padding-top: 14px; padding-left: 5px;">
+								<embed width="85" height="30" style="vertical-align: middle;"
+									wmode="transparent" src="http://www.shuazuan.com/images/clock_4.swf?TimeZone=GMT0800"
+									quality="high"
+									pluginspage="http://www.adobe.com/go/getflashplayer"
+									type="application/x-shockwave-flash">
+								<br>
+								<a target="_blank" href="http://www.17win.net/"><img  border="0"
+										src="images/tubiao.png">
+								</a>
+							</div>
+						</div>
 					</TD>
 					<TD vAlign=top width=528>
 						<TABLE cellSpacing=0 cellPadding=0 width=535 align=right border=0>
@@ -225,8 +239,9 @@
 				</s:if>
 					<s:else>
 						class="li0 "
-				</s:else> href="logisticsManager/logistics!queryLogisticsLog.php"
-					id="a11" onmouseover="Mea(11);" testclass="">真实快递</A>
+				</s:else>
+					href="logisticsManager/logistics!queryLogisticsLog.php" id="a11"
+					onmouseover="Mea(11);" testclass="">真实快递</A>
 			</LI>
 		</UL>
 	</DIV>

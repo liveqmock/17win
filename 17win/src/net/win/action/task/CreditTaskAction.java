@@ -185,15 +185,6 @@ public class CreditTaskAction extends BaseAction {
 		return creditTaskService.insertReleaseTask(creditTaskVO);
 	}
 
-	/**
-	 * 发布任务 指定
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	public String releaseTaskAssign() throws Exception {
-		return creditTaskService.insertReleaseTaskAssign(creditTaskVO);
-	}
 
 	/**
 	 * 发送手机短信

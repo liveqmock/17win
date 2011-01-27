@@ -59,7 +59,7 @@ public final class MailUtils {
 			helper.setText(htmlText, true);
 			mailSender.send(msg);
 		} catch (Exception e) {
-			LoggerUtils.error(e);
+			// ingore
 		}
 	}
 
@@ -95,7 +95,7 @@ public final class MailUtils {
 			helper.setText(htmlText, true);
 			mailSender.send(msg);
 		} catch (Exception e) {
-			LoggerUtils.error(e);
+			throw new RuntimeException(e);
 		}
 	}
 

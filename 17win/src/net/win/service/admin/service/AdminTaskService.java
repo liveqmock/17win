@@ -146,11 +146,11 @@ public class AdminTaskService extends BaseService {
 		/**
 		 * 验证
 		 */
-		String goodType = creditTask.getGoodTimeType();
-		if (!"1".equals(goodType)) {
-			creditTask.setRemainTime(creditTask.getIntervalHour());
-			creditTask.setDispatchDate(new Date());
-		}
+//		String goodType = creditTask.getGoodTimeType();
+//		if (!"1".equals(goodType)) {
+//			creditTask.setRemainTime(creditTask.getIntervalHour());
+//			creditTask.setDispatchDate(new Date());
+//		}
 		creditTask.setStatus(TaskMananger.STEP_FOUR_STATUS);
 		putAlertMsg("修改成功！");
 		return JUMP;

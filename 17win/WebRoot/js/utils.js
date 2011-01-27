@@ -55,7 +55,7 @@ function copyToClipboard(txt, msg) {
 			return false;
 		clip.setData(trans, null, clipid.kGlobalClipboard);
 	}
-	msg = (typeof(msg) == "undefined") ? '赋值成功!' : msg;
+	msg = (typeof(msg) == "undefined") ? '复制成功!' : msg;
 	alert(msg + '!');
 }
 
@@ -245,4 +245,11 @@ function getUserLogin() {
 
 				$("#userLoginId").html(tdYes);
 			});
+}
+function waitPage() {
+	document.body.innerHTML = '<p>&nbsp;</p>'
+			+ '<table width="200" height="200" border="0" align="center" valign="middle" cellpadding="0" cellspacing="0">'
+			+ '<tr>'
+			+ '<td align="center" valign="middle"><img src="../images/loading.gif" width="136" height="50s"></td>'
+			+ '</tr>' + '</table>';
 }

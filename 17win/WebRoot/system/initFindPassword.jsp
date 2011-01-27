@@ -25,7 +25,7 @@
 							</DIV>
 							<BR>
 							<DIV style="COLOR: #999900">
-								<FONT color=#ff0000>请输入您的用户名或密码，我们会发送邮件到您的邮箱里面。如果有疑问请联系我们的客户。</FONT>
+								<FONT color=#ff0000>请输入您的用户名，我们会发送邮件到您的邮箱里面。如果有疑问请联系我们的客户。</FONT>
 							</DIV>
 							<BR>
 							<DIV style="COLOR: red">

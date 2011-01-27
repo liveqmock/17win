@@ -50,7 +50,7 @@ public class CreditTaskRepositoryEntity extends BaseEntity {
 	@Column(name = "GOOD_TIME_TYPE_", columnDefinition = "CHAR(1)", nullable = false)
 	private String goodTimeType;
 	// 动态评分(x:默认好评，x:全部5分 ...)
-	@Column(name = "GRADE_", columnDefinition = "CHAR(1)", nullable = false)
+	@Column(name = "GRADE_",length=20, nullable = false)
 	private String grade;
 	// 间隔几个小时(x*24[勾选]或则X[自定义] 0为马上收货) 收货时间
 	@Column(name = "INTERVAL_HOUR_", nullable = false)
@@ -69,8 +69,8 @@ public class CreditTaskRepositoryEntity extends BaseEntity {
 	private Boolean address;
 
 	// 描述
-	@Column(name = "DESC_", length = 255)
-	private String desc;
+	@Column(name = "COMMON_", length = 255)
+	private String common;
 
 	// 附加金额、
 	@Column(name = "ADDTATION_MONEY", nullable = false)
@@ -180,14 +180,7 @@ public class CreditTaskRepositoryEntity extends BaseEntity {
 		this.goodTimeType = goodTimeType;
 	}
 
-	public String getDesc() {
-		return desc;
-	}
-
-	public void setDesc(String desc) {
-		this.desc = desc;
-	}
-
+	 
 	public Date getLastDispathDate() {
 		return lastDispathDate;
 	}
@@ -234,6 +227,14 @@ public class CreditTaskRepositoryEntity extends BaseEntity {
 
 	public void setAssignUser(String assignUser) {
 		this.assignUser = assignUser;
+	}
+
+	public String getCommon() {
+		return common;
+	}
+
+	public void setCommon(String common) {
+		this.common = common;
 	}
 
 }

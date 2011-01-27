@@ -113,16 +113,6 @@ public class AjaxAction extends BaseAction {
 		return JSON;
 	}
 
-	/**
-	 * 查找密码
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	public String findPassword() throws Exception {
-		bool = ajaxService.updateFindPassword(username, telephone);
-		return JSON;
-	}
 
 	/**
 	 * 验证用户

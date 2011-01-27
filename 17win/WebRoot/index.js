@@ -64,7 +64,7 @@ $(document).ready(function() {
 						+ "					<a href='userInfoManager/info!initUpdateInfo.php'><font color='#ff0000'>修改资料</font> </a> "
 						+ "				</td> "
 						+ "				<td width='102'> "
-						+ "					<a href='user/paid.jsp'><font color='#ff0000'>帐号充值</font> "
+						+ "					<a href='payManager/pay!initPay.php'><font color='#ff0000'>帐号充值</font> "
 						+ "					</a> "
 						+ "				</td> "
 						+ "			</tr> "

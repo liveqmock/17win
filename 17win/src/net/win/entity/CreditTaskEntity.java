@@ -17,7 +17,27 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "Tb_CreditTask")
-public class CreditTaskEntity extends TaskBaseEntity {
+public class CreditTaskEntity extends BaseEntity {
+	// 任务ID 给用户看 格式yyymmddhhmmssis
+	@Column(name = "TESTID_", columnDefinition = "CHAR(17)", nullable = false, unique = true)
+	private String testID;
+	// 发布点
+	@Column(name = "RELEASE_DOT_", nullable = false)
+	private Double releaseDot;
+	// 发布时间
+	@Column(name = "RELEASE_DATE")
+	private Date releaseDate;
+	// 发布人
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = UserEntity.class)
+	@JoinColumn(name = "RELEASE_PERSON_")
+	private UserEntity releasePerson;
+	// 接收人
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = UserEntity.class)
+	@JoinColumn(name = "RECEIVE_PERSON_")
+	private UserEntity receivePerson;
+	// 好评
+	@Column(name = "COMMENT_", length = 255)
+	private String comment;
 	// 类型 ( 1:淘宝，2：拍拍，3有啊)
 	@Column(name = "TYPE_", columnDefinition = "CHAR(1)", nullable = false)
 	private String type;
@@ -37,17 +57,17 @@ public class CreditTaskEntity extends TaskBaseEntity {
 	@Column(name = "PROTECT_", nullable = false)
 	private Boolean protect;
 	// 商品地址
-	@Column(name = "ITEM_URL_", length = 255, nullable = false)
+	@Column(name = "ITEM_URL_", length = 2000, nullable = false)
 	private String itemUrl;
 	// 是否修改价格
 	@Column(name = "UPDATE_PRICE_", nullable = false)
 	private Boolean updatePrice;
-	// 动态评分(1:全部5分，2:全部不打分 3带子好评)
-	@Column(name = "GRADE_", columnDefinition = "CHAR(1)", nullable = false)
+	// 动态评分(1马上带字好评)
+	@Column(name = "GRADE_", length=20, nullable = false)
 	private String grade;
-	// 好评时间类型(1 马上 2:24小时 3:48小时 ，4：72小时，5 ：自定义)
-	@Column(name = "GOOD_TIME_TYPE_", columnDefinition = "CHAR(1)", nullable = false)
-	private String goodTimeType;
+	// 好评时间类型(1 虚拟任务 2，实体任务 3，套餐任务)
+	@Column(name = "TASK_TYPE", columnDefinition = "CHAR(1)", nullable = false)
+	private String taskType;
 	// 间隔几个小时(x*24[勾选]或则X[自定义] 0为马上收货)
 	@Column(name = "INTERVAL_HOUR_", nullable = false)
 	private Integer intervalHour;
@@ -76,10 +96,6 @@ public class CreditTaskEntity extends TaskBaseEntity {
 	// 接手时间
 	@Column(name = "RECEIVE_DATE_")
 	private Date receiveDate;
-
-	// 发货时间
-	@Column(name = "DISPATCH_DATE_")
-	private Date dispatchDate;
 
 	// 接收人IP
 	@Column(name = "RECEIVE_IP_", length = 20)
@@ -199,12 +215,12 @@ public class CreditTaskEntity extends TaskBaseEntity {
 		this.protect = protect;
 	}
 
-	public String getGoodTimeType() {
-		return goodTimeType;
+	public String getTaskType() {
+		return taskType;
 	}
 
-	public void setGoodTimeType(String goodTimeType) {
-		this.goodTimeType = goodTimeType;
+	public void setTaskType(String taskType) {
+		this.taskType = taskType;
 	}
 
 	public String getAddress() {
@@ -230,15 +246,6 @@ public class CreditTaskEntity extends TaskBaseEntity {
 	public void setReceiveDate(Date receiveDate) {
 		this.receiveDate = receiveDate;
 	}
-
-	public Date getDispatchDate() {
-		return dispatchDate;
-	}
-
-	public void setDispatchDate(Date dispatchDate) {
-		this.dispatchDate = dispatchDate;
-	}
-
 	public Integer getAddtionMoney() {
 		return addtionMoney;
 	}
@@ -261,6 +268,54 @@ public class CreditTaskEntity extends TaskBaseEntity {
 
 	public void setAssignUser(String assignUser) {
 		this.assignUser = assignUser;
+	}
+
+	public String getTestID() {
+		return testID;
+	}
+
+	public void setTestID(String testID) {
+		this.testID = testID;
+	}
+
+	public Double getReleaseDot() {
+		return releaseDot;
+	}
+
+	public void setReleaseDot(Double releaseDot) {
+		this.releaseDot = releaseDot;
+	}
+
+	public Date getReleaseDate() {
+		return releaseDate;
+	}
+
+	public void setReleaseDate(Date releaseDate) {
+		this.releaseDate = releaseDate;
+	}
+
+	public UserEntity getReleasePerson() {
+		return releasePerson;
+	}
+
+	public void setReleasePerson(UserEntity releasePerson) {
+		this.releasePerson = releasePerson;
+	}
+
+	public UserEntity getReceivePerson() {
+		return receivePerson;
+	}
+
+	public void setReceivePerson(UserEntity receivePerson) {
+		this.receivePerson = receivePerson;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 
 }

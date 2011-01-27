@@ -217,7 +217,7 @@ td {
 										<input style="width: 210px"
 											name="userVO.userEntity.referee.username" size="30"
 											value="<s:property value="#request.username" />"
-											id="refeereeName" readonly="readonly">
+											id="refeereeName">
 										<br />
 										没有可留空！对于被推荐人，没有任务损失，推荐人得到积分奖励
 									</td>

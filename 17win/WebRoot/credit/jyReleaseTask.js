@@ -64,7 +64,7 @@ function openTelephoneDiv(telphone, username) {
 		show : 'slide',
 		width : 400,
 		buttons : {
-			"保存" : function() {
+			"发送" : function() {
 				if (Validater.isBlank($("#contentID").text())
 						&& $("#contentID").text().length > 200) {
 					alert("内容不能为空,并且长度不能大于200！");

@@ -1,8 +1,5 @@
 var submitFlag = true;
 $(document).ready(function() {
-	intText("addtionMoneyId");
-	intText("addtionReleaseDotId");
-
 	// 进入任务仓库
 	$("#goTaskRe").click(function() {
 		var platformType = $("#platformType").val();
@@ -32,79 +29,6 @@ $(document).ready(function() {
 		}
 
 	}
-
-	$("#releaseDIV").dialog({
-				autoOpen : true,
-				draggable : false,
-				hide : 'slide',
-				modal : true,
-				resizable : false,
-				show : 'slide'
-			});
-	$(".btnClass").button();
-	$("#money").focus();
-
-	// 价格
-	$("#money").bind("blur", function() {
-				var currMoney = parseFloat($("#currMoney").val());
-				if (!Validater.isNumber($(this).val(), '+')) {
-					changeStyle(this, '0', '不是有效的数值！');
-					submitFlag = false;
-				} else {
-					changeStyle(this, '1', '');
-				}
-			});
-
-	// 商品地址
-	$("#itemUrl").bind("focus", function() {
-				$(obj).data("nowUrl", $.trim($(obj).val()));
-			});
-	$("#itemUrl").bind("blur", function() {
-
-		var obj = this;
-		var platformType = $("#platformType").val();
-		// 去掉空格
-		$(obj).val($.trim($(obj).val()));
-
-		// 获取seller input
-		if (!Validater.isItem($(obj).val(), platformType)) {
-			submitFlag = false;
-			alert("您输入的格式不地址格式不正确，最好复制在浏览器地址栏里面复制后粘贴,如还有疑问，请联系客户！");
-			changeStyle(obj, '0',
-					'您输入的格式不地址格式不正确，最好复制在浏览器地址栏里面复制后粘贴,如还有疑问，请联系客户！');
-			return;
-		}
-		// 获取用户地址
-		VhostAop.divAOP.ajax("ajaxManager/ajax!obtainSellerByItem.php", {
-					url : $(obj).val(),
-					type : platformType
-				}, function(data) {
-					if (data.seller == null || data.seller == "") {
-						submitFlag = false;
-						alert("您输入的地址和您的掌柜不匹配！");
-						changeStyle(obj, '0', '您输入的地址和您的掌柜不匹配！');
-					} else {
-						var flag = false;
-						var selectRadio = null;
-						$("input[name='creditTaskVO.sellerID']").each(
-								function() {
-									if ($.trim($(this).next("label").text()) == data.seller) {
-										flag = true;
-										selectRadio = $(this);
-										return;
-									}
-								});
-						if (flag) {
-							changeStyle(obj, '1', '');
-							selectRadio.attr("checked", true);
-						} else {
-							alert("您输入的地址和您的掌柜不匹配！");
-							changeStyle(obj, '0', '您输入的地址和您的掌柜不匹配！');
-							submitFlag = false;
-						}
-					}
-				}, "json");
-	});
 	// 自定义时间单选框
 	$("input[name='creditTaskVO.goodTimeType']").bind("click", function() {
 				if ($(this).val() == "5") {
@@ -117,16 +41,25 @@ $(document).ready(function() {
 			});
 	// 自定义时间
 	intText("intervalHour");
-
 	// 仓库
 	$("#respository").bind("click", function() {
 				if ($(this).attr("checked")) {
 					$("#respositoryName").val("");
 					$("#respositoryName").show();
+					$("#respositoryName").focus();
 				} else {
 					$("#respositoryName").hide();
 				}
 			});
+
+	$("[name='creditTaskVO.grade']").bind("change", function() {
+		if ($(this).attr("withodCommmon") != null
+				&& $(this).attr("withodCommmon") != "underfiend") {
+			$("input[name='creditTaskVO.comment']").attr("disabled", true);
+		} else {
+			$("input[name='creditTaskVO.comment']").attr("disabled", false);
+		}
+	});
 	// 选择仓库
 	$("#resultTaskRepsId").bind("change", function() {
 		var id = $(this).val();
@@ -196,51 +129,111 @@ $(document).ready(function() {
 					}, "json");
 		}
 	});
-	// 删除层
-	$("#closeDIVBtn").bind("click", function() {
-				$("#releaseDIV").dialog("close");
-			});
+	// tip
+	$("#addtaskForm :input").tooltip({
 
-	// 选择指定人
-	$("#assignUserCheckedBox").bind("click", function() {
-				if ($(this).attr("checked")) {
-					$("#assignUserID").attr("disabled", false);
-				} else {
-					$("#assignUserID").attr("disabled", true);
-				}
+				// place tooltip on the right edge
+				position : "center right",
+
+				// a little tweaking of the position
+				offset : [-2, 10],
+
+				// use the built-in fadeIn/fadeOut effect
+				effect : "fade",
+
+				// custom opacity setting
+				opacity : 0.7
+
 			});
 
 });
-function validateForm() {
-	if ($("input[name='creditTaskVO.sellerID']:checked").size() == 0) {
-		alert("掌柜未选中，请检查您的商品地址！");
-		return false;
+
+/**
+ * 添加Utem
+ */
+function addItem(obj) {
+	var spans = $("[name='itemUrls']")
+	if (spans.size() >= 10) {
+		alert("最多添加10个商品!");
+		return;
 	}
-	submitFlag = true;
-	$("input[name!='creditTaskVO.itemUrl']").blur();
-	// 验证和第一次加载都为真
-	if (submitFlag) {
-		$("input[name='creditTaskVO.sellerID']").attr("disabled", false);
-		if ($("#assignUserCheckedBox").attr("checked")) {
-			$("#addtaskForm").attr("action",
-					"taskManager/task!releaseTaskAssign.php");
-		} else {
-			$("#addtaskForm")
-					.attr("action", "taskManager/task!releaseTask.php");
-		}
-		return true;
-	} else {
-		alert("您填写的信息不正确，请检查！");
-		return false;
+	var td = $(obj).parents(".itemClass");
+	var span = $(obj).parent("span").clone();
+	span.children("input").val("");
+	td.append("<br>");
+	td.append(span);
+}
+/**
+ * 删除utem
+ * 
+ * @param {}
+ *            obj
+ */
+function removeItem(obj) {
+	var spans = $("[name='itemUrls']")
+	if (spans.size() == 1) {
+		alert("至少保留一个商品地址！");
+		return;
 	}
+	var td = $(obj).parents(".itemClass");
+	var span = $(obj).parent("span");
+	var br = span.prev("br");
+	if (br != null) {
+		br.detach();
+	}
+	span.detach();
 }
 
-// 改变样式
-function changeStyle(obj, flag, msg) {
-	if ("0" == flag) {
-		$(obj).addClass("errorText");
-	} else {
-		$(obj).removeClass("errorText");
+function hideTaskType(obj) {
+	var taskType = $(obj).attr("id").split("_")[0];
+	$("[class$=TaskType]").hide();
+	$("." + taskType).show();
+	$("." + taskType).find("input").eq(0).attr("checked", true);
+}
+
+/** *表单验证* */
+function validateForm() {
+	var platformType = $("#platformType").val();
+	var itemUrlObjs = $("input[name='itemUrls']");
+	var money = $("#money").val();
+	var addtionMoney = $("#addtionMoneyId").val();
+	var addtionReleaseDot = $("#addtionReleaseDotId").val();
+	var updatePriceObj = $("input[name='creditTaskVO.updatePrice']:checked");
+	// 验证地址
+	for (var i = 0; i < itemUrlObjs.length; i++) {
+		var obj = itemUrlObjs.eq(i);
+		obj.val($.trim(obj.val()));
+		if (!Validater.isItem(obj.val(), platformType)) {
+			alert("输入的地址格式不正确，请核对一下！");
+			obj.focus();
+			return false;
+		}
 	}
-	$(obj).attr("title", msg);
+	// 验证money
+	if (!Validater.isNumber(money, "0+")) {
+		alert("商品任务价格式不对！");
+		$("#money").focus();
+		return false;
+	}
+	// 验证addtionMoney
+	if (!Validater.isBlank(addtionMoney) && isNaN(addtionMoney)
+			&& parseFloat(addtionMoney) < 0) {
+		alert("追加金额格式不对！");
+		$("#addtionMoneyId").focus();
+		return false;
+	}
+	// 验证addtionReleaseDot
+	if (!Validater.isBlank(addtionReleaseDot) && isNaN(addtionReleaseDot)
+			&& parseFloat(addtionMoney) < 0) {
+		alert("追加发布点格式不对！");
+		$("#addtionReleaseDotId").focus();
+		return false;
+	}
+	if (updatePriceObj == null || updatePriceObj.length == 0
+			|| updatePriceObj == "undefined") {
+		alert("请选择是否修改价格！");
+		$("#addtionReleaseDotId").focus();
+		return false;
+	}
+	return true; 
 }
