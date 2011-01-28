@@ -122,7 +122,7 @@
 
 												<tr>
 													<td colspan="2" align="center" bgcolor="#FFFFFF">
-														<INPUT id="loginBtn" type=submit value="登陆服务平台" />
+														<INPUT id="loginBtn" type=submit value="登陆平台" />
 														&nbsp; &nbsp;
 													</td>
 												</tr>

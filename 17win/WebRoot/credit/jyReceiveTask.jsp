@@ -5,6 +5,11 @@
 	<HEAD>
 		<META http-equiv=Content-Type content="text/html; charset=UTF-8">
 		<%
+			String basePath = request.getScheme() + "://"
+					+ request.getServerName() + ":" + request.getServerPort()
+					+ "/";
+		%>
+		<%
 			//让浏览器不缓存jsp页面 
 			response.setHeader("Pragma", "No-cache");// http1.0 
 			response.setHeader("Cache-Control", "no-store,no-cache"); //http1.1 
@@ -33,6 +38,8 @@
 		</script>
 		<script
 			src="http://cdn.jquerytools.org/1.2.1/tiny/jquery.tools.min.js"></script>
+		<script src="<%=basePath%>js/My97DatePicker/WdatePicker.js"
+			defer="defer" type="text/javascript"></script>
 		<SCRIPT src="credit/jyReceiveTask.js" type="text/javascript"></SCRIPT>
 		<style>
 /* trigger button */
@@ -74,6 +81,133 @@
 						<!-- xgj navigation.jsp -->
 						<s:include value="../common/task/navigation.jsp"></s:include>
 					</DIV>
+					<div style="WIDTH: 910px">
+						<form action="http://www.shuazuan.com/task/novice.php"
+							method="get" name="queryConditionForm" id="queryConditionForm">
+							<input type="hidden" value="alreadycatcher" name="action">
+							<div style="display: block;" id="J_SearchBox">
+								<table class="table-6">
+									<tbody>
+										<tr>
+											<td>
+												<label>
+													任&nbsp;务&nbsp;I&nbsp;D：
+												</label>
+												<input type="text" size="15" id="order_sn" name="order_sn"
+													value="">
+											</td>
+											<td>
+												<label>
+													发布时间：
+												</label>
+												<s:textfield name="creditTaskVO.fbStartDate" id="startDate"
+													readonly="true"
+													onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})"
+													cssStyle="width:80px">
+												</s:textfield>
+												至
+												<s:textfield name="creditTaskVO.fbEndDate" id="endDate"
+													readonly="true"
+													onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})"
+													cssStyle="width:80px">
+												</s:textfield>
+											</td>
+											<td>
+												<label>
+													任务状态：
+												</label>
+												<select id="statusid" name="statusid" value="">
+													<option value="ALL">
+														全部
+													</option>
+													<option value="1">
+														等待接手人
+													</option>
+													<option value="2">
+														已接手，等待接手方支付
+													</option>
+													<option value="3">
+														已支付，等待发布方发货
+													</option>
+													<option value="4">
+														已发货，等待接手方确认好评
+													</option>
+													<option value="5">
+														接手方已确认好评，等待发布方好评
+													</option>
+													<option value="6">
+														任务已完成
+													</option>
+												</select>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<label>
+													&nbsp;会 员 名：
+												</label>
+												<input type="text" size="15" id="username" name="username"
+													value="">
+											</td>
+											<td>
+												<label>
+													接手时间：
+												</label>
+												<s:textfield name="creditTaskVO.jsStartDate" id="startDate"
+													cssStyle="width:80px" readonly="true"
+													onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})">
+												</s:textfield>
+												至
+												<s:textfield name="creditTaskVO.jsEndDate" id="endDate"
+													cssStyle="width:80px" readonly="true"
+													onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})">
+												</s:textfield>
+											</td>
+											<td align="left">
+												<label>
+													任务分类：
+												</label>
+												<select id="t_type" name="t_type" value=""
+													style="width: 75px;">
+													<option value="ALL">
+														全部
+													</option>
+													<option value="virtual">
+														虚拟
+													</option>
+													<option value="realobject">
+														实物
+													</option>
+													<option value="realobject">
+														套餐
+													</option>
+												</select>
+											</td>
+										</tr>
+										<tr>
+											<td class="col1">
+												<label>
+													掌 柜 名：
+												</label>
+												<input type="text" size="15" id="shopkeeper"
+													name="shopkeeper" value="">
+											</td>
+											<td align="left">
+												<label>
+													接手小号：
+												</label>
+												<input type="text" size="15" id="catcher_shopkeeper"
+													name="catcher_shopkeeper" value="">
+											</td>
+											<td align="left">
+												<input type="submit" value="搜索" name="btnSearch">
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</form>
+					</div>
 					<DIV style="MARGIN-TOP: 0px; BACKGROUND: #ffffff; WIDTH: 910px">
 						<DIV
 							style="BACKGROUND: url(images/task_bg_01.jpg) repeat-x 50% top; WIDTH: 910px; HEIGHT: 38px">
@@ -81,12 +215,24 @@
 								<IMG src="images/task_02.gif">
 							</DIV>
 							<DIV style="MARGIN-TOP: 12px; FLOAT: left; MARGIN-LEFT: 10px">
-								<A href="javascript:sort1()"><SPAN class="taskAnniu<s:property value="#request.platformType"/>">全部任务</SPAN> </A>
-								<A href="javascript:sort2()"><SPAN class=taskAnniu<s:property value="#request.platformType"/>>已接手</SPAN> </A>
-								<A href="javascript:sort3()"><SPAN class=taskAnniu<s:property value="#request.platformType"/>>已支付</SPAN> </A>
-								<A href="javascript:sort4()"><SPAN class=taskAnniu<s:property value="#request.platformType"/>>已发货</SPAN> </A>
-								<A href="javascript:sort5()"><SPAN class=taskAnniu<s:property value="#request.platformType"/>>已好评</SPAN> </A>
-								<A href="javascript:sort6()"><SPAN class=taskAnniu<s:property value="#request.platformType"/>>已完成</SPAN> </A>
+								<A href="javascript:sort1()"><SPAN
+									class="taskAnniu<s:property value="#request.platformType"/>">全部任务</SPAN>
+								</A>
+								<A href="javascript:sort2()"><SPAN
+									class="taskAnniu<s:property value="#request.platformType"/>">已接手</SPAN>
+								</A>
+								<A href="javascript:sort3()"><SPAN
+									class="taskAnniu<s:property value="#request.platformType"/>">已支付</SPAN>
+								</A>
+								<A href="javascript:sort4()"><SPAN
+									class="taskAnniu<s:property value="#request.platformType"/>">已发货</SPAN>
+								</A>
+								<A href="javascript:sort5()"><SPAN
+									class="taskAnniu<s:property value="#request.platformType"/>">已好评</SPAN>
+								</A>
+								<A href="javascript:sort6()"><SPAN
+									class="taskAnniu<s:property value="#request.platformType"/>">已完成</SPAN>
+								</A>
 							</DIV>
 							<DIV style="CLEAR: right; MARGIN-TOP: 12px; FLOAT: right">
 								自定义刷新时间
@@ -108,7 +254,9 @@
 									id="platformType" />
 								秒
 								<A title=点击刷新 href="javascript:location.reload(true);"
-									class="yell_font"> <SPAN class=taskAnniu<s:property value="#request.platformType"/>>刷新页面</SPAN> </A>
+									class="yell_font"> <SPAN
+									class="taskAnniu<s:property value="#request.platformType"/>">刷新页面</SPAN>
+								</A>
 							</DIV>
 						</DIV>
 					</DIV>
@@ -122,7 +270,7 @@
 									发布人
 								</td>
 								<td nowrap="nowrap" align="center">
-									任务价格
+									价格/发布点
 								</td>
 								<td nowrap="nowrap" align="center">
 									商品信息
@@ -287,9 +435,6 @@
 									style="WIDTH: 98%; LINE-HEIGHT: 40px; PADDING-TOP: 10px; HEIGHT: 40px; TEXT-ALIGN: center">
 									<td colspan="7">
 										没有记录！
-										<font color="red"><a
-											href="taskManager/task!initTask.php?platformType=<s:property value="#request.platformType"/>">点此进入发布任务</a>
-										</font>
 									</td>
 								</tr>
 							</s:if>

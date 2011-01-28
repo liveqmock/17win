@@ -18,9 +18,8 @@
 		<link href="css/excite-bike/jquery-ui-1.8.4.custom.css"
 			rel="stylesheet" type="text/css" />
 		<SCRIPT src="js/jquery-ui-1.8.4.custom.min.js" type="text/javascript"></SCRIPT>
-		<SCRIPT src="js/jquery.tablesorter.min.js" type="text/javascript"></SCRIPT>
-		<script src="<%=basePath%>js/My97DatePicker/WdatePicker.js"  defer="defer" 
-			type="text/javascript"></script>
+		<script src="<%=basePath%>js/My97DatePicker/WdatePicker.js"
+			defer="defer" type="text/javascript"></script>
 		<script src="sms/mySms.js" type="text/javascript"></script>
 		<style type="text/css">
 body {
@@ -118,135 +117,146 @@ img {
 														</s:textfield>
 													</td>
 													<td>
-														短信类型：
-														<s:select id="smsVO" listKey="key" listValue="value"
-															name="smsVO.type" headerKey="" headerValue="--请选择--"
-															list="#{'1':'系统短信','2':'普通短信'}">
-														</s:select>
-													</td>
-													<td>
 														<input type="submit" value="查&nbsp;&nbsp;询"
 															style="cursor: pointer;">
+														<s:hidden name="smsVO.queryTypeFlag" />
 													</td>
 												</tr>
 											</table>
 										</s:form>
 										<br>
-										<table id="myTable" class="tablesorter" cellpadding="1"
-											style="table-layout: fixed">
-											<thead>
-												<tr>
-													<th style="font-size: 12px" nowrap="nowrap">
-														发送人
-													</th>
-													<th style="font-size: 12px" nowrap="nowrap">
-														接收人
-													</th>
-													<th style="font-size: 12px" nowrap="nowrap">
-														类型
-													</th>
-													<th style="font-size: 12px" nowrap="nowrap">
-														标题
-													</th>
-													<th style="font-size: 12px" nowrap="nowrap">
-														发送时间
-													</th>
-													<th style="font-size: 12px" nowrap="nowrap">
-														操作
-													</th>
-												</tr>
-											</thead>
-											<tbody>
-												<s:iterator value="#request.result" id="sms">
-													<tr>
-														<td id="td_<s:property value="#sms.id"/>"
-															fromUserName="<s:property value="#sms.fromUserName" />">
-															<s:if
-																test="!#sms.read &&  #sms.fromUserName!=#session.userLogin.username">
-																<b>*<s:property value="#sms.fromUserName" /> </b>
-															</s:if>
-															<s:else>
-																<s:property value="#sms.fromUserName" />
-															</s:else>
-														</td>
-														<td>
-															<s:property value="#sms.toUserName" />
-														</td>
-														<td>
-															<s:if test="#sms.type==1">
-																	系统消息
-															</s:if>
-															<s:else>
-																普通消息
-															</s:else>
-														</td>
-														<td
-															style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-															<s:property value="#sms.title" />
-														</td>
-														<td>
-															<s:date name="#sms.sendDate" format="yyyy-MM-dd HH-mm-ss" />
-														</td>
-														<td>
-															<a content="<s:property value="#sms.content"/>"
-																title="<s:property value="#sms.title"/>"
-																id="a_<s:property value="#sms.id"/>"
-																href="javascript:brower(<s:property value="#sms.id" />,<s:property value="#sms.read" />,this);">浏览</a>
-															<s:if
-																test="#sms.type==2 && #sms.fromUserName!=#session.userLogin.username">
-																<a
-																	href="javascript:reply('<s:property value="#sms.fromUserName" />');">回复</a>
-															</s:if>
-															<a
-																href="javascript:deleteSms(<s:property value="#sms.id" />);">删除</a>
-														</td>
-													</tr>
-												</s:iterator>
-											</tbody>
-											<s:if test="#request.result.size()==0">
-												<tr>
-													<th colspan="6" align="center">
-														您当前没有短信！
-													</th>
-												</tr>
-											</s:if>
-											<s:else>
-												<tfoot>
-													<tr>
-														<th colspan="6">
-															<div style="float: left;">
-																<a href="javascript:firstPage()">首页</a>
-																<a href="javascript:prevPage()">上一页</a>&nbsp;
-																<a href="javascript:nextPage()">下一页</a>&nbsp;
-																<a href="javascript:lastPage()">尾页</a>&nbsp;
-															</div>
-															<div style="float: left;">
-																跳转到
-																<select id='toPageSelect' size='1' onchange="jumpPage()">
-																	<s:iterator begin="1" end="smsVO.pageCount" step="1"
-																		var="index">
-																		<option value="<s:property value="#index" />">
-																			第
-																			<s:property value="#index" />
-																			页
-																		</option>
-																	</s:iterator>
-																</select>
-															</div>
-															<input type="hidden" name="smsVO.nowPage"
-																value="<s:property
-											value="smsVO.nowPage" />"
-																id="nowPage">
-															<input type="hidden"
-																value="<s:property
-										value="smsVO.pageCount" />"
-																id="pageCount">
-														</th>
-													</tr>
-												</tfoot>
-											</s:else>
-										</table>
+										<div>
+											<div id="tabs">
+												<ul>
+													<li>
+														<a href="#tabs-1">收件箱</a>
+													</li>
+													<li>
+														<a href="#tabs-2">发件箱</a>
+													</li>
+												</ul>
+												<div id="tabs-1">
+													<table cellspacing="1" width="100%">
+														<thead>
+															<tr>
+																<th>
+																	<input type="checkbox">
+																</th>
 
+																<th>
+																	标题
+																</th>
+
+																<th>
+																	发件人
+																</th>
+
+																<th>
+																	发送时间
+																</th>
+															</tr>
+														</thead>
+														<tbody>
+															<s:iterator value="#request.result" status="status"
+																id="sms">
+																<tr>
+																	<td align="center">
+																		<input type="checkbox"
+																			value="<s:property value="#sms.id"/>">
+																	</td>
+																	<td>
+																		<s:property value="#sms.title" />
+																	</td>
+																	<td align="center">
+																		<s:property value="#sms.content" />
+																	</td>
+																	<td align="center">
+																		<s:date name="#sms.sendDate"
+																			format="yyyy-MM-dd HH:mm:ss" />
+																	</td>
+																</tr>
+															</s:iterator>
+														</tbody>
+														<tfoot>
+															<s:if test="#request.result.size()==0">
+																<tr>
+																	<td colspan="4" align="center">
+																		没有记录！
+																	</td>
+																</tr>
+															</s:if>
+															<s:else>
+																<tr>
+																	<td colspan="4">
+																		<input type="button" value="删除" id="deleteBtn1">
+																	</td>
+																</tr>
+															</s:else>
+														</tfoot>
+													</table>
+												</div>
+												<div id="tabs-2">
+													<table cellspacing="1" width="100%">
+														<thead>
+															<tr>
+																<th>
+																	<input type="checkbox">
+																</th>
+
+																<th>
+																	标题
+																</th>
+
+																<th>
+																	收件人
+																</th>
+
+																<th>
+																	发送时间
+																</th>
+															</tr>
+														</thead>
+														<tbody>
+															<s:iterator value="#request.result" status="status"
+																id="sms">
+																<tr>
+																	<td align="center">
+																		<input type="checkbox"
+																			value="<s:property value="#sms.id"/>">
+																	</td>
+																	<td>
+																		<s:property value="#sms.title" />
+																	</td>
+																	<td align="center">
+																		<s:property value="#sms.content" />
+																	</td>
+																	<td align="center">
+																		<s:date name="#sms.sendDate"
+																			format="yyyy-MM-dd HH:mm:ss" />
+																	</td>
+																</tr>
+															</s:iterator>
+														</tbody>
+														<tfoot>
+															<s:if test="#request.result.size()==0">
+																<tr>
+																	<td colspan="4" align="center">
+																		没有记录！
+																	</td>
+																</tr>
+															</s:if>
+															<s:else>
+																<tr>
+																	<td colspan="4">
+																		<input type="button" value="删除" id="deleteBtn1">
+																	</td>
+																</tr>
+															</s:else>
+														</tfoot>
+													</table>
+												</div>
+											</div>
+										</div>
 									</div>
 								</div>
 							</td>
@@ -258,7 +268,7 @@ img {
 		</table>
 		<s:include value="../common/footDuan.jsp"></s:include>
 
-		<div id="browerSms" title="站内信">
+		<div style="display: none" id="browerSms" title="站内信">
 			<table border="0" cellpadding="0" cellspacing="0">
 				<tr>
 					<td nowrap="nowrap">

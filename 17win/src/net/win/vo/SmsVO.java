@@ -19,6 +19,8 @@ public class SmsVO extends BaseVO {
 	private String fromUserName;
 
 	private Boolean read;
+	
+	private String  queryTypeFlag;
 
 	// 参数
 	private Date startDate;
@@ -94,5 +96,13 @@ public class SmsVO extends BaseVO {
 
 	public void setFromUserName(String fromUserName) {
 		this.fromUserName = fromUserName;
+	}
+
+	public String getQueryTypeFlag() {
+		return queryTypeFlag;
+	}
+
+	public void setQueryTypeFlag(String queryTypeFlag) {
+		this.queryTypeFlag = queryTypeFlag;
 	}
 }

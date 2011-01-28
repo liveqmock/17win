@@ -69,22 +69,20 @@ td {
 									</td>
 								</tr>
 								<tr>
-									<td align="right" class="font12h" valign="top" width="300">
+									<td align="right" height="40" class="font12h" width="300">
 										用户名：
 										<font color="#FF0000">*</font>&nbsp;
 									</td>
 									<td>
 										<s:textfield name="userVO.userEntity.username" size="30"
 											cssStyle="width:210px" id="username" maxlength="12"></s:textfield>
-										<br />
-										<span id="c0">4-12个字符的字母、汉字、数字、下划线</span>
 									</td>
 									<td nowrap="nowrap" valign="top" width="400">
 									</td>
 
 								</tr>
 								<tr>
-									<td height="40" align="right" class="font12h" valign="top">
+									<td height="40" align="right" class="font12h">
 										登录密码：
 										<font color="#FF0000">*&nbsp;</font>
 									</td>
@@ -92,8 +90,7 @@ td {
 										<s:password id="password" maxlength="20"
 											name="userVO.userEntity.loginPassword" size="30"
 											cssStyle="width:210px"></s:password>
-										<br />
-										登录时需要使用密码，6至20位字符
+
 									</td>
 									<td valign="top">
 
@@ -101,14 +98,13 @@ td {
 								</tr>
 								<tr>
 
-									<td height="40" align="right" class="font12h" valign="top">
+									<td height="40" align="right" class="font12h">
 										确认登陆密码
 										<font color="#FF0000">*&nbsp;</font>
 									</td>
 									<td>
 										<input type="password" id="rePassword" size="30"
 											maxlength="20" style="width: 210px">
-										<br />
 									</td>
 									<td valign="top">
 
@@ -116,7 +112,7 @@ td {
 								</tr>
 
 								<tr>
-									<td height="40" align="right" class="font12h" valign="top">
+									<td height="40" align="right" class="font12h">
 										操作密码：
 										<font color="#FF0000">*&nbsp;</font>
 									</td>
@@ -124,23 +120,20 @@ td {
 										<s:password id="opertationCode" maxlength="20"
 											name="userVO.userEntity.opertationCode" size="30"
 											cssStyle="width:210px"></s:password>
-										<br />
-										互刷时必用,6至20位字符！
+
 									</td>
 									<td valign="top">
-
 									</td>
 
 								</tr>
 								<tr>
-									<td height="40" align="right" class="font12h" valign="top">
+									<td height="40" align="right" class="font12h">
 										确认操作密码：
 										<font color="#FF0000">*&nbsp;</font>
 									</td>
 									<td align="left" class="red-bcolor">
 										<input type="password" id="reOperationCode" size="30"
 											maxlength="20" style="width: 210px" />
-										<br />
 									</td>
 									<td valign="top">
 
@@ -149,7 +142,7 @@ td {
 								</tr>
 
 								<tr>
-									<td height="40" align="right" class="font12h" valign="top">
+									<td height="40" align="right" class="font12h">
 										Q&nbsp;Q：
 										<font color="#FF0000">*&nbsp;</font>
 									</td>
@@ -157,29 +150,12 @@ td {
 									<td>
 										<s:textfield name="userVO.userEntity.qq" id="qq" size="30"
 											maxlength="11" cssStyle="width:210px"></s:textfield>
-										<br />
 									</td>
 									<td valign="top">
-
-									</td>
-								</tr>
-
-								<tr>
-									<td height="40" align="right" class="font12h" valign="top">
-										手机号码：
-										<font color="#FF0000">*&nbsp;</font>
-									</td>
-									<td align="left" class="red-bcolor">
-										<s:textfield id="telephone" name="userVO.userEntity.telephone"
-											maxlength="11" size="30" cssStyle="width:210px"></s:textfield>
-										<br />
-									</td>
-									<td valign="top">
-
 									</td>
 								</tr>
 								<tr>
-									<td height="40" align="right" class="font12h" valign="top">
+									<td height="40" align="right" class="font12h">
 										电子邮箱：
 										<font color="#FF0000">*&nbsp;</font>
 									</td>
@@ -188,29 +164,41 @@ td {
 											size="30" cssStyle="width:210px"></s:textfield>
 										<br />
 									</td>
-									<td valign="top">
+									<td>
 
 									</td>
 
 								</tr>
 								<tr>
-									<td height="40" align="right" class="font12h" valign="top">
+									<td height="40" align="right" class="font12h">
+										手机号码：
+										<font color="#FF0000">*&nbsp;</font>
+									</td>
+									<td align="left" class="red-bcolor">
+										<s:textfield id="telephone" name="userVO.userEntity.telephone"
+											maxlength="11" size="30" cssStyle="width:210px"></s:textfield>
+										<br />
+									</td>
+									<td>
+
+									</td>
+								</tr>
+								<tr>
+									<td height="40" align="right" class="font12h">
 										旺旺：
 									</td>
 
 									<td>
 										<s:textfield id="ww" name="userVO.userEntity.ww" size="30"
 											cssStyle="width:210px"></s:textfield>
-										<br />
-										<font color="#FF0000">注意：非必须，不要用旺旺发送任何关于刷信誉的内容</font>
 									</td>
-									<td valign="top">
+									<td>
 
 									</td>
 								</tr>
 								<tr>
 
-									<td height="40" align="right" class="font12h" valign="top">
+									<td height="40" align="right" class="font12h">
 										推荐人：
 									</td>
 									<td>
@@ -219,18 +207,17 @@ td {
 											value="<s:property value="#request.username" />"
 											id="refeereeName">
 										<br />
-										没有可留空！对于被推荐人，没有任务损失，推荐人得到积分奖励
 									</td>
-									<td valign="top">
+									<td>
 
 									</td>
 								</tr>
 								<tr>
-									<td height="40" align="right" class="font12h" valign="top">
+									<td height="40" align="right" class="font12h">
 										验证码：
 										<font color="#FF0000">*&nbsp;</font>
 									</td>
-									<td align="left" class="red-bcolor" valign="top">
+									<td align="left" class="red-bcolor">
 										<s:textfield id="ww" name="userVO.verificationCode"
 											maxlength="4" id="verificationCode" size="30"
 											cssStyle="width:60px"></s:textfield>
@@ -238,7 +225,7 @@ td {
 											onclick="changeValidateCode(this)" title="点击图片刷新验证码"
 											style="cursor: pointer;" />
 									</td>
-									<td valign="top">
+									<td>
 
 									</td>
 								</tr>

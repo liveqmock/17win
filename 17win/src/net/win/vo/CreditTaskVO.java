@@ -2,8 +2,6 @@ package net.win.vo;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-
 import net.win.BaseVO;
 
 public class CreditTaskVO extends BaseVO {
@@ -19,6 +17,8 @@ public class CreditTaskVO extends BaseVO {
 	private String itemUrl;
 	// 是否修改价格
 	private Boolean updatePrice;
+	// 发布时间
+	private Date releaseDate;
 	// 动态评分(x:默认好评，x:全部5分 ...)
 	private String grade;
 	// 好评时间类型(1 虚拟任务 2，实体任务 3，套餐任务)
@@ -40,16 +40,16 @@ public class CreditTaskVO extends BaseVO {
 	// 接收人IP
 	private String receiveIP;
 	// 发布点
-	private Float releaseDot;
+	private Double releaseDot;
 	// 好评时间类型
 	private String goodTimeType;
 	// 描述
-	private String desc;
+	private String comment;
 
 	// 附加金额、
-	private Integer addtionMoney;
+	private Double addtionMoney;
 	// 附加发布点
-	private Integer addtionReleaseDot;
+	private Double addtionReleaseDot;
 
 	// 任务保护
 	private Boolean protect;
@@ -57,11 +57,50 @@ public class CreditTaskVO extends BaseVO {
 	 * 和entity无关的数据
 	 */
 	private Boolean repository;
-	private Boolean address;
+	private String address;
 	private Long sellerID;
 	private Long buyerID;
-	// 仓库名
+	private Date receiveDate;
 	private String respositoryName;
+	private String sellname;
+	private String buyername;
+	private String jsUsername;
+	private Integer jsUpgradeScore;
+	private String jsVipType;
+	private String jsQQ;
+	private String jsWW;
+	private String jsTelphone;
+	private String fbShopURL;
+	private String fbQQ;
+	private String fbWW;
+	private String fbUsername;
+	private String fbTelphone;
+	private Integer fbUpgradeScore;
+	private String fbVipType;
+
+	public String getJsQQ() {
+		return jsQQ;
+	}
+
+	public void setJsQQ(String jsQQ) {
+		this.jsQQ = jsQQ;
+	}
+
+	public String getJsUsername() {
+		return jsUsername;
+	}
+
+	public void setJsUsername(String jsUsername) {
+		this.jsUsername = jsUsername;
+	}
+
+	public String getSellname() {
+		return sellname;
+	}
+
+	public void setSellname(String sellname) {
+		this.sellname = sellname;
+	}
 
 	public String getType() {
 		return type;
@@ -159,14 +198,6 @@ public class CreditTaskVO extends BaseVO {
 		this.receiveIP = receiveIP;
 	}
 
-	public Float getReleaseDot() {
-		return releaseDot;
-	}
-
-	public void setReleaseDot(Float releaseDot) {
-		this.releaseDot = releaseDot;
-	}
-
 	public Long getSellerID() {
 		return sellerID;
 	}
@@ -191,11 +222,11 @@ public class CreditTaskVO extends BaseVO {
 		this.repository = repository;
 	}
 
-	public Boolean getAddress() {
+	public String getAddress() {
 		return address;
 	}
 
-	public void setAddress(Boolean address) {
+	public void setAddress(String address) {
 		this.address = address;
 	}
 
@@ -223,36 +254,12 @@ public class CreditTaskVO extends BaseVO {
 		this.goodTimeType = goodTimeType;
 	}
 
-	public String getDesc() {
-		return desc;
-	}
-
-	public void setDesc(String desc) {
-		this.desc = desc;
-	}
-
 	public Long getBuyerID() {
 		return buyerID;
 	}
 
 	public void setBuyerID(Long buyerID) {
 		this.buyerID = buyerID;
-	}
-
-	public Integer getAddtionMoney() {
-		return addtionMoney;
-	}
-
-	public void setAddtionMoney(Integer addtionMoney) {
-		this.addtionMoney = addtionMoney;
-	}
-
-	public Integer getAddtionReleaseDot() {
-		return addtionReleaseDot;
-	}
-
-	public void setAddtionReleaseDot(Integer addtionReleaseDot) {
-		this.addtionReleaseDot = addtionReleaseDot;
 	}
 
 	public String getAssignUser() {
@@ -263,12 +270,156 @@ public class CreditTaskVO extends BaseVO {
 		this.assignUser = assignUser;
 	}
 
+	public Double getReleaseDot() {
+		return releaseDot;
+	}
+
+	public void setReleaseDot(Double releaseDot) {
+		this.releaseDot = releaseDot;
+	}
+
+	public Double getAddtionMoney() {
+		return addtionMoney;
+	}
+
+	public void setAddtionMoney(Double addtionMoney) {
+		this.addtionMoney = addtionMoney;
+	}
+
+	public Double getAddtionReleaseDot() {
+		return addtionReleaseDot;
+	}
+
+	public void setAddtionReleaseDot(Double addtionReleaseDot) {
+		this.addtionReleaseDot = addtionReleaseDot;
+	}
+
 	public String getTaskType() {
 		return taskType;
 	}
 
 	public void setTaskType(String taskType) {
 		this.taskType = taskType;
+	}
+
+	public Date getReleaseDate() {
+		return releaseDate;
+	}
+
+	public void setReleaseDate(Date releaseDate) {
+		this.releaseDate = releaseDate;
+	}
+
+	public String getBuyername() {
+		return buyername;
+	}
+
+	public void setBuyername(String buyername) {
+		this.buyername = buyername;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public String getFbShopURL() {
+		return fbShopURL;
+	}
+
+	public void setFbShopURL(String fbShopURL) {
+		this.fbShopURL = fbShopURL;
+	}
+
+	public String getFbQQ() {
+		return fbQQ;
+	}
+
+	public void setFbQQ(String fbQQ) {
+		this.fbQQ = fbQQ;
+	}
+
+	public String getFbUsername() {
+		return fbUsername;
+	}
+
+	public void setFbUsername(String fbUsername) {
+		this.fbUsername = fbUsername;
+	}
+
+	public String getJsWW() {
+		return jsWW;
+	}
+
+	public void setJsWW(String jsWW) {
+		this.jsWW = jsWW;
+	}
+
+	public String getFbWW() {
+		return fbWW;
+	}
+
+	public void setFbWW(String fbWW) {
+		this.fbWW = fbWW;
+	}
+
+	public String getJsTelphone() {
+		return jsTelphone;
+	}
+
+	public void setJsTelphone(String jsTelphone) {
+		this.jsTelphone = jsTelphone;
+	}
+
+	public String getFbTelphone() {
+		return fbTelphone;
+	}
+
+	public void setFbTelphone(String fbTelphone) {
+		this.fbTelphone = fbTelphone;
+	}
+
+	public Date getReceiveDate() {
+		return receiveDate;
+	}
+
+	public void setReceiveDate(Date receiveDate) {
+		this.receiveDate = receiveDate;
+	}
+
+	public Integer getJsUpgradeScore() {
+		return jsUpgradeScore;
+	}
+
+	public void setJsUpgradeScore(Integer jsUpgradeScore) {
+		this.jsUpgradeScore = jsUpgradeScore;
+	}
+
+	public Integer getFbUpgradeScore() {
+		return fbUpgradeScore;
+	}
+
+	public void setFbUpgradeScore(Integer fbUpgradeScore) {
+		this.fbUpgradeScore = fbUpgradeScore;
+	}
+
+	public String getJsVipType() {
+		return jsVipType;
+	}
+
+	public void setJsVipType(String jsVipType) {
+		this.jsVipType = jsVipType;
+	}
+
+	public String getFbVipType() {
+		return fbVipType;
+	}
+
+	public void setFbVipType(String fbVipType) {
+		this.fbVipType = fbVipType;
 	}
 
 }

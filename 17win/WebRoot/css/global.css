@@ -585,9 +585,11 @@ DIV#navigation_tk .mc LI A:hover SPAN {
 	PADDING-RIGHT: 0pt;
 	PADDING-LEFT: 0pt;
 	BACKGROUND: none transparent scroll repeat 0% 0%;
-	FILTER: progid :   DXImageTransform .   Microsoft . 
-		 AlphaImageLoader(enabled =   'true', sizingMethod =   'scale', src = 
-		 "../img/1199944129517.png");
+	FILTER: progid :     DXImageTransform .     Microsoft .  
+		 
+		AlphaImageLoader(enabled =     'true', sizingMethod =     'scale', src =
+		 
+		  "../img/1199944129517.png");
 	PADDING-BOTTOM: 0pt;
 	MARGIN: 16px auto;
 	WIDTH: 100%;

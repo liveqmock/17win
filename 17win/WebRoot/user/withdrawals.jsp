@@ -138,73 +138,22 @@ img {
 													</li>
 												</ul>
 												<div id="tabs-1">
-													<s:form
-														action="withdrawalsManager/withdrawals!withdrawals.php"
-														theme="simple" onsubmit="return validateForm('1')">
-														<table>
+													<table cellspacing="1" class="taskTable">
+														<thead>
 															<tr>
-																<Td align="right">
-																	提现人：
-																	<input name="withdrawalsVO.type" type="hidden"
-																		value="1">
-																	<input name="withdrawalsVO.shopType" id="shopType"
-																		type="hidden" value="1">
-																</Td>
-																<Td>
-																	<s:property value="#session.userLogin.username" />
-																</Td>
+																<td>
+																	fdsf
+																</td>
 															</tr>
+														</thead>
+														<tbody>
 															<tr>
-																<Td align="right">
-																	提现金额：
-																</Td>
-																<Td>
-																	<s:textfield name="withdrawalsVO.money" id="money_1"></s:textfield>
-																	元
-																</Td>
+																<td>
+																	fdsf
+																</td>
 															</tr>
-															<tr>
-																<Td align="right">
-																	商品地址：
-																</Td>
-																<Td>
-																	<s:textfield name="withdrawalsVO.realIdentity"
-																		id="realIdentity_1"></s:textfield>
-																	(淘宝，拍拍，有啊任意一个和提现金额价格相等的商品地址)
-																	<span id="errorShop"></span>
-																</Td>
-															</tr>
-															<tr>
-																<Td align="right">
-																	掌柜：
-																</Td>
-																<Td>
-																	<s:textfield name="withdrawalsVO.realName"
-																		readonly="true" id="realname_1"></s:textfield>
-																	(系统自动获取)
-																</Td>
-															</tr>
-															<tr>
-																<Td align="right">
-																	操作密码：
-																</Td>
-																<Td>
-																	<s:password name="withdrawalsVO.operationCode"
-																		maxlength="20" id="operationCode_1"></s:password>
-																</Td>
-															</tr>
-															<tr>
-																<Td colspan="2" align="center">
-																	<input type="submit" class="buttonFlag"
-																		value="提&nbsp;&nbsp;交">
-
-																	<input type="hidden" name="win17_token"
-																		value="<s:property value="#session.win17_token"/>">
-																</Td>
-
-															</tr>
-														</table>
-													</s:form>
+														</tbody>
+													</table>
 												</div>
 												<div id="tabs-2">
 													<s:form

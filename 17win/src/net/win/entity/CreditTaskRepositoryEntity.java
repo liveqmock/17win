@@ -50,7 +50,7 @@ public class CreditTaskRepositoryEntity extends BaseEntity {
 	@Column(name = "GOOD_TIME_TYPE_", columnDefinition = "CHAR(1)", nullable = false)
 	private String goodTimeType;
 	// 动态评分(x:默认好评，x:全部5分 ...)
-	@Column(name = "GRADE_",length=20, nullable = false)
+	@Column(name = "GRADE_", length = 20, nullable = false)
 	private String grade;
 	// 间隔几个小时(x*24[勾选]或则X[自定义] 0为马上收货) 收货时间
 	@Column(name = "INTERVAL_HOUR_", nullable = false)
@@ -74,10 +74,10 @@ public class CreditTaskRepositoryEntity extends BaseEntity {
 
 	// 附加金额、
 	@Column(name = "ADDTATION_MONEY", nullable = false)
-	private Integer addtionMoney = 0;
+	private Double addtionMoney = 0d;
 	// 附加发布点
 	@Column(name = "ADDTATION_RELEASE_DOT", nullable = false)
-	private Integer addtionReleaseDot = 0;
+	private Double addtionReleaseDot = 0d;
 
 	// 所属人
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = UserEntity.class)
@@ -180,7 +180,6 @@ public class CreditTaskRepositoryEntity extends BaseEntity {
 		this.goodTimeType = goodTimeType;
 	}
 
-	 
 	public Date getLastDispathDate() {
 		return lastDispathDate;
 	}
@@ -205,19 +204,19 @@ public class CreditTaskRepositoryEntity extends BaseEntity {
 		this.releaseDot = releaseDot;
 	}
 
-	public Integer getAddtionMoney() {
+	public Double getAddtionMoney() {
 		return addtionMoney;
 	}
 
-	public void setAddtionMoney(Integer addtionMoney) {
+	public void setAddtionMoney(Double addtionMoney) {
 		this.addtionMoney = addtionMoney;
 	}
 
-	public Integer getAddtionReleaseDot() {
+	public Double getAddtionReleaseDot() {
 		return addtionReleaseDot;
 	}
 
-	public void setAddtionReleaseDot(Integer addtionReleaseDot) {
+	public void setAddtionReleaseDot(Double addtionReleaseDot) {
 		this.addtionReleaseDot = addtionReleaseDot;
 	}
 

@@ -1,5 +1,8 @@
 package net.win.action.task;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import net.win.BaseAction;
@@ -18,7 +21,7 @@ import org.springframework.stereotype.Controller;
 @Controller
 @Scope("prototype")
 @ParentPackage("17win-default")
-@Results( {
+@Results({
 		@Result(name = "input", location = "/credit/task.jsp"),
 		@Result(name = "initTask", location = "/credit/task.jsp"),
 		@Result(name = "initReleaseTask", location = "/credit/releaseTask.jsp"),
@@ -41,6 +44,8 @@ public class CreditTaskAction extends BaseAction {
 	private CreditTaskService creditTaskService;
 
 	private CreditTaskVO creditTaskVO = new CreditTaskVO();
+
+	private List<String> linkMans = new ArrayList<String>();
 
 	@Action("/task")
 	public String execute() throws Exception {
@@ -185,6 +190,16 @@ public class CreditTaskAction extends BaseAction {
 		return creditTaskService.insertReleaseTask(creditTaskVO);
 	}
 
+	/**
+	 * 加载联系人
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String obtainLinkMan() throws Exception {
+		linkMans = creditTaskService.getLinkMans(creditTaskVO);
+		return JSON;
+	}
 
 	/**
 	 * 发送手机短信
@@ -212,6 +227,10 @@ public class CreditTaskAction extends BaseAction {
 
 	public void setCreditTaskVO(CreditTaskVO creditTaskVO) {
 		this.creditTaskVO = creditTaskVO;
+	}
+
+	public List<String> getLinkMans() {
+		return linkMans;
 	}
 
 }

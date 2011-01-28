@@ -8,39 +8,10 @@ $(document).ready(function() {
 	});
 	// 判断是否取消任务
 	var cancelTaskId = $("#cancelFlagTaskIdHidden").val();
-	if (!Validater.isBlank(cancelTaskId)) {
-		// 评论时间
-		var cancelGTT = $("#cancelFlagGTTHidden").val();
-		// 是否改价
-		var cancelUP = $("#cancelFlagUPHidden").val();
-		// 评价类型
-		var cancelGradde = $("#cancelFlagGradeHidden").val();
-
-		$("input[name='creditTaskVO.updatePrice'][value='" + cancelUP + "']")
-				.attr("checked", true);
-		$("input[name='creditTaskVO.goodTimeType'][value='" + cancelGTT + "']")
-				.attr("checked", true);
-		$("input[name='creditTaskVO.grade'][value='" + cancelGradde + "']")
-				.attr("checked", true);
-		var hour = $("#cancelFlagHourHidden").val();
-		if (!Validater.isBlank(hour)) {
-			$("#intervalHour").attr("disabled", false);
-			$("#intervalHour").val(hour);
-		}
-
-	}
-	// 自定义时间单选框
-	$("input[name='creditTaskVO.goodTimeType']").bind("click", function() {
-				if ($(this).val() == "5") {
-					$("#intervalHour").val("");
-					$("#intervalHour").attr("disabled", false);
-				} else {
-					$("#intervalHour").val("");
-					$("#intervalHour").attr("disabled", true);
-				}
-			});
 	// 自定义时间
-	intText("intervalHour");
+	intText("intervalHour1");
+	// 自定义时间
+	intText("intervalHour2");
 	// 仓库
 	$("#respository").bind("click", function() {
 				if ($(this).attr("checked")) {
@@ -56,8 +27,14 @@ $(document).ready(function() {
 		if ($(this).attr("withodCommmon") != null
 				&& $(this).attr("withodCommmon") != "underfiend") {
 			$("input[name='creditTaskVO.comment']").attr("disabled", true);
+			$("#commentByJSID").attr("disabled", true);
 		} else {
 			$("input[name='creditTaskVO.comment']").attr("disabled", false);
+			$("#commentByJSID").attr("disabled", false);
+		}
+		// 是否自定义时间好评
+		if (!$(this).val().startWith("自定义")) {
+			$("input[name='creditTaskVO.intervalHour']").attr("disabled", true);
 		}
 	});
 	// 选择仓库
@@ -189,6 +166,65 @@ function hideTaskType(obj) {
 	$("[class$=TaskType]").hide();
 	$("." + taskType).show();
 	$("." + taskType).find("input").eq(0).attr("checked", true);
+	$("input[name='creditTaskVO.intervalHour']").attr("disabled", true);
+}
+
+// 自定义好评时间
+function diyCommentTime(id) {
+	$("#" + id).attr("disabled", false);
+}
+
+// 弹出选择人
+function selectAssignUser(obj) {
+	var username = $(obj).val();
+	queryAssignUser(username);
+	var div = $("#selectUserDiv");
+	var position = $(obj).position();
+	div.css("top", position.top + 22);
+	div.css("left", position.left);
+	div.show();
+}
+// 查询选择人
+function queryAssignUser(username) {
+	// 获取用户地址
+	VhostAop.divAOP.ajax("taskManager/task!obtainLinkMan.php", {
+				"creditTaskVO.assignUser" : $("#assignUserID").val()
+			}, function(data) {
+				$("#assignUserTable").empty();
+				if(data.linkMans.length==0){
+					var tr = "<tr>"
+							+ "	<td colspan='2'>"
+							+ "		<b>没有联系人！</b>"
+							+ "	</td>"
+							+ "</tr>"
+					$("#assignUserTable").append(tr);
+					return ;
+				}
+				for (var i = 0; i < data.linkMans.length; i++) {
+					var tr = "<tr onmouseover='this.className=\'over\'' style='cursor: pointer;'"
+							+ "onclick='selectUser(this);' onmouseout='this.className=\'out\'\>"
+							+ "	<td colspan='2'>"
+							+ "		<b>"+data.linkMans[i]+"</b>"
+							+ "	</td>"
+							+ "</tr>"
+					$("#assignUserTable").append(tr);
+				}
+			}, "json");
+}
+//改变选择人
+function changeUser(obj){
+	queryAssignUser($(obj).val());
+}
+// 选择人员
+function selectUser(obj) {
+	var username = $.trim($(obj).find("b").text());
+	$("#assignUserID").val(username);
+	closeAssignUser();
+}
+// 关闭选择人
+function closeAssignUser() {
+	var div = $("#selectUserDiv");
+	div.hide();
 }
 
 /** *表单验证* */
@@ -235,5 +271,5 @@ function validateForm() {
 		$("#addtionReleaseDotId").focus();
 		return false;
 	}
-	return true; 
+	return true;
 }

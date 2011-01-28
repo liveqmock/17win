@@ -49,21 +49,29 @@
 								<IMG src="images/task_02.gif">
 							</DIV>
 							<DIV style="MARGIN-TOP: 12px; FLOAT: left; MARGIN-LEFT: 10px">
-								<A href="javascript:allQuery()"><SPAN class="taskAnniu<s:property value="#request.platformType"/>">全部任务</SPAN>
+								<A href="javascript:allQuery()"><SPAN
+									class="taskAnniu<s:property value="#request.platformType"/>">全部任务</SPAN>
 								</A>
-								<A href="javascript:moneyAsc()"><SPAN class="taskAnniu<s:property value="#request.platformType"/>">价低排列</SPAN>
+								<A href="javascript:moneyAsc()"><SPAN
+									class="taskAnniu<s:property value="#request.platformType"/>">价低排列</SPAN>
 								</A>
-								<A href="javascript:moneyDesc()"><SPAN class="taskAnniu<s:property value="#request.platformType"/>">价高排列</SPAN>
+								<A href="javascript:moneyDesc()"><SPAN
+									class="taskAnniu<s:property value="#request.platformType"/>">价高排列</SPAN>
 								</A>
-								<A href="javascript:money1_40()"><SPAN class="taskAnniu<s:property value="#request.platformType"/>">1-40元区</SPAN>
+								<A href="javascript:money1_40()"><SPAN
+									class="taskAnniu<s:property value="#request.platformType"/>">1-40元区</SPAN>
 								</A>
-								<A href="javascript:money40_100()"><SPAN class="taskAnniu<s:property value="#request.platformType"/>">40-100元区</SPAN>
+								<A href="javascript:money40_100()"><SPAN
+									class="taskAnniu<s:property value="#request.platformType"/>">40-100元区</SPAN>
 								</A>
-								<A href="javascript:money100_200()"><SPAN class="taskAnniu<s:property value="#request.platformType"/>">100-200元区</SPAN>
+								<A href="javascript:money100_200()"><SPAN
+									class="taskAnniu<s:property value="#request.platformType"/>">100-200元区</SPAN>
 								</A>
-								<A href="javascript:money200_500()"><SPAN class="taskAnniu<s:property value="#request.platformType"/>">200-500元区</SPAN>
+								<A href="javascript:money200_500()"><SPAN
+									class="taskAnniu<s:property value="#request.platformType"/>">200-500元区</SPAN>
 								</A>
-								<A href="javascript:money500()"><SPAN class="taskAnniu<s:property value="#request.platformType"/>">500元以上区</SPAN>
+								<A href="javascript:money500()"><SPAN
+									class="taskAnniu<s:property value="#request.platformType"/>">500元以上区</SPAN>
 								</A>
 							</DIV>
 							<DIV style="CLEAR: right; MARGIN-TOP: 12px; FLOAT: right">
@@ -77,7 +85,9 @@
 								<input type="hidden" id="currTaskId" />
 								秒
 								<A title=点击刷新 href="javascript:location.reload(true);"
-									class="yell_font"> <SPAN class="taskAnniu<s:property value="#request.platformType"/>">刷新页面</SPAN> </A>
+									class="yell_font"> <SPAN
+									class="taskAnniu<s:property value="#request.platformType"/>">刷新页面</SPAN>
+								</A>
 							</DIV>
 						</DIV>
 					</DIV>
@@ -91,10 +101,10 @@
 									发布人
 								</td>
 								<td nowrap="nowrap" align="center">
-									任务价格
+									价格/发布点
 								</td>
 								<td nowrap="nowrap" align="center">
-									打分/好评
+									改价/好评
 								</td>
 								<td nowrap="nowrap" align="center">
 									任务状态
@@ -109,54 +119,59 @@
 								<tr onmouseover="this.className='over'"
 									onmouseout="this.className='out'">
 									<td align="center">
-										<img src="images/swType.jpg" title="实物类型" />
-										<s:property value="#task[0]" />
+										<s:if test="#task.taskType==1">
+											<img src="images/xnType.jpg" title="虚拟任务" />
+										</s:if>
+										<s:elseif test="#task.taskType==2">
+											<img src="images/swType.jpg" title="实物任务" />
+										</s:elseif>
+										<s:elseif test="#task.taskType==3">
+											<img src="images/tcType.jpg" title="套餐任务" />
+										</s:elseif>
+										<s:property value="#task.testID" />
 										<br>
-										<s:if test="#task[17]!=null">
+										<s:if test="#task.assignUser!=null &&  #task.assignUser!=''">
 											<img src="images/tdTask.gif" title="特定任务" />
 										</s:if>
 										<s:else>
 											<img src="images/ptTask.jpg" title="普通任务" />
 										</s:else>
-										<s:date name="#task[1]" format="yyyy-MM-dd HH:mm:ss" />
+										<s:date name="#task.releaseDate" format="yyyy-MM-dd HH:mm:ss" />
 									</td>
 									<td align="center">
 										<SPAN style="Z-INDEX: 20; POSITION: relative"> <a
-											href="javascript:reply('<s:property value='#task[2]' />');"
-											title="发送站内信息"><s:property value="#task[2]" /> </a> </SPAN>
+											href="javascript:reply('<s:property value='#task.fbUsername' />');"
+											title="发送站内信息"><s:property value="#task.fbUsername" /> </a>
+										</SPAN>
 										<br>
 										<img
-											src="images/<s:property value="@net.win.utils.StrategyUtils@getLevelImg(#task[3])" />"
-											alt="刷客经验积分：<s:property value="#task[3]" />">
+											src="images/<s:property value="@net.win.utils.StrategyUtils@getLevelImg(#task.fbUpgradeScore)" />"
+											alt="刷客经验积分：<s:property value="#task.fbUpgradeScore" />">
 									</td>
 									<td align="center">
-										<s:property value="#task[4]" />
+										<s:property value="#task.money" />
 										+
-										<s:property value="#task[15]" />
+										<s:property value="#task.addtionMoney" />
 										<br>
-										<s:property value="#task[7]" />
+										<s:property value="#task.releaseDot" />
 										+
-										<s:property value="#task[16]" />
+										<s:property value="#task.addtionReleaseDot" />
 									</td>
 									<td align="center">
-										<s:if test="#task[13]==1">全部打5分</s:if>
-										<s:elseif test="#task[13]==2">全部不打分</s:elseif>
-										<s:elseif test="#task[13]==3">带字5分好评</s:elseif>
+										<s:if test="#task.updatePrice">
+											需修修改价格
+										</s:if>
+										<s:else>
+											不需修改价格
+										</s:else>
 										<br>
-										<s:if test="#task[6]==1">马上好评</s:if>
-										<s:elseif test="#task[6]==2">一天后好评</s:elseif>
-										<s:elseif test="#task[6]==3">两天后好评</s:elseif>
-										<s:elseif test="#task[6]==4">三天后好评</s:elseif>
-										<s:elseif test="#task[6]==5">自定义好评(<s:property
-												value="#task[9]" />小时候后)</s:elseif>
-
-
+										<s:property value="#task.grade" />
 									</td>
 									<td align="center">
-										<s:if test="#task[8]==1">
+										<s:if test="#task.status==1">
 											<font color="red" style="font-weight: bold;">等待接收人</font>
 										</s:if>
-										<s:elseif test="#task[8]==6">
+										<s:elseif test="#task.status==6">
 											<font color="green" style="font-weight: bold;">任务已结束</font>
 										</s:elseif>
 										<s:else>
@@ -164,29 +179,29 @@
 										</s:else>
 									</td>
 									<td align="center">
-										<s:if test="#task[8]==1">
-											<s:if test="#task[2]==#session.userLogin.username">
+										<s:if test="#task.status==1">
+											<s:if test="#task.fbUsername==#session.userLogin.username">
 												<img src="images/disable.gif" title="不能接自己的任务，特定任务" />
 											</s:if>
 											<s:else>
 												<s:if
-													test="#task[17]!=null && #task[17]!=#session.userLogin.username">
+													test="#task.assignUser!=null && #task.assignUser!=#session.userLogin.username">
 													<img src="images/disable.gif" title="特定任务,你不是指定人" />
 												</s:if>
 												<s:elseif
-													test="#task[17]!=null && #task[17]==#session.userLogin.username ">
+													test="#task.assignUser!=null && #task.assignUser==#session.userLogin.username ">
 													<a title="接手，并完成任务可获得存款和发布点" style="CURSOR: pointer"
-														onClick="receiveTask('<s:property value="#task[12]"/>')">
+														onClick="receiveTask('<s:property value="#task.id"/>')">
 														<img src="images/qiang.gif" /> </a>
 												</s:elseif>
 												<s:else>
 													<a title="接手，并完成任务可获得存款和发布点" style="CURSOR: pointer"
-														onClick="receiveTask('<s:property value="#task[12]"/>')">
+														onClick="receiveTask('<s:property value="#task.id"/>')">
 														<img src="images/qiang.gif" /> </a>
 												</s:else>
 											</s:else>
 										</s:if>
-										<s:elseif test="#task[8]==6">
+										<s:elseif test="#task.status==6">
 											<img src="images/disable.gif" title="任务已经完成" />
 										</s:elseif>
 										<s:else>
@@ -204,42 +219,52 @@
 							</s:iterator>
 						</tbody>
 						<tfoot>
-							<TR>
-								<TD colspan="6">
-									<input type="hidden"
-										value="<s:property value="#request.queryType"/>"
-										id="queryType">
-									<input type="hidden"
-										value="<s:property
+							<s:if test="#request.result.size()==0">
+								<tr
+									style="WIDTH: 98%; LINE-HEIGHT: 40px; PADDING-TOP: 10px; HEIGHT: 40px; TEXT-ALIGN: center">
+									<TD colspan="7">
+										没有记录！
+									</TD>
+								</tr>
+							</s:if>
+							<s:else>
+								<TR>
+									<TD colspan="6">
+										<input type="hidden"
+											value="<s:property value="#request.queryType"/>"
+											id="queryType">
+										<input type="hidden"
+											value="<s:property
 											value="creditTaskVO.nowPage" />"
-										id="nowPage">
-									<input type="hidden"
-										value="<s:property
+											id="nowPage">
+										<input type="hidden"
+											value="<s:property
 										value="creditTaskVO.pageCount" />"
-										id="pageCount">
-									共
-									<font color="blue"><b><s:property
-												value="creditTaskVO.dataCount" /> </b> </font> 条主题&nbsp;&nbsp;&nbsp;
-									<a href="javascript:firstPage()">首页</a>
-									<a href="javascript:prevPage()">上一页</a>&nbsp;
-									<a href="javascript:nextPage()">下一页</a>&nbsp;
-									<a href="javascript:lastPage()">尾页</a>&nbsp;页次：
-									<strong><font color="red"><s:property
-												value="creditTaskVO.nowPage" /> </font>/<s:property
-											value="creditTaskVO.pageCount" /> </strong>页 &nbsp;
-									<b><s:property value="creditTaskVO.eachPage" /> </b>条主题/页&nbsp;转到：
-									<select id='toPageSelect' size='1' onchange="jumpPage()">
-										<s:iterator begin="1" end="creditTaskVO.pageCount" step="1"
-											var="index">
-											<option value="<s:property value="#index" />">
-												第
-												<s:property value="#index" />
-												页
-											</option>
-										</s:iterator>
-									</select>
-								</TD>
-							</TR>
+											id="pageCount">
+										共
+										<font color="blue"><b><s:property
+													value="creditTaskVO.dataCount" /> </b> </font> 条主题&nbsp;&nbsp;&nbsp;
+										<a href="javascript:firstPage()">首页</a>
+										<a href="javascript:prevPage()">上一页</a>&nbsp;
+										<a href="javascript:nextPage()">下一页</a>&nbsp;
+										<a href="javascript:lastPage()">尾页</a>&nbsp;页次：
+										<strong><font color="red"><s:property
+													value="creditTaskVO.nowPage" /> </font>/<s:property
+												value="creditTaskVO.pageCount" /> </strong>页 &nbsp;
+										<b><s:property value="creditTaskVO.eachPage" /> </b>条主题/页&nbsp;转到：
+										<select id='toPageSelect' size='1' onchange="jumpPage()">
+											<s:iterator begin="1" end="creditTaskVO.pageCount" step="1"
+												var="index">
+												<option value="<s:property value="#index" />">
+													第
+													<s:property value="#index" />
+													页
+												</option>
+											</s:iterator>
+										</select>
+									</TD>
+								</TR>
+							</s:else>
 						</tfoot>
 					</table>
 				</div>

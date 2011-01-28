@@ -7,10 +7,9 @@ public class BaseVO {
 	private Integer pageCount = 0;
 	private Integer dataCount = 0;
 	private Long id;
-	
-	private Boolean checkFlag=true;
-	
-	
+
+	private Boolean checkFlag = true;
+
 	public Boolean getCheckFlag() {
 		return checkFlag;
 	}
@@ -35,8 +34,6 @@ public class BaseVO {
 		return eachPage;
 	}
 
- 
-
 	public Integer getNowPage() {
 		return nowPage;
 	}
@@ -54,7 +51,10 @@ public class BaseVO {
 	}
 
 	public Integer getPageCount() {
-		pageCount = (dataCount + eachPage-1) / eachPage;
+		if (dataCount == 0) {
+			return 1;
+		}
+		pageCount = (dataCount + eachPage - 1) / eachPage;
 		return pageCount;
 	}
 

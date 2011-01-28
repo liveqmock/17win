@@ -53,6 +53,14 @@
 	-moz-box-shadow: 0 0 10px #000;
 	-webkit-box-shadow: 0 0 10px #000;
 }
+
+.over {
+	background-color: #FFFFFF;
+}
+
+.out {
+	background-color: #EEF7FB;
+}
 </style>
 	<body>
 		<s:include value="../common/title.jsp"></s:include>
@@ -129,9 +137,9 @@
 																		商品地址：
 																	</td>
 																	<td colspan="4" valign="middle" class="itemClass">
-																		<span> <s:textfield name="itemUrls"
-																				size="70" title="填写正确的商品地址！" maxlength="100"></s:textfield>
-																			<img src="images/add.jpg" style="cursor: pointer;"
+																		<span> <s:textfield name="itemUrls" size="70"
+																				title="填写正确的商品地址！" maxlength="100"></s:textfield> <img
+																				src="images/add.jpg" style="cursor: pointer;"
 																				onclick="addItem(this)" title="添加任务" /> <img
 																				src="images/jian.jpg" style="cursor: pointer;"
 																				title="删除任务" onclick="removeItem(this)" /> </span>
@@ -205,6 +213,21 @@
 																</tr>
 																<tr>
 																	<td align="right">
+																		特定任务：
+																	</td>
+																	<td colspan="4">
+																		<s:textfield name="creditTaskVO.assignUser"
+																			onchange="changeUser(this)"
+																			onfocus="selectAssignUser(this);"
+																			title="输入指定人的17win帐号，只有指定的人才可以接你的任务，发特定任务不需要发布点！"
+																			id="assignUserID" maxlength="12"></s:textfield>
+																		<img src="images/tdTask.gif">
+																		<input type="checkbox" name="addLinkName" value="true" />
+																		加入到常用联系人
+																	</td>
+																</tr>
+																<tr>
+																	<td align="right">
 																		定时任务：
 																	</td>
 																	<td colspan="2">
@@ -219,18 +242,8 @@
 																	</td>
 																</tr>
 																<tr>
-																	<td align="right">
-																		特定任务：
-																	</td>
-																	<td colspan="4">
-																		<s:textfield name="creditTaskVO.assignUser"
-																			title="输入指定人的17win帐号，只有指定的人才可以接你的任务，发特定任务不需要发布点！"
-																			id="assignUserID" maxlength="12"></s:textfield>
-																	</td>
-																</tr>
-																<tr>
-																	<td align="right">
-																		价格是否相等：
+																	<td align="right" nowrap="nowrap">
+																		是否修改价格：
 																	</td>
 																	<td>
 																		<input type="radio" name="creditTaskVO.updatePrice"
@@ -313,13 +326,13 @@
 																	<td nowrap="nowrap">
 																		<label>
 																			<input name="creditTaskVO.grade" type="radio"
-																				title="扣X*2个发布点！" value="一天后收货好评" />
+																				title="扣X*2个发布点(特定任务除外)！" value="一天后收货好评" />
 																			一天后收货好评
 																		</label>
 																	</td>
 																	<td nowrap="nowrap">
 																		<input name="creditTaskVO.grade" type="radio"
-																			title="扣X*2+1个发布点！" value="二天后收货好评" />
+																			title="扣X*2+1个发布点(特定任务除外)！" value="二天后收货好评" />
 																		二天后收货好评
 																	</td>
 																</tr>
@@ -329,16 +342,17 @@
 																	</td>
 																	<td nowrap="nowrap">
 																		<input name="creditTaskVO.grade" type="radio"
-																			title="扣X*2+2个发布点" value="三天后收货好评" />
+																			title="扣X*2+2个发布点(特定任务除外)" value="三天后收货好评" />
 																		三天后收货好评
 																	</td>
 																	<td>
 																		<input name="creditTaskVO.grade" type="radio"
+																			onclick="diyCommentTime('intervalHour1')"
 																			title="自定义时间好评！" value="自定义时间好评" />
-																		<input type="text" maxlength="3"
-																			title="0≤h＜24(扣x个发布点)，24≤h＜48(扣x*2个发布点)，48≤h＜72(扣x*2+1个发布点)，h≥72(扣x*2+2个发布点)"
+																		<input type="text" maxlength="3" id="intervalHour1"
+																			title="0≤h＜24(扣x个发布点)，24≤h＜48(扣x*2个发布点)，48≤h＜72(扣x*2+1个发布点)，h≥72(扣x*2+2个发布点)(特定任务除外)！"
 																			name="creditTaskVO.intervalHour" style="width: 40px"
-																			id="intervalHour" disabled="disabled">
+																			disabled="disabled">
 																		<span>时后好评</span>
 																	</td>
 																</tr>
@@ -368,13 +382,13 @@
 																	<td nowrap="nowrap">
 																		<label>
 																			<input name="creditTaskVO.grade" type="radio"
-																				title="扣X*2个发布点！" value="一天后收货好评" />
+																				title="扣X*2个发布点(特定任务除外)！" value="一天后收货好评" />
 																			一天后收货好评
 																		</label>
 																	</td>
 																	<td nowrap="nowrap">
 																		<input name="creditTaskVO.grade" type="radio"
-																			title="扣X*2+1个发布点！" value="二天后收货好评" />
+																			title="扣X*2+1个发布点(特定任务除外)！" value="二天后收货好评" />
 																		二天后收货好评
 																	</td>
 																</tr>
@@ -384,16 +398,17 @@
 																	</td>
 																	<td nowrap="nowrap">
 																		<input name="creditTaskVO.grade" type="radio"
-																			title="扣X*2+2个发布点" value="三天后收货好评" />
+																			title="扣X*2+2个发布点(特定任务除外)！" value="三天后收货好评" />
 																		三天后收货好评
 																	</td>
 																	<td>
 																		<input name="creditTaskVO.grade" type="radio"
+																			onclick="diyCommentTime('intervalHour2')"
 																			title="自定义时间好评！" value="自定义时间好评" />
 																		<input type="text" maxlength="3"
-																			title="0≤h＜24(扣x个发布点)，24≤h＜48(扣x*2个发布点)，48≤h＜72(扣x*2+1个发布点)，h≥72(扣x*2+2个发布点)"
+																			title="0≤h＜24(扣x个发布点)，24≤h＜48(扣x*2个发布点)，48≤h＜72(扣x*2+1个发布点)，h≥72(扣x*2+2个发布点)(特定任务除外)!"
 																			name="creditTaskVO.intervalHour" style="width: 40px"
-																			id="intervalHour" disabled="disabled">
+																			id="intervalHour2" disabled="disabled">
 																		<span>时后好评</span>
 																	</td>
 																</tr>
@@ -436,12 +451,14 @@
 																	<td align="right">
 																		好评短语：
 																	</td>
-																	<td colspan="2">
+																	<td colspan="2" nowrap="nowrap">
 																		<s:textfield maxlength="255"
 																			name="creditTaskVO.comment"
 																			title="希望接手人在任务完成时对你的好评时的内容！" size="70"></s:textfield>
-																		<!-- 	<img src="images/tip.gif" title="要对接手人说的话!">
-																	-->
+																		<input value="-1" name="commentByJS"
+																			id="commentByJSID" title="评论不能为空，要求接手人自己想！"
+																			type="checkbox">
+																		接手人自己想
 																	</td>
 																</tr>
 																<tr>
@@ -449,11 +466,11 @@
 																		&nbsp;
 																	</td>
 																	<td colspan="2">
-																		<input type="submit" style="cursor: pointer;"  title="发布任务"
-																			value="发布任务">
+																		<input type="submit" style="cursor: pointer;"
+																			title="发布任务" value="发布任务">
 																		&nbsp;
-																		<input type="reset" style="cursor: pointer;"   title="重置内容"
-																			value="重置内容">
+																		<input type="reset" style="cursor: pointer;"
+																			title="重置内容" value="重置内容">
 																	</td>
 
 																</tr>
@@ -472,6 +489,23 @@
 				</td>
 			</tr>
 		</table>
+		<div id="selectUserDiv"
+			style="display: none; position: absolute; z-index: 999; border: 1px solid; border-color: #000000; background: #EEF7FB; width: 155px; height: 200px; overflow-y: auto; overflow-x: no">
+			<table style="width: 99%;" cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<th align="left">
+							选择联系人
+						</th>
+						<th align="right">
+							<A style="color: #2F5FA1" href="javascript:closeAssignUser();">关闭</A>
+						</th>
+					</tr>
+				</thead>
+				<tbody id="assignUserTable">
+				</tbody>
+			</table>
+		</div>
 		<s:include value="../common/footDuan.jsp"></s:include>
 	</BODY>
 </html>

@@ -63,7 +63,7 @@ public class CreditTaskEntity extends BaseEntity {
 	@Column(name = "UPDATE_PRICE_", nullable = false)
 	private Boolean updatePrice;
 	// 动态评分(1马上带字好评)
-	@Column(name = "GRADE_", length=20, nullable = false)
+	@Column(name = "GRADE_", length = 20, nullable = false)
 	private String grade;
 	// 好评时间类型(1 虚拟任务 2，实体任务 3，套餐任务)
 	@Column(name = "TASK_TYPE", columnDefinition = "CHAR(1)", nullable = false)
@@ -84,10 +84,10 @@ public class CreditTaskEntity extends BaseEntity {
 
 	// 附加金额、
 	@Column(name = "ADDTATION_MONEY", nullable = false)
-	private Integer addtionMoney = 0;
+	private Double addtionMoney = 0d;
 	// 附加发布点
 	@Column(name = "ADDTATION_RELEASE_DOT", nullable = false)
-	private Integer addtionReleaseDot = 0;
+	private Double addtionReleaseDot = 0D;
 
 	// 定时任务时间(不能小于开始时间)
 	@Column(name = "TIMEING_TIME_")
@@ -246,19 +246,20 @@ public class CreditTaskEntity extends BaseEntity {
 	public void setReceiveDate(Date receiveDate) {
 		this.receiveDate = receiveDate;
 	}
-	public Integer getAddtionMoney() {
+
+	public Double getAddtionMoney() {
 		return addtionMoney;
 	}
 
-	public void setAddtionMoney(Integer addtionMoney) {
+	public void setAddtionMoney(Double addtionMoney) {
 		this.addtionMoney = addtionMoney;
 	}
 
-	public Integer getAddtionReleaseDot() {
+	public Double getAddtionReleaseDot() {
 		return addtionReleaseDot;
 	}
 
-	public void setAddtionReleaseDot(Integer addtionReleaseDot) {
+	public void setAddtionReleaseDot(Double addtionReleaseDot) {
 		this.addtionReleaseDot = addtionReleaseDot;
 	}
 

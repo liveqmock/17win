@@ -19,7 +19,7 @@ import net.win.vo.SmsVO;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Service;
 
-@SuppressWarnings( { "unchecked" })
+@SuppressWarnings({"unchecked"})
 @Service("smsService")
 public class SmsService extends BaseService {
 	@Resource
@@ -53,8 +53,12 @@ public class SmsService extends BaseService {
 	 */
 	public String deleteSms(SmsVO smsVO) throws Exception {
 		smsDAO.deleteByHql("delete from SmsEntity where id=:smsID",
-				new String[] { "smsID" }, new Object[] { smsVO.getId() });
-		querySms(smsVO);
+				new String[]{"smsID"}, new Object[]{smsVO.getId()});
+		if ("fjx".equalsIgnoreCase(smsVO.getQueryTypeFlag())) {
+			queryFJXSms(smsVO);
+		} else {
+			querySJXSms(smsVO);
+		}
 		putAlertMsg("删除成功！");
 		return "deleteSms";
 	}
@@ -133,6 +137,7 @@ public class SmsService extends BaseService {
 	 * @throws Exception
 	 */
 	public String updateSendTelphone() throws Exception {
+
 		putJumpSelfPage("smsManager/sms!initSendTelphone.php");
 		try {
 			String telphone = getByParam("telehpne");
@@ -183,23 +188,19 @@ public class SmsService extends BaseService {
 	}
 
 	/**
-	 * 查询短信
+	 * 查询收件箱短信
 	 * 
 	 * @param smsVO
 	 * @return
 	 * @throws Exception
 	 */
-	public String querySms(SmsVO smsVO) throws Exception {
+	public String querySJXSms(SmsVO smsVO) throws Exception {
+		smsVO.setQueryTypeFlag("sjx");
 		UserEntity userEntity = getLoginUserEntity(userDAO);
 		StringBuffer resultFromHQL = new StringBuffer(
 				"select  _sms ,_toUser.username,_fromUser.username from SmsEntity _sms inner join _sms.fromUser as _fromUser  inner join _sms.toUser as _toUser where _fromUser.id=:userId  ");
 		StringBuffer countFromHQL = new StringBuffer(
 				"select  count(*)  from SmsEntity _sms inner join _sms.fromUser as _fromUser inner join _sms.toUser as _toUser  where _fromUser.id=:userId  ");
-		StringBuffer resultToHQL = new StringBuffer(
-				"select  _sms  ,_toUser.username,_fromUser.username  from SmsEntity _sms inner join _sms.toUser as _toUser  inner join _sms.fromUser as _fromUser where  _toUser.id=:userId  ");
-		StringBuffer countToHQL = new StringBuffer(
-				"select  count(*)  from SmsEntity _sms inner join _sms.toUser as _toUser  inner join _sms.fromUser as _fromUser  where _toUser.id=:userId  ");
-
 		List<String> paramNames = new ArrayList<String>();
 		paramNames.add("userId");
 		List<Object> paramValues = new ArrayList<Object>();
@@ -208,9 +209,6 @@ public class SmsService extends BaseService {
 		if (!StringUtils.isBlank(smsVO.getType())) {
 			resultFromHQL.append(" and _sms.type=:type ");
 			countFromHQL.append(" and _sms.type=:type ");
-
-			resultToHQL.append(" and _sms.type=:type ");
-			countToHQL.append(" and _sms.type=:type ");
 
 			paramNames.add("type");
 			paramValues.add(smsVO.getType());
@@ -224,10 +222,6 @@ public class SmsService extends BaseService {
 			countFromHQL
 					.append(" and (_sms.sendDate>=:startDate and _sms.sendDate<=:endDate) ");
 
-			resultToHQL
-					.append(" and (_sms.sendDate>=:startDate and _sms.sendDate<=:endDate) ");
-			countToHQL
-					.append(" and (_sms.sendDate>=:startDate and _sms.sendDate<=:endDate) ");
 			paramNames.add("startDate");
 			paramNames.add("endDate");
 			paramValues.add(smsVO.getStartDate());
@@ -237,9 +231,6 @@ public class SmsService extends BaseService {
 			resultFromHQL.append(" and _sms.sendDate>=:startDate  ");
 			countFromHQL.append(" and  _sms.sendDate>=:startDate   ");
 
-			resultToHQL.append(" and _sms.sendDate>=:startDate  ");
-			countToHQL.append(" and  _sms.sendDate>=:startDate   ");
-
 			paramNames.add("startDate");
 			paramValues.add(smsVO.getStartDate());
 		} else if (smsVO.getEndDate() != null) {
@@ -247,31 +238,18 @@ public class SmsService extends BaseService {
 			resultFromHQL.append(" and   _sms.sendDate<=:endDate ");
 			countFromHQL.append(" and   _sms.sendDate<=:endDate  ");
 
-			resultToHQL.append(" and   _sms.sendDate<=:endDate  ");
-			countToHQL.append(" and   _sms.sendDate<=:endDate   ");
-
 			paramNames.add("endDate");
 			paramValues.add(smsVO.getEndDate());
 		}
 
-		Long countFrom = (Long) smsDAO.uniqueResultObject(countFromHQL
-				.toString(), paramNames.toArray(paramNames
-				.toArray(new String[paramNames.size()])), paramValues
-				.toArray(new Object[paramValues.size()]));
-		Long countTo = (Long) smsDAO.uniqueResultObject(countToHQL.toString(),
+		Long count = (Long) smsDAO.uniqueResultObject(countFromHQL.toString(),
 				paramNames.toArray(paramNames.toArray(new String[paramNames
 						.size()])), paramValues.toArray(new Object[paramValues
 						.size()]));
-		Long count = countFrom + countTo;
 		List<SmsVO> result = new ArrayList<SmsVO>();
 		if (count > 0) {
 			smsVO.setDataCount(count.intValue());
 			List<Object[]> resultFromTemp = smsDAO.pageQuery(resultFromHQL
-					.toString(), paramNames.toArray(paramNames
-					.toArray(new String[paramNames.size()])), paramValues
-					.toArray(new Object[paramValues.size()]), smsVO.getStart(),
-					smsVO.getLimit());
-			List<Object[]> resultToTemp = smsDAO.pageQuery(resultToHQL
 					.toString(), paramNames.toArray(paramNames
 					.toArray(new String[paramNames.size()])), paramValues
 					.toArray(new Object[paramValues.size()]), smsVO.getStart(),
@@ -285,6 +263,78 @@ public class SmsService extends BaseService {
 				smsVOTemp.setFromUserName(objs[2].toString());
 				result.add(smsVOTemp);
 			}
+		}
+		putByRequest("result", result);
+		return "querySms";
+	}
+
+	/**
+	 * 查询收件箱短信
+	 * 
+	 * @param smsVO
+	 * @return
+	 * @throws Exception
+	 */
+	public String queryFJXSms(SmsVO smsVO) throws Exception {
+		smsVO.setQueryTypeFlag("fjx");
+		UserEntity userEntity = getLoginUserEntity(userDAO);
+		StringBuffer resultToHQL = new StringBuffer(
+				"select _sms ,_toUser.username,_fromUser.username from SmsEntity _sms inner join _sms.toUser as _toUser inner join _sms.fromUser as _fromUser where _toUser.id=:userId ");
+		StringBuffer countToHQL = new StringBuffer(
+				"select count(*) from SmsEntity _sms inner join _sms.toUser as _toUser inner join _sms.fromUser as _fromUser where _toUser.id=:userId ");
+
+		List<String> paramNames = new ArrayList<String>();
+		paramNames.add("userId");
+		List<Object> paramValues = new ArrayList<Object>();
+		paramValues.add(userEntity.getId());
+		// 类型
+		if (!StringUtils.isBlank(smsVO.getType())) {
+			resultToHQL.append(" and _sms.type=:type ");
+			countToHQL.append(" and _sms.type=:type ");
+
+			paramNames.add("type");
+			paramValues.add(smsVO.getType());
+		}
+
+		// 时间
+		if (smsVO.getStartDate() != null && smsVO.getEndDate() != null) {
+			resultToHQL
+					.append(" and (_sms.sendDate>=:startDate and _sms.sendDate<=:endDate) ");
+			countToHQL
+					.append(" and (_sms.sendDate>=:startDate and  _sms.sendDate<=:endDate) ");
+			paramNames.add("startDate");
+			paramNames.add("endDate");
+			paramValues.add(smsVO.getStartDate());
+			paramValues.add(smsVO.getEndDate());
+		} else if (smsVO.getStartDate() != null) {
+
+			resultToHQL.append(" and _sms.sendDate>=:startDate ");
+			countToHQL.append(" and _sms.sendDate>=:startDate ");
+
+			paramNames.add("startDate");
+			paramValues.add(smsVO.getStartDate());
+		} else if (smsVO.getEndDate() != null) {
+			resultToHQL.append(" and _sms.sendDate<=:endDate ");
+			countToHQL.append(" and _sms.sendDate<=:endDate ");
+
+			paramNames.add("endDate");
+			paramValues.add(smsVO.getEndDate());
+		}
+
+		Long count = (Long) smsDAO.uniqueResultObject(countToHQL.toString(),
+				paramNames.toArray(paramNames.toArray(new String[paramNames
+						.size()])), paramValues.toArray(new Object[paramValues
+						.size()]));
+		List<SmsVO> result = new ArrayList<SmsVO>();
+		if (count > 0) {
+			smsVO.setDataCount(count.intValue());
+			List<Object[]> resultToTemp = smsDAO.pageQuery(resultToHQL
+					.toString(), paramNames.toArray(paramNames
+					.toArray(new String[paramNames.size()])), paramValues
+					.toArray(new Object[paramValues.size()]), smsVO.getStart(),
+					smsVO.getLimit());
+
+			SmsVO smsVOTemp = null;
 			for (Object[] objs : resultToTemp) {
 				smsVOTemp = new SmsVO();
 				BeanUtils.copyProperties(smsVOTemp, objs[0]);

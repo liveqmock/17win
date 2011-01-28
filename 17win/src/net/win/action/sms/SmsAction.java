@@ -94,8 +94,8 @@ public class SmsAction extends BaseAction {
 	 * @return
 	 * @throws Exception
 	 */
-	public String querySms() throws Exception {
-		return smsService.querySms(smsVO);
+	public String querySJXSms() throws Exception {
+		return smsService.querySJXSms(smsVO);
 	}
 
 	/**

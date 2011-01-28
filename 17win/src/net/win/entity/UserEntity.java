@@ -122,14 +122,14 @@ public class UserEntity extends BaseEntity {
 	@JoinColumn(name = "RELEASE_PERSON_")
 	@Cascade(CascadeType.ALL)
 	private List<CreditTaskEntity> releaseCreditTasks;
+
 	// 接受的任务
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "RECEIVE_PERSON_")
 	@Cascade(CascadeType.ALL)
 	private List<CreditTaskEntity> receiveCreditTasks;
-	
-	
-	// 我
+
+	// 资产记录
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_ID_")
 	@Cascade(CascadeType.ALL)
@@ -201,6 +201,20 @@ public class UserEntity extends BaseEntity {
 	@JoinColumn(name = "USER_VIPINFO_ID_")
 	@Cascade(CascadeType.ALL)
 	private VipBidUserEntity vipBidUserEntity;
+
+	// 任务联系人
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "USER_ID_")
+	@Cascade(CascadeType.ALL)
+	private List<TaskLinkManEntity> taskLinkmans;
+
+	public List<TaskLinkManEntity> getTaskLinkmans() {
+		return taskLinkmans;
+	}
+
+	public void setTaskLinkmans(List<TaskLinkManEntity> taskLinkmans) {
+		this.taskLinkmans = taskLinkmans;
+	}
 
 	/**
 	 * 关联关系

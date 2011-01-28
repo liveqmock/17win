@@ -1,26 +1,17 @@
 $(document).ready(function() {
+			$("#tabs").tabs();
 			$("#browerSms").dialog({
 						autoOpen : false,
 						draggable : false,
 						hide : 'highlight',
 						modal : true,
 						resizable : false,
-						width:500,
+						width : 500,
 						show : 'highlight'
 					});
+			$("#deleteBtn1").button();
+			$("#deleteBtn2").button();
 
-			$("#myTable").tablesorter({
-						widthFixed : true,
-						sortList : [[0, 0]],
-						headers : {
-							3 : {
-								sorter : false
-							},
-							5 : {
-								sorter : false
-							}
-						}
-					});
 		});
 // 删除
 function deleteSms(id) {
@@ -30,19 +21,20 @@ function deleteSms(id) {
 }
 // 浏览
 function brower(id, read) {
-	$("#td_"+id).text($("#td_"+id).attr("fromUserName"));
+	$("#td_" + id).text($("#td_" + id).attr("fromUserName"));
 	if (!read) {
-		$.post("smsManager/sms!updateSms.php?smsVO.id=" + id+"&timeFlag="+new Date().getTime());
+		$.post("smsManager/sms!updateSms.php?smsVO.id=" + id + "&timeFlag="
+				+ new Date().getTime());
 	}
-	$("#title").val($("#a_"+id).attr("title"));
-	$("#content").text($("#a_"+id).attr("content"));
+	$("#title").val($("#a_" + id).attr("title"));
+	$("#content").text($("#a_" + id).attr("content"));
 	$("#browerSms").dialog("open");
-	
+
 }
 // 回复
 function reply(fromUsername) {
-	window.open("smsManager/sms!initSendSms.php?toUser=" + fromUsername+"&timeFlag="+new Date().getTime(),
-			"_blank");
+	window.open("smsManager/sms!initSendSms.php?toUser=" + fromUsername
+					+ "&timeFlag=" + new Date().getTime(), "_blank");
 }
 function validateForm() {
 	var startDate = $("#startDate").val();

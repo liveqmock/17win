@@ -5,6 +5,11 @@
 	<HEAD>
 		<META http-equiv=Content-Type content="text/html; charset=UTF-8">
 		<%
+			String basePath = request.getScheme() + "://"
+					+ request.getServerName() + ":" + request.getServerPort()
+					+ "/";
+		%>
+		<%
 			//让浏览器不缓存jsp页面 
 			response.setHeader("Pragma", "No-cache");// http1.0 
 			response.setHeader("Cache-Control", "no-store,no-cache"); //http1.1 
@@ -30,6 +35,8 @@
 		<SCRIPT src="js/utils.js" type="text/javascript"></SCRIPT>
 		<script type="text/javascript" src="js/jquery-ui-1.8.4.custom.min.js">
 		</script>
+		<script src="<%=basePath%>js/My97DatePicker/WdatePicker.js"
+			defer="defer" type="text/javascript"></script>
 		<script
 			src="http://cdn.jquerytools.org/1.2.1/tiny/jquery.tools.min.js"></script>
 
@@ -74,6 +81,133 @@
 						<!-- xgj navigation.jsp -->
 						<s:include value="../common/task/navigation.jsp"></s:include>
 					</DIV>
+					<div style="WIDTH: 910px">
+						<form action="http://www.shuazuan.com/task/novice.php"
+							method="get" name="queryConditionForm" id="queryConditionForm">
+							<input type="hidden" value="alreadyadd" name="action">
+							<div style="MARGIN-TOP: 0px; BACKGROUND: #ffffff; WIDTH: 910px">
+								<table>
+									<tbody>
+										<tr>
+											<td>
+												<label>
+													任&nbsp;务&nbsp;I&nbsp;D：
+												</label>
+												<input type="text" size="15" value="">
+											</td>
+											<td>
+												<label>
+													发布时间：
+												</label>
+												<s:textfield name="creditTaskVO.fbStartDate" id="startDate"
+													readonly="true"
+													onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})"
+													cssStyle="width:80px"
+													>
+												</s:textfield>
+												至
+												<s:textfield name="creditTaskVO.fbEndDate" id="endDate"
+													readonly="true"
+													onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})"
+													cssStyle="width:80px"
+													>
+												</s:textfield>
+											</td>
+											<td>
+												<label>
+													任务状态：
+												</label>
+												<select id="statusid" name="statusid" value="">
+													<option value="ALL">
+														全部
+													</option>
+													<option value="1">
+														等待接手人
+													</option>
+													<option value="2">
+														已接手，等待接手方支付
+													</option>
+													<option value="3">
+														已支付，等待发布方发货
+													</option>
+													<option value="4">
+														已发货，等待接手方确认好评
+													</option>
+													<option value="5">
+														接手方已确认好评，等待发布方好评
+													</option>
+													<option value="6">
+														任务已完成
+													</option>
+												</select>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<label>
+													会 员 名：
+												</label>
+												<input type="text" size="15" id="username" name="username"
+													value="">
+											</td>
+											<td>
+												<label>
+													接手时间：
+												</label>
+												<s:textfield name="creditTaskVO.jsStartDate" id="startDate" cssStyle="width:80px"
+													readonly="true"
+													onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})">
+												</s:textfield>
+												至
+												<s:textfield name="creditTaskVO.jsEndDate" id="endDate" cssStyle="width:80px"
+													readonly="true"
+													onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})">
+												</s:textfield>
+											</td>
+											<td align="left">
+												<label>
+													任务分类：
+												</label>
+												<select id="t_type" name="t_type" style="width: 75px;">
+													<option value="ALL">
+														全部
+													</option>
+													<option value="virtual">
+														虚拟
+													</option>
+													<option value="realobject">
+														实物
+													</option>
+													<option value="realobject">
+														套餐
+													</option>
+												</select>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<label>
+													掌 柜 名：
+												</label>
+												<input type="text" size="15" id="shopkeeper"
+													name="shopkeeper" value="">
+											</td>
+											<td align="left">
+												<label>
+													接手小号：
+												</label>
+												<input type="text" size="15">
+											</td>
+											<td align="left">
+												<input type="submit" style="cursor: pointer;" value="搜索"
+													name="btnSearch">
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</form>
+					</div>
 					<DIV style="MARGIN-TOP: 0px; BACKGROUND: #ffffff; WIDTH: 910px">
 						<DIV
 							style="BACKGROUND: url(images/task_bg_01.jpg) repeat-x 50% top; WIDTH: 910px; HEIGHT: 38px">
@@ -81,15 +215,33 @@
 								<IMG src="images/task_02.gif">
 							</DIV>
 							<DIV style="MARGIN-TOP: 12px; FLOAT: left; MARGIN-LEFT: 10px">
-								<A href="javascript:sort1()"><SPAN class="taskAnniu<s:property value="#request.platformType"/>">全部任务</SPAN> </A>
-								<A href="javascript:sort9()"><SPAN class="taskAnniu<s:property value="#request.platformType"/>">定时任务</SPAN> </A>
-								<A href="javascript:sort7()"><SPAN class="taskAnniu<s:property value="#request.platformType"/>">等待接手</SPAN> </A>
-								<A href="javascript:sort8()"><SPAN class="taskAnniu<s:property value="#request.platformType"/>">等待审核</SPAN> </A>
-								<A href="javascript:sort2()"><SPAN class="taskAnniu<s:property value="#request.platformType"/>">等待支付</SPAN> </A>
-								<A href="javascript:sort3()"><SPAN class="taskAnniu<s:property value="#request.platformType"/>">等待发货</SPAN> </A>
-								<A href="javascript:sort4()"><SPAN class="taskAnniu<s:property value="#request.platformType"/>">等待好评</SPAN> </A>
-								<A href="javascript:sort5()"><SPAN class="taskAnniu<s:property value="#request.platformType"/>">等待完成</SPAN> </A>
-								<A href="javascript:sort6()"><SPAN class="taskAnniu<s:property value="#request.platformType"/>">已完成</SPAN> </A>
+								<A href="javascript:sort1()"><SPAN
+									class="taskAnniu<s:property value="#request.platformType"/>">全部任务</SPAN>
+								</A>
+								<A href="javascript:sort9()"><SPAN
+									class="taskAnniu<s:property value="#request.platformType"/>">定时任务</SPAN>
+								</A>
+								<A href="javascript:sort7()"><SPAN
+									class="taskAnniu<s:property value="#request.platformType"/>">等待接手</SPAN>
+								</A>
+								<A href="javascript:sort8()"><SPAN
+									class="taskAnniu<s:property value="#request.platformType"/>">等待审核</SPAN>
+								</A>
+								<A href="javascript:sort2()"><SPAN
+									class="taskAnniu<s:property value="#request.platformType"/>">等待支付</SPAN>
+								</A>
+								<A href="javascript:sort3()"><SPAN
+									class="taskAnniu<s:property value="#request.platformType"/>">等待发货</SPAN>
+								</A>
+								<A href="javascript:sort4()"><SPAN
+									class="taskAnniu<s:property value="#request.platformType"/>">等待好评</SPAN>
+								</A>
+								<A href="javascript:sort5()"><SPAN
+									class="taskAnniu<s:property value="#request.platformType"/>">等待完成</SPAN>
+								</A>
+								<A href="javascript:sort6()"><SPAN
+									class="taskAnniu<s:property value="#request.platformType"/>">已完成</SPAN>
+								</A>
 							</DIV>
 							<DIV style="CLEAR: right; MARGIN-TOP: 12px; FLOAT: right">
 								自定义刷新时间
@@ -111,7 +263,9 @@
 									id="platformType" />
 								秒
 								<A title=点击刷新 href="javascript:location.reload(true);"
-									class="yell_font"> <SPAN class="taskAnniu<s:property value="#request.platformType"/>">刷新页面</SPAN> </A>
+									class="yell_font"> <SPAN
+									class="taskAnniu<s:property value="#request.platformType"/>">刷新页面</SPAN>
+								</A>
 							</DIV>
 						</DIV>
 					</DIV>
@@ -122,7 +276,7 @@
 									任务编号
 								</td>
 								<td nowrap="nowrap" align="center">
-									价格
+									价格/发布点
 								</td>
 								<td nowrap="nowrap" align="center">
 									商品信息
@@ -146,79 +300,87 @@
 								<tr onmouseover="this.className='over'"
 									onmouseout="this.className='out'">
 									<td align="center">
-										<img src="images/swType.jpg" title="实物类型" />
-										<s:property value="#task[0]" />
+										<s:if test="#task.taskType==1">
+											<img src="images/xnType.jpg" title="虚拟任务" />
+										</s:if>
+										<s:elseif test="#task.taskType==2">
+											<img src="images/swType.jpg" title="实物任务" />
+										</s:elseif>
+										<s:elseif test="#task.taskType==3">
+											<img src="images/tcType.jpg" title="套餐任务" />
+										</s:elseif>
+										<s:property value="#task.testID" />
 										<br>
-										<s:if test="#task[26]!=null">
+										<s:if test="#task.assignUser!=null && #task.assignUser!=''">
 											<img src="images/tdTask.gif" title="特定任务" />
 										</s:if>
 										<s:else>
 											<img src="images/ptTask.jpg" title="普通任务" />
 										</s:else>
-										<s:date name="#task[1]" format="yyyy-MM-dd HH:mm:ss" />
+										<s:date name="#task.releaseDate" format="yyyy-MM-dd HH:mm:ss" />
 									</td>
 									<td align="center">
-										<s:property value="#task[2]" />
+										<s:property value="#task.money" />
 										+
-										<s:property value="#task[24]" />
+										<s:property value="#task.addtionMoney" />
 										<br>
-										<s:property value="#task[4]" />
+										<s:property value="#task.releaseDot" />
 										+
-										<s:property value="#task[25]" />
+										<s:property value="#task.addtionReleaseDot" />
 									</td>
 									<td valign="middle" align="center">
 										<a style="cursor: pointer;"
-											onclick="copyToClipboard('<s:property value="#task[5]" />')">
+											onclick="copyToClipboard('<s:property value="#task.itemUrl" />')">
 											<img src="images/renwu-3.png" border="0"> </a>
 										<br>
 										<a target="_blank" title="点此直接打开商品地址"
-											href="<s:property value="#task[5]" />"><img
+											href="<s:property value="#task.itemUrl" />"><img
 												src="images/open.gif"> </a>
 									</td>
 									<td align="center">
-										<s:if test="#task[7]==0">
+										<s:if test="#task.status==0">
 												定时任务
 												<br>
 												没接手人
 											</s:if>
 										<s:else>
-											<s:if test="#task[7]==1">
+											<s:if test="#task.status==1">
 												无接手人
 												<br>
 												请等片刻
 											</s:if>
 											<s:else>
-												<s:property value="#task[8]" />
+												<s:property value="#task.jsUsername" />
 												<br>
 												<img width="25" height="17" border="0" class="qqConnection"
 													style="vertical-align: middle;" class="tip"
-													src="http://wpa.qq.com/pa?p=1:<s:property value="#task[10]" />:17">
+													src="http://wpa.qq.com/pa?p=1:<s:property value="#task.jsQQ" />:17">
 												<div class="tooltip"
 													style="background-image: url('images/blackArrowBig.png');">
 													<table style="margin-top: 8px">
 														<tr>
 															<td align="center" style="color: #ffffff">
 																<a style="color: white; text-decoration: underline;"
-																	href="tencent://message/?uin=<s:property value="#task[10]" />">【临时会话】</a>
+																	href="tencent://message/?uin=<s:property value="#task.jsQQ" />">【临时会话】</a>
 																<br>
 																<a style="color: white; text-decoration: underline;"
-																	onclick="copyToClipboard('<s:property value="#task[10]" />');"
+																	onclick="copyToClipboard('<s:property value="#task.jsQQ" />');"
 																	href="javascript:void(0)">复制QQ号码</a>
 															</td>
 														</tr>
 													</table>
 												</div>
 												<a
-													href="javascript:openTelephoneDiv('<s:property value="#task[27]" />','<s:property value="#task[28]" />')"><img
+													href="javascript:openTelephoneDiv('<s:property value="#task.jsTelphone" />','<s:property value="#task.fbUsername" />')"><img
 														title="发送手机短信" style="vertical-align: middle;"
 														src="images/sendTelphone.png"> </a>
 												<a
-													href="javascript:openTelephoneDiv('<s:property value="#task[27]" />','<s:property value="#task[28]" />')"><img
+													href="javascript:openTelephoneDiv('<s:property value="#task.jsTelphone" />','<s:property value="#task.fbUsername" />')"><img
 														title="发送站内信" style="vertical-align: middle;"
 														src="images/sms.gif"> </a>
 												<img border="0" class="qqConnection"
 													style="vertical-align: middle;" class="tip"
-													src="http://amos1.taobao.com/online.ww?v=2&uid=<s:property value="#task[21]" />&s=2">
+													src="http://amos1.taobao.com/online.ww?v=2&uid=<s:property value="#task.jsWW" />&s=2">
 												<div class="tooltip"
 													style="background-image: url('images/blackArrowBig.png');">
 													<table style="margin-top: 8px">
@@ -226,10 +388,10 @@
 															<td align="center" style="color: #ffffff">
 																<a style="color: white; text-decoration: underline;"
 																	target="_blank"
-																	href="http://amos1.taobao.com/msg.ww?v=2&uid=<s:property value="#task[21]" />&s=2">【临时会话】</a>
+																	href="http://amos1.taobao.com/msg.ww?v=2&uid=<s:property value="#task.jsWW" />&s=2">【临时会话】</a>
 																<br>
 																<a style="color: white; text-decoration: underline;"
-																	onclick="copyToClipboard('<s:property value="#task[21]" />');"
+																	onclick="copyToClipboard('<s:property value="#task.jsWW" />');"
 																	href="javascript:void(0)">复制旺旺号</a>
 															</td>
 														</tr>
@@ -239,90 +401,84 @@
 										</s:else>
 									</td>
 									<td align="center">
-										<s:if test="#task[7]==1">
+										<s:if test="#task.status==1">
 											无接手人
 												<br>
 												请等片刻
 											</s:if>
-										<s:elseif test="#task[7]==-1">
+										<s:elseif test="#task.status==-1">
 										在申诉中
 										<br>
 										不能操作
 									</s:elseif>
-										<s:elseif test="#task[7]==0">
+										<s:elseif test="#task.status==0">
 										定时任务
 										<br>
 										没到时间
 									</s:elseif>
 										<s:else>
-											<s:date name="#task[29]" format="MM-dd HH:mm:ss" />
+											<s:date name="#task.receiveDate" format="MM-dd HH:mm:ss" />
 											<br>
 											<a
 												style="color: white; text-decoration: underline; cursor: pointer;"
 												title="复制买号"
-												onclick="copyToClipboard('<s:property value="#task[21]" />');"
+												onclick="copyToClipboard('<s:property value="#task.buyername" />');"
 												href="javascript:void(0)"><font color="#FF0000"><s:property
-														value="#task[9]" /> </font> </a>
+														value="#task.buyername" /> </font> </a>
 										</s:else>
 									</td>
 
 									<td align="center">
-										<s:if test="#task[7]==1">
-											<s:if test="#task[26]!=null">
+										<s:if test="#task.status==1">
 											等待接手
-											<br>
-												<s:property value="#task[26]" />
-											</s:if>
-											<s:else>
-												等待接手
-										</s:else>
 										</s:if>
-										<s:elseif test="#task[7]==-1">
+										<s:elseif test="#task.status==-1">
 										申诉中
-									</s:elseif>
-										<s:elseif test="#task[7]==0">
-											<s:if test="#task[26]!=null">
+										</s:elseif>
+										<s:elseif test="#task.status==0">
+											<s:if test="#task.timeingTime!=null">
 											定时任务
 											<br>
-											 等待<s:property value="#task[26]" />接手
+											 等待<s:property value="#task.timeingTime" />接手
 										</s:if>
 											<s:else>
 											定时任务
 										</s:else>
 										</s:elseif>
-										<s:elseif test="#task[7]==-2">
+										<s:elseif test="#task.status==-2">
 												等待您审核<br>
-											<s:if test="#task[7]!=1">
+											<s:if test="#task.status!=1">
 											剩余
-											<font color="red"> <s:property value="#task[12]" /> </font>
+											<font color="red"> <s:property
+														value="#task.remainTime" /> </font>
 											分钟
 											</s:if>
 										</s:elseif>
-										<s:elseif test="#task[7]==2">
+										<s:elseif test="#task.status==2">
 												等待买家付款<br>
-											<s:if test="#task[7]!=1">
+											<s:if test="#task.status!=1">
 											剩余
-												<font color="red"> <s:property value="#task[12]" />
-												</font>
+												<font color="red"> <s:property
+														value="#task.remainTime" /> </font>
 											分钟
 											</s:if>
 										</s:elseif>
-										<s:elseif test="#task[7]==3">
+										<s:elseif test="#task.status==3">
 												等待您确认发货
 											</s:elseif>
-										<s:elseif test="#task[7]==4">
-											<s:if test="#task[12]==0">
+										<s:elseif test="#task.status==4">
+											<s:if test="#task.remainTime==0">
 													等待买家确认好评
 												</s:if>
 											<s:else>
-												<font color="red"> <s:if test="#task[12]>1">
-														<s:property value="#task[12]" />小时后好评 
+												<font color="red"> <s:if test="#task.remainTime>1">
+														<s:property value="#task.remainTime" />小时后好评 
 											</s:if> <s:else>
-														<s:property value="%{#task[12]*60}" />分钟后好评
+														<s:property value="%{#task.remainTime*60}" />分钟后好评
 											</s:else> </font>
 											</s:else>
 										</s:elseif>
-										<s:elseif test="#task[7]==5">
+										<s:elseif test="#task.status==5">
 												等待您确认好评
 											</s:elseif>
 										<s:else>
@@ -331,57 +487,57 @@
 										<br>
 									</td>
 									<td align="center">
-										<s:if test="#task[7]==0">
+										<s:if test="#task.status==0">
 											<a title="可能由于你填写错误，可以重新进行填写！"
-												href="javascript:cancelTask(<s:property value="#task[18]"/>)"><span
+												href="javascript:cancelTask(<s:property value="#task.id"/>)"><span
 												class="anniu">取消重填</span> </a>
 											<br>
-											<font color="red">定时时间：<s:date name="#task[23]"
-													format="yyyy-MM-dd HH-mm-ss" /> </font>
+											<font color="red">定时时间：<s:date
+													name="#task.timeingTime" format="yyyy-MM-dd HH-mm-ss" /> </font>
 										</s:if>
-										<s:elseif test="#task[7]==1">
+										<s:elseif test="#task.status==1">
 											<a title="可能由于你填写错误，可以重新进行填写！"
-												href="javascript:cancelTask(<s:property value="#task[18]"/>)"><span
+												href="javascript:cancelTask(<s:property value="#task.id"/>)"><span
 												class="anniu">取消重填</span> </a>
 											<br>
 											<a title="刷新排前可以使您的任务在发布区靠前！"
-												href="javascript:toFirstTask(<s:property value="#task[18]"/>)"><span
+												href="javascript:toFirstTask(<s:property value="#task.id"/>)"><span
 												class="anniu2">刷新排前</span> </a>
 										</s:elseif>
-										<s:elseif test="#task[7]==-2">
+										<s:elseif test="#task.status==-2">
 											<a title="您对该人信任之后，可以允许他接您的任务！"
-												href="javascript:audiReceiver(<s:property value="#task[18]"/>)"><span
+												href="javascript:audiReceiver(<s:property value="#task.id"/>)"><span
 												class="anniu">审核接收人</span> </a>
 											<br>
 											<a title="如果对方没有被您审核过，可以清理买家！"
-												href="javascript:clearReceiver(<s:property value="#task[18]"/>)"><span
+												href="javascript:clearReceiver(<s:property value="#task.id"/>)"><span
 												class="anniu2">清理买家</span> </a>
 											<br>
 											<a title="为对方加时"
-												href="javascript:addTime('<s:property value="#task[18]"/>')"><span
+												href="javascript:addTime('<s:property value="#task.id"/>')"><span
 												class="anniu">为他加时</span> </a>
 										</s:elseif>
-										<s:elseif test="#task[7]==2">
+										<s:elseif test="#task.status==2">
 											<a title="为对方加时"
-												href="javascript:addTime('<s:property value="#task[18]"/>')"><span
+												href="javascript:addTime('<s:property value="#task.id"/>')"><span
 												class="anniu">为他加时</span> </a>
 										</s:elseif>
-										<s:elseif test="#task[7]==3">
+										<s:elseif test="#task.status==3">
 											<a title="请您在确认后，进行发货！"
-												href="javascript:dispatch('<s:property value="#task[18]"/>')"><span
+												href="javascript:dispatch('<s:property value="#task.id"/>')"><span
 												class="anniu">我已发货</span> </a>
 										</s:elseif>
-										<s:elseif test="#task[7]==4">
-											<s:if test="#task[12]==0">
+										<s:elseif test="#task.status==4">
+											<s:if test="#task.remainTime==0">
 													等待对方评价
 												</s:if>
 											<s:else>
 												时间还没到
 												</s:else>
 										</s:elseif>
-										<s:elseif test="#task[7]==5">
+										<s:elseif test="#task.status==5">
 											<a title="请您好评，结束任务！"
-												href="javascript:sellerEvaluate('<s:property value="#task[18]"/>')"><span
+												href="javascript:sellerEvaluate('<s:property value="#task.id"/>')"><span
 												class="anniu">确认好评</span> </a>
 										</s:elseif>
 										<s:else>
@@ -405,9 +561,6 @@
 									style="WIDTH: 98%; LINE-HEIGHT: 40px; PADDING-TOP: 10px; HEIGHT: 40px; TEXT-ALIGN: center">
 									<TD colspan="7">
 										没有记录！
-										<font color="red"><a
-											href="taskManager/task!initReleaseTask.php?platformType=<s:property value="#request.platformType"/>">点此进入发布任务</a>
-										</font>！
 									</TD>
 								</tr>
 							</s:if>
