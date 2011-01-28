@@ -455,7 +455,7 @@
 																		<s:textfield maxlength="255"
 																			name="creditTaskVO.comment"
 																			title="希望接手人在任务完成时对你的好评时的内容！" size="70"></s:textfield>
-																		<input value="-1" name="commentByJS"
+																		<input value="true" name="commentByJS"
 																			id="commentByJSID" title="评论不能为空，要求接手人自己想！"
 																			type="checkbox">
 																		接手人自己想

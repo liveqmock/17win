@@ -1241,6 +1241,13 @@ public class CreditTaskService extends BaseService {
 			creditTask.setReleaseDot(0D);
 		}
 		/**
+		 * 接手人自己想
+		 */
+		String commentByJS =getByParam("commentByJS");
+		if("true".equalsIgnoreCase(commentByJS)){
+			creditTask.setComment("-1");
+		}
+		/**
 		 * 保存任务
 		 */
 		// 是否是定时任务
