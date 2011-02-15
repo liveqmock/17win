@@ -1,5 +1,11 @@
 $(document).ready(function() {
-			$("#tabs").tabs();
+			var $tabs = $("#tabs").tabs();
+			if ($("[name='smsVO.queryTypeFlag']").val() == "sjx") {
+				$tabs.tabs('select', 0);
+			} else {
+				$tabs.tabs('select', 1);
+			}
+			$tabs.tabs( "option", "event", 'dblclick' );
 			$("#browerSms").dialog({
 						autoOpen : false,
 						draggable : false,
@@ -31,6 +37,20 @@ function brower(id, read) {
 	$("#browerSms").dialog("open");
 
 }
+function changeQuery(obj) {
+	if ($(obj).attr("queryFlag") == "sjx") {
+		$("form").attr("action", "smsManager/sms!querySJXSms.php");
+	} else {
+		$("form").attr("action", "smsManager/sms!queryFJXSms.php");
+	}
+	$("form").submit();
+}
+function selectSJAll(obj) {
+	selectAll(obj, "sjSmsID");
+}
+function selectFJAll(obj) {
+	selectAll(obj, "fjSmsID");
+}
 // 回复
 function reply(fromUsername) {
 	window.open("smsManager/sms!initSendSms.php?toUser=" + fromUsername
@@ -44,60 +64,4 @@ function validateForm() {
 		return false;
 	}
 	return true;
-}
-
-// ///分页
-function firstPage() {
-	var nowPage = parseInt($("#nowPage").val());
-	if (nowPage == 1) {
-		alert("当前已经是第一页！");
-		return;
-	}
-	$("#nowPage").val(1);
-	if (validateForm()) {
-		$("form").submit();
-	}
-}
-function prevPage() {
-	var nowPage = parseInt($("#nowPage").val());
-	if (nowPage == 1) {
-		alert("当前已经是第一页！");
-		return;
-	}
-	$("#nowPage").val(nowPage - 1);
-	if (validateForm()) {
-		$("form").submit();
-	}
-}
-function nextPage() {
-	var nowPage = parseInt($("#nowPage").val());
-	var pageCount = parseInt($("#pageCount").val());
-	if (nowPage == pageCount) {
-		alert("当前已经是最后一页！");
-		return;
-	}
-	$("#nowPage").val(nowPage + 1);
-	if (validateForm()) {
-		$("form").submit();
-	}
-}
-function lastPage() {
-	var page = parseInt($("#pageCount").val());
-	var nowPage = parseInt($("#nowPage").val());
-	var pageCount = parseInt($("#pageCount").val());
-	if (nowPage == pageCount) {
-		alert("当前已经是最后一页！");
-		return;
-	}
-	$("#nowPage").val(page);
-	if (validateForm()) {
-		$("form").submit();
-	}
-}
-function jumpPage() {
-	var page = parseInt($("#toPageSelect").val());
-	$("#nowPage").val(page);
-	if (validateForm()) {
-		$("form").submit();
-	}
 }

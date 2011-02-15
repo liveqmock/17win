@@ -198,9 +198,9 @@ public class SmsService extends BaseService {
 		smsVO.setQueryTypeFlag("sjx");
 		UserEntity userEntity = getLoginUserEntity(userDAO);
 		StringBuffer resultFromHQL = new StringBuffer(
-				"select  _sms ,_toUser.username,_fromUser.username from SmsEntity _sms inner join _sms.fromUser as _fromUser  inner join _sms.toUser as _toUser where _fromUser.id=:userId  ");
+				"select  _sms ,_toUser.username,_fromUser.username from SmsEntity _sms inner join _sms.fromUser as _fromUser  inner join _sms.toUser as _toUser where _toUser.id=:userId  ");
 		StringBuffer countFromHQL = new StringBuffer(
-				"select  count(*)  from SmsEntity _sms inner join _sms.fromUser as _fromUser inner join _sms.toUser as _toUser  where _fromUser.id=:userId  ");
+				"select  count(*)  from SmsEntity _sms inner join _sms.fromUser as _fromUser inner join _sms.toUser as _toUser  where _toUser.id=:userId  ");
 		List<String> paramNames = new ArrayList<String>();
 		paramNames.add("userId");
 		List<Object> paramValues = new ArrayList<Object>();
@@ -279,9 +279,9 @@ public class SmsService extends BaseService {
 		smsVO.setQueryTypeFlag("fjx");
 		UserEntity userEntity = getLoginUserEntity(userDAO);
 		StringBuffer resultToHQL = new StringBuffer(
-				"select _sms ,_toUser.username,_fromUser.username from SmsEntity _sms inner join _sms.toUser as _toUser inner join _sms.fromUser as _fromUser where _toUser.id=:userId ");
+				"select _sms ,_toUser.username,_fromUser.username from SmsEntity _sms inner join _sms.toUser as _toUser inner join _sms.fromUser as _fromUser where _fromUser.id=:userId ");
 		StringBuffer countToHQL = new StringBuffer(
-				"select count(*) from SmsEntity _sms inner join _sms.toUser as _toUser inner join _sms.fromUser as _fromUser where _toUser.id=:userId ");
+				"select count(*) from SmsEntity _sms inner join _sms.toUser as _toUser inner join _sms.fromUser as _fromUser where _fromUser.id=:userId ");
 
 		List<String> paramNames = new ArrayList<String>();
 		paramNames.add("userId");

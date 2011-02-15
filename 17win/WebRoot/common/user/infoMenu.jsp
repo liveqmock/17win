@@ -304,7 +304,7 @@
 										</tr>
 										<tr>
 											<td height=20>
-												<a href="smsManager/sms!querySms.php">我的站内信</a>
+												<a href="smsManager/sms!querySJXSms.php">我的站内信</a>
 											</td>
 
 										</tr>

@@ -20,6 +20,7 @@
 		<SCRIPT src="js/jquery-ui-1.8.4.custom.min.js" type="text/javascript"></SCRIPT>
 		<script src="<%=basePath%>js/My97DatePicker/WdatePicker.js"
 			defer="defer" type="text/javascript"></script>
+		<script src="js/utils.js" type="text/javascript"></script>
 		<script src="sms/mySms.js" type="text/javascript"></script>
 		<style type="text/css">
 body {
@@ -98,7 +99,7 @@ img {
 										</div>
 										<!-- xgj -->
 										<br>
-										<s:form action="smsManager/sms!querySms.php"
+										<s:form action="smsManager/sms!querySJXSms.php"
 											onsubmit="return validateForm()" theme="simple">
 											<table width="100%" cellpadding="1" cellspacing="1"
 												border="0px" style="background: #DDEDFA">
@@ -129,10 +130,12 @@ img {
 											<div id="tabs">
 												<ul>
 													<li>
-														<a href="#tabs-1">收件箱</a>
+														<a href="#tabs-1" queryFlag="sjx"
+															onclick="javascript:changeQuery(this);">收件箱</a>
 													</li>
 													<li>
-														<a href="#tabs-2">发件箱</a>
+														<a href="#tabs-2" queryFlag="fjx"
+															onclick="javascript:changeQuery(this);">发件箱</a>
 													</li>
 												</ul>
 												<div id="tabs-1">
@@ -140,7 +143,7 @@ img {
 														<thead>
 															<tr>
 																<th>
-																	<input type="checkbox">
+																	<input type="checkbox" onclick="selectSJAll(this);">
 																</th>
 
 																<th>
@@ -161,14 +164,20 @@ img {
 																id="sms">
 																<tr>
 																	<td align="center">
-																		<input type="checkbox"
+																		<input type="checkbox" name="sjSmsIDs"
+																			sjSmsID="sjSmsID"
 																			value="<s:property value="#sms.id"/>">
 																	</td>
 																	<td>
-																		<s:property value="#sms.title" />
+																		<s:if test="!#sms.read">
+																			*
+																		</s:if>
+																		<font
+																			style="text-decoration: underline;"> <s:property
+																				value="#sms.title" /> </font>
 																	</td>
 																	<td align="center">
-																		<s:property value="#sms.content" />
+																		<s:property value="#sms.fromUserName" />
 																	</td>
 																	<td align="center">
 																		<s:date name="#sms.sendDate"
@@ -200,7 +209,7 @@ img {
 														<thead>
 															<tr>
 																<th>
-																	<input type="checkbox">
+																	<input type="checkbox" onclick="selectFJAll(this)">
 																</th>
 
 																<th>
@@ -221,14 +230,16 @@ img {
 																id="sms">
 																<tr>
 																	<td align="center">
-																		<input type="checkbox"
+																		<input type="checkbox" name="fjSmsIDs"
+																			fjSmsID="fjSmsID"
 																			value="<s:property value="#sms.id"/>">
 																	</td>
 																	<td>
-																		<s:property value="#sms.title" />
+																		<font style="text-decoration: underline;"> <s:property
+																				value="#sms.title" /> </font>
 																	</td>
 																	<td align="center">
-																		<s:property value="#sms.content" />
+																		<s:property value="#sms.toUserName" />
 																	</td>
 																	<td align="center">
 																		<s:date name="#sms.sendDate"
@@ -248,7 +259,7 @@ img {
 															<s:else>
 																<tr>
 																	<td colspan="4">
-																		<input type="button" value="删除" id="deleteBtn1">
+																		<input type="button" value="删除" id="deleteBtn2">
 																	</td>
 																</tr>
 															</s:else>
@@ -267,7 +278,6 @@ img {
 			</tr>
 		</table>
 		<s:include value="../common/footDuan.jsp"></s:include>
-
 		<div style="display: none" id="browerSms" title="站内信">
 			<table border="0" cellpadding="0" cellspacing="0">
 				<tr>
