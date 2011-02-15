@@ -89,13 +89,22 @@ public class SmsAction extends BaseAction {
 	}
 
 	/**
-	 * 查询
+	 * 查询收件箱
 	 * 
 	 * @return
 	 * @throws Exception
 	 */
 	public String querySJXSms() throws Exception {
 		return smsService.querySJXSms(smsVO);
+	}
+	/**
+	 * 查询发件箱
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String queryFJXSms() throws Exception {
+		return smsService.queryFJXSms(smsVO);
 	}
 
 	/**
