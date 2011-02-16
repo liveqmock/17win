@@ -21,7 +21,10 @@ public class SmsVO extends BaseVO {
 	private Boolean read;
 	
 	private String  queryTypeFlag;
-
+	
+	private Long[] fjSmsIDs;
+	
+	private Long[] sjSmsIDs;
 	// 参数
 	private Date startDate;
 	private Date endDate;
@@ -105,4 +108,22 @@ public class SmsVO extends BaseVO {
 	public void setQueryTypeFlag(String queryTypeFlag) {
 		this.queryTypeFlag = queryTypeFlag;
 	}
+
+	public Long[] getFjSmsIDs() {
+		return fjSmsIDs;
+	}
+
+	public void setFjSmsIDs(Long[] fjSmsIDs) {
+		this.fjSmsIDs = fjSmsIDs;
+	}
+
+	public Long[] getSjSmsIDs() {
+		return sjSmsIDs;
+	}
+
+	public void setSjSmsIDs(Long[] sjSmsIDs) {
+		this.sjSmsIDs = sjSmsIDs;
+	}
+
+	 
 }

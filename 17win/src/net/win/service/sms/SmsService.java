@@ -19,7 +19,7 @@ import net.win.vo.SmsVO;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Service;
 
-@SuppressWarnings({"unchecked"})
+@SuppressWarnings( { "unchecked" })
 @Service("smsService")
 public class SmsService extends BaseService {
 	@Resource
@@ -51,14 +51,31 @@ public class SmsService extends BaseService {
 	 * @return
 	 * @throws Exception
 	 */
-	public String deleteSms(SmsVO smsVO) throws Exception {
-		smsDAO.deleteByHql("delete from SmsEntity where id=:smsID",
-				new String[]{"smsID"}, new Object[]{smsVO.getId()});
-		if ("fjx".equalsIgnoreCase(smsVO.getQueryTypeFlag())) {
-			queryFJXSms(smsVO);
-		} else {
-			querySJXSms(smsVO);
+	public String deleteSjxSms(SmsVO smsVO) throws Exception {
+		Long[] sjxIds = smsVO.getSjSmsIDs();
+		for (Long id : sjxIds) {
+			smsDAO.deleteByHql("delete from SmsEntity where id=:smsID",
+					new String[] { "smsID" }, new Object[] { id });
 		}
+		querySJXSms(smsVO);
+		putAlertMsg("删除成功！");
+		return "deleteSms";
+	}
+
+	/**
+	 * 删除
+	 * 
+	 * @param smsVO
+	 * @return
+	 * @throws Exception
+	 */
+	public String deleteFjxSms(SmsVO smsVO) throws Exception {
+		Long[] fjxIds = smsVO.getFjSmsIDs();
+		for (Long id : fjxIds) {
+			smsDAO.deleteByHql("delete from SmsEntity where id=:smsID",
+					new String[] { "smsID" }, new Object[] { id });
+		}
+		queryFJXSms(smsVO);
 		putAlertMsg("删除成功！");
 		return "deleteSms";
 	}

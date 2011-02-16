@@ -14,135 +14,141 @@
 				<DIV
 					style="BORDER-RIGHT: #8fc2d1 1px solid; BORDER-TOP: #8fc2d1 1px solid; BACKGROUND: url(/image/task_bg_02.jpg) #ffffff repeat-x 50% top; FLOAT: left; BORDER-LEFT: #8fc2d1 1px solid; WIDTH: 160px; BORDER-BOTTOM: #8fc2d1 1px solid">
 					<table cellpadding=0 cellspacing=0 width=158 align=center>
-						<tr>
-							<td height=25 class="menu_title"
-								onmouseover="this.className=
+						<thead onclick="showOrhideLeftInfo(this)" style="cursor: pointer;">
+							<tr>
+								<td height=25 class="menu_title"
+									onmouseover="this.className=
 															'menu_title';"
-								onmouseout="this.className=
+									onmouseout="this.className=
 															'menu_title';"
-								background="images/membertitle.gif" id="menuTitle29"
-								onClick="showsubmenu(29)" style="cursor: hand;">
-								<span>我的账户</span>
-							</td>
-						</tr>
-						<tr>
+									background="images/membertitle.gif" id="menuTitle29"
+									style="cursor: hand;">
+									<span>我的账户</span>
+								</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
 
-							<td id='submenu29'>
-								<div class=sec_menu style="width: 158">
-									<table cellpadding=0 cellspacing=0 align=center width=130>
-										<tr>
-											<td height=20>
-												会&nbsp;&nbsp;&nbsp;&nbsp;员：
-												<font color="#ff0000">${userLogin.username}</font> 您好
-											</td>
-										</tr>
-										<tr>
-											<td height=20>
-												您拥有：
-												<font color=#ff0000><s:property
-														value="#session.userLogin.money"></s:property> </font> 元
-											</td>
-										</tr>
+								<td id='submenu29'>
+									<div class=sec_menu style="width: 158">
+										<table cellpadding=0 cellspacing=0 align=center width=130>
+											<tr>
+												<td height=20>
+													会&nbsp;&nbsp;&nbsp;&nbsp;员：
+													<font color="#ff0000">${userLogin.username}</font> 您好
+												</td>
+											</tr>
+											<tr>
+												<td height=20>
+													您拥有：
+													<font color="red"><s:property
+															value="#session.userLogin.money"></s:property> </font> 元
+												</td>
+											</tr>
 
-										<tr>
-											<td height=20>
-												发布点：
-												<font color=#ff0000> <s:property
-														value="#session.userLogin.releaseDot"></s:property> </font> 点
-											</td>
-										</tr>
-										<tr>
-											<td height=20>
-												积&nbsp;&nbsp;&nbsp;&nbsp;分：
-												<font color=#ff0000> <s:property
-														value="#session.userLogin.convertScore"></s:property> </font>点
-											</td>
-										</tr>
-										<tr>
-											<td height=20>
-												状&nbsp;&nbsp;&nbsp;&nbsp;态：
-												<s:if test="#session.userLogin.status==0">
-													<font color=#ff0000><a
-														href="userInfoManager/info!initActiave.php">没激活！</a> </font>
-												</s:if>
-												<s:elseif test="#session.userLogin.status==1">
-													<font color=#ff0000>正常</font>
-												</s:elseif>
-												<s:elseif test="#session.userLogin.status==2">
-													<font color=#ff0000>被冻结 </font>
-												</s:elseif>
-												<s:elseif test="#session.userLogin.status==3">
-													<font color=#ff0000>找密码</font>
-												</s:elseif>
-											</td>
-										</tr>
-										<tr>
-											<td nowrap="nowrap">
-												<a href="userInfoManager/info!refreshUser.php">点击此处刷新用户信息</a>
-											</td>
-										</tr>
-										<tr>
-											<td nowrap="nowrap">
-												<a href="userInfoManager/info!init.php">点击此处进入个人中心</a>
-											</td>
-										</tr>
-									</table>
-								</div>
+											<tr>
+												<td height=20>
+													发布点：
+													<font color=#ff0000> <s:property
+															value="#session.userLogin.releaseDot"></s:property> </font> 点
+												</td>
+											</tr>
+											<tr>
+												<td height=20>
+													积&nbsp;&nbsp;&nbsp;&nbsp;分：
+													<font color=#ff0000> <s:property
+															value="#session.userLogin.convertScore"></s:property> </font>点
+												</td>
+											</tr>
+											<tr>
+												<td height=20>
+													状&nbsp;&nbsp;&nbsp;&nbsp;态：
+													<s:if test="#session.userLogin.status==0">
+														<font color=#ff0000><a
+															href="userInfoManager/info!initActiave.php">没激活！</a> </font>
+													</s:if>
+													<s:elseif test="#session.userLogin.status==1">
+														<font color=#ff0000>正常</font>
+													</s:elseif>
+													<s:elseif test="#session.userLogin.status==2">
+														<font color=#ff0000>被冻结 </font>
+													</s:elseif>
+													<s:elseif test="#session.userLogin.status==3">
+														<font color=#ff0000>找密码</font>
+													</s:elseif>
+												</td>
+											</tr>
+											<tr>
+												<td nowrap="nowrap">
+													<a href="userInfoManager/info!refreshUser.php">点击此处刷新用户信息</a>
+												</td>
+											</tr>
+											<tr>
+												<td nowrap="nowrap">
+													<a href="userInfoManager/info!init.php">点击此处进入个人中心</a>
+												</td>
+											</tr>
+										</table>
+									</div>
 
-							</td>
-						</tr>
+								</td>
+							</tr>
+						</tbody>
 					</table>
 
 					<table cellpadding=0 cellspacing=0 width=158 align=center>
-						<tr>
-							<td height=25 class="menu_title"
-								onmouseover="this.className=
+						<thead onclick="showOrhideLeftInfo(this)" style="cursor: pointer;">
+							<tr>
+								<td height=25 class="menu_title"
+									onmouseover="this.className=
 															'menu_title2';"
-								onmouseout="this.className=
+									onmouseout="this.className=
 															'menu_title';"
-								background="images/membertitle.gif" id="menuTitle8"
-								onClick="showsubmenu(243)" style="cursor: hand;">
-								<span>个人资料管理</span>
-							</td>
-						</tr>
-						<tr>
+									background="images/membertitle.gif" id="menuTitle8"
+									style="cursor: hand;">
+									<span>个人资料管理</span>
+								</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td id='submenu243'>
+									<div class=sec_menu style="width: 158">
+										<table cellpadding=0 cellspacing=0 align=center width=130
+											class=LeftNews>
+											<tr>
+												<td height=20>
+													<a href="userInfoManager/info!initActiave.php">账号激活</a>
+												</td>
+											</tr>
+											<tr>
+												<td height=20>
+													<A href="userInfoManager/info!initUpdateInfo.php">修改资料</A>
+												</td>
+											</tr>
+											<tr>
+												<td height=20>
+													<A href="userInfoManager/info!initSellerAndBuyer.php">卖号/买号</A>
+												</td>
+											</tr>
+											<tr>
+												<td height=20>
+													<a href="userInfoManager/info!initUpdatePassword.php">密码/操作码</a>
+												</td>
+											</tr>
+											<tr>
 
-							<td id='submenu243'>
-								<div class=sec_menu style="width: 158">
-									<table cellpadding=0 cellspacing=0 align=center width=130
-										class=LeftNews>
-										<tr>
-											<td height=20>
-												<a href="userInfoManager/info!initActiave.php">账号激活</a>
-											</td>
-										</tr>
-										<tr>
-											<td height=20>
-												<A href="userInfoManager/info!initUpdateInfo.php">修改资料</A>
-											</td>
-										</tr>
-										<tr>
-											<td height=20>
-												<A href="userInfoManager/info!initSellerAndBuyer.php">卖号/买号</A>
-											</td>
-										</tr>
-										<tr>
-											<td height=20>
-												<a href="userInfoManager/info!initUpdatePassword.php">密码/操作码</a>
-											</td>
-										</tr>
-										<tr>
-
-											<td height=20>
-												<A href="userInfoManager/info!referee.php" target="_blank">我要推广</A>
-											</td>
-										</tr>
-										<tr>
-											<td height=20>
-												<A href="userInfoManager/info!myRefee.php">我的推广</A>
-											</td>
-										</tr>
-										<!-- xgj
+												<td height=20>
+													<A href="userInfoManager/info!referee.php" target="_blank">我要推广</A>
+												</td>
+											</tr>
+											<tr>
+												<td height=20>
+													<A href="userInfoManager/info!myRefee.php">我的推广</A>
+												</td>
+											</tr>
+											<!-- xgj
 										<tr>
 											<td height=20>
 												<A href="user/user.asp">站内信</A>
@@ -150,13 +156,13 @@
 										</tr>
  -->
 
-										<tr>
-											<td height=20>
-												<a href="vipManager/vip!initVip.php"><font
-													color="#FF0000">加入VIP</font> </a>
-											</td>
-										</tr>
-										<!-- xgj 
+											<tr>
+												<td height=20>
+													<a href="vipManager/vip!initVip.php"><font
+														color="#FF0000">加入VIP</font> </a>
+												</td>
+											</tr>
+											<!-- xgj 
 										<tr>
 
 											<td height=20>
@@ -165,158 +171,172 @@
 											</td>
 										</tr>
 										-->
-									</table>
-								</div>
-							</td>
-						</tr>
+										</table>
+									</div>
+								</td>
+							</tr>
+						</tbody>
 					</table>
 					<table cellpadding=0 cellspacing=0 width=158 align=center>
-						<tr>
-							<td height=25 class="menu_title"
-								onmouseover="this.className=
+						<thead onclick="showOrhideLeftInfo(this)" style="cursor: pointer;">
+							<tr>
+								<td height=25 class="menu_title"
+									onmouseover="this.className=
 															'menu_title2';"
-								onmouseout="this.className=
+									onmouseout="this.className=
 															'menu_title';"
-								background="images/membertitle.gif" id="menuTitle8"
-								onClick="showsubmenu(24)" style="cursor: hand;">
-								<span>物流管理</span>
-							</td>
-						</tr>
-						<tr>
-							<td id='submenu24'>
-								<div class=sec_menu style="width: 158">
-									<table cellpadding=0 cellspacing=0 align=center width=130
-										class=LeftNews>
-										<tr>
+									background="images/membertitle.gif" id="menuTitle8"
+									style="cursor: hand;">
+									<span>物流管理</span>
+								</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td id='submenu24'>
+									<div class=sec_menu style="width: 158">
+										<table cellpadding=0 cellspacing=0 align=center width=130
+											class=LeftNews>
+											<tr>
 
-											<td height=20>
-												<a href="logisticsManager/logistics!initLogistics.php">添加真实快递</a>
-											</td>
-										</tr>
-										<tr>
-											<td height=20>
-												<a href="logisticsManager/logistics!logisticsLog.php">我提交的物流</a>
-											</td>
-										</tr>
-										<tr>
-											<td height=20>
-												<a href="logisticsManager/logistics!useLogisticsLog.php">我使用的物流</a>
-											</td>
-										</tr>
-									</table>
-								</div>
-							</td>
-						</tr>
+												<td height=20>
+													<a href="logisticsManager/logistics!initLogistics.php">添加真实快递</a>
+												</td>
+											</tr>
+											<tr>
+												<td height=20>
+													<a href="logisticsManager/logistics!logisticsLog.php">我提交的物流</a>
+												</td>
+											</tr>
+											<tr>
+												<td height=20>
+													<a href="logisticsManager/logistics!useLogisticsLog.php">我使用的物流</a>
+												</td>
+											</tr>
+										</table>
+									</div>
+								</td>
+							</tr>
+						</tbody>
 					</table>
 					<table cellpadding=0 cellspacing=0 width=158 align=center>
-						<tr>
-							<td height=25 class="menu_title"
-								onmouseover="this.className=
+						<thead onclick="showOrhideLeftInfo(this)" style="cursor: pointer;">
+							<tr>
+								<td height=25 class="menu_title"
+									onmouseover="this.className=
 															'menu_title2';"
-								onmouseout="this.className=
+									onmouseout="this.className=
 															'menu_title';"
-								background="images/membertitle.gif" id="menuTitle8"
-								onClick="showsubmenu(24)" style="cursor: hand;">
-								<span>财物管理</span>
-							</td>
-						</tr>
-						<tr>
-							<td id='submenu24'>
-								<div class=sec_menu style="width: 158">
-									<table cellpadding=0 cellspacing=0 align=center width=130
-										class=LeftNews>
-										<tr>
+									background="images/membertitle.gif" id="menuTitle8"
+									style="cursor: hand;">
+									<span>财产管理</span>
+								</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td id='submenu24'>
+									<div class=sec_menu style="width: 158">
+										<table cellpadding=0 cellspacing=0 align=center width=130
+											class=LeftNews>
+											<tr>
 
-											<td height=20>
-												<a href="payManager/pay!initPay.php">帐号充值</a>
-											</td>
-										</tr>
-										<tr>
+												<td height=20>
+													<a href="payManager/pay!initPay.php">帐号充值</a>
+												</td>
+											</tr>
+											<tr>
 
-											<td height=20>
-												<a href="payManager/pay!queryPay.php">充值记录</a>
-											</td>
-										</tr>
-										<tr>
-											<td height=20>
-												<a href="userInfoManager/info!initBuyDot.php">买发布点</a>
-											</td>
+												<td height=20>
+													<a href="payManager/pay!queryPay.php">充值记录</a>
+												</td>
+											</tr>
+											<tr>
+												<td height=20>
+													<a href="userInfoManager/info!initBuyDot.php">买发布点</a>
+												</td>
 
-										</tr>
-										<tr>
-											<td height=20>
-												<a href="userInfoManager/info!initExchange.php">我要兑换</a>
-											</td>
-										</tr>
+											</tr>
+											<tr>
+												<td height=20>
+													<a href="userInfoManager/info!initExchange.php">我要兑换</a>
+												</td>
+											</tr>
 
-										<tr>
-											<td height=20>
-												<a href="withdrawalsManager/withdrawals!initWithdrawals.php">我要提现</a>
-											</td>
-										</tr>
+											<tr>
+												<td height=20>
+													<a
+														href="withdrawalsManager/withdrawals!initWithdrawals.php">我要提现</a>
+												</td>
+											</tr>
 
-										<tr>
-											<td height=20>
-												<a href="withdrawalsManager/withdrawals!withdrawalsLog.php">提现记录</a>
-											</td>
-										</tr>
-										<tr>
-											<td height=20>
-												<a href="capitalLogManager/capitalLog!queryLogs.php">资产记录</a>
-											</td>
-										</tr>
-										<!--  
+											<tr>
+												<td height=20>
+													<a href="withdrawalsManager/withdrawals!withdrawalsLog.php">提现记录</a>
+												</td>
+											</tr>
+											<tr>
+												<td height=20>
+													<a href="capitalLogManager/capitalLog!queryLogs.php">资产记录</a>
+												</td>
+											</tr>
+											<!--  
 										<tr>
 											<td height=20>
 												<a href="user/operationLog.jsp">操作记录</a>
 											</td>
 										</tr>
 										  -->
-									</table>
-								</div>
-							</td>
-						</tr>
+										</table>
+									</div>
+								</td>
+							</tr>
+						</tbody>
 					</table>
 
 
 					<table cellpadding=0 cellspacing=0 width=158 align=center>
-						<tr>
-							<td height=25 class="menu_title"
-								onmouseover="this.className=
+						<thead onclick="showOrhideLeftInfo(this)" style="cursor: pointer;">
+							<tr>
+								<td height=25 class="menu_title"
+									onmouseover="this.className=
 															'menu_title2';"
-								onmouseout="this.className=
+									onmouseout="this.className=
 															'menu_title';"
-								background="images/membertitle.gif" id="menuTitle8"
-								onClick="showsubmenu(24)" style="cursor: hand;">
-								<span>短信管理</span>
-							</td>
-						</tr>
-						<tr>
-							<td id='submenu24'>
-								<div class=sec_menu style="width: 158">
-									<table cellpadding=0 cellspacing=0 align=center width=130
-										class=LeftNews>
-										<tr>
+									background="images/membertitle.gif" id="menuTitle8"
+									style="cursor: hand;">
+									<span>短信管理</span>
+								</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td id='submenu24'>
+									<div class=sec_menu style="width: 158">
+										<table cellpadding=0 cellspacing=0 align=center width=130
+											class=LeftNews>
+											<tr>
 
-											<td height=20>
-												<a href="smsManager/sms!initSendSms.php">发送站内信</a>
-											</td>
-										</tr>
-										<tr>
-											<td height=20>
-												<a href="smsManager/sms!querySJXSms.php">我的站内信</a>
-											</td>
+												<td height=20>
+													<a href="smsManager/sms!initSendSms.php">发送站内信</a>
+												</td>
+											</tr>
+											<tr>
+												<td height=20>
+													<a href="smsManager/sms!querySJXSms.php">我的站内信</a>
+												</td>
 
-										</tr>
-										<tr>
-											<td height=20>
-												<a href="smsManager/sms!initSendTelphone.php">发送手机短信</a>
-											</td>
-										</tr>
-									</table>
-								</div>
-							</td>
-						</tr>
+											</tr>
+											<tr>
+												<td height=20>
+													<a href="smsManager/sms!initSendTelphone.php">发送手机短信</a>
+												</td>
+											</tr>
+										</table>
+									</div>
+								</td>
+							</tr>
+						</tbody>
 					</table>
 					<!--  xgj
 					<table cellpadding=0 cellspacing=0 width=158 align=center>
@@ -328,7 +348,7 @@
 								onmouseout="this.className=
 															'menu_title';"
 								background="images/membertitle.gif" id=menuTitle8
-								onClick="showsubmenu(242)" style="cursor: hand;">
+								   style="cursor: hand;">
 								<span>部落管理</span>
 							</td>
 						</tr>
@@ -371,7 +391,7 @@
 								onmouseout="this.className=
 															'menu_title';"
 								background="images/membertitle.gif" id="menuTitle8"
-								onClick="showsubmenu(241)" style="cursor: hand;">
+								   style="cursor: hand;">
 								<span>申诉中心</span>
 							</td>
 						</tr>

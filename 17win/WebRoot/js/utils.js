@@ -253,3 +253,7 @@ function waitPage() {
 			+ '<td align="center" valign="middle"><img src="../images/loading.gif" width="136" height="50s"></td>'
 			+ '</tr>' + '</table>';
 }
+
+function showOrhideLeftInfo(obj) {
+	$(obj).parent().children("tbody").toggle();
+}

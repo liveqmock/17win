@@ -99,7 +99,7 @@ img {
 										</div>
 										<!-- xgj -->
 										<br>
-										<s:form action="smsManager/sms!querySJXSms.php"
+										<s:form action="smsManager/sms!querySJXSms.php" id="formQuery"
 											onsubmit="return validateForm()" theme="simple">
 											<table width="100%" cellpadding="1" cellspacing="1"
 												border="0px" style="background: #DDEDFA">
@@ -126,148 +126,154 @@ img {
 											</table>
 										</s:form>
 										<br>
-										<div>
-											<div id="tabs">
-												<ul>
-													<li>
-														<a href="#tabs-1" queryFlag="sjx"
-															onclick="javascript:changeQuery(this);">收件箱</a>
-													</li>
-													<li>
-														<a href="#tabs-2" queryFlag="fjx"
-															onclick="javascript:changeQuery(this);">发件箱</a>
-													</li>
-												</ul>
-												<div id="tabs-1">
-													<table cellspacing="1" width="100%">
-														<thead>
-															<tr>
-																<th>
-																	<input type="checkbox" onclick="selectSJAll(this);">
-																</th>
-
-																<th>
-																	标题
-																</th>
-
-																<th>
-																	发件人
-																</th>
-
-																<th>
-																	发送时间
-																</th>
-															</tr>
-														</thead>
-														<tbody>
-															<s:iterator value="#request.result" status="status"
-																id="sms">
+										<form id="form2" method="post">
+											<div>
+												<div id="tabs">
+													<ul>
+														<li>
+															<a href="#tabs-1" queryFlag="sjx"
+																onclick="javascript:changeQuery(this);">收件箱</a>
+														</li>
+														<li>
+															<a href="#tabs-2" queryFlag="fjx"
+																onclick="javascript:changeQuery(this);">发件箱</a>
+														</li>
+													</ul>
+													<div id="tabs-1">
+														<table cellspacing="1" width="100%">
+															<thead>
 																<tr>
-																	<td align="center">
-																		<input type="checkbox" name="sjSmsIDs"
-																			sjSmsID="sjSmsID"
-																			value="<s:property value="#sms.id"/>">
-																	</td>
-																	<td>
-																		<s:if test="!#sms.read">
+																	<th>
+																		<input type="checkbox" onclick="selectSJAll(this);">
+																	</th>
+
+																	<th>
+																		标题
+																	</th>
+
+																	<th>
+																		发件人
+																	</th>
+
+																	<th>
+																		发送时间
+																	</th>
+																</tr>
+															</thead>
+															<tbody>
+																<s:iterator value="#request.result" status="status"
+																	id="sms">
+																	<tr>
+																		<td align="center">
+																			<input type="checkbox" name="smsVO.sjSmsIDs"
+																				sjSmsID="sjSmsID"
+																				value="<s:property value="#sms.id"/>">
+																		</td>
+																		<td
+																			onclick="brower(this,'<s:property value="#sms.id"/>','<s:property value="#sms.fromUserName"/>','<s:property value="#sms.title"/>','<s:property value="#sms.content"/>','<s:property value="#sms.read"/>','sjx');"
+																			style="cursor: pointer; text-decoration: underline;">
+																			<s:if test="!#sms.read">
 																			*
 																		</s:if>
-																		<font
-																			style="text-decoration: underline;"> <s:property
-																				value="#sms.title" /> </font>
-																	</td>
-																	<td align="center">
-																		<s:property value="#sms.fromUserName" />
-																	</td>
-																	<td align="center">
-																		<s:date name="#sms.sendDate"
-																			format="yyyy-MM-dd HH:mm:ss" />
-																	</td>
-																</tr>
-															</s:iterator>
-														</tbody>
-														<tfoot>
-															<s:if test="#request.result.size()==0">
+																			<s:property value="#sms.title" />
+																		</td>
+																		<td align="center">
+																			<s:property value="#sms.fromUserName" />
+																		</td>
+																		<td align="center">
+																			<s:date name="#sms.sendDate"
+																				format="yyyy-MM-dd HH:mm:ss" />
+																		</td>
+																	</tr>
+																</s:iterator>
+															</tbody>
+															<tfoot>
+																<s:if test="#request.result.size()==0">
+																	<tr>
+																		<td colspan="4" align="center">
+																			没有记录！
+																		</td>
+																	</tr>
+																</s:if>
+																<s:else>
+																	<tr>
+																		<td colspan="4">
+																			<input type="button" onclick="deleteSjx()" value="删除"
+																				id="deleteBtn1">
+																		</td>
+																	</tr>
+																</s:else>
+															</tfoot>
+														</table>
+													</div>
+													<div id="tabs-2">
+														<table cellspacing="1" width="100%">
+															<thead>
 																<tr>
-																	<td colspan="4" align="center">
-																		没有记录！
-																	</td>
-																</tr>
-															</s:if>
-															<s:else>
-																<tr>
-																	<td colspan="4">
-																		<input type="button" value="删除" id="deleteBtn1">
-																	</td>
-																</tr>
-															</s:else>
-														</tfoot>
-													</table>
-												</div>
-												<div id="tabs-2">
-													<table cellspacing="1" width="100%">
-														<thead>
-															<tr>
-																<th>
-																	<input type="checkbox" onclick="selectFJAll(this)">
-																</th>
+																	<th>
+																		<input type="checkbox" onclick="selectFJAll(this)">
+																	</th>
 
-																<th>
-																	标题
-																</th>
+																	<th>
+																		标题
+																	</th>
 
-																<th>
-																	收件人
-																</th>
+																	<th>
+																		收件人
+																	</th>
 
-																<th>
-																	发送时间
-																</th>
-															</tr>
-														</thead>
-														<tbody>
-															<s:iterator value="#request.result" status="status"
-																id="sms">
-																<tr>
-																	<td align="center">
-																		<input type="checkbox" name="fjSmsIDs"
-																			fjSmsID="fjSmsID"
-																			value="<s:property value="#sms.id"/>">
-																	</td>
-																	<td>
-																		<font style="text-decoration: underline;"> <s:property
-																				value="#sms.title" /> </font>
-																	</td>
-																	<td align="center">
-																		<s:property value="#sms.toUserName" />
-																	</td>
-																	<td align="center">
-																		<s:date name="#sms.sendDate"
-																			format="yyyy-MM-dd HH:mm:ss" />
-																	</td>
+																	<th>
+																		发送时间
+																	</th>
 																</tr>
-															</s:iterator>
-														</tbody>
-														<tfoot>
-															<s:if test="#request.result.size()==0">
-																<tr>
-																	<td colspan="4" align="center">
-																		没有记录！
-																	</td>
-																</tr>
-															</s:if>
-															<s:else>
-																<tr>
-																	<td colspan="4">
-																		<input type="button" value="删除" id="deleteBtn2">
-																	</td>
-																</tr>
-															</s:else>
-														</tfoot>
-													</table>
+															</thead>
+															<tbody>
+																<s:iterator value="#request.result" status="status"
+																	id="sms">
+																	<tr>
+																		<td align="center">
+																			<input type="checkbox" name="smsVO.fjSmsIDs"
+																				fjSmsID="fjSmsID"
+																				value="<s:property value="#sms.id"/>">
+																		</td>
+																		<td
+																			onclick="brower(this,'<s:property value="#sms.id"/>','<s:property value="#sms.toUserName"/>','<s:property value="#sms.title"/>','<s:property value="#sms.content"/>','<s:property value="#sms.read"/>','fjx');"
+																			style="cursor: pointer;">
+																			<font style="text-decoration: underline;"> <s:property
+																					value="#sms.title" /> </font>
+																		</td>
+																		<td align="center">
+																			<s:property value="#sms.toUserName" />
+																		</td>
+																		<td align="center">
+																			<s:date name="#sms.sendDate"
+																				format="yyyy-MM-dd HH:mm:ss" />
+																		</td>
+																	</tr>
+																</s:iterator>
+															</tbody>
+															<tfoot>
+																<s:if test="#request.result.size()==0">
+																	<tr>
+																		<td colspan="4" align="center">
+																			没有记录！
+																		</td>
+																	</tr>
+																</s:if>
+																<s:else>
+																	<tr>
+																		<td colspan="4">
+																			<input onclick="deleteFjx()" type="button" value="删除"
+																				id="deleteBtn2">
+																		</td>
+																	</tr>
+																</s:else>
+															</tfoot>
+														</table>
+													</div>
 												</div>
 											</div>
-										</div>
+										</form>
 									</div>
 								</div>
 							</td>
@@ -280,6 +286,14 @@ img {
 		<s:include value="../common/footDuan.jsp"></s:include>
 		<div style="display: none" id="browerSms" title="站内信">
 			<table border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td nowrap="nowrap">
+						<font id="userLable">发件人：</font>
+					</td>
+					<td>
+						<input type="text" id="user" readonly="readonly" />
+					</td>
+				</tr>
 				<tr>
 					<td nowrap="nowrap">
 						标题:

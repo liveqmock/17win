@@ -113,10 +113,18 @@ public class SmsAction extends BaseAction {
 	 * @return
 	 * @throws Exception
 	 */
-	public String deleteSms() throws Exception {
-		return smsService.deleteSms(smsVO);
+	public String deleteSjxSms() throws Exception {
+		return smsService.deleteSjxSms(smsVO);
 	}
-
+	/**
+	 * 删除
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String deleteFjxSms() throws Exception {
+		return smsService.deleteFjxSms(smsVO);
+	}
 	/**
 	 * 修改已读标记
 	 * 
