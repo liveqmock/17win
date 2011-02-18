@@ -222,8 +222,8 @@ public abstract class BaseDAO<T> extends HibernateDaoSupport {
 	 */
 	public T uniqueResult(String queryString, String name, Object value)
 			throws Exception {
-		return uniqueResult(queryString, new String[] { name },
-				new Object[] { value });
+		return uniqueResult(queryString, new String[]{name},
+				new Object[]{value});
 	}
 
 	/**
@@ -245,7 +245,6 @@ public abstract class BaseDAO<T> extends HibernateDaoSupport {
 		}
 		return query.uniqueResult();
 	}
-
 	/**
 	 * 根据HQL查询
 	 * 
@@ -267,8 +266,8 @@ public abstract class BaseDAO<T> extends HibernateDaoSupport {
 	 */
 	public Object uniqueResultObject(String queryString, String name,
 			Object value) throws Exception {
-		return uniqueResultObject(queryString, new String[] { name },
-				new Object[] { value });
+		return uniqueResultObject(queryString, new String[]{name},
+				new Object[]{value});
 	}
 
 	/**
@@ -280,7 +279,7 @@ public abstract class BaseDAO<T> extends HibernateDaoSupport {
 	 * @throws Exception
 	 */
 	public List list(String queryString, Object value) throws Exception {
-		Object[] values = { value };
+		Object[] values = {value};
 		try {
 			return list(queryString, values);
 		} catch (Exception e) {
@@ -316,7 +315,7 @@ public abstract class BaseDAO<T> extends HibernateDaoSupport {
 	 */
 	public List list(String queryString, String name, Object value)
 			throws Exception {
-		return list(queryString, new String[] { name }, new Object[] { value });
+		return list(queryString, new String[]{name}, new Object[]{value});
 
 	}
 
@@ -352,7 +351,7 @@ public abstract class BaseDAO<T> extends HibernateDaoSupport {
 	 */
 	public List pageQuery(String queryString, Object value, Integer start,
 			Integer limit) throws Exception {
-		Object[] values = { value };
+		Object[] values = {value};
 		try {
 			return pageQuery(queryString, values, start, limit);
 		} catch (Exception e) {
@@ -441,8 +440,8 @@ public abstract class BaseDAO<T> extends HibernateDaoSupport {
 	 */
 	public List pageQuery(String queryString, String name, Object value,
 			Integer start, Integer limit) throws Exception {
-		return pageQuery(queryString, new String[] { name },
-				new Object[] { value }, start, limit);
+		return pageQuery(queryString, new String[]{name}, new Object[]{value},
+				start, limit);
 
 	}
 

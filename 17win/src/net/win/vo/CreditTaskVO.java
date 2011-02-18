@@ -21,7 +21,7 @@ public class CreditTaskVO extends BaseVO {
 	private Date releaseDate;
 	// 动态评分(x:默认好评，x:全部5分 ...)
 	private String grade;
-	// 好评时间类型(1 虚拟任务 2，实体任务 3，套餐任务)
+	// 任务类型(1 虚拟任务 2，实体任务 3，套餐任务)
 	private String taskType;
 	// 间隔几个小时(x*24[勾选]或则X[自定义])
 	private Integer intervalHour;
@@ -78,6 +78,10 @@ public class CreditTaskVO extends BaseVO {
 	private Integer fbUpgradeScore;
 	private String fbVipType;
 
+	private Date fbStartDate;
+	private Date fbEndDate;
+	private Date jsStartDate;
+	private Date jsEndDate;
 	public String getJsQQ() {
 		return jsQQ;
 	}
@@ -420,6 +424,38 @@ public class CreditTaskVO extends BaseVO {
 
 	public void setFbVipType(String fbVipType) {
 		this.fbVipType = fbVipType;
+	}
+
+	public Date getFbStartDate() {
+		return fbStartDate;
+	}
+
+	public void setFbStartDate(Date fbStartDate) {
+		this.fbStartDate = fbStartDate;
+	}
+
+	public Date getFbEndDate() {
+		return fbEndDate;
+	}
+
+	public void setFbEndDate(Date fbEndDate) {
+		this.fbEndDate = fbEndDate;
+	}
+
+	public Date getJsStartDate() {
+		return jsStartDate;
+	}
+
+	public void setJsStartDate(Date jsStartDate) {
+		this.jsStartDate = jsStartDate;
+	}
+
+	public Date getJsEndDate() {
+		return jsEndDate;
+	}
+
+	public void setJsEndDate(Date jsEndDate) {
+		this.jsEndDate = jsEndDate;
 	}
 
 }

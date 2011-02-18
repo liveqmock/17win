@@ -65,7 +65,7 @@ public class CreditTaskEntity extends BaseEntity {
 	// 动态评分(1马上带字好评)
 	@Column(name = "GRADE_", length = 20, nullable = false)
 	private String grade;
-	// 好评时间类型(1 虚拟任务 2，实体任务 3，套餐任务)
+	// 任务类型(1 虚拟任务 2，实体任务 3，套餐任务)
 	@Column(name = "TASK_TYPE", columnDefinition = "CHAR(1)", nullable = false)
 	private String taskType;
 	// 间隔几个小时(x*24[勾选]或则X[自定义] 0为马上收货)

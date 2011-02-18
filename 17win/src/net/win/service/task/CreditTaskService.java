@@ -999,14 +999,8 @@ public class CreditTaskService extends BaseService {
 			putIndexShowType("4");
 		}
 		putTaskShowType("4");
-		String queryType = getByParam("queryType");
 		String page = getByParam("page");
 		String autoRefresh = getByParam("autoRefresh");
-		if (queryType != null) {
-			putByRequest("queryType", queryType);
-		} else {
-			putByRequest("queryType", "1");
-		}
 		if (autoRefresh != null) {
 			putByRequest("autoRefresh", autoRefresh);
 		}
@@ -1039,26 +1033,51 @@ public class CreditTaskService extends BaseService {
 			}
 			creditTaskDAO.flushSession();
 			// 分页查询
-			Long count = (Long) creditTaskDAO
-					.uniqueResultObject(
-							"select count(*) from CreditTaskEntity as _task inner join _task.releasePerson as _user   where     _user.id=:userId and   _task.type=:platformType "
-									+ orderAndWhereReleasedTaskStr(queryType,
-											true), new String[]{"userId",
-									"platformType"}, new Object[]{
-									getLoginUser().getId(), platformType});
-			List<Object[]> resultTemp = creditTaskDAO
-					.pageQuery(
-							"select _task.testID , _task.releaseDate ,_task.money,_task.updatePrice ,_task.releaseDot, _task.itemUrl , _seller.name,_task.status "// 7
-									+ ", _jsuser.username,_buyer.name,_jsuser.qq" // 10
-									+ ", _task.remainTime,_task.taskType ,_task.intervalHour,_task.comment,_task.address ,_task.grade," // 16
-									+ "_task.id,_seller.shopURL ,_jsuser.ww,_task.waybill,_task.timeingTime,_task.addtionMoney," // 22
-									+ "_task.addtionReleaseDot ,_task.assignUser,_jsuser.telephone,_fbuser.username,_task.receiveDate" // index=27
-									+ " from CreditTaskEntity as _task inner join _task.releasePerson as _fbuser  inner join _task.seller as _seller left join _task.receivePerson as _jsuser left join _task.buyer as _buyer  where     _fbuser.id=:userId and   _task.type=:platformType "
-									+ orderAndWhereReleasedTaskStr(queryType,
-											false), new String[]{"userId",
-									"platformType"}, new Object[]{
-									getLoginUser().getId(), platformType},
-							creditTaskVO.getStart(), creditTaskVO.getLimit());
+			List paramNames = new ArrayList();
+			List paramValues = new ArrayList();
+			StringBuffer countSQL = new StringBuffer(
+					"select count(*) from CreditTaskEntity as _task inner join _task.releasePerson as _user   "
+							+ "where     _user.id=:userId and   _task.type=:platformType ");
+			StringBuffer resultSQL = new StringBuffer(
+					"select _task.testID , _task.releaseDate ,_task.money,_task.updatePrice ,_task.releaseDot, _task.itemUrl , _seller.name,_task.status "// 7
+							+ ", _jsuser.username,_buyer.name,_jsuser.qq" // 10
+							+ ", _task.remainTime,_task.taskType ,_task.intervalHour,_task.comment,_task.address ,_task.grade," // 16
+							+ "_task.id,_seller.shopURL ,_jsuser.ww,_task.waybill,_task.timeingTime,_task.addtionMoney," // 22
+							+ "_task.addtionReleaseDot ,_task.assignUser,_jsuser.telephone,_fbuser.username,_task.receiveDate" // index=27
+							+ " from CreditTaskEntity as _task inner join _task.releasePerson as _fbuser  inner join _task.seller as _seller left join _task.receivePerson as _jsuser left join _task.buyer as _buyer "
+							+ " where     _fbuser.id=:userId and   _task.type=:platformType ");
+			paramNames.add("userId");
+			paramNames.add("platformType");
+			paramValues.add(getLoginUser().getId());
+			paramValues.add(platformType);
+			if (!StringUtils.isBlank(creditTaskVO.getStatus())
+					&& !"null".equalsIgnoreCase(creditTaskVO.getStatus())) {
+				countSQL.append("and _task.status=:status");
+			}
+			if (!StringUtils.isBlank(creditTaskVO.getTestID())) {
+				countSQL.append("and _task.testID=:testID");
+			}
+			if (!StringUtils.isBlank(creditTaskVO.getJsUsername())) {
+				countSQL.append("and _jsuser.username=:jsUsername");
+			}
+			if (creditTaskVO.getFbStartDate() == null) {
+				countSQL.append("and _task.releaseDate=:fbStartDate");
+			}
+
+			Long count = (Long) creditTaskDAO.uniqueResultObject();
+			List<Object[]> resultTemp = creditTaskDAO.pageQuery(
+
+			+orderAndWhereReleasedTaskStr(queryType, false), new String[]{
+					"userId", "platformType"}, new Object[]{
+					getLoginUser().getId(), platformType}, creditTaskVO
+					.getStart(), creditTaskVO.getLimit());
+
+			StringBuffer result = new StringBuffer();
+			if (!StringUtils.isBlank(taskCondition.getStatus())
+					&& !"null".equalsIgnoreCase(taskCondition.getStatus())) {
+				result.append(" and  and _task.status='3'");
+			}
+
 			Long currentDate = System.currentTimeMillis();
 			// 设置时间
 			List<CreditTaskVO> result = new ArrayList<CreditTaskVO>(resultTemp
@@ -1103,7 +1122,6 @@ public class CreditTaskService extends BaseService {
 			return "initReleasedTast";
 		}
 	}
-
 	/**
 	 * 发布任务
 	 * 
@@ -1243,8 +1261,8 @@ public class CreditTaskService extends BaseService {
 		/**
 		 * 接手人自己想
 		 */
-		String commentByJS =getByParam("commentByJS");
-		if("true".equalsIgnoreCase(commentByJS)){
+		String commentByJS = getByParam("commentByJS");
+		if ("true".equalsIgnoreCase(commentByJS)) {
 			creditTask.setComment("-1");
 		}
 		/**
@@ -1580,91 +1598,6 @@ public class CreditTaskService extends BaseService {
 			ip = ip.split(",", 2)[0];
 		}
 		return ip;
-	}
-
-	/**
-	 * 发任务查询
-	 * 
-	 * @param type
-	 * @return
-	 */
-	private String orderAndWhereReleasedTaskStr(String type, Boolean countFlag) {
-		if (countFlag) {
-			// 默认时间排列
-			if ("1".equals(type)) {
-				return "";
-			}
-			// 等待支付
-			if ("2".equals(type)) {
-				return " and _task.status='2' ";
-			}
-			// 等待发货
-			if ("3".equals(type)) {
-				return " and _task.status='3'";
-			}
-			// 等待好评
-			if ("4".equals(type)) {
-				return " and _task.status='4' ";
-			}
-			// 等待完成
-			if ("5".equals(type)) {
-				return " and _task.status='5' ";
-			}
-			// 已完成
-			if ("6".equals(type)) {
-				return " and _task.status='6' ";
-			} // 等待接手
-			if ("7".equals(type)) {
-				return " and _task.status='1' ";
-			}
-			// 等待审核
-			if ("8".equals(type)) {
-				return " and _task.status='-2' ";
-			}
-			if ("9".equals(type)) {
-				return " and _task.status='0' ";
-			}
-			return "";
-		} else {
-			// 默认时间排列
-			if ("1".equals(type)) {
-				return " order by   _task.releaseDate desc";
-			}
-			// 等待支付
-			if ("2".equals(type)) {
-				return " and _task.status='2' order by   _task.releaseDate desc";
-			}
-			// 等待发货
-			if ("3".equals(type)) {
-				return " and _task.status='3' order by   _task.releaseDate desc";
-			}
-			// 等待好评
-			if ("4".equals(type)) {
-				return " and _task.status='4' order by   _task.releaseDate desc";
-			}
-			// 等待完成
-			if ("5".equals(type)) {
-				return " and _task.status='5' order by   _task.releaseDate desc";
-			}
-			// 已完成
-			if ("6".equals(type)) {
-				return " and _task.status='6' order by   _task.releaseDate desc";
-			}
-			// 等待接手
-			if ("7".equals(type)) {
-				return " and _task.status='1'  order by   _task.releaseDate desc";
-			}
-			// 等待审核
-			if ("8".equals(type)) {
-				return " and _task.status='-2'  order by   _task.releaseDate desc ";
-			}
-			// 定时
-			if ("9".equals(type)) {
-				return " and _task.status='0'  order by   _task.releaseDate desc ";
-			}
-			return " order by   _task.releaseDate desc";
-		}
-
 	}
 
 	/**
