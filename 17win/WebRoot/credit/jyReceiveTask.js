@@ -1,3 +1,4 @@
+
 $(document).ready(function() {
 	$(".qqConnection").tooltip();
 	intText("autoreFresh");
@@ -34,6 +35,16 @@ $(document).ready(function() {
 				window.open(val, "_blank");
 
 			});
+	$("#addressDIV").dialog({
+		autoOpen : false,
+		draggable : false,
+		hide : 'slide',
+		modal : true,
+		resizable : false,
+		show : 'slide',
+		width : 400
+		 
+	});
 });
 
 // 弹出发送手机短信层
@@ -49,6 +60,7 @@ function openTelephoneDiv(telphone, username) {
 		resizable : false,
 		show : 'slide',
 		width : 400,
+		title : '发送手机短信',
 		buttons : {
 			"保存" : function() {
 				if (Validater.isBlank($("#contentID").text())
@@ -149,36 +161,31 @@ function jumpPage() {
 	query(page);
 }
 
-// 条件查询
-
-function sort1() {
-	$("#queryType").val("1");
-	query(1);
+// 复制地址
+function showItemUrl(itemUrl, grade, comment) {
+	$("#gradeCommon").text(comment + "【" + grade + "】");
+	$("#itemContent").empty();
+	var itemUrls = itemUrl.split(",");
+	for (var i = 0; i < itemUrls.length; i++) {
+		var tr = $("<tr>" + "<td>" + "地址" + (i + 1) + "：" + "	</td>" + "	<td>"
+				+ "	<input  type='text' readonly='readonly'  value="
+				+ itemUrls[i] + " style='width: 200px'/>" + "		</td>" + "	<td>"
+				+ "	<a  href=\"javascript:copyToClipboard(\'" + itemUrls[i]
+				+ "\')\"" + "		style='cursor: pointer;''> <img border='0'"
+				+ "		src='images/renwu-3.png''> </a>" + "</td>" + "</tr>");
+		$("#itemContent").append(tr);
+	}
+	$("#addressDIV").dialog("open");
 }
-
-function sort2() {
-	$("#queryType").val("2");
-	query(1);
+// 直接跳转地址
+function openItemUrl(itemUrl, grade, comment) {
+	var itemUrls = itemUrl.split(",");
+	if (itemUrls.length == 1) {
+		window.open(itemUrls[0], "_blank");
+	} else {
+		showItemUrl(itemUrl, grade, comment);
+	}
 }
-
-function sort3() {
-	$("#queryType").val("3");
-	query(1);
-}
-function sort4() {
-	$("#queryType").val("4");
-	query(1);
-}
-function sort5() {
-	$("#queryType").val("5");
-	query(1);
-}
-
-function sort6() {
-	$("#queryType").val("6");
-	query(1);
-}
-
 // 条件查询
 function sort(sortValue) {
 	$("select[name='creditTaskVO.status']").val(sortValue);

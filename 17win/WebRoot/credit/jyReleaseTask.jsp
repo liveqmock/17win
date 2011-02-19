@@ -216,7 +216,7 @@
 								自定义刷新时间
 								<input type="text"
 									value="<s:property value="#request.autoRefresh"/>"
-									style="width: 25px" id="autoreFresh" title="必须大于5秒，空表示不刷新！" />
+									style="width: 25px" id="autoreFresh" alt="必须大于5秒，空表示不刷新！" />
 								<input type="hidden"
 									value="<s:property
 											value="creditTaskVO.nowPage" />"
@@ -226,7 +226,7 @@
 										value="creditTaskVO.pageCount" />"
 									id="pageCount">
 								秒
-								<A title=点击刷新 href="javascript:location.reload(true);"
+								<A alt=点击刷新 href="javascript:location.reload(true);"
 									class="yell_font"> <SPAN
 									class="taskAnniu<s:property value="#request.platformType"/>">刷新页面</SPAN>
 								</A>
@@ -246,10 +246,10 @@
 									商品信息
 								</td>
 								<td nowrap="nowrap" align="center">
-									接手方
+									接手方信息
 								</td>
 								<td nowrap="nowrap" align="center">
-									接手时间
+									发布方信息
 								</td>
 								<td nowrap="nowrap" align="center">
 									状&nbsp;&nbsp;态
@@ -262,24 +262,24 @@
 						<tbody>
 							<s:iterator value="#request.result" status="status" id="task">
 								<tr onmouseover="this.className='over'"
-									onmouseout="this.className='out'"  >
+									onmouseout="this.className='out'">
 									<td align="center">
 										<s:if test="#task.taskType==1">
-											<img src="images/xnType.jpg" title="虚拟任务" />
+											<img src="images/xnType.jpg" alt="虚拟任务" />
 										</s:if>
 										<s:elseif test="#task.taskType==2">
-											<img src="images/swType.jpg" title="实物任务" />
+											<img src="images/swType.jpg" alt="实物任务" />
 										</s:elseif>
 										<s:elseif test="#task.taskType==3">
-											<img src="images/tcType.jpg" title="套餐任务" />
+											<img src="images/tcType.jpg" alt="套餐任务" />
 										</s:elseif>
 										<s:property value="#task.testID" />
 										<br>
 										<s:if test="#task.assignUser!=null && #task.assignUser!=''">
-											<img src="images/tdTask.gif" title="特定任务" />
+											<img src="images/tdTask.gif" alt="特定任务" />
 										</s:if>
 										<s:else>
-											<img src="images/ptTask.jpg" title="普通任务" />
+											<img src="images/ptTask.jpg" alt="普通任务" />
 										</s:else>
 										<s:date name="#task.releaseDate" format="yyyy-MM-dd HH:mm:ss" />
 									</td>
@@ -294,11 +294,11 @@
 									</td>
 									<td valign="middle" align="center">
 										<a style="cursor: pointer;"
-											onclick="copyToClipboard('<s:property value="#task.itemUrl" />')">
+											href="javascript:showItemUrl('<s:property value="#task.itemUrl" />','<s:property value="#task.grade" />','<s:property value="#task.comment" />');">
 											<img src="images/renwu-3.png" border="0"> </a>
 										<br>
-										<a target="_blank" title="点此直接打开商品地址"
-											href="<s:property value="#task.itemUrl" />"><img
+										<a alt="点此直接打开商品地址"
+											href="javascript:openItemUrl('<s:property value="#task.itemUrl" />','<s:property value="#task.grade" />','<s:property value="#task.comment" />');"><img
 												src="images/open.gif"> </a>
 									</td>
 									<td align="center">
@@ -314,8 +314,7 @@
 												请等片刻
 											</s:if>
 											<s:else>
-												<s:property value="#task.jsUsername" />
-												<br>
+
 												<img width="25" height="17" border="0" class="qqConnection"
 													style="vertical-align: middle;" class="tip"
 													src="http://wpa.qq.com/pa?p=1:<s:property value="#task.jsQQ" />:17">
@@ -336,11 +335,11 @@
 												</div>
 												<a
 													href="javascript:openTelephoneDiv('<s:property value="#task.jsTelphone" />','<s:property value="#task.fbUsername" />')"><img
-														title="发送手机短信" style="vertical-align: middle;"
+														alt="发送手机短信" style="vertical-align: middle;"
 														src="images/sendTelphone.png"> </a>
 												<a
 													href="javascript:openTelephoneDiv('<s:property value="#task.jsTelphone" />','<s:property value="#task.fbUsername" />')"><img
-														title="发送站内信" style="vertical-align: middle;"
+														alt alt="发送站内信" style="vertical-align: middle;"
 														src="images/sms.gif"> </a>
 												<img border="0" class="qqConnection"
 													style="vertical-align: middle;" class="tip"
@@ -361,6 +360,13 @@
 														</tr>
 													</table>
 												</div>
+												<br>
+												<a
+													style="color: white; text-decoration: underline; cursor: pointer;"
+													alt="复制买号"
+													onclick="copyToClipboard('<s:property value="#task.buyername" />');"
+													href="javascript:void(0)"><font color="#FF0000"><s:property
+															value="#task.buyername" /> </font> </a>
 											</s:else>
 										</s:else>
 									</td>
@@ -381,14 +387,14 @@
 										没到时间
 									</s:elseif>
 										<s:else>
-											<s:date name="#task.receiveDate" format="MM-dd HH:mm:ss" />
+											<s:date name="#task.receiveDate" format="yyyy-MM-dd HH:mm" />
 											<br>
 											<a
 												style="color: white; text-decoration: underline; cursor: pointer;"
-												title="复制买号"
-												onclick="copyToClipboard('<s:property value="#task.buyername" />');"
-												href="javascript:void(0)"><font color="#FF0000"><s:property
-														value="#task.buyername" /> </font> </a>
+												alt="复制掌柜"
+												href="javascript:copyToClipboard('<s:property value="#task.sellname" />');"><font
+												color="#FF0000"><s:property value="#task.sellname" />
+											</font> </a>
 										</s:else>
 									</td>
 
@@ -397,7 +403,7 @@
 											等待接手
 										</s:if>
 										<s:elseif test="#task.status==-1">
-										申诉中
+										任务被申诉中
 										</s:elseif>
 										<s:elseif test="#task.status==0">
 											<s:if test="#task.timeingTime!=null">
@@ -422,7 +428,7 @@
 												等待买家付款<br>
 											<s:if test="#task.status!=1">
 											剩余
-												<font color="red"> <s:property
+												<font color="red"><s:property
 														value="#task.remainTime" /> </font>
 											分钟
 											</s:if>
@@ -448,11 +454,10 @@
 										<s:else>
 												任务完成
 											</s:else>
-										<br>
 									</td>
 									<td align="center">
 										<s:if test="#task.status==0">
-											<a title="可能由于你填写错误，可以重新进行填写！"
+											<a alt="可能由于你填写错误，可以重新进行填写！"
 												href="javascript:cancelTask(<s:property value="#task.id"/>)"><span
 												class="anniu">取消重填</span> </a>
 											<br>
@@ -460,34 +465,34 @@
 													name="#task.timeingTime" format="yyyy-MM-dd HH-mm-ss" /> </font>
 										</s:if>
 										<s:elseif test="#task.status==1">
-											<a title="可能由于你填写错误，可以重新进行填写！"
+											<a alt="可能由于你填写错误，可以重新进行填写！"
 												href="javascript:cancelTask(<s:property value="#task.id"/>)"><span
 												class="anniu">取消重填</span> </a>
 											<br>
-											<a title="刷新排前可以使您的任务在发布区靠前！"
+											<a alt="刷新排前可以使您的任务在发布区靠前！"
 												href="javascript:toFirstTask(<s:property value="#task.id"/>)"><span
 												class="anniu2">刷新排前</span> </a>
 										</s:elseif>
 										<s:elseif test="#task.status==-2">
-											<a title="您对该人信任之后，可以允许他接您的任务！"
+											<a alt="您对该人信任之后，可以允许他接您的任务！"
 												href="javascript:audiReceiver(<s:property value="#task.id"/>)"><span
 												class="anniu">审核接收人</span> </a>
 											<br>
-											<a title="如果对方没有被您审核过，可以清理买家！"
+											<a alt="如果对方没有被您审核过，可以清理买家！"
 												href="javascript:clearReceiver(<s:property value="#task.id"/>)"><span
 												class="anniu2">清理买家</span> </a>
 											<br>
-											<a title="为对方加时"
+											<a alt="为对方加时"
 												href="javascript:addTime('<s:property value="#task.id"/>')"><span
 												class="anniu">为他加时</span> </a>
 										</s:elseif>
 										<s:elseif test="#task.status==2">
-											<a title="为对方加时"
+											<a alt="为对方加时"
 												href="javascript:addTime('<s:property value="#task.id"/>')"><span
 												class="anniu">为他加时</span> </a>
 										</s:elseif>
 										<s:elseif test="#task.status==3">
-											<a title="请您在确认后，进行发货！"
+											<a alt="请您在确认后，进行发货！"
 												href="javascript:dispatch('<s:property value="#task.id"/>')"><span
 												class="anniu">我已发货</span> </a>
 										</s:elseif>
@@ -500,7 +505,7 @@
 												</s:else>
 										</s:elseif>
 										<s:elseif test="#task.status==5">
-											<a title="请您好评，结束任务！"
+											<a alt="请您好评，结束任务！"
 												href="javascript:sellerEvaluate('<s:property value="#task.id"/>')"><span
 												class="anniu">确认好评</span> </a>
 										</s:elseif>
@@ -534,7 +539,7 @@
 									<TD colspan="7" align="left">
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 共
 										<font color="blue"><b><s:property
-													value="creditTaskVO.dataCount" /> </b> </font> 条主题&nbsp;&nbsp;&nbsp;
+													value="creditTaskVO.dataCount" /> </b> </font> 条记录&nbsp;&nbsp;&nbsp;
 										<a href="javascript:firstPage()">首页</a>
 										<a href="javascript:prevPage()">上一页</a>&nbsp;
 										<a href="javascript:nextPage()">下一页</a>&nbsp;
@@ -561,6 +566,7 @@
 				</div>
 			</div>
 		</s:form>
+		<!-- 发送手机短信层 -->
 		<div id="sendSmsDIV" title="发送手机短信" style="display: none">
 			<s:form action="taskManager/task!sendMsg.php" target="_blank"
 				id="sendSmsForm" theme="simple">
@@ -593,6 +599,29 @@
 					</tr>
 				</table>
 			</s:form>
+		</div>
+		<!-- 显示地址 -->
+		<div id="addressDIV" title="发布方提醒" style="display: none">
+			<table cellpadding="0" cellspacing="0" border="0" width="100%">
+				<tr>
+					<td>
+						<font style="font: 14px;" color="red"><b> 您的要求:</b> </font>
+						<span id="gradeCommon"> 24小时带字好评 </span>
+					</td>
+				</tr>
+			</table>
+			<hr>
+			<table cellpadding="0" cellspacing="0" border="0" width="100%">
+				<thead>
+					<tr>
+						<td colspan="3" align="sleft">
+							<font style="font: 14px;" color="red"><b> 商品地址：</b>
+						</td>
+					</tr>
+				</thead>
+				<tbody id="itemContent">
+				</tbody>
+			</table>
 		</div>
 		<s:include value="../common/footDuan.jsp"></s:include>
 	</BODY>

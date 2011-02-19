@@ -28,7 +28,9 @@
 		<SCRIPT src="js/jquery-ui-1.8.4.custom.min.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="credit/task.js" type="text/javascript"></SCRIPT>
 		<script type="text/javascript" src="js/utils.js">
+		
 		</script>
+		<script src="js/x_alt.js" type="text/javascript"></script>
 	</HEAD>
 	<BODY>
 		<s:include value="../common/title.jsp"></s:include>
@@ -78,13 +80,13 @@
 								刷新时间
 								<input type="text"
 									value="<s:property value="#request.autoRefresh"/>"
-									style="width: 25px" id="autoreFresh" title="必须大于5秒，空表示不刷新！" />
+									style="width: 25px" id="autoreFresh" alt="必须大于5秒，空表示不刷新！" />
 								<input type="hidden"
 									value="<s:property value="#request.platformType"/>"
 									id="platformType" />
 								<input type="hidden" id="currTaskId" />
 								秒
-								<A title=点击刷新 href="javascript:location.reload(true);"
+								<A alt=点击刷新 href="javascript:location.reload(true);"
 									class="yell_font"> <SPAN
 									class="taskAnniu<s:property value="#request.platformType"/>">刷新页面</SPAN>
 								</A>
@@ -120,28 +122,28 @@
 									onmouseout="this.className='out'">
 									<td align="center">
 										<s:if test="#task.taskType==1">
-											<img src="images/xnType.jpg" title="虚拟任务" />
+											<img src="images/xnType.jpg" alt="虚拟任务" />
 										</s:if>
 										<s:elseif test="#task.taskType==2">
-											<img src="images/swType.jpg" title="实物任务" />
+											<img src="images/swType.jpg" alt="实物任务" />
 										</s:elseif>
 										<s:elseif test="#task.taskType==3">
-											<img src="images/tcType.jpg" title="套餐任务" />
+											<img src="images/tcType.jpg" alt="套餐任务" />
 										</s:elseif>
 										<s:property value="#task.testID" />
 										<br>
 										<s:if test="#task.assignUser!=null &&  #task.assignUser!=''">
-											<img src="images/tdTask.gif" title="特定任务" />
+											<img src="images/tdTask.gif" alt="特定任务" />
 										</s:if>
 										<s:else>
-											<img src="images/ptTask.jpg" title="普通任务" />
+											<img src="images/ptTask.jpg" alt="普通任务" />
 										</s:else>
 										<s:date name="#task.releaseDate" format="yyyy-MM-dd HH:mm:ss" />
 									</td>
 									<td align="center">
 										<SPAN style="Z-INDEX: 20; POSITION: relative"> <a
 											href="javascript:reply('<s:property value='#task.fbUsername' />');"
-											title="发送站内信息"><s:property value="#task.fbUsername" /> </a>
+											alt="发送站内信息"><s:property value="#task.fbUsername" /> </a>
 										</SPAN>
 										<br>
 										<img
@@ -181,31 +183,31 @@
 									<td align="center">
 										<s:if test="#task.status==1">
 											<s:if test="#task.fbUsername==#session.userLogin.username">
-												<img src="images/disable.gif" title="不能接自己的任务，特定任务" />
+												<img src="images/disable.gif" alt="不能接自己的任务，特定任务" />
 											</s:if>
 											<s:else>
 												<s:if
-													test="#task.assignUser!=null && #task.assignUser!=#session.userLogin.username">
-													<img src="images/disable.gif" title="特定任务,你不是指定人" />
+													test="(#task.assignUser!='' && #task.assignUser!=null )&& #task.assignUser!=#session.userLogin.username">
+													<img src="images/disable.gif" alt="特定任务,你不是指定人" />
 												</s:if>
 												<s:elseif
-													test="#task.assignUser!=null && #task.assignUser==#session.userLogin.username ">
-													<a title="接手，并完成任务可获得存款和发布点" style="CURSOR: pointer"
+													test="(#task.assignUser!='' &&  #task.assignUser!=null) && #task.assignUser==#session.userLogin.username ">
+													<a alt="接手，并完成任务可获得存款和发布点" style="CURSOR: pointer"
 														onClick="receiveTask('<s:property value="#task.id"/>')">
 														<img src="images/qiang.gif" /> </a>
 												</s:elseif>
 												<s:else>
-													<a title="接手，并完成任务可获得存款和发布点" style="CURSOR: pointer"
+													<a alt="接手，并完成任务可获得存款和发布点" style="CURSOR: pointer"
 														onClick="receiveTask('<s:property value="#task.id"/>')">
 														<img src="images/qiang.gif" /> </a>
 												</s:else>
 											</s:else>
 										</s:if>
 										<s:elseif test="#task.status==6">
-											<img src="images/disable.gif" title="任务已经完成" />
+											<img src="images/disable.gif" alt="任务已经完成" />
 										</s:elseif>
 										<s:else>
-											<img src="images/disable.gif" title="任务操作中" />
+											<img src="images/disable.gif" alt="任务操作中" />
 										</s:else>
 									</TD>
 								</tr>

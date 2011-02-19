@@ -916,62 +916,150 @@ public class CreditTaskService extends BaseService {
 			}
 			creditTaskDAO.flushSession();
 			// 分页查询
-			Long count = (Long) creditTaskDAO
-					.uniqueResultObject(
-							"select count(*) from CreditTaskEntity as _task inner join _task.receivePerson as _user   where     _user.id=:userId and   _task.type=:platformType "
-									+ orderAndWhereReceivedTaskStr(queryType,
-											true), new String[] { "userId",
-									"platformType" }, new Object[] {
-									getLoginUser().getId(), platformType });
-			List<Object[]> resultTemp = creditTaskDAO
-					.pageQuery(
-							"select _task.testID , _task.releaseDate ,_fbuser.username,_fbuser.qq,_task.money,_task.updatePrice ,_task.releaseDot "// 6
-									+ ", _task.itemUrl , _seller.name,_seller.shopURL,_buyer.name,_jsuser.upgradeScore,_task.status" // 12
-									+ ", _task.remainTime,_task.taskType ,_task.intervalHour,_task.comment,_task.address ,_task.grade,_task.id ," // 19
-									+ "_fbuser.ww,_task.waybill,_task.addtionMoney,_task.addtionReleaseDot,_fbuser.upgradeScore," // 24
-									+ "_task.assignUser,_fbuser.telephone,_jsuser.username,_task.receiveDate" // index=28
-									+ " from CreditTaskEntity as _task inner join _task.releasePerson as _fbuser  inner join _task.seller as _seller left join _task.receivePerson as _jsuser left join _task.buyer as _buyer  where     _jsuser.id=:userId and   _task.type=:platformType "
-									+ orderAndWhereReceivedTaskStr(queryType,
-											false), new String[] { "userId",
-									"platformType" }, new Object[] {
-									getLoginUser().getId(), platformType },
-							creditTaskVO.getStart(), creditTaskVO.getLimit());
-			// 设置
-			List<CreditTaskVO> result = new ArrayList<CreditTaskVO>(resultTemp
-					.size());
-			CreditTaskVO creditTaskVO2 = null;
-			for (Object[] objs : resultTemp) {
-				creditTaskVO2 = new CreditTaskVO();
-				creditTaskVO2.setTestID((String) objs[0]);
-				creditTaskVO2.setReleaseDate((Date) objs[1]);
-				creditTaskVO2.setFbUsername((String) objs[2]);
-				creditTaskVO2.setFbQQ((String) objs[3]);
-				creditTaskVO2.setMoney((Double) objs[4]);
-				creditTaskVO2.setUpdatePrice((Boolean) objs[5]);
-				creditTaskVO2.setReleaseDot((Double) objs[6]);
-				creditTaskVO2.setItemUrl((String) objs[7]);
-				creditTaskVO2.setSellname((String) objs[8]);
-				creditTaskVO2.setFbShopURL((String) objs[9]);
-				creditTaskVO2.setBuyername((String) objs[10]);
-				creditTaskVO2.setJsUpgradeScore((Integer) objs[11]);
-				creditTaskVO2.setStatus((String) objs[12]);
-				creditTaskVO2.setRemainTime((Integer) objs[13]);
-				creditTaskVO2.setTaskType((String) objs[14]);
-				creditTaskVO2.setIntervalHour((Integer) objs[15]);
-				creditTaskVO2.setComment((String) objs[16]);
-				creditTaskVO2.setAddress((String) objs[17]);
-				creditTaskVO2.setGrade((String) objs[18]);
-				creditTaskVO2.setId((Long) objs[19]);
-				creditTaskVO2.setFbQQ((String) objs[20]);
-				creditTaskVO2.setWaybill((String) objs[21]);
-				creditTaskVO2.setAddtionMoney((Double) objs[22]);
-				creditTaskVO2.setAddtionReleaseDot((Double) objs[23]);
-				creditTaskVO2.setFbUpgradeScore((Integer) objs[24]);
-				creditTaskVO2.setAssignUser((String) objs[25]);
-				creditTaskVO2.setFbTelphone((String) objs[26]);
-				creditTaskVO2.setJsUsername((String) objs[27]);
-				creditTaskVO2.setReceiveDate((Date) objs[28]);
-				result.add(creditTaskVO2);
+			List<String> paramNames = new ArrayList<String>();
+			List paramValues = new ArrayList();
+			StringBuffer countSQL = new StringBuffer(
+					"select count(*) from CreditTaskEntity as _task inner join _task.receivePerson as _user  "
+							+ " where     _user.id=:userId and   _task.type=:platformType ");
+			StringBuffer resultSQL = new StringBuffer(
+					"select _task.testID , _task.releaseDate ,_fbuser.username,_fbuser.qq,_task.money,_task.updatePrice ,_task.releaseDot "// 6
+							+ ", _task.itemUrl , _seller.name,_seller.shopURL,_buyer.name,_jsuser.upgradeScore,_task.status" // 12
+							+ ", _task.remainTime,_task.taskType ,_task.intervalHour,_task.comment,_task.address ,_task.grade,_task.id ," // 19
+							+ "_fbuser.ww,_task.waybill,_task.addtionMoney,_task.addtionReleaseDot,_fbuser.upgradeScore," // 24
+							+ "_task.assignUser,_fbuser.telephone,_jsuser.username,_task.receiveDate" // index=28
+							+ " from CreditTaskEntity as _task inner join _task.releasePerson as _fbuser  inner join _task.seller as _seller left join _task.receivePerson as _jsuser left join _task.buyer as _buyer "
+							+ " where     _jsuser.id=:userId and   _task.type=:platformType ");
+			paramNames.add("userId");
+			paramNames.add("platformType");
+			paramValues.add(getLoginUser().getId());
+			paramValues.add(platformType);
+			if (!StringUtils.isBlank(creditTaskVO.getTestID())) {
+				countSQL.append("and _task.testID=:testID ");
+				resultSQL.append("and _task.testID=:testID ");
+				paramNames.add("testID");
+				paramValues.add(creditTaskVO.getTestID());
+			}
+			if (!StringUtils.isBlank(creditTaskVO.getJsUsername())) {
+				countSQL.append("and _jsuser.username=:jsUsername ");
+				resultSQL.append("and _jsuser.username=:jsUsername ");
+				paramNames.add("jsUsername");
+				paramValues.add(creditTaskVO.getJsUsername());
+			}
+			if (!StringUtils.isBlank(creditTaskVO.getSellname())) {
+				countSQL.append("and _seller.name=:sellername ");
+				resultSQL.append("and _jsuser.username=:sellername ");
+				paramNames.add("sellername");
+				paramValues.add(creditTaskVO.getSellname());
+			}
+			// 发布 时间
+			if (creditTaskVO.getFbStartDate() != null
+					&& creditTaskVO.getFbEndDate() != null) {
+				countSQL
+						.append(" and (_task.releaseDate>=:fbStartDate and _task.releaseDate<=:fbEndDate) ");
+				resultSQL
+						.append(" and (_task.releaseDate>=:fbStartDate and _task.releaseDate<=:fbEndDate) ");
+				paramNames.add("fbStartDate");
+				paramNames.add("fbEndDate");
+				paramValues.add(creditTaskVO.getFbStartDate());
+				paramValues.add(creditTaskVO.getFbEndDate());
+			} else if (creditTaskVO.getFbStartDate() != null) {
+				resultSQL.append(" and _task.releaseDate>=:fbStartDate  ");
+				countSQL.append(" and  _task.releaseDate>=:fbStartDate   ");
+				paramNames.add("fbStartDate");
+				paramValues.add(creditTaskVO.getFbStartDate());
+			} else if (creditTaskVO.getFbEndDate() != null) {
+				resultSQL.append(" and    _task.releaseDate>=:fbEndDate  ");
+				countSQL.append(" and   _task.releaseDate>=:fbEndDate  ");
+				paramNames.add("fbEndDate");
+				paramValues.add(creditTaskVO.getFbEndDate());
+			}
+			// 接手 时间
+			if (creditTaskVO.getJsStartDate() != null
+					&& creditTaskVO.getJsEndDate() != null) {
+				countSQL
+						.append(" and (_task.receiveDate>=:jsStartDate and _task.receiveDate<=:jsEndDate) ");
+				resultSQL
+						.append(" and (_task.receiveDate>=:jsStartDate and _task.receiveDate<=:jsEndDate) ");
+				paramNames.add("jsStartDate");
+				paramNames.add("jsEndDate");
+				paramValues.add(creditTaskVO.getJsStartDate());
+				paramValues.add(creditTaskVO.getJsEndDate());
+			} else if (creditTaskVO.getJsStartDate() != null) {
+				resultSQL.append(" and _task.receiveDate>=:jsStartDate  ");
+				countSQL.append(" and  _task.receiveDate>=:jsStartDate   ");
+				paramNames.add("jsStartDate");
+				paramValues.add(creditTaskVO.getJsStartDate());
+			} else if (creditTaskVO.getJsEndDate() != null) {
+				resultSQL.append(" and    _task.receiveDate>=:jsEndDate  ");
+				countSQL.append(" and   _task.receiveDate>=:jsEndDate  ");
+				paramNames.add("jsEndDate");
+				paramValues.add(creditTaskVO.getJsEndDate());
+			}
+			if (!StringUtils.isBlank(creditTaskVO.getBuyername())) {
+				countSQL.append("and _buyer.name=:buyname ");
+				resultSQL.append("and _buyer.name=:buyname ");
+				paramNames.add("buyname");
+				paramValues.add(creditTaskVO.getBuyername());
+			}
+			if (!StringUtils.isBlank(creditTaskVO.getStatus())) {
+				countSQL.append("and _task.status=:status ");
+				resultSQL.append("and _task.status=:status ");
+				paramNames.add("status");
+				paramValues.add(creditTaskVO.getStatus());
+			}
+			if (!StringUtils.isBlank(creditTaskVO.getTaskType())) {
+				countSQL.append("and _task.taskType=:taskType ");
+				resultSQL.append("and _task.taskType=:taskType ");
+				paramNames.add("taskType");
+				paramValues.add(creditTaskVO.getTaskType());
+			}
+			resultSQL.append(" order by _task.releaseDate desc ");
+			Long count = (Long) creditTaskDAO.uniqueResultObject(countSQL
+					.toString(), paramNames.toArray(paramNames
+					.toArray(new String[paramNames.size()])), paramValues
+					.toArray(new Object[paramValues.size()]));
+			List<CreditTaskVO> result = new ArrayList<CreditTaskVO>(count
+					.intValue());
+			if (count > 0) {
+				List<Object[]> resultTemp = creditTaskDAO.pageQuery(resultSQL
+						.toString(), paramNames.toArray(paramNames
+						.toArray(new String[paramNames.size()])), paramValues
+						.toArray(new Object[paramValues.size()]), creditTaskVO
+						.getStart(), creditTaskVO.getLimit());
+				CreditTaskVO creditTaskVO2 = null;
+				for (Object[] objs : resultTemp) {
+					creditTaskVO2 = new CreditTaskVO();
+					creditTaskVO2.setTestID((String) objs[0]);
+					creditTaskVO2.setReleaseDate((Date) objs[1]);
+					creditTaskVO2.setFbUsername((String) objs[2]);
+					creditTaskVO2.setFbQQ((String) objs[3]);
+					creditTaskVO2.setMoney((Double) objs[4]);
+					creditTaskVO2.setUpdatePrice((Boolean) objs[5]);
+					creditTaskVO2.setReleaseDot((Double) objs[6]);
+					creditTaskVO2.setItemUrl((String) objs[7]);
+					creditTaskVO2.setSellname((String) objs[8]);
+					creditTaskVO2.setFbShopURL((String) objs[9]);
+					creditTaskVO2.setBuyername((String) objs[10]);
+					creditTaskVO2.setJsUpgradeScore((Integer) objs[11]);
+					creditTaskVO2.setStatus((String) objs[12]);
+					creditTaskVO2.setRemainTime((Integer) objs[13]);
+					creditTaskVO2.setTaskType((String) objs[14]);
+					creditTaskVO2.setIntervalHour((Integer) objs[15]);
+					creditTaskVO2.setComment((String) objs[16]);
+					creditTaskVO2.setAddress((String) objs[17]);
+					creditTaskVO2.setGrade((String) objs[18]);
+					creditTaskVO2.setId((Long) objs[19]);
+					creditTaskVO2.setFbWW((String) objs[20]);
+					creditTaskVO2.setWaybill((String) objs[21]);
+					creditTaskVO2.setAddtionMoney((Double) objs[22]);
+					creditTaskVO2.setAddtionReleaseDot((Double) objs[23]);
+					creditTaskVO2.setFbUpgradeScore((Integer) objs[24]);
+					creditTaskVO2.setAssignUser((String) objs[25]);
+					creditTaskVO2.setFbTelphone((String) objs[26]);
+					creditTaskVO2.setJsUsername((String) objs[27]);
+					creditTaskVO2.setReceiveDate((Date) objs[28]);
+					result.add(creditTaskVO2);
+				}
 			}
 			creditTaskVO.setDataCount(count.intValue());
 			putPlatformByRequest(WinUtils.changeType2Platform(platformType));

@@ -48,6 +48,16 @@ $(document).ready(function() {
 					$("#showTip").text(value.length);
 				}
 			});
+
+	$("#addressDIV").dialog({
+				autoOpen : false,
+				draggable : false,
+				hide : 'slide',
+				modal : true,
+				resizable : false,
+				show : 'slide',
+				width : 400
+			});
 });
 
 // 弹出发送手机短信层
@@ -62,7 +72,8 @@ function openTelephoneDiv(telphone, username) {
 		modal : true,
 		resizable : false,
 		show : 'slide',
-		width : 400,
+		width : 400, 
+		title:'发送手机短信',
 		buttons : {
 			"发送" : function() {
 				if (Validater.isBlank($("#contentID").text())
@@ -178,7 +189,31 @@ function jumpPage() {
 	var page = parseInt($("#toPageSelect").val());
 	query(page);
 }
-
+//复制地址
+function showItemUrl(itemUrl,grade,comment) {
+	$("#gradeCommon").text(comment+"【"+grade+"】");
+	$("#itemContent").empty();
+	var itemUrls = itemUrl.split(",");
+	for (var i = 0; i < itemUrls.length; i++) {
+		var tr = $("<tr>" + "<td>" + "地址" + (i + 1) + "：" +"	</td>" + "	<td>"
+				+ "	<input  type='text' readonly='readonly'  value="
+				+ itemUrls[i] + " style='width: 200px'/>" + "		</td>" + "	<td>"
+				+ "	<a  href=\"javascript:copyToClipboard(\'" + itemUrls[i]
+				+ "\')\"" + "		style='cursor: pointer;''> <img border='0'"
+				+ "		src='images/renwu-3.png''> </a>" + "</td>" + "</tr>");
+		$("#itemContent").append(tr);
+	}
+	$("#addressDIV").dialog("open");
+}
+//直接跳转地址
+function openItemUrl(itemUrl,grade,comment) {
+	var itemUrls = itemUrl.split(",");
+	if(itemUrls.length==1){
+		window.open(itemUrls[0],"_blank");
+	}else{
+		showItemUrl(itemUrl,grade,comment);
+	}
+}
 // 条件查询
 function sort(sortValue) {
 	$("select[name='creditTaskVO.status']").val(sortValue);
