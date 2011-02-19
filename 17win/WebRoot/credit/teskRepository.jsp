@@ -70,39 +70,17 @@
 						<s:iterator value="#request.result" status="status" id="task">
 							<tr style="BORDER-BOTTOM: #06314a 1px dashed;">
 								<td valign="top" align="center">
-									<font color="red"><s:property value="#task.money" /> </font>
-									<font color="blue">+<s:property
-											value="#task.addtionMoney" /> </font>元
-									<s:if test="#test.updatePrice">(需改价格)</s:if>
-									<s:else>(全额相等)</s:else>
-									<br>
-									<font color="red"><s:property value="#task.releaseDot" />
-									</font>
-									<font color="blue">+<s:property
-											value="#task.addtionReleaseDot" /> </font> 个发布点
+									<s:property value="#task.money" />
+									+
+									<s:property value="#task.addtionMoney" />
 								</td>
 								<td valign="top" align="center">
-									<input type="text" readonly="readonly"
-										title="<s:property value="#task.itemUrl" />"
-										style="width: 60px"
-										value="<s:property value="#task.itemUrl" />" />
-									<br>
-									<input type="button" value="GO" style="cursor: pointer;"
-										class="goItemButton">
-									<br>
-									<font color="#FF0000">掌柜:<s:property
-											value="#task.sellerName" /> </font>
+									<a style="cursor: pointer;"
+										onclick="copyToClipboard('<s:property value="#task.itemUrl" />')">
+										<img src="images/renwu-3.png" border="0"> </a>
 								</td>
 								<td valign="top" align="center">
-									<s:if test="#task.protect">
-									 	需要审核
-									</s:if>
-									<s:else>
-									不需审核
-								</s:else>
-									<s:if test="#task.address">
-									系统提供地址
-									 </s:if>
+									<s:property value="#task.name" />
 								</td>
 								<td valign="top" align="center">
 									<s:if test="#task.lastDispathDate!=null">
@@ -110,7 +88,7 @@
 											format="yyyy-MM-dd HH-mm-ss" />
 									</s:if>
 									<s:else>
-									还没发送过！
+									还没发送过
 								</s:else>
 								</td>
 

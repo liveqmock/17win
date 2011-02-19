@@ -8,8 +8,6 @@
 			String basePath = request.getScheme() + "://"
 					+ request.getServerName() + ":" + request.getServerPort()
 					+ "/";
-		%>
-		<%
 			//让浏览器不缓存jsp页面 
 			response.setHeader("Pragma", "No-cache");// http1.0 
 			response.setHeader("Cache-Control", "no-store,no-cache"); //http1.1 
@@ -33,13 +31,13 @@
 			rel="stylesheet" type="text/css" />
 		<SCRIPT src="js/validater.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="js/utils.js" type="text/javascript"></SCRIPT>
-		<script type="text/javascript" src="js/jquery-ui-1.8.4.custom.min.js">
+		<script src="js/jquery-ui-1.8.4.custom.min.js" type="text/javascript">
 		</script>
 		<script src="<%=basePath%>js/My97DatePicker/WdatePicker.js"
 			defer="defer" type="text/javascript"></script>
 		<script
 			src="http://cdn.jquerytools.org/1.2.1/tiny/jquery.tools.min.js"></script>
-
+		<script src="js/x_alt.js" type="text/javascript"></script>
 		<SCRIPT src="credit/jyReleaseTask.js" type="text/javascript"></SCRIPT>
 		<style>
 /* trigger button */
@@ -73,7 +71,7 @@
 		<s:include value="../common/title.jsp"></s:include>
 		<s:include value="../common/task/title.jsp"></s:include>
 		<s:form action="taskManager/task!initReleasedTast.php" theme="simple"
-			onsubmit="return validateForm()">
+			id="mainForm" onsubmit="return validateForm()">
 			<div align="center" id="partdiv">
 				<div align="center">
 					<DIV
@@ -115,7 +113,7 @@
 											</label>
 											<s:select listKey="key" listValue="value"
 												name="creditTaskVO.status"
-												list="#{'null':'全部','-1':'申诉中的任务','0':'定时任务','1':'等待接手人','1':'等待接手人','2':'已接手，等待接手方支付','3':'已支付，等待发布方发货','4':'已发货，等待接手方确认好评','4':'已发货，等待接手方确认好评','5':'接手方已确认好评，等待发布方好评','6':'任务已完成'}">
+												list="#{'':'全部','-1':'申诉中的任务','0':'定时任务','1':'等待接手人','-2':'已经接手，等待我审核','2':'已经接手，等待对方支付','3':'已经支付，等待我发货','4':'已经发货，等待对方好评','5':'已经好评，等待我好评','6':'任务已完成'}">
 											</s:select>
 										</td>
 									</tr>
@@ -147,7 +145,7 @@
 											</label>
 											<s:select listKey="key" listValue="value"
 												name="creditTaskVO.taskType"
-												list="#{'0':'全部','1':'虚拟','2':'实物','3':'套餐'}">
+												list="#{'':'全部','1':'虚拟','2':'实物','3':'套餐'}">
 											</s:select>
 										</td>
 									</tr>
@@ -170,9 +168,6 @@
 										<td align="left">
 											<input type="submit" style="cursor: pointer;" value="搜索"
 												name="btnSearch">
-											<input type="hidden"
-												value="<s:property value="#request.queryType"/>"
-												id="queryType">
 											<input type="hidden" name="platformType"
 												value='<s:property value="#request.platformType"/>'
 												id="platformType">
@@ -189,32 +184,32 @@
 								<IMG src="images/task_02.gif">
 							</DIV>
 							<DIV style="MARGIN-TOP: 12px; FLOAT: left; MARGIN-LEFT: 10px">
-								<A href="javascript:sort1()"><SPAN
+								<A href="javascript:sort('');"><SPAN
 									class="taskAnniu<s:property value="#request.platformType"/>">全部任务</SPAN>
 								</A>
-								<A href="javascript:sort9()"><SPAN
+								<A href="javascript:sort('0');"><SPAN
 									class="taskAnniu<s:property value="#request.platformType"/>">定时任务</SPAN>
 								</A>
-								<A href="javascript:sort7()"><SPAN
+								<A href="javascript:sort('1');"><SPAN
 									class="taskAnniu<s:property value="#request.platformType"/>">等待接手</SPAN>
 								</A>
-								<A href="javascript:sort8()"><SPAN
+								<A href="javascript:sort('-2');"><SPAN
 									class="taskAnniu<s:property value="#request.platformType"/>">等待审核</SPAN>
 								</A>
-								<A href="javascript:sort2()"><SPAN
+								<A href="javascript:sort('2');"><SPAN
 									class="taskAnniu<s:property value="#request.platformType"/>">等待支付</SPAN>
 								</A>
-								<A href="javascript:sort3()"><SPAN
+								<A href="javascript:sort('3');"><SPAN
 									class="taskAnniu<s:property value="#request.platformType"/>">等待发货</SPAN>
 								</A>
-								<A href="javascript:sort4()"><SPAN
+								<A href="javascript:sort('4');"><SPAN
 									class="taskAnniu<s:property value="#request.platformType"/>">等待好评</SPAN>
 								</A>
-								<A href="javascript:sort5()"><SPAN
+								<A href="javascript:sort('5')"><SPAN
 									class="taskAnniu<s:property value="#request.platformType"/>">等待完成</SPAN>
 								</A>
-								<A href="javascript:sort6()"><SPAN
-									class="taskAnniu<s:property value="#request.platformType"/>">已完成</SPAN>
+								<A href="javascript:sort('6')"><SPAN
+									class="taskAnniu<s:property value="#request.platformType"/>">已经完成</SPAN>
 								</A>
 							</DIV>
 							<DIV style="CLEAR: right; MARGIN-TOP: 12px; FLOAT: right">
@@ -267,7 +262,7 @@
 						<tbody>
 							<s:iterator value="#request.result" status="status" id="task">
 								<tr onmouseover="this.className='over'"
-									onmouseout="this.className='out'">
+									onmouseout="this.className='out'"  >
 									<td align="center">
 										<s:if test="#task.taskType==1">
 											<img src="images/xnType.jpg" title="虚拟任务" />

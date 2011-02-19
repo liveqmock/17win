@@ -35,7 +35,7 @@ $(document).ready(function() {
 
 			});
 });
- 
+
 // 弹出发送手机短信层
 function openTelephoneDiv(telphone, username) {
 	$("#telphoneID").val(telphone);
@@ -69,8 +69,8 @@ function openTelephoneDiv(telphone, username) {
 
 // 回复
 function reply(fromUsername) {
-	window.open("smsManager/sms!initSendSms.php?toUser=" + fromUsername+"&timeFlag="+new Date().getTime(),
-			"_blank");
+	window.open("smsManager/sms!initSendSms.php?toUser=" + fromUsername
+					+ "&timeFlag=" + new Date().getTime(), "_blank");
 }
 // 好评
 function buyerEvaluate(id) {
@@ -179,6 +179,11 @@ function sort6() {
 	query(1);
 }
 
+// 条件查询
+function sort(sortValue) {
+	$("select[name='creditTaskVO.status']").val(sortValue);
+	$("#mainForm").submit();
+}
 // 查询
 function query(page) {
 	var pageCount = parseInt($("#pageCount").val());
@@ -188,7 +193,5 @@ function query(page) {
 		alert("页数必须在1-" + pageCount + "之间！");
 		return;
 	}
-	window.location.href = "taskManager/task!initReceivedTast.php"
-			+ "?platformType=" + platformType + "&queryType=" + queryType
-			+ "&page=" + page;
+	$("#mainForm").submit();
 }

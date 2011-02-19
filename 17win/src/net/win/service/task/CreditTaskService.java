@@ -19,6 +19,7 @@ import net.win.dao.TaskLinkManDAO;
 import net.win.dao.UserDAO;
 import net.win.dao.VipDAO;
 import net.win.entity.BuyerEntity;
+import net.win.entity.CapitalLogEntity;
 import net.win.entity.CreditTaskEntity;
 import net.win.entity.CreditTaskRepositoryEntity;
 import net.win.entity.SellerEntity;
@@ -47,7 +48,7 @@ import org.springframework.stereotype.Service;
  * @author xgj
  * 
  */
-@SuppressWarnings({"unused", "unchecked"})
+@SuppressWarnings( { "unused", "unchecked" })
 @Service("creditTaskService")
 public class CreditTaskService extends BaseService {
 	@Resource
@@ -288,18 +289,18 @@ public class CreditTaskService extends BaseService {
 		}
 		if (!userEntity.getStatus().equals("1")) {
 			switch (Integer.parseInt(userEntity.getStatus())) {
-				case 0 :
-					putAlertMsg("您当前的【状态】为【未激活状态】，请到个人中心激活！");
-					break;
-				case 2 :
-					putAlertMsg("您当前的【状态】为【冻结状态】，不能发布任务！");
-					break;
-				case 3 :
-					putAlertMsg("您当前的【状态】为【找密码状态】，可能有人试图盗取您的秘密，请联系管理员，不能发布任务！");
-					break;
-				default :
-					putAlertMsg("您当前的【状态】不是【正常状态】，不能发布任务！");
-					break;
+			case 0:
+				putAlertMsg("您当前的【状态】为【未激活状态】，请到个人中心激活！");
+				break;
+			case 2:
+				putAlertMsg("您当前的【状态】为【冻结状态】，不能发布任务！");
+				break;
+			case 3:
+				putAlertMsg("您当前的【状态】为【找密码状态】，可能有人试图盗取您的秘密，请联系管理员，不能发布任务！");
+				break;
+			default:
+				putAlertMsg("您当前的【状态】不是【正常状态】，不能发布任务！");
+				break;
 			}
 			putJumpSelfPage("userInfoManager/info!initActiave.php");
 			return JUMP;
@@ -348,16 +349,17 @@ public class CreditTaskService extends BaseService {
 
 		Integer year = Calendar.getInstance().get(Calendar.YEAR);
 		Integer month = Calendar.getInstance().get(Calendar.MONTH);
-		Boolean refuseFlag = (Long) creditTaskDAO.uniqueResultObject(hqlOne,
-				new String[]{"bid", "receiveIP", "year", "month", "itemUrl"},
-				new Object[]{buyerEntitiy.getId(), ip, year, month,
-						creditTask.getItemUrl()}) == 1;
+		Boolean refuseFlag = (Long) creditTaskDAO
+				.uniqueResultObject(hqlOne, new String[] { "bid", "receiveIP",
+						"year", "month", "itemUrl" }, new Object[] {
+						buyerEntitiy.getId(), ip, year, month,
+						creditTask.getItemUrl() }) == 1;
 		if (!refuseFlag) {
-			refuseFlag = (Long) creditTaskDAO
-					.uniqueResultObject(hqlSix, new String[]{"bid",
-							"receiveIP", "year", "month", "shopUrl"},
-							new Object[]{buyerEntitiy.getId(), ip, year, month,
-									creditTask.getSeller().getShopURL()}) == 6;
+			refuseFlag = (Long) creditTaskDAO.uniqueResultObject(hqlSix,
+					new String[] { "bid", "receiveIP", "year", "month",
+							"shopUrl" }, new Object[] { buyerEntitiy.getId(),
+							ip, year, month,
+							creditTask.getSeller().getShopURL() }) == 6;
 		}
 		if (refuseFlag) {
 			putJumpSelfPage("taskManager/task!initReceivedTast.php?platformType="
@@ -903,8 +905,8 @@ public class CreditTaskService extends BaseService {
 			List<CreditTaskEntity> tasks = creditTaskDAO
 					.list(
 							"select  _task from CreditTaskEntity as _task   inner join _task.receivePerson as _user where _user.id=:userId and _task.type=:platformType and (_task.status='2' or _task.status='-2' ) ",
-							new String[]{"userId", "platformType"},
-							new Object[]{getLoginUser().getId(), platformType});
+							new String[] { "userId", "platformType" },
+							new Object[] { getLoginUser().getId(), platformType });
 			for (CreditTaskEntity creditTaskEntity : tasks) {
 				Date currOperDate = creditTaskEntity.getReceiveDate();
 				Integer minuties = ((Long) ((System.currentTimeMillis() - currOperDate
@@ -918,9 +920,9 @@ public class CreditTaskService extends BaseService {
 					.uniqueResultObject(
 							"select count(*) from CreditTaskEntity as _task inner join _task.receivePerson as _user   where     _user.id=:userId and   _task.type=:platformType "
 									+ orderAndWhereReceivedTaskStr(queryType,
-											true), new String[]{"userId",
-									"platformType"}, new Object[]{
-									getLoginUser().getId(), platformType});
+											true), new String[] { "userId",
+									"platformType" }, new Object[] {
+									getLoginUser().getId(), platformType });
 			List<Object[]> resultTemp = creditTaskDAO
 					.pageQuery(
 							"select _task.testID , _task.releaseDate ,_fbuser.username,_fbuser.qq,_task.money,_task.updatePrice ,_task.releaseDot "// 6
@@ -930,9 +932,9 @@ public class CreditTaskService extends BaseService {
 									+ "_task.assignUser,_fbuser.telephone,_jsuser.username,_task.receiveDate" // index=28
 									+ " from CreditTaskEntity as _task inner join _task.releasePerson as _fbuser  inner join _task.seller as _seller left join _task.receivePerson as _jsuser left join _task.buyer as _buyer  where     _jsuser.id=:userId and   _task.type=:platformType "
 									+ orderAndWhereReceivedTaskStr(queryType,
-											false), new String[]{"userId",
-									"platformType"}, new Object[]{
-									getLoginUser().getId(), platformType},
+											false), new String[] { "userId",
+									"platformType" }, new Object[] {
+									getLoginUser().getId(), platformType },
 							creditTaskVO.getStart(), creditTaskVO.getLimit());
 			// 设置
 			List<CreditTaskVO> result = new ArrayList<CreditTaskVO>(resultTemp
@@ -1022,8 +1024,8 @@ public class CreditTaskService extends BaseService {
 			List<CreditTaskEntity> tasks = creditTaskDAO
 					.list(
 							"select  _task  from CreditTaskEntity as _task   inner join _task.releasePerson as _user where _user.id=:userId and _task.type=:platformType and (_task.status='2' or _task.status='-2' ) ",
-							new String[]{"userId", "platformType"},
-							new Object[]{getLoginUser().getId(), platformType});
+							new String[] { "userId", "platformType" },
+							new Object[] { getLoginUser().getId(), platformType });
 			for (CreditTaskEntity creditTaskEntity : tasks) {
 				Date currOperDate = creditTaskEntity.getReceiveDate();
 				Integer minuties = ((Long) ((System.currentTimeMillis() - currOperDate
@@ -1033,7 +1035,7 @@ public class CreditTaskService extends BaseService {
 			}
 			creditTaskDAO.flushSession();
 			// 分页查询
-			List paramNames = new ArrayList();
+			List<String> paramNames = new ArrayList<String>();
 			List paramValues = new ArrayList();
 			StringBuffer countSQL = new StringBuffer(
 					"select count(*) from CreditTaskEntity as _task inner join _task.releasePerson as _user   "
@@ -1050,70 +1052,132 @@ public class CreditTaskService extends BaseService {
 			paramNames.add("platformType");
 			paramValues.add(getLoginUser().getId());
 			paramValues.add(platformType);
-			if (!StringUtils.isBlank(creditTaskVO.getStatus())
-					&& !"null".equalsIgnoreCase(creditTaskVO.getStatus())) {
-				countSQL.append("and _task.status=:status");
-			}
 			if (!StringUtils.isBlank(creditTaskVO.getTestID())) {
-				countSQL.append("and _task.testID=:testID");
+				countSQL.append("and _task.testID=:testID ");
+				resultSQL.append("and _task.testID=:testID ");
+				paramNames.add("testID");
+				paramValues.add(creditTaskVO.getTestID());
 			}
 			if (!StringUtils.isBlank(creditTaskVO.getJsUsername())) {
-				countSQL.append("and _jsuser.username=:jsUsername");
+				countSQL.append("and _jsuser.username=:jsUsername ");
+				resultSQL.append("and _jsuser.username=:jsUsername ");
+				paramNames.add("jsUsername");
+				paramValues.add(creditTaskVO.getJsUsername());
 			}
-			if (creditTaskVO.getFbStartDate() == null) {
-				countSQL.append("and _task.releaseDate=:fbStartDate");
+			if (!StringUtils.isBlank(creditTaskVO.getSellname())) {
+				countSQL.append("and _seller.name=:sellername ");
+				resultSQL.append("and _jsuser.username=:sellername ");
+				paramNames.add("sellername");
+				paramValues.add(creditTaskVO.getSellname());
 			}
-
-			Long count = (Long) creditTaskDAO.uniqueResultObject();
-			List<Object[]> resultTemp = creditTaskDAO.pageQuery(
-
-			+orderAndWhereReleasedTaskStr(queryType, false), new String[]{
-					"userId", "platformType"}, new Object[]{
-					getLoginUser().getId(), platformType}, creditTaskVO
-					.getStart(), creditTaskVO.getLimit());
-
-			StringBuffer result = new StringBuffer();
-			if (!StringUtils.isBlank(taskCondition.getStatus())
-					&& !"null".equalsIgnoreCase(taskCondition.getStatus())) {
-				result.append(" and  and _task.status='3'");
+			// 发布 时间
+			if (creditTaskVO.getFbStartDate() != null
+					&& creditTaskVO.getFbEndDate() != null) {
+				countSQL
+						.append(" and (_task.releaseDate>=:fbStartDate and _task.releaseDate<=:fbEndDate) ");
+				resultSQL
+						.append(" and (_task.releaseDate>=:fbStartDate and _task.releaseDate<=:fbEndDate) ");
+				paramNames.add("fbStartDate");
+				paramNames.add("fbEndDate");
+				paramValues.add(creditTaskVO.getFbStartDate());
+				paramValues.add(creditTaskVO.getFbEndDate());
+			} else if (creditTaskVO.getFbStartDate() != null) {
+				resultSQL.append(" and _task.releaseDate>=:fbStartDate  ");
+				countSQL.append(" and  _task.releaseDate>=:fbStartDate   ");
+				paramNames.add("fbStartDate");
+				paramValues.add(creditTaskVO.getFbStartDate());
+			} else if (creditTaskVO.getFbEndDate() != null) {
+				resultSQL.append(" and    _task.releaseDate>=:fbEndDate  ");
+				countSQL.append(" and   _task.releaseDate>=:fbEndDate  ");
+				paramNames.add("fbEndDate");
+				paramValues.add(creditTaskVO.getFbEndDate());
 			}
-
-			Long currentDate = System.currentTimeMillis();
-			// 设置时间
-			List<CreditTaskVO> result = new ArrayList<CreditTaskVO>(resultTemp
-					.size());
-			CreditTaskVO creditTaskVO2 = null;
-			for (Object[] objs : resultTemp) {
-				creditTaskVO2 = new CreditTaskVO();
-				creditTaskVO2.setTestID((String) objs[0]);
-				creditTaskVO2.setReleaseDate((Date) objs[1]);
-				creditTaskVO2.setMoney((Double) objs[2]);
-				creditTaskVO2.setUpdatePrice((Boolean) objs[3]);
-				creditTaskVO2.setReleaseDot((Double) objs[4]);
-				creditTaskVO2.setItemUrl((String) objs[5]);
-				creditTaskVO2.setSellname((String) objs[6]);
-				creditTaskVO2.setStatus((String) objs[7]);
-				creditTaskVO2.setJsUsername((String) objs[8]);
-				creditTaskVO2.setBuyername((String) objs[9]);
-				creditTaskVO2.setJsQQ((String) objs[10]);
-				creditTaskVO2.setRemainTime((Integer) objs[11]);
-				creditTaskVO2.setTaskType((String) objs[12]);
-				creditTaskVO2.setIntervalHour((Integer) objs[13]);
-				creditTaskVO2.setComment((String) objs[14]);
-				creditTaskVO2.setAddress((String) objs[15]);
-				creditTaskVO2.setGrade((String) objs[16]);
-				creditTaskVO2.setId((Long) objs[17]);
-				creditTaskVO2.setFbShopURL((String) objs[18]);
-				creditTaskVO2.setJsWW((String) objs[19]);
-				creditTaskVO2.setWaybill((String) objs[20]);
-				creditTaskVO2.setTimeingTime((Date) objs[21]);
-				creditTaskVO2.setAddtionMoney((Double) objs[22]);
-				creditTaskVO2.setAddtionReleaseDot((Double) objs[23]);
-				creditTaskVO2.setAssignUser((String) objs[24]);
-				creditTaskVO2.setJsTelphone((String) objs[25]);
-				creditTaskVO2.setFbUsername((String) objs[26]);
-				creditTaskVO2.setReceiveDate((Date) objs[27]);
-				result.add(creditTaskVO2);
+			// 接手 时间
+			if (creditTaskVO.getJsStartDate() != null
+					&& creditTaskVO.getJsEndDate() != null) {
+				countSQL
+						.append(" and (_task.receiveDate>=:jsStartDate and _task.receiveDate<=:jsEndDate) ");
+				resultSQL
+						.append(" and (_task.receiveDate>=:jsStartDate and _task.receiveDate<=:jsEndDate) ");
+				paramNames.add("jsStartDate");
+				paramNames.add("jsEndDate");
+				paramValues.add(creditTaskVO.getJsStartDate());
+				paramValues.add(creditTaskVO.getJsEndDate());
+			} else if (creditTaskVO.getJsStartDate() != null) {
+				resultSQL.append(" and _task.receiveDate>=:jsStartDate  ");
+				countSQL.append(" and  _task.receiveDate>=:jsStartDate   ");
+				paramNames.add("jsStartDate");
+				paramValues.add(creditTaskVO.getJsStartDate());
+			} else if (creditTaskVO.getJsEndDate() != null) {
+				resultSQL.append(" and    _task.receiveDate>=:jsEndDate  ");
+				countSQL.append(" and   _task.receiveDate>=:jsEndDate  ");
+				paramNames.add("jsEndDate");
+				paramValues.add(creditTaskVO.getJsEndDate());
+			}
+			if (!StringUtils.isBlank(creditTaskVO.getBuyername())) {
+				countSQL.append("and _buyer.name=:buyname ");
+				resultSQL.append("and _buyer.name=:buyname ");
+				paramNames.add("buyname");
+				paramValues.add(creditTaskVO.getBuyername());
+			}
+			if (!StringUtils.isBlank(creditTaskVO.getStatus())) {
+				countSQL.append("and _task.status=:status ");
+				resultSQL.append("and _task.status=:status ");
+				paramNames.add("status");
+				paramValues.add(creditTaskVO.getStatus());
+			}
+			if (!StringUtils.isBlank(creditTaskVO.getTaskType())) {
+				countSQL.append("and _task.taskType=:taskType ");
+				resultSQL.append("and _task.taskType=:taskType ");
+				paramNames.add("taskType");
+				paramValues.add(creditTaskVO.getTaskType());
+			}
+			resultSQL.append(" order by _task.releaseDate desc ");
+			Long count = (Long) creditTaskDAO.uniqueResultObject(countSQL
+					.toString(), paramNames.toArray(paramNames
+					.toArray(new String[paramNames.size()])), paramValues
+					.toArray(new Object[paramValues.size()]));
+			List<CreditTaskVO> result = new ArrayList<CreditTaskVO>(count
+					.intValue());
+			if (count > 0) {
+				List<Object[]> resultTemp = creditTaskDAO.pageQuery(resultSQL
+						.toString(), paramNames.toArray(paramNames
+						.toArray(new String[paramNames.size()])), paramValues
+						.toArray(new Object[paramValues.size()]), creditTaskVO
+						.getStart(), creditTaskVO.getLimit());
+				CreditTaskVO creditTaskVO2 = null;
+				for (Object[] objs : resultTemp) {
+					creditTaskVO2 = new CreditTaskVO();
+					creditTaskVO2.setTestID((String) objs[0]);
+					creditTaskVO2.setReleaseDate((Date) objs[1]);
+					creditTaskVO2.setMoney((Double) objs[2]);
+					creditTaskVO2.setUpdatePrice((Boolean) objs[3]);
+					creditTaskVO2.setReleaseDot((Double) objs[4]);
+					creditTaskVO2.setItemUrl((String) objs[5]);
+					creditTaskVO2.setSellname((String) objs[6]);
+					creditTaskVO2.setStatus((String) objs[7]);
+					creditTaskVO2.setJsUsername((String) objs[8]);
+					creditTaskVO2.setBuyername((String) objs[9]);
+					creditTaskVO2.setJsQQ((String) objs[10]);
+					creditTaskVO2.setRemainTime((Integer) objs[11]);
+					creditTaskVO2.setTaskType((String) objs[12]);
+					creditTaskVO2.setIntervalHour((Integer) objs[13]);
+					creditTaskVO2.setComment((String) objs[14]);
+					creditTaskVO2.setAddress((String) objs[15]);
+					creditTaskVO2.setGrade((String) objs[16]);
+					creditTaskVO2.setId((Long) objs[17]);
+					creditTaskVO2.setFbShopURL((String) objs[18]);
+					creditTaskVO2.setJsWW((String) objs[19]);
+					creditTaskVO2.setWaybill((String) objs[20]);
+					creditTaskVO2.setTimeingTime((Date) objs[21]);
+					creditTaskVO2.setAddtionMoney((Double) objs[22]);
+					creditTaskVO2.setAddtionReleaseDot((Double) objs[23]);
+					creditTaskVO2.setAssignUser((String) objs[24]);
+					creditTaskVO2.setJsTelphone((String) objs[25]);
+					creditTaskVO2.setFbUsername((String) objs[26]);
+					creditTaskVO2.setReceiveDate((Date) objs[27]);
+					result.add(creditTaskVO2);
+				}
 			}
 			creditTaskVO.setDataCount(count.intValue());
 			putPlatformByRequest(WinUtils.changeType2Platform(platformType));
@@ -1122,6 +1186,7 @@ public class CreditTaskService extends BaseService {
 			return "initReleasedTast";
 		}
 	}
+
 	/**
 	 * 发布任务
 	 * 
@@ -1163,18 +1228,18 @@ public class CreditTaskService extends BaseService {
 		// 验证
 		if (!userEntity.getStatus().equals("1")) {
 			switch (Integer.parseInt(userEntity.getStatus())) {
-				case 0 :
-					putAlertMsg("您当前的【状态】为【未激活状态】，请到个人中心激活！");
-					break;
-				case 2 :
-					putAlertMsg("您当前的【状态】为【冻结状态】，不能发布任务！");
-					break;
-				case 3 :
-					putAlertMsg("您当前的【状态】为【找密码状态】，可能有人试图盗取您的秘密，请联系管理员，不能发布任务！");
-					break;
-				default :
-					putAlertMsg("您当前的【状态】不是【正常状态】，不能发布任务！");
-					break;
+			case 0:
+				putAlertMsg("您当前的【状态】为【未激活状态】，请到个人中心激活！");
+				break;
+			case 2:
+				putAlertMsg("您当前的【状态】为【冻结状态】，不能发布任务！");
+				break;
+			case 3:
+				putAlertMsg("您当前的【状态】为【找密码状态】，可能有人试图盗取您的秘密，请联系管理员，不能发布任务！");
+				break;
+			default:
+				putAlertMsg("您当前的【状态】不是【正常状态】，不能发布任务！");
+				break;
 			}
 			return JUMP;
 		}
@@ -1333,6 +1398,7 @@ public class CreditTaskService extends BaseService {
 		putAlertMsg("发布任务成功!");
 		return JUMP;
 	}
+
 	/**
 	 * 初始化发布任务
 	 * 
@@ -1359,18 +1425,18 @@ public class CreditTaskService extends BaseService {
 			UserEntity userEntity = getLoginUserEntity(userDAO);
 			if (!userEntity.getStatus().equals("1")) {
 				switch (Integer.parseInt(userEntity.getStatus())) {
-					case 0 :
-						putAlertMsg("您当前的【状态】为【未激活状态】，请到个人中心激活！");
-						break;
-					case 2 :
-						putAlertMsg("您当前的【状态】为【冻结状态】，不能发布任务！");
-						break;
-					case 3 :
-						putAlertMsg("您当前的【状态】为【找密码状态】，可能有人试图盗取您的秘密，请联系管理员，不能发布任务！");
-						break;
-					default :
-						putAlertMsg("您当前的【状态】不是【正常状态】，不能发布任务！");
-						break;
+				case 0:
+					putAlertMsg("您当前的【状态】为【未激活状态】，请到个人中心激活！");
+					break;
+				case 2:
+					putAlertMsg("您当前的【状态】为【冻结状态】，不能发布任务！");
+					break;
+				case 3:
+					putAlertMsg("您当前的【状态】为【找密码状态】，可能有人试图盗取您的秘密，请联系管理员，不能发布任务！");
+					break;
+				default:
+					putAlertMsg("您当前的【状态】不是【正常状态】，不能发布任务！");
+					break;
 				}
 				putJumpSelfPage("userInfoManager/info!initActiave.php");
 				return JUMP;
@@ -1378,8 +1444,8 @@ public class CreditTaskService extends BaseService {
 			List<SellerEntity> sellers = sellerDAO
 					.list(
 							"select _s   from SellerEntity  as _s where _s.type=:type and _s.user.id=:userID",
-							new String[]{"type", "userID"}, new Object[]{
-									platformType, userEntity.getId()});
+							new String[] { "type", "userID" }, new Object[] {
+									platformType, userEntity.getId() });
 			List<SellerVO> resultSellers = new ArrayList<SellerVO>(sellers
 					.size());
 			if (sellers.size() > 0) {
@@ -1398,8 +1464,8 @@ public class CreditTaskService extends BaseService {
 			List<CreditTaskRepositoryEntity> creditTaskResitorys = creditTaskRepositoryDAO
 					.list(
 							"from CreditTaskRepositoryEntity _cr where _cr.user.id=:userId and _cr.type=:type",
-							new String[]{"userId", "type"}, new Object[]{
-									userEntity.getId(), platformType});
+							new String[] { "userId", "type" }, new Object[] {
+									userEntity.getId(), platformType });
 			List<CreditTaskRepositoryVO> resultTaskReps = new ArrayList<CreditTaskRepositoryVO>(
 					creditTaskResitorys.size());
 			CreditTaskRepositoryVO creditTaskRepositoryVO = null;
@@ -1418,6 +1484,7 @@ public class CreditTaskService extends BaseService {
 			return "initReleaseTask";
 		}
 	}
+
 	/**
 	 * 查找联系人
 	 * 
@@ -1434,6 +1501,7 @@ public class CreditTaskService extends BaseService {
 				.getAssignUser(), userEntity.getId());
 		return tlms;
 	}
+
 	/**
 	 * 初始化任务
 	 * 
@@ -1494,8 +1562,9 @@ public class CreditTaskService extends BaseService {
 		List<BuyerEntity> buyers = userDAO
 				.list(
 						" from BuyerEntity  as _b where _b.user.id=:userId  and  _b.type=:type and _b.enable=:enable",
-						new String[]{"userId", "type", "enable"}, new Object[]{
-								getLoginUser().getId(), platformType, true});
+						new String[] { "userId", "type", "enable" },
+						new Object[] { getLoginUser().getId(), platformType,
+								true });
 		List<BuyerVO> resultBuyers = new ArrayList<BuyerVO>(buyers.size());
 		// 设置
 		List<CreditTaskVO> result = new ArrayList<CreditTaskVO>(resultTemp

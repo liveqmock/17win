@@ -180,46 +180,10 @@ function jumpPage() {
 }
 
 // 条件查询
-function sort1() {
-	$("#queryType").val("1");
-	query(1);
+function sort(sortValue) {
+	$("select[name='creditTaskVO.status']").val(sortValue);
+	$("#mainForm").submit();
 }
-
-function sort2() {
-	$("#queryType").val("2");
-	query(1);
-}
-
-function sort3() {
-	$("#queryType").val("3");
-	query(1);
-}
-function sort4() {
-	$("#queryType").val("4");
-	query(1);
-}
-function sort5() {
-	$("#queryType").val("5");
-	query(1);
-}
-
-function sort6() {
-	$("#queryType").val("6");
-	query(1);
-}
-function sort7() {
-	$("#queryType").val("7");
-	query(1);
-}
-function sort8() {
-	$("#queryType").val("8");
-	query(1);
-}
-function sort9() {
-	$("#queryType").val("9");
-	query(1);
-}
-
 // 查询
 function query(page) {
 	var pageCount = parseInt($("#pageCount").val());
@@ -229,7 +193,5 @@ function query(page) {
 		alert("页数必须在1-" + pageCount + "之间！");
 		return;
 	}
-	window.location.href = "taskManager/task!initReleasedTast.php"
-			+ "?platformType=" + platformType + "&queryType=" + queryType
-			+ "&page=" + page;
+	$("#mainForm").submit();
 }
