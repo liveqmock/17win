@@ -68,7 +68,8 @@
 					</thead>
 					<tbody>
 						<s:iterator value="#request.result" status="status" id="task">
-							<tr style="BORDER-BOTTOM: #06314a 1px dashed;">
+							<tr   onmouseover="this.className='over'"
+									onmouseout="this.className='out'">
 								<td valign="top" align="center">
 									<s:property value="#task.money" />
 									+
@@ -105,7 +106,6 @@
 										class="anniu2">删除任务</span> </a>
 								</td>
 							</tr>
-
 							<tr>
 								<td colspan="7">
 									<hr width="98%"
