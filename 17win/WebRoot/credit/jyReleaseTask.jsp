@@ -39,6 +39,11 @@
 			src="http://cdn.jquerytools.org/1.2.1/tiny/jquery.tools.min.js"></script>
 		<script src="js/x_alt.js" type="text/javascript"></script>
 		<SCRIPT src="credit/jyReleaseTask.js" type="text/javascript"></SCRIPT>
+		<s:if test="creditTaskVO.refreshSec!=null">
+			<script type="text/javascript">
+			setTimeout("refreshPage()",<s:property value='creditTaskVO.refreshSec'/>*1000);  
+			</script>
+		</s:if>
 		<style>
 /* trigger button */
 .qqConnection {
@@ -95,17 +100,17 @@
 											<label>
 												发布时间：
 											</label>
-											<s:textfield name="creditTaskVO.fbStartDate" id="fbStartDate"
-												readonly="true"
-												onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})"
-												cssStyle="width:80px">
-											</s:textfield>
+											<input type="text" style="width: 80px"
+												name="creditTaskVO.fbStartDate" id="fbStartDate"
+												readonly="readonly"
+												value="<s:date name="creditTaskVO.fbStartDate" format="yyyy-MM-dd" />"
+												onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})" />
 											至
-											<s:textfield name="creditTaskVO.fbEndDate" id="fbEndDate"
-												readonly="true"
-												onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})"
-												cssStyle="width:80px">
-											</s:textfield>
+											<input type="text" style="width: 80px"
+												name="creditTaskVO.fbEndDate" id="fbEndDate"
+												readonly="readonly"
+												value="<s:date name="creditTaskVO.fbEndDate" format="yyyy-MM-dd" />"
+												onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})" />
 										</td>
 										<td>
 											<label>
@@ -129,15 +134,17 @@
 											<label>
 												接手时间：
 											</label>
-											<s:textfield name="creditTaskVO.jsStartDate" id="jsStartDate"
-												cssStyle="width:80px" readonly="true"
-												onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})">
-											</s:textfield>
+											<input type="text" style="width: 80px"
+												name="creditTaskVO.jsStartDate" id="jsStartDate"
+												readonly="readonly"
+												value="<s:date name="creditTaskVO.jsStartDate" format="yyyy-MM-dd" />"
+												onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})" />
 											至
-											<s:textfield name="creditTaskVO.jsEndDate" id="jsEndDate"
-												cssStyle="width:80px" readonly="true"
-												onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})">
-											</s:textfield>
+											<input type="text" style="width: 80px"
+												name="creditTaskVO.jsEndDate" id="jsEndDate"
+												readonly="readonly"
+												value="<s:date name="creditTaskVO.jsEndDate" format="yyyy-MM-dd" />"
+												onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})" />
 										</td>
 										<td align="left">
 											<label>
@@ -214,10 +221,10 @@
 							</DIV>
 							<DIV style="CLEAR: right; MARGIN-TOP: 12px; FLOAT: right">
 								自定义刷新时间
-								<input type="text"
-									value="<s:property value="#request.autoRefresh"/>"
+								<input type="text" name="creditTaskVO.refreshSec"
+									value="<s:property value="creditTaskVO.refreshSec"/>"
 									style="width: 25px" id="autoreFresh" alt="必须大于5秒，空表示不刷新！" />
-								<input type="hidden"
+								<input type="hidden" name="creditTaskVO.nowPage"
 									value="<s:property
 											value="creditTaskVO.nowPage" />"
 									id="nowPage">

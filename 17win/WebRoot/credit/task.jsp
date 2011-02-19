@@ -14,10 +14,6 @@
 		<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
 		<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
 		<META HTTP-EQUIV="Expires" CONTENT="0">
-		<s:if test="#request.autoRefresh!=null">
-			<meta http-equiv="refresh"
-				content="<s:property value="#request.autoRefresh"/>">
-		</s:if>
 		<s:include value="../common/header.jsp"></s:include>
 		<LINK href="css/Css.css" type=text/css rel=stylesheet>
 		<LINK href="css/header.css" type=text/css rel=stylesheet>
@@ -28,15 +24,19 @@
 		<SCRIPT src="js/jquery-ui-1.8.4.custom.min.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="credit/task.js" type="text/javascript"></SCRIPT>
 		<script type="text/javascript" src="js/utils.js">
-		
 		</script>
 		<script src="js/x_alt.js" type="text/javascript"></script>
+		<s:if test="creditTaskVO.refreshSec!=null">
+			<script type="text/javascript">
+			setTimeout("refreshPage()",<s:property value='creditTaskVO.refreshSec'/>*1000);  
+		</script>
+		</s:if>
 	</HEAD>
 	<BODY>
 		<s:include value="../common/title.jsp"></s:include>
 		<s:include value="../common/task/title.jsp"></s:include>
 		<s:form action="taskManager/task!initTask.php" theme="simple"
-			onsubmit="return validateForm()">
+			id="mainForm" onsubmit="return validateForm()">
 			<div align="center" id="partdiv">
 				<div align="center">
 					<DIV
@@ -78,10 +78,10 @@
 							</DIV>
 							<DIV style="CLEAR: right; MARGIN-TOP: 12px; FLOAT: right">
 								刷新时间
-								<input type="text"
-									value="<s:property value="#request.autoRefresh"/>"
+								<input type="text" name="creditTaskVO.refreshSec"
+									value="<s:property value="creditTaskVO.refreshSec"/>"
 									style="width: 25px" id="autoreFresh" alt="必须大于5秒，空表示不刷新！" />
-								<input type="hidden"
+								<input type="hidden" name="platformType"
 									value="<s:property value="#request.platformType"/>"
 									id="platformType" />
 								<input type="hidden" id="currTaskId" />
@@ -143,8 +143,7 @@
 									<td align="center">
 										<SPAN style="Z-INDEX: 20; POSITION: relative"> <a
 											href="javascript:reply('<s:property value='#task.fbUsername' />');"
-											alt="发送站内信息"><s:property value="#task.fbUsername" /> </a>
-										</SPAN>
+											alt="发送站内信息"><s:property value="#task.fbUsername" /> </a> </SPAN>
 										<br>
 										<img
 											src="images/<s:property value="@net.win.utils.StrategyUtils@getLevelImg(#task.fbUpgradeScore)" />"
@@ -232,10 +231,10 @@
 							<s:else>
 								<TR>
 									<TD colspan="6">
-										<input type="hidden"
-											value="<s:property value="#request.queryType"/>"
-											id="queryType">
-										<input type="hidden"
+										<input type="hidden" name="creditTaskVO.moneyFlag"
+											value="<s:property value="creditTaskVO.moneyFlag"/>"
+											id="moneyFlag">
+										<input type="hidden" name="creditTaskVO.nowPage"
 											value="<s:property
 											value="creditTaskVO.nowPage" />"
 											id="nowPage">

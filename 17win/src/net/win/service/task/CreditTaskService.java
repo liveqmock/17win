@@ -876,20 +876,6 @@ public class CreditTaskService extends BaseService {
 			putIndexShowType("4");
 		}
 		putTaskShowType("3");
-		String queryType = getByParam("queryType");
-		String page = getByParam("page");
-		String autoRefresh = getByParam("autoRefresh");
-		if (queryType != null) {
-			putByRequest("queryType", queryType);
-		} else {
-			putByRequest("queryType", "1");
-		}
-		if (autoRefresh != null) {
-			putByRequest("autoRefresh", autoRefresh);
-		}
-		if (page != null) {
-			creditTaskVO.setNowPage(Integer.parseInt(page));
-		}
 		if (StringUtils.isBlank(platformType)) {
 			WinUtils.throwIllegalityException(getLoginUser().getUsername()
 					+ "试图越过取消重填操作！ ");
@@ -1013,7 +999,8 @@ public class CreditTaskService extends BaseService {
 				paramNames.add("taskType");
 				paramValues.add(creditTaskVO.getTaskType());
 			}
-			resultSQL.append(" order by _task.releaseDate desc ");
+			resultSQL
+					.append(" order by _task.status asc, _task.releaseDate desc ");
 			Long count = (Long) creditTaskDAO.uniqueResultObject(countSQL
 					.toString(), paramNames.toArray(paramNames
 					.toArray(new String[paramNames.size()])), paramValues
@@ -1089,14 +1076,6 @@ public class CreditTaskService extends BaseService {
 			putIndexShowType("4");
 		}
 		putTaskShowType("4");
-		String page = getByParam("page");
-		String autoRefresh = getByParam("autoRefresh");
-		if (autoRefresh != null) {
-			putByRequest("autoRefresh", autoRefresh);
-		}
-		if (page != null) {
-			creditTaskVO.setNowPage(Integer.parseInt(page));
-		}
 		if (StringUtils.isBlank(platformType)) {
 			WinUtils.throwIllegalityException(getLoginUser().getUsername()
 					+ "试图越过取消重填操作！ ");
@@ -1220,7 +1199,8 @@ public class CreditTaskService extends BaseService {
 				paramNames.add("taskType");
 				paramValues.add(creditTaskVO.getTaskType());
 			}
-			resultSQL.append(" order by _task.releaseDate desc ");
+			resultSQL
+					.append(" order by  _task.status asc,_task.releaseDate desc ");
 			Long count = (Long) creditTaskDAO.uniqueResultObject(countSQL
 					.toString(), paramNames.toArray(paramNames
 					.toArray(new String[paramNames.size()])), paramValues
@@ -1609,20 +1589,6 @@ public class CreditTaskService extends BaseService {
 			putIndexShowType("4");
 		}
 		putTaskShowType("1");
-		String queryType = getByParam("queryType");
-		String page = getByParam("page");
-		String autoRefresh = getByParam("autoRefresh");
-		if (queryType != null) {
-			putByRequest("queryType", queryType);
-		} else {
-			putByRequest("queryType", "1");
-		}
-		if (autoRefresh != null) {
-			putByRequest("autoRefresh", autoRefresh);
-		}
-		if (page != null) {
-			creditTaskVO.setNowPage(Integer.parseInt(page));
-		}
 		if (!getLoginUser().getOperationCodeStatus()) {
 			putByRequest("preURL", getRequset().getRequestURL() + "?"
 					+ getRequset().getQueryString());
@@ -1632,21 +1598,97 @@ public class CreditTaskService extends BaseService {
 			WinUtils.throwIllegalityException(getLoginUser().getUsername()
 					+ "试图越过初始化任务!");
 		}
-		Long count = (Long) creditTaskDAO
-				.uniqueResultObject(
-						"select count(*)"
-								+ " from CreditTaskEntity as _task inner join _task.releasePerson as _user where  _task.status not  in ('0','-1')  and   _task.type=:platformType"
-								+ orderAndWhereInitTaskStr(queryType, true),
-						"platformType", platformType);
-		List<Object[]> resultTemp = creditTaskDAO
-				.pageQuery(
-						"select _task.testID , _task.releaseDate ,_user.username,_user.upgradeScore,_task.money,_task.updatePrice, " // 5
-								+ "_task.taskType,_task.releaseDot,_task.status ,_task.intervalHour,_task.id,_task.grade " // 11
-								+ ",_vip.type,_task.addtionMoney,_task.addtionReleaseDot,_task.assignUser" // index=15
-								+ " from CreditTaskEntity as _task inner join _task.releasePerson as _user  left join _user.vip as _vip  where _task.status not  in ('0','-1')   and   _task.type=:platformType "
-								+ orderAndWhereInitTaskStr(queryType, false),
-						"platformType", platformType, creditTaskVO.getStart(),
-						creditTaskVO.getLimit());
+
+		// 分页查询
+		List<String> paramNames = new ArrayList<String>();
+		List paramValues = new ArrayList();
+		StringBuffer countSQL = new StringBuffer(
+				"select count(*)"
+						+ " from CreditTaskEntity as _task inner join _task.releasePerson as _user where  _task.status not  in ('0','-1')  and   _task.type=:platformType");
+		StringBuffer resultSQL = new StringBuffer(
+				"select _task.testID , _task.releaseDate ,_user.username,_user.upgradeScore,_task.money,_task.updatePrice, " // 5
+						+ "_task.taskType,_task.releaseDot,_task.status ,_task.intervalHour,_task.id,_task.grade " // 11
+						+ ",_vip.type,_task.addtionMoney,_task.addtionReleaseDot,_task.assignUser" // index=15
+						+ " from CreditTaskEntity as _task inner join _task.releasePerson as _user  left join _user.vip as _vip "
+						+ " where _task.status not  in ('0','-1')   and   _task.type=:platformType ");
+		paramNames.add("platformType");
+		paramValues.add(platformType);
+		if ("1".equals(creditTaskVO.getMoneyFlag())) {
+			// 默认时间排列
+			resultSQL
+					.append("    order by _vip.type desc , _task.status asc,_task.releaseDate desc ");
+		} else if ("2".equals(creditTaskVO.getMoneyFlag())) {
+			// 价低排列
+			resultSQL.append("   order by _vip.type desc , _task.money asc ");
+		} else if ("3".equals(creditTaskVO.getMoneyFlag())) {
+			// 价高排列
+			resultSQL
+					.append(" order by   _vip.type desc ,    _task.money desc ");
+		} else if ("4".equals(creditTaskVO.getMoneyFlag())) {
+			// 1-40
+			countSQL.append(" and  (_task.money>0 and _task.money<=40)  ");
+			resultSQL
+					.append(" and (_task.money>40 and _task.money<=100) order by   _vip.type desc , _task.status asc,_task.releaseDate desc,  _task.money asc ");
+		} else if ("5".equals(creditTaskVO.getMoneyFlag())) {
+			// 40-100
+			resultSQL
+					.append(" and (_task.money>40 and _task.money<=100)");
+			resultSQL
+					.append(" and (_task.money>40 and _task.money<=100) order by   _vip.type desc , _task.status asc,_task.releaseDate desc,  _task.money asc ");
+		} else if ("6".equals(creditTaskVO.getMoneyFlag())) {
+			// 100-200
+			countSQL
+					.append(" and   (_task.money>100 and _task.money<=200) ");
+			resultSQL
+					.append(" and   (_task.money>100 and _task.money<=200) order by   _vip.type desc , _task.status asc,_task.releaseDate desc,  _task.money asc ");
+		} else if ("7".equals(creditTaskVO.getMoneyFlag())) {
+			countSQL
+					.append(" and   (_task.money>200 and _task.money<=500) ");
+			resultSQL
+					.append(" and   (_task.money>200 and _task.money<=500) order by   _vip.type desc , _task.status asc,_task.releaseDate desc,  _task.money asc ");
+		} else if ("8".equals(creditTaskVO.getMoneyFlag())) {
+			countSQL
+					.append(" and     _task.money>500  ");
+			resultSQL
+					.append(" and     _task.money>500 order by   _vip.type desc , _task.status asc,_task.releaseDate desc,  _task.money asc ");
+		} else {
+			resultSQL
+					.append("    order by _vip.type desc , _task.status asc,_task.releaseDate desc ");
+		}
+		Long count = (Long) creditTaskDAO.uniqueResultObject(countSQL
+				.toString(), paramNames.toArray(paramNames
+				.toArray(new String[paramNames.size()])), paramValues
+				.toArray(new Object[paramValues.size()]));
+		List<CreditTaskVO> result = new ArrayList<CreditTaskVO>(count
+				.intValue());
+		if (count > 0) {
+			List<Object[]> resultTemp = creditTaskDAO.pageQuery(resultSQL
+					.toString(), paramNames.toArray(paramNames
+					.toArray(new String[paramNames.size()])), paramValues
+					.toArray(new Object[paramValues.size()]), creditTaskVO
+					.getStart(), creditTaskVO.getLimit());
+			CreditTaskVO creditTaskVO2 = null;
+			for (Object[] objs : resultTemp) {
+				creditTaskVO2 = new CreditTaskVO();
+				creditTaskVO2.setTestID((String) objs[0]);
+				creditTaskVO2.setReleaseDate((Date) objs[1]);
+				creditTaskVO2.setFbUsername((String) objs[2]);
+				creditTaskVO2.setFbUpgradeScore((Integer) objs[3]);
+				creditTaskVO2.setMoney((Double) objs[4]);
+				creditTaskVO2.setUpdatePrice((Boolean) objs[5]);
+				creditTaskVO2.setTaskType((String) objs[6]);
+				creditTaskVO2.setReleaseDot((Double) objs[7]);
+				creditTaskVO2.setStatus((String) objs[8]);
+				creditTaskVO2.setIntervalHour((Integer) objs[9]);
+				creditTaskVO2.setId((Long) objs[10]);
+				creditTaskVO2.setGrade((String) objs[11]);
+				creditTaskVO2.setFbVipType((String) objs[12]);
+				creditTaskVO2.setAddtionMoney((Double) objs[13]);
+				creditTaskVO2.setAddtionReleaseDot((Double) objs[14]);
+				creditTaskVO2.setAssignUser((String) objs[15]);
+				result.add(creditTaskVO2);
+			}
+		}
 		List<BuyerEntity> buyers = userDAO
 				.list(
 						" from BuyerEntity  as _b where _b.user.id=:userId  and  _b.type=:type and _b.enable=:enable",
@@ -1654,30 +1696,6 @@ public class CreditTaskService extends BaseService {
 						new Object[] { getLoginUser().getId(), platformType,
 								true });
 		List<BuyerVO> resultBuyers = new ArrayList<BuyerVO>(buyers.size());
-		// 设置
-		List<CreditTaskVO> result = new ArrayList<CreditTaskVO>(resultTemp
-				.size());
-		CreditTaskVO creditTaskVO2 = null;
-		for (Object[] objs : resultTemp) {
-			creditTaskVO2 = new CreditTaskVO();
-			creditTaskVO2.setTestID((String) objs[0]);
-			creditTaskVO2.setReleaseDate((Date) objs[1]);
-			creditTaskVO2.setFbUsername((String) objs[2]);
-			creditTaskVO2.setFbUpgradeScore((Integer) objs[3]);
-			creditTaskVO2.setMoney((Double) objs[4]);
-			creditTaskVO2.setUpdatePrice((Boolean) objs[5]);
-			creditTaskVO2.setTaskType((String) objs[6]);
-			creditTaskVO2.setReleaseDot((Double) objs[7]);
-			creditTaskVO2.setStatus((String) objs[8]);
-			creditTaskVO2.setIntervalHour((Integer) objs[9]);
-			creditTaskVO2.setId((Long) objs[10]);
-			creditTaskVO2.setGrade((String) objs[11]);
-			creditTaskVO2.setFbVipType((String) objs[12]);
-			creditTaskVO2.setAddtionMoney((Double) objs[13]);
-			creditTaskVO2.setAddtionReleaseDot((Double) objs[14]);
-			creditTaskVO2.setAssignUser((String) objs[15]);
-			result.add(creditTaskVO2);
-		}
 		for (BuyerEntity buyerEntity : buyers) {
 			BuyerVO buyerVO = new BuyerVO();
 			BeanUtils.copyProperties(buyerVO, buyerEntity);
@@ -1691,7 +1709,6 @@ public class CreditTaskService extends BaseService {
 		putPlatformTypeByRequest(platformType);
 		if (buyers.size() == 0) {
 			putByRequest("noBuyser", "noBuyser");
-			return "initTask";
 		}
 		return "initTask";
 	}
@@ -1758,68 +1775,6 @@ public class CreditTaskService extends BaseService {
 	}
 
 	/**
-	 * 已接任务查询
-	 * 
-	 * @param type
-	 * @return
-	 */
-	private String orderAndWhereReceivedTaskStr(String type, Boolean countFlag) {
-		if (countFlag) {
-			// 默认时间排列
-			if ("1".equals(type)) {
-				return "";
-			}
-			// 已接任务
-			if ("2".equals(type)) {
-				return " and _task.status='2' ";
-			}
-			// 已支付
-			if ("3".equals(type)) {
-				return " and _task.status='3' ";
-			}
-			// 已发货
-			if ("4".equals(type)) {
-				return " and _task.status='4' ";
-			}
-			// 已评价
-			if ("5".equals(type)) {
-				return " and _task.status='5' ";
-			}
-			// 已完成
-			if ("6".equals(type)) {
-				return " and _task.status='6' ";
-			}
-			return "";
-		} else {
-			// 默认时间排列
-			if ("1".equals(type)) {
-				return " order by   _task.releaseDate desc";
-			}
-			// 已接任务
-			if ("2".equals(type)) {
-				return " and _task.status='2' order by   _task.releaseDate desc";
-			}
-			// 已支付
-			if ("3".equals(type)) {
-				return " and _task.status='3' order by   _task.releaseDate desc";
-			}
-			// 已发货
-			if ("4".equals(type)) {
-				return " and _task.status='4' order by   _task.releaseDate desc";
-			}
-			// 已评价
-			if ("5".equals(type)) {
-				return " and _task.status='5' order by   _task.releaseDate desc";
-			}
-			// 已完成
-			if ("6".equals(type)) {
-				return " and _task.status='6' order by   _task.releaseDate desc";
-			}
-			return " order by   _task.releaseDate desc";
-		}
-	}
-
-	/**
 	 * 
 	 * 
 	 * @param type
@@ -1861,38 +1816,7 @@ public class CreditTaskService extends BaseService {
 			}
 			return "";
 		} else {
-			// 默认时间排列
-			if ("1".equals(type)) {
-				return " order by   _vip.type desc , _task.releaseDate desc ";
-			}
-			// 价低排列
-			if ("2".equals(type)) {
-				return " order by   _vip.type desc ,   _task.money asc";
-			}
-			// 价高排列
-			if ("3".equals(type)) {
-				return " order by   _vip.type desc ,    _task.money desc";
-			}
-			// 1-40
-			if ("4".equals(type)) {
-				return " and  (_task.money>0 and _task.money<=40) order by   _vip.type desc ,   _task.money asc";
-			}
-			// 40-100
-			if ("5".equals(type)) {
-				return " and  (_task.money>40 and _task.money<=100) order by   _vip.type desc ,   _task.money asc";
-			}
-			// 100-200
-			if ("6".equals(type)) {
-				return " and  (_task.money>100 and _task.money<=200) order by   _vip.type desc ,   _task.money asc";
-			}
-			// 200-500
-			if ("7".equals(type)) {
-				return " and  (_task.money>200 and _task.money<=500) order by   _vip.type desc ,   _task.money asc";
-			}
-			// 500 以上
-			if ("8".equals(type)) {
-				return " and  _task.money>500 order by   _vip.type desc ,   _task.money asc";
-			}
+
 			return " order by   _vip.type desc ,   _task.releaseDate desc";
 		}
 

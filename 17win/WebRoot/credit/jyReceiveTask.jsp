@@ -42,6 +42,11 @@
 			defer="defer" type="text/javascript"></script>
 		<SCRIPT src="credit/jyReceiveTask.js" type="text/javascript"></SCRIPT>
 		<script src="js/x_alt.js" type="text/javascript"></script>
+		<s:if test="creditTaskVO.refreshSec!=null">
+			<script type="text/javascript">
+			setTimeout("refreshPage()",<s:property value='creditTaskVO.refreshSec'/>*1000);  
+		</script>
+		</s:if>
 		<style>
 /* trigger button */
 .qqConnection {
@@ -98,17 +103,17 @@
 											<label>
 												发布时间：
 											</label>
-											<s:textfield name="creditTaskVO.fbStartDate" id="fbStartDate"
-												readonly="true"
-												onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})"
-												cssStyle="width:80px">
-											</s:textfield>
+											<input type="text" style="width: 80px"
+												name="creditTaskVO.fbStartDate" id="fbStartDate"
+												readonly="readonly"
+												value="<s:date name="creditTaskVO.fbStartDate" format="yyyy-MM-dd" />"
+												onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})" />
 											至
-											<s:textfield name="creditTaskVO.fbEndDate" id="fbEndDate"
-												readonly="true"
-												onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})"
-												cssStyle="width:80px">
-											</s:textfield>
+											<input type="text" style="width: 80px"
+												name="creditTaskVO.fbEndDate" id="fbEndDate"
+												readonly="readonly"
+												value="<s:date name="creditTaskVO.fbEndDate" format="yyyy-MM-dd" />"
+												onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})" />
 										</td>
 										<td>
 											<label>
@@ -132,15 +137,17 @@
 											<label>
 												接手时间：
 											</label>
-											<s:textfield name="creditTaskVO.jsStartDate" id="jsStartDate"
-												cssStyle="width:80px" readonly="true"
-												onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})">
-											</s:textfield>
+											<input type="text" style="width: 80px"
+												name="creditTaskVO.jsStartDate" id="jsStartDate"
+												readonly="readonly"
+												value="<s:date name="creditTaskVO.jsStartDate" format="yyyy-MM-dd" />"
+												onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})" />
 											至
-											<s:textfield name="creditTaskVO.jsEndDate" id="jsEndDate"
-												cssStyle="width:80px" readonly="true"
-												onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})">
-											</s:textfield>
+											<input type="text" style="width: 80px"
+												name="creditTaskVO.jsEndDate" id="jsEndDate"
+												readonly="readonly"
+												value="<s:date name="creditTaskVO.jsEndDate" format="yyyy-MM-dd" />"
+												onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})" />
 										</td>
 										<td align="left">
 											<label>
@@ -209,10 +216,10 @@
 							</DIV>
 							<DIV style="CLEAR: right; MARGIN-TOP: 12px; FLOAT: right">
 								自定义刷新时间
-								<input type="text"
-									value="<s:property value="#request.autoRefresh"/>"
+								<input type="text" name="creditTaskVO.refreshSec"
+									value="<s:property value="creditTaskVO.refreshSec"/>"
 									style="width: 25px" id="autoreFresh" alt="必须大于5秒，空表示不刷新！" />
-								<input type="hidden"
+								<input type="hidden" name="creditTaskVO.nowPage"
 									value="<s:property
 											value="creditTaskVO.nowPage" />"
 									id="nowPage">
@@ -266,7 +273,7 @@
 											<img src="images/swType.jpg" alt="实物任务" />
 										</s:elseif>
 										<s:elseif test="#task.taskType==3">
-											<img src="images/tcType.jpg" alt="套餐任务" s />
+											<img src="images/tcType.jpg" alt="套餐任务" />
 										</s:elseif>
 										<s:property value="#task.testID" />
 										<br>
@@ -293,7 +300,7 @@
 											<img src="images/renwu-3.png" border="0"> </a>
 										<br>
 										<a alt="点此直接打开商品地址"
-											href="javascript:openItemUrl('<s:property value="#task.itemUrl" />','<s:property value="#task.grade" />','<s:property value="#task.comment" />');"><img
+											href="javascript:openItemUrl('<s:property value="#task.status" />','<s:property value="#task.itemUrl" />','<s:property value="#task.grade" />','<s:property value="#task.comment" />');"><img
 												src="images/open.gif"> </a>
 									</td>
 									<td align="center">
@@ -438,12 +445,14 @@
 												</s:else>
 										</s:elseif>
 										<s:elseif test="#task.status==5">
-												QQ联系对方好评
+												已经好评
 												<br>
-												完成任务
+												对方好评
 											</s:elseif>
 										<s:elseif test="#task.status==6">
-												完成
+												任务完成
+												<br>
+												双方互评
 											</s:elseif>
 									</td>
 								</tr>
@@ -495,6 +504,7 @@
 						</tfoot>
 					</table>
 				</div>
+			</div>
 		</s:form>
 		<div id="sendSmsDIV" title="发送手机短信" style="display: none">
 			<s:form action="taskManager/task!sendMsg.php" target="_blank"

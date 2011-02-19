@@ -82,6 +82,28 @@ public class CreditTaskVO extends BaseVO {
 	private Date fbEndDate;
 	private Date jsStartDate;
 	private Date jsEndDate;
+	
+	//刷新 时间
+	private Integer refreshSec;
+	
+	//任务大厅的查询标记
+	private String moneyFlag;
+	public String getMoneyFlag() {
+		return moneyFlag;
+	}
+
+	public void setMoneyFlag(String moneyFlag) {
+		this.moneyFlag = moneyFlag;
+	}
+
+	public Integer getRefreshSec() {
+		return refreshSec;
+	}
+
+	public void setRefreshSec(Integer refreshSec) {
+		this.refreshSec = refreshSec;
+	}
+
 	public String getJsQQ() {
 		return jsQQ;
 	}

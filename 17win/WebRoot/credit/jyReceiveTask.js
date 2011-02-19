@@ -1,51 +1,42 @@
-
 $(document).ready(function() {
-	$(".qqConnection").tooltip();
-	intText("autoreFresh");
-	$("#autoreFresh").focus(function() {
-				$(this).data("oldValue", $(this).val());
-				$(this).val("");
-			});
-	$("#autoreFresh").blur(function() {
-		if (!Validater.isBlank($(this).val())) {
-			var value = parseInt($(this).val());
-			if (value < 5) {
-				alert("刷新时间必须大于5秒");
-				return;
-			}
-			var queryType = parseInt($("#queryType").val());
-			var platformType = $("#platformType").val();
-			window.location.href = "taskManager/task!initReceivedTast.php"
-					+ "?platformType=" + platformType + "&queryType="
-					+ queryType + "&page=1" + "&autoRefresh=" + $(this).val();
-		} else {
-			if (!Validater.isBlank($(this).data("oldValue"))) {
-				var queryType = parseInt($("#queryType").val());
-				var platformType = $("#platformType").val();
-				window.location.href = "taskManager/task!initReceivedTast.php"
-						+ "?platformType=" + platformType + "&queryType="
-						+ queryType + "&page=1";
-			}
-		}
-	});
+			$(".qqConnection").tooltip();
+			intText("autoreFresh");
+			$("#autoreFresh").focus(function() {
+						$(this).data("oldValue", $(this).val());
+						$(this).val("");
+					});
+			$("#autoreFresh").blur(function() {
+						if (!Validater.isBlank($(this).val())) {
+							var value = parseInt($(this).val());
+							if (value < 5) {
+								alert("刷新时间必须大于5秒");
+								return;
+							}
+							$("#mainForm").submit();
+						} else {
+							if (!Validater.isBlank($(this).data("oldValue"))) {
+								$("#mainForm").submit();
+							}
+						}
+					});
 
-	// /////
-	$("input[class='goItemButton']").click(function() {
-				var val = $(this).siblings("input").val();
-				window.open(val, "_blank");
+			// /////
+			$("input[class='goItemButton']").click(function() {
+						var val = $(this).siblings("input").val();
+						window.open(val, "_blank");
 
-			});
-	$("#addressDIV").dialog({
-		autoOpen : false,
-		draggable : false,
-		hide : 'slide',
-		modal : true,
-		resizable : false,
-		show : 'slide',
-		width : 400
-		 
-	});
-});
+					});
+			$("#addressDIV").dialog({
+						autoOpen : false,
+						draggable : false,
+						hide : 'slide',
+						modal : true,
+						resizable : false,
+						show : 'slide',
+						width : 400
+
+					});
+		});
 
 // 弹出发送手机短信层
 function openTelephoneDiv(telphone, username) {
@@ -178,9 +169,9 @@ function showItemUrl(itemUrl, grade, comment) {
 	$("#addressDIV").dialog("open");
 }
 // 直接跳转地址
-function openItemUrl(itemUrl, grade, comment) {
+function openItemUrl(status, itemUrl, grade, comment) {
 	var itemUrls = itemUrl.split(",");
-	if (itemUrls.length == 1) {
+	if (itemUrls.length == 1 && status != "2" && status != "-2") {
 		window.open(itemUrls[0], "_blank");
 	} else {
 		showItemUrl(itemUrl, grade, comment);
@@ -200,5 +191,9 @@ function query(page) {
 		alert("页数必须在1-" + pageCount + "之间！");
 		return;
 	}
+	$("#mainForm").submit();
+}
+// 刷新页面
+function refreshPage() {
 	$("#mainForm").submit();
 }

@@ -13,18 +13,10 @@ $(document).ready(function() {
 				alert("刷新时间必须大于5秒");
 				return;
 			}
-			var queryType = parseInt($("#queryType").val());
-			var platformType = $("#platformType").val();
-			window.location.href = "taskManager/task!initReleasedTast.php"
-					+ "?platformType=" + platformType + "&queryType="
-					+ queryType + "&page=1" + "&autoRefresh=" + $(this).val();
+			$("#mainForm").submit();
 		} else {
 			if (!Validater.isBlank($(this).data("oldValue"))) {
-				var queryType = parseInt($("#queryType").val());
-				var platformType = $("#platformType").val();
-				window.location.href = "taskManager/task!initReleasedTast.php"
-						+ "?platformType=" + platformType + "&queryType="
-						+ queryType + "&page=1";
+				$("#mainForm").submit();
 			}
 		}
 	});
@@ -72,8 +64,8 @@ function openTelephoneDiv(telphone, username) {
 		modal : true,
 		resizable : false,
 		show : 'slide',
-		width : 400, 
-		title:'发送手机短信',
+		width : 400,
+		title : '发送手机短信',
 		buttons : {
 			"发送" : function() {
 				if (Validater.isBlank($("#contentID").text())
@@ -189,13 +181,13 @@ function jumpPage() {
 	var page = parseInt($("#toPageSelect").val());
 	query(page);
 }
-//复制地址
-function showItemUrl(itemUrl,grade,comment) {
-	$("#gradeCommon").text(comment+"【"+grade+"】");
+// 复制地址
+function showItemUrl(itemUrl, grade, comment) {
+	$("#gradeCommon").text(comment + "【" + grade + "】");
 	$("#itemContent").empty();
 	var itemUrls = itemUrl.split(",");
 	for (var i = 0; i < itemUrls.length; i++) {
-		var tr = $("<tr>" + "<td>" + "地址" + (i + 1) + "：" +"	</td>" + "	<td>"
+		var tr = $("<tr>" + "<td>" + "地址" + (i + 1) + "：" + "	</td>" + "	<td>"
 				+ "	<input  type='text' readonly='readonly'  value="
 				+ itemUrls[i] + " style='width: 200px'/>" + "		</td>" + "	<td>"
 				+ "	<a  href=\"javascript:copyToClipboard(\'" + itemUrls[i]
@@ -205,13 +197,13 @@ function showItemUrl(itemUrl,grade,comment) {
 	}
 	$("#addressDIV").dialog("open");
 }
-//直接跳转地址
-function openItemUrl(itemUrl,grade,comment) {
+// 直接跳转地址
+function openItemUrl(itemUrl, grade, comment) {
 	var itemUrls = itemUrl.split(",");
-	if(itemUrls.length==1){
-		window.open(itemUrls[0],"_blank");
-	}else{
-		showItemUrl(itemUrl,grade,comment);
+	if (itemUrls.length == 1) {
+		window.open(itemUrls[0], "_blank");
+	} else {
+		showItemUrl(itemUrl, grade, comment);
 	}
 }
 // 条件查询
@@ -228,5 +220,9 @@ function query(page) {
 		alert("页数必须在1-" + pageCount + "之间！");
 		return;
 	}
+	$("#mainForm").submit();
+}
+// 刷新页面
+function refreshPage() {
 	$("#mainForm").submit();
 }
