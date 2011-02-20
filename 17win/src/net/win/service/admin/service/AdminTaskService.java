@@ -119,8 +119,8 @@ public class AdminTaskService extends BaseService {
 		 * 任务
 		 */
 		Date currOperDate = creditTask.getReceiveDate();
-		Integer minuties = ((Long) ((System.currentTimeMillis() - currOperDate
-				.getTime()) / 1000 / 60)).intValue();
+		Long minuties = ((System.currentTimeMillis() - currOperDate
+				.getTime()) / 1000 / 60);
 		/**
 		 * 真正的逻辑 修改时间
 		 */
@@ -175,7 +175,7 @@ public class AdminTaskService extends BaseService {
 		/**
 		 * 任务
 		 */
-		creditTask.setRemainTime(0);
+		creditTask.setRemainTime(0L);
 		creditTask.setStatus(TaskMananger.STEP_THREE_STATUS);
 		putAlertMsg("修改成功！");
 		return JUMP;
