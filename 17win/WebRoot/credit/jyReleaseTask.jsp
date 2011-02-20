@@ -234,8 +234,8 @@
 									value="<s:property value="creditTaskVO.refreshSec"/>"
 									style="width: 25px" id="autoreFresh" alt="必须大于5秒，空表示不刷新！" />
 								秒
-								<A alt="点击刷新" href="javascript:refreshPage();"
-									class="yell_font"> <SPAN
+								<A alt="点击刷新" href="javascript:refreshPage();" class="yell_font">
+									<SPAN
 									class="taskAnniu<s:property value="#request.platformType"/>">刷新页面</SPAN>
 								</A>
 							</DIV>
@@ -448,14 +448,21 @@
 											</s:else>
 										</s:elseif>
 										<s:elseif test="#task.status==3">
-												等待您确认发货
+												等待您发货
 											</s:elseif>
 										<s:elseif test="#task.status==4">
 											<s:if test="#task.remainTime<=0">
-													等待买家确认好评
+													等待对方好评
 												</s:if>
 											<s:else>
-												 
+												<s:if test="#task.remainTime>=60">
+													剩余：<s:property value="#task.remainTime/60" />时<s:property
+														value="#task.remainTime%60" />分
+												</s:if>
+												<s:else>
+													剩余：<s:property value="#task.remainTime%60" />分
+												</s:else>
+												<s:property value="#task.remainTime" />
 											</s:else>
 										</s:elseif>
 										<s:elseif test="#task.status==5">
@@ -478,7 +485,7 @@
 											<a alt="取消任务！"
 												href="javascript:cancelTask(<s:property value="#task.id"/>)"><span
 												class="anniu">取消任务</span> </a>
-												<!-- 
+											<!-- 
 											<br>
 											<a alt="刷新排前可以使您的任务在发布区靠前！"
 												href="javascript:toFirstTask(<s:property value="#task.id"/>)"><span
@@ -624,7 +631,7 @@
 				<tr>
 					<td>
 						<font style="font: 14px;" color="red"><b> 您的要求:</b> </font>
-						<span id="gradeCommon"> 24小时带字好评 </span>
+						<span id="gradeCommon"></span>
 					</td>
 				</tr>
 			</table>

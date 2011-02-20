@@ -637,13 +637,9 @@ public class CreditTaskService extends BaseService {
 				return "initReleasedTast";
 			}
 			creditTask.setStatus(TaskMananger.STEP_FOUR_STATUS);
-			// 设置好评剩余时间 秒
+			// 设置好评多久后好评
 			if (creditTask.getIntervalHour() > 0) {
-				creditTask.setRemainTime(creditTask.getIntervalHour()
-						* 60
-						* 60
-						- (System.currentTimeMillis() - creditTask
-								.getReceiveDate().getTime()));
+				creditTask.setRemainTime(creditTask.getIntervalHour() * 60L);
 			}
 			putAlertMsg("发货成功！");
 			List<CreditTaskVO> result = queryReleaseData(creditTaskVO,
@@ -811,8 +807,8 @@ public class CreditTaskService extends BaseService {
 				return "initReleasedTast";
 			}
 			Date currOperDate = creditTask.getReceiveDate();
-			Long minuties =   ((System.currentTimeMillis() - currOperDate
-					.getTime()) / 1000 / 60) ;
+			Long minuties = ((System.currentTimeMillis() - currOperDate
+					.getTime()) / 1000 / 60);
 			/**
 			 * 真正的逻辑 修改时间
 			 */

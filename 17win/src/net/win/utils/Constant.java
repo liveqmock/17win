@@ -258,6 +258,7 @@ public final class Constant {
 		// 加载数据库XML配置文件，得到Document对象
 		Document document = null;
 		try {
+			saxReader.setValidation(false);
 			document = saxReader.read(url.getFile());
 			Element root = document.getRootElement(); // 获得根节点
 			// 得到class节点
