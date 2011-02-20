@@ -13,7 +13,7 @@ import net.win.utils.DateUtils;
 public final class TaskMananger {
 	/**
 	 * 因为申述被暂停(
-	 */
+	 */ 
 	public final static String ALLEGE_STATUS = "-1";
 	/**
 	 * 审核
