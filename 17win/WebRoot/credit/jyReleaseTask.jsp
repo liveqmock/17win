@@ -178,6 +178,15 @@
 											<input type="hidden" name="platformType"
 												value='<s:property value="#request.platformType"/>'
 												id="platformType">
+											<input type="hidden" name="creditTaskVO.nowPage"
+												value="<s:property
+											value="creditTaskVO.nowPage" />"
+												id="nowPage">
+											<input type="hidden"
+												value="<s:property
+										value="creditTaskVO.pageCount" />"
+												id="pageCount">
+											<input type="hidden" name="creditTaskVO.id" id="taskId">
 										</td>
 									</tr>
 								</tbody>
@@ -224,16 +233,8 @@
 								<input type="text" name="creditTaskVO.refreshSec"
 									value="<s:property value="creditTaskVO.refreshSec"/>"
 									style="width: 25px" id="autoreFresh" alt="必须大于5秒，空表示不刷新！" />
-								<input type="hidden" name="creditTaskVO.nowPage"
-									value="<s:property
-											value="creditTaskVO.nowPage" />"
-									id="nowPage">
-								<input type="hidden"
-									value="<s:property
-										value="creditTaskVO.pageCount" />"
-									id="pageCount">
 								秒
-								<A alt=点击刷新 href="javascript:location.reload(true);"
+								<A alt="点击刷新" href="javascript:refreshPage();"
 									class="yell_font"> <SPAN
 									class="taskAnniu<s:property value="#request.platformType"/>">刷新页面</SPAN>
 								</A>
@@ -423,36 +424,38 @@
 										</s:else>
 										</s:elseif>
 										<s:elseif test="#task.status==-2">
-												等待您审核<br>
-											<s:if test="#task.status!=1">
+												等待审核<br>
+											<s:if test="#task.remainTime>0">
 											剩余
 											<font color="red"> <s:property
 														value="#task.remainTime" /> </font>
 											分钟
 											</s:if>
+											<s:else>
+												时间已到
+											</s:else>
 										</s:elseif>
 										<s:elseif test="#task.status==2">
-												等待买家付款<br>
-											<s:if test="#task.status!=1">
+												等待付款<br>
+											<s:if test="#task.remainTime>0">
 											剩余
-												<font color="red"><s:property
+											<font color="red"> <s:property
 														value="#task.remainTime" /> </font>
 											分钟
 											</s:if>
+											<s:else>
+												时间已到
+											</s:else>
 										</s:elseif>
 										<s:elseif test="#task.status==3">
 												等待您确认发货
 											</s:elseif>
 										<s:elseif test="#task.status==4">
-											<s:if test="#task.remainTime==0">
+											<s:if test="#task.remainTime<=0">
 													等待买家确认好评
 												</s:if>
 											<s:else>
-												<font color="red"> <s:if test="#task.remainTime>1">
-														<s:property value="#task.remainTime" />小时后好评 
-											</s:if> <s:else>
-														<s:property value="%{#task.remainTime*60}" />分钟后好评
-											</s:else> </font>
+												 
 											</s:else>
 										</s:elseif>
 										<s:elseif test="#task.status==5">
@@ -464,30 +467,32 @@
 									</td>
 									<td align="center">
 										<s:if test="#task.status==0">
-											<a alt="可能由于你填写错误，可以重新进行填写！"
+											<a alt="取消任务！"
 												href="javascript:cancelTask(<s:property value="#task.id"/>)"><span
-												class="anniu">取消重填</span> </a>
+												class="anniu">取消任务</span> </a>
 											<br>
 											<font color="red">定时时间：<s:date
 													name="#task.timeingTime" format="yyyy-MM-dd HH-mm-ss" /> </font>
 										</s:if>
 										<s:elseif test="#task.status==1">
-											<a alt="可能由于你填写错误，可以重新进行填写！"
+											<a alt="取消任务！"
 												href="javascript:cancelTask(<s:property value="#task.id"/>)"><span
-												class="anniu">取消重填</span> </a>
+												class="anniu">取消任务</span> </a>
+												<!-- 
 											<br>
 											<a alt="刷新排前可以使您的任务在发布区靠前！"
 												href="javascript:toFirstTask(<s:property value="#task.id"/>)"><span
 												class="anniu2">刷新排前</span> </a>
+												 -->
 										</s:elseif>
 										<s:elseif test="#task.status==-2">
 											<a alt="您对该人信任之后，可以允许他接您的任务！"
 												href="javascript:audiReceiver(<s:property value="#task.id"/>)"><span
-												class="anniu">审核接收人</span> </a>
+												class="anniu">审核对方</span> </a>
 											<br>
-											<a alt="如果对方没有被您审核过，可以清理买家！"
+											<a alt="如果对方没有被您审核过，可以清除买家！"
 												href="javascript:clearReceiver(<s:property value="#task.id"/>)"><span
-												class="anniu2">清理买家</span> </a>
+												class="anniu2">清除对方</span> </a>
 											<br>
 											<a alt="为对方加时"
 												href="javascript:addTime('<s:property value="#task.id"/>')"><span
@@ -497,6 +502,12 @@
 											<a alt="为对方加时"
 												href="javascript:addTime('<s:property value="#task.id"/>')"><span
 												class="anniu">为他加时</span> </a>
+											<s:if test="#task.remainTime<=0">
+												<br>
+												<a alt="如果对方长时间没操作可以清除对方！"
+													href="javascript:clearReceiver(<s:property value="#task.id"/>)"><span
+													class="anniu2">清除对方</span> </a>
+											</s:if>
 										</s:elseif>
 										<s:elseif test="#task.status==3">
 											<a alt="请您在确认后，进行发货！"

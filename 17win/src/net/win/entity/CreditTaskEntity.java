@@ -44,9 +44,9 @@ public class CreditTaskEntity extends BaseEntity {
 	// 价格
 	@Column(name = "MONEY_", nullable = false)
 	private Double money;
-	// 所剩时间(分钟/小时（卖家发货）)
+	// 所剩时间(分钟 / 秒（卖家发货）)
 	@Column(name = "REMAIN_TIME_")
-	private Integer remainTime = 20;
+	private Long remainTime = 20L;
 	// 状态
 	// (-2（已接手等待审核） -1因为申述被暂停(但是要判断12小时，不能像2000w一样不能判断) ,0 还没开始（定时任务有用）
 	// 1:等待接手，2买家接手，卖家等待买家付款，3买家已付款。等待卖家确认发货，4：卖家发货了。等待买家确认好评。5：买家已经确认好评。等待卖家确认好评。6完成
@@ -198,11 +198,11 @@ public class CreditTaskEntity extends BaseEntity {
 		this.buyer = buyer;
 	}
 
-	public Integer getRemainTime() {
+	public Long getRemainTime() {
 		return remainTime;
 	}
 
-	public void setRemainTime(Integer remainTime) {
+	public void setRemainTime(Long remainTime) {
 		this.remainTime = remainTime;
 	}
 

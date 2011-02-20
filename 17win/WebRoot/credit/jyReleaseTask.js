@@ -1,56 +1,56 @@
 $(document).ready(function() {
-	$(".qqConnection").tooltip();
+			$(".qqConnection").tooltip();
 
-	intText("autoreFresh");
-	$("#autoreFresh").focus(function() {
-				$(this).data("oldValue", $(this).val());
-				$(this).val("");
-			});
-	$("#autoreFresh").blur(function() {
-		if (!Validater.isBlank($(this).val())) {
-			var value = parseInt($(this).val());
-			if (value < 5) {
-				alert("刷新时间必须大于5秒");
-				return;
-			}
-			$("#mainForm").submit();
-		} else {
-			if (!Validater.isBlank($(this).data("oldValue"))) {
-				$("#mainForm").submit();
-			}
-		}
-	});
+			intText("autoreFresh");
+			$("#autoreFresh").focus(function() {
+						$(this).data("oldValue", $(this).val());
+						$(this).val("");
+					});
+			$("#autoreFresh").blur(function() {
+						if (!Validater.isBlank($(this).val())) {
+							var value = parseInt($(this).val());
+							if (value < 5) {
+								alert("刷新时间必须大于5秒");
+								return;
+							}
+							$("#mainForm").submit();
+						} else {
+							if (!Validater.isBlank($(this).data("oldValue"))) {
+								$("#mainForm").submit();
+							}
+						}
+					});
 
-	// /////
-	$("input[class='goItemButton']").click(function() {
-				var val = $(this).siblings("input").val();
-				window.open(val, "_blank");
+			// /////
+			$("input[class='goItemButton']").click(function() {
+						var val = $(this).siblings("input").val();
+						window.open(val, "_blank");
 
-			});
+					});
 
-	$("#autoreFresh").focus(function() {
+			$("#autoreFresh").focus(function() {
 
-			});
+					});
 
-	$("#contentID").keyup(function() {
-				var value = $(this).val();
-				if (value.length > 200) {
-					$(this).val(value.substring(0, 200));
-				} else {
-					$("#showTip").text(value.length);
-				}
-			});
+			$("#contentID").keyup(function() {
+						var value = $(this).val();
+						if (value.length > 200) {
+							$(this).val(value.substring(0, 200));
+						} else {
+							$("#showTip").text(value.length);
+						}
+					});
 
-	$("#addressDIV").dialog({
-				autoOpen : false,
-				draggable : false,
-				hide : 'slide',
-				modal : true,
-				resizable : false,
-				show : 'slide',
-				width : 400
-			});
-});
+			$("#addressDIV").dialog({
+						autoOpen : false,
+						draggable : false,
+						hide : 'slide',
+						modal : true,
+						resizable : false,
+						show : 'slide',
+						width : 400
+					});
+		});
 
 // 弹出发送手机短信层
 function openTelephoneDiv(telphone, username) {
@@ -89,50 +89,63 @@ function reply(fromUsername) {
 	window.open("smsManager/sms!initSendSms.php?toUser=" + fromUsername
 					+ "&timeFlag=" + new Date().getTime(), "_blank");
 }
-// 审核卖家
-function clearReceiver(id) {
-	var platformType = $("#platformType").val();
-	window.location.href = "taskManager/task!clearReceiver.php?taskId=" + id
-			+ "&platformType=" + platformType;
-}
 // 清理买家
+function clearReceiver(id) {
+	if (confirm("是否清除对方！")) {
+		$("#taskId").val(id);
+		$("#mainForm").attr("action", "taskManager/task!clearReceiver.php");
+		$("#mainForm").submit();
+	}
+}
+// 审核卖家
 function audiReceiver(id) {
-	var platformType = $("#platformType").val();
-	window.location.href = "taskManager/task!audiReceiver.php?taskId=" + id
-			+ "&platformType=" + platformType;
+	if (confirm("是否确认审核对方！")) {
+		$("#taskId").val(id);
+		$("#mainForm").attr("action", "taskManager/task!audiReceiver.php");
+		$("#mainForm").submit();
+	}
 }
 // 好评
 function sellerEvaluate(id) {
-	var platformType = $("#platformType").val();
-	window.location.href = "taskManager/task!sellerEvaluate.php?taskId=" + id
-			+ "&platformType=" + platformType;
+	if (confirm("是否确认好评！")) {
+		$("#taskId").val(id);
+		$("#mainForm").attr("action", "taskManager/task!sellerEvaluate.php");
+		$("#mainForm").submit();
+	}
 }
 // 发货
 function dispatch(id) {
-	var platformType = $("#platformType").val();
-	window.location.href = "taskManager/task!dispatch.php?taskId=" + id
-			+ "&platformType=" + platformType;
+	if (confirm("是否确认发货！")) {
+		$("#taskId").val(id);
+		$("#mainForm").attr("action", "taskManager/task!dispatch.php");
+		$("#mainForm").submit();
+	}
 }
 // 取消重填
 function cancelTask(id) {
-	var platformType = $("#platformType").val();
-	if (confirm("是否要取消任务重填任务！")) {
-		window.location.href = "taskManager/task!cancelTask.php?taskId=" + id
-				+ "&platformType=" + platformType;
+	if (confirm("是否要取消任务！")) {
+		$("#taskId").val(id);
+		$("#mainForm").attr("action", "taskManager/task!cancelTask.php");
+		$("#mainForm").submit();
 	}
 }
 // 刷新排前
 function toFirstTask(id) {
-	var platformType = $("#platformType").val();
-	window.location.href = "taskManager/task!toFirstTask.php?taskId=" + id
-			+ "&platformType=" + platformType;
+	if (confirm("是否要刷新任务！")) {
+		$("#taskId").val(id);
+		$("#mainForm").attr("action", "taskManager/task!toFirstTask.php");
+		$("#mainForm").submit();
+	}
 }
+
 
 // 加时
 function addTime(id) {
-	var platformType = $("#platformType").val();
-	window.location.href = "taskManager/task!addTime.php?taskId=" + id
-			+ "&platformType=" + platformType;
+	if (confirm("是否要为对方加时！")) {
+		$("#taskId").val(id);
+		$("#mainForm").attr("action", "taskManager/task!addTime.php");
+		$("#mainForm").submit();
+	}
 }
 
 // 旺旺
@@ -140,6 +153,10 @@ function callWW(url) {
 	if (confirm("为了您和他人的安全，使用旺旺联系对方时请不要发送关于任何刷信誉的消息！")) {
 		window.open(url, "_blank");
 	}
+}
+//刷新当前页
+function refreshPage(){
+	$("#mainForm").submit();
 }
 // ///分页
 function firstPage() {

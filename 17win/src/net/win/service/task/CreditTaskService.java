@@ -19,7 +19,6 @@ import net.win.dao.TaskLinkManDAO;
 import net.win.dao.UserDAO;
 import net.win.dao.VipDAO;
 import net.win.entity.BuyerEntity;
-import net.win.entity.CapitalLogEntity;
 import net.win.entity.CreditTaskEntity;
 import net.win.entity.CreditTaskRepositoryEntity;
 import net.win.entity.SellerEntity;
@@ -41,6 +40,8 @@ import net.win.vo.CreditTaskVO;
 import net.win.vo.SellerVO;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.springframework.stereotype.Service;
 
 /**
@@ -80,31 +81,44 @@ public class CreditTaskService extends BaseService {
 					+ getRequset().getQueryString());
 			return "operationValidate";
 		} else {
-			Long taskId = Long.parseLong(getByParam("taskId"));
+			Long taskId = creditTaskVO.getId();
 			CreditTaskEntity creditTask = creditTaskDAO.get(taskId);
-			// 如果发布人不是当前的登陆人就报错
-			if (creditTask.getStatus().equals(TaskMananger.STEP_FIVE_STATUS)) {
-				putAlertMsg("已经好评，不要重复提交！");
-				putJumpSelfPage("taskManager/task!initReceivedTast.php?platformType="
-						+ platformType);
-				return JUMP;
-			}
-			if (!platformType.equals(creditTask.getType())
+			/**
+			 * 验证
+			 */
+			if (creditTask == null
+					|| !platformType.equals(creditTask.getType())
 					|| !creditTask.getReceivePerson().getId().equals(
-							getLoginUser().getId())
-					|| !creditTask.getStatus().equals(
-							TaskMananger.STEP_FOUR_STATUS)) {
-				WinUtils.throwIllegalityException(getLoginUser().getUsername()
-						+ "试图越过【买家好评】操作！任务ID是：" + taskId);
+							getLoginUser().getId())) {
+				putAlertMsg("任务不存在！");
+				List<CreditTaskVO> result = queryReceiveData(creditTaskVO,
+						platformType);
+				putByRequest("result", result);
+				putPlatformByRequest(WinUtils.changeType2Platform(platformType));
+				putPlatformTypeByRequest(platformType);
+				return "initReceivedTast";
+			}
+			// 如果发布人不是当前的登陆人就报错
+			if (!creditTask.getStatus().equals(TaskMananger.STEP_FOUR_STATUS)) {
+				putAlertMsg("好评失败，任务状态已经改变！");
+				List<CreditTaskVO> result = queryReceiveData(creditTaskVO,
+						platformType);
+				putPlatformByRequest(WinUtils.changeType2Platform(platformType));
+				putPlatformTypeByRequest(platformType);
+				putByRequest("result", result);
+				return "initReceivedTast";
 			}
 			/**
 			 * 验证
 			 */
 			creditTask.setStatus(TaskMananger.STEP_FIVE_STATUS);
 			putAlertMsg("好评成功，通知卖家好评吧！");
-			putJumpSelfPage("taskManager/task!initReceivedTast.php?platformType="
-					+ platformType);
-			return JUMP;
+			List<CreditTaskVO> result = queryReceiveData(creditTaskVO,
+					platformType);
+			putPlatformByRequest(WinUtils.changeType2Platform(platformType));
+			putPlatformTypeByRequest(platformType);
+			putByRequest("result", result);
+			return "initReceivedTast";
 		}
 	}
 
@@ -117,40 +131,43 @@ public class CreditTaskService extends BaseService {
 	public String updateRollbackPay(CreditTaskVO creditTaskVO) throws Exception {
 		String platformType = getPlatformType();
 		UserLoginInfo loginInfo = getLoginUser();
-		Long taskId = Long.parseLong(getByParam("taskId"));
+		Long taskId = creditTaskVO.getId();
 		if (!getLoginUser().getOperationCodeStatus()) {
 			putByRequest("preURL", getRequset().getRequestURL() + "?"
 					+ getRequset().getQueryString());
 			return "operationValidate";
 		} else {
 			CreditTaskEntity creditTask = creditTaskDAO.get(taskId);
-			if (creditTask.getStatus().equals(TaskMananger.STEP_TWO_STATUS)) {
-				putAlertMsg("已经撤销，不要重复提交！");
-				putJumpSelfPage("taskManager/task!initReceivedTast.php?platformType="
-						+ platformType);
-				return JUMP;
-			}
-			if (creditTask.getStatus().equals(TaskMananger.STEP_FOUR_STATUS)) {
-				putJumpSelfPage("taskManager/task!initReceivedTast.php?platformType="
-						+ platformType);
-				putAlertMsg("撤销失败，卖家已发货！");
-				return JUMP;
-			}
-			// 如果发布人不是当前的登陆人就报错
-			if (!platformType.equals(creditTask.getType())
+			/**
+			 * 验证
+			 */
+			if (creditTask == null
+					|| !platformType.equals(creditTask.getType())
 					|| !creditTask.getReceivePerson().getId().equals(
-							loginInfo.getId())
-					|| !creditTask.getStatus().equals(
-							TaskMananger.STEP_THREE_STATUS)) {
-				WinUtils.throwIllegalityException(getLoginUser().getUsername()
-						+ "试图越过【撤销支付】操作！任务ID是：" + taskId);
+							getLoginUser().getId())) {
+				putAlertMsg("任务不存在！");
+				List<CreditTaskVO> result = queryReceiveData(creditTaskVO,
+						platformType);
+				putByRequest("result", result);
+				putPlatformByRequest(WinUtils.changeType2Platform(platformType));
+				putPlatformTypeByRequest(platformType);
+				return "initReceivedTast";
+			}
+			if (!creditTask.getStatus().equals(TaskMananger.STEP_THREE_STATUS)) {
+				putAlertMsg("撤销失败，任务状态已经改变！");
+				List<CreditTaskVO> result = queryReceiveData(creditTaskVO,
+						platformType);
+				putPlatformByRequest(WinUtils.changeType2Platform(platformType));
+				putPlatformTypeByRequest(platformType);
+				putByRequest("result", result);
+				return "initReceivedTast";
 			}
 			/**
 			 * 任务
 			 */
 			Date currOperDate = creditTask.getReceiveDate();
-			Integer minuties = ((Long) ((System.currentTimeMillis() - currOperDate
-					.getTime()) / 1000 / 60)).intValue();
+			Long minuties = ((System.currentTimeMillis() - currOperDate
+					.getTime()) / 1000 / 60);
 			/**
 			 * 真正的逻辑 修改时间
 			 */
@@ -158,9 +175,11 @@ public class CreditTaskService extends BaseService {
 			creditTask.setStatus(TaskMananger.STEP_TWO_STATUS);
 			putAlertMsg("撤销成功！");
 		}
-		putJumpSelfPage("taskManager/task!initReceivedTast.php?platformType="
-				+ platformType);
-		return JUMP;
+		List<CreditTaskVO> result = queryReceiveData(creditTaskVO, platformType);
+		putPlatformByRequest(WinUtils.changeType2Platform(platformType));
+		putPlatformTypeByRequest(platformType);
+		putByRequest("result", result);
+		return "initReceivedTast";
 	}
 
 	/**
@@ -172,38 +191,54 @@ public class CreditTaskService extends BaseService {
 	public String updatePayTask(CreditTaskVO creditTaskVO) throws Exception {
 		String platformType = getPlatformType();
 		UserLoginInfo loginInfo = getLoginUser();
-		Long taskId = Long.parseLong(getByParam("taskId"));
+		Long taskId = creditTaskVO.getId();
 		if (!getLoginUser().getOperationCodeStatus()) {
 			putByRequest("preURL", getRequset().getRequestURL() + "?"
 					+ getRequset().getQueryString());
 			return "operationValidate";
 		} else {
 			CreditTaskEntity creditTask = creditTaskDAO.get(taskId);
-			if (creditTask.getStatus().equals(TaskMananger.STEP_THREE_STATUS)) {
-				putAlertMsg("已经支付，不要重复提交！");
-				putJumpSelfPage("taskManager/task!initReceivedTast.php?platformType="
-						+ platformType);
-				return JUMP;
-			}
-			// 如果发布人不是当前的登陆人就报错
-			if (!platformType.equals(creditTask.getType())
+			/**
+			 * 验证
+			 */
+			if (creditTask == null
+					|| !platformType.equals(creditTask.getType())
 					|| !creditTask.getReceivePerson().getId().equals(
-							loginInfo.getId())
-					|| !creditTask.getStatus().equals(
-							TaskMananger.STEP_TWO_STATUS)) {
+							getLoginUser().getId())) {
+				putAlertMsg("任务不存在！");
+				List<CreditTaskVO> result = queryReceiveData(creditTaskVO,
+						platformType);
+				putByRequest("result", result);
+				putPlatformByRequest(WinUtils.changeType2Platform(platformType));
+				putPlatformTypeByRequest(platformType);
+				return "initReceivedTast";
+			}
+			if (!creditTask.getStatus().equals(TaskMananger.STEP_TWO_STATUS)) {
+				putAlertMsg("支付失败，任务状态已经改变！");
+				List<CreditTaskVO> result = queryReceiveData(creditTaskVO,
+						platformType);
+				putPlatformByRequest(WinUtils.changeType2Platform(platformType));
+				putPlatformTypeByRequest(platformType);
+				putByRequest("result", result);
+				return "initReceivedTast";
+			} else if (!platformType.equals(creditTask.getType())
+					|| !creditTask.getReceivePerson().getId().equals(
+							loginInfo.getId())) {
+				// 如果发布人不是当前的登陆人就报错
 				WinUtils.throwIllegalityException(getLoginUser().getUsername()
 						+ "试图越过【已经支付】操作！任务ID是：" + taskId);
 			}
 			/**
 			 * 任务
 			 */
-			creditTask.setRemainTime(0);
 			creditTask.setStatus(TaskMananger.STEP_THREE_STATUS);
 		}
-		putJumpSelfPage("taskManager/task!initReceivedTast.php?platformType="
-				+ platformType);
 		putAlertMsg("支付成功！");
-		return JUMP;
+		List<CreditTaskVO> result = queryReceiveData(creditTaskVO, platformType);
+		putPlatformByRequest(WinUtils.changeType2Platform(platformType));
+		putPlatformTypeByRequest(platformType);
+		putByRequest("result", result);
+		return "initReceivedTast";
 	}
 
 	/**
@@ -215,35 +250,40 @@ public class CreditTaskService extends BaseService {
 	public String updateQuitTask(CreditTaskVO creditTaskVO) throws Exception {
 		String platformType = getPlatformType();
 		UserLoginInfo loginInfo = getLoginUser();
-		Long taskId = Long.parseLong(getByParam("taskId"));
+		Long taskId = creditTaskVO.getId();
 		if (!getLoginUser().getOperationCodeStatus()) {
 			putByRequest("preURL", getRequset().getRequestURL() + "?"
 					+ getRequset().getQueryString());
 			return "operationValidate";
 		} else {
 			CreditTaskEntity creditTask = creditTaskDAO.get(taskId);
-			UserEntity receiveUser = creditTask.getReceivePerson();
-			if (creditTask.getStatus().equals(TaskMananger.STEP_ONE_STATUS)) {
-				putAlertMsg("已经退出，不要重复提交！");
-				putJumpSelfPage("taskManager/task!initReceivedTast.php?platformType="
-						+ platformType);
-				return JUMP;
-			}
-			if ((!platformType.equals(creditTask.getType()))
-					|| (!receiveUser.getId().equals(loginInfo.getId()))
-					|| (!platformType.equals(creditTask.getType()))) {
-				WinUtils.throwIllegalityException(loginInfo.getUsername()
-						+ "试图越过【退出任务】操作！ 任务ID是:" + taskId);
-			}
 			/**
-			 * 验证 如果不是付款，也不是 审核，那么就不能退出任务了。
+			 * 验证
 			 */
-			if (!TaskMananger.STEP_TWO_STATUS.equals(creditTask.getStatus())
-					&& !TaskMananger.AUDIT_STATUS
-							.equals(creditTask.getStatus())) {
-				WinUtils.throwIllegalityException(getLoginUser().getUsername()
-						+ "试图越过【退出任务】操作！ 任务ID是:" + taskId);
+			if (creditTask == null
+					|| !platformType.equals(creditTask.getType())
+					|| !creditTask.getReceivePerson().getId().equals(
+							getLoginUser().getId())) {
+				putAlertMsg("任务不存在！");
+				List<CreditTaskVO> result = queryReceiveData(creditTaskVO,
+						platformType);
+				putByRequest("result", result);
+				putPlatformByRequest(WinUtils.changeType2Platform(platformType));
+				putPlatformTypeByRequest(platformType);
+				return "initReceivedTast";
 			}
+			if (!creditTask.getStatus().equals(TaskMananger.STEP_TWO_STATUS)
+					&& !creditTask.getStatus()
+							.equals(TaskMananger.AUDIT_STATUS)) {
+				putAlertMsg("退出失败，任务状态已经改变！");
+				List<CreditTaskVO> result = queryReceiveData(creditTaskVO,
+						platformType);
+				putPlatformByRequest(WinUtils.changeType2Platform(platformType));
+				putPlatformTypeByRequest(platformType);
+				putByRequest("result", result);
+				return "initReceivedTast";
+			}
+			UserEntity receiveUser = creditTask.getReceivePerson();
 			/**
 			 * 任务
 			 */
@@ -255,10 +295,12 @@ public class CreditTaskService extends BaseService {
 			creditTask.setStatus(TaskMananger.STEP_ONE_STATUS);
 			updateUserLoginInfo(receiveUser);
 		}
-		putJumpSelfPage("taskManager/task!initReceivedTast.php?platformType="
-				+ platformType);
 		putAlertMsg("已经退出任务！");
-		return JUMP;
+		List<CreditTaskVO> result = queryReceiveData(creditTaskVO, platformType);
+		putPlatformByRequest(WinUtils.changeType2Platform(platformType));
+		putPlatformTypeByRequest(platformType);
+		putByRequest("result", result);
+		return "initReceivedTast";
 	}
 
 	/*
@@ -276,15 +318,27 @@ public class CreditTaskService extends BaseService {
 		BuyerEntity buyerEntitiy = buyerDAO.get(Long
 				.parseLong(getByParam("buyerId")));
 		UserEntity userEntity = userDAO.get(loginInfo.getId());
-		if (creditTask == null) {
-			putAlertMsg("任务已经不存在！");
-			putJumpSelfPage("userInfoManager/info!initActiave.php");
+		/**
+		 * 验证
+		 */
+		// 如果发布人不是当前的登陆人就报错
+		if (creditTask == null || !platformType.equals(creditTask.getType())) {
+			putAlertMsg("任务不存在！");
+			putJumpSelfPage("taskManager/task!initTask.php?platformType="
+					+ platformType);
+			return JUMP;
+		}
+		if (!creditTask.getStatus().equals(TaskMananger.STEP_ONE_STATUS)) {
+			putAlertMsg("接手任务失败，任务状态已经改变！");
+			putJumpSelfPage("taskManager/task!initTask.php?platformType="
+					+ platformType);
 			return JUMP;
 		}
 		if (!StringUtils.isBlank(creditTask.getAssignUser())
 				&& !creditTask.getAssignUser().equals(userEntity.getUsername())) {
-			putAlertMsg("任务已经不存在！");
-			putJumpSelfPage("这是特殊任务，您不是指定的人！");
+			putAlertMsg("这是特殊任务，您不是指定的人！");
+			putJumpSelfPage("taskManager/task!initTask.php?platformType="
+					+ platformType);
 			return JUMP;
 		}
 		if (!userEntity.getStatus().equals("1")) {
@@ -305,32 +359,13 @@ public class CreditTaskService extends BaseService {
 			putJumpSelfPage("userInfoManager/info!initActiave.php");
 			return JUMP;
 		}
-		if (creditTask.getStatus().equals(TaskMananger.STEP_TWO_STATUS)) {
-			if (creditTask.getReceivePerson().getId().equals(
-					getLoginUser().getId())) {
-				putAlertMsg("您已经接受了此任务，不要重复提交！");
-			} else {
-				putAlertMsg("任务已经被人别抢先接受！！");
-			}
-			putJumpSelfPage("taskManager/task!initReceivedTast.php?platformType="
-					+ platformType);
-			return JUMP;
-		}
-		// 验证状态
-		if (!platformType.equals(creditTask.getType())
-				|| !TaskMananger.STEP_ONE_STATUS.equals(creditTask.getStatus())
-				|| buyerEntitiy == null) {
-			WinUtils.throwIllegalityException(loginInfo.getUsername()
-					+ "试图越过【接受任务】操作！ 任务ID是:" + taskId);
-		}
-
 		/**
 		 * 验证卖号和买号是否同一个人
 		 */
 		if (buyerEntitiy.getName().equalsIgnoreCase(
 				creditTask.getSeller().getName())) {
 			putAlertMsg("买号和卖号不能相同！");
-			putJumpSelfPage("taskManager/task!initReceivedTast.php?platformType="
+			putJumpSelfPage("taskManager/task!initTask.php?platformType="
 					+ platformType);
 			return JUMP;
 		}
@@ -362,9 +397,9 @@ public class CreditTaskService extends BaseService {
 							creditTask.getSeller().getShopURL() }) == 6;
 		}
 		if (refuseFlag) {
-			putJumpSelfPage("taskManager/task!initReceivedTast.php?platformType="
-					+ platformType);
 			putAlertMsg("为了您和他人的安全，同一商品买号在一个月内只能接手一次，同一店铺的商品买号最多只能接受6次！");
+			putJumpSelfPage("taskManager/task!initTask.php?platformType="
+					+ platformType);
 			return JUMP;
 		}
 		/**
@@ -375,7 +410,7 @@ public class CreditTaskService extends BaseService {
 		// Ip
 		creditTask.setReceiveIP(ip);
 		creditTask.setBuyer(buyerEntitiy);
-		creditTask.setRemainTime(20);
+		creditTask.setRemainTime(20L);
 		creditTask.setReceiveDate(new Date());
 		// 保护就到审核状态
 		if (creditTask.getProtect()) {
@@ -383,7 +418,6 @@ public class CreditTaskService extends BaseService {
 		} else {
 			creditTask.setStatus(TaskMananger.STEP_TWO_STATUS);
 		}
-
 		putJumpSelfPage("taskManager/task!initReceivedTast.php?platformType="
 				+ platformType);
 		putAlertMsg("恭喜您，你已经抢到了此任务！");
@@ -405,28 +439,35 @@ public class CreditTaskService extends BaseService {
 					+ getRequset().getQueryString());
 			return "operationValidate";
 		} else {
-			Long taskId = Long.parseLong(getByParam("taskId"));
+			Long taskId = creditTaskVO.getId();
 			CreditTaskEntity creditTask = creditTaskDAO.get(taskId);
+			/**
+			 * 验证
+			 */
+			// 如果发布人不是当前的登陆人就报错
+			if (creditTask == null
+					|| !platformType.equals(creditTask.getType())
+					|| !creditTask.getReleasePerson().getId().equals(
+							getLoginUser().getId())) {
+				putAlertMsg("任务不存在！");
+				List<CreditTaskVO> result = queryReleaseData(creditTaskVO,
+						platformType);
+				putByRequest("result", result);
+				putPlatformByRequest(WinUtils.changeType2Platform(platformType));
+				putPlatformTypeByRequest(platformType);
+				return "initReleasedTast";
+			}
+			if (!creditTask.getStatus().equals(TaskMananger.STEP_FIVE_STATUS)) {
+				putAlertMsg("已经好评，，任务状态已经改变！");
+				List<CreditTaskVO> result = queryReleaseData(creditTaskVO,
+						platformType);
+				putByRequest("result", result);
+				putPlatformByRequest(WinUtils.changeType2Platform(platformType));
+				putPlatformTypeByRequest(platformType);
+				return "initReleasedTast";
+			}
 			UserEntity receiveUser = creditTask.getReceivePerson();
 			UserEntity releaseUser = creditTask.getReleasePerson();
-			if (creditTask.getStatus().equals(TaskMananger.STEP_SIX_STATUS)) {
-				putAlertMsg("已经好评，不要重复提交！");
-				putJumpSelfPage("taskManager/task!initReleasedTast.php?platformType="
-						+ platformType);
-				return JUMP;
-			}
-			// 如果发布人不是当前的登陆人就报错
-			if (!platformType.equals(creditTask.getType())
-					|| !creditTask.getReleasePerson().getId().equals(
-							getLoginUser().getId())
-					|| !creditTask.getStatus().equals(
-							TaskMananger.STEP_FIVE_STATUS)) {
-				WinUtils.throwIllegalityException(getLoginUser().getUsername()
-						+ "试图越过【卖家好评】操作！ 任务ID是:" + taskId);
-			}
-			/**
-			 * 人
-			 */
 			/**
 			 * 修改积分发送人
 			 */
@@ -447,7 +488,6 @@ public class CreditTaskService extends BaseService {
 				releaseVipBidUser.setGrowValue(releaseVipBidUser.getGrowValue()
 						+ releaseUserVip.getReleaseGrowValue());
 			}
-
 			/**
 			 * 修改积分和钱 接收人 和 接受号
 			 */
@@ -549,9 +589,12 @@ public class CreditTaskService extends BaseService {
 			updateUserLoginInfo(releaseUser);
 			creditTask.setStatus(TaskMananger.STEP_SIX_STATUS);
 			putAlertMsg("好评成功，任务完成！");
-			putJumpSelfPage("taskManager/task!initReleasedTast.php?platformType="
-					+ platformType);
-			return JUMP;
+			List<CreditTaskVO> result = queryReleaseData(creditTaskVO,
+					platformType);
+			putByRequest("result", result);
+			putPlatformByRequest(WinUtils.changeType2Platform(platformType));
+			putPlatformTypeByRequest(platformType);
+			return "initReleasedTast";
 		}
 	}
 
@@ -566,41 +609,49 @@ public class CreditTaskService extends BaseService {
 					+ getRequset().getQueryString());
 			return "operationValidate";
 		} else {
-			Long taskId = Long.parseLong(getByParam("taskId"));
+			Long taskId = creditTaskVO.getId();
 			CreditTaskEntity creditTask = creditTaskDAO.get(taskId);
-			if (creditTask.getStatus().equals(TaskMananger.STEP_FOUR_STATUS)) {
-				putAlertMsg("已经发货，不要重复提交！");
-				putJumpSelfPage("taskManager/task!initReleasedTast.php?platformType="
-						+ platformType);
-				return JUMP;
-			}
 			/**
 			 * 验证
 			 */
-			if (TaskMananger.STEP_TWO_STATUS.equals(creditTask.getStatus())) {
-				putAlertMsg("发货失败，买家已经撤销支付！");
-			} else {
-				// 如果发布人不是当前的登陆人就报错
-				if (!platformType.equals(creditTask.getType())
-						|| !creditTask.getReleasePerson().getId().equals(
-								getLoginUser().getId())
-						|| !creditTask.getStatus().equals(
-								TaskMananger.STEP_THREE_STATUS)) {
-					WinUtils.throwIllegalityException(getLoginUser()
-							.getUsername()
-							+ "试图越过【卖家发货】操作！ 任务ID是:" + taskId);
-				}
-				// String goodType = creditTask.getGoodTimeType();
-				// if (!"1".equals(goodType)) {
-				// creditTask.setRemainTime(creditTask.getIntervalHour());
-				// creditTask.setDispatchDate(new Date());
-				// }
-				creditTask.setStatus(TaskMananger.STEP_FOUR_STATUS);
-				putAlertMsg("发货成功！");
+			// 如果发布人不是当前的登陆人就报错
+			if (creditTask == null
+					|| !platformType.equals(creditTask.getType())
+					|| !creditTask.getReleasePerson().getId().equals(
+							getLoginUser().getId())) {
+				putAlertMsg("任务不存在！");
+				List<CreditTaskVO> result = queryReleaseData(creditTaskVO,
+						platformType);
+				putByRequest("result", result);
+				putPlatformByRequest(WinUtils.changeType2Platform(platformType));
+				putPlatformTypeByRequest(platformType);
+				return "initReleasedTast";
 			}
-			putJumpSelfPage("taskManager/task!initReleasedTast.php?platformType="
-					+ platformType);
-			return JUMP;
+			if (!creditTask.getStatus().equals(TaskMananger.STEP_THREE_STATUS)) {
+				putAlertMsg("发货失败，任务状态已经改变！");
+				List<CreditTaskVO> result = queryReleaseData(creditTaskVO,
+						platformType);
+				putByRequest("result", result);
+				putPlatformByRequest(WinUtils.changeType2Platform(platformType));
+				putPlatformTypeByRequest(platformType);
+				return "initReleasedTast";
+			}
+			creditTask.setStatus(TaskMananger.STEP_FOUR_STATUS);
+			// 设置好评剩余时间 秒
+			if (creditTask.getIntervalHour() > 0) {
+				creditTask.setRemainTime(creditTask.getIntervalHour()
+						* 60
+						* 60
+						- (System.currentTimeMillis() - creditTask
+								.getReceiveDate().getTime()));
+			}
+			putAlertMsg("发货成功！");
+			List<CreditTaskVO> result = queryReleaseData(creditTaskVO,
+					platformType);
+			putByRequest("result", result);
+			putPlatformByRequest(WinUtils.changeType2Platform(platformType));
+			putPlatformTypeByRequest(platformType);
+			return "initReleasedTast";
 		}
 	}
 
@@ -617,30 +668,35 @@ public class CreditTaskService extends BaseService {
 					+ getRequset().getQueryString());
 			return "operationValidate";
 		} else {
-			Long taskId = Long.parseLong(getByParam("taskId"));
+			Long taskId = creditTaskVO.getId();
 			CreditTaskEntity creditTask = creditTaskDAO.get(taskId);
-			if (creditTask.getStatus().equals(TaskMananger.STEP_ONE_STATUS)) {
-				putAlertMsg("已经清理，不要重复提交！");
-				putJumpSelfPage("taskManager/task!initReleasedTast.php?platformType="
-						+ platformType);
-				return JUMP;
-			}
-			if (creditTask.getStatus().equals(TaskMananger.STEP_ONE_STATUS)) {
-				putJumpSelfPage("taskManager/task!initReleasedTast.php?platformType="
-						+ platformType);
-				putAlertMsg("清理成功！");
-				return JUMP;
-			}
-			// 如果发布人不是当前的登陆人就报错
-			if (!creditTask.getReleasePerson().getId().equals(
-					getLoginUser().getId())
-					|| !platformType.equals(creditTask.getType())) {
-				WinUtils.throwIllegalityException(getLoginUser().getUsername()
-						+ "试图越过【清理买家】操作！ 任务ID是:" + taskId);
-			}
 			/**
-			 * 修改
+			 * 验证
 			 */
+			// 如果发布人不是当前的登陆人就报错
+			if (creditTask == null
+					|| !platformType.equals(creditTask.getType())
+					|| !creditTask.getReleasePerson().getId().equals(
+							getLoginUser().getId())) {
+				putAlertMsg("任务不存在！");
+				List<CreditTaskVO> result = queryReleaseData(creditTaskVO,
+						platformType);
+				putByRequest("result", result);
+				putPlatformByRequest(WinUtils.changeType2Platform(platformType));
+				putPlatformTypeByRequest(platformType);
+				return "initReleasedTast";
+			}
+			if (!creditTask.getStatus().equals(TaskMananger.STEP_TWO_STATUS)
+					&& !creditTask.getStatus()
+							.equals(TaskMananger.AUDIT_STATUS)) {
+				putAlertMsg("清理失败，任务状态已经改变！");
+				List<CreditTaskVO> result = queryReleaseData(creditTaskVO,
+						platformType);
+				putByRequest("result", result);
+				putPlatformByRequest(WinUtils.changeType2Platform(platformType));
+				putPlatformTypeByRequest(platformType);
+				return "initReleasedTast";
+			}
 			/**
 			 * 任务
 			 */
@@ -651,9 +707,12 @@ public class CreditTaskService extends BaseService {
 			creditTask.setReceiveDate(null);
 			creditTask.setStatus(TaskMananger.STEP_ONE_STATUS);
 			putAlertMsg("清理买家成功！");
-			putJumpSelfPage("taskManager/task!initReleasedTast.php?platformType="
-					+ platformType);
-			return JUMP;
+			List<CreditTaskVO> result = queryReleaseData(creditTaskVO,
+					platformType);
+			putByRequest("result", result);
+			putPlatformByRequest(WinUtils.changeType2Platform(platformType));
+			putPlatformTypeByRequest(platformType);
+			return "initReleasedTast";
 		}
 	}
 
@@ -669,31 +728,44 @@ public class CreditTaskService extends BaseService {
 					+ getRequset().getQueryString());
 			return "operationValidate";
 		} else {
-			Long taskId = Long.parseLong(getByParam("taskId"));
+			Long taskId = creditTaskVO.getId();
 			CreditTaskEntity creditTask = creditTaskDAO.get(taskId);
-			if (creditTask.getStatus().equals(TaskMananger.STEP_TWO_STATUS)) {
-				putAlertMsg("已经审核，不要重复提交！");
-				putJumpSelfPage("taskManager/task!initReleasedTast.php?platformType="
-						+ platformType);
-				return JUMP;
-			}
+			/**
+			 * 验证
+			 */
 			// 如果发布人不是当前的登陆人就报错
-			if (!platformType.equals(creditTask.getType())
+			if (creditTask == null
+					|| !platformType.equals(creditTask.getType())
 					|| !creditTask.getReleasePerson().getId().equals(
-							getLoginUser().getId())
-					|| !creditTask.getStatus()
-							.equals(TaskMananger.AUDIT_STATUS)) {
-				WinUtils.throwIllegalityException(getLoginUser().getUsername()
-						+ "试图越过【审核接收人】操作！ 任务ID是:" + taskId);
+							getLoginUser().getId())) {
+				putAlertMsg("任务不存在！");
+				List<CreditTaskVO> result = queryReleaseData(creditTaskVO,
+						platformType);
+				putByRequest("result", result);
+				putPlatformByRequest(WinUtils.changeType2Platform(platformType));
+				putPlatformTypeByRequest(platformType);
+				return "initReleasedTast";
+			}
+			if (!creditTask.getStatus().equals(TaskMananger.AUDIT_STATUS)) {
+				putAlertMsg("审核失败，任务状态已经改变！");
+				List<CreditTaskVO> result = queryReleaseData(creditTaskVO,
+						platformType);
+				putByRequest("result", result);
+				putPlatformByRequest(WinUtils.changeType2Platform(platformType));
+				putPlatformTypeByRequest(platformType);
+				return "initReleasedTast";
 			}
 			/**
 			 * 验证
 			 */
 			creditTask.setStatus(TaskMananger.STEP_TWO_STATUS);
 			putAlertMsg("审核完成，联系买家付款吧！");
-			putJumpSelfPage("taskManager/task!initReleasedTast.php?platformType="
-					+ platformType);
-			return JUMP;
+			List<CreditTaskVO> result = queryReleaseData(creditTaskVO,
+					platformType);
+			putByRequest("result", result);
+			putPlatformByRequest(WinUtils.changeType2Platform(platformType));
+			putPlatformTypeByRequest(platformType);
+			return "initReleasedTast";
 		}
 	}
 
@@ -708,42 +780,50 @@ public class CreditTaskService extends BaseService {
 					+ getRequset().getQueryString());
 			return "operationValidate";
 		} else {
-			Long taskId = Long.parseLong(getByParam("taskId"));
+			Long taskId = creditTaskVO.getId();
 			UserEntity userEntity = userDAO.get(getLoginUser().getId());
 			CreditTaskEntity creditTask = creditTaskDAO.get(taskId);
-			if (creditTask.getStatus().equals(TaskMananger.STEP_ONE_STATUS)) {
-				putJumpSelfPage("taskManager/task!initReleasedTast.php?platformType="
-						+ platformType);
-				putAlertMsg("加时失败，买家已经退出！");
-				return JUMP;
-			}
-			// 如果发布人不是当前的登陆人就报错
-			if (!platformType.equals(creditTask.getType())
-					|| !creditTask.getReleasePerson().getId().equals(
-							userEntity.getId())) {
-				WinUtils.throwIllegalityException(userEntity.getUsername()
-						+ "试图越过【卖家加时】操作！ 任务ID是:" + taskId);
-			}
 			/**
 			 * 验证
 			 */
-			if (TaskMananger.STEP_THREE_STATUS.equals(creditTask.getStatus())) {
-				putAlertMsg("加时失败,买家已经付款！");
-			} else {
-
-				Date currOperDate = creditTask.getReceiveDate();
-				Integer minuties = ((Long) ((System.currentTimeMillis() - currOperDate
-						.getTime()) / 1000 / 60)).intValue();
-				/**
-				 * 真正的逻辑 修改时间
-				 */
-				creditTask.setRemainTime(minuties + 20);
-				putAlertMsg("加时成功！");
+			// 如果发布人不是当前的登陆人就报错
+			if (creditTask == null
+					|| !platformType.equals(creditTask.getType())
+					|| !creditTask.getReleasePerson().getId().equals(
+							userEntity.getId())) {
+				putAlertMsg("任务不存在！");
+				List<CreditTaskVO> result = queryReleaseData(creditTaskVO,
+						platformType);
+				putByRequest("result", result);
+				putPlatformByRequest(WinUtils.changeType2Platform(platformType));
+				putPlatformTypeByRequest(platformType);
+				return "initReleasedTast";
 			}
-			putJumpSelfPage("taskManager/task!initReleasedTast.php?platformType="
-					+ platformType);
-
-			return JUMP;
+			if (!TaskMananger.AUDIT_STATUS.equals(creditTask.getStatus())
+					&& !TaskMananger.STEP_TWO_STATUS.equals(creditTask
+							.getStatus())) {
+				putAlertMsg("加时失败,任务状态已经改变！");
+				List<CreditTaskVO> result = queryReleaseData(creditTaskVO,
+						platformType);
+				putByRequest("result", result);
+				putPlatformByRequest(WinUtils.changeType2Platform(platformType));
+				putPlatformTypeByRequest(platformType);
+				return "initReleasedTast";
+			}
+			Date currOperDate = creditTask.getReceiveDate();
+			Long minuties =   ((System.currentTimeMillis() - currOperDate
+					.getTime()) / 1000 / 60) ;
+			/**
+			 * 真正的逻辑 修改时间
+			 */
+			creditTask.setRemainTime(minuties + 20);
+			putAlertMsg("加时成功！");
+			List<CreditTaskVO> result = queryReleaseData(creditTaskVO,
+					platformType);
+			putByRequest("result", result);
+			putPlatformByRequest(WinUtils.changeType2Platform(platformType));
+			putPlatformTypeByRequest(platformType);
+			return "initReleasedTast";
 		}
 	}
 
@@ -761,15 +841,33 @@ public class CreditTaskService extends BaseService {
 					+ getRequset().getQueryString());
 			return "operationValidate";
 		} else {
-			Long taskId = Long.parseLong(getByParam("taskId"));
+			Long taskId = creditTaskVO.getId();
 			UserEntity userEntity = userDAO.get(getLoginUser().getId());
 			CreditTaskEntity creditTask = creditTaskDAO.get(taskId);
+			/**
+			 * 验证
+			 */
 			// 如果发布人不是当前的登陆人就报错
-			if (!platformType.equals(creditTask.getType())
+			if (creditTask == null
+					|| !platformType.equals(creditTask.getType())
 					|| !creditTask.getReleasePerson().getId().equals(
 							userEntity.getId())) {
-				WinUtils.throwIllegalityException(userEntity.getUsername()
-						+ "试图越过【刷新排前】操作！ 任务ID是:" + taskId);
+				putAlertMsg("任务不存在！");
+				List<CreditTaskVO> result = queryReleaseData(creditTaskVO,
+						platformType);
+				putByRequest("result", result);
+				putPlatformByRequest(WinUtils.changeType2Platform(platformType));
+				putPlatformTypeByRequest(platformType);
+				return "initReleasedTast";
+			}
+			if (!TaskMananger.STEP_ONE_STATUS.equals(creditTask.getStatus())) {
+				putAlertMsg("刷新失败,任务状态已经改变！");
+				List<CreditTaskVO> result = queryReleaseData(creditTaskVO,
+						platformType);
+				putByRequest("result", result);
+				putPlatformByRequest(WinUtils.changeType2Platform(platformType));
+				putPlatformTypeByRequest(platformType);
+				return "initReleasedTast";
 			}
 
 			/**
@@ -777,7 +875,12 @@ public class CreditTaskService extends BaseService {
 			 */
 			creditTask.setReleaseDate(new Date());
 			putAlertMsg("已经排前！");
-			return "updateToFirstTask";
+			List<CreditTaskVO> result = queryReleaseData(creditTaskVO,
+					platformType);
+			putByRequest("result", result);
+			putPlatformByRequest(WinUtils.changeType2Platform(platformType));
+			putPlatformTypeByRequest(platformType);
+			return "initReleasedTast";
 		}
 	}
 
@@ -795,38 +898,37 @@ public class CreditTaskService extends BaseService {
 					+ getRequset().getQueryString());
 			return "operationValidate";
 		} else {
-			Long taskId = Long.parseLong(getByParam("taskId"));
+			Long taskId = creditTaskVO.getId();
 			UserEntity userEntity = userDAO.get(getLoginUser().getId());
 			CreditTaskEntity creditTask = creditTaskDAO.get(taskId);
-			if (creditTask == null) {
-				putAlertMsg("已经取消了任务，不要重复提交！");
-				putJumpSelfPage("taskManager/task!initReleasedTast.php?platformType="
-						+ platformType);
-				return JUMP;
-			}
-			if (creditTask.getStatus().equals(TaskMananger.STEP_TWO_STATUS)
-					|| creditTask.getStatus().equals(TaskMananger.AUDIT_STATUS)) {
-				putAlertMsg("取消失败，任务已被接受！");
-				putJumpSelfPage("taskManager/task!initReleasedTast.php?platformType="
-						+ platformType);
-				return JUMP;
-			}
+			/**
+			 * 验证
+			 */
 			// 如果发布人不是当前的登陆人就报错
 			if (creditTask == null
 					|| !platformType.equals(creditTask.getType())
 					|| !creditTask.getReleasePerson().getId().equals(
 							userEntity.getId())) {
-				WinUtils.throwIllegalityException(userEntity.getUsername()
-						+ "试图越过【取消重填】操作！  任务ID是:" + taskId);
+				putAlertMsg("任务不存在！");
+				List<CreditTaskVO> result = queryReleaseData(creditTaskVO,
+						platformType);
+				putByRequest("result", result);
+				putPlatformByRequest(WinUtils.changeType2Platform(platformType));
+				putPlatformTypeByRequest(platformType);
+				return "initReleasedTast";
 			}
-			/**
-			 * 拷贝数据
-			 */
-			BeanUtils.copyProperties(creditTaskVO, creditTask);
-			// 掌柜
-			creditTaskVO.setSellerID(creditTask.getSeller().getId());
-			// 地址
-			creditTaskVO.setAddress(creditTask.getAddress());
+			// 验证
+			if (!TaskMananger.TIMING_STATUS.equals(creditTask.getStatus())
+					&& !TaskMananger.STEP_ONE_STATUS.equals(creditTask
+							.getStatus())) {
+				putAlertMsg("取消失败,任务状态已经改变！");
+				List<CreditTaskVO> result = queryReleaseData(creditTaskVO,
+						platformType);
+				putByRequest("result", result);
+				putPlatformByRequest(WinUtils.changeType2Platform(platformType));
+				putPlatformTypeByRequest(platformType);
+				return "initReleasedTast";
+			}
 			/**
 			 * 删除任务
 			 */
@@ -842,15 +944,19 @@ public class CreditTaskService extends BaseService {
 					+ creditTask.getAddtionReleaseDot());
 			putByRequest("cancelTask", "cancelTask");
 			putByRequest("cancelTask", "cancelTask");
-			putAlertMsg("取消成功，金额已返回！");
-
 			logMoneyCapital(userDAO, creditTask.getMoney()
 					+ creditTask.getAddtionMoney(), "取消重填  任务 返回金额", userEntity);
 			logDotCapital(userDAO, creditTask.getReleaseDot()
 					+ creditTask.getAddtionReleaseDot(), "取消重填  任务 返回发布点",
 					userEntity);
 			updateUserLoginInfo(userEntity);
-			return "cancelTask";
+			putAlertMsg("取消成功，金额已返回！");
+			List<CreditTaskVO> result = queryReleaseData(creditTaskVO,
+					platformType);
+			putByRequest("result", result);
+			putPlatformByRequest(WinUtils.changeType2Platform(platformType));
+			putPlatformTypeByRequest(platformType);
+			return "initReleasedTast";
 		}
 	}
 
@@ -886,174 +992,191 @@ public class CreditTaskService extends BaseService {
 			return "operationValidate";
 		} else {
 			/**
+			 * 更新用户信息
+			 */
+			updateUserLoginInfo(userEntity);
+			/**
 			 * 更新加时的剩余时间
 			 */
-			List<CreditTaskEntity> tasks = creditTaskDAO
-					.list(
-							"select  _task from CreditTaskEntity as _task   inner join _task.receivePerson as _user where _user.id=:userId and _task.type=:platformType and (_task.status='2' or _task.status='-2' ) ",
-							new String[] { "userId", "platformType" },
-							new Object[] { getLoginUser().getId(), platformType });
-			for (CreditTaskEntity creditTaskEntity : tasks) {
-				Date currOperDate = creditTaskEntity.getReceiveDate();
-				Integer minuties = ((Long) ((System.currentTimeMillis() - currOperDate
-						.getTime()) / 1000 / 60)).intValue();
-				creditTaskEntity.setRemainTime(creditTaskEntity.getRemainTime()
-						- minuties);
-			}
-			creditTaskDAO.flushSession();
-			// 分页查询
-			List<String> paramNames = new ArrayList<String>();
-			List paramValues = new ArrayList();
-			StringBuffer countSQL = new StringBuffer(
-					"select count(*) from CreditTaskEntity as _task inner join _task.receivePerson as _user  "
-							+ " where     _user.id=:userId and   _task.type=:platformType ");
-			StringBuffer resultSQL = new StringBuffer(
-					"select _task.testID , _task.releaseDate ,_fbuser.username,_fbuser.qq,_task.money,_task.updatePrice ,_task.releaseDot "// 6
-							+ ", _task.itemUrl , _seller.name,_seller.shopURL,_buyer.name,_jsuser.upgradeScore,_task.status" // 12
-							+ ", _task.remainTime,_task.taskType ,_task.intervalHour,_task.comment,_task.address ,_task.grade,_task.id ," // 19
-							+ "_fbuser.ww,_task.waybill,_task.addtionMoney,_task.addtionReleaseDot,_fbuser.upgradeScore," // 24
-							+ "_task.assignUser,_fbuser.telephone,_jsuser.username,_task.receiveDate" // index=28
-							+ " from CreditTaskEntity as _task inner join _task.releasePerson as _fbuser  inner join _task.seller as _seller left join _task.receivePerson as _jsuser left join _task.buyer as _buyer "
-							+ " where     _jsuser.id=:userId and   _task.type=:platformType ");
-			paramNames.add("userId");
-			paramNames.add("platformType");
-			paramValues.add(getLoginUser().getId());
-			paramValues.add(platformType);
-			if (!StringUtils.isBlank(creditTaskVO.getTestID())) {
-				countSQL.append("and _task.testID=:testID ");
-				resultSQL.append("and _task.testID=:testID ");
-				paramNames.add("testID");
-				paramValues.add(creditTaskVO.getTestID());
-			}
-			if (!StringUtils.isBlank(creditTaskVO.getJsUsername())) {
-				countSQL.append("and _jsuser.username=:jsUsername ");
-				resultSQL.append("and _jsuser.username=:jsUsername ");
-				paramNames.add("jsUsername");
-				paramValues.add(creditTaskVO.getJsUsername());
-			}
-			if (!StringUtils.isBlank(creditTaskVO.getSellname())) {
-				countSQL.append("and _seller.name=:sellername ");
-				resultSQL.append("and _jsuser.username=:sellername ");
-				paramNames.add("sellername");
-				paramValues.add(creditTaskVO.getSellname());
-			}
-			// 发布 时间
-			if (creditTaskVO.getFbStartDate() != null
-					&& creditTaskVO.getFbEndDate() != null) {
-				countSQL
-						.append(" and (_task.releaseDate>=:fbStartDate and _task.releaseDate<=:fbEndDate) ");
-				resultSQL
-						.append(" and (_task.releaseDate>=:fbStartDate and _task.releaseDate<=:fbEndDate) ");
-				paramNames.add("fbStartDate");
-				paramNames.add("fbEndDate");
-				paramValues.add(creditTaskVO.getFbStartDate());
-				paramValues.add(creditTaskVO.getFbEndDate());
-			} else if (creditTaskVO.getFbStartDate() != null) {
-				resultSQL.append(" and _task.releaseDate>=:fbStartDate  ");
-				countSQL.append(" and  _task.releaseDate>=:fbStartDate   ");
-				paramNames.add("fbStartDate");
-				paramValues.add(creditTaskVO.getFbStartDate());
-			} else if (creditTaskVO.getFbEndDate() != null) {
-				resultSQL.append(" and    _task.releaseDate>=:fbEndDate  ");
-				countSQL.append(" and   _task.releaseDate>=:fbEndDate  ");
-				paramNames.add("fbEndDate");
-				paramValues.add(creditTaskVO.getFbEndDate());
-			}
-			// 接手 时间
-			if (creditTaskVO.getJsStartDate() != null
-					&& creditTaskVO.getJsEndDate() != null) {
-				countSQL
-						.append(" and (_task.receiveDate>=:jsStartDate and _task.receiveDate<=:jsEndDate) ");
-				resultSQL
-						.append(" and (_task.receiveDate>=:jsStartDate and _task.receiveDate<=:jsEndDate) ");
-				paramNames.add("jsStartDate");
-				paramNames.add("jsEndDate");
-				paramValues.add(creditTaskVO.getJsStartDate());
-				paramValues.add(creditTaskVO.getJsEndDate());
-			} else if (creditTaskVO.getJsStartDate() != null) {
-				resultSQL.append(" and _task.receiveDate>=:jsStartDate  ");
-				countSQL.append(" and  _task.receiveDate>=:jsStartDate   ");
-				paramNames.add("jsStartDate");
-				paramValues.add(creditTaskVO.getJsStartDate());
-			} else if (creditTaskVO.getJsEndDate() != null) {
-				resultSQL.append(" and    _task.receiveDate>=:jsEndDate  ");
-				countSQL.append(" and   _task.receiveDate>=:jsEndDate  ");
-				paramNames.add("jsEndDate");
-				paramValues.add(creditTaskVO.getJsEndDate());
-			}
-			if (!StringUtils.isBlank(creditTaskVO.getBuyername())) {
-				countSQL.append("and _buyer.name=:buyname ");
-				resultSQL.append("and _buyer.name=:buyname ");
-				paramNames.add("buyname");
-				paramValues.add(creditTaskVO.getBuyername());
-			}
-			if (!StringUtils.isBlank(creditTaskVO.getStatus())) {
-				countSQL.append("and _task.status=:status ");
-				resultSQL.append("and _task.status=:status ");
-				paramNames.add("status");
-				paramValues.add(creditTaskVO.getStatus());
-			}
-			if (!StringUtils.isBlank(creditTaskVO.getTaskType())) {
-				countSQL.append("and _task.taskType=:taskType ");
-				resultSQL.append("and _task.taskType=:taskType ");
-				paramNames.add("taskType");
-				paramValues.add(creditTaskVO.getTaskType());
-			}
-			resultSQL
-					.append(" order by _task.status asc, _task.releaseDate desc ");
-			Long count = (Long) creditTaskDAO.uniqueResultObject(countSQL
-					.toString(), paramNames.toArray(paramNames
-					.toArray(new String[paramNames.size()])), paramValues
-					.toArray(new Object[paramValues.size()]));
-			List<CreditTaskVO> result = new ArrayList<CreditTaskVO>(count
-					.intValue());
-			if (count > 0) {
-				List<Object[]> resultTemp = creditTaskDAO.pageQuery(resultSQL
-						.toString(), paramNames.toArray(paramNames
-						.toArray(new String[paramNames.size()])), paramValues
-						.toArray(new Object[paramValues.size()]), creditTaskVO
-						.getStart(), creditTaskVO.getLimit());
-				CreditTaskVO creditTaskVO2 = null;
-				for (Object[] objs : resultTemp) {
-					creditTaskVO2 = new CreditTaskVO();
-					creditTaskVO2.setTestID((String) objs[0]);
-					creditTaskVO2.setReleaseDate((Date) objs[1]);
-					creditTaskVO2.setFbUsername((String) objs[2]);
-					creditTaskVO2.setFbQQ((String) objs[3]);
-					creditTaskVO2.setMoney((Double) objs[4]);
-					creditTaskVO2.setUpdatePrice((Boolean) objs[5]);
-					creditTaskVO2.setReleaseDot((Double) objs[6]);
-					creditTaskVO2.setItemUrl((String) objs[7]);
-					creditTaskVO2.setSellname((String) objs[8]);
-					creditTaskVO2.setFbShopURL((String) objs[9]);
-					creditTaskVO2.setBuyername((String) objs[10]);
-					creditTaskVO2.setJsUpgradeScore((Integer) objs[11]);
-					creditTaskVO2.setStatus((String) objs[12]);
-					creditTaskVO2.setRemainTime((Integer) objs[13]);
-					creditTaskVO2.setTaskType((String) objs[14]);
-					creditTaskVO2.setIntervalHour((Integer) objs[15]);
-					creditTaskVO2.setComment((String) objs[16]);
-					creditTaskVO2.setAddress((String) objs[17]);
-					creditTaskVO2.setGrade((String) objs[18]);
-					creditTaskVO2.setId((Long) objs[19]);
-					creditTaskVO2.setFbWW((String) objs[20]);
-					creditTaskVO2.setWaybill((String) objs[21]);
-					creditTaskVO2.setAddtionMoney((Double) objs[22]);
-					creditTaskVO2.setAddtionReleaseDot((Double) objs[23]);
-					creditTaskVO2.setFbUpgradeScore((Integer) objs[24]);
-					creditTaskVO2.setAssignUser((String) objs[25]);
-					creditTaskVO2.setFbTelphone((String) objs[26]);
-					creditTaskVO2.setJsUsername((String) objs[27]);
-					creditTaskVO2.setReceiveDate((Date) objs[28]);
-					result.add(creditTaskVO2);
-				}
-			}
-			creditTaskVO.setDataCount(count.intValue());
+			Session session = creditTaskDAO.obtainSession();
+			String updateRemainTimeSql = "update"
+					+ " Tb_CreditTask as _task      "
+					+ "   set "
+					+ "     _task.REMAIN_TIME_= _task.REMAIN_TIME_-(UNIX_TIMESTAMP(sysdate())- UNIX_TIMESTAMP(_task.RECEIVE_DATE_))/60"
+					+ "   where  (      _task.STATUS_='2'      or _task.STATUS_='-2'   ) "
+					+ "   and _task.RECEIVE_PERSON_=:userId and  _task.TYPE_=:platformType  and  _task.REMAIN_TIME_>0";
+			Query query = session.createSQLQuery(updateRemainTimeSql);
+			query.setLong("userId", getLoginUser().getId());
+			query.setString("platformType", platformType);
+			query.executeUpdate();
+			session.flush();
+			List<CreditTaskVO> result = queryReceiveData(creditTaskVO,
+					platformType);
 			putPlatformByRequest(WinUtils.changeType2Platform(platformType));
 			putPlatformTypeByRequest(platformType);
 			putByRequest("result", result);
 			return "initReceivedTast";
 		}
+	}
+
+	/**
+	 * 接手数据查询
+	 * 
+	 * @param creditTaskVO
+	 * @param platformType
+	 * @return
+	 * @throws Exception
+	 */
+	private List<CreditTaskVO> queryReceiveData(CreditTaskVO creditTaskVO,
+			String platformType) throws Exception {
+		// 分页查询
+		List<String> paramNames = new ArrayList<String>();
+		List paramValues = new ArrayList();
+		StringBuffer countSQL = new StringBuffer(
+				"select count(*) from CreditTaskEntity as _task inner join _task.receivePerson as _user  "
+						+ " where     _user.id=:userId and   _task.type=:platformType ");
+		StringBuffer resultSQL = new StringBuffer(
+				"select _task.testID , _task.releaseDate ,_fbuser.username,_fbuser.qq,_task.money,_task.updatePrice ,_task.releaseDot "// 6
+						+ ", _task.itemUrl , _seller.name,_seller.shopURL,_buyer.name,_jsuser.upgradeScore,_task.status" // 12
+						+ ", _task.remainTime,_task.taskType ,_task.intervalHour,_task.comment,_task.address ,_task.grade,_task.id ," // 19
+						+ "_fbuser.ww,_task.waybill,_task.addtionMoney,_task.addtionReleaseDot,_fbuser.upgradeScore," // 24
+						+ "_task.assignUser,_fbuser.telephone,_jsuser.username,_task.receiveDate" // index=28
+						+ " from CreditTaskEntity as _task inner join _task.releasePerson as _fbuser  inner join _task.seller as _seller left join _task.receivePerson as _jsuser left join _task.buyer as _buyer "
+						+ " where     _jsuser.id=:userId and   _task.type=:platformType ");
+		paramNames.add("userId");
+		paramNames.add("platformType");
+		paramValues.add(getLoginUser().getId());
+		paramValues.add(platformType);
+		if (!StringUtils.isBlank(creditTaskVO.getTestID())) {
+			countSQL.append("and _task.testID=:testID ");
+			resultSQL.append("and _task.testID=:testID ");
+			paramNames.add("testID");
+			paramValues.add(creditTaskVO.getTestID());
+		}
+		if (!StringUtils.isBlank(creditTaskVO.getJsUsername())) {
+			countSQL.append("and _jsuser.username=:jsUsername ");
+			resultSQL.append("and _jsuser.username=:jsUsername ");
+			paramNames.add("jsUsername");
+			paramValues.add(creditTaskVO.getJsUsername());
+		}
+		if (!StringUtils.isBlank(creditTaskVO.getSellname())) {
+			countSQL.append("and _seller.name=:sellername ");
+			resultSQL.append("and _jsuser.username=:sellername ");
+			paramNames.add("sellername");
+			paramValues.add(creditTaskVO.getSellname());
+		}
+		// 发布 时间
+		if (creditTaskVO.getFbStartDate() != null
+				&& creditTaskVO.getFbEndDate() != null) {
+			countSQL
+					.append(" and (_task.releaseDate>=:fbStartDate and _task.releaseDate<=:fbEndDate) ");
+			resultSQL
+					.append(" and (_task.releaseDate>=:fbStartDate and _task.releaseDate<=:fbEndDate) ");
+			paramNames.add("fbStartDate");
+			paramNames.add("fbEndDate");
+			paramValues.add(creditTaskVO.getFbStartDate());
+			paramValues.add(creditTaskVO.getFbEndDate());
+		} else if (creditTaskVO.getFbStartDate() != null) {
+			resultSQL.append(" and _task.releaseDate>=:fbStartDate  ");
+			countSQL.append(" and  _task.releaseDate>=:fbStartDate   ");
+			paramNames.add("fbStartDate");
+			paramValues.add(creditTaskVO.getFbStartDate());
+		} else if (creditTaskVO.getFbEndDate() != null) {
+			resultSQL.append(" and    _task.releaseDate>=:fbEndDate  ");
+			countSQL.append(" and   _task.releaseDate>=:fbEndDate  ");
+			paramNames.add("fbEndDate");
+			paramValues.add(creditTaskVO.getFbEndDate());
+		}
+		// 接手 时间
+		if (creditTaskVO.getJsStartDate() != null
+				&& creditTaskVO.getJsEndDate() != null) {
+			countSQL
+					.append(" and (_task.receiveDate>=:jsStartDate and _task.receiveDate<=:jsEndDate) ");
+			resultSQL
+					.append(" and (_task.receiveDate>=:jsStartDate and _task.receiveDate<=:jsEndDate) ");
+			paramNames.add("jsStartDate");
+			paramNames.add("jsEndDate");
+			paramValues.add(creditTaskVO.getJsStartDate());
+			paramValues.add(creditTaskVO.getJsEndDate());
+		} else if (creditTaskVO.getJsStartDate() != null) {
+			resultSQL.append(" and _task.receiveDate>=:jsStartDate  ");
+			countSQL.append(" and  _task.receiveDate>=:jsStartDate   ");
+			paramNames.add("jsStartDate");
+			paramValues.add(creditTaskVO.getJsStartDate());
+		} else if (creditTaskVO.getJsEndDate() != null) {
+			resultSQL.append(" and    _task.receiveDate>=:jsEndDate  ");
+			countSQL.append(" and   _task.receiveDate>=:jsEndDate  ");
+			paramNames.add("jsEndDate");
+			paramValues.add(creditTaskVO.getJsEndDate());
+		}
+		if (!StringUtils.isBlank(creditTaskVO.getBuyername())) {
+			countSQL.append("and _buyer.name=:buyname ");
+			resultSQL.append("and _buyer.name=:buyname ");
+			paramNames.add("buyname");
+			paramValues.add(creditTaskVO.getBuyername());
+		}
+		if (!StringUtils.isBlank(creditTaskVO.getStatus())) {
+			countSQL.append("and _task.status=:status ");
+			resultSQL.append("and _task.status=:status ");
+			paramNames.add("status");
+			paramValues.add(creditTaskVO.getStatus());
+		}
+		if (!StringUtils.isBlank(creditTaskVO.getTaskType())) {
+			countSQL.append("and _task.taskType=:taskType ");
+			resultSQL.append("and _task.taskType=:taskType ");
+			paramNames.add("taskType");
+			paramValues.add(creditTaskVO.getTaskType());
+		}
+		resultSQL.append(" order by _task.status asc, _task.releaseDate desc ");
+		Long count = (Long) creditTaskDAO.uniqueResultObject(countSQL
+				.toString(), paramNames.toArray(paramNames
+				.toArray(new String[paramNames.size()])), paramValues
+				.toArray(new Object[paramValues.size()]));
+		List<CreditTaskVO> result = new ArrayList<CreditTaskVO>(count
+				.intValue());
+		if (count > 0) {
+			List<Object[]> resultTemp = creditTaskDAO.pageQuery(resultSQL
+					.toString(), paramNames.toArray(paramNames
+					.toArray(new String[paramNames.size()])), paramValues
+					.toArray(new Object[paramValues.size()]), creditTaskVO
+					.getStart(), creditTaskVO.getLimit());
+			CreditTaskVO creditTaskVO2 = null;
+			for (Object[] objs : resultTemp) {
+				creditTaskVO2 = new CreditTaskVO();
+				creditTaskVO2.setTestID((String) objs[0]);
+				creditTaskVO2.setReleaseDate((Date) objs[1]);
+				creditTaskVO2.setFbUsername((String) objs[2]);
+				creditTaskVO2.setFbQQ((String) objs[3]);
+				creditTaskVO2.setMoney((Double) objs[4]);
+				creditTaskVO2.setUpdatePrice((Boolean) objs[5]);
+				creditTaskVO2.setReleaseDot((Double) objs[6]);
+				creditTaskVO2.setItemUrl((String) objs[7]);
+				creditTaskVO2.setSellname((String) objs[8]);
+				creditTaskVO2.setFbShopURL((String) objs[9]);
+				creditTaskVO2.setBuyername((String) objs[10]);
+				creditTaskVO2.setJsUpgradeScore((Integer) objs[11]);
+				creditTaskVO2.setStatus((String) objs[12]);
+				creditTaskVO2.setRemainTime((Long) objs[13]);
+				creditTaskVO2.setTaskType((String) objs[14]);
+				creditTaskVO2.setIntervalHour((Integer) objs[15]);
+				creditTaskVO2.setComment((String) objs[16]);
+				creditTaskVO2.setAddress((String) objs[17]);
+				creditTaskVO2.setGrade((String) objs[18]);
+				creditTaskVO2.setId((Long) objs[19]);
+				creditTaskVO2.setFbWW((String) objs[20]);
+				creditTaskVO2.setWaybill((String) objs[21]);
+				creditTaskVO2.setAddtionMoney((Double) objs[22]);
+				creditTaskVO2.setAddtionReleaseDot((Double) objs[23]);
+				creditTaskVO2.setFbUpgradeScore((Integer) objs[24]);
+				creditTaskVO2.setAssignUser((String) objs[25]);
+				creditTaskVO2.setFbTelphone((String) objs[26]);
+				creditTaskVO2.setJsUsername((String) objs[27]);
+				creditTaskVO2.setReceiveDate((Date) objs[28]);
+				result.add(creditTaskVO2);
+			}
+		}
+		creditTaskVO.setDataCount(count.intValue());
+		return result;
 	}
 
 	/**
@@ -1086,173 +1209,190 @@ public class CreditTaskService extends BaseService {
 			return "operationValidate";
 		} else {
 			/**
+			 * 更新用户信息
+			 */
+			updateUserLoginInfo(userEntity);
+			/**
 			 * 更新加时的剩余时间
 			 */
-			List<CreditTaskEntity> tasks = creditTaskDAO
-					.list(
-							"select  _task  from CreditTaskEntity as _task   inner join _task.releasePerson as _user where _user.id=:userId and _task.type=:platformType and (_task.status='2' or _task.status='-2' ) ",
-							new String[] { "userId", "platformType" },
-							new Object[] { getLoginUser().getId(), platformType });
-			for (CreditTaskEntity creditTaskEntity : tasks) {
-				Date currOperDate = creditTaskEntity.getReceiveDate();
-				Integer minuties = ((Long) ((System.currentTimeMillis() - currOperDate
-						.getTime()) / 1000 / 60)).intValue();
-				creditTaskEntity.setRemainTime(creditTaskEntity.getRemainTime()
-						- minuties);
-			}
-			creditTaskDAO.flushSession();
-			// 分页查询
-			List<String> paramNames = new ArrayList<String>();
-			List paramValues = new ArrayList();
-			StringBuffer countSQL = new StringBuffer(
-					"select count(*) from CreditTaskEntity as _task inner join _task.releasePerson as _user   "
-							+ "where     _user.id=:userId and   _task.type=:platformType ");
-			StringBuffer resultSQL = new StringBuffer(
-					"select _task.testID , _task.releaseDate ,_task.money,_task.updatePrice ,_task.releaseDot, _task.itemUrl , _seller.name,_task.status "// 7
-							+ ", _jsuser.username,_buyer.name,_jsuser.qq" // 10
-							+ ", _task.remainTime,_task.taskType ,_task.intervalHour,_task.comment,_task.address ,_task.grade," // 16
-							+ "_task.id,_seller.shopURL ,_jsuser.ww,_task.waybill,_task.timeingTime,_task.addtionMoney," // 22
-							+ "_task.addtionReleaseDot ,_task.assignUser,_jsuser.telephone,_fbuser.username,_task.receiveDate" // index=27
-							+ " from CreditTaskEntity as _task inner join _task.releasePerson as _fbuser  inner join _task.seller as _seller left join _task.receivePerson as _jsuser left join _task.buyer as _buyer "
-							+ " where     _fbuser.id=:userId and   _task.type=:platformType ");
-			paramNames.add("userId");
-			paramNames.add("platformType");
-			paramValues.add(getLoginUser().getId());
-			paramValues.add(platformType);
-			if (!StringUtils.isBlank(creditTaskVO.getTestID())) {
-				countSQL.append("and _task.testID=:testID ");
-				resultSQL.append("and _task.testID=:testID ");
-				paramNames.add("testID");
-				paramValues.add(creditTaskVO.getTestID());
-			}
-			if (!StringUtils.isBlank(creditTaskVO.getJsUsername())) {
-				countSQL.append("and _jsuser.username=:jsUsername ");
-				resultSQL.append("and _jsuser.username=:jsUsername ");
-				paramNames.add("jsUsername");
-				paramValues.add(creditTaskVO.getJsUsername());
-			}
-			if (!StringUtils.isBlank(creditTaskVO.getSellname())) {
-				countSQL.append("and _seller.name=:sellername ");
-				resultSQL.append("and _jsuser.username=:sellername ");
-				paramNames.add("sellername");
-				paramValues.add(creditTaskVO.getSellname());
-			}
-			// 发布 时间
-			if (creditTaskVO.getFbStartDate() != null
-					&& creditTaskVO.getFbEndDate() != null) {
-				countSQL
-						.append(" and (_task.releaseDate>=:fbStartDate and _task.releaseDate<=:fbEndDate) ");
-				resultSQL
-						.append(" and (_task.releaseDate>=:fbStartDate and _task.releaseDate<=:fbEndDate) ");
-				paramNames.add("fbStartDate");
-				paramNames.add("fbEndDate");
-				paramValues.add(creditTaskVO.getFbStartDate());
-				paramValues.add(creditTaskVO.getFbEndDate());
-			} else if (creditTaskVO.getFbStartDate() != null) {
-				resultSQL.append(" and _task.releaseDate>=:fbStartDate  ");
-				countSQL.append(" and  _task.releaseDate>=:fbStartDate   ");
-				paramNames.add("fbStartDate");
-				paramValues.add(creditTaskVO.getFbStartDate());
-			} else if (creditTaskVO.getFbEndDate() != null) {
-				resultSQL.append(" and    _task.releaseDate>=:fbEndDate  ");
-				countSQL.append(" and   _task.releaseDate>=:fbEndDate  ");
-				paramNames.add("fbEndDate");
-				paramValues.add(creditTaskVO.getFbEndDate());
-			}
-			// 接手 时间
-			if (creditTaskVO.getJsStartDate() != null
-					&& creditTaskVO.getJsEndDate() != null) {
-				countSQL
-						.append(" and (_task.receiveDate>=:jsStartDate and _task.receiveDate<=:jsEndDate) ");
-				resultSQL
-						.append(" and (_task.receiveDate>=:jsStartDate and _task.receiveDate<=:jsEndDate) ");
-				paramNames.add("jsStartDate");
-				paramNames.add("jsEndDate");
-				paramValues.add(creditTaskVO.getJsStartDate());
-				paramValues.add(creditTaskVO.getJsEndDate());
-			} else if (creditTaskVO.getJsStartDate() != null) {
-				resultSQL.append(" and _task.receiveDate>=:jsStartDate  ");
-				countSQL.append(" and  _task.receiveDate>=:jsStartDate   ");
-				paramNames.add("jsStartDate");
-				paramValues.add(creditTaskVO.getJsStartDate());
-			} else if (creditTaskVO.getJsEndDate() != null) {
-				resultSQL.append(" and    _task.receiveDate>=:jsEndDate  ");
-				countSQL.append(" and   _task.receiveDate>=:jsEndDate  ");
-				paramNames.add("jsEndDate");
-				paramValues.add(creditTaskVO.getJsEndDate());
-			}
-			if (!StringUtils.isBlank(creditTaskVO.getBuyername())) {
-				countSQL.append("and _buyer.name=:buyname ");
-				resultSQL.append("and _buyer.name=:buyname ");
-				paramNames.add("buyname");
-				paramValues.add(creditTaskVO.getBuyername());
-			}
-			if (!StringUtils.isBlank(creditTaskVO.getStatus())) {
-				countSQL.append("and _task.status=:status ");
-				resultSQL.append("and _task.status=:status ");
-				paramNames.add("status");
-				paramValues.add(creditTaskVO.getStatus());
-			}
-			if (!StringUtils.isBlank(creditTaskVO.getTaskType())) {
-				countSQL.append("and _task.taskType=:taskType ");
-				resultSQL.append("and _task.taskType=:taskType ");
-				paramNames.add("taskType");
-				paramValues.add(creditTaskVO.getTaskType());
-			}
-			resultSQL
-					.append(" order by  _task.status asc,_task.releaseDate desc ");
-			Long count = (Long) creditTaskDAO.uniqueResultObject(countSQL
-					.toString(), paramNames.toArray(paramNames
-					.toArray(new String[paramNames.size()])), paramValues
-					.toArray(new Object[paramValues.size()]));
-			List<CreditTaskVO> result = new ArrayList<CreditTaskVO>(count
-					.intValue());
-			if (count > 0) {
-				List<Object[]> resultTemp = creditTaskDAO.pageQuery(resultSQL
-						.toString(), paramNames.toArray(paramNames
-						.toArray(new String[paramNames.size()])), paramValues
-						.toArray(new Object[paramValues.size()]), creditTaskVO
-						.getStart(), creditTaskVO.getLimit());
-				CreditTaskVO creditTaskVO2 = null;
-				for (Object[] objs : resultTemp) {
-					creditTaskVO2 = new CreditTaskVO();
-					creditTaskVO2.setTestID((String) objs[0]);
-					creditTaskVO2.setReleaseDate((Date) objs[1]);
-					creditTaskVO2.setMoney((Double) objs[2]);
-					creditTaskVO2.setUpdatePrice((Boolean) objs[3]);
-					creditTaskVO2.setReleaseDot((Double) objs[4]);
-					creditTaskVO2.setItemUrl((String) objs[5]);
-					creditTaskVO2.setSellname((String) objs[6]);
-					creditTaskVO2.setStatus((String) objs[7]);
-					creditTaskVO2.setJsUsername((String) objs[8]);
-					creditTaskVO2.setBuyername((String) objs[9]);
-					creditTaskVO2.setJsQQ((String) objs[10]);
-					creditTaskVO2.setRemainTime((Integer) objs[11]);
-					creditTaskVO2.setTaskType((String) objs[12]);
-					creditTaskVO2.setIntervalHour((Integer) objs[13]);
-					creditTaskVO2.setComment((String) objs[14]);
-					creditTaskVO2.setAddress((String) objs[15]);
-					creditTaskVO2.setGrade((String) objs[16]);
-					creditTaskVO2.setId((Long) objs[17]);
-					creditTaskVO2.setFbShopURL((String) objs[18]);
-					creditTaskVO2.setJsWW((String) objs[19]);
-					creditTaskVO2.setWaybill((String) objs[20]);
-					creditTaskVO2.setTimeingTime((Date) objs[21]);
-					creditTaskVO2.setAddtionMoney((Double) objs[22]);
-					creditTaskVO2.setAddtionReleaseDot((Double) objs[23]);
-					creditTaskVO2.setAssignUser((String) objs[24]);
-					creditTaskVO2.setJsTelphone((String) objs[25]);
-					creditTaskVO2.setFbUsername((String) objs[26]);
-					creditTaskVO2.setReceiveDate((Date) objs[27]);
-					result.add(creditTaskVO2);
-				}
-			}
-			creditTaskVO.setDataCount(count.intValue());
+			Session session = creditTaskDAO.obtainSession();
+			String updateRemainTimeSql = "update"
+					+ " Tb_CreditTask as _task      "
+					+ "   set "
+					+ "     _task.REMAIN_TIME_= _task.REMAIN_TIME_-(UNIX_TIMESTAMP(sysdate())- UNIX_TIMESTAMP(_task.RECEIVE_DATE_))/60"
+					+ "   where  (      _task.STATUS_='2'      or _task.STATUS_='-2'   ) "
+					+ "   and _task.RELEASE_PERSON_=:userId and  _task.TYPE_=:platformType  and  _task.REMAIN_TIME_>0";
+			Query query = session.createSQLQuery(updateRemainTimeSql);
+			query.setLong("userId", getLoginUser().getId());
+			query.setString("platformType", platformType);
+			query.executeUpdate();
+			session.flush();
+			List<CreditTaskVO> result = queryReleaseData(creditTaskVO,
+					platformType);
+			putByRequest("result", result);
 			putPlatformByRequest(WinUtils.changeType2Platform(platformType));
 			putPlatformTypeByRequest(platformType);
-			putByRequest("result", result);
 			return "initReleasedTast";
 		}
+	}
+
+	/**
+	 * 发布数据调整
+	 * 
+	 * @param creditTaskVO
+	 * @param platformType
+	 * @return
+	 * @throws Exception
+	 */
+	private List<CreditTaskVO> queryReleaseData(CreditTaskVO creditTaskVO,
+			String platformType) throws Exception {
+		// 分页查询
+		List<String> paramNames = new ArrayList<String>();
+		List paramValues = new ArrayList();
+		StringBuffer countSQL = new StringBuffer(
+				"select count(*) from CreditTaskEntity as _task inner join _task.releasePerson as _user   "
+						+ "where     _user.id=:userId and   _task.type=:platformType ");
+		StringBuffer resultSQL = new StringBuffer(
+				"select _task.testID , _task.releaseDate ,_task.money,_task.updatePrice ,_task.releaseDot, _task.itemUrl , _seller.name,_task.status "// 7
+						+ ", _jsuser.username,_buyer.name,_jsuser.qq" // 10
+						+ ", _task.remainTime,_task.taskType ,_task.intervalHour,_task.comment,_task.address ,_task.grade," // 16
+						+ "_task.id,_seller.shopURL ,_jsuser.ww,_task.waybill,_task.timeingTime,_task.addtionMoney," // 22
+						+ "_task.addtionReleaseDot ,_task.assignUser,_jsuser.telephone,_fbuser.username,_task.receiveDate" // index=27
+						+ " from CreditTaskEntity as _task inner join _task.releasePerson as _fbuser  inner join _task.seller as _seller left join _task.receivePerson as _jsuser left join _task.buyer as _buyer "
+						+ " where     _fbuser.id=:userId and   _task.type=:platformType ");
+		paramNames.add("userId");
+		paramNames.add("platformType");
+		paramValues.add(getLoginUser().getId());
+		paramValues.add(platformType);
+		if (!StringUtils.isBlank(creditTaskVO.getTestID())) {
+			countSQL.append("and _task.testID=:testID ");
+			resultSQL.append("and _task.testID=:testID ");
+			paramNames.add("testID");
+			paramValues.add(creditTaskVO.getTestID());
+		}
+		if (!StringUtils.isBlank(creditTaskVO.getJsUsername())) {
+			countSQL.append("and _jsuser.username=:jsUsername ");
+			resultSQL.append("and _jsuser.username=:jsUsername ");
+			paramNames.add("jsUsername");
+			paramValues.add(creditTaskVO.getJsUsername());
+		}
+		if (!StringUtils.isBlank(creditTaskVO.getSellname())) {
+			countSQL.append("and _seller.name=:sellername ");
+			resultSQL.append("and _jsuser.username=:sellername ");
+			paramNames.add("sellername");
+			paramValues.add(creditTaskVO.getSellname());
+		}
+		// 发布 时间
+		if (creditTaskVO.getFbStartDate() != null
+				&& creditTaskVO.getFbEndDate() != null) {
+			countSQL
+					.append(" and (_task.releaseDate>=:fbStartDate and _task.releaseDate<=:fbEndDate) ");
+			resultSQL
+					.append(" and (_task.releaseDate>=:fbStartDate and _task.releaseDate<=:fbEndDate) ");
+			paramNames.add("fbStartDate");
+			paramNames.add("fbEndDate");
+			paramValues.add(creditTaskVO.getFbStartDate());
+			paramValues.add(creditTaskVO.getFbEndDate());
+		} else if (creditTaskVO.getFbStartDate() != null) {
+			resultSQL.append(" and _task.releaseDate>=:fbStartDate  ");
+			countSQL.append(" and  _task.releaseDate>=:fbStartDate   ");
+			paramNames.add("fbStartDate");
+			paramValues.add(creditTaskVO.getFbStartDate());
+		} else if (creditTaskVO.getFbEndDate() != null) {
+			resultSQL.append(" and    _task.releaseDate>=:fbEndDate  ");
+			countSQL.append(" and   _task.releaseDate>=:fbEndDate  ");
+			paramNames.add("fbEndDate");
+			paramValues.add(creditTaskVO.getFbEndDate());
+		}
+		// 接手 时间
+		if (creditTaskVO.getJsStartDate() != null
+				&& creditTaskVO.getJsEndDate() != null) {
+			countSQL
+					.append(" and (_task.receiveDate>=:jsStartDate and _task.receiveDate<=:jsEndDate) ");
+			resultSQL
+					.append(" and (_task.receiveDate>=:jsStartDate and _task.receiveDate<=:jsEndDate) ");
+			paramNames.add("jsStartDate");
+			paramNames.add("jsEndDate");
+			paramValues.add(creditTaskVO.getJsStartDate());
+			paramValues.add(creditTaskVO.getJsEndDate());
+		} else if (creditTaskVO.getJsStartDate() != null) {
+			resultSQL.append(" and _task.receiveDate>=:jsStartDate  ");
+			countSQL.append(" and  _task.receiveDate>=:jsStartDate   ");
+			paramNames.add("jsStartDate");
+			paramValues.add(creditTaskVO.getJsStartDate());
+		} else if (creditTaskVO.getJsEndDate() != null) {
+			resultSQL.append(" and    _task.receiveDate>=:jsEndDate  ");
+			countSQL.append(" and   _task.receiveDate>=:jsEndDate  ");
+			paramNames.add("jsEndDate");
+			paramValues.add(creditTaskVO.getJsEndDate());
+		}
+		if (!StringUtils.isBlank(creditTaskVO.getBuyername())) {
+			countSQL.append("and _buyer.name=:buyname ");
+			resultSQL.append("and _buyer.name=:buyname ");
+			paramNames.add("buyname");
+			paramValues.add(creditTaskVO.getBuyername());
+		}
+		if (!StringUtils.isBlank(creditTaskVO.getStatus())) {
+			countSQL.append("and _task.status=:status ");
+			resultSQL.append("and _task.status=:status ");
+			paramNames.add("status");
+			paramValues.add(creditTaskVO.getStatus());
+		}
+		if (!StringUtils.isBlank(creditTaskVO.getTaskType())) {
+			countSQL.append("and _task.taskType=:taskType ");
+			resultSQL.append("and _task.taskType=:taskType ");
+			paramNames.add("taskType");
+			paramValues.add(creditTaskVO.getTaskType());
+		}
+		resultSQL.append(" order by  _task.status asc,_task.releaseDate desc ");
+		Long count = (Long) creditTaskDAO.uniqueResultObject(countSQL
+				.toString(), paramNames.toArray(paramNames
+				.toArray(new String[paramNames.size()])), paramValues
+				.toArray(new Object[paramValues.size()]));
+		List<CreditTaskVO> result = new ArrayList<CreditTaskVO>(count
+				.intValue());
+		if (count > 0) {
+			List<Object[]> resultTemp = creditTaskDAO.pageQuery(resultSQL
+					.toString(), paramNames.toArray(paramNames
+					.toArray(new String[paramNames.size()])), paramValues
+					.toArray(new Object[paramValues.size()]), creditTaskVO
+					.getStart(), creditTaskVO.getLimit());
+			CreditTaskVO creditTaskVO2 = null;
+			for (Object[] objs : resultTemp) {
+				creditTaskVO2 = new CreditTaskVO();
+				creditTaskVO2.setTestID((String) objs[0]);
+				creditTaskVO2.setReleaseDate((Date) objs[1]);
+				creditTaskVO2.setMoney((Double) objs[2]);
+				creditTaskVO2.setUpdatePrice((Boolean) objs[3]);
+				creditTaskVO2.setReleaseDot((Double) objs[4]);
+				creditTaskVO2.setItemUrl((String) objs[5]);
+				creditTaskVO2.setSellname((String) objs[6]);
+				creditTaskVO2.setStatus((String) objs[7]);
+				creditTaskVO2.setJsUsername((String) objs[8]);
+				creditTaskVO2.setBuyername((String) objs[9]);
+				creditTaskVO2.setJsQQ((String) objs[10]);
+				creditTaskVO2.setRemainTime((Long) objs[11]);
+				creditTaskVO2.setTaskType((String) objs[12]);
+				creditTaskVO2.setIntervalHour((Integer) objs[13]);
+				creditTaskVO2.setComment((String) objs[14]);
+				creditTaskVO2.setAddress((String) objs[15]);
+				creditTaskVO2.setGrade((String) objs[16]);
+				creditTaskVO2.setId((Long) objs[17]);
+				creditTaskVO2.setFbShopURL((String) objs[18]);
+				creditTaskVO2.setJsWW((String) objs[19]);
+				creditTaskVO2.setWaybill((String) objs[20]);
+				creditTaskVO2.setTimeingTime((Date) objs[21]);
+				creditTaskVO2.setAddtionMoney((Double) objs[22]);
+				creditTaskVO2.setAddtionReleaseDot((Double) objs[23]);
+				creditTaskVO2.setAssignUser((String) objs[24]);
+				creditTaskVO2.setJsTelphone((String) objs[25]);
+				creditTaskVO2.setFbUsername((String) objs[26]);
+				creditTaskVO2.setReceiveDate((Date) objs[27]);
+				result.add(creditTaskVO2);
+			}
+		}
+		creditTaskVO.setDataCount(count.intValue());
+		return result;
 	}
 
 	/**
@@ -1281,7 +1421,7 @@ public class CreditTaskService extends BaseService {
 			hour = 24;
 		} else if (creditTaskVO.getGrade().indexOf("二天") != -1) {
 			hour = 24 * 2;
-		} else if (creditTaskVO.getGrade().indexOf("三 天") != -1) {
+		} else if (creditTaskVO.getGrade().indexOf("三天") != -1) {
 			hour = 24 * 3;
 		} else if (creditTaskVO.getIntervalHour() != null) {
 			hour = creditTaskVO.getIntervalHour();
@@ -1631,24 +1771,20 @@ public class CreditTaskService extends BaseService {
 					.append(" and (_task.money>40 and _task.money<=100) order by   _vip.type desc , _task.status asc,_task.releaseDate desc,  _task.money asc ");
 		} else if ("5".equals(creditTaskVO.getMoneyFlag())) {
 			// 40-100
-			resultSQL
-					.append(" and (_task.money>40 and _task.money<=100)");
+			resultSQL.append(" and (_task.money>40 and _task.money<=100)");
 			resultSQL
 					.append(" and (_task.money>40 and _task.money<=100) order by   _vip.type desc , _task.status asc,_task.releaseDate desc,  _task.money asc ");
 		} else if ("6".equals(creditTaskVO.getMoneyFlag())) {
 			// 100-200
-			countSQL
-					.append(" and   (_task.money>100 and _task.money<=200) ");
+			countSQL.append(" and   (_task.money>100 and _task.money<=200) ");
 			resultSQL
 					.append(" and   (_task.money>100 and _task.money<=200) order by   _vip.type desc , _task.status asc,_task.releaseDate desc,  _task.money asc ");
 		} else if ("7".equals(creditTaskVO.getMoneyFlag())) {
-			countSQL
-					.append(" and   (_task.money>200 and _task.money<=500) ");
+			countSQL.append(" and   (_task.money>200 and _task.money<=500) ");
 			resultSQL
 					.append(" and   (_task.money>200 and _task.money<=500) order by   _vip.type desc , _task.status asc,_task.releaseDate desc,  _task.money asc ");
 		} else if ("8".equals(creditTaskVO.getMoneyFlag())) {
-			countSQL
-					.append(" and     _task.money>500  ");
+			countSQL.append(" and     _task.money>500  ");
 			resultSQL
 					.append(" and     _task.money>500 order by   _vip.type desc , _task.status asc,_task.releaseDate desc,  _task.money asc ");
 		} else {

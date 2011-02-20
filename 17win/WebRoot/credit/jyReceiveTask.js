@@ -77,30 +77,34 @@ function reply(fromUsername) {
 }
 // 好评
 function buyerEvaluate(id) {
-	var platformType = $("#platformType").val();
-	window.location.href = "taskManager/task!buyerEvaluate.php?taskId=" + id
-			+ "&platformType=" + platformType;
+	if (confirm("是否确认好评！")) {
+		$("#taskId").val(id);
+		$("#mainForm").attr("action", "taskManager/task!buyerEvaluate.php");
+		$("#mainForm").submit();
+	}
 }
 // 撤销付款
 function rollbackPay(id) {
-	var platformType = $("#platformType").val();
-	window.location.href = "taskManager/task!rollbackPay.php?taskId=" + id
-			+ "&platformType=" + platformType;
+	if (confirm("是否确认撤销付款！")) {
+		$("#taskId").val(id);
+		$("#mainForm").attr("action", "taskManager/task!rollbackPay.php");
+		$("#mainForm").submit();
+	}
 }
 // 付款
 function payMoney(id) {
-	var platformType = $("#platformType").val();
-	if (confirm("确认已经已经付款！")) {
-		window.location.href = "taskManager/task!payMoney.php?taskId=" + id
-				+ "&platformType=" + platformType;
+	if (confirm("是否确认已经付款！")) {
+		$("#taskId").val(id);
+		$("#mainForm").attr("action", "taskManager/task!payMoney.php");
+		$("#mainForm").submit();
 	}
 }
-// 退出
+// 退出任务
 function quitTask(id) {
-	var platformType = $("#platformType").val();
-	if (confirm("是否退出任务！")) {
-		window.location.href = "taskManager/task!quitTask.php?taskId=" + id
-				+ "&platformType=" + platformType;;
+	if (confirm("是否确认退出任务！")) {
+		$("#taskId").val(id);
+		$("#mainForm").attr("action", "taskManager/task!quitTask.php");
+		$("#mainForm").submit();
 	}
 }
 

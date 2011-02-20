@@ -30,8 +30,6 @@ import org.springframework.stereotype.Controller;
 		//		@Result(name = "insertReleaseTaskSuccess", type = "chain", location = "/taskManager/task!initReleaseTask.php"),
 		@Result(name = "initReleaseTaskFail", type = "chain", location = "/taskManager/task!initTask.php"),
 		@Result(name = "initReleasedTast", location = "/credit/jyReleaseTask.jsp"),
-		@Result(name = "cancelTask", type = "chain", location = "/taskManager/task!initReleaseTask.php"),
-		@Result(name = "updateToFirstTask", type = "chain", location = "/taskManager/task!initReleasedTast.php"),
 		@Result(name = "initReceivedTast", location = "/credit/jyReceiveTask.jsp")
 /**
  * 买家操作

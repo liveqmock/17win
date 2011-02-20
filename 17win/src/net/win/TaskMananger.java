@@ -44,6 +44,12 @@ public final class TaskMananger {
 	 */
 	public final static String STEP_FIVE_STATUS = "5";
 	/**
+	 * 任务类型  虚拟， 实物 套餐
+	 */
+	public final static String TASK_TYPE_VIRTUAL="1";
+	public final static String TASK_TYPE_ENTITY="2";
+	public final static String TASK_TYPE_MIX="3";
+	/**
 	 * 完成
 	 */
 	public final static String STEP_SIX_STATUS = "6";

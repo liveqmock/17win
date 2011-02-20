@@ -28,7 +28,7 @@ public class CreditTaskVO extends BaseVO {
 	// 指定某人
 	private String assignUser;
 	// 剩余时间
-	private Integer remainTime;
+	private Long remainTime;
 	// 运货单号
 	private String waybill;
 	// 定时任务时间(不能小于开始时间)
@@ -232,11 +232,11 @@ public class CreditTaskVO extends BaseVO {
 		this.sellerID = sellerID;
 	}
 
-	public Integer getRemainTime() {
+	public Long getRemainTime() {
 		return remainTime;
 	}
 
-	public void setRemainTime(Integer remainTime) {
+	public void setRemainTime(Long remainTime) {
 		this.remainTime = remainTime;
 	}
 

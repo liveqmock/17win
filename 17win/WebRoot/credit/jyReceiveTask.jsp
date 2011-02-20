@@ -179,6 +179,15 @@
 											<input type="hidden" name="platformType"
 												value='<s:property value="#request.platformType"/>'
 												id="platformType">
+											<input type="hidden" name="creditTaskVO.nowPage"
+												value="<s:property
+											value="creditTaskVO.nowPage" />"
+												id="nowPage">
+											<input type="hidden"
+												value="<s:property
+										value="creditTaskVO.pageCount" />"
+												id="pageCount">
+											<input type="hidden" name="creditTaskVO.id" id="taskId">
 										</td>
 									</tr>
 								</tbody>
@@ -219,14 +228,6 @@
 								<input type="text" name="creditTaskVO.refreshSec"
 									value="<s:property value="creditTaskVO.refreshSec"/>"
 									style="width: 25px" id="autoreFresh" alt="必须大于5秒，空表示不刷新！" />
-								<input type="hidden" name="creditTaskVO.nowPage"
-									value="<s:property
-											value="creditTaskVO.nowPage" />"
-									id="nowPage">
-								<input type="hidden"
-									value="<s:property
-										value="creditTaskVO.pageCount" />"
-									id="pageCount">
 								秒
 								<A alt=点击刷新 href="javascript:location.reload(true);"
 									class="yell_font"> <SPAN
@@ -379,12 +380,17 @@
 												任务被申诉中
 											</s:elseif>
 										<s:elseif test="#task.status==2">
-												等待您付款
-												<br>
-												剩余
-												<font color="red"><s:property
-													value="#task.remainTime" /> </font>分钟
-											</s:elseif>
+													等待付款<br>
+											<s:if test="#task.remainTime>0">
+											剩余
+											<font color="red"> <s:property
+														value="#task.remainTime" /> </font>
+											分钟
+											</s:if>
+											<s:else>
+												时间已到
+											</s:else>
+										</s:elseif>
 										<s:elseif test="#task.status==3">
 												已经付款
 												<br>等待卖家发货
@@ -427,12 +433,11 @@
 											<a alt="退出任务，并且返回金钱和发布点给您"
 												href="javascript:quitTask('<s:property value="#task.id"/>')"><span
 												class="anniu2">退出任务</span> </a>
-											<br>
 										</s:elseif>
 										<s:elseif test="#task.status==3">
 											<a alt="撤销上次支付操作！"
 												href="javascript:rollbackPay('<s:property value="#task.id"/>')"><span
-												class="anniu">并未支付</span> </a>
+												class="anniu">撤消支付</span> </a>
 										</s:elseif>
 										<s:elseif test="#task.status==4">
 											<s:if test="#task.remainTime==0">
