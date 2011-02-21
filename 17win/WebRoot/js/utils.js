@@ -257,3 +257,15 @@ function waitPage() {
 function showOrhideLeftInfo(obj) {
 	$(obj).parent().children("tbody").toggle();
 }
+/**
+ * 当鼠标移出某层时，则隐藏该层
+ */
+function moveOutCloseDisplay(evt, divName) {
+	var obj = document.all ? evt.toElement : evt.relatedTarget;
+	while (obj != null && obj.id != divName) {
+		obj = document.all ? obj.parentElement : obj.parentNode;
+	}
+	if (obj == null) {
+		document.getElementById(divName).style.display = "none";
+	}
+}

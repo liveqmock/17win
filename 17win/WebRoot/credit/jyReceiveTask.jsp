@@ -396,15 +396,23 @@
 												<br>等待卖家发货
 											</s:elseif>
 										<s:elseif test="#task.status==4">
-											<s:if test="#task.remainTime==0">
+											<s:if test="#task.remainTime<=0">
 													卖家已发货<br>等待您确认好评
 												</s:if>
 											<s:else>
-												<font color="red"><s:if test="#task.remainTime>1">
-														<s:property value="#task.remainTime" />小时后好评
-												</s:if> <s:else>
-														<s:property value="%{#task.remainTime*60}" />分钟后好评
-												</s:else> </font>
+												<s:if test="#task.remainTime>=1440">
+													剩余：<s:property value="#task.remainTime/1440" />天<s:property
+														value="#task.remainTime%1440/60" />时<s:property
+														value="#task.remainTime%60" />分
+												</s:if>
+												<s:elseif test="#task.remainTime>=60">
+													剩余：<s:property value="#task.remainTime/60" />时<s:property
+														value="#task.remainTime%60" />分
+												</s:elseif>
+												<s:else>
+													剩余：<s:property value="#task.remainTime" />分
+												</s:else>
+											
 											</s:else>
 										</s:elseif>
 										<s:elseif test="#task.status==5">
@@ -440,7 +448,7 @@
 												class="anniu">撤消支付</span> </a>
 										</s:elseif>
 										<s:elseif test="#task.status==4">
-											<s:if test="#task.remainTime==0">
+											<s:if test="#task.remainTime<=0">
 												<a alt="买家评价"
 													href="javascript:buyerEvaluate('<s:property value="#task.id"/>')"><span
 													class="anniu">我已评价</span> </a>

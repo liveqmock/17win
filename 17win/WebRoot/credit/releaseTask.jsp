@@ -218,7 +218,7 @@
 																	<td colspan="4">
 																		<s:textfield name="creditTaskVO.assignUser"
 																			onchange="changeUser(this)"
-																			onfocus="selectAssignUser(this);"
+																			onclick="selectAssignUser(this);"
 																			title="输入指定人的17win帐号，只有指定的人才可以接你的任务，发特定任务不需要发布点！"
 																			id="assignUserID" maxlength="12"></s:textfield>
 																		<img src="images/tdTask.gif">
@@ -489,16 +489,13 @@
 				</td>
 			</tr>
 		</table>
-		<div id="selectUserDiv"
+		<div id="selectUserDiv" onmouseout="moveOutCloseDisplay(event,'selectUserDiv');"
 			style="display: none; position: absolute; z-index: 999; border: 1px solid; border-color: #000000; background: #EEF7FB; width: 155px; height: 200px; overflow-y: auto; overflow-x: no">
 			<table style="width: 99%;" cellpadding="0" cellspacing="0">
 				<thead>
 					<tr>
 						<th align="left">
 							选择联系人
-						</th>
-						<th align="right">
-							<A style="color: #2F5FA1" href="javascript:closeAssignUser();">关闭</A>
 						</th>
 					</tr>
 				</thead>

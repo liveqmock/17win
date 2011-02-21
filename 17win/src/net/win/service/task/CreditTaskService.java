@@ -108,6 +108,15 @@ public class CreditTaskService extends BaseService {
 				putByRequest("result", result);
 				return "initReceivedTast";
 			}
+			if(creditTask.getRemainTime()>0){
+				putAlertMsg("好评失败，时间还没到！");
+				List<CreditTaskVO> result = queryReceiveData(creditTaskVO,
+						platformType);
+				putPlatformByRequest(WinUtils.changeType2Platform(platformType));
+				putPlatformTypeByRequest(platformType);
+				putByRequest("result", result);
+				return "initReceivedTast";
+			}
 			/**
 			 * 验证
 			 */
@@ -221,13 +230,8 @@ public class CreditTaskService extends BaseService {
 				putPlatformTypeByRequest(platformType);
 				putByRequest("result", result);
 				return "initReceivedTast";
-			} else if (!platformType.equals(creditTask.getType())
-					|| !creditTask.getReceivePerson().getId().equals(
-							loginInfo.getId())) {
-				// 如果发布人不是当前的登陆人就报错
-				WinUtils.throwIllegalityException(getLoginUser().getUsername()
-						+ "试图越过【已经支付】操作！任务ID是：" + taskId);
-			}
+			} 
+			creditTask.setRemainTime(0L);
 			/**
 			 * 任务
 			 */
@@ -636,11 +640,10 @@ public class CreditTaskService extends BaseService {
 				putPlatformTypeByRequest(platformType);
 				return "initReleasedTast";
 			}
-			creditTask.setStatus(TaskMananger.STEP_FOUR_STATUS);
-			// 设置好评多久后好评
-			if (creditTask.getIntervalHour() > 0) {
-				creditTask.setRemainTime(creditTask.getIntervalHour() * 60L);
+			if(creditTask.getIntervalHour()>0){
+				creditTask.setRemainTime(1L);
 			}
+			creditTask.setStatus(TaskMananger.STEP_FOUR_STATUS);
 			putAlertMsg("发货成功！");
 			List<CreditTaskVO> result = queryReleaseData(creditTaskVO,
 					platformType);
@@ -965,7 +968,7 @@ public class CreditTaskService extends BaseService {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public String initReceivedTast(CreditTaskVO creditTaskVO) throws Exception {
+	public String updateInitReceivedTast(CreditTaskVO creditTaskVO) throws Exception {
 		UserEntity userEntity = getLoginUserEntity(userDAO);
 		updateUserLoginInfo(userEntity);
 		// 没有操作码验证就验证
@@ -995,13 +998,24 @@ public class CreditTaskService extends BaseService {
 			 * 更新加时的剩余时间
 			 */
 			Session session = creditTaskDAO.obtainSession();
-			String updateRemainTimeSql = "update"
+			String updateRemainTimeSql1 = "update"
 					+ " Tb_CreditTask as _task      "
 					+ "   set "
 					+ "     _task.REMAIN_TIME_= _task.REMAIN_TIME_-(UNIX_TIMESTAMP(sysdate())- UNIX_TIMESTAMP(_task.RECEIVE_DATE_))/60"
 					+ "   where  (      _task.STATUS_='2'      or _task.STATUS_='-2'   ) "
 					+ "   and _task.RECEIVE_PERSON_=:userId and  _task.TYPE_=:platformType  and  _task.REMAIN_TIME_>0";
-			Query query = session.createSQLQuery(updateRemainTimeSql);
+			Query query = session.createSQLQuery(updateRemainTimeSql1);
+			query.setLong("userId", getLoginUser().getId());
+			query.setString("platformType", platformType);
+			query.executeUpdate();
+			// 更新多久好评时间
+			String updateRemainTimeSql2 = "update"
+					+ " Tb_CreditTask as _task      "
+					+ "   set "
+					+ "     _task.REMAIN_TIME_= _task.INTERVAL_HOUR_*60-(UNIX_TIMESTAMP(sysdate())- UNIX_TIMESTAMP(_task.RECEIVE_DATE_))/60"
+					+ "   where      _task.STATUS_='4'     and _task.INTERVAL_HOUR_>0"
+					+ "   and _task.RECEIVE_PERSON_=:userId and  _task.TYPE_=:platformType  and  _task.REMAIN_TIME_>0";
+			query = session.createSQLQuery(updateRemainTimeSql2);
 			query.setLong("userId", getLoginUser().getId());
 			query.setString("platformType", platformType);
 			query.executeUpdate();
@@ -1181,7 +1195,7 @@ public class CreditTaskService extends BaseService {
 	 * @param userVO
 	 * @return
 	 */
-	public String initReleasedTast(CreditTaskVO creditTaskVO) throws Exception {
+	public String updateInitReleasedTast(CreditTaskVO creditTaskVO) throws Exception {
 		UserEntity userEntity = getLoginUserEntity(userDAO);
 		updateUserLoginInfo(userEntity);
 
@@ -1212,13 +1226,24 @@ public class CreditTaskService extends BaseService {
 			 * 更新加时的剩余时间
 			 */
 			Session session = creditTaskDAO.obtainSession();
-			String updateRemainTimeSql = "update"
+			String updateRemainTimeSql1 = "update"
 					+ " Tb_CreditTask as _task      "
 					+ "   set "
 					+ "     _task.REMAIN_TIME_= _task.REMAIN_TIME_-(UNIX_TIMESTAMP(sysdate())- UNIX_TIMESTAMP(_task.RECEIVE_DATE_))/60"
 					+ "   where  (      _task.STATUS_='2'      or _task.STATUS_='-2'   ) "
 					+ "   and _task.RELEASE_PERSON_=:userId and  _task.TYPE_=:platformType  and  _task.REMAIN_TIME_>0";
-			Query query = session.createSQLQuery(updateRemainTimeSql);
+			Query query = session.createSQLQuery(updateRemainTimeSql1);
+			query.setLong("userId", getLoginUser().getId());
+			query.setString("platformType", platformType);
+			query.executeUpdate();
+			// 更新多久好评时间
+			String updateRemainTimeSql2 = "update"
+					+ " Tb_CreditTask as _task      "
+					+ "   set "
+					+ "     _task.REMAIN_TIME_= _task.INTERVAL_HOUR_*60-(UNIX_TIMESTAMP(sysdate())- UNIX_TIMESTAMP(_task.RECEIVE_DATE_))/60"
+					+ "   where      _task.STATUS_='4'     and _task.INTERVAL_HOUR_>0"
+					+ "   and _task.RELEASE_PERSON_=:userId and  _task.TYPE_=:platformType  and  _task.REMAIN_TIME_>0";
+			query = session.createSQLQuery(updateRemainTimeSql2);
 			query.setLong("userId", getLoginUser().getId());
 			query.setString("platformType", platformType);
 			query.executeUpdate();

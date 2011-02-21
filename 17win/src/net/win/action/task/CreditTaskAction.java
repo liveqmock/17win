@@ -155,7 +155,7 @@ public class CreditTaskAction extends BaseAction {
 	 * @throws Exception
 	 */
 	public String initReceivedTast() throws Exception {
-		return creditTaskService.initReceivedTast(creditTaskVO);
+		return creditTaskService.updateInitReceivedTast(creditTaskVO);
 	}
 
 	/**
@@ -165,7 +165,7 @@ public class CreditTaskAction extends BaseAction {
 	 * @throws Exception
 	 */
 	public String initReleasedTast() throws Exception {
-		return creditTaskService.initReleasedTast(creditTaskVO);
+		return creditTaskService.updateInitReleasedTast(creditTaskVO);
 	}
 
 	/**

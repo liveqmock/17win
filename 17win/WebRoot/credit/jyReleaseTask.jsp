@@ -455,14 +455,18 @@
 													等待对方好评
 												</s:if>
 											<s:else>
-												<s:if test="#task.remainTime>=60">
-													剩余：<s:property value="#task.remainTime/60" />时<s:property
+												<s:if test="#task.remainTime>=1440">
+													剩余：<s:property value="#task.remainTime/1440" />天<s:property
+														value="#task.remainTime%1440/60" />时<s:property
 														value="#task.remainTime%60" />分
 												</s:if>
+												<s:elseif test="#task.remainTime>=60">
+													剩余：<s:property value="#task.remainTime/60" />时<s:property
+														value="#task.remainTime%60" />分
+												</s:elseif>
 												<s:else>
-													剩余：<s:property value="#task.remainTime%60" />分
+													剩余：<s:property value="#task.remainTime" />分
 												</s:else>
-												<s:property value="#task.remainTime" />
 											</s:else>
 										</s:elseif>
 										<s:elseif test="#task.status==5">
