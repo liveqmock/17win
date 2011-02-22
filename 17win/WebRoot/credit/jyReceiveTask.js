@@ -1,42 +1,54 @@
 $(document).ready(function() {
-			$(".qqConnection").tooltip();
-			intText("autoreFresh");
-			$("#autoreFresh").focus(function() {
-						$(this).data("oldValue", $(this).val());
-						$(this).val("");
-					});
-			$("#autoreFresh").blur(function() {
-						if (!Validater.isBlank($(this).val())) {
-							var value = parseInt($(this).val());
-							if (value < 5) {
-								alert("刷新时间必须大于5秒");
-								return;
-							}
-							$("#mainForm").submit();
+	$(".qqConnection").tooltip();
+	intText("autoreFresh");
+	$("#autoreFresh").focus(function() {
+				$(this).data("oldValue", $(this).val());
+				$(this).val("");
+			});
+	$("#autoreFresh").blur(function() {
+				if (!Validater.isBlank($(this).val())) {
+					var value = parseInt($(this).val());
+					if (value < 5) {
+						alert("刷新时间必须大于5秒");
+						return;
+					}
+					$("#mainForm").submit();
+				} else {
+					if (!Validater.isBlank($(this).data("oldValue"))) {
+						$("#mainForm").submit();
+					}
+				}
+			});
+
+	// /////
+	$("input[class='goItemButton']").click(function() {
+				var val = $(this).siblings("input").val();
+				window.open(val, "_blank");
+
+			});
+	$("#addressDIV").dialog({
+				autoOpen : false,
+				draggable : false,
+				hide : 'slide',
+				modal : true,
+				resizable : false,
+				show : 'slide',
+				width : 400,
+				beforeClose : function(event, ui) {
+					var status = $("#nowAddressTaskStatus").val();
+					if (status == "2" || status == "-2") {
+						if ($("input[name='alertCheckedBox']:checked").size() == 4) {
+							return true;
 						} else {
-							if (!Validater.isBlank($(this).data("oldValue"))) {
-								$("#mainForm").submit();
-							}
+							alert("请查看对方提出的要求后，然后勾选每个条件后面的复选框再关闭！");
+							return false;
 						}
-					});
+					}
 
-			// /////
-			$("input[class='goItemButton']").click(function() {
-						var val = $(this).siblings("input").val();
-						window.open(val, "_blank");
+				}
+			});
 
-					});
-			$("#addressDIV").dialog({
-						autoOpen : false,
-						draggable : false,
-						hide : 'slide',
-						modal : true,
-						resizable : false,
-						show : 'slide',
-						width : 400
-
-					});
-		});
+});
 
 // 弹出发送手机短信层
 function openTelephoneDiv(telphone, username) {
@@ -157,8 +169,17 @@ function jumpPage() {
 }
 
 // 复制地址
-function showItemUrl(itemUrl, grade, comment) {
-	$("#gradeCommon").text(comment + "【" + grade + "】");
+function showItemUrl(itemUrl, updatePrice, grade, comment, address, status) {
+	$("#updatePrice").text(updatePrice == "true" ? "需修改价" : "不需改价");
+	$("#grade").text(grade);
+	$("#comment").text((comment == null || comment == "") ? "无" : comment);
+	$("#address").text((address == null || address == "") ? "无" : address);
+	$("#comment").bind("click",function(){
+			copyToClipboard($(this).text());
+	});
+	$("#address").bind("click",function(){
+			copyToClipboard($(this).text());
+	});
 	$("#itemContent").empty();
 	var itemUrls = itemUrl.split(",");
 	for (var i = 0; i < itemUrls.length; i++) {
@@ -170,15 +191,22 @@ function showItemUrl(itemUrl, grade, comment) {
 				+ "		src='images/renwu-3.png''> </a>" + "</td>" + "</tr>");
 		$("#itemContent").append(tr);
 	}
+	$("input[name='alertCheckedBox']").attr("checked", false);
+	if (status == "2" || status == "-2") {
+		$("span[alertSpan='alertSpan']").show();
+	} else {
+		$("span[alertSpan='alertSpan']").hide();
+	}
+	$("#nowAddressTaskStatus").val(status);
 	$("#addressDIV").dialog("open");
 }
 // 直接跳转地址
-function openItemUrl(status, itemUrl, grade, comment) {
+function openItemUrl(itemUrl, updatePrice, grade, comment, address, status) {
 	var itemUrls = itemUrl.split(",");
 	if (itemUrls.length == 1 && status != "2" && status != "-2") {
 		window.open(itemUrls[0], "_blank");
 	} else {
-		showItemUrl(itemUrl, grade, comment);
+		showItemUrl(itemUrl, updatePrice, grade, comment, address, status);
 	}
 }
 // 条件查询
@@ -200,4 +228,19 @@ function query(page) {
 // 刷新页面
 function refreshPage() {
 	$("#mainForm").submit();
+}
+
+document.onkeydown = function() {
+	if ((window.event.keyCode == 116) || // 屏蔽 F5
+			(window.event.keyCode == 122) || // 屏蔽 F11
+			(window.event.shiftKey && window.event.keyCode == 121) // shift+F10
+	) {
+		window.event.keyCode = 0;
+		window.event.returnValue = false;
+	}
+	if ((window.event.altKey) && (window.event.keyCode == 115)) { // 屏蔽Alt+F4
+		window.showModelessDialog("about:blank", "",
+				"dialogWidth:1px;dialogheight:1px");
+		return false;
+	}
 }

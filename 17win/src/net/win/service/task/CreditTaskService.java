@@ -76,6 +76,8 @@ public class CreditTaskService extends BaseService {
 			throws Exception {
 		// 没有操作码验证就验证
 		String platformType = getPlatformType();
+		putIndexShowType(platformType);
+		putTaskShowType("3");
 		if (!getLoginUser().getOperationCodeStatus()) {
 			putByRequest("preURL", getRequset().getRequestURL() + "?"
 					+ getRequset().getQueryString());
@@ -108,7 +110,7 @@ public class CreditTaskService extends BaseService {
 				putByRequest("result", result);
 				return "initReceivedTast";
 			}
-			if(creditTask.getRemainTime()>0){
+			if (creditTask.getRemainTime() > 0) {
 				putAlertMsg("好评失败，时间还没到！");
 				List<CreditTaskVO> result = queryReceiveData(creditTaskVO,
 						platformType);
@@ -139,6 +141,8 @@ public class CreditTaskService extends BaseService {
 	 */
 	public String updateRollbackPay(CreditTaskVO creditTaskVO) throws Exception {
 		String platformType = getPlatformType();
+		putIndexShowType(platformType);
+		putTaskShowType("3");
 		UserLoginInfo loginInfo = getLoginUser();
 		Long taskId = creditTaskVO.getId();
 		if (!getLoginUser().getOperationCodeStatus()) {
@@ -199,6 +203,8 @@ public class CreditTaskService extends BaseService {
 	 */
 	public String updatePayTask(CreditTaskVO creditTaskVO) throws Exception {
 		String platformType = getPlatformType();
+		putIndexShowType(platformType);
+		putTaskShowType("3");
 		UserLoginInfo loginInfo = getLoginUser();
 		Long taskId = creditTaskVO.getId();
 		if (!getLoginUser().getOperationCodeStatus()) {
@@ -230,7 +236,7 @@ public class CreditTaskService extends BaseService {
 				putPlatformTypeByRequest(platformType);
 				putByRequest("result", result);
 				return "initReceivedTast";
-			} 
+			}
 			creditTask.setRemainTime(0L);
 			/**
 			 * 任务
@@ -253,6 +259,8 @@ public class CreditTaskService extends BaseService {
 	 */
 	public String updateQuitTask(CreditTaskVO creditTaskVO) throws Exception {
 		String platformType = getPlatformType();
+		putIndexShowType(platformType);
+		putTaskShowType("3");
 		UserLoginInfo loginInfo = getLoginUser();
 		Long taskId = creditTaskVO.getId();
 		if (!getLoginUser().getOperationCodeStatus()) {
@@ -314,9 +322,7 @@ public class CreditTaskService extends BaseService {
 	 */
 	public String updateReceiveTask(CreditTaskVO creditTaskVO) throws Exception {
 		String platformType = getPlatformType();
-
 		UserLoginInfo loginInfo = getLoginUser();
-
 		Long taskId = Long.parseLong(getByParam("taskId"));
 		CreditTaskEntity creditTask = creditTaskDAO.get(taskId);
 		BuyerEntity buyerEntitiy = buyerDAO.get(Long
@@ -438,6 +444,8 @@ public class CreditTaskService extends BaseService {
 			throws Exception {
 		// 没有操作码验证就验证
 		String platformType = getPlatformType();
+		putIndexShowType(platformType);
+		putTaskShowType("4");
 		if (!getLoginUser().getOperationCodeStatus()) {
 			putByRequest("preURL", getRequset().getRequestURL() + "?"
 					+ getRequset().getQueryString());
@@ -608,6 +616,8 @@ public class CreditTaskService extends BaseService {
 	public String updateDispatch(CreditTaskVO creditTaskVO) throws Exception {
 		// 没有操作码验证就验证
 		String platformType = getPlatformType();
+		putIndexShowType(platformType);
+		putTaskShowType("4");
 		if (!getLoginUser().getOperationCodeStatus()) {
 			putByRequest("preURL", getRequset().getRequestURL() + "?"
 					+ getRequset().getQueryString());
@@ -640,7 +650,7 @@ public class CreditTaskService extends BaseService {
 				putPlatformTypeByRequest(platformType);
 				return "initReleasedTast";
 			}
-			if(creditTask.getIntervalHour()>0){
+			if (creditTask.getIntervalHour() > 0) {
 				creditTask.setRemainTime(1L);
 			}
 			creditTask.setStatus(TaskMananger.STEP_FOUR_STATUS);
@@ -661,6 +671,8 @@ public class CreditTaskService extends BaseService {
 			throws Exception {
 		// 没有操作码验证就验证
 		String platformType = getPlatformType();
+		putIndexShowType(platformType);
+		putTaskShowType("4");
 		UserEntity receiveUser = userDAO.get(getLoginUser().getId());
 		if (!getLoginUser().getOperationCodeStatus()) {
 			putByRequest("preURL", getRequset().getRequestURL() + "?"
@@ -722,6 +734,8 @@ public class CreditTaskService extends BaseService {
 			throws Exception {
 		// 没有操作码验证就验证
 		String platformType = getPlatformType();
+		putIndexShowType(platformType);
+		putTaskShowType("4");
 		if (!getLoginUser().getOperationCodeStatus()) {
 			putByRequest("preURL", getRequset().getRequestURL() + "?"
 					+ getRequset().getQueryString());
@@ -774,6 +788,8 @@ public class CreditTaskService extends BaseService {
 	public String updateAddTime(CreditTaskVO creditTaskVO) throws Exception {
 		// 没有操作码验证就验证
 		String platformType = getPlatformType();
+		putIndexShowType(platformType);
+		putTaskShowType("4");
 		if (!getLoginUser().getOperationCodeStatus()) {
 			putByRequest("preURL", getRequset().getRequestURL() + "?"
 					+ getRequset().getQueryString());
@@ -810,12 +826,10 @@ public class CreditTaskService extends BaseService {
 				return "initReleasedTast";
 			}
 			Date currOperDate = creditTask.getReceiveDate();
-			Long minuties = ((System.currentTimeMillis() - currOperDate
-					.getTime()) / 1000 / 60);
 			/**
 			 * 真正的逻辑 修改时间
 			 */
-			creditTask.setRemainTime(minuties + 20);
+			creditTask.setRemainTime(20L);
 			putAlertMsg("加时成功！");
 			List<CreditTaskVO> result = queryReleaseData(creditTaskVO,
 					platformType);
@@ -835,6 +849,8 @@ public class CreditTaskService extends BaseService {
 	public String updateToFirstTask(CreditTaskVO creditTaskVO) throws Exception {
 		// 没有操作码验证就验证
 		String platformType = getPlatformType();
+		putIndexShowType(platformType);
+		putTaskShowType("4");
 		if (!getLoginUser().getOperationCodeStatus()) {
 			putByRequest("preURL", getRequset().getRequestURL() + "?"
 					+ getRequset().getQueryString());
@@ -892,6 +908,8 @@ public class CreditTaskService extends BaseService {
 	public String updateCancelTask(CreditTaskVO creditTaskVO) throws Exception {
 		// 没有操作码验证就验证
 		String platformType = getPlatformType();
+		putIndexShowType(platformType);
+		putTaskShowType("4");
 		if (!getLoginUser().getOperationCodeStatus()) {
 			putByRequest("preURL", getRequset().getRequestURL() + "?"
 					+ getRequset().getQueryString());
@@ -968,18 +986,13 @@ public class CreditTaskService extends BaseService {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public String updateInitReceivedTast(CreditTaskVO creditTaskVO) throws Exception {
+	public String updateInitReceivedTast(CreditTaskVO creditTaskVO)
+			throws Exception {
 		UserEntity userEntity = getLoginUserEntity(userDAO);
 		updateUserLoginInfo(userEntity);
 		// 没有操作码验证就验证
 		String platformType = getPlatformType();
-		if ("1".equals(platformType)) {
-			putIndexShowType("2");
-		} else if ("2".equals(platformType)) {
-			putIndexShowType("3");
-		} else if ("3".equals(platformType)) {
-			putIndexShowType("4");
-		}
+		putIndexShowType(platformType);
 		putTaskShowType("3");
 		if (StringUtils.isBlank(platformType)) {
 			WinUtils.throwIllegalityException(getLoginUser().getUsername()
@@ -1001,7 +1014,7 @@ public class CreditTaskService extends BaseService {
 			String updateRemainTimeSql1 = "update"
 					+ " Tb_CreditTask as _task      "
 					+ "   set "
-					+ "     _task.REMAIN_TIME_= _task.REMAIN_TIME_-(UNIX_TIMESTAMP(sysdate())- UNIX_TIMESTAMP(_task.RECEIVE_DATE_))/60"
+					+ "     _task.REMAIN_TIME_=20-(UNIX_TIMESTAMP(sysdate())- UNIX_TIMESTAMP(_task.RECEIVE_DATE_))/60"
 					+ "   where  (      _task.STATUS_='2'      or _task.STATUS_='-2'   ) "
 					+ "   and _task.RECEIVE_PERSON_=:userId and  _task.TYPE_=:platformType  and  _task.REMAIN_TIME_>0";
 			Query query = session.createSQLQuery(updateRemainTimeSql1);
@@ -1195,19 +1208,14 @@ public class CreditTaskService extends BaseService {
 	 * @param userVO
 	 * @return
 	 */
-	public String updateInitReleasedTast(CreditTaskVO creditTaskVO) throws Exception {
+	public String updateInitReleasedTast(CreditTaskVO creditTaskVO)
+			throws Exception {
 		UserEntity userEntity = getLoginUserEntity(userDAO);
 		updateUserLoginInfo(userEntity);
 
 		// 没有操作码验证就验证
 		String platformType = getPlatformType();
-		if ("1".equals(platformType)) {
-			putIndexShowType("2");
-		} else if ("2".equals(platformType)) {
-			putIndexShowType("3");
-		} else if ("3".equals(platformType)) {
-			putIndexShowType("4");
-		}
+		putIndexShowType(platformType);
 		putTaskShowType("4");
 		if (StringUtils.isBlank(platformType)) {
 			WinUtils.throwIllegalityException(getLoginUser().getUsername()
@@ -1223,13 +1231,13 @@ public class CreditTaskService extends BaseService {
 			 */
 			updateUserLoginInfo(userEntity);
 			/**
-			 * 更新加时的剩余时间
+			 * 更新审核或者等待的剩余时间
 			 */
 			Session session = creditTaskDAO.obtainSession();
 			String updateRemainTimeSql1 = "update"
 					+ " Tb_CreditTask as _task      "
 					+ "   set "
-					+ "     _task.REMAIN_TIME_= _task.REMAIN_TIME_-(UNIX_TIMESTAMP(sysdate())- UNIX_TIMESTAMP(_task.RECEIVE_DATE_))/60"
+					+ "     _task.REMAIN_TIME_=20-(UNIX_TIMESTAMP(sysdate())- UNIX_TIMESTAMP(_task.RECEIVE_DATE_))/60"
 					+ "   where  (      _task.STATUS_='2'      or _task.STATUS_='-2'   ) "
 					+ "   and _task.RELEASE_PERSON_=:userId and  _task.TYPE_=:platformType  and  _task.REMAIN_TIME_>0";
 			Query query = session.createSQLQuery(updateRemainTimeSql1);
@@ -1638,13 +1646,7 @@ public class CreditTaskService extends BaseService {
 
 		// 没有操作码验证就验证
 		String platformType = getPlatformType();
-		if ("1".equals(platformType)) {
-			putIndexShowType("2");
-		} else if ("2".equals(platformType)) {
-			putIndexShowType("3");
-		} else if ("3".equals(platformType)) {
-			putIndexShowType("4");
-		}
+		putIndexShowType(platformType);
 		putTaskShowType("2");
 		if (!getLoginUser().getOperationCodeStatus()) {
 			putByRequest("preURL", getRequset().getRequestURL() + "?"
@@ -1742,13 +1744,7 @@ public class CreditTaskService extends BaseService {
 		UserEntity userEntity = getLoginUserEntity(userDAO);
 		updateUserLoginInfo(userEntity);
 		String platformType = getPlatformType();
-		if ("1".equals(platformType)) {
-			putIndexShowType("2");
-		} else if ("2".equals(platformType)) {
-			putIndexShowType("3");
-		} else if ("3".equals(platformType)) {
-			putIndexShowType("4");
-		}
+		putIndexShowType(platformType);
 		putTaskShowType("1");
 		if (!getLoginUser().getOperationCodeStatus()) {
 			putByRequest("preURL", getRequset().getRequestURL() + "?"

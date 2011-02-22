@@ -96,6 +96,7 @@ public class BaseService {
 	 * @return
 	 */
 	protected void putTaskShowType(String showTaskType) {
+		// 显示CSS用
 		putByRequest("showTaskType", showTaskType);
 	}
 
@@ -105,7 +106,7 @@ public class BaseService {
 	 * @return
 	 */
 	protected void putIndexShowType(String showIndexType) {
-		putByRequest("showIndexType", showIndexType);
+		putByRequest("showIndexType", Integer.parseInt(showIndexType)+1+"");
 	}
 
 	/**

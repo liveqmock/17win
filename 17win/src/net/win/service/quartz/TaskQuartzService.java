@@ -29,27 +29,6 @@ public class TaskQuartzService {
 		Session session = null;
 		try {
 			session = creditTaskDAO.obtainSession();
-//			session.beginTransaction();
-//			// 修改发布任务 审核 或者等待买家付款
-//			String sql = "update"
-//					+ " Tb_CreditTask "
-//					+ "   set"
-//					+ "     RECEIVE_DATE_=null,"
-//					+ "   RECEIVE_IP_=null,"
-//					+ "    BUYER_ID_=null,"
-//					+ "       STATUS_='1',"
-//					+ "  REMAIN_TIME_=0,"
-//					+ "  RELEASE_DATE = sysdate(),"
-//					+ "  RECEIVE_PERSON_=null "
-//					+ "   where"
-//					+ "     ("
-//					+ "       STATUS_='2' "
-//					+ "      or STATUS_='-2'"
-//					+ "    ) "
-//					+ "  and (UNIX_TIMESTAMP(sysdate())- UNIX_TIMESTAMP(RECEIVE_DATE_)>=REMAIN_TIME_*60)";
-//			query = session.createSQLQuery(sql);
-//			query.executeUpdate();
-//			session.getTransaction().commit();
 
 			// / 修改定时任务
 			session.beginTransaction();
@@ -62,10 +41,9 @@ public class TaskQuartzService {
 			query = session.createSQLQuery(sql2);
 			query.executeUpdate();
 			session.getTransaction().commit();
-
 		} catch (Exception e) {
 			session.getTransaction().rollback();
-			LoggerUtils.error("定时任务错误!", e);
+			LoggerUtils.error("分钟任务!", e);
 		}
 	}
 
@@ -76,6 +54,7 @@ public class TaskQuartzService {
 		Query query;
 		Session session = null;
 		try {
+			//买家信誉认证
 			List<BuyerEntity> buyers = buyerDAO
 					.list("from BuyerEntity where enable=true and  type in (1,2) ");
 			Integer value = 0;
@@ -89,7 +68,7 @@ public class TaskQuartzService {
 			}
 		} catch (Exception e) {
 			session.getTransaction().rollback();
-			LoggerUtils.error("定时任务错误!", e);
+			LoggerUtils.error(" 每晚24点任务!", e);
 		}
 	}
 }

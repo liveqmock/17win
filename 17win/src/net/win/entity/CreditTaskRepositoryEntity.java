@@ -18,7 +18,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Tb_CreditTaskReposotory")
 public class CreditTaskRepositoryEntity extends BaseEntity {
-
 	// 名字
 	@Column(name = "NAME_", length = 20, nullable = false, unique = true)
 	private String name;

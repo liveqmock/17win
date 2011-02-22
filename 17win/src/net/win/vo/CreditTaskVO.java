@@ -241,7 +241,7 @@ public class CreditTaskVO extends BaseVO {
 	}
 
 	public Boolean getRepository() {
-		return repository;
+		return repository; 
 	}
 
 	public void setRepository(Boolean repository) {

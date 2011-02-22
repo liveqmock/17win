@@ -229,8 +229,8 @@
 									value="<s:property value="creditTaskVO.refreshSec"/>"
 									style="width: 25px" id="autoreFresh" alt="必须大于5秒，空表示不刷新！" />
 								秒
-								<A alt=点击刷新 href="javascript:location.reload(true);"
-									class="yell_font"> <SPAN
+								<A alt="点击刷新" href="javascript:refreshPage();" class="yell_font">
+									<SPAN
 									class="taskAnniu<s:property value="#request.platformType"/>">刷新页面</SPAN>
 								</A>
 							</DIV>
@@ -297,12 +297,12 @@
 									</td>
 									<td align="center" valign="middle">
 										<a style="cursor: pointer;"
-											href="javascript:showItemUrl('<s:property value="#task.itemUrl" />','<s:property value="#task.grade" />','<s:property value="#task.comment" />');">
+											href="javascript:showItemUrl('<s:property value="#task.itemUrl" />','<s:property value="#task.updatePrice" />','<s:property value="#task.grade" />','<s:property value="#task.comment" />','<s:property value="#task.address" />','<s:property value="#task.status" />');">
 											<img src="images/renwu-3.png" border="0"> </a>
 										<br>
 										<a alt="点此直接打开商品地址"
-											href="javascript:openItemUrl('<s:property value="#task.status" />','<s:property value="#task.itemUrl" />','<s:property value="#task.grade" />','<s:property value="#task.comment" />');"><img
-												src="images/open.gif"> </a>
+											href="javascript:openItemUrl('<s:property value="#task.itemUrl" />','<s:property value="#task.updatePrice" />','<s:property value="#task.grade" />','<s:property value="#task.comment" />','<s:property value="#task.address" />','<s:property value="#task.status" />');">
+											<img src="images/open.gif" border="0"> </a>
 									</td>
 									<td align="center">
 
@@ -412,7 +412,7 @@
 												<s:else>
 													剩余：<s:property value="#task.remainTime" />分
 												</s:else>
-											
+
 											</s:else>
 										</s:elseif>
 										<s:elseif test="#task.status==5">
@@ -424,7 +424,7 @@
 									</td>
 									<td align="center">
 										<s:if test="#task.status==-2">
-										可联系对方加时
+										等待审核
 										<br>
 											<a alt="退出任务" class="anniu"
 												href="javascript:quitTask('<s:property value="#task.id"/>')">退出任务</a>
@@ -555,12 +555,64 @@
 		<!-- 显示地址 -->
 		<div id="addressDIV" title="发布方提醒" style="display: none">
 			<table cellpadding="0" cellspacing="0" border="0" width="100%">
-				<tr>
-					<td>
-						<font style="font: 14px;" color="red"><b> 您的要求:</b> </font>
-						<span id="gradeCommon"> 24小时带字好评 </span>
-					</td>
-				</tr>
+				<thead>
+					<tr>
+						<td colspan="99">
+							<font style="font: 14px;" color="red"><b> 您的要求:</b> </font>
+							<input type="hidden" id="nowAddressTaskStatus" />
+						</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td nowrap="nowrap" valign="top">
+							是否修改价格：
+						</td>
+						<td>
+							<span id="updatePrice"></span>
+						</td>
+						<td nowrap="nowrap" valign="top">
+							<span alertSpan="alertSpan" style="display: none"><input
+									type="checkbox" name="alertCheckedBox">我已知道 </span>
+						</td>
+					</tr>
+					<tr>
+						<td valign="top">
+							好评要求：
+						</td>
+						<td>
+							<span id="grade"></span>
+						</td>
+						<td>
+							<span style="display: none" alertSpan="alertSpan"><input
+									type="checkbox" name="alertCheckedBox">我已知道 </span>
+						</td>
+					</tr>
+					<tr>
+						<td valign="top">
+							自定义评语：
+						</td>
+						<td>
+							<span id="comment" style="text-decoration: underline;color:red;cursor:pointer"></span>
+						</td>
+						<td valign="top">
+							<span style="display: none" alertSpan="alertSpan"><input
+									type="checkbox" name="alertCheckedBox">我已知道 </span>
+						</td>
+					</tr>
+					<tr>
+						<td valign="top">
+							收货地址：
+						</td>
+						<td>
+							<span id="address" style="text-decoration: underline;color:red;cursor:pointer" ></span>
+						</td>
+						<td valign="top">
+							<span style="display: none" alertSpan="alertSpan"><input
+									type="checkbox" name="alertCheckedBox">我已知道 </span>
+						</td>
+					</tr>
+				</tbody>
 			</table>
 			<hr>
 			<table cellpadding="0" cellspacing="0" border="0" width="100%">

@@ -302,12 +302,12 @@
 									</td>
 									<td valign="middle" align="center">
 										<a style="cursor: pointer;"
-											href="javascript:showItemUrl('<s:property value="#task.itemUrl" />','<s:property value="#task.grade" />','<s:property value="#task.comment" />');">
+											href="javascript:showItemUrl('<s:property value="#task.itemUrl" />','<s:property value="#task.updatePrice" />','<s:property value="#task.grade" />','<s:property value="#task.comment" />','<s:property value="#task.address" />');">
 											<img src="images/renwu-3.png" border="0"> </a>
 										<br>
 										<a alt="点此直接打开商品地址"
-											href="javascript:openItemUrl('<s:property value="#task.itemUrl" />','<s:property value="#task.grade" />','<s:property value="#task.comment" />');"><img
-												src="images/open.gif"> </a>
+											href="javascript:openItemUrl('<s:property value="#task.itemUrl" />','<s:property value="#task.updatePrice" />','<s:property value="#task.grade" />','<s:property value="#task.comment" />','<s:property value="#task.address" />');">
+											<img src="images/open.gif" border="0"> </a>
 									</td>
 									<td align="center">
 										<s:if test="#task.status==0">
@@ -505,20 +505,16 @@
 												href="javascript:clearReceiver(<s:property value="#task.id"/>)"><span
 												class="anniu2">清除对方</span> </a>
 											<br>
-											<a alt="为对方加时"
-												href="javascript:addTime('<s:property value="#task.id"/>')"><span
-												class="anniu">为他加时</span> </a>
 										</s:elseif>
 										<s:elseif test="#task.status==2">
-											<a alt="为对方加时"
-												href="javascript:addTime('<s:property value="#task.id"/>')"><span
-												class="anniu">为他加时</span> </a>
 											<s:if test="#task.remainTime<=0">
-												<br>
 												<a alt="如果对方长时间没操作可以清除对方！"
 													href="javascript:clearReceiver(<s:property value="#task.id"/>)"><span
 													class="anniu2">清除对方</span> </a>
 											</s:if>
+											<s:else>
+												等待付款
+											</s:else>
 										</s:elseif>
 										<s:elseif test="#task.status==3">
 											<a alt="请您在确认后，进行发货！"
@@ -632,19 +628,66 @@
 		<!-- 显示地址 -->
 		<div id="addressDIV" title="发布方提醒" style="display: none">
 			<table cellpadding="0" cellspacing="0" border="0" width="100%">
-				<tr>
-					<td>
-						<font style="font: 14px;" color="red"><b> 您的要求:</b> </font>
-						<span id="gradeCommon"></span>
-					</td>
-				</tr>
+				<thead>
+					<tr>
+						<td colspan="99">
+							<font style="font: 14px;" color="red"><b> 您的要求:</b> </font>
+						</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td nowrap="nowrap">
+							是否修改价格：
+						</td>
+						<td width="70%">
+							<span id="updatePrice"></span>
+						</td>
+						<td>
+							&nbsp;
+						</td>
+					</tr>
+					<tr>
+						<td>
+							好评要求：
+						</td>
+						<td>
+							<span id="grade"></span>
+						</td>
+						<td>
+							&nbsp;
+						</td>
+					</tr>
+					<tr>
+						<td>
+							自定义评语：
+						</td>
+						<td>
+							<span id="comment"></span>
+						</td>
+						<td>
+							&nbsp;
+						</td>
+					</tr>
+					<tr>
+						<td>
+							收货地址：
+						</td>
+						<td>
+							<span id="address"></span>
+						</td>
+						<td>
+							&nbsp;
+						</td>
+					</tr>
+				</tbody>
 			</table>
 			<hr>
 			<table cellpadding="0" cellspacing="0" border="0" width="100%">
 				<thead>
 					<tr>
 						<td colspan="3" align="sleft">
-							<font style="font: 14px;" color="red"><b> 商品地址：</b>
+							<font style="font: 14px;" color="red"><b> 商品地址：</b> </font>
 						</td>
 					</tr>
 				</thead>

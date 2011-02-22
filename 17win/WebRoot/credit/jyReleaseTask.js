@@ -138,7 +138,6 @@ function toFirstTask(id) {
 	}
 }
 
-
 // 加时
 function addTime(id) {
 	if (confirm("是否要为对方加时！")) {
@@ -154,8 +153,8 @@ function callWW(url) {
 		window.open(url, "_blank");
 	}
 }
-//刷新当前页
-function refreshPage(){
+// 刷新当前页
+function refreshPage() {
 	$("#mainForm").submit();
 }
 // ///分页
@@ -199,8 +198,11 @@ function jumpPage() {
 	query(page);
 }
 // 复制地址
-function showItemUrl(itemUrl, grade, comment) {
-	$("#gradeCommon").text(comment + "【" + grade + "】");
+function showItemUrl(itemUrl, updatePrice, grade, comment, address) {
+	$("#updatePrice").text(updatePrice == "true" ? "需修改价" : "不需改价");
+	$("#grade").text(grade);
+	$("#comment").text((comment == null || comment == "") ? "无" : comment);
+	$("#address").text((address == null || address == "") ? "无" : address);
 	$("#itemContent").empty();
 	var itemUrls = itemUrl.split(",");
 	for (var i = 0; i < itemUrls.length; i++) {
@@ -215,12 +217,12 @@ function showItemUrl(itemUrl, grade, comment) {
 	$("#addressDIV").dialog("open");
 }
 // 直接跳转地址
-function openItemUrl(itemUrl, grade, comment) {
+function openItemUrl(itemUrl, updatePrice, grade, comment, address) {
 	var itemUrls = itemUrl.split(",");
 	if (itemUrls.length == 1) {
 		window.open(itemUrls[0], "_blank");
 	} else {
-		showItemUrl(itemUrl, grade, comment);
+		showItemUrl(itemUrl, updatePrice, grade, comment, address);
 	}
 }
 // 条件查询
@@ -242,4 +244,14 @@ function query(page) {
 // 刷新页面
 function refreshPage() {
 	$("#mainForm").submit();
+}
+
+document.onkeydown = function() {
+	if ((window.event.keyCode == 116) || // 屏蔽 F5
+			(window.event.keyCode == 122) || // 屏蔽 F11
+			(window.event.shiftKey && window.event.keyCode == 121) // shift+F10
+	) {
+		refreshPage();
+		return false;
+	}
 }
