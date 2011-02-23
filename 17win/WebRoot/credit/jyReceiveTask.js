@@ -47,6 +47,14 @@ $(document).ready(function() {
 
 				}
 			});
+	$("#contentID").keyup(function() {
+				var value = $(this).val();
+				if (value.length > 200) {
+					$(this).val(value.substring(0, 200));
+				} else {
+					$("#showTip").text(value.length);
+				}
+			});
 
 });
 
@@ -174,12 +182,12 @@ function showItemUrl(itemUrl, updatePrice, grade, comment, address, status) {
 	$("#grade").text(grade);
 	$("#comment").text((comment == null || comment == "") ? "无" : comment);
 	$("#address").text((address == null || address == "") ? "无" : address);
-	$("#comment").bind("click",function(){
-			copyToClipboard($(this).text());
-	});
-	$("#address").bind("click",function(){
-			copyToClipboard($(this).text());
-	});
+	$("#comment").bind("click", function() {
+				copyToClipboard($(this).text());
+			});
+	$("#address").bind("click", function() {
+				copyToClipboard($(this).text());
+			});
 	$("#itemContent").empty();
 	var itemUrls = itemUrl.split(",");
 	for (var i = 0; i < itemUrls.length; i++) {

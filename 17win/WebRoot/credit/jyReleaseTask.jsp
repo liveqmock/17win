@@ -619,7 +619,7 @@
 						</td>
 						<td>
 							<span id="showTip">0</span>个字
-							<font color="red">（一条短信收取0.1元，字数为70个字）</font>
+							<font color="red">（70个字收取0.1元）</font>
 						</td>
 					</tr>
 				</table>
