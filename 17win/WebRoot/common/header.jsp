@@ -22,3 +22,5 @@
 </script>
 <script type="text/javascript" src="js/service.js">
 </script>
+<script type="text/javascript" src="js/utils.js">
+</script>

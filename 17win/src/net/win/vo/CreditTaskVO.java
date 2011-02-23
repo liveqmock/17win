@@ -41,8 +41,6 @@ public class CreditTaskVO extends BaseVO {
 	private String receiveIP;
 	// 发布点
 	private Double releaseDot;
-	// 好评时间类型
-	private String goodTimeType;
 	// 描述
 	private String comment;
 
@@ -272,13 +270,6 @@ public class CreditTaskVO extends BaseVO {
 		this.respositoryName = respositoryName;
 	}
 
-	public String getGoodTimeType() {
-		return goodTimeType;
-	}
-
-	public void setGoodTimeType(String goodTimeType) {
-		this.goodTimeType = goodTimeType;
-	}
 
 	public Long getBuyerID() {
 		return buyerID;

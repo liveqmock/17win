@@ -12,16 +12,6 @@ $(document).ready(function() {
 	intText("intervalHour1");
 	// 自定义时间
 	intText("intervalHour2");
-	// 仓库
-	$("#respository").bind("click", function() {
-				if ($(this).attr("checked")) {
-					$("#respositoryName").val("");
-					$("#respositoryName").show();
-					$("#respositoryName").focus();
-				} else {
-					$("#respositoryName").hide();
-				}
-			});
 
 	$("[name='creditTaskVO.grade']").bind("change", function() {
 		if ($(this).attr("withodCommmon") != null
@@ -35,75 +25,6 @@ $(document).ready(function() {
 		// 是否自定义时间好评
 		if (!$(this).val().startWith("自定义")) {
 			$("input[name='creditTaskVO.intervalHour']").attr("disabled", true);
-		}
-	});
-	// 选择仓库
-	$("#resultTaskRepsId").bind("change", function() {
-		var id = $(this).val();
-		if (!Validater.isBlank(id)) {
-			// 获取用户地址
-			VhostAop.divAOP.ajax(
-					"taskRepositoryManager/taskRepository!obtainTaskInfo.php",
-					{
-						"creditTaskRepositoryVO.id" : id
-					}, function(data) {
-						if (!Validater.isNull(data)
-								&& !Validater
-										.isNull(data.creditTaskRepositoryVO)) {
-							var obj = data.creditTaskRepositoryVO;
-							// 价格
-							$("#money").val(obj.money);
-							// 地址
-							$("#itemUrl").val(obj.itemUrl);
-							// 掌柜
-							$("input[name='creditTaskVO.sellerID'][value='"
-									+ obj.sellerID + "']")
-									.attr("checked", true);
-							// 价格相等
-							$("input[name='creditTaskVO.updatePrice'][value='"
-									+ obj.updatePrice + "']").attr("checked",
-									true);
-							// 动态评分
-							$("input[name='creditTaskVO.grade'][value='"
-									+ obj.grade + "']").attr("checked", true);
-							// 收货时间好评
-							$("input[name='creditTaskVO.goodTimeType'][value='"
-									+ obj.goodTimeType + "']").attr("checked",
-									true);
-							if (obj.goodTimeType == "5") {
-								// 自定义小时
-								$("#intervalHour").attr("disabled", false);
-								$("#intervalHour").val(obj.intervalHour);
-							}
-							// 任务保护
-							$("input[name='creditTaskVO.protect']").attr(
-									"checked", obj.protect);
-							// 收货地址
-							$("input[name='creditTaskVO.address']").attr(
-									"checked", obj.address);
-							// 描述
-							$("input[name='creditTaskVO.desc']").val(obj.desc);
-
-							// 附加时间
-							$("#addtionMoney").val(obj.addtionMoney);
-							if (obj.assignUser != null) {
-								$("#assignUserID").attr("disabled", false);
-								$("#assignUserCheckedBox")
-										.attr("checked", true);
-								// 指定用户
-								$("#assignUserID").val(obj.assignUser);
-							}
-							// 附加发布点
-							$("#addtionReleaseDotId")
-									.val(obj.addtionReleaseDot);
-
-							$("input[class='errorText']")
-									.removeClass("errorText");
-						} else {
-							alert("系统错误，请联系管理员！");
-							submitFlag = false;
-						}
-					}, "json");
 		}
 	});
 	// tip
@@ -191,28 +112,25 @@ function queryAssignUser(username) {
 				"creditTaskVO.assignUser" : $("#assignUserID").val()
 			}, function(data) {
 				$("#assignUserTable").empty();
-				if(data.linkMans.length==0){
-					var tr = "<tr>"
-							+ "	<td colspan='2'>"
-							+ "		<b>没有联系人！</b>"
-							+ "	</td>"
-							+ "</tr>"
+				if (data.linkMans.length == 0) {
+					var tr = "<tr>" + "	<td colspan='2'>" + "		<b>没有联系人！</b>"
+							+ "	</td>" + "</tr>"
 					$("#assignUserTable").append(tr);
-					return ;
+					return;
 				}
 				for (var i = 0; i < data.linkMans.length; i++) {
 					var tr = "<tr onmouseover='this.className=\'over\'' style='cursor: pointer;'"
 							+ "onclick='selectUser(this);' onmouseout='this.className=\'out\'\>"
 							+ "	<td colspan='2'>"
-							+ "		<b>"+data.linkMans[i]+"</b>"
-							+ "	</td>"
-							+ "</tr>"
+							+ "		<b>"
+							+ data.linkMans[i]
+							+ "</b>" + "	</td>" + "</tr>"
 					$("#assignUserTable").append(tr);
 				}
 			}, "json");
 }
-//改变选择人
-function changeUser(obj){
+// 改变选择人
+function changeUser(obj) {
 	queryAssignUser($(obj).val());
 }
 // 选择人员

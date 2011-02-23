@@ -73,8 +73,13 @@ function openTelephoneDiv(telphone, username) {
 					alert("内容不能为空,并且长度不能大于200！");
 					return;
 				}
-				$("#sendSmsDIV").dialog("close");
-				$("#sendSmsForm").submit();
+				$.post("taskManager/task!sendMsg.php", {
+							telphone : $("#telphoneID").val(),
+							content : $("#contentID").text()
+						}, function(data) {
+							$("#sendSmsDIV").dialog("close");
+							alert(data.creditTaskVO.message);
+						}, "json");
 			}
 		},
 		close : function(event, ui) {
@@ -208,10 +213,14 @@ function showItemUrl(itemUrl, updatePrice, grade, comment, address) {
 	for (var i = 0; i < itemUrls.length; i++) {
 		var tr = $("<tr>" + "<td>" + "地址" + (i + 1) + "：" + "	</td>" + "	<td>"
 				+ "	<input  type='text' readonly='readonly'  value="
-				+ itemUrls[i] + " style='width: 200px'/>" + "		</td>" + "	<td>"
+				+ itemUrls[i] + " style='width: 200px'/>" + "		</td>"
+				+ "	<td  valign='middle'>"
 				+ "	<a  href=\"javascript:copyToClipboard(\'" + itemUrls[i]
 				+ "\')\"" + "		style='cursor: pointer;''> <img border='0'"
-				+ "		src='images/renwu-3.png''> </a>" + "</td>" + "</tr>");
+				+ "		src='images/renwu-3.png''> </a>" + "<a href='"
+				+ itemUrls[i] + "' target='_blank' xalt_txt='点此直接打开商品地址'>"
+				+ "<img border='0' src='images/open.gif'>" + "</a>" + "</td>"
+				+ "</tr>");
 		$("#itemContent").append(tr);
 	}
 	$("#addressDIV").dialog("open");
@@ -249,8 +258,7 @@ function refreshPage() {
 document.onkeydown = function() {
 	if ((window.event.keyCode == 116) || // 屏蔽 F5
 			(window.event.keyCode == 122) || // 屏蔽 F11
-			(window.event.shiftKey && window.event.keyCode == 121) // shift+F10
-	) {
+			(window.event.shiftKey && window.event.keyCode == 121)) {
 		refreshPage();
 		return false;
 	}

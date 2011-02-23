@@ -1602,17 +1602,14 @@ public class CreditTaskService extends BaseService {
 		// 任务仓库
 		if (creditTaskVO.getRepository()) {
 			CreditTaskRepositoryEntity creditTaskRepository = new CreditTaskRepositoryEntity();
-			BeanUtils.copyProperties(creditTaskRepository, creditTaskVO);
+			BeanUtils.copyProperties(creditTaskRepository, creditTask);
 			creditTaskRepository.setUser(userEntity);
 			creditTaskRepository.setType(platFormType);
-			creditTaskRepository.setReleaseDot(creditTaskDot);
-			creditTaskRepository
-					.setGoodTimeType(creditTaskVO.getGoodTimeType());
-			if (StringUtils.isBlank(creditTaskVO.getRespositoryName())) {
-				creditTaskRepository.setName(creditTask.getTestID());
-			} else {
+			creditTaskRepository.setSeller(creditTask.getSeller());
+			creditTaskRepository.setAddress(!StringUtils.isBlank(creditTaskVO
+					.getAddress()));
+			if (!StringUtils.isBlank(creditTaskVO.getRespositoryName())) {
 				creditTaskRepository.setName(creditTaskVO.getRespositoryName());
-
 			}
 			creditTaskRepositoryDAO.save(creditTaskRepository);
 		}
@@ -1878,17 +1875,20 @@ public class CreditTaskService extends BaseService {
 		String content = getByParam("content");
 		UserEntity userEntity = getLoginUserEntity(userDAO);
 		Double money = 0.1 * ((content.length() + 69) / 70);
+		String result = "";
 		if (userEntity.getMoney() < money) {
-			putAlertMsg("您当前的余额不足！");
+			creditTaskVO.setExecuteFlag("error");
+			creditTaskVO.setMessage("发送失败，您当前的余额不足！");
 		} else {
 			MsgUtils.sendMsg(telphone, content);
 			userEntity.setMoney(ArithUtils.sub(userEntity.getMoney(), money));
 			logMoneyCapital(userDAO, 0 - money, "发送长度为" + content.length()
 					+ "的短信花费" + money + "元", userEntity);
 			updateUserLoginInfo(userEntity);
-			putAlertMsg("发送成功！");
+			creditTaskVO.setExecuteFlag("success");
+			creditTaskVO.setMessage("发送成功！");
 		}
-		return JUMP;
+		return JSON;
 	}
 
 	/**

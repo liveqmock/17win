@@ -27,6 +27,11 @@ public class CreditTaskRepositoryEntity extends BaseEntity {
 	// 价格
 	@Column(name = "MONEY_", nullable = false)
 	private Double money;
+
+	// 任务类型(1 虚拟任务 2，实体任务 3，套餐任务)
+	@Column(name = "TASK_TYPE", columnDefinition = "CHAR(1)", nullable = false)
+	private String taskType;
+
 	// 任务保护
 	@Column(name = "PROTECT_", nullable = false)
 	private Boolean protect;
@@ -45,9 +50,6 @@ public class CreditTaskRepositoryEntity extends BaseEntity {
 	// 发布次数
 	@Column(name = "dispathCount_")
 	private Integer dispathCount = 0;
-	// 好评时间类型(1 马上 2:24小时 3:48小时 ，4：72小时，5 ：自定义)
-	@Column(name = "GOOD_TIME_TYPE_", columnDefinition = "CHAR(1)", nullable = false)
-	private String goodTimeType;
 	// 动态评分(x:默认好评，x:全部5分 ...)
 	@Column(name = "GRADE_", length = 20, nullable = false)
 	private String grade;
@@ -60,9 +62,9 @@ public class CreditTaskRepositoryEntity extends BaseEntity {
 	private Double releaseDot;
 
 	// 发布人的卖家号
-	@Column(name = "SELLER_ID_", nullable = false)
-	private Long sellerID;
-
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "SELLER_ID_")
+	private SellerEntity seller;
 	// 是否地址
 	@Column(name = "ADDRESS_", nullable = false)
 	private Boolean address;
@@ -147,14 +149,6 @@ public class CreditTaskRepositoryEntity extends BaseEntity {
 		this.intervalHour = intervalHour;
 	}
 
-	public Long getSellerID() {
-		return sellerID;
-	}
-
-	public void setSellerID(Long sellerID) {
-		this.sellerID = sellerID;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -169,14 +163,6 @@ public class CreditTaskRepositoryEntity extends BaseEntity {
 
 	public void setAddress(Boolean address) {
 		this.address = address;
-	}
-
-	public String getGoodTimeType() {
-		return goodTimeType;
-	}
-
-	public void setGoodTimeType(String goodTimeType) {
-		this.goodTimeType = goodTimeType;
 	}
 
 	public Date getLastDispathDate() {
@@ -233,6 +219,22 @@ public class CreditTaskRepositoryEntity extends BaseEntity {
 
 	public void setCommon(String common) {
 		this.common = common;
+	}
+
+	public String getTaskType() {
+		return taskType;
+	}
+
+	public void setTaskType(String taskType) {
+		this.taskType = taskType;
+	}
+
+	public SellerEntity getSeller() {
+		return seller;
+	}
+
+	public void setSeller(SellerEntity seller) {
+		this.seller = seller;
 	}
 
 }

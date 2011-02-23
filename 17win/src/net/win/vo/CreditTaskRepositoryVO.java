@@ -28,6 +28,8 @@ public class CreditTaskRepositoryVO extends BaseVO {
 	private Integer intervalHour;
 	// 发布人的卖家号
 	private Long sellerID;
+	
+	private String taskType;
 
 	// 发布点
 	private Double releaseDot;
@@ -201,6 +203,14 @@ public class CreditTaskRepositoryVO extends BaseVO {
 
 	public void setAssignUser(String assignUser) {
 		this.assignUser = assignUser;
+	}
+
+	public String getTaskType() {
+		return taskType;
+	}
+
+	public void setTaskType(String taskType) {
+		this.taskType = taskType;
 	}
 
 }

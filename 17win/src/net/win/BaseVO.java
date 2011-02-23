@@ -10,6 +10,10 @@ public class BaseVO {
 
 	private Boolean checkFlag = true;
 
+	// ajax调用
+	private String executeFlag = "";
+	private String message = "";
+
 	public Boolean getCheckFlag() {
 		return checkFlag;
 	}
@@ -68,5 +72,21 @@ public class BaseVO {
 
 	public void setDataCount(Integer dataCount) {
 		this.dataCount = dataCount;
+	}
+
+	public String getExecuteFlag() {
+		return executeFlag;
+	}
+
+	public void setExecuteFlag(String executeFlag) {
+		this.executeFlag = executeFlag;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 }

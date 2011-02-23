@@ -1,3 +1,15 @@
+$(document).ready(function() {
+			$("#addressDIV").dialog({
+						autoOpen : false,
+						draggable : false,
+						hide : 'slide',
+						modal : true,
+						resizable : false,
+						show : 'slide',
+						width : 400
+					});
+		});
+
 // 继续发布任务
 function releaseRepository(id) {
 	var platformType = $("#platformType").val();
@@ -54,6 +66,48 @@ function jumpPage() {
 	query(page);
 }
 
+// 复制地址
+function showItemUrl(itemUrl, updatePrice, grade, comment, address) {
+	$("#updatePrice").text(updatePrice == "true" ? "需修改价" : "不需改价");
+	$("#grade").text(grade);
+	$("#comment").text((comment == null || comment == "") ? "无" : comment);
+	$("#address").text((address == "true") ? "是" : "否");
+	$("#itemContent").empty();
+	var itemUrls = itemUrl.split(",");
+	for (var i = 0; i < itemUrls.length; i++) {
+		var tr = $("<tr>" + "<td>" + "地址" + (i + 1) + "：" + "	</td>" + "	<td>"
+				+ "	<input  type='text' readonly='readonly'  value="
+				+ itemUrls[i] + " style='width: 200px'/>" + "		</td>"
+				+ "	<td  valign='middle'>"
+				+ "	<a  href=\"javascript:copyToClipboard(\'" + itemUrls[i]
+				+ "\')\"" + "		style='cursor: pointer;''> <img border='0'"
+				+ "		src='images/renwu-3.png''> </a>" + "<a href='"
+				+ itemUrls[i] + "' target='_blank' xalt_txt='点此直接打开商品地址'>"
+				+ "<img border='0' src='images/open.gif'>" + "</a>" + "</td>"
+				+ "</tr>");
+		$("#itemContent").append(tr);
+	}
+	$("#addressDIV").dialog("open");
+}
+// 直接跳转地址
+function openItemUrl(itemUrl, updatePrice, grade, comment, address) {
+	var itemUrls = itemUrl.split(",");
+	if (itemUrls.length == 1) {
+		window.open(itemUrls[0], "_blank");
+	} else {
+		showItemUrl(itemUrl, updatePrice, grade, comment, address);
+	}
+}
+// 直接跳转地址
+function openItemUrl(itemUrl, updatePrice, grade, comment, address, status) {
+	var itemUrls = itemUrl.split(",");
+	if (itemUrls.length == 1 && status != "2" && status != "-2") {
+		window.open(itemUrls[0], "_blank");
+	} else {
+		showItemUrl(itemUrl, updatePrice, grade, comment, address, status);
+	}
+}
+
 // 查询
 function query(page) {
 	var pageCount = parseInt($("#pageCount").val());
@@ -62,6 +116,5 @@ function query(page) {
 		alert("页数必须在1-" + pageCount + "之间！");
 		return;
 	}
-	window.location.href = "taskRepositoryManager/taskRepository!queryRepositories.php"
-			+ "?platformType=" + platformType
+	$("#mainForm").submit();
 }

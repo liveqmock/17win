@@ -110,6 +110,7 @@ public class CreditTaskEntity extends BaseEntity {
 	@JoinColumn(name = "BUYER_ID_")
 	private BuyerEntity buyer;
 
+
 	public String getType() {
 		return type;
 	}
@@ -317,5 +318,6 @@ public class CreditTaskEntity extends BaseEntity {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+
 
 }

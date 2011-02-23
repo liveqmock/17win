@@ -284,10 +284,12 @@
 										<s:property value="#task.testID" />
 										<br>
 										<s:if test="#task.assignUser!=null && #task.assignUser!=''">
-											<img src="images/tdTask.gif" alt="特定任务" />
+											<img src="images/tdTask.gif"
+												alt="特定任务，接手人是<s:property value="#task.assignUser"/>" />
 										</s:if>
 										<s:else>
-											<img src="images/ptTask.jpg" alt="普通任务" />
+											<img src="images/ptTask.jpg"
+												alt="普通任务，接手人是<s:property value="#task.jsUsername"/>" />
 										</s:else>
 										<s:date name="#task.releaseDate" format="yyyy-MM-dd HH:mm:ss" />
 									</td>
@@ -345,29 +347,32 @@
 													href="javascript:openTelephoneDiv('<s:property value="#task.jsTelphone" />','<s:property value="#task.fbUsername" />')"><img
 														alt="发送手机短信" style="vertical-align: middle;"
 														src="images/sendTelphone.png"> </a>
+												<!-- 
 												<a
 													href="javascript:openTelephoneDiv('<s:property value="#task.jsTelphone" />','<s:property value="#task.fbUsername" />')"><img
 														alt alt="发送站内信" style="vertical-align: middle;"
 														src="images/sms.gif"> </a>
-												<img border="0" class="qqConnection"
-													style="vertical-align: middle;" class="tip"
-													src="http://amos1.taobao.com/online.ww?v=2&uid=<s:property value="#task.jsWW" />&s=2">
-												<div class="tooltip"
-													style="background-image: url('images/blackArrowBig.png');">
-													<table style="margin-top: 8px">
-														<tr>
-															<td align="center" style="color: #ffffff">
-																<a style="color: white; text-decoration: underline;"
-																	target="_blank"
-																	href="http://amos1.taobao.com/msg.ww?v=2&uid=<s:property value="#task.jsWW" />&s=2">【临时会话】</a>
-																<br>
-																<a style="color: white; text-decoration: underline;"
-																	onclick="copyToClipboard('<s:property value="#task.jsWW" />');"
-																	href="javascript:void(0)">复制旺旺号</a>
-															</td>
-														</tr>
-													</table>
-												</div>
+														 -->
+												<s:if test="#task.jsWW!=null && #task.jsWW!=''">
+													<img border="0" class="qqConnection"
+														style="vertical-align: middle;" class="tip"
+														src="http://amos1.taobao.com/online.ww?v=2&uid=<s:property value="#task.jsWW" />&s=2">
+													<div class="tooltip"
+														style="background-image: url('images/blackArrowBig.png');">
+														<table style="margin-top: 8px">
+															<tr>
+																<td align="center" style="color: #ffffff">
+																	<a style="color: white; text-decoration: underline;"
+																		href="javascript:callWW('http://amos1.taobao.com/msg.ww?v=2&uid=<s:property value="#task.jsWW" />&s=2')">【临时会话】</a>
+																	<br>
+																	<a style="color: white; text-decoration: underline;"
+																		onclick="copyToClipboard('<s:property value="#task.jsWW" />');"
+																		href="javascript:void(0)">复制旺旺号</a>
+																</td>
+															</tr>
+														</table>
+													</div>
+												</s:if>
 												<br>
 												<a
 													style="color: white; text-decoration: underline; cursor: pointer;"
@@ -593,37 +598,34 @@
 		</s:form>
 		<!-- 发送手机短信层 -->
 		<div id="sendSmsDIV" title="发送手机短信" style="display: none">
-			<s:form action="taskManager/task!sendMsg.php" target="_blank"
-				id="sendSmsForm" theme="simple">
-				<table cellpadding="0" cellspacing="0" border="0" width="100%">
-					<tr>
-						<td nowrap="nowrap">
-							手机号码：
-						</td>
-						<td>
-							<input name="telphone" id="telphoneID" readonly="readonly"
-								maxlength="50">
-						</td>
-					</tr>
-					<tr>
-						<td valign="top" nowrap="nowrap">
-							发送内容：
-						</td>
-						<td>
-							<textarea name="content" cols="40" rows="4" id="contentID"></textarea>
-						</td>
-					</tr>
-					<tr>
-						<td valign="top" nowrap="nowrap">
-							&nbsp;
-						</td>
-						<td>
-							<span id="showTip">0</span>个字
-							<font color="red">（70个字收取0.1元）</font>
-						</td>
-					</tr>
-				</table>
-			</s:form>
+			<table cellpadding="0" cellspacing="0" border="0" width="100%">
+				<tr>
+					<td nowrap="nowrap">
+						手机号码：
+					</td>
+					<td>
+						<input name="telphone" id="telphoneID" readonly="readonly"
+							maxlength="50">
+					</td>
+				</tr>
+				<tr>
+					<td valign="top" nowrap="nowrap">
+						发送内容：
+					</td>
+					<td>
+						<textarea name="content" cols="40" rows="4" id="contentID"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td valign="top" nowrap="nowrap">
+						&nbsp;
+					</td>
+					<td>
+						<span id="showTip">0</span>个字
+						<font color="red">（70个字收取0.1元）</font>
+					</td>
+				</tr>
+			</table>
 		</div>
 		<!-- 显示地址 -->
 		<div id="addressDIV" title="发布方提醒" style="display: none">
@@ -659,7 +661,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td>
+						<td valign="top">
 							自定义评语：
 						</td>
 						<td>
@@ -670,7 +672,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td>
+						<td valign="top" nowrap="nowrap">
 							收货地址：
 						</td>
 						<td>

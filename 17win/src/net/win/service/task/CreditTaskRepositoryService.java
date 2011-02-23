@@ -56,8 +56,7 @@ public class CreditTaskRepositoryService extends BaseService {
 					.get(taskReId);
 			UserEntity user = creditTaskRepositoryEntity.getUser();
 
-			SellerEntity seller = sellerDAO.get(creditTaskRepositoryEntity
-					.getSellerID());
+			SellerEntity seller = creditTaskRepositoryEntity.getSeller();
 
 			if (!user.getId().equals(getLoginUser().getId())) {
 				WinUtils.throwIllegalityException(getLoginUser().getUsername()
@@ -87,7 +86,7 @@ public class CreditTaskRepositoryService extends BaseService {
 			creditTaskEntity.setReleaseDot(creditTaskRepositoryEntity
 					.getReleaseDot());
 			creditTaskEntity.setMoney(creditTaskRepositoryEntity.getMoney());
-			 
+
 			creditTaskEntity.setAddtionMoney(creditTaskRepositoryEntity
 					.getAddtionMoney());
 			creditTaskEntity.setAddtionReleaseDot(creditTaskRepositoryEntity
@@ -95,15 +94,15 @@ public class CreditTaskRepositoryService extends BaseService {
 
 			creditTaskEntity
 					.setProtect(creditTaskRepositoryEntity.getProtect());
-//			// 状态 到时间
-//			if (!creditTaskEntity.getGoodTimeType().equals("5")) {
-//				creditTaskEntity.setIntervalHour(StrategyUtils
-//						.getIntervalHourByGoodType(creditTaskEntity
-//								.getGoodTimeType()));
-//			} else {
-//				creditTaskEntity.setIntervalHour(creditTaskRepositoryEntity
-//						.getIntervalHour());
-//			}
+			// // 状态 到时间
+			// if (!creditTaskEntity.getGoodTimeType().equals("5")) {
+			// creditTaskEntity.setIntervalHour(StrategyUtils
+			// .getIntervalHourByGoodType(creditTaskEntity
+			// .getGoodTimeType()));
+			// } else {
+			// creditTaskEntity.setIntervalHour(creditTaskRepositoryEntity
+			// .getIntervalHour());
+			// }
 			// 有地址
 			if (creditTaskRepositoryEntity.getAddress()) {
 				creditTaskEntity.setAddress(seller.getAddress() + " "
@@ -223,14 +222,14 @@ public class CreditTaskRepositoryService extends BaseService {
 			return "operationValidate";
 		} else {
 			putTaskShowType("6");
-			String hqlCount = "select count(*) from CreditTaskRepositoryEntity as _taskRe ,SellerEntity as _seller"
-					+ " where _seller.id=_taskRe.sellerID and  _taskRe.type=:platformType and _taskRe.user.id=:userId";
+			String hqlCount = "select count(*) from CreditTaskRepositoryEntity as _taskRe "
+					+ " where  _taskRe.type=:platformType and _taskRe.user.id=:userId";
 			Long count = (Long) creditTaskRepositoryDAO.uniqueResultObject(
 					hqlCount, new String[] { "platformType", "userId" },
 					new Object[] { platformType, getLoginUser().getId() });
 			if (count > 0) {
-				String hql = "select _taskRe ,_seller.name from CreditTaskRepositoryEntity as _taskRe ,SellerEntity as _seller"
-						+ " where _seller.id=_taskRe.sellerID and  _taskRe.type=:platformType and _taskRe.user.id=:userId";
+				String hql = "select _taskRe ,_taskRe.seller.name from CreditTaskRepositoryEntity as _taskRe "
+						+ " where    _taskRe.type=:platformType and _taskRe.user.id=:userId";
 				List<Object[]> resultTemp = creditTaskRepositoryDAO.list(hql,
 						new String[] { "platformType", "userId" },
 						new Object[] { platformType, getLoginUser().getId() });

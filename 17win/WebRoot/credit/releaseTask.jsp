@@ -106,33 +106,6 @@
 															<table width="680" border="0" align="center" height="500"
 																cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
 																<tr>
-																	<td colspan="5" align="center">
-																		从任务仓库中选择任务：
-																		<s:if test="#request.resultTaskReps!=null">
-																			<s:select id="resultTaskRepsId"
-																				title="选择任务仓库里面的任务会动态修改下面的属性！"
-																				list="#request.resultTaskReps" listKey="id"
-																				listValue="name" headerKey=""
-																				headerValue="--请选择任务仓库--">
-																			</s:select>
-																		</s:if>
-																		<s:else>
-																			<select>
-																				<option>
-																					任务仓库没有数据
-																				</option>
-																			</select>
-																		</s:else>
-																		<input value="进入任务仓库" style="cursor: pointer;"
-																			id="goTaskRe" class="btnClass" type="button">
-																	</td>
-																</tr>
-																<tr>
-																	<td colspan="5">
-																		<hr color="#DDEDFA">
-																	</td>
-																</tr>
-																<tr>
 																	<td align="right" valign="top">
 																		商品地址：
 																	</td>
@@ -489,7 +462,8 @@
 				</td>
 			</tr>
 		</table>
-		<div id="selectUserDiv" onmouseout="moveOutCloseDisplay(event,'selectUserDiv');"
+		<div id="selectUserDiv"
+			onmouseout="moveOutCloseDisplay(event,'selectUserDiv');"
 			style="display: none; position: absolute; z-index: 999; border: 1px solid; border-color: #000000; background: #EEF7FB; width: 155px; height: 200px; overflow-y: auto; overflow-x: no">
 			<table style="width: 99%;" cellpadding="0" cellspacing="0">
 				<thead>
