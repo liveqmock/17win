@@ -5,6 +5,7 @@ import javax.annotation.Resource;
 import net.win.BaseAction;
 import net.win.service.task.CreditTaskRepositoryService;
 import net.win.vo.CreditTaskRepositoryVO;
+import net.win.vo.CreditTaskVO;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
@@ -26,20 +27,11 @@ public class CreditTaskRepositiryAction extends BaseAction {
 
 	private CreditTaskRepositoryVO creditTaskRepositoryVO = new CreditTaskRepositoryVO();
 
+	private CreditTaskVO creditTaskVO = new CreditTaskVO();
+
 	@Action("/taskRepository")
 	public String execute() throws Exception {
 		return INPUT;
-	}
-
-	/**
-	 * 发布任务
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	public String releaseRepository() throws Exception {
-		return creditTaskRepositoryService
-				.insertRepository(creditTaskRepositoryVO);
 	}
 
 	/**

@@ -7,19 +7,16 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import net.win.BaseService;
-import net.win.TaskMananger;
 import net.win.dao.CreditTaskDAO;
 import net.win.dao.CreditTaskRepositoryDAO;
 import net.win.dao.SellerDAO;
 import net.win.dao.UserDAO;
-import net.win.entity.CreditTaskEntity;
 import net.win.entity.CreditTaskRepositoryEntity;
 import net.win.entity.SellerEntity;
 import net.win.entity.UserEntity;
-import net.win.utils.ArithUtils;
-import net.win.utils.StrategyUtils;
 import net.win.utils.WinUtils;
 import net.win.vo.CreditTaskRepositoryVO;
+import net.win.vo.CreditTaskVO;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -36,127 +33,7 @@ public class CreditTaskRepositoryService extends BaseService {
 	@Resource
 	private SellerDAO sellerDAO;
 
-	/**
-	 * 发布任务
-	 * 
-	 * @param creditTaskRepositoryVO
-	 * @return
-	 * @throws Exception
-	 */
-	public String insertRepository(CreditTaskRepositoryVO creditTaskRepositoryVO)
-			throws Exception {
-		String platformType = getPlatformType();
-		if (!getLoginUser().getOperationCodeStatus()) {
-			putByRequest("preURL", getRequset().getRequestURL() + "?"
-					+ getRequset().getQueryString());
-			return "operationValidate";
-		} else {
-			Long taskReId = Long.parseLong(getByParam("taskReId"));
-			CreditTaskRepositoryEntity creditTaskRepositoryEntity = creditTaskRepositoryDAO
-					.get(taskReId);
-			UserEntity user = creditTaskRepositoryEntity.getUser();
-
-			SellerEntity seller = creditTaskRepositoryEntity.getSeller();
-
-			if (!user.getId().equals(getLoginUser().getId())) {
-				WinUtils.throwIllegalityException(getLoginUser().getUsername()
-						+ " 试图越过【任务仓库的发布任务】操作.");
-			}
-			// 验证 金钱
-			if (creditTaskRepositoryEntity.getMoney()
-					+ creditTaskRepositoryEntity.getAddtionMoney() > user
-					.getMoney()) {
-				putJumpSelfPage("taskRepositoryManager/taskRepository!queryRepositories.php?platformType="
-						+ platformType);
-				putAlertMsg("您当前的余额不够发布此任务！");
-				return JUMP;
-			}
-			if (creditTaskRepositoryEntity.getReleaseDot()
-					+ creditTaskRepositoryEntity.getAddtionReleaseDot() > user
-					.getReleaseDot()) {
-				putJumpSelfPage("taskRepositoryManager/taskRepository!queryRepositories.php?platformType="
-						+ platformType);
-				putAlertMsg("您当前的发布点不够发布此任务！");
-				return JUMP;
-			}
-
-			// 发布任务
-			CreditTaskEntity creditTaskEntity = new CreditTaskEntity();
-			creditTaskEntity.setReleaseDate(new Date());
-			creditTaskEntity.setReleaseDot(creditTaskRepositoryEntity
-					.getReleaseDot());
-			creditTaskEntity.setMoney(creditTaskRepositoryEntity.getMoney());
-
-			creditTaskEntity.setAddtionMoney(creditTaskRepositoryEntity
-					.getAddtionMoney());
-			creditTaskEntity.setAddtionReleaseDot(creditTaskRepositoryEntity
-					.getAddtionReleaseDot());
-
-			creditTaskEntity
-					.setProtect(creditTaskRepositoryEntity.getProtect());
-			// // 状态 到时间
-			// if (!creditTaskEntity.getGoodTimeType().equals("5")) {
-			// creditTaskEntity.setIntervalHour(StrategyUtils
-			// .getIntervalHourByGoodType(creditTaskEntity
-			// .getGoodTimeType()));
-			// } else {
-			// creditTaskEntity.setIntervalHour(creditTaskRepositoryEntity
-			// .getIntervalHour());
-			// }
-			// 有地址
-			if (creditTaskRepositoryEntity.getAddress()) {
-				creditTaskEntity.setAddress(seller.getAddress() + " "
-						+ StrategyUtils.makeAddress());
-			} else {
-				creditTaskEntity.setAddress("无");
-			}
-			creditTaskEntity.setTestID(TaskMananger.getInstance()
-					.generateTaskID());
-			creditTaskEntity.setStatus("1");
-			creditTaskEntity.setUpdatePrice(creditTaskRepositoryEntity
-					.getUpdatePrice());
-			creditTaskEntity
-					.setItemUrl(creditTaskRepositoryEntity.getItemUrl());
-			creditTaskEntity.setType(creditTaskRepositoryEntity.getType());
-			creditTaskEntity.setSeller(seller);
-			creditTaskEntity.setReleasePerson(user);
-			creditTaskEntity.setGrade(creditTaskRepositoryEntity.getGrade());
-			creditTaskEntity.setComment(creditTaskRepositoryEntity.getCommon());
-			creditTaskEntity.setWaybill(StrategyUtils.makeWaybill());
-			creditTaskEntity.setAssignUser(creditTaskRepositoryEntity
-					.getAssignUser());
-			creditTaskDAO.save(creditTaskEntity);
-			// 改变人
-			user.setMoney(ArithUtils.sub(user.getMoney(),
-					creditTaskRepositoryEntity.getMoney()
-							+ creditTaskRepositoryEntity.getAddtionMoney()));
-			user
-					.setReleaseDot(ArithUtils.sub(user.getReleaseDot(),
-							creditTaskRepositoryEntity.getReleaseDot()
-									+ creditTaskRepositoryEntity
-											.getAddtionReleaseDot()));
-
-			// 仓库信息
-			creditTaskRepositoryEntity
-					.setDispathCount(creditTaskRepositoryEntity
-							.getDispathCount() + 1);
-			creditTaskRepositoryEntity.setLastDispathDate(new Date());
-			updateUserLoginInfo(user);
-			putJumpSelfPage("taskRepositoryManager/taskRepository!queryRepositories.php?platformType="
-					+ platformType);
-
-			logMoneyCapital(
-					userDAO,
-					0 - (creditTaskRepositoryEntity.getMoney() + creditTaskRepositoryEntity
-							.getAddtionMoney()), "从仓库发布任务", user);
-
-			logDotCapital(userDAO, 0 - (creditTaskRepositoryEntity
-					.getReleaseDot() + creditTaskRepositoryEntity
-					.getAddtionReleaseDot()), "从仓库发布任务", user);
-			putAlertMsg("发布成功！");
-			return JUMP;
-		}
-	}
+	 
 
 	/**
 	 * 删除

@@ -1608,8 +1608,8 @@ public class CreditTaskService extends BaseService {
 			creditTaskRepository.setSeller(creditTask.getSeller());
 			creditTaskRepository.setAddress(!StringUtils.isBlank(creditTaskVO
 					.getAddress()));
-			if (!StringUtils.isBlank(creditTaskVO.getRespositoryName())) {
-				creditTaskRepository.setName(creditTaskVO.getRespositoryName());
+			if (StringUtils.isBlank(creditTaskVO.getRespositoryName())) {
+				creditTaskRepository.setName(creditTask.getTestID());
 			}
 			creditTaskRepositoryDAO.save(creditTaskRepository);
 		}

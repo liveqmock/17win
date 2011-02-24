@@ -203,11 +203,13 @@ function jumpPage() {
 	query(page);
 }
 // 复制地址
-function showItemUrl(itemUrl, updatePrice, grade, comment, address) {
+function showItemUrl(itemUrl, updatePrice, grade, comment, address, waybill) {
 	$("#updatePrice").text(updatePrice == "true" ? "需修改价" : "不需改价");
 	$("#grade").text(grade);
 	$("#comment").text((comment == null || comment == "") ? "无" : comment);
 	$("#address").text((address == null || address == "") ? "无" : address);
+	$("#waybill").text(waybill);
+
 	$("#itemContent").empty();
 	var itemUrls = itemUrl.split(",");
 	for (var i = 0; i < itemUrls.length; i++) {
@@ -226,12 +228,12 @@ function showItemUrl(itemUrl, updatePrice, grade, comment, address) {
 	$("#addressDIV").dialog("open");
 }
 // 直接跳转地址
-function openItemUrl(itemUrl, updatePrice, grade, comment, address) {
+function openItemUrl(itemUrl, updatePrice, grade, comment, address, waybill) {
 	var itemUrls = itemUrl.split(",");
 	if (itemUrls.length == 1) {
 		window.open(itemUrls[0], "_blank");
 	} else {
-		showItemUrl(itemUrl, updatePrice, grade, comment, address);
+		showItemUrl(itemUrl, updatePrice, grade, comment, address, waybill);
 	}
 }
 // 条件查询

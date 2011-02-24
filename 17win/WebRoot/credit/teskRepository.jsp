@@ -64,7 +64,10 @@
 									商品信息
 								</td>
 								<td nowrap="nowrap" align="center">
-									上次发布时间
+									好评信息
+								</td>
+								<td nowrap="nowrap" align="center">
+									改价/地址
 								</td>
 								<td nowrap="nowrap" align="center">
 									发布次数
@@ -108,21 +111,38 @@
 									</td>
 									<td valign="middle" align="center">
 										<a style="cursor: pointer;"
-											href="javascript:showItemUrl('<s:property value="#task.itemUrl" />','<s:property value="#task.updatePrice" />','<s:property value="#task.grade" />','<s:property value="#task.comment" />','<s:property value="#task.address" />');">
+											href="javascript:showItemUrl('<s:property value="#task.itemUrl" />');">
 											<img src="images/renwu-3.png" border="0"> </a>
 										<br>
 										<a alt="点此直接打开商品地址"
-											href="javascript:openItemUrl('<s:property value="#task.itemUrl" />','<s:property value="#task.updatePrice" />','<s:property value="#task.grade" />','<s:property value="#task.comment" />','<s:property value="#task.address" />');">
+											href="javascript:openItemUrl('<s:property value="#task.itemUrl" />');">
 											<img src="images/open.gif" border="0"> </a>
 									</td>
 									<td valign="middle" align="center">
-										<s:if test="#task.lastDispathDate!=null">
-											<s:date name="#task.lastDispathDate"
-												format="yyyy-MM-dd HH-mm-ss" />
+										<s:property value="#task.grade" />
+										<br>
+										<s:if test="#task.comment==null || #task.comment==''">
+											无
 										</s:if>
 										<s:else>
-									还没发送过
-								</s:else>
+										评语:<s:property value="#task.comment" />
+										</s:else>
+									</td>
+									<td valign="middle" align="center">
+										<s:if test="#task.updatePrice">
+											需修改价
+										</s:if>
+										<s:else>
+											不需改价
+										</s:else>
+										<Br>
+										是否自动生成地址：
+										<s:if test="#task.address">
+											是
+										</s:if>
+										<s:else>
+											否
+										</s:else>
 									</td>
 
 									<td valign="middle" align="center">
@@ -199,71 +219,8 @@
 			</div>
 		</s:form>
 		<!-- 显示地址 -->
-		<div id="addressDIV" title="发布方提醒" style="display: none">
+		<div id="addressDIV" title="商品地址" style="display: none">
 			<table cellpadding="0" cellspacing="0" border="0" width="100%">
-				<thead>
-					<tr>
-						<td colspan="99">
-							<font style="font: 14px;" color="red"><b> 您的要求:</b> </font>
-						</td>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td valign="top"  nowrap="nowrap">
-							是否修改价格：
-						</td>
-						<td width="70%">
-							<span id="updatePrice"></span>
-						</td>
-						<td>
-							&nbsp;
-						</td>
-					</tr>
-					<tr>
-						<td valign="top"  nowrap="nowrap">
-							好评要求：
-						</td>
-						<td>
-							<span id="grade"></span>
-						</td>
-						<td>
-							&nbsp;
-						</td>
-					</tr>
-					<tr>
-						<td valign="top"  nowrap="nowrap">
-							自定义评语：
-						</td>
-						<td>
-							<span id="comment"></span>
-						</td>
-						<td>
-							&nbsp;
-						</td>
-					</tr>
-					<tr>
-						<td valign="top"  nowrap="nowrap">
-							是否生成收货地址：
-						</td>
-						<td>
-							<span id="address"></span>
-						</td>
-						<td>
-							&nbsp;
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			<hr>
-			<table cellpadding="0" cellspacing="0" border="0" width="100%">
-				<thead>
-					<tr>
-						<td colspan="3" align="sleft">
-							<font style="font: 14px;" color="red"><b> 商品地址：</b> </font>
-						</td>
-					</tr>
-				</thead>
 				<tbody id="itemContent">
 				</tbody>
 			</table>

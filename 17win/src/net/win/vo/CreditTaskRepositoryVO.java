@@ -28,7 +28,7 @@ public class CreditTaskRepositoryVO extends BaseVO {
 	private Integer intervalHour;
 	// 发布人的卖家号
 	private Long sellerID;
-	
+
 	private String taskType;
 
 	// 发布点
@@ -41,8 +41,8 @@ public class CreditTaskRepositoryVO extends BaseVO {
 
 	// 是否地址
 	private Boolean address;
-	// 描述
-	private String desc;
+
+	private String comment;
 
 	// 现实
 	// 发布人的卖家号名字
@@ -140,15 +140,6 @@ public class CreditTaskRepositoryVO extends BaseVO {
 	public void setGoodTimeType(String goodTimeType) {
 		this.goodTimeType = goodTimeType;
 	}
-
-	public String getDesc() {
-		return desc;
-	}
-
-	public void setDesc(String desc) {
-		this.desc = desc;
-	}
-
 	public Date getLastDispathDate() {
 		return lastDispathDate;
 	}
@@ -211,6 +202,14 @@ public class CreditTaskRepositoryVO extends BaseVO {
 
 	public void setTaskType(String taskType) {
 		this.taskType = taskType;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 
 }

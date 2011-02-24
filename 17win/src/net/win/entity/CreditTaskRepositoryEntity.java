@@ -24,6 +24,9 @@ public class CreditTaskRepositoryEntity extends BaseEntity {
 	// 类型 ( 1:淘宝，2：拍拍，3有啊)
 	@Column(name = "TYPE_", columnDefinition = "CHAR(1)", nullable = false)
 	private String type;
+	// 好评短语
+	@Column(name = "COMMENT_", length = 255)
+	private String comment;
 	// 价格
 	@Column(name = "MONEY_", nullable = false)
 	private Double money;
@@ -68,10 +71,6 @@ public class CreditTaskRepositoryEntity extends BaseEntity {
 	// 是否地址
 	@Column(name = "ADDRESS_", nullable = false)
 	private Boolean address;
-
-	// 描述
-	@Column(name = "COMMON_", length = 255)
-	private String common;
 
 	// 附加金额、
 	@Column(name = "ADDTATION_MONEY", nullable = false)
@@ -213,14 +212,6 @@ public class CreditTaskRepositoryEntity extends BaseEntity {
 		this.assignUser = assignUser;
 	}
 
-	public String getCommon() {
-		return common;
-	}
-
-	public void setCommon(String common) {
-		this.common = common;
-	}
-
 	public String getTaskType() {
 		return taskType;
 	}
@@ -235,6 +226,14 @@ public class CreditTaskRepositoryEntity extends BaseEntity {
 
 	public void setSeller(SellerEntity seller) {
 		this.seller = seller;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 
 }

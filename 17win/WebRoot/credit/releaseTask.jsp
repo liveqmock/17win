@@ -403,7 +403,7 @@
 																	<td colspan="2">
 																		<span style="display: none" id="respositoryName">
 																			<s:textfield name="creditTaskVO.respositoryName"
-																				title="任务简单描述，默认为任务ID！" id="itemUrl" maxlength="20"></s:textfield>
+																				title="任务简单描述，默认为任务ID！" maxlength="20"></s:textfield>
 																		</span>
 																		<s:checkbox name="creditTaskVO.repository"
 																			title="放入任务仓库下次方便使用！" id="respository" value="false"

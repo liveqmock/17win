@@ -1,13 +1,5 @@
 var submitFlag = true;
 $(document).ready(function() {
-	// 进入任务仓库
-	$("#goTaskRe").click(function() {
-		var platformType = $("#platformType").val();
-		window.location.href = "taskRepositoryManager/taskRepository!queryRepositories.php?platformType="
-				+ platformType;
-	});
-	// 判断是否取消任务
-	var cancelTaskId = $("#cancelFlagTaskIdHidden").val();
 	// 自定义时间
 	intText("intervalHour1");
 	// 自定义时间
@@ -42,6 +34,24 @@ $(document).ready(function() {
 				// custom opacity setting
 				opacity : 0.7
 
+			});
+	// 仓库
+	$("#respository").bind("click", function() {
+				if ($(this).attr("checked")) {
+					$("#respositoryName").val("");
+					$("#respositoryName").show();
+				} else {
+					$("#respositoryName").hide();
+				}
+			});
+	// 自己想
+	$("#respository").bind("click", function() {
+				if ($(this).attr("checked")) {
+					$("#respositoryName").val("");
+					$("#respositoryName").show();
+				} else {
+					$("#respositoryName").hide();
+				}
 			});
 
 });

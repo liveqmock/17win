@@ -304,11 +304,11 @@
 									</td>
 									<td valign="middle" align="center">
 										<a style="cursor: pointer;"
-											href="javascript:showItemUrl('<s:property value="#task.itemUrl" />','<s:property value="#task.updatePrice" />','<s:property value="#task.grade" />','<s:property value="#task.comment" />','<s:property value="#task.address" />');">
+											href="javascript:showItemUrl('<s:property value="#task.itemUrl" />','<s:property value="#task.updatePrice" />','<s:property value="#task.grade" />','<s:property value="#task.comment" />','<s:property value="#task.address" />','<s:property value="#task.waybill" />');">
 											<img src="images/renwu-3.png" border="0"> </a>
 										<br>
 										<a alt="点此直接打开商品地址"
-											href="javascript:openItemUrl('<s:property value="#task.itemUrl" />','<s:property value="#task.updatePrice" />','<s:property value="#task.grade" />','<s:property value="#task.comment" />','<s:property value="#task.address" />');">
+											href="javascript:openItemUrl('<s:property value="#task.itemUrl" />','<s:property value="#task.updatePrice" />','<s:property value="#task.grade" />','<s:property value="#task.comment" />','<s:property value="#task.address" />','<s:property value="#task.waybill" />');">
 											<img src="images/open.gif" border="0"> </a>
 									</td>
 									<td align="center">
@@ -655,6 +655,17 @@
 						</td>
 						<td>
 							<span id="grade"></span>
+						</td>
+						<td>
+							&nbsp;
+						</td>
+					</tr>
+					<tr>
+						<td>
+							快递单号：
+						</td>
+						<td>
+							<span id="waybill"></span>
 						</td>
 						<td>
 							&nbsp;
