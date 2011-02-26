@@ -23,7 +23,8 @@ import org.springframework.stereotype.Controller;
 @Results( {
 		@Result(name = "input", location = "/logistics/logistics.jsp"),
 		@Result(name = "initLogistics", location = "/logistics/logistics.jsp"),
-		@Result(name = "addLinkTaskMan", location = "/logistics/logistics.jsp"),
+		@Result(name = "initAddLinkTaskMan", location = "/taskLinkMan/addTaskLinkMan.jsp"),
+		@Result(name = "addLinkTaskMan", location = "/taskLinkMan/addTaskLinkMan.jsp"),
 		@Result(name = "logisticsLog", location = "/logistics/logisticsLog.jsp"),
 		@Result(name = "useLogisticsLog", location = "/logistics/useLogisticsLog.jsp"),
 		@Result(name = "queryLogisticsLog", location = "/logistics/titleLogistics.jsp") })
@@ -33,8 +34,6 @@ public class TaskLinkManAction extends BaseAction {
 	private TaskLinkManService taskLinkManService;
 	private TaskLinkManVo taskLinkManVo = new TaskLinkManVo();
 
- 
-
 	public TaskLinkManVo getTaskLinkManVo() {
 		return taskLinkManVo;
 	}
@@ -43,19 +42,9 @@ public class TaskLinkManAction extends BaseAction {
 		this.taskLinkManVo = taskLinkManVo;
 	}
 
-	@Action("/logistics")
+	@Action("/initAddLinkTaskMan")
 	public String execute() throws Exception {
 		return INPUT;
-	}
-
-	/**
-	 * 物流信息
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	public String queryLogisticsLog() throws Exception {
-		return logisticsService.queryLogisticsLog(logisticsVO);
 	}
 
 	/**
@@ -64,52 +53,12 @@ public class TaskLinkManAction extends BaseAction {
 	 * @return
 	 * @throws Exception
 	 */
-	public String insertLogistics() throws Exception {
+	public String initAddLinkTaskMan() throws Exception {
 		return logisticsService.insertLogistics(logisticsVO);
 	}
 
 	public String useLogistics() throws Exception {
 		return logisticsService.updateUseLogistics(logisticsVO);
-	}
-
-	/**
-	 * 删除物流
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	public String deleteLogistics() throws Exception {
-		return logisticsService.deleteLogistics(logisticsVO);
-	}
-
-	/**
-	 * 查找提交物流
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	public String logisticsLog() throws Exception {
-		return logisticsService.logisticsLog(logisticsVO);
-	}
-
-	/**
-	 * 查找使用物流
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	public String useLogisticsLog() throws Exception {
-		return logisticsService.useLogisticsLog(logisticsVO);
-	}
-
-	/**
-	 * 初始化物流
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	public String initLogistics() throws Exception {
-		return logisticsService.initLogistics(logisticsVO);
 	}
 
 }
