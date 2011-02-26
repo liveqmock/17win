@@ -2,7 +2,8 @@ $(document).ready(function() {
 
 		});
 function validateForm() {
-	var expressCompany = $("#expressCompany").val();
+
+	var expressCompany = $("input[name='otherExpress']").val();
 	var waybill = $("#waybill").val();
 
 	var fhdz = $("#fhdz").val();
@@ -18,7 +19,8 @@ function validateForm() {
 	var startDate = $("#sendDate").val();
 	var endDate = $("#arrivalDate").val();
 
-	if (Validater.isBlank(expressCompany)) {
+	if ($("select[name='logisticsVO.logistics.expressCompany']").val() == "-1"
+			&& Validater.isBlank(expressCompany)) {
 		alert("物流公司不能为空");
 		return false;
 	}
@@ -75,18 +77,27 @@ function validateForm() {
 		return false;
 	}
 	// /
-	var releaseInfo=fhdz + " " + fhyb + " " + fhlxr + " " + fhdh;
-	var receieveInfo=shdz + " " + shyb + " " + shlxr + " " + shdh;
-	if(releaseInfo.length>255){
+	var releaseInfo = fhdz + " " + fhyb + " " + fhlxr + " " + fhdh;
+	var receieveInfo = shdz + " " + shyb + " " + shlxr + " " + shdh;
+	if (releaseInfo.length > 255) {
 		alert("发货信息（发货地址+邮编+联系人+电话）长度不能大于255，一般发货信息不会大于这个多，如果确实大于请和客户联系！");
 		return false
 	}
-		if(receieveInfo.length>255){
+	if (receieveInfo.length > 255) {
 		alert("收货信息（收货地址 +邮编+联系人+电话）长度不能大于255，一般发货信息不会大于这个多，如果确实大于请和客户联系！");
 		return false
 	}
 	$("#releaseInfo").val(releaseInfo);
 	$("#receieveInfo").val(receieveInfo);
 	return confirm("请认真审核您的信息，如果被人举报虚假物流信息，我们将严惩！");
+}
 
+function changeExpressCompany(obj) {
+	if ($(obj).val() == "-1") {
+		$("input[name='otherExpress']").attr("disabled", false);
+		$("input[name='otherExpress']").show();
+	} else {
+		$("input[name='otherExpress']").hide();
+		$("input[name='otherExpress']").attr("disabled", true);
+	}
 }

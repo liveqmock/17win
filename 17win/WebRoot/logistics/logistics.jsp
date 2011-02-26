@@ -28,8 +28,8 @@
 		<SCRIPT src="js/aop.js" type=text/javascript></SCRIPT>
 		<SCRIPT src="js/utils.js" type=text/javascript></SCRIPT>
 		<SCRIPT src="logistics/logistics.js" type=text/javascript></SCRIPT>
-		<script src="<%=basePath%>js/My97DatePicker/WdatePicker.js"  defer="defer" 
-			type="text/javascript"></script>
+		<script src="<%=basePath%>js/My97DatePicker/WdatePicker.js"
+			defer="defer" type="text/javascript"></script>
 		<style type="text/css">
 body {
 	
@@ -126,8 +126,41 @@ img {
 															<font color="red">(*)</font>：
 														</td>
 														<td>
-															<s:textfield name="logisticsVO.logistics.expressCompany"
-																id="expressCompany" maxlength="20"></s:textfield>
+															<select onchange="changeExpressCompany(this)"
+																name="logisticsVO.logistics.expressCompany">
+																<option value="顺丰快递">
+																	顺丰快递
+																</option>
+																<option value="申通快递">
+																	申通快递
+																</option>
+																<option value="圆通快递">
+																	圆通快递
+																</option>
+																<option value="中通快递">
+																	中通快递
+																</option>
+																<option value="韵达快递">
+																	韵达快递
+																</option>
+																<option value="EMS快递">
+																	EMS快递
+																</option>
+																<option value="德邦快递">
+																	德邦快递
+																</option>
+																<option value="邮政平邮">
+																	邮政平邮
+																</option>
+																<option value="宅急送快递">
+																	宅急送快递
+																</option>
+																<option value="-1">
+																	其他快递公司
+																</option>
+															</select>
+															<input name="otherExpress" type="text" maxlength="20"
+																style="display: none">
 															<input type="hidden" name="win17_token"
 																value="<s:property value="#session.win17_token"/>">
 														</td>

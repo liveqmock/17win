@@ -1554,9 +1554,9 @@ public class CreditTaskService extends BaseService {
 					linkMan.setUser(userEntity);
 					linkMan.setLastUseTime(new Date());
 					taskLinkManDAO.save(linkMan);
-				} else {
-					linkMan.setLastUseTime(new Date());
 				}
+				linkMan.setLastUseTime(new Date());
+				linkMan.setUseCount(linkMan.getUseCount()+1);
 			}
 			creditTask.setReleaseDot(0D);
 		}
@@ -1612,6 +1612,14 @@ public class CreditTaskService extends BaseService {
 				creditTaskRepository.setName(creditTask.getTestID());
 			}
 			creditTaskRepositoryDAO.save(creditTaskRepository);
+		}
+		// 查看任务仓库
+		String taskRepId = getByParam("taskRepId");
+		if (!StringUtils.isBlank(taskRepId)) {
+			CreditTaskRepositoryEntity taskRep = creditTaskRepositoryDAO
+					.get(Long.parseLong(taskRepId));
+			taskRep.setLastDispathDate(new Date());
+			taskRep.setDispathCount(taskRep.getDispathCount() + 1);
 		}
 		/**
 		 * 改变用户金钱和发布点
@@ -1695,7 +1703,7 @@ public class CreditTaskService extends BaseService {
 				CreditTaskRepositoryEntity taskRep = creditTaskRepositoryDAO
 						.get(Long.parseLong(taskRepId));
 				if (taskRep.getUser().getId().equals(getLoginUser().getId())) {
-					putByRequest("taskRep", "taskRep");
+					putByRequest("taskRep", taskRepId);
 					BeanUtils.copyProperties(creditTaskVO, taskRep);
 				}
 			}

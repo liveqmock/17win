@@ -155,6 +155,10 @@
 																			value="<s:property
 						value="#request.platformType" />"
 																			id="platformType" type="hidden" />
+																		<s:if test="#request.taskRep!=null">
+																			<input name="taskRepId" type="hidden"
+																				value="<s:property value="#request.taskRep"/>" />
+																		</s:if>
 																		<input type="hidden" name="win17_token"
 																			value="<s:property value="#session.win17_token"/>">
 																		<s:textfield name="creditTaskVO.money" size="10"
