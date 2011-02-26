@@ -180,7 +180,7 @@ Validater.isShop = function(url, type) {
 		}
 	}
 	if ("1" == type) {
-		regName = new RegExp("^http:[/\\\\]{2}\\w+\\-*\\w+\\.taobao\\.com[/\\\\]?");
+		regName = new RegExp("^http:[/\\\\]{2}shop\\d+\\-*\\w+\\.taobao\\.com[/\\\\]?");
 	} else if ("2" == type) {
 		regName = new RegExp("^http:[/\\\\]{2}\\w+\\-*\\w+\\.paipai\\.com[/\\\\]?");
 	} else if ("3" == type) {

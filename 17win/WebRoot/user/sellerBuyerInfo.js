@@ -139,7 +139,7 @@ function obtainSellerByShop(type, obj) {
 	var input = $("#sellerName");
 	if (!Validater.isShop(shopURL, type)) {
 		submitFlag = false;
-		changeStyle(obj, '0', '您输入的格式不地址格式不正确，最好复制在浏览器地址栏里面复制后粘贴,如还有疑问，请联系客户！');
+		changeStyle(obj, '0', '您输入的格式不地址格式不正确（淘宝不要用二级域名地址），最好复制在浏览器地址栏里面复制后粘贴,如还有疑问，请联系客户！');
 		return;
 	}
 	if ($("input[platformType='" + type + "'][shopUrl='" + shopURL + "']")
