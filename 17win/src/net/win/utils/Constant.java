@@ -99,6 +99,14 @@ public final class Constant {
 	// 最大注册数
 	public static Double maxRegisterCount;
 
+	/**
+	 * 系统流程控制
+	 * 
+	 * @return
+	 */
+	public static Boolean stopTask = true;
+	public static Boolean stopAll = true;
+
 	public static Double getFabudianPrice() {
 		return fabudian_P;
 	}
@@ -413,6 +421,14 @@ public final class Constant {
 				else if ("maxRegisterCount".equalsIgnoreCase(name)) {
 					maxRegisterCount = numberValue;
 				}
+				// 停止所有(不包括HTML)
+				else if ("stopAll".equalsIgnoreCase(name)) {
+					stopAll = Boolean.parseBoolean(stringValue);
+				}
+				// 停止所有和任务相关的操作
+				else if ("stopTask".equalsIgnoreCase(name)) {
+					stopTask = Boolean.parseBoolean(stringValue);
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -427,6 +443,14 @@ public final class Constant {
 
 	public static Double getMaxRegisterCount() {
 		return maxRegisterCount;
+	}
+
+	public static Boolean getStopTask() {
+		return stopTask;
+	}
+
+	public static Boolean getStopAll() {
+		return stopAll;
 	}
 
 }
