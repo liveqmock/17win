@@ -139,7 +139,7 @@ public class UserInfoService extends BaseService {
 				.getBuyReleaseDotRebateToRefree());
 		// 通过你的宣传链接注册的会员购买VIP，获得5元
 		putByRequest("refreeByVipMoney", Constant.getRefreeByVipMoney());
-		// 积累接受100个任务 推广人获取10元钱
+		// 积累接手100个任务 推广人获取10元钱
 		putByRequest("task100RefreeMoney", Constant.getTask100RefreeMoney());
 		// 通过你的宣传链接注册的会员积分每上升1000 ，你的收益=100积分
 		putByRequest("score1000Refree", Constant.getScore1000Refree());
@@ -941,7 +941,7 @@ public class UserInfoService extends BaseService {
 						if (TaskMananger.TIMING_STATUS.equals(objs[1])) {
 							result2[0][1] = objs[2] + "";// 定时任务
 						} else if (TaskMananger.STEP_ONE_STATUS.equals(objs[1])) {
-							result2[0][2] = objs[2] + "";// 等待接收
+							result2[0][2] = objs[2] + "";// 等待接手
 						} else if (TaskMananger.AUDIT_STATUS.equals(objs[1])) {
 							result2[0][3] = objs[2] + "";// 等待审核
 						} else if (TaskMananger.STEP_TWO_STATUS.equals(objs[1])) {
@@ -963,7 +963,7 @@ public class UserInfoService extends BaseService {
 						if (TaskMananger.TIMING_STATUS.equals(objs[1])) {
 							result2[1][1] = objs[2] + "";// 定时任务
 						} else if (TaskMananger.STEP_ONE_STATUS.equals(objs[1])) {
-							result2[1][2] = objs[2] + "";// 等待接收
+							result2[1][2] = objs[2] + "";// 等待接手
 						} else if (TaskMananger.AUDIT_STATUS.equals(objs[1])) {
 							result2[1][3] = objs[2] + "";// 等待审核
 						} else if (TaskMananger.STEP_TWO_STATUS.equals(objs[1])) {
@@ -985,7 +985,7 @@ public class UserInfoService extends BaseService {
 						if (TaskMananger.TIMING_STATUS.equals(objs[1])) {
 							result2[2][1] = objs[2] + "";// 定时任务
 						} else if (TaskMananger.STEP_ONE_STATUS.equals(objs[1])) {
-							result2[2][2] = objs[2] + "";// 等待接收
+							result2[2][2] = objs[2] + "";// 等待接手
 						} else if (TaskMananger.AUDIT_STATUS.equals(objs[1])) {
 							result2[2][3] = objs[2] + "";// 等待审核
 						} else if (TaskMananger.STEP_TWO_STATUS.equals(objs[1])) {

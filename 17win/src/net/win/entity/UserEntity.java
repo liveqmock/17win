@@ -94,7 +94,7 @@ public class UserEntity extends BaseEntity {
 	// 发布任务数
 	@Column(name = "RELEASE_TASK_COUNT_")
 	private Integer releaseTaskCount = 0;
-	// 接受任务数
+	// 接手任务数
 	@Column(name = "RECEIVE_TASK_COUNT_")
 	private Integer receiveTaskCount = 0;
 
@@ -123,7 +123,7 @@ public class UserEntity extends BaseEntity {
 	@Cascade(CascadeType.ALL)
 	private List<CreditTaskEntity> releaseCreditTasks;
 
-	// 接受的任务
+	// 接手的任务
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "RECEIVE_PERSON_")
 	@Cascade(CascadeType.ALL)
@@ -186,7 +186,7 @@ public class UserEntity extends BaseEntity {
 	@Cascade(CascadeType.ALL)
 	private List<LogisticsEntity> releaseLogistics;
 
-	// // 我接受的物流信息
+	// // 我使用的物流信息
 	@ManyToMany(mappedBy = "receieveUsers")
 	@Cascade(CascadeType.ALL)
 	private List<LogisticsEntity> receieveLogistics;

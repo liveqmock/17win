@@ -14,7 +14,7 @@ public class Struts2DateConverter extends StrutsTypeConverter {
 	public static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
 	/** */
-	/** 可接受的日期格式 */
+	/** 可接手的日期格式 */
 	public static final DateFormat[] ACCEPT_DATE_FORMATS = {
 			new SimpleDateFormat(DEFAULT_DATE_FORMAT),
 			new SimpleDateFormat("yyyy-MM-dd"),

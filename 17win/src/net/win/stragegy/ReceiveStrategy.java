@@ -8,7 +8,7 @@ import net.win.utils.DateUtils;
 
 public class ReceiveStrategy {
 	/**
-	 * 验证接收人是否 一个买号一个月接同一个店铺的只能是6次 ,一个商品一次。
+	 * 验证接手人是否 一个买号一个月接同一个店铺的只能是6次 ,一个商品一次。
 	 * 
 	 * @param buyerEntity
 	 * @param itemURL

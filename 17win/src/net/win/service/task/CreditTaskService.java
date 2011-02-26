@@ -407,7 +407,7 @@ public class CreditTaskService extends BaseService {
 							creditTask.getSeller().getShopURL() }) == 6;
 		}
 		if (refuseFlag) {
-			putAlertMsg("为了您和他人的安全，同一商品买号在一个月内只能接手一次，同一店铺的商品买号最多只能接受6次！");
+			putAlertMsg("为了您和他人的安全，同一商品买号在一个月内只能接手一次，同一店铺的商品买号最多只能接手6次！");
 			putJumpSelfPage("taskManager/task!initTask.php?platformType="
 					+ platformType);
 			return JUMP;
@@ -415,7 +415,7 @@ public class CreditTaskService extends BaseService {
 		/**
 		 * 改变任务属性
 		 */
-		// 接收人
+		// 接手人
 		creditTask.setReceivePerson(userEntity);
 		// Ip
 		creditTask.setReceiveIP(ip);
@@ -501,7 +501,7 @@ public class CreditTaskService extends BaseService {
 						+ releaseUserVip.getReleaseGrowValue());
 			}
 			/**
-			 * 修改积分和钱 接收人 和 接受号
+			 * 修改积分和钱 接收人 和 接手号
 			 */
 			VipEntity receiveUserVip = receiveUser.getVip();
 			VipBidUserEntity receiveVipBidUser = receiveUser
@@ -568,14 +568,14 @@ public class CreditTaskService extends BaseService {
 			/**
 			 * 计算推广
 			 */
-			// 积累接受100个任务
+			// 积累接手100个任务
 			if (receiveUser.getReceiveTaskCount() % 100 == 0) {
 				UserEntity refereeUser = receiveUser.getReferee();
 				if (refereeUser != null) {
 					refereeUser.setMoney(Constant.getTask100RefreeMoney()
 							+ refereeUser.getMoney());
 					logMoneyCapital(userDAO, Constant.getTask100RefreeMoney(),
-							"你推广的用户接受了100个任务你获得"
+							"你推广的用户接手了100个任务你获得"
 									+ Constant.getTask100RefreeMoney() + "元！",
 							refereeUser);
 				}
@@ -586,17 +586,17 @@ public class CreditTaskService extends BaseService {
 			// 记录 信息
 
 			logMoneyCapital(userDAO, creditTask.getMoney()
-					+ creditTask.getAddtionMoney(), "接受任务获取金额", receiveUser);
+					+ creditTask.getAddtionMoney(), "接手任务获取金额", receiveUser);
 
 			logDotCapital(userDAO, releaseDot
-					+ creditTask.getAddtionReleaseDot(), "接受任务获取发布点",
+					+ creditTask.getAddtionReleaseDot(), "接手任务获取发布点",
 					receiveUser);
 			// 接手人买好信誉+1
 			BuyerEntity buyer = creditTask.getBuyer();
 			buyer.setScore(buyer.getScore() + 1);
 			if (buyer.getScore() >= Constant.getCreditValueLimit()) {
 				buyer.setEnable(false);
-			}
+			} 
 			// 更新信息
 			updateUserLoginInfo(releaseUser);
 			creditTask.setStatus(TaskMananger.STEP_SIX_STATUS);

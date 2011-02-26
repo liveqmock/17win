@@ -85,7 +85,7 @@ public final class Constant {
 	// 当购买发布点的时候，推广人所得金额为，他推荐人买的发布点的金额的0.01
 	private static Double buyReleaseDotRebateToRefree;
 
-	// 积累接受100个任务 推广人获取10元钱
+	// 积累接手100个任务 推广人获取10元钱
 	private static Double task100RefreeMoney;
 	// 通过你的宣传链接注册的会员积分每上升1000 ，你的收益=100积分
 	private static Double score1000Refree;
@@ -373,7 +373,7 @@ public final class Constant {
 				else if ("refreeByVipMoney".equalsIgnoreCase(name)) {
 					refreeByVipMoney = numberValue;
 				}
-				// 积累接受100个任务 推广人获取N元钱
+				// 积累接手100个任务 推广人获取N元钱
 				else if ("task100RefreeMoney".equalsIgnoreCase(name)) {
 					task100RefreeMoney = numberValue;
 				}

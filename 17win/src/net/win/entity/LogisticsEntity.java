@@ -65,7 +65,7 @@ public class LogisticsEntity extends BaseEntity {
 	@JoinColumn(name = "User_ID_")
 	private UserEntity releaseUser;
 
-	// 接受者者
+	// 接手者
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "Tb_Logistics_Bid_User", joinColumns = { @JoinColumn(name = "USER_ID_", referencedColumnName = "ID_") }, inverseJoinColumns = { @JoinColumn(name = "Logistics_ID_", referencedColumnName = "ID_") })
 	private List<UserEntity> receieveUsers;

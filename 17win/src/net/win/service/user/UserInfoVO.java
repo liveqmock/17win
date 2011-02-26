@@ -42,7 +42,7 @@ public class UserInfoVO extends BaseVO {
 	private Date registerTime = new Date();
 	// 发布任务数
 	private Integer releaseTaskCount = 0;
-	// 接受任务数
+	// 接手任务数
 	private Integer receiveTaskCount = 0;
 	// 推广积分
 	private Integer spreadScore = 0;

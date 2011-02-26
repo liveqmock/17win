@@ -7,7 +7,7 @@ import net.win.BaseVO;
 public class AdminUserVO extends BaseVO {
 
 	/**
-	 * 接受数据
+	 * 接手数据
 	 */
 
 	// 用户名
@@ -31,7 +31,7 @@ public class AdminUserVO extends BaseVO {
 	// 发布任务数
 	private Integer startReleaseTaskCount;
 	private Integer endReleaseTaskCount;
-	// 接受任务数
+	// 接手任务数
 	private Integer startReceieveTaskCount;
 	private Integer endReceieveTaskCount;
 	// 是否VIP

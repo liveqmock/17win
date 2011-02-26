@@ -146,7 +146,7 @@ public final class StrategyUtils {
 	}
 
 	/**
-	 * 获取任务接受者的的积分
+	 * 获取任务接手者的的积分
 	 * 
 	 * @param goodType
 	 * @return

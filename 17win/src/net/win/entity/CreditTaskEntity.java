@@ -31,7 +31,7 @@ public class CreditTaskEntity extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = UserEntity.class)
 	@JoinColumn(name = "RELEASE_PERSON_")
 	private UserEntity releasePerson;
-	// 接收人
+	// 接手人
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = UserEntity.class)
 	@JoinColumn(name = "RECEIVE_PERSON_")
 	private UserEntity receivePerson;
@@ -96,7 +96,7 @@ public class CreditTaskEntity extends BaseEntity {
 	@Column(name = "RECEIVE_DATE_")
 	private Date receiveDate;
 
-	// 接收人IP
+	// 接手人IP
 	@Column(name = "RECEIVE_IP_", length = 20)
 	private String receiveIP;
 
@@ -105,7 +105,7 @@ public class CreditTaskEntity extends BaseEntity {
 	@JoinColumn(name = "SELLER_ID_")
 	private SellerEntity seller;
 
-	// 接收人的买家号
+	// 接手人的买家号
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "BUYER_ID_")
 	private BuyerEntity buyer;

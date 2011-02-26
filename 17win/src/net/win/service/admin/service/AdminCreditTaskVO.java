@@ -33,7 +33,7 @@ public class AdminCreditTaskVO extends BaseVO {
 	private Date startDate;
 	// 任务ID 给用户看 格式yyymmddhhmmssis
 	private String testID;
-	// 接收人IP
+	// 接手人IP
 	private String receiveIP;
 	// 发布点
 	private Float releaseDot;

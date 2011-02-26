@@ -42,7 +42,7 @@ public class VipEntity extends BaseEntity {
 	// 发任务数 发任务所得的成长值
 	@Column(name = "Release_GrowValue_", nullable = false)
 	private Integer releaseGrowValue = 0;
-	// 接任务数 接受任务所得的成长值
+	// 接任务数 接手任务所得的成长值
 	@Column(name = "Receieve_GrowValue_", nullable = false)
 	private Integer receieveGrowValue = 0;
 

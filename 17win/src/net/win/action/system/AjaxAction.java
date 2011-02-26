@@ -30,7 +30,7 @@ public class AjaxAction extends BaseAction {
 	private UserDAO userDAO;
 
 	/**
-	 * 接受的数据
+	 * 接收的数据
 	 */
 	// 类型
 	private String type;

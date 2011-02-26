@@ -58,7 +58,7 @@ public class AdminSmsService extends BaseService {
 			return "insertSms";
 		}
 		if (toUser == null) {
-			putAlertMsg("没有该接收人！");
+			putAlertMsg("没有该用户！");
 			return "insertSms";
 		}
 		BeanUtils.copyProperties(smsEntity, smsVO);

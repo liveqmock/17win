@@ -241,7 +241,7 @@ public class AdminTaskService extends BaseService {
 		}
 
 		/**
-		 * 修改积分和钱 接收人 和 接受号
+		 * 修改积分和钱 接手人 和 接手号
 		 */
 		VipEntity receiveUserVip = receiveUser.getVip();
 		VipBidUserEntity receiveVipBidUser = receiveUser.getVipBidUserEntity();
@@ -307,14 +307,14 @@ public class AdminTaskService extends BaseService {
 		/**
 		 * 计算推广
 		 */
-		// 积累接受100个任务
+		// 积累接手100个任务
 		if (receiveUser.getReceiveTaskCount() % 100 == 0) {
 			UserEntity refereeUser = receiveUser.getReferee();
 			if (refereeUser != null) {
 				refereeUser.setMoney(Constant.getTask100RefreeMoney()
 						+ refereeUser.getMoney());
 				logMoneyCapital(userDAO, Constant.getTask100RefreeMoney(),
-						"你推广的用户接受了100个任务你获得" + Constant.getTask100RefreeMoney()
+						"你推广的用户接手了100个任务你获得" + Constant.getTask100RefreeMoney()
 								+ "元！", refereeUser);
 			}
 		}
@@ -324,10 +324,10 @@ public class AdminTaskService extends BaseService {
 		// 记录 信息
 
 		logMoneyCapital(userDAO, creditTask.getMoney()
-				+ creditTask.getAddtionMoney(), "接受任务获取金额", receiveUser);
+				+ creditTask.getAddtionMoney(), "接手任务获取金额", receiveUser);
 
 		logDotCapital(userDAO, releaseDot + creditTask.getAddtionReleaseDot(),
-				"接受任务获取发布点", receiveUser);
+				"接手任务获取发布点", receiveUser);
 
 		// 更新信息
 		updateUserLoginInfo(releaseUser);

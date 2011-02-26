@@ -8,7 +8,7 @@ import net.win.entity.UserEntity;
 public class UserVO extends BaseVO {
 
 	/**
-	 * 接受数据
+	 * 接手数据
 	 */
 	// 用户信息
 	private UserEntity userEntity = new UserEntity();

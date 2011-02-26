@@ -131,7 +131,7 @@ public class SmsService extends BaseService {
 			return JUMP;
 		}
 		if (toUser == null) {
-			putAlertMsg("没有该接收人！");
+			putAlertMsg("没有该用户！");
 			return JUMP;
 		}
 		BeanUtils.copyProperties(smsEntity, smsVO);
