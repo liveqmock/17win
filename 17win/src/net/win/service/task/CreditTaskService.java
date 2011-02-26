@@ -1056,8 +1056,8 @@ public class CreditTaskService extends BaseService {
 		List<String> paramNames = new ArrayList<String>();
 		List paramValues = new ArrayList();
 		StringBuffer countSQL = new StringBuffer(
-				"select count(*) from CreditTaskEntity as _task inner join _task.receivePerson as _user  "
-						+ " where     _user.id=:userId and   _task.type=:platformType ");
+				"select count(*) 	 from CreditTaskEntity as _task inner join _task.releasePerson as _fbuser  inner join _task.seller as _seller left join _task.receivePerson as _jsuser left join _task.buyer as _buyer "
+						+ " where     _jsuser.id=:userId and   _task.type=:platformType ");
 		StringBuffer resultSQL = new StringBuffer(
 				"select _task.testID , _task.releaseDate ,_fbuser.username,_fbuser.qq,_task.money,_task.updatePrice ,_task.releaseDot "// 6
 						+ ", _task.itemUrl , _seller.name,_seller.shopURL,_buyer.name,_jsuser.upgradeScore,_task.status" // 12
@@ -1071,20 +1071,20 @@ public class CreditTaskService extends BaseService {
 		paramValues.add(getLoginUser().getId());
 		paramValues.add(platformType);
 		if (!StringUtils.isBlank(creditTaskVO.getTestID())) {
-			countSQL.append("and _task.testID=:testID ");
-			resultSQL.append("and _task.testID=:testID ");
+			countSQL.append(" and _task.testID=:testID ");
+			resultSQL.append(" and _task.testID=:testID ");
 			paramNames.add("testID");
 			paramValues.add(creditTaskVO.getTestID());
 		}
 		if (!StringUtils.isBlank(creditTaskVO.getJsUsername())) {
-			countSQL.append("and _jsuser.username=:jsUsername ");
-			resultSQL.append("and _jsuser.username=:jsUsername ");
+			countSQL.append(" and _jsuser.username=:jsUsername ");
+			resultSQL.append(" and _jsuser.username=:jsUsername ");
 			paramNames.add("jsUsername");
 			paramValues.add(creditTaskVO.getJsUsername());
 		}
 		if (!StringUtils.isBlank(creditTaskVO.getSellname())) {
-			countSQL.append("and _seller.name=:sellername ");
-			resultSQL.append("and _jsuser.username=:sellername ");
+			countSQL.append(" and _seller.name=:sellername ");
+			resultSQL.append(" and _jsuser.username=:sellername ");
 			paramNames.add("sellername");
 			paramValues.add(creditTaskVO.getSellname());
 		}
@@ -1133,20 +1133,20 @@ public class CreditTaskService extends BaseService {
 			paramValues.add(creditTaskVO.getJsEndDate());
 		}
 		if (!StringUtils.isBlank(creditTaskVO.getBuyername())) {
-			countSQL.append("and _buyer.name=:buyname ");
-			resultSQL.append("and _buyer.name=:buyname ");
+			countSQL.append(" and _buyer.name=:buyname ");
+			resultSQL.append(" and _buyer.name=:buyname ");
 			paramNames.add("buyname");
 			paramValues.add(creditTaskVO.getBuyername());
 		}
 		if (!StringUtils.isBlank(creditTaskVO.getStatus())) {
-			countSQL.append("and _task.status=:status ");
-			resultSQL.append("and _task.status=:status ");
+			countSQL.append(" and _task.status=:status ");
+			resultSQL.append(" and _task.status=:status ");
 			paramNames.add("status");
 			paramValues.add(creditTaskVO.getStatus());
 		}
 		if (!StringUtils.isBlank(creditTaskVO.getTaskType())) {
-			countSQL.append("and _task.taskType=:taskType ");
-			resultSQL.append("and _task.taskType=:taskType ");
+			countSQL.append(" and _task.taskType=:taskType ");
+			resultSQL.append(" and _task.taskType=:taskType ");
 			paramNames.add("taskType");
 			paramValues.add(creditTaskVO.getTaskType());
 		}
@@ -1279,8 +1279,8 @@ public class CreditTaskService extends BaseService {
 		List<String> paramNames = new ArrayList<String>();
 		List paramValues = new ArrayList();
 		StringBuffer countSQL = new StringBuffer(
-				"select count(*) from CreditTaskEntity as _task inner join _task.releasePerson as _user   "
-						+ "where     _user.id=:userId and   _task.type=:platformType ");
+				"select count(*)	  from CreditTaskEntity as _task inner join _task.releasePerson as _fbuser  inner join _task.seller as _seller left join _task.receivePerson as _jsuser left join _task.buyer as _buyer "
+						+ " where     _fbuser.id=:userId and   _task.type=:platformType ");
 		StringBuffer resultSQL = new StringBuffer(
 				"select _task.testID , _task.releaseDate ,_task.money,_task.updatePrice ,_task.releaseDot, _task.itemUrl , _seller.name,_task.status "// 7
 						+ ", _jsuser.username,_buyer.name,_jsuser.qq" // 10
@@ -1294,20 +1294,20 @@ public class CreditTaskService extends BaseService {
 		paramValues.add(getLoginUser().getId());
 		paramValues.add(platformType);
 		if (!StringUtils.isBlank(creditTaskVO.getTestID())) {
-			countSQL.append("and _task.testID=:testID ");
-			resultSQL.append("and _task.testID=:testID ");
+			countSQL.append(" and _task.testID=:testID ");
+			resultSQL.append(" and _task.testID=:testID ");
 			paramNames.add("testID");
 			paramValues.add(creditTaskVO.getTestID());
 		}
 		if (!StringUtils.isBlank(creditTaskVO.getJsUsername())) {
-			countSQL.append("and _jsuser.username=:jsUsername ");
-			resultSQL.append("and _jsuser.username=:jsUsername ");
+			countSQL.append(" and _jsuser.username=:jsUsername ");
+			resultSQL.append(" and _jsuser.username=:jsUsername ");
 			paramNames.add("jsUsername");
 			paramValues.add(creditTaskVO.getJsUsername());
 		}
 		if (!StringUtils.isBlank(creditTaskVO.getSellname())) {
-			countSQL.append("and _seller.name=:sellername ");
-			resultSQL.append("and _jsuser.username=:sellername ");
+			countSQL.append(" and _seller.name=:sellername ");
+			resultSQL.append(" and _jsuser.username=:sellername ");
 			paramNames.add("sellername");
 			paramValues.add(creditTaskVO.getSellname());
 		}
@@ -1356,19 +1356,19 @@ public class CreditTaskService extends BaseService {
 			paramValues.add(creditTaskVO.getJsEndDate());
 		}
 		if (!StringUtils.isBlank(creditTaskVO.getBuyername())) {
-			countSQL.append("and _buyer.name=:buyname ");
-			resultSQL.append("and _buyer.name=:buyname ");
+			countSQL.append(" and _buyer.name=:buyname ");
+			resultSQL.append(" and _buyer.name=:buyname ");
 			paramNames.add("buyname");
 			paramValues.add(creditTaskVO.getBuyername());
 		}
 		if (!StringUtils.isBlank(creditTaskVO.getStatus())) {
-			countSQL.append("and _task.status=:status ");
+			countSQL.append(" and _task.status=:status ");
 			resultSQL.append("and _task.status=:status ");
 			paramNames.add("status");
 			paramValues.add(creditTaskVO.getStatus());
 		}
 		if (!StringUtils.isBlank(creditTaskVO.getTaskType())) {
-			countSQL.append("and _task.taskType=:taskType ");
+			countSQL.append(" and _task.taskType=:taskType ");
 			resultSQL.append("and _task.taskType=:taskType ");
 			paramNames.add("taskType");
 			paramValues.add(creditTaskVO.getTaskType());
