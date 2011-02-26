@@ -58,6 +58,8 @@ public class PayService extends BaseService {
 	public String insertPay(PayVO payVO) throws Exception {
 		String opertationCode = getByParam("opertationCode");
 		String verificationCode = getByParam("verificationCode");
+		String customMoney = getByParam("customMoney");
+
 		UserEntity userEntity = getLoginUserEntity(userDAO);
 		if (!userEntity.getOpertationCode().equals(
 				StringUtils.processPwd(opertationCode))) {
@@ -75,6 +77,9 @@ public class PayService extends BaseService {
 		payEntity.setStatus("1");
 		payEntity.setPayDate(new Date());
 		payEntity.setUser(userEntity);
+		if (!StringUtils.isBlank(customMoney)) {
+			payEntity.setMoney(Double.parseDouble(customMoney));
+		}
 		payDAO.save(payEntity);
 		String toTaobao = null;
 		switch (payVO.getMoney().intValue()) {

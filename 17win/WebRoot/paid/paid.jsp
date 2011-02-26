@@ -135,9 +135,12 @@ img {
 																			</td>
 																			<td>
 																				<s:select listKey="key" listValue="value" id="money"
+																					onchange="changeCustomMoney(this)"
 																					name="payVO.money"
-																					list="#{'1':'1元','10':'10元','50':'50元','100':'100元'}">
+																					list="#{'1':'1元','10':'10元','50':'50元','100':'100元','-1':'自定义'}">
 																				</s:select>
+																				<input type="text" name="customMoney" maxlength="4"
+																					style="display: none" id="customMoneyId" />
 																				<input type="hidden" name="win17_token"
 																					value="<s:property value="#session.win17_token"/>">
 																			</td>

@@ -335,7 +335,7 @@
 							描述：
 						</td>
 						<td>
-							<input type="text" name="moneyDesc" id="moneyDescID"
+							<input type="text" name="moneyDesc" id="moneyDescID"  
 								maxlength="200" style="width: 400px">
 						</td>
 

@@ -199,7 +199,7 @@ function updateStatus(id, status) {
 // 充值金额
 function addMoney(id) {
 	$("#moneyId").val("");
-	$("#moneyDescID").val("");
+	$("#moneyDescID").val("充值成功");
 	if (confirm("确认是否充值？")) {
 		$("#moneyUserIdId").val(id);
 		$("#updateMoneyDIV").dialog("open");

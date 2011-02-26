@@ -45,7 +45,8 @@
 			<tx:method name="insert*"
 				rollback-for="java.lang.Exception" />
 			<tx:method name="input*" rollback-for="java.lang.Exception" />
-			<tx:method name="quartz*" rollback-for="java.lang.Exception" />
+			<tx:method name="quartz*"
+				rollback-for="java.lang.Exception" />
 			<tx:method name="merge*" rollback-for="java.lang.Exception" />
 			<tx:method name="*" read-only="true" propagation="SUPPORTS" />
 		</tx:attributes>
@@ -109,7 +110,8 @@
 
 	<!-- quartz -->
 	<!-- 要调用的工作类 -->
-	<bean id="taskQuartzService" class="net.win.service.quartz.TaskQuartzService">
+	<bean id="taskQuartzService"
+		class="net.win.service.quartz.TaskQuartzService">
 	</bean>
 	<!-- 定义调用对象和调用对象的方法 分钟 -->
 	<bean id="minuteTask"
@@ -136,6 +138,60 @@
 			<value>quartzClock24OfDayTask</value>
 		</property>
 	</bean>
+
+	<!-- 定义调用对象和调用对象的方法 每周 -->
+	<bean id="weekTask"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 调用的类 -->
+		<property name="targetObject">
+			<ref bean="taskQuartzService" />
+		</property>
+		<!-- 调用类中的方法 -->
+		<property name="targetMethod">
+			<value>quartzWeekTask</value>
+		</property>
+	</bean>
+
+
+
+	<!-- 定义调用对象和调用对象的方法 每月 -->
+	<bean id="monthTask"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 调用的类 -->
+		<property name="targetObject">
+			<ref bean="taskQuartzService" />
+		</property>
+		<!-- 调用类中的方法 -->
+		<property name="targetMethod">
+			<value>quartzMonthTask</value>
+		</property>
+	</bean>
+
+	<!-- 定义调用对象和调用对象的方法 每季度 -->
+	<bean id="quarterTask"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 调用的类 -->
+		<property name="targetObject">
+			<ref bean="taskQuartzService" />
+		</property>
+		<!-- 调用类中的方法 -->
+		<property name="targetMethod">
+			<value>quartzQuarterTask</value>
+		</property>
+	</bean>
+	<!-- 定义调用对象和调用对象的方法 每半年 -->
+	<bean id="halfYearTask"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 调用的类 -->
+		<property name="targetObject">
+			<ref bean="taskQuartzService" />
+		</property>
+		<!-- 调用类中的方法 -->
+		<property name="targetMethod">
+			<value>quartzHalfYearTask</value>
+		</property>
+	</bean>
+
 	<!-- 定义触发任务状态更新，每分钟-->
 	<bean id="minuteTaskTime"
 		class="org.springframework.scheduling.quartz.CronTriggerBean">
@@ -147,7 +203,7 @@
 			<value>0 * * * * ?</value>
 		</property>
 	</bean>
-	<!-- 定义触发任务状态更新，每分钟-->
+	<!-- 定义触发任务状态更新 每天-->
 	<bean id="clock24OfDayTaskTime"
 		class="org.springframework.scheduling.quartz.CronTriggerBean">
 		<property name="jobDetail">
@@ -158,6 +214,55 @@
 			<value>0 0 0 * * ?</value>
 		</property>
 	</bean>
+
+	<!-- 定义触发任务状态更新，每周-->
+	<bean id="weekTaskTime"
+		class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="weekTask" />
+		</property>
+		<!-- cron表达式 -->
+		<property name="cronExpression">
+			<value>59 59 23 ? * 1</value>
+		</property>
+	</bean>
+
+	<!-- 定义触发任务状态更新，每月-->
+	<bean id="monthTaskTime"
+		class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="monthTask" />
+		</property>
+		<!-- cron表达式 -->
+		<property name="cronExpression">
+			<value>40 59 23 L * ?</value>
+		</property>
+	</bean>
+
+	<!-- 定义触发任务状态更新，每季度-->
+	<bean id="quarterTaskTime"
+		class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="quarterTask" />
+		</property>
+		<!-- cron表达式 -->
+		<property name="cronExpression">
+			<value>30 59 23 L 5,8,11,2 ?</value>
+		</property>
+	</bean>
+
+
+	<!-- 定义触发任务状态更新，每半年-->
+	<bean id="halfYearTime"
+		class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="halfYearTask" />
+		</property>
+		<!-- cron表达式 -->
+		<property name="cronExpression">
+			<value>59 59 23 L 6,12 ?</value>
+		</property>
+	</bean>
 	<!-- 总管理类 如果将lazy-init='false'那么容器启动就会执行调度程序  -->
 	<bean id="startQuertz" lazy-init="false" autowire="no"
 		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
@@ -165,6 +270,10 @@
 			<list>
 				<ref bean="minuteTaskTime" />
 				<ref bean="clock24OfDayTaskTime" />
+				<ref bean="weekTaskTime" />
+				<ref bean="monthTaskTime" />
+				<ref bean="quarterTaskTime" />
+				<ref bean="halfYearTime" />
 			</list>
 		</property>
 	</bean>

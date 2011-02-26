@@ -11,6 +11,12 @@ $(document).ready(function() {
 		});
 
 function validateForm() {
+	var customMoney = $("#customMoneyId").val();
+	if ($("select[name='payVO.money']").val() == "-1"
+			&& !Validater.isInt(customMoney, "0+")) {
+		alert("金额格式不对！");
+		return false;
+	}
 	var opertationCodeId = $("#opertationCodeId").val();
 	var verificationCodeID = $("#verificationCodeID").val();
 	if (Validater.isBlank(opertationCodeId)
@@ -20,4 +26,14 @@ function validateForm() {
 	}
 	$("#submitadd").attr("disabled", true);
 	return true;
+}
+
+function changeCustomMoney(obj) {
+	if ($(obj).val() == "-1") {
+		$("#customMoneyId").attr("disabled", false);
+		$("#customMoneyId").show();
+	} else {
+		$("#customMoneyId").hide();
+		$("#customMoneyId").attr("disabled", true);
+	}
 }

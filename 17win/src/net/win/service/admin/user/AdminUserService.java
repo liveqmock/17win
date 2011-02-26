@@ -7,8 +7,10 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import net.win.BaseService;
+import net.win.dao.PayDAO;
 import net.win.dao.SmsDAO;
 import net.win.dao.UserDAO;
+import net.win.entity.PayEntity;
 import net.win.entity.SmsEntity;
 import net.win.entity.UserEntity;
 import net.win.utils.ArithUtils;
@@ -27,6 +29,8 @@ public class AdminUserService extends BaseService {
 	private UserDAO userDAO;
 	@Resource
 	private SmsDAO smsDAO;
+	@Resource
+	private PayDAO payDAO;
 	@Resource
 	private JavaMailSender mailSender;
 	@Resource
@@ -140,6 +144,7 @@ public class AdminUserService extends BaseService {
 	 * @throws Exception
 	 */
 	public String updateUserMoney(AdminUserVO adminUserVO) throws Exception {
+
 		Double money = Double.parseDouble(getByParam("money"));
 		String desc = getByParam("moneyDesc");
 		Long id = Long.parseLong(getByParam("userId"));
@@ -147,6 +152,13 @@ public class AdminUserService extends BaseService {
 		userEntity.setMoney(ArithUtils.add(userEntity.getMoney(), money));
 		queryUser(adminUserVO);
 		logMoneyCapital(userDAO, money, desc, userEntity);
+
+		PayEntity payEntity = new PayEntity();
+		payEntity.setMoney(money);
+		payEntity.setPayDate(new Date());
+		payEntity.setStatus("2");
+		payDAO.save(payEntity);
+		payEntity.setUser(userEntity);
 		putAlertMsg("充值金额成功！");
 		putJumpSelfPage("admin/adminUserManager/adminUser!queryUser.php");
 		return JUMP;
