@@ -1610,6 +1610,8 @@ public class CreditTaskService extends BaseService {
 					.getAddress()));
 			if (StringUtils.isBlank(creditTaskVO.getRespositoryName())) {
 				creditTaskRepository.setName(creditTask.getTestID());
+			}else{
+				creditTaskRepository.setName(creditTaskVO.getRespositoryName());
 			}
 			creditTaskRepositoryDAO.save(creditTaskRepository);
 		}

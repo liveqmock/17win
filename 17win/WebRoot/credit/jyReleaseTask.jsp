@@ -271,7 +271,7 @@
 							<s:iterator value="#request.result" status="status" id="task">
 								<tr onmouseover="this.className='over'"
 									onmouseout="this.className='out'">
-									<td align="center">
+									<td align="center" nowrap="nowrap">
 										<s:if test="#task.taskType==1">
 											<img src="images/xnType.jpg" alt="虚拟任务" />
 										</s:if>
@@ -281,7 +281,7 @@
 										<s:elseif test="#task.taskType==3">
 											<img src="images/tcType.jpg" alt="套餐任务" />
 										</s:elseif>
-										<s:property value="#task.testID" />
+										<span alt="任务ID"><s:property value="#task.testID" /> </span>
 										<br>
 										<s:if test="#task.assignUser!=null && #task.assignUser!=''">
 											<img src="images/tdTask.gif"
@@ -291,18 +291,23 @@
 											<img src="images/ptTask.jpg"
 												alt="普通任务，接手人是<s:property value="#task.jsUsername"/>" />
 										</s:else>
-										<s:date name="#task.releaseDate" format="yyyy-MM-dd HH:mm:ss" />
+										<span alt="任务发布时间"> <s:date name="#task.releaseDate"
+												format="yyyy-MM-dd HH:mm:ss" /> </span>
 									</td>
-									<td align="center">
-										<s:property value="#task.money" />
-										+
-										<s:property value="#task.addtionMoney" />
+									<td align="center" nowrap="nowrap">
+										<span
+											alt="任务金额：<s:property value="#task.money" />，附加金额：<s:property
+												value="#task.addtionMoney" />"><s:property
+												value="#task.money" /> + <s:property
+												value="#task.addtionMoney" /> </span>
 										<br>
-										<s:property value="#task.releaseDot" />
-										+
-										<s:property value="#task.addtionReleaseDot" />
+										<span
+											alt="任务发布点：<s:property value="#task.money" />，附加发布点：<s:property
+												value="#task.addtionMoney" />">
+											<s:property value="#task.releaseDot" /> + <s:property
+												value="#task.addtionReleaseDot" /> </span>
 									</td>
-									<td valign="middle" align="center">
+									<td valign="middle" align="center" nowrap="nowrap">
 										<a style="cursor: pointer;"
 											href="javascript:showItemUrl('<s:property value="#task.itemUrl" />','<s:property value="#task.updatePrice" />','<s:property value="#task.grade" />','<s:property value="#task.comment" />','<s:property value="#task.address" />','<s:property value="#task.waybill" />',<s:property value="#task.intervalHour" />);">
 											<img src="images/renwu-3.png" border="0"> </a>
@@ -311,7 +316,7 @@
 											href="javascript:openItemUrl('<s:property value="#task.itemUrl" />','<s:property value="#task.updatePrice" />','<s:property value="#task.grade" />','<s:property value="#task.comment" />','<s:property value="#task.address" />','<s:property value="#task.waybill" />',<s:property value="#task.intervalHour" />);">
 											<img src="images/open.gif" border="0"> </a>
 									</td>
-									<td align="center">
+									<td align="center" nowrap="nowrap">
 										<s:if test="#task.status==0">
 												定时任务
 												<br>
@@ -383,7 +388,7 @@
 											</s:else>
 										</s:else>
 									</td>
-									<td align="center">
+									<td align="center" nowrap="nowrap">
 										<s:if test="#task.status==1">
 											无接手人
 												<br>
@@ -400,7 +405,10 @@
 										没接手人
 									</s:elseif>
 										<s:else>
-											<s:date name="#task.receiveDate" format="yyyy-MM-dd HH:mm" />
+											<span
+												alt="接手日期：<s:date name="#task.receiveDate" format="yyyy-MM-dd HH:mm" />">
+												<s:date name="#task.receiveDate" format="yyyy-MM-dd HH:mm" />
+											</span>
 											<br>
 											<a
 												style="color: white; text-decoration: underline; cursor: pointer;"
@@ -411,7 +419,7 @@
 										</s:else>
 									</td>
 
-									<td align="center">
+									<td align="center" nowrap="nowrap">
 										<s:if test="#task.status==1">
 											等待接手
 										</s:if>
@@ -476,7 +484,7 @@
 												任务完成
 											</s:else>
 									</td>
-									<td align="center">
+									<td align="center" nowrap="nowrap">
 										<s:if test="#task.status==0">
 											<a alt="取消任务！"
 												href="javascript:cancelTask(<s:property value="#task.id"/>)"><span
@@ -576,7 +584,11 @@
 										<select id='toPageSelect' size='1' onchange="jumpPage()">
 											<s:iterator begin="1" end="creditTaskVO.pageCount" step="1"
 												var="index">
-												<option value="<s:property value="#index" />">
+												<option value="<s:property value="#index" />"
+													<s:if test="creditTaskVO.nowPage==#index">
+													selected='selected'
+												</s:if>>
+
 													第
 													<s:property value="#index" />
 													页

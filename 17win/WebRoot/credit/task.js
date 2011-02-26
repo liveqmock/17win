@@ -22,6 +22,8 @@ $(document).ready(function() {
 	$("#buyerDIV").dialog({
 		autoOpen : false,
 		draggable : false,
+		height:200,
+		width:550,
 		hide : 'slide',
 		modal : true,
 		resizable : false,

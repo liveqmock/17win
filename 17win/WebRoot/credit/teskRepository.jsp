@@ -40,7 +40,8 @@
 						<!-- xgj navigation.jsp -->
 						<s:include value="../common/task/navigation.jsp"></s:include>
 					</DIV>
-					<table cellspacing="1" class="taskTable">
+					<table cellspacing="1" class="taskTable"
+						style="table-layout: fixed">
 						<thead>
 							<tr>
 								<td nowrap="nowrap" align="center">
@@ -81,7 +82,8 @@
 							<s:iterator value="#request.result" status="status" id="task">
 								<tr onmouseover="this.className='over'"
 									onmouseout="this.className='out'">
-									<td valign="middle" align="center">
+									<td valign="middle" align="center" nowrap="nowrap"
+										style="overflow: hidden; text-overflow: ellipsis;">
 										<s:if test="#task.taskType==1">
 											<img src="images/xnType.jpg" alt="虚拟任务" />
 										</s:if>
@@ -91,7 +93,8 @@
 										<s:elseif test="#task.taskType==3">
 											<img src="images/tcType.jpg" alt="套餐任务" />
 										</s:elseif>
-										<s:property value="#task.name" />
+										<span alt="名称：<s:property value="#task.name" />"> <s:property
+												value="#task.name" /> </span>
 										<br>
 										<s:if test="#task.assignUser!=null && #task.assignUser!=''">
 											<img src="images/tdTask.gif"
@@ -105,7 +108,7 @@
 										<s:else>否</s:else>
 
 									</td>
-									<td valign="middle" align="center">
+									<td valign="middle" align="center" nowrap="nowrap">
 										<s:property value="#task.money" />
 										+
 										<s:property value="#task.addtionMoney" />
@@ -114,7 +117,7 @@
 										+
 										<s:property value="#task.addtionReleaseDot" />
 									</td>
-									<td valign="middle" align="center">
+									<td valign="middle" align="center" nowrap="nowrap">
 										<a style="cursor: pointer;"
 											href="javascript:showItemUrl('<s:property value="#task.itemUrl" />');">
 											<img src="images/renwu-3.png" border="0"> </a>
@@ -123,7 +126,8 @@
 											href="javascript:openItemUrl('<s:property value="#task.itemUrl" />');">
 											<img src="images/open.gif" border="0"> </a>
 									</td>
-									<td valign="middle" align="center">
+									<td valign="middle" align="center" nowrap="nowrap"
+										style="overflow: hidden; text-overflow: ellipsis;">
 										<s:property value="#task.grade" />
 										<br>
 										<s:if test="#task.comment==null || #task.comment==''">
@@ -135,11 +139,12 @@
 												接手人自己想
 											</s:if>
 											<s:else>
-												<s:property value="#task.comment" />
+												<span alt="<s:property value="#task.comment" />"> <s:property
+														value="#task.comment" /> </span>
 											</s:else>
 										</s:else>
 									</td>
-									<td valign="middle" align="center">
+									<td valign="middle" align="center" nowrap="nowrap">
 										<s:if test="#task.updatePrice">
 											需修改价
 										</s:if>
@@ -156,7 +161,7 @@
 										</s:else>
 									</td>
 
-									<td valign="middle" align="center">
+									<td valign="middle" align="center" nowrap="nowrap">
 										<s:property value="#task.dispathCount" default="0" />
 										<br>
 										<s:if test="#task.lastDispathDate!=null">
@@ -167,12 +172,12 @@
 									没发送过
 									</s:else>
 									</td>
-									<td valign="middle" align="center">
-										<a title="可能由于你填写错误，可以重新进行填写！"
+									<td valign="middle" align="center" nowrap="nowrap">
+										<a alt="发布任务！"
 											href="javascript:releaseRepository(<s:property value="#task.id"/>)"><span
 											class="anniu">发布任务</span> </a>
 										<br>
-										<a title="刷新排前可以使您的任务在发布区靠前！"
+										<a alt="删除任务！"
 											href="javascript:deleteRepository(<s:property value="#task.id"/>)"><span
 											class="anniu2">删除任务</span> </a>
 									</td>
@@ -214,7 +219,10 @@
 										<select id='toPageSelect' size='1' onchange="jumpPage()">
 											<s:iterator begin="1" end="creditTaskRepositoryVO.pageCount"
 												step="1" var="index">
-												<option value="<s:property value="#index" />">
+												<option value="<s:property value="#index" />"
+													<s:if test="creditTaskRepositoryVO.nowPage==#index">
+													selected='selected'
+												</s:if>>
 													第
 													<s:property value="#index" />
 													页

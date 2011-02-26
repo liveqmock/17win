@@ -120,7 +120,7 @@
 							<s:iterator value="#request.result" status="status" id="task">
 								<tr onmouseover="this.className='over'"
 									onmouseout="this.className='out'">
-									<td align="center">
+									<td align="center" nowrap="nowrap">
 										<s:if test="#task.taskType==1">
 											<img src="images/xnType.jpg" alt="虚拟任务" />
 										</s:if>
@@ -140,7 +140,7 @@
 										</s:else>
 										<s:date name="#task.releaseDate" format="yyyy-MM-dd HH:mm:ss" />
 									</td>
-									<td align="center">
+									<td align="center" nowrap="nowrap">
 										<SPAN style="Z-INDEX: 20; POSITION: relative"> <a
 											href="javascript:reply('<s:property value='#task.fbUsername' />');"
 											alt="发送站内信息"><s:property value="#task.fbUsername" /> </a> </SPAN>
@@ -149,7 +149,7 @@
 											src="images/<s:property value="@net.win.utils.StrategyUtils@getLevelImg(#task.fbUpgradeScore)" />"
 											alt="刷客经验积分：<s:property value="#task.fbUpgradeScore" />">
 									</td>
-									<td align="center">
+									<td align="center" nowrap="nowrap">
 										<s:property value="#task.money" />
 										+
 										<s:property value="#task.addtionMoney" />
@@ -158,7 +158,7 @@
 										+
 										<s:property value="#task.addtionReleaseDot" />
 									</td>
-									<td align="center">
+									<td align="center" nowrap="nowrap">
 										<s:if test="#task.updatePrice">
 											需修修改价格
 										</s:if>
@@ -168,7 +168,7 @@
 										<br>
 										<s:property value="#task.grade" />
 									</td>
-									<td align="center">
+									<td align="center" nowrap="nowrap">
 										<s:if test="#task.status==1">
 											<font color="red" style="font-weight: bold;">等待接收人</font>
 										</s:if>
@@ -179,7 +179,7 @@
 											<font color="green" style="font-weight: bold;">任务进行中</font>
 										</s:else>
 									</td>
-									<td align="center">
+									<td align="center" nowrap="nowrap">
 										<s:if test="#task.status==1">
 											<s:if test="#task.fbUsername==#session.userLogin.username">
 												<img src="images/disable.gif" alt="不能接自己的任务，特定任务" />
@@ -290,6 +290,21 @@
 					</s:else>
 					<s:property value="#buyer.name" />
 				</s:iterator>
+				<hr>
+				<ul style="color: red;">
+					<li>
+						1：选择的小号要和您登录淘宝购买商品的名称要一致，乱购买者，一经发现严惩。
+					</li>
+					<li>
+						2：接手任务后，请按照对方的要求购买商品。
+					</li>
+					<li>
+						3：平台每一步双方必须先进行淘宝严格核实，淘宝操作同步平台操作，淘宝一步平台一步。
+					</li>
+					<li>
+						4：如有疑问加QQ群询问(QQ群：100103766)。
+					</li>
+				</ul>
 			</div>
 		</s:else>
 	</BODY>

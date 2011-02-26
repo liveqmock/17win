@@ -97,8 +97,8 @@ img {
 												id="addBtn">
 										</div>
 										<s:iterator value="#request.sellers.keys" id="type">
-											<table width="100%" cellspacing="0" cellpadding="0"  style="table-layout: fixed"
-												border="0" align="center">
+											<table width="100%" cellspacing="0" cellpadding="0"
+												style="table-layout: fixed" border="0" align="center">
 												<tbody id="sellerTable<s:property value="#type"/>">
 													<tr>
 														<td colspan="3" height="40" align="left" nowrap="nowrap"
@@ -125,7 +125,9 @@ img {
 													</tr>
 													<s:iterator value="#request.sellers.get(#type)" id="seller">
 														<tr class="sellerTr">
-															<td align="left" nowrap="nowrap" 	style="overflow: hidden; text-overflow: ellipsis;" width="100%">
+															<td align="left" nowrap="nowrap"
+																style="overflow: hidden; text-overflow: ellipsis;"
+																width="100%">
 																<input type="hidden"
 																	platformType="<s:property value="#type"/>"
 																	shopUrl="<s:property value="#seller.shopURL" />" />
@@ -153,11 +155,11 @@ img {
 										<s:iterator value="#request.buyers.keys" id="type">
 											<s:set name="platformName"
 												value="#type==1?'淘宝':#type==2?'拍拍':'有啊'"></s:set>
-											<table width="%" cellspacing="0" cellpadding="0" border="0"  
-										style="table-layout: fixed"		align="center">
-												<tbody id="buyerTable<s:property value="#type"/>">
+											<table cellspacing="0" cellpadding="0" border="0"
+												style="table-layout: fixed" align="center">
+												<thead id="buyerTable<s:property value="#type"/>">
 													<tr>
-														<td width="16%" colspan="2" height="40" align="left"
+														<td width="100%" colspan="4" height="40" align="left"
 															class="font14b2">
 															<s:property value="#platformName" />
 															买号资料：
@@ -165,22 +167,24 @@ img {
 														</td>
 													</tr>
 													<tr style="background: #EDF6FF">
-														<th height="10" nowrap="nowrap" align="center" width="25%">
+														<th height="10" nowrap="nowrap" align="center">
 															买号
 														</th>
-														<th height="10" nowrap="nowrap" align="center" width="25%">
+														<th height="10" nowrap="nowrap" align="center">
 															信誉值
 														</th>
-														<th height="10" nowrap="nowrap" align="center" width="25%">
+														<th height="10" nowrap="nowrap" align="center">
 															信誉地址
 														</th>
-														<th height="10" nowrap="nowrap" align="center" width="25%">
+														<th height="10" nowrap="nowrap" align="center">
 															是否可用
 														</th>
 													</tr>
+												</thead>
+												<tbody>
 													<s:iterator value="#request.buyers.get(#type)" id="buyer">
 														<tr class="buyerTr">
-															<td height="10" align="center">
+															<td height="10" align="center" nowrap="nowrap">
 																<input type="hidden"
 																	platformType="<s:property value="#type"/>"
 																	buyerName="<s:property value="#buyer.name" />" />
@@ -188,20 +192,25 @@ img {
 															</td>
 															<td height="10" align="center">
 																<s:if test="#buyer.score>=0 && #buyer.score<=100">
-																	<font style="color: #9ACD34;font-weight: bold;" title="此买号安全!" ><s:property
-																			value="#buyer.score" /> </font>
+																	<font style="color: #9ACD34; font-weight: bold;"
+																		title="此买号安全!"><s:property value="#buyer.score" />
+																	</font>
 																</s:if>
 																<s:elseif test="#buyer.score>100 && #buyer.score<=200">
-																	<font style="color: #FFCC01;font-weight: bold;"  title="此买号还算安全！"><s:property
+																	<font style="color: #FFCC01; font-weight: bold;"
+																		title="此买号还算安全！"><s:property
 																			value="#buyer.score" /> </font>
 																</s:elseif>
 																<s:else>
-																	<font style="color: #FE0001;font-weight: bold;"  title="此买号已经要达到黄钻，建议换号！"> <s:property
+																	<font style="color: #FE0001; font-weight: bold;"
+																		title="此买号已经要达到黄钻，建议换号！"> <s:property
 																			value="#buyer.score" /> </font>
 																</s:else>
 
 															</td>
-															<td height="10" align="left" nowrap="nowrap" 	style="overflow: hidden; text-overflow: ellipsis;" width="100%">
+															<td height="10" align="left" nowrap="nowrap"
+																style="overflow: hidden; text-overflow: ellipsis;"
+																width="100%">
 																<s:if
 																	test="#buyer.creditURL==null  || #buyer.creditURL==''">
 																			N/A
