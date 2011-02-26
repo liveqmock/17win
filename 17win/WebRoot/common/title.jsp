@@ -39,7 +39,8 @@
 									pluginspage="http://www.adobe.com/go/getflashplayer"
 									type="application/x-shockwave-flash">
 								<br>
-								<a target="_blank" href="http://www.17win.net/"><img
+								<a
+									href="javascript:alert('此位招租，联系QQ:30756500，联系电话：13554783576（谢先生）');"><img
 										border="0" src="images/tubiao.png"> </a>
 							</div>
 						</div>

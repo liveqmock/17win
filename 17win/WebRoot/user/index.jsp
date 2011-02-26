@@ -109,8 +109,9 @@ img {
 													</td>
 													<td width="63%" align="left" class="borderc">
 														&nbsp;
-														<a href="payManager/pay!initPay.php"><img src="images/congzhi.jpg"
-																title="我要充值" width="140" height="40" border="0" /> </a>&nbsp;&nbsp;&nbsp;
+														<a href="payManager/pay!initPay.php"><img
+																src="images/congzhi.jpg" title="我要充值" width="140"
+																height="40" border="0" /> </a>&nbsp;&nbsp;&nbsp;
 													</td>
 												</tr>
 												<tr>
@@ -205,6 +206,9 @@ img {
 																	等待卖家好评
 																</th>
 																<th style="background: #D1ECF9">
+																	已完成的
+																</th>
+																<th style="background: #D1ECF9">
 																	合计
 																</th>
 															</tr>
@@ -214,7 +218,7 @@ img {
 																	<s:iterator value="selltask" id="task" status="indexJ">
 																		<td align="center" />
 																			<s:if test="#indexI.index<3 && #indexJ.index>0">
-																				<a href="#" buyer='buyer' target="_blank"
+																				<a href="#" buyer='buyer'  
 																					row='<s:property value="#indexI.index"/>'
 																					col='<s:property value="#indexJ.index"/>'><s:property
 																						value="task" /> </a>
@@ -242,6 +246,9 @@ img {
 																	平台
 																</th>
 																<th style="background: #D1ECF9">
+																	定时任务
+																</th>
+																<th style="background: #D1ECF9">
 																	等待接手
 																</th>
 																<th style="background: #D1ECF9">
@@ -260,7 +267,7 @@ img {
 																	等待我好评
 																</th>
 																<th style="background: #D1ECF9">
-																	定时任务
+																	已完成的
 																</th>
 																<th style="background: #D1ECF9">
 																	合计
@@ -272,7 +279,7 @@ img {
 																	<s:iterator value="buyTask" id="task" status="indexJ">
 																		<td align="center"">
 																			<s:if test="#indexI.index<3 && #indexJ.index>0">
-																				<a href="#" seller='seller' target="_blank"
+																				<a href="#" seller='seller'  
 																					row='<s:property value="#indexI.index"/>'
 																					col='<s:property value="#indexJ.index"/>'><s:property
 																						value="task" /> </a>

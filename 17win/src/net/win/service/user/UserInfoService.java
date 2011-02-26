@@ -846,11 +846,11 @@ public class UserInfoService extends BaseService {
 		/**
 		 * 买家
 		 */
-		String[][] result1 = new String[4][6];
+		String[][] result1 = new String[4][7];
 		/**
 		 * 卖家
 		 */
-		String[][] result2 = new String[4][9];
+		String[][] result2 = new String[4][10];
 		for (String[] r : result1) {
 			Arrays.fill(r, "0");
 		}
@@ -889,6 +889,8 @@ public class UserInfoService extends BaseService {
 						} else if (TaskMananger.STEP_FIVE_STATUS
 								.equals(objs[1])) {
 							result1[0][4] = objs[2] + "";// 等待卖家好评
+						} else if (TaskMananger.STEP_SIX_STATUS.equals(objs[1])) {
+							result1[0][5] = objs[2] + "";// 完成的
 						}
 					} else if ("2".equals(objs[0])) {
 						// 拍拍
@@ -903,6 +905,8 @@ public class UserInfoService extends BaseService {
 						} else if (TaskMananger.STEP_FIVE_STATUS
 								.equals(objs[1])) {
 							result1[1][4] = objs[2] + "";// 等待卖家好评
+						} else if (TaskMananger.STEP_SIX_STATUS.equals(objs[1])) {
+							result1[1][5] = objs[2] + "";// 完成的
 						}
 					} else if ("3".equals(objs[0])) {
 						// 拍拍
@@ -917,6 +921,8 @@ public class UserInfoService extends BaseService {
 						} else if (TaskMananger.STEP_FIVE_STATUS
 								.equals(objs[1])) {
 							result1[2][4] = objs[2] + "";// 等待卖家好评
+						} else if (TaskMananger.STEP_SIX_STATUS.equals(objs[1])) {
+							result1[2][5] = objs[2] + "";// 完成的
 						}
 					}
 				}
@@ -932,63 +938,69 @@ public class UserInfoService extends BaseService {
 
 					if ("1".equals(objs[0])) {
 						// 淘宝的
-						if (TaskMananger.STEP_ONE_STATUS.equals(objs[1])) {
-							result2[0][1] = objs[2] + "";// 等待接收
+						if (TaskMananger.TIMING_STATUS.equals(objs[1])) {
+							result2[0][1] = objs[2] + "";// 定时任务
+						} else if (TaskMananger.STEP_ONE_STATUS.equals(objs[1])) {
+							result2[0][2] = objs[2] + "";// 等待接收
 						} else if (TaskMananger.AUDIT_STATUS.equals(objs[1])) {
-							result2[0][2] = objs[2] + "";// 等待审核
+							result2[0][3] = objs[2] + "";// 等待审核
 						} else if (TaskMananger.STEP_TWO_STATUS.equals(objs[1])) {
-							result2[0][3] = objs[2] + ""; // 等待买家付款
+							result2[0][4] = objs[2] + ""; // 等待买家付款
 						} else if (TaskMananger.STEP_THREE_STATUS
 								.equals(objs[1])) {
-							result2[0][4] = objs[2] + "";// 等待我发货
+							result2[0][5] = objs[2] + "";// 等待我发货
 						} else if (TaskMananger.STEP_FOUR_STATUS
 								.equals(objs[1])) {
-							result2[0][5] = objs[2] + "";// 等待买家确认好评
+							result2[0][6] = objs[2] + "";// 等待买家确认好评
 						} else if (TaskMananger.STEP_FIVE_STATUS
 								.equals(objs[1])) {
-							result2[0][6] = objs[2] + "";// 等待我好评
-						} else if (TaskMananger.TIMING_STATUS.equals(objs[1])) {
-							result2[0][7] = objs[2] + "";// 定时任务
+							result2[0][7] = objs[2] + "";// 等待我好评
+						} else if (TaskMananger.STEP_SIX_STATUS.equals(objs[1])) {
+							result2[0][8] = objs[2] + "";// 完成的
 						}
 					} else if ("2".equals(objs[0])) {
 						// 拍拍
-						if (TaskMananger.STEP_ONE_STATUS.equals(objs[1])) {
-							result2[1][1] = objs[2] + "";// 等待接收
+						if (TaskMananger.TIMING_STATUS.equals(objs[1])) {
+							result2[1][1] = objs[2] + "";// 定时任务
+						} else if (TaskMananger.STEP_ONE_STATUS.equals(objs[1])) {
+							result2[1][2] = objs[2] + "";// 等待接收
 						} else if (TaskMananger.AUDIT_STATUS.equals(objs[1])) {
-							result2[1][2] = objs[2] + "";// 等待审核
+							result2[1][3] = objs[2] + "";// 等待审核
 						} else if (TaskMananger.STEP_TWO_STATUS.equals(objs[1])) {
-							result2[1][3] = objs[2] + ""; // 等待买家付款
+							result2[1][4] = objs[2] + ""; // 等待买家付款
 						} else if (TaskMananger.STEP_THREE_STATUS
 								.equals(objs[1])) {
-							result2[1][4] = objs[2] + "";// 等待我发货
+							result2[1][5] = objs[2] + "";// 等待我发货
 						} else if (TaskMananger.STEP_FOUR_STATUS
 								.equals(objs[1])) {
-							result2[1][5] = objs[2] + "";// 等待买家确认好评
+							result2[1][6] = objs[2] + "";// 等待买家确认好评
 						} else if (TaskMananger.STEP_FIVE_STATUS
 								.equals(objs[1])) {
-							result2[1][6] = objs[2] + "";// 等待我好评
-						} else if (TaskMananger.TIMING_STATUS.equals(objs[1])) {
-							result2[1][7] = objs[2] + "";// 定时任务
+							result2[1][7] = objs[2] + "";// 等待我好评
+						} else if (TaskMananger.STEP_SIX_STATUS.equals(objs[1])) {
+							result2[1][8] = objs[2] + "";// 完成的
 						}
 					} else if ("3".equals(objs[0])) {
 						// 有啊
-						if (TaskMananger.STEP_ONE_STATUS.equals(objs[1])) {
-							result2[2][1] = objs[2] + "";// 等待接收
+						if (TaskMananger.TIMING_STATUS.equals(objs[1])) {
+							result2[2][1] = objs[2] + "";// 定时任务
+						} else if (TaskMananger.STEP_ONE_STATUS.equals(objs[1])) {
+							result2[2][2] = objs[2] + "";// 等待接收
 						} else if (TaskMananger.AUDIT_STATUS.equals(objs[1])) {
-							result2[2][2] = objs[2] + "";// 等待审核
+							result2[2][3] = objs[2] + "";// 等待审核
 						} else if (TaskMananger.STEP_TWO_STATUS.equals(objs[1])) {
-							result2[2][3] = objs[2] + ""; // 等待买家付款
+							result2[2][4] = objs[2] + ""; // 等待买家付款
 						} else if (TaskMananger.STEP_THREE_STATUS
 								.equals(objs[1])) {
-							result2[2][4] = objs[2] + "";// 等待我发货
+							result2[2][5] = objs[2] + "";// 等待我发货
 						} else if (TaskMananger.STEP_FOUR_STATUS
 								.equals(objs[1])) {
-							result2[2][5] = objs[2] + "";// 等待买家确认好评
+							result2[2][6] = objs[2] + "";// 等待买家确认好评
 						} else if (TaskMananger.STEP_FIVE_STATUS
 								.equals(objs[1])) {
-							result2[2][6] = objs[2] + "";// 等待我好评
-						} else if (TaskMananger.TIMING_STATUS.equals(objs[1])) {
-							result2[2][7] = objs[2] + "";// 定时任务
+							result2[2][7] = objs[2] + "";// 等待我好评
+						} else if (TaskMananger.STEP_SIX_STATUS.equals(objs[1])) {
+							result2[1][8] = objs[2] + "";// 完成的
 						}
 					}
 				}

@@ -198,6 +198,9 @@ function validateForm() {
 		$("#addtionReleaseDotId").focus();
 		return false;
 	}
+	$("#bgDIV").show();
+	$("#rtpLoadingDiv").show();
+	$("#submitBtnId").attr("disabled", true);
 	return true;
 }
 

@@ -72,7 +72,7 @@
 </style>
 
 	</HEAD>
-	<BODY>
+	<BODY onkeydown="return refuseF5();">
 		<s:include value="../common/title.jsp"></s:include>
 		<s:include value="../common/task/title.jsp"></s:include>
 		<s:form action="taskManager/task!initReleasedTast.php" theme="simple"
@@ -304,11 +304,11 @@
 									</td>
 									<td valign="middle" align="center">
 										<a style="cursor: pointer;"
-											href="javascript:showItemUrl('<s:property value="#task.itemUrl" />','<s:property value="#task.updatePrice" />','<s:property value="#task.grade" />','<s:property value="#task.comment" />','<s:property value="#task.address" />','<s:property value="#task.waybill" />');">
+											href="javascript:showItemUrl('<s:property value="#task.itemUrl" />','<s:property value="#task.updatePrice" />','<s:property value="#task.grade" />','<s:property value="#task.comment" />','<s:property value="#task.address" />','<s:property value="#task.waybill" />',<s:property value="#task.intervalHour" />);">
 											<img src="images/renwu-3.png" border="0"> </a>
 										<br>
 										<a alt="点此直接打开商品地址"
-											href="javascript:openItemUrl('<s:property value="#task.itemUrl" />','<s:property value="#task.updatePrice" />','<s:property value="#task.grade" />','<s:property value="#task.comment" />','<s:property value="#task.address" />','<s:property value="#task.waybill" />');">
+											href="javascript:openItemUrl('<s:property value="#task.itemUrl" />','<s:property value="#task.updatePrice" />','<s:property value="#task.grade" />','<s:property value="#task.comment" />','<s:property value="#task.address" />','<s:property value="#task.waybill" />',<s:property value="#task.intervalHour" />);">
 											<img src="images/open.gif" border="0"> </a>
 									</td>
 									<td align="center">
@@ -397,7 +397,7 @@
 										<s:elseif test="#task.status==0">
 										定时任务
 										<br>
-										没到时间
+										没接手人
 									</s:elseif>
 										<s:else>
 											<s:date name="#task.receiveDate" format="yyyy-MM-dd HH:mm" />
@@ -419,14 +419,9 @@
 										任务被申诉中
 										</s:elseif>
 										<s:elseif test="#task.status==0">
-											<s:if test="#task.timeingTime!=null">
 											定时任务
 											<br>
-											 等待<s:property value="#task.timeingTime" />接手
-										</s:if>
-											<s:else>
-											定时任务
-										</s:else>
+											没到时间
 										</s:elseif>
 										<s:elseif test="#task.status==-2">
 												等待审核<br>
@@ -665,7 +660,8 @@
 							快递单号：
 						</td>
 						<td>
-							<span id="waybill" style="text-decoration: underline; color: red; cursor: pointer"></span>
+							<span id="waybill"
+								style="text-decoration: underline; color: red; cursor: pointer"></span>
 						</td>
 						<td>
 							&nbsp;
@@ -684,11 +680,12 @@
 						</td>
 					</tr>
 					<tr>
-						<td valign="top" nowrap="nowrap">
+						<td valign="top">
 							收货地址：
 						</td>
 						<td>
-							<span id="address" style="text-decoration: underline; color: red; cursor: pointer"></span>
+							<span id="address"
+								style="text-decoration: underline; color: red; cursor: pointer"></span>
 						</td>
 						<td>
 							&nbsp;

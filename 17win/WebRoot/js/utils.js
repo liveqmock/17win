@@ -280,3 +280,14 @@ function forbidBackSpace() {
 		event.returnValue = false;
 	}
 }
+
+function refuseF5() {
+	if ((window.event.keyCode == 116) || // 屏蔽 F5
+			(window.event.keyCode == 122) || // 屏蔽 F11
+			(window.event.shiftKey && window.event.keyCode == 121)) {
+		event.keyCode = 0;
+		event.cancelBubble = true;
+		return false;
+		refreshPage();
+	}
+}

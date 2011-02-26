@@ -181,22 +181,26 @@ function jumpPage() {
 }
 
 // 复制地址
-function showItemUrl(itemUrl, updatePrice, grade, comment, address, status) {
+function showItemUrl(itemUrl, updatePrice, grade, comment, address, status,
+		intervalHour) {
 	$("#updatePrice").text(updatePrice == "true" ? "需修改价" : "不需改价");
-	$("#grade").text(grade);
+	$("#grade").text(grade == "自定义时间好评"
+			? grade + "(" + intervalHour + "小时后好评)"
+			: grade);
 	$("#comment").text((comment == null || comment == "")
 			? "无"
 			: (comment == "-1") ? "接手人自己想" : comment);
 	$("#address").text((address == null || address == "") ? "无" : address);
 	$("#comment").unbind("click");
 	$("#comment").click(function() {
-				if (comment != null && comment != "" && comment != "-1") {
-					copyToClipboard($(this).text());
-				}
-			});
+		if (comment != null && comment != "" && comment != "-1"
+				&& comment != "无") {
+			copyToClipboard($(this).text());
+		}
+	});
 	$("#address").unbind("click");
 	$("#address").click(function() {
-				if (address != null && address != "") {
+				if (address != null && address != "" && address != "无") {
 					copyToClipboard($(this).text());
 				}
 			});
@@ -225,12 +229,14 @@ function showItemUrl(itemUrl, updatePrice, grade, comment, address, status) {
 	$("#addressDIV").dialog("open");
 }
 // 直接跳转地址
-function openItemUrl(itemUrl, updatePrice, grade, comment, address, status) {
+function openItemUrl(itemUrl, updatePrice, grade, comment, address, status,
+		intervalHour) {
 	var itemUrls = itemUrl.split(",");
 	if (itemUrls.length == 1 && status != "2" && status != "-2") {
 		window.open(itemUrls[0], "_blank");
 	} else {
-		showItemUrl(itemUrl, updatePrice, grade, comment, address, status);
+		showItemUrl(itemUrl, updatePrice, grade, comment, address, status,
+				intervalHour);
 	}
 }
 // 条件查询
@@ -246,13 +252,4 @@ function query(page) {
 // 刷新页面
 function refreshPage() {
 	$("#mainForm").submit();
-}
-
-document.onkeydown = function() {
-	if ((window.event.keyCode == 116) || // 屏蔽 F5
-			(window.event.keyCode == 122) || // 屏蔽 F11
-			(window.event.shiftKey && window.event.keyCode == 121)) {
-		refreshPage();
-		return false;
-	}
 }

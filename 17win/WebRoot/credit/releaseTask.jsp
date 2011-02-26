@@ -76,8 +76,7 @@
 	background-color: #EEF7FB;
 }
 </style>
-	<body>
-
+	<body onkeydown="return refuseF5();">
 		<s:include value="../common/title.jsp"></s:include>
 		<s:include value="../common/task/title.jsp"></s:include>
 		<div align="center">
@@ -443,7 +442,7 @@
 																	</td>
 																	<td colspan="2">
 																		<input type="submit" style="cursor: pointer;"
-																			title="发布任务" value="发布任务">
+																			id="submitBtnId" title="发布任务" value="发布任务">
 																		&nbsp;
 																		<input type="reset" style="cursor: pointer;"
 																			title="重置内容" value="重置内容">
@@ -481,5 +480,11 @@
 			</table>
 		</div>
 		<s:include value="../common/footDuan.jsp"></s:include>
+
+		<div class="bg_Div" id="bgDIV" style="display: none"></div>
+		<div id='rtpLoadingDiv'
+			style='position: absolute; top: 50%; left: 50%; margin: 0px; z-index: 1000; width: 200px; height: 30px; display: none;'>
+			<img src='../images/loading.gif' />
+		</div>
 	</BODY>
 </html>

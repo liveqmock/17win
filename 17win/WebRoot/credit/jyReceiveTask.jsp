@@ -75,7 +75,7 @@
 </style>
 
 	</HEAD>
-	<BODY>
+	<BODY onkeydown="return refuseF5();">
 		<s:include value="../common/title.jsp"></s:include>
 		<s:include value="../common/task/title.jsp"></s:include>
 		<s:form action="taskManager/task!initReceivedTast.php" theme="simple"
@@ -299,11 +299,11 @@
 									</td>
 									<td align="center" valign="middle">
 										<a style="cursor: pointer;"
-											href="javascript:showItemUrl('<s:property value="#task.itemUrl" />','<s:property value="#task.updatePrice" />','<s:property value="#task.grade" />','<s:property value="#task.comment" />','<s:property value="#task.address" />','<s:property value="#task.status" />');">
+											href="javascript:showItemUrl('<s:property value="#task.itemUrl" />','<s:property value="#task.updatePrice" />','<s:property value="#task.grade" />','<s:property value="#task.comment" />','<s:property value="#task.address" />','<s:property value="#task.status" />',<s:property value="#task.intervalHour" />);">
 											<img src="images/renwu-3.png" border="0"> </a>
 										<br>
 										<a alt="点此直接打开商品地址"
-											href="javascript:openItemUrl('<s:property value="#task.itemUrl" />','<s:property value="#task.updatePrice" />','<s:property value="#task.grade" />','<s:property value="#task.comment" />','<s:property value="#task.address" />','<s:property value="#task.status" />');">
+											href="javascript:openItemUrl('<s:property value="#task.itemUrl" />','<s:property value="#task.updatePrice" />','<s:property value="#task.grade" />','<s:property value="#task.comment" />','<s:property value="#task.address" />','<s:property value="#task.status" />',<s:property value="#task.intervalHour" />);">
 											<img src="images/open.gif" border="0"> </a>
 									</td>
 									<td align="center">
