@@ -59,7 +59,8 @@
 				</tr>
 			</table>
 			<br>
-			<table id="myTable"  style="font-size: 12px;"  class="tablesorter" cellpadding="1">
+			<table id="myTable" style="font-size: 12px;" class="tablesorter"
+				cellpadding="1">
 				<thead>
 					<tr>
 						<th style="font-size: 12px" nowrap="nowrap">
@@ -102,7 +103,7 @@
 							<td>
 								<s:property value="#capitalLog.value" />
 							</td>
-								<td>
+							<td>
 								<s:property value="#capitalLog.remainValue" />
 							</td>
 							<td>
@@ -125,12 +126,11 @@
 					<tfoot>
 						<tr>
 							<th colspan="6" style="font-size: 12px">
-								<div style="float: left;f">
+								<div style="float: left;">
 									<a href="javascript:firstPage()">首页</a>
 									<a href="javascript:prevPage()">上一页</a>&nbsp;
 									<a href="javascript:nextPage()">下一页</a>&nbsp;
-									<a href="javascript:lastPage()">尾页</a>&nbsp;
-									当前任务数:
+									<a href="javascript:lastPage()">尾页</a>&nbsp; 当前记录数:
 									<s:property value="capitalLogVO.dataCount" />
 									&nbsp;
 									<s:property value="capitalLogVO.nowPage" />
@@ -138,8 +138,7 @@
 									<s:property value="capitalLogVO.pageCount" />
 
 									&nbsp; 每页显示：
-									<s:textfield name="capitalLogVO.eachPage"
-										cssStyle="width:40px"></s:textfield>
+									<s:textfield name="capitalLogVO.eachPage" cssStyle="width:40px"></s:textfield>
 									&nbsp;
 								</div>
 								<div style="float: left;">

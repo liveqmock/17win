@@ -154,7 +154,7 @@ img {
 												<th style="font-size: 12px">
 													注册时间
 												</th>
-											 
+
 											</tr>
 										</thead>
 										<tbody>
@@ -181,13 +181,6 @@ img {
 														</td>
 													</tr>
 												</s:iterator>
-												<tfoot>
-													<tr>
-														<th colspan="5">
-															首页&nbsp;&nbsp;上一页&nbsp;&nbsp;下一页&nbsp;&nbsp;末页
-														</th>
-													</tr>
-												</tfoot>
 											</s:if>
 											<s:else>
 												<tfoot>

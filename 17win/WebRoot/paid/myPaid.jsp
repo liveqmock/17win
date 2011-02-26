@@ -16,8 +16,8 @@
 		<LINK href="css/Css.css" type="text/css" rel="stylesheet">
 		<LINK href="css/center.css" type="text/css" rel="stylesheet">
 		<SCRIPT src="js/jquery.tablesorter.min.js" type="text/javascript"></SCRIPT>
-		<script src="<%=basePath%>js/My97DatePicker/WdatePicker.js"  defer="defer" 
-			type="text/javascript"></script>
+		<script src="<%=basePath%>js/My97DatePicker/WdatePicker.js"
+			defer="defer" type="text/javascript"></script>
 		<script src="paid/myPaid.js" type="text/javascript"></script>
 		<style type="text/css">
 body {
@@ -169,6 +169,12 @@ img {
 													<tr>
 														<th colspan="3">
 															<div style="float: left;">
+																<s:property value="payVO.nowPage" />
+																/
+																<s:property value="payVO.pageCount" />
+																&nbsp;总记录数：
+																<s:property value="payVO.dataCount" />
+																&nbsp;
 																<a href="javascript:firstPage()">首页</a>
 																<a href="javascript:prevPage()">上一页</a>&nbsp;
 																<a href="javascript:nextPage()">下一页</a>&nbsp;

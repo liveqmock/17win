@@ -3,7 +3,8 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
 <%
 	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()+"/";
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ "/";
 %>
 <HTML>
 	<HEAD>
@@ -19,8 +20,8 @@
 		<SCRIPT src="js/jquery.tablesorter.min.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="js/utils.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="js/validater.js" type="text/javascript"></SCRIPT>
-		<script src="<%=basePath%>js/My97DatePicker/WdatePicker.js"  defer="defer" 
-			type="text/javascript"></script>
+		<script src="<%=basePath%>js/My97DatePicker/WdatePicker.js"
+			defer="defer" type="text/javascript"></script>
 		<SCRIPT src="capitalLog/index.js" type="text/javascript"></SCRIPT>
 		<style type="text/css">
 body {
@@ -207,6 +208,12 @@ img {
 														<tr>
 															<th colspan="5">
 																<div style="float: left;">
+																	<s:property value="capitalLogVO.nowPage" />
+																	/
+																	<s:property value="capitalLogVO.pageCount" />
+																	&nbsp;总记录数：
+																	<s:property value="capitalLogVO.dataCount" />
+																	&nbsp;
 																	<a href="javascript:firstPage()">首页</a>
 																	<a href="javascript:prevPage()">上一页</a>&nbsp;
 																	<a href="javascript:nextPage()">下一页</a>&nbsp;

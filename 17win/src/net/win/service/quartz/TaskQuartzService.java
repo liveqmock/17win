@@ -87,9 +87,16 @@ public class TaskQuartzService {
 			session = creditTaskDAO.obtainSession();
 			// / 删除完成的任务
 			session.beginTransaction();
-			String sql2 = "delete from " + " Tb_CreditTask " + "   where"
+			String sql1 = "delete from " + " Tb_CreditTask " + "   where"
 					+ "       STATUS_='6'   ";
+			query = session.createSQLQuery(sql1);
+			query.executeUpdate();
+			// 删除资产记录
+			Calendar calendarCapital = Calendar.getInstance();
+			calendarCapital.add(Calendar.DAY_OF_YEAR, -7);
+			String sql2 = "delete from   TB_CapitalLog  where LogTime_=<:logDate  ";
 			query = session.createSQLQuery(sql2);
+			query.setDate("logDate", calendarCapital.getTime());
 			query.executeUpdate();
 			session.getTransaction().commit();
 		} catch (Exception e) {
@@ -111,7 +118,7 @@ public class TaskQuartzService {
 			calendar.add(Calendar.DAY_OF_YEAR, -7);
 			List<LogisticsEntity> result = logisticsDAO
 					.list(
-							"from LogisticsEntity where logDate>:logDate and status='1'",
+							"from LogisticsEntity where logDate=<:logDate and status='1'",
 							"logDate", calendar.getTime());
 			for (LogisticsEntity logisticsEntity : result) {
 				logisticsDAO.delete(logisticsEntity);

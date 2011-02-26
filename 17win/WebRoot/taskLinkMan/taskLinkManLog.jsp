@@ -196,15 +196,18 @@ img {
 														<tr>
 															<th colspan="10">
 																<div style="float: left;">
+																	<s:property value="taskLinkManVO.nowPage" />
+																	/
+																	<s:property value="taskLinkManVO.pageCount" />
+																	&nbsp;总记录数：
+																	<s:property value="taskLinkManVO.dataCount" />
+																	&nbsp;
 																	<a href="javascript:firstPage()">首页</a>
 																	<a href="javascript:prevPage()">上一页</a>&nbsp;
 																	<a href="javascript:nextPage()">下一页</a>&nbsp;
 																	<a href="javascript:lastPage()">尾页</a>&nbsp;
 																</div>
 																<div style="float: left;">
-																	<s:property value="taskLinkManVO.nowPage" />
-																	/
-																	<s:property value="taskLinkManVO.pageCount" />
 																	跳转到
 																	<select id='toPageSelect' size='1'
 																		onchange="jumpPage()">

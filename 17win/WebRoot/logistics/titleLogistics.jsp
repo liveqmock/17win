@@ -33,8 +33,8 @@
 		<SCRIPT src="js/jquery.tablesorter.min.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="js/utils.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="js/validater.js" type="text/javascript"></SCRIPT>
-		<script src="<%=basePath%>js/My97DatePicker/WdatePicker.js"  defer="defer" 
-			type="text/javascript"></script>
+		<script src="<%=basePath%>js/My97DatePicker/WdatePicker.js"
+			defer="defer" type="text/javascript"></script>
 		<SCRIPT src="logistics/titleLogistics.js" type="text/javascript"></SCRIPT>
 
 		<style type="text/css">
@@ -254,15 +254,18 @@ img {
 								<tr>
 									<th colspan="10">
 										<div style="float: left;">
+											<s:property value="logisticsVO.nowPage" />
+											/
+											<s:property value="logisticsVO.pageCount" />
+											&nbsp;总记录数：
+											<s:property value="logisticsVO.dataCount" />
+											&nbsp;
 											<a href="javascript:firstPage()">首页</a>
 											<a href="javascript:prevPage()">上一页</a>&nbsp;
 											<a href="javascript:nextPage()">下一页</a>&nbsp;
 											<a href="javascript:lastPage()">尾页</a>&nbsp;
 										</div>
 										<div style="float: left;">
-											<s:property value="logisticsVO.nowPage" />
-											/
-											<s:property value="logisticsVO.pageCount" />
 											跳转到
 											<select id='toPageSelect' size='1' onchange="jumpPage()">
 												<s:iterator begin="1" end="logisticsVO.pageCount" step="1"

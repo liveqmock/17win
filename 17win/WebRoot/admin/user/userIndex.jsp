@@ -280,7 +280,7 @@
 									<a href="javascript:firstPage()">首页</a>
 									<a href="javascript:prevPage()">上一页</a>&nbsp;
 									<a href="javascript:nextPage()">下一页</a>&nbsp;
-									<a href="javascript:lastPage()">尾页</a>&nbsp; 当前人数:
+									<a href="javascript:lastPage()">尾页</a>&nbsp; 当前记录数:
 									<s:property value="adminUserVO.dataCount" />
 									&nbsp;
 									<s:property value="adminUserVO.nowPage" />
