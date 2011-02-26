@@ -66,7 +66,8 @@ public class AdminPropertyService extends BaseService {
 		PropertyEntity propertyEntity = propertyDAO.get(propertyVO.getId());
 		BeanUtils.copyProperties(propertyEntity, propertyVO);
 		putAlertMsg("修改成功！");
-		return "updateProperty";
+		putJumpSelfPage("adminPropertyManager/adminProperty!queryProperty.php");
+		return JUMP;
 	}
 
 	/**

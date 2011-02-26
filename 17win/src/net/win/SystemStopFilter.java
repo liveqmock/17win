@@ -22,6 +22,8 @@ import net.win.utils.Constant;
  */
 public class SystemStopFilter implements Filter {
 
+	public String[] INCLUDE_SUFFIX = new String[] { ".php", ".jsp" };
+
 	public void destroy() {
 		// TODO Auto-generated method stub
 
@@ -33,11 +35,10 @@ public class SystemStopFilter implements Filter {
 		HttpServletRequest request = (HttpServletRequest) requestTemp;
 		HttpServletResponse response = (HttpServletResponse) responseTemp;
 		String requestURI = request.getRequestURI();
-		if (!requestURI.contains("admin")) {
+
+		if (!requestURI.contains("admin") && checkIncludeSuffix(requestURI)) {
 			if (Constant.stopAll) {
-				if (!requestURI.endsWith(".html")) {
-					throw new BuildingException("");
-				}
+				throw new BuildingException("");
 			}
 			if (Constant.stopTask) {
 				if (requestURI.contains("taskManager")
@@ -47,6 +48,21 @@ public class SystemStopFilter implements Filter {
 			}
 		}
 		chain.doFilter(request, response);
+	}
+
+	/**
+	 * TRUE 要检查
+	 * 
+	 * @param requestURI
+	 * @return
+	 */
+	private boolean checkIncludeSuffix(String requestURI) {
+		for (String path : INCLUDE_SUFFIX) {
+			if (requestURI.toLowerCase().endsWith(path)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public void init(FilterConfig arg0) throws ServletException {
