@@ -29,19 +29,18 @@
 				<TR>
 					<TD width=433>
 						<div style="width: 350px;" id="logo">
-							<a href="http://www.17win.net/" style="float: left;"><img border="0"
-									alt="刷钻网" src="images/logo.gif">
-							</a>
+							<a href="http://www.17win.net/" style="float: left;"><img
+									border="0" alt="刷钻网" src="images/logo.gif"> </a>
 							<div style="float: left; padding-top: 14px; padding-left: 5px;">
 								<embed width="85" height="30" style="vertical-align: middle;"
-									wmode="transparent" src="http://www.shuazuan.com/images/clock_4.swf?TimeZone=GMT0800"
+									wmode="transparent"
+									src="http://www.shuazuan.com/images/clock_4.swf?TimeZone=GMT0800"
 									quality="high"
 									pluginspage="http://www.adobe.com/go/getflashplayer"
 									type="application/x-shockwave-flash">
 								<br>
-								<a target="_blank" href="http://www.17win.net/"><img  border="0"
-										src="images/tubiao.png">
-								</a>
+								<a target="_blank" href="http://www.17win.net/"><img
+										border="0" src="images/tubiao.png"> </a>
 							</div>
 						</div>
 					</TD>
@@ -66,7 +65,7 @@
 											[个人中心] </A>|
 									</s:else>
 									<A
-										href="javascript:window.external.addFavorite('http://www.17win.net','淘宝刷信誉');"
+										href="javascript:window.external.addFavorite('http://www.17win.net','淘宝,拍拍，有啊完全免费互刷信誉');"
 										title="添加到收藏夹">[收藏本站]</A>
 									<!-- xgj|
 									<A href="help/link.asp" target="_top">广告服务</A>

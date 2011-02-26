@@ -1,19 +1,6 @@
 $(document).ready(function() {
 			$("#myTable").tablesorter();
 		});
-function toCopy(id) {
-	if (!$.browser.msie) {
-		alert("仅在IE浏览器中支持！");
-		return;
-	}
-
-	var value = "";
-	$("[class='toCopy_" + id + "']").each(function(i) {
-				value = value + $(this).text() + " ";
-			});
-	copy_code(value);
-	alert("复制成功");
-}
 
 function validateForm() {
 	var startDate = $("input[name='logisticsVO.startDate']").val();

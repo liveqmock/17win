@@ -3,10 +3,8 @@ package net.win.action.taskLinkMan;
 import javax.annotation.Resource;
 
 import net.win.BaseAction;
-import net.win.service.logistics.LogisticsService;
 import net.win.service.taskLinkMan.TaskLinkManService;
-import net.win.vo.LogisticsVO;
-import net.win.vo.TaskLinkManVo;
+import net.win.vo.TaskLinkManVO;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
@@ -21,30 +19,39 @@ import org.springframework.stereotype.Controller;
 @Scope("prototype")
 @ParentPackage("17win-default")
 @Results( {
-		@Result(name = "input", location = "/logistics/logistics.jsp"),
-		@Result(name = "initLogistics", location = "/logistics/logistics.jsp"),
+		@Result(name = "input", location = "/taskLinkMan/addTaskLinkMan.jsp"),
 		@Result(name = "initAddLinkTaskMan", location = "/taskLinkMan/addTaskLinkMan.jsp"),
-		@Result(name = "addLinkTaskMan", location = "/taskLinkMan/addTaskLinkMan.jsp"),
-		@Result(name = "logisticsLog", location = "/logistics/logisticsLog.jsp"),
-		@Result(name = "useLogisticsLog", location = "/logistics/useLogisticsLog.jsp"),
-		@Result(name = "queryLogisticsLog", location = "/logistics/titleLogistics.jsp") })
+		@Result(name = "queryLinkTaskMan", location = "/taskLinkMan/taskLinkManLog.jsp"),
+		@Result(name = "deleteLinkTaskMan", location = "/taskLinkMan/taskLinkManLog.jsp")
+
+})
 @Namespace("/taskLinkManManager")
 public class TaskLinkManAction extends BaseAction {
 	@Resource
 	private TaskLinkManService taskLinkManService;
-	private TaskLinkManVo taskLinkManVo = new TaskLinkManVo();
+	private TaskLinkManVO taskLinkManVO = new TaskLinkManVO();
 
-	public TaskLinkManVo getTaskLinkManVo() {
-		return taskLinkManVo;
+	public TaskLinkManVO getTaskLinkManVO() {
+		return taskLinkManVO;
 	}
 
-	public void setTaskLinkManVo(TaskLinkManVo taskLinkManVo) {
-		this.taskLinkManVo = taskLinkManVo;
+	public void setTaskLinkManVO(TaskLinkManVO taskLinkManVO) {
+		this.taskLinkManVO = taskLinkManVO;
 	}
 
-	@Action("/initAddLinkTaskMan")
+	@Action("/taskLinkMan")
 	public String execute() throws Exception {
 		return INPUT;
+	}
+
+	/**
+	 * 初始化添加联系人
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String initAddLinkTaskMan() throws Exception {
+		return taskLinkManService.initAddLinkTaskMan(taskLinkManVO);
 	}
 
 	/**
@@ -53,12 +60,29 @@ public class TaskLinkManAction extends BaseAction {
 	 * @return
 	 * @throws Exception
 	 */
-	public String initAddLinkTaskMan() throws Exception {
-		return logisticsService.insertLogistics(logisticsVO);
+	public String insertLinkTaskMan() throws Exception {
+		return taskLinkManService.insertLinkTaskMan(taskLinkManVO);
 	}
 
-	public String useLogistics() throws Exception {
-		return logisticsService.updateUseLogistics(logisticsVO);
+	//
+	/**
+	 * 查找联系人
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String queryLinkTaskMan() throws Exception {
+		return taskLinkManService.queryLinkTaskMan(taskLinkManVO);
+	}
+
+	/**
+	 * 删除联系人
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String deleteLinkTaskMan() throws Exception {
+		return taskLinkManService.deleteLinkTaskMan(taskLinkManVO);
 	}
 
 }

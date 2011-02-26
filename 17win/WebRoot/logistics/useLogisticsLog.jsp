@@ -30,8 +30,8 @@
 		<SCRIPT src="js/jquery.tablesorter.min.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="js/utils.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="js/validater.js" type="text/javascript"></SCRIPT>
-		<script src="<%=basePath%>js/My97DatePicker/WdatePicker.js"  defer="defer" 
-			type="text/javascript"></script>
+		<script src="<%=basePath%>js/My97DatePicker/WdatePicker.js"
+			defer="defer" type="text/javascript"></script>
 		<SCRIPT src="logistics/useLogisticsLog.js" type="text/javascript"></SCRIPT>
 
 		<style type="text/css">
@@ -173,11 +173,19 @@ img {
 													<s:iterator value="#request.result" id="logistics">
 														<tr
 															<s:if test="#status.odd"> style="background: #FFC278"</s:if>>
-															<td class='toCopy_<s:property value="#logistics.id"/>'>
-																<s:property value="#logistics.expressCompany" />
+															<td>
+																<span
+																	style="text-decoration: underline; cursor: pointer"
+																	onclick="copyToClipboard('<s:property 
+																		value="#logistics.expressCompany" />')">
+																	<s:property value="#logistics.expressCompany" /> </span>
 															</td>
-															<td class="toCopy_<s:property value="#logistics.id"/>">
-																<s:property value="#logistics.waybill" />
+															<td>
+																<span
+																	style="text-decoration: underline; cursor: pointer"
+																	onclick="copyToClipboard('<s:property 
+																		value="#logistics.waybill" />')">
+																	<s:property value="#logistics.waybill" /> </span>
 															</td>
 															<td>
 																<s:date name="#logistics.sendDate" format="yyyy-MM-dd" />
@@ -187,10 +195,18 @@ img {
 																	format="yyyy-MM-dd" />
 															</td>
 															<td>
-																<s:property value="#logistics.releaseInfo" />
+																<span
+																	style="text-decoration: underline; cursor: pointer"
+																	onclick="copyToClipboard('<s:property 
+																		value="#logistics.releaseInfo" />')">
+																	<s:property value="#logistics.releaseInfo" /> </span>
 															</td>
-															<td class="toCopy_<s:property value="#logistics.id"/>">
-																<s:property value="#logistics.receieveInfo" />
+															<td>
+																<span
+																	style="text-decoration: underline; cursor: pointer"
+																	onclick="copyToClipboard('<s:property 
+																		value="#logistics.receieveInfo" />')">
+																	<s:property value="#logistics.receieveInfo" /> </span>
 															</td>
 															<td>
 																<s:property value="#logistics.remark" />

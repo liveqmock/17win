@@ -1556,7 +1556,7 @@ public class CreditTaskService extends BaseService {
 					taskLinkManDAO.save(linkMan);
 				}
 				linkMan.setLastUseTime(new Date());
-				linkMan.setUseCount(linkMan.getUseCount()+1);
+				linkMan.setUseCount(linkMan.getUseCount() + 1);
 			}
 			creditTask.setReleaseDot(0D);
 		}
@@ -1723,12 +1723,7 @@ public class CreditTaskService extends BaseService {
 	 * @throws Exception
 	 */
 	public List<String> getLinkMans(CreditTaskVO creditTaskVO) throws Exception {
-		UserEntity userEntity = getLoginUserEntity(userDAO);
-		/**
-		 * 是否指定人
-		 */
-		List<String> tlms = taskLinkManDAO.queryLinkMan(creditTaskVO
-				.getAssignUser(), userEntity.getId());
+		List<String> tlms = taskLinkManDAO.queryLinkMan(getLoginUser().getId());
 		return tlms;
 	}
 

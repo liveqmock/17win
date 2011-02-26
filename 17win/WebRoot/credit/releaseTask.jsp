@@ -193,8 +193,8 @@
 																	</td>
 																	<td colspan="4">
 																		<s:textfield name="creditTaskVO.assignUser"
-																			onchange="changeUser(this)"
-																			onclick="selectAssignUser(this);"
+																			onmouseout="moveOutCloseDisplay(event,'selectUserDiv');"
+																			onclick="selectAssignUser();"
 																			title="输入指定人的17win帐号，只有指定的人才可以接你的任务，发特定任务不需要发布点！"
 																			id="assignUserID" maxlength="12"></s:textfield>
 																		<img src="images/tdTask.gif">

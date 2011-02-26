@@ -21,11 +21,11 @@ public class TaskLinkManEntity extends BaseEntity {
 	@Column(name = "USERNAME_", length = 12, unique = true, nullable = false)
 	private String username;
 	// 最后一次使用日期
-	@Column(name = "LAST_USE_TIME", nullable = false)
+	@Column(name = "LAST_USE_TIME", nullable = true)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date lastUseTime;
 	// 使用次数
-	@Column(name = "USE_COUNT_", nullable = false)
+	@Column(name = "USE_COUNT_", nullable = true)
 	private Integer useCount;
 	// 所属人
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = UserEntity.class)

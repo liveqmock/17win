@@ -37,7 +37,7 @@ $(document).ready(function() {
 						+ "			|    "
 						+ "			<a target='_self' href='userInfoManager/info!init.php'> "
 						+ "				[个人中心] </a>|  "
-						+ "		<a  href='javascript:window.external.addFavorite(\"http://www.17win.net\",\"淘宝刷信誉\");'	title='添加到收藏夹'>[收藏本站]</a>  ";
+						+ "		<a  href='javascript:window.external.addFavorite(\"http://www.17win.net\",\"淘宝,拍拍，有啊完全免费互刷信誉\");'	title='添加到收藏夹'>[收藏本站]</a>  ";
 				var tableYes = "<table width='100%' cellspacing='0' cellpadding='0' border='0' class='LeftNews'>  "
 						+ "			<tbody>  "
 						+ "			<tr> "

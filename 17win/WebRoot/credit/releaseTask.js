@@ -109,42 +109,38 @@ function diyCommentTime(id) {
 }
 
 // 弹出选择人
-function selectAssignUser(obj) {
-	var username = $(obj).val();
-	queryAssignUser(username);
-	var div = $("#selectUserDiv");
-	var position = $(obj).position();
-	div.css("top", position.top + 22);
-	div.css("left", position.left);
-	div.show();
+function selectAssignUser() {
+	queryAssignUser();
+
 }
 // 查询选择人
-function queryAssignUser(username) {
+function queryAssignUser() {
 	// 获取用户地址
-	VhostAop.divAOP.ajax("taskManager/task!obtainLinkMan.php", {
-				"creditTaskVO.assignUser" : $("#assignUserID").val()
-			}, function(data) {
-				$("#assignUserTable").empty();
-				if (data.linkMans.length == 0) {
-					var tr = "<tr>" + "	<td colspan='2'>" + "		<b>没有联系人！</b>"
-							+ "	</td>" + "</tr>"
-					$("#assignUserTable").append(tr);
-					return;
-				}
-				for (var i = 0; i < data.linkMans.length; i++) {
-					var tr = "<tr onmouseover='this.className=\'over\'' style='cursor: pointer;'"
-							+ "onclick='selectUser(this);' onmouseout='this.className=\'out\'\>"
-							+ "	<td colspan='2'>"
-							+ "		<b>"
-							+ data.linkMans[i]
-							+ "</b>" + "	</td>" + "</tr>"
-					$("#assignUserTable").append(tr);
-				}
-			}, "json");
-}
-// 改变选择人
-function changeUser(obj) {
-	queryAssignUser($(obj).val());
+	VhostAop.divAOP.ajax("taskManager/task!obtainLinkMan.php", {}, function(
+			data) {
+		$("#assignUserTable").empty();
+		if (data.linkMans.length == 0) {
+			var tr = "<tr>" + "	<td colspan='2'>" + "		<b>没有联系人！</b>"
+					+ "	</td>" + "</tr>"
+			$("#assignUserTable").append(tr);
+			return;
+		}
+		for (var i = 0; i < data.linkMans.length; i++) {
+			var tr = "<tr onmouseover='this.className=\'over\'' style='cursor: pointer;'"
+					+ "onclick='selectUser(this);' onmouseout='this.className=\'out\'\>"
+					+ "	<td colspan='2'>"
+					+ "		<b>"
+					+ data.linkMans[i]
+					+ "</b>"
+					+ "	</td>" + "</tr>"
+			$("#assignUserTable").append(tr);
+		}
+		var div = $("#selectUserDiv");
+		var position = $("#assignUserID").position();
+		div.css("top", position.top + 22);
+		div.css("left", position.left);
+		div.show();
+	}, "JSON");
 }
 // 选择人员
 function selectUser(obj) {

@@ -140,23 +140,24 @@
 											<tr>
 
 												<td height=20>
+													<A
+														href="taskLinkManManager/taskLinkMan!initAddLinkTaskMan.php">添加联系人</A>
+												</td>
+											</tr>
+											<tr>
+												<td height=20>
+													<A href="taskLinkManManager/taskLinkMan!queryLinkTaskMan.php">我的联系人</A>
+												</td>
+											</tr>
+											<tr>
+
+												<td height=20>
 													<A href="userInfoManager/info!referee.php" target="_blank">我要推广</A>
 												</td>
 											</tr>
 											<tr>
 												<td height=20>
 													<A href="userInfoManager/info!myRefee.php">我的推广</A>
-												</td>
-											</tr>
-											<tr>
-
-												<td height=20>
-													<A href="userInfoManager/info!referee.php" target="_blank">添加联系人</A>
-												</td>
-											</tr>
-											<tr>
-												<td height=20>
-													<A href="userInfoManager/info!myRefee.php">我的联系人</A>
 												</td>
 											</tr>
 
