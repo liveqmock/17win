@@ -206,9 +206,27 @@ function jumpPage() {
 function showItemUrl(itemUrl, updatePrice, grade, comment, address, waybill) {
 	$("#updatePrice").text(updatePrice == "true" ? "需修改价" : "不需改价");
 	$("#grade").text(grade);
-	$("#comment").text((comment == null || comment == "") ? "无" : comment);
+	$("#comment").text((comment == null || comment == "")
+			? "无"
+			: (comment == "-1") ? "接手人自己想" : comment);
 	$("#address").text((address == null || address == "") ? "无" : address);
 	$("#waybill").text(waybill);
+	$("#waybill").unbind("click");
+	$("#waybill").click(function() {
+				copyToClipboard($(this).text().split(" ")[1]);
+			});
+	$("#comment").unbind("click");
+	$("#comment").click(function() {
+				if (comment != null && comment != "" && comment != "-1") {
+					copyToClipboard($(this).text());
+				}
+			});
+	$("#address").unbind("click");
+	$("#address").click(function() {
+				if (address != null && address != "") {
+					copyToClipboard($(this).text());
+				}
+			});
 
 	$("#itemContent").empty();
 	var itemUrls = itemUrl.split(",");

@@ -12,9 +12,8 @@ $(document).ready(function() {
 
 // 继续发布任务
 function releaseRepository(id) {
-	var platformType = $("#platformType").val();
-	window.location.href = "taskRepositoryManager/taskRepository!releaseRepository.php?taskReId="
-			+ id + "&platformType=" + platformType;
+	$("#taskRepCurrId").val(id);
+	$("#taskForm").submit();
 }
 
 // 删除

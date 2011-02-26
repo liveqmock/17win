@@ -82,8 +82,6 @@
 								<tr onmouseover="this.className='over'"
 									onmouseout="this.className='out'">
 									<td valign="middle" align="center">
-										<s:property value="#task.name" />
-										<br>
 										<s:if test="#task.taskType==1">
 											<img src="images/xnType.jpg" alt="虚拟任务" />
 										</s:if>
@@ -93,12 +91,19 @@
 										<s:elseif test="#task.taskType==3">
 											<img src="images/tcType.jpg" alt="套餐任务" />
 										</s:elseif>
+										<s:property value="#task.name" />
+										<br>
 										<s:if test="#task.assignUser!=null && #task.assignUser!=''">
-											<img src="images/tdTask.gif" alt="特定任务" />
+											<img src="images/tdTask.gif"
+												alt="特定任务，接手人是<s:property value="#task.assignUser"/>" />
 										</s:if>
 										<s:else>
 											<img src="images/ptTask.jpg" alt="普通任务" />
 										</s:else>
+										是否任务保护：
+										<s:if test="#task.protect">是</s:if>
+										<s:else>否</s:else>
+
 									</td>
 									<td valign="middle" align="center">
 										<s:property value="#task.money" />
@@ -122,10 +127,16 @@
 										<s:property value="#task.grade" />
 										<br>
 										<s:if test="#task.comment==null || #task.comment==''">
-											无
+										评语:无
 										</s:if>
 										<s:else>
-										评语:<s:property value="#task.comment" />
+										评语:
+											<s:if test="#task.comment=='-1'">
+												接手人自己想
+											</s:if>
+											<s:else>
+												<s:property value="#task.comment" />
+											</s:else>
 										</s:else>
 									</td>
 									<td valign="middle" align="center">
@@ -218,6 +229,12 @@
 				</div>
 			</div>
 		</s:form>
+
+		<form
+			action="taskManager/task!initReleaseTask.php?platformType=<s:property value="#request.platformType"/>"
+			id="taskForm" method="post">
+			<input type="hidden" name="taskRepId" id="taskRepCurrId" />
+		</form>
 		<!-- 显示地址 -->
 		<div id="addressDIV" title="商品地址" style="display: none">
 			<table cellpadding="0" cellspacing="0" border="0" width="100%">

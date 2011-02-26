@@ -185,13 +185,21 @@ function jumpPage() {
 function showItemUrl(itemUrl, updatePrice, grade, comment, address, status) {
 	$("#updatePrice").text(updatePrice == "true" ? "需修改价" : "不需改价");
 	$("#grade").text(grade);
-	$("#comment").text((comment == null || comment == "") ? "无" : comment);
+	$("#comment").text((comment == null || comment == "")
+			? "无"
+			: (comment == "-1") ? "接手人自己想" : comment);
 	$("#address").text((address == null || address == "") ? "无" : address);
-	$("#comment").bind("click", function() {
-				copyToClipboard($(this).text());
+	$("#comment").unbind("click");
+	$("#comment").click(function() {
+				if (comment != null && comment != "" && comment != "-1") {
+					copyToClipboard($(this).text());
+				}
 			});
-	$("#address").bind("click", function() {
-				copyToClipboard($(this).text());
+	$("#address").unbind("click");
+	$("#address").click(function() {
+				if (address != null && address != "") {
+					copyToClipboard($(this).text());
+				}
 			});
 	$("#itemContent").empty();
 	var itemUrls = itemUrl.split(",");

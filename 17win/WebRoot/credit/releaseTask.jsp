@@ -38,6 +38,20 @@
 		</script>
 		<script
 			src="http://cdn.jquerytools.org/1.2.1/tiny/jquery.tools.min.js"></script>
+		<script type="text/javascript">
+				function initTaskRep(){
+					<s:if test="#request.taskRep!=null">
+											// 初始化ITEM地址
+						 initItemUrl('<s:property value="creditTaskVO.itemUrl"/>');
+						// 初始化是否修改价格
+						 initUpdatePrice('<s:property value="creditTaskVO.updatePrice"/>');
+						// 初始化任务类型和好评要求
+						initTaskTypeAndGrade('<s:property value="creditTaskVO.taskType"/>','<s:property value="creditTaskVO.grade"/>',<s:property value="creditTaskVO.intervalHour"/>);
+						// 自己想 评语
+						initCommentThinkBySelf('<s:property value="creditTaskVO.comment"/>');
+		</s:if>
+				}
+		</script>
 	</head>
 	<style>
 .tooltip {
@@ -63,6 +77,7 @@
 }
 </style>
 	<body>
+
 		<s:include value="../common/title.jsp"></s:include>
 		<s:include value="../common/task/title.jsp"></s:include>
 		<div align="center">
@@ -140,22 +155,6 @@
 																			value="<s:property
 						value="#request.platformType" />"
 																			id="platformType" type="hidden" />
-																		<!-- 取消重填 -->
-																		<input value="<s:property value="creditTaskVO.id"/>"
-																			id="cancelFlagTaskIdHidden" type="hidden" />
-																		<input
-																			value="<s:property value="creditTaskVO.goodTimeType"/>"
-																			id="cancelFlagGTTHidden" type="hidden" />
-																		<input
-																			value="<s:property value="creditTaskVO.updatePrice"/>"
-																			id="cancelFlagUPHidden" type="hidden" />
-																		<input
-																			value="<s:property value="creditTaskVO.grade"/>"
-																			id="cancelFlagGradeHidden" type="hidden" />
-																		<input
-																			value="<s:property value="creditTaskVO.intervalHour"/>"
-																			id="cancelFlagHourHidden" type="hidden" />
-																		<!-- end -->
 																		<input type="hidden" name="win17_token"
 																			value="<s:property value="#session.win17_token"/>">
 																		<s:textfield name="creditTaskVO.money" size="10"
@@ -244,7 +243,7 @@
 																		<input type="radio" name="creditTaskVO.taskType"
 																			id="stTaskType_Id" onclick="hideTaskType(this)"
 																			title="任务的价格和淘宝上的商品价格（包含邮费）不一致时，需要修改价格" value="2">
-																		实体任务
+																		实物任务
 																		<img src="images/swType.jpg" />
 																		&nbsp;&nbsp;
 																		<input type="radio" name="creditTaskVO.taskType"
@@ -390,7 +389,7 @@
 																		任务保护：
 																	</td>
 																	<td colspan="2">
-																		<s:checkbox name="creditTaskVO.protect" value="false"
+																		<s:checkbox name="creditTaskVO.protect" value="true"
 																			title="接手人需要您审核过后才能发布任务，审核方式可以通过QQ进行一些特定的交流！对方同意你的要求时，你就可以同意他接任务，否则可以不准他接任务!"
 																			fieldValue="true" />
 																	</td>

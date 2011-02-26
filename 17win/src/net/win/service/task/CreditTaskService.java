@@ -1689,25 +1689,19 @@ public class CreditTaskService extends BaseService {
 				putJumpSelfPage("userInfoManager/info!initSellerAndBuyer.php");
 				return JUMP;
 			}
-			List<CreditTaskRepositoryEntity> creditTaskResitorys = creditTaskRepositoryDAO
-					.list(
-							"from CreditTaskRepositoryEntity _cr where _cr.user.id=:userId and _cr.type=:type",
-							new String[] { "userId", "type" }, new Object[] {
-									userEntity.getId(), platformType });
-			List<CreditTaskRepositoryVO> resultTaskReps = new ArrayList<CreditTaskRepositoryVO>(
-					creditTaskResitorys.size());
-			CreditTaskRepositoryVO creditTaskRepositoryVO = null;
-			for (CreditTaskRepositoryEntity creditTaskRepositoryEntity : creditTaskResitorys) {
-				creditTaskRepositoryVO = new CreditTaskRepositoryVO();
-				BeanUtils.copyProperties(creditTaskRepositoryVO,
-						creditTaskRepositoryEntity);
-				resultTaskReps.add(creditTaskRepositoryVO);
-			}
 
+			String taskRepId = getByParam("taskRepId");
+			if (!StringUtils.isBlank(taskRepId)) {
+				CreditTaskRepositoryEntity taskRep = creditTaskRepositoryDAO
+						.get(Long.parseLong(taskRepId));
+				if (taskRep.getUser().getId().equals(getLoginUser().getId())) {
+					putByRequest("taskRep", "taskRep");
+					BeanUtils.copyProperties(creditTaskVO, taskRep);
+				}
+			}
 			putPlatformByRequest(WinUtils.changeType2Platform(platformType));
 			putPlatformTypeByRequest(platformType);
 			putByRequest("sellers", resultSellers);
-			putByRequest("resultTaskReps", resultTaskReps);
 			putTokenBySession();
 			return "initReleaseTask";
 		}

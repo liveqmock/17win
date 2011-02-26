@@ -665,7 +665,7 @@
 							快递单号：
 						</td>
 						<td>
-							<span id="waybill"></span>
+							<span id="waybill" style="text-decoration: underline; color: red; cursor: pointer"></span>
 						</td>
 						<td>
 							&nbsp;
@@ -676,7 +676,8 @@
 							自定义评语：
 						</td>
 						<td>
-							<span id="comment"></span>
+							<span id="comment"
+								style="text-decoration: underline; color: red; cursor: pointer"></span>
 						</td>
 						<td>
 							&nbsp;
@@ -687,7 +688,7 @@
 							收货地址：
 						</td>
 						<td>
-							<span id="address"></span>
+							<span id="address" style="text-decoration: underline; color: red; cursor: pointer"></span>
 						</td>
 						<td>
 							&nbsp;

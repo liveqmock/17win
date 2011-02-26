@@ -33,8 +33,6 @@ public class CreditTaskRepositoryService extends BaseService {
 	@Resource
 	private SellerDAO sellerDAO;
 
-	 
-
 	/**
 	 * 删除
 	 * 
@@ -106,7 +104,7 @@ public class CreditTaskRepositoryService extends BaseService {
 					new Object[] { platformType, getLoginUser().getId() });
 			if (count > 0) {
 				String hql = "select _taskRe ,_taskRe.seller.name from CreditTaskRepositoryEntity as _taskRe "
-						+ " where    _taskRe.type=:platformType and _taskRe.user.id=:userId";
+						+ " where    _taskRe.type=:platformType and _taskRe.user.id=:userId order by _taskRe.id desc";
 				List<Object[]> resultTemp = creditTaskRepositoryDAO.list(hql,
 						new String[] { "platformType", "userId" },
 						new Object[] { platformType, getLoginUser().getId() });

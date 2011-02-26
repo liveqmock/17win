@@ -41,7 +41,7 @@ public class CreditTaskVO extends BaseVO {
 	private String receiveIP;
 	// 发布点
 	private Double releaseDot;
-	// 描述
+	// 评语
 	private String comment;
 
 	// 附加金额、
@@ -80,12 +80,13 @@ public class CreditTaskVO extends BaseVO {
 	private Date fbEndDate;
 	private Date jsStartDate;
 	private Date jsEndDate;
-	
-	//刷新 时间
+
+	// 刷新 时间
 	private Integer refreshSec;
-	
-	//任务大厅的查询标记
+
+	// 任务大厅的查询标记
 	private String moneyFlag;
+
 	public String getMoneyFlag() {
 		return moneyFlag;
 	}
@@ -239,7 +240,7 @@ public class CreditTaskVO extends BaseVO {
 	}
 
 	public Boolean getRepository() {
-		return repository; 
+		return repository;
 	}
 
 	public void setRepository(Boolean repository) {
@@ -269,7 +270,6 @@ public class CreditTaskVO extends BaseVO {
 	public void setRespositoryName(String respositoryName) {
 		this.respositoryName = respositoryName;
 	}
-
 
 	public Long getBuyerID() {
 		return buyerID;

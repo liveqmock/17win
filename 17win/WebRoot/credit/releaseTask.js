@@ -1,5 +1,8 @@
 var submitFlag = true;
 $(document).ready(function() {
+	// 初始化仓库
+	initTaskRep();
+
 	// 自定义时间
 	intText("intervalHour1");
 	// 自定义时间
@@ -200,4 +203,77 @@ function validateForm() {
 		return false;
 	}
 	return true;
+}
+
+/**
+ * 任务仓库发送的时候
+ */
+// 初始化ITEM地址
+function initItemUrl(itemUrl) {
+	var itemUrls = itemUrl.split(",");
+	var itemInput = $("input[name='itemUrls']");
+	var td = itemInput.parents(".itemClass");
+	itemInput.val(itemUrls[0]);
+	for (var i = 1; i < itemUrls.length; i++) {
+		var span = itemInput.parent("span").clone();
+		span.children("input").val(itemUrls[i]);
+		td.append("<br>");
+		td.append(span);
+	}
+}
+// 初始化是否修改价格
+function initUpdatePrice(updatePrice) {
+	$("input[name='creditTaskVO.updatePrice'][value='" + updatePrice + "']")
+			.attr("checked", true);
+}
+// 初始化任务类型和好评要求
+function initTaskTypeAndGrade(taskType, grade, intervalHour) {
+	grade = grade.replace(/&#(\d+);/g, function($0, $1) {
+				return String.fromCharCode($1);
+			});
+	$("input[name='creditTaskVO.taskType'][value='" + taskType + "']").attr(
+			"checked", true);
+	hideTaskType($("input[name='creditTaskVO.taskType']:checked").get(0));
+	if ("1" == taskType) {
+		$("tr[class='xnTaskType']").find("input[value='" + grade + "']").attr(
+				"checked", true);
+	} else if ("2" == taskType) {
+		$("tr[class='stTaskType']").find("input[value='" + grade + "']").attr(
+				"checked", true);
+		if (grade == "自定义时间好评") {
+			$("tr[class='stTaskType']")
+					.find("input[name='creditTaskVO.intervalHour']")
+					.val(intervalHour);
+			$("tr[class='stTaskType']")
+					.find("input[name='creditTaskVO.intervalHour']").attr(
+							"disabled", false);
+
+		}
+	} else if ("3" == taskType) {
+		$("tr[class='tcTaskType']").find("input[value='" + grade + "']").attr(
+				"checked", true);
+		if (grade == "自定义时间好评") {
+			$("tr[class='tcTaskType']")
+					.find("input[name='creditTaskVO.intervalHour']")
+					.val(intervalHour);
+			$("tr[class='tcTaskType']")
+					.find("input[name='creditTaskVO.intervalHour']").attr(
+							"disabled", false);
+		}
+	}
+}
+// 自己想 评语
+function initCommentThinkBySelf(comment) {
+	if (comment == null) {
+		return;
+	}
+	comment = comment.replace(/&#(\d+);/g, function($0, $1) {
+				return String.fromCharCode($1);
+			});
+	if (comment == "-1") {
+		$("#commentByJSID").attr("checked", true);
+		$("#addtaskForm_creditTaskVO_comment").val("");
+	} else {
+		$("#addtaskForm_creditTaskVO_comment").val(comment);
+	}
 }
