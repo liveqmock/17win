@@ -197,7 +197,7 @@ public class AdminUserService extends BaseService {
 		StringBuffer resultHQL = new StringBuffer(
 				"select  _user.username,_user.releaseDot,_user.money,_user.registerTime,_user.email,_user.telephone," // 5
 						+ "_user.spreadScore,_user.spreadScore,_user.releaseTaskCount,_user.receiveTaskCount,_user.vipEnable ,"// 10
-						+ " _user.status,_user.id,_user.statusDesc" // 13
+						+ " _user.status,_user.id,_user.statusDesc,_user.lastLoginTime" // 14
 						+ " from UserEntity   as _user  where 1=1 ");
 		StringBuffer countHQL = new StringBuffer(
 				"select  count(*)  from UserEntity  as _user  where 1=1  ");
@@ -253,6 +253,29 @@ public class AdminUserService extends BaseService {
 			countHQL.append(" and   _user.money<=:endMoney  ");
 			paramNames.add("endMoney");
 			paramValues.add(adminUserVO.getEndMoney());
+		}
+		// 最后一次登录时间
+		if (adminUserVO.getStartLastLoginTime() != null
+				&& adminUserVO.getEndLastLoginTime() != null) {
+			resultHQL
+					.append(" and (_user.lastLoginTime>=:startLastLoginTime and _user.lastLoginTime<=:endLastLoginTime) ");
+			countHQL
+					.append(" and (_user.lastLoginTime>=:startLastLoginTime and _user.lastLoginTime<=:endLastLoginTime) ");
+			paramNames.add("startLastLoginTime");
+			paramNames.add("endLastLoginTime");
+			paramValues.add(adminUserVO.getStartLastLoginTime());
+			paramValues.add(adminUserVO.getEndLastLoginTime());
+		} else if (adminUserVO.getStartLastLoginTime() != null) {
+			resultHQL.append(" and _user.lastLoginTime>=:startLastLoginTime  ");
+			countHQL
+					.append(" and  _user.lastLoginTime>=:startLastLoginTime   ");
+			paramNames.add("startLastLoginTime");
+			paramValues.add(adminUserVO.getStartLastLoginTime());
+		} else if (adminUserVO.getEndLastLoginTime() != null) {
+			resultHQL.append(" and   _user.lastLoginTime<=:endLastLoginTime  ");
+			countHQL.append(" and   _user.lastLoginTime<=:endLastLoginTime  ");
+			paramNames.add("endLastLoginTime");
+			paramValues.add(adminUserVO.getEndLastLoginTime());
 		}
 		// 注册时间
 		if (adminUserVO.getRegeditStartDate() != null
