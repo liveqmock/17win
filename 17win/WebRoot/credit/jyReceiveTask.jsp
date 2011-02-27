@@ -639,7 +639,9 @@
 				<thead>
 					<tr>
 						<td colspan="3" align="sleft">
-							<font style="font: 14px;" color="red"><b> 商品地址：</b>
+							<font style="font: 14px;" color="red"><b> 商品地址：</b> </font>
+							<img alt="打开全部商品地址" onclick="openAllItemUrl()" style="cursor: pointer;" border='0'
+								src='images/open.gif' />
 						</td>
 					</tr>
 				</thead>

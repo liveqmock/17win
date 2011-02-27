@@ -245,6 +245,15 @@
 		</form>
 		<!-- 显示地址 -->
 		<div id="addressDIV" title="商品地址" style="display: none">
+			<thead>
+				<tr>
+					<td colspan="4" align="left">
+						<font style="font: 14px;" color="red"><b> 商品地址：</b> </font>
+						<img alt="打开全部商品地址" onclick="openAllItemUrl()"
+							style="cursor: pointer;" border='0' src='images/open.gif' />
+					</td>
+				</tr>
+			</thead>
 			<table cellpadding="0" cellspacing="0" border="0" width="100%">
 				<tbody id="itemContent">
 				</tbody>

@@ -69,8 +69,14 @@ function jumpPage() {
 function showItemUrl(itemUrl) {
 	var itemUrls = itemUrl.split(",");
 	for (var i = 0; i < itemUrls.length; i++) {
-		var tr = $("<tr>" + "<td>" + "地址" + (i + 1) + "：" + "	</td>" + "	<td>"
-				+ "	<input  type='text' readonly='readonly'  value="
+		var tr = $("<tr>"
+				+ "<td>"
+				+ "地址"
+				+ (i + 1)
+				+ "："
+				+ "	</td>"
+				+ "	<td>"
+				+ "	<input  type='text' readonly='readonly' name='itemUrlInput'  value="
 				+ itemUrls[i] + " style='width: 200px'/>" + "		</td>"
 				+ "	<td  valign='middle'>"
 				+ "	<a  href=\"javascript:copyToClipboard(\'" + itemUrls[i]
@@ -111,4 +117,11 @@ function query(page) {
 		return;
 	}
 	$("#mainForm").submit();
+}
+
+// 打开全部商品地址
+function openAllItemUrl() {
+	$("input[name='itemUrlInput']").each(function(i) {
+				window.open($(this).val(), "_blank");
+			});
 }
