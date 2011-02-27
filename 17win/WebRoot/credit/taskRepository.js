@@ -68,6 +68,7 @@ function jumpPage() {
 // 复制地址
 function showItemUrl(itemUrl) {
 	var itemUrls = itemUrl.split(",");
+	$("#itemContent").empty();
 	for (var i = 0; i < itemUrls.length; i++) {
 		var tr = $("<tr>"
 				+ "<td>"
