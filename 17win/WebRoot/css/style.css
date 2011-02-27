@@ -401,15 +401,12 @@ a.yellow-bcolor:hover {
 }
 
 .anniu {
-	BORDER-RIGHT: #2f5fa1 2px solid;
-	BORDER-TOP: #2f5fa1 2px solid;
+	border:2px solid #FFB044;
 	FONT-SIZE: 12px;
 	MARGIN: 3px;
-	BORDER-LEFT: #2f5fa1 2px solid;
-	COLOR: #ffffff;
+	COLOR: #000000;
 	LINE-HEIGHT: 150%;
-	BORDER-BOTTOM: #2f5fa1 2px solid;
-	BACKGROUND-COLOR: #006600
+	BACKGROUND-COLOR: #FFB044
 }
 
 .bg_Div {
@@ -419,6 +416,6 @@ a.yellow-bcolor:hover {
 	background: #FFFFFF;
 	zIndex: 999;
 	opacity: 0.5;
-	filter: alpha(opacity =       50);
+	filter: alpha(opacity =         50);
 	mozOpacity: 0.5;
 }

@@ -23,10 +23,11 @@
 		</s:if>
 		<s:include value="../common/header.jsp"></s:include>
 
-		<LINK href="css/Css.css" type=text/css rel=stylesheet>
-		<LINK href="css/header.css" type=text/css rel=stylesheet>
-		<LINK href="css/index.css" type=text/css rel=stylesheet>
-		<LINK href="css/top_bottom.css" type="text/css" rel="stylesheet">
+		<LINK href="css/Css.css" type=text/css rel=stylesheet />
+		<LINK href="css/header.css" type=text/css rel=stylesheet />
+		<LINK href="css/index.css" type=text/css rel=stylesheet />
+		<LINK href="css/style.css" type=text/css rel=stylesheet />
+		<LINK href="css/top_bottom.css" type="text/css" rel="stylesheet" />
 		<link href="css/excite-bike/jquery-ui-1.8.4.custom.css"
 			rel="stylesheet" type="text/css" />
 		<SCRIPT src="js/validater.js" type="text/javascript"></SCRIPT>
@@ -712,7 +713,7 @@
 						<td colspan="3" align="left">
 							<font style="font: 14px;" color="red"><b> 商品地址：</b> </font>
 							<img alt="打开全部商品地址" onclick="openAllItemUrl()"
-								style="cursor: pointer;" border='0' src='images/open.gif'/>
+								style="cursor: pointer;" border='0' src='images/open.gif' />
 						</td>
 					</tr>
 				</thead>

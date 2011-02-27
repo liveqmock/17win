@@ -17,6 +17,7 @@
 		<LINK href="css/Css.css" type=text/css rel=stylesheet>
 		<LINK href="css/header.css" type=text/css rel=stylesheet>
 		<LINK href="css/index.css" type=text/css rel=stylesheet>
+		<LINK href="css/style.css" type=text/css rel=stylesheet>
 		<link href="css/excite-bike/jquery-ui-1.8.4.custom.css"
 			rel="stylesheet" type="text/css" />
 		<LINK href="css/top_bottom.css" type="text/css" rel="stylesheet">
