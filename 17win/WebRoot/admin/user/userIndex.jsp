@@ -317,7 +317,7 @@
 				</s:else>
 			</table>
 		</s:form>
-		<div id="updateMoneyDIV" title="充值金额">
+		<div id="updateMoneyDIV" title="充值金额" style="display: none">
 			<s:form action="adminUserManager/adminUser!addMoney.php"
 				id="moneyForm" theme="simple">
 				<table cellpadding="0" cellspacing="0" border="0">
@@ -344,7 +344,7 @@
 			</s:form>
 		</div>
 
-		<div id="updateReleaseDotDIV" title="充值发布点">
+		<div id="updateReleaseDotDIV" title="充值发布点" style="display: none">
 			<s:form action="adminUserManager/adminUser!addReleaseDot.php"
 				id="releaseDotForm" theme="simple">
 				<table cellpadding="0" cellspacing="0" border="0">
@@ -372,7 +372,7 @@
 			</s:form>
 		</div>
 
-		<div id="updateStatusDIV" title="状态切换">
+		<div id="updateStatusDIV" title="状态切换" style="display: none">
 			<s:form action="adminUserManager/adminUser!updateStatus.php"
 				id="statusForm" theme="simple">
 				<table cellpadding="0" cellspacing="0" border="0">
@@ -392,7 +392,7 @@
 		</div>
 
 		<!--  邮件 -->
-		<div id="sendMailDIV" title="发送邮件">
+		<div id="sendMailDIV" title="发送邮件" style="display: none">
 			<s:form action="adminUserManager/adminUser!sendMail.php"
 				id="sendMailForm" theme="simple">
 				<table cellpadding="0" cellspacing="0" border="0">
@@ -419,7 +419,7 @@
 
 
 		<!--  站内信 -->
-		<div id="sendSmsDIV" title="发站内信">
+		<div id="sendSmsDIV" title="发站内信" style="display: none">
 			<s:form action="adminUserManager/adminUser!sendSms.php"
 				id="sendSmsForm" theme="simple">
 				<table cellpadding="0" cellspacing="0" border="0">

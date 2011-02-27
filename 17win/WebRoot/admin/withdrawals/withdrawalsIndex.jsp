@@ -231,7 +231,7 @@
 			</table>
 		</s:form>
 
-		<div id="updateTableDIV" title="修改状态">
+		<div id="updateTableDIV" title="修改状态" style="display: none">
 			<s:form onsubmit="return validateUpdateForm();" id="updateForm"
 				action="adminWithdrawalsManager/adminWithdrawals!updateLog.php">
 				<table cellpadding="0" cellspacing="0" border="0">
