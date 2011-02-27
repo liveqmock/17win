@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import net.win.dao.BuyerDAO;
 import net.win.dao.CreditTaskDAO;
 import net.win.dao.LogisticsDAO;
+import net.win.dao.UserDAO;
 import net.win.entity.BuyerEntity;
 import net.win.entity.LogisticsEntity;
 import net.win.utils.Constant;
@@ -25,6 +26,8 @@ public class TaskQuartzService {
 	private LogisticsDAO logisticsDAO;
 	@Resource
 	private BuyerDAO buyerDAO;
+	@Resource
+	private UserDAO userDAO;
 
 	/**
 	 * 分钟任务 改变加时状态
@@ -96,8 +99,13 @@ public class TaskQuartzService {
 			calendarCapital.add(Calendar.DAY_OF_YEAR, -7);
 			String sql2 = "delete from   TB_CapitalLog  where LogTime_=<:logDate  ";
 			query = session.createSQLQuery(sql2);
+			
+			//删除未激活的人
 			query.setDate("logDate", calendarCapital.getTime());
 			query.executeUpdate();
+			
+			
+			
 			session.getTransaction().commit();
 		} catch (Exception e) {
 			session.getTransaction().rollback();

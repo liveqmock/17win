@@ -43,8 +43,8 @@ public class AdminUserVO extends BaseVO {
 	private Date startOverDate;
 	private Date endOverDate;
 	// 最后一次登录时间
-	private Date startLiatLogin;
-	private Date endLiatLogin;
+	private Date startLastLoginTime;
+	private Date endLastLoginTime;
 
 	private String status;
 
@@ -216,20 +216,22 @@ public class AdminUserVO extends BaseVO {
 		this.endOverDate = endOverDate;
 	}
 
-	public Date getStartLiatLogin() {
-		return startLiatLogin;
+	public Date getStartLastLoginTime() {
+		return startLastLoginTime;
 	}
 
-	public void setStartLiatLogin(Date startLiatLogin) {
-		this.startLiatLogin = startLiatLogin;
+	public void setStartLastLoginTime(Date startLastLoginTime) {
+		this.startLastLoginTime = startLastLoginTime;
 	}
 
-	public Date getEndLiatLogin() {
-		return endLiatLogin;
+	public Date getEndLastLoginTime() {
+		return endLastLoginTime;
 	}
 
-	public void setEndLiatLogin(Date endLiatLogin) {
-		this.endLiatLogin = endLiatLogin;
+	public void setEndLastLoginTime(Date endLastLoginTime) {
+		this.endLastLoginTime = endLastLoginTime;
 	}
+
+	 
 
 }
