@@ -55,7 +55,7 @@ function copyToClipboard(txt, msg) {
 			return false;
 		clip.setData(trans, null, clipid.kGlobalClipboard);
 	}
-	msg = (typeof(msg) == "undefined") ? '复制成功!' : msg;
+	msg = (typeof(msg) == "undefined") ? '复制成功' : msg;
 	alert(msg + '!');
 }
 
