@@ -90,7 +90,7 @@
 				<script language="javascript">Ofty="Left"</script>
 
 				<script src="../js/Foot.js" language="javascript"></script>
-				<a href="../help/about.asp">关于我们</a> |
+				<a href="/help/about.html">关于我们</a> |
 				<a href="mailto:service@17win.net">联系我们</a> |
 				<a href="mailto:service@17win.net">建议留言</a> |
 				<a href="/help/index.html">帮助中心</a>
