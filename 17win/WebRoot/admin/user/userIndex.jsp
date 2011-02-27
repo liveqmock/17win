@@ -114,6 +114,23 @@
 						</s:select>
 					</td>
 					<td nowrap="nowrap">
+						最后登录时间：
+						<s:textfield name="adminUserVO.startLastLoginTime"
+							id="startLastLoginDate"
+							onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})"
+							readonly="true" cssStyle="width:80px">
+						</s:textfield>
+						至
+						<s:textfield name="adminUserVO.endLastLoginTime"
+							id="endLastLoginDate" readonly="true"
+							onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})"
+							cssStyle="width:80px">
+						</s:textfield>
+					</td>
+
+				</tr>
+				<tr>
+					<td colspan="4">
 						<input type="submit" value="查&nbsp;&nbsp;询"
 							style="cursor: pointer;">
 						<input type="button" value="删&nbsp;&nbsp;除" onclick="deleteUser()"
@@ -123,9 +140,6 @@
 						<input type="button" value="站内信" onclick="openSmsDiv()"
 							style="cursor: pointer; color: red">
 					</td>
-				</tr>
-				<tr>
-
 				</tr>
 			</table>
 			<br>
@@ -137,7 +151,13 @@
 							<input type="checkbox" onclick="selectAll(this,'selectUserName')">
 						</th>
 						<th nowrap="nowrap" style="font-size: 12px;">
+							序号
+						</th>
+						<th nowrap="nowrap" style="font-size: 12px;">
 							用户名
+						</th>
+						<th nowrap="nowrap" style="font-size: 12px;">
+							最后登录时间
 						</th>
 						<th nowrap="nowrap" style="font-size: 12px;">
 							状态
@@ -175,15 +195,22 @@
 					</tr>
 				</thead>
 				<tbody>
-					<s:iterator value="#request.result" id="user">
+					<s:iterator value="#request.result" id="user" status="index">
 						<tr>
 							<td>
 								<input name="userIDs" type="checkbox"
 									value="<s:property value="#user[12]" />"
 									selectUserName="selectUserName" />
 							</td>
+							<td>
+								<s:property
+									value="(adminUserVO.nowPage-1)*adminUserVO.eachPage+#index.index+1" />
+							</td>
 							<td title="<s:property value="#user[0]" />">
 								<s:property value="#user[0]" />
+							</td>
+							<td title="<s:date name="#user[14]" format="yyyy-MM-dd" />">
+								<s:date name="#user[14]" format="yyyy-MM-dd" />
 							</td>
 							<td
 								title="
@@ -267,7 +294,7 @@
 				</tbody>
 				<s:if test="#request.result.size()==0">
 					<tr>
-						<th colspan="13" align="center">
+						<th colspan="15" align="center">
 							没有用户！
 						</th>
 					</tr>
@@ -275,7 +302,7 @@
 				<s:else>
 					<tfoot>
 						<tr>
-							<th colspan="13" style="font-size: 12px;">
+							<th colspan="15" style="font-size: 12px;">
 								<div style="float: left;">
 									<a href="javascript:firstPage()">首页</a>
 									<a href="javascript:prevPage()">上一页</a>&nbsp;
@@ -335,7 +362,7 @@
 							描述：
 						</td>
 						<td>
-							<input type="text" name="moneyDesc" id="moneyDescID"  
+							<input type="text" name="moneyDesc" id="moneyDescID"
 								maxlength="200" style="width: 400px">
 						</td>
 
