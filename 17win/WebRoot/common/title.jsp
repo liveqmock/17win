@@ -40,7 +40,7 @@
 									type="application/x-shockwave-flash">
 								<br>
 								<a
-									href="javascript:alert('此位招租，联系QQ:30756500，联系电话：13554783576（谢先生）');"><img
+									href="javascript:alert('此广告位招租，联系QQ:30756500，联系电话：13554783576（谢先生）');"><img
 										border="0" src="images/tubiao.png"> </a>
 							</div>
 						</div>
@@ -152,22 +152,9 @@
 					href="taskManager/task!initTask.php?platformType=3" id="a3"
 					onmouseover="Mea(3);" testclass="">有啊互刷</A>
 			</LI>
-			<!-- 
 			<LI class=white>
 				<A
 					<s:if test="#request.showIndexType==5">
-					class="li1 white"  	style="COLOR: #000000"
-				</s:if>
-					<s:else>
-						class="li0 "
-				</s:else> href="credit/task.jsp"
-					id="a4" onmouseover="Mea(4);" testclass="">双色球</A>
-				<br>
-			</LI>
-			 -->
-			<LI class=white>
-				<A
-					<s:if test="#request.showIndexType==6">
 					class="li1 white"  	style="COLOR: #000000"
 				</s:if>
 					<s:else>
@@ -176,19 +163,6 @@
 					href="payManager/pay!initPay.php" id="a5" onmouseover="Mea(5);"
 					testclass="">账号充值</A>
 			</LI>
-			<!-- 
-			<LI class=white>
-				<A
-					<s:if test="#request.showIndexType==7">
-					class="li1 white"  	style="COLOR: #000000"
-				</s:if>
-					<s:else>
-						class="li0 "
-				</s:else>
-					href="userInfoManager/info!initExchange.php" id="a6"
-					onmouseover="Mea(6);" testclass="">赠送兑换</A>
-			</LI>
-			 -->
 			<LI class=white>
 				<A
 					<s:if test="#request.showIndexType==8">
@@ -224,7 +198,7 @@
 			</LI>
 			<LI class=white>
 				<A
-					<s:if test="#request.showIndexType==10">
+					<s:if test="#request.showIndexType==12">
 					class="li1 white"  	style="COLOR: #000000"
 				</s:if>
 					<s:else>
@@ -234,7 +208,7 @@
 			</LI>
 			<LI class=white>
 				<A
-					<s:if test="#request.showIndexType==11">
+					<s:if test="#request.showIndexType==13">
 					class="li1 white"  	style="COLOR: #000000"
 				</s:if>
 					<s:else>

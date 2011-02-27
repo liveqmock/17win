@@ -51,6 +51,9 @@ public class BaseService {
 		if (StringUtils.isBlank(platformType)) {
 			platformType = (String) getByRequest("platformType");
 		}
+		if (StringUtils.isBlank(platformType)) {
+			platformType = "1";
+		}
 		return platformType;
 	}
 
@@ -101,12 +104,12 @@ public class BaseService {
 	}
 
 	/**
-	 * 存放现实类型
+	 * 存放现实类型 位置+1
 	 * 
 	 * @return
 	 */
 	protected void putIndexShowType(String showIndexType) {
-		putByRequest("showIndexType", Integer.parseInt(showIndexType)+1+"");
+		putByRequest("showIndexType", Integer.parseInt(showIndexType) + 1 + "");
 	}
 
 	/**
@@ -232,13 +235,14 @@ public class BaseService {
 	 * @param message
 	 * @throws Exception
 	 */
-	protected void putJumpOutterPage(String page, Boolean close,Boolean refushSelf)
-			throws Exception {
+	protected void putJumpOutterPage(String page, Boolean close,
+			Boolean refushSelf) throws Exception {
 		putByRequest("jumpPageType", "outterPage");
 		putByRequest("closeed", close);
 		putByRequest("refushSelf", refushSelf);
 		putByRequest(JUMP, page);
 	}
+
 	/**
 	 * 显示DIV
 	 * 

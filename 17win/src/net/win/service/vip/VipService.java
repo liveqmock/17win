@@ -36,9 +36,9 @@ public class VipService extends BaseService {
 	 * @throws Exception
 	 */
 	public String initVip(VipVO vipVO) throws Exception {
-		putIndexShowType("9");
+		putIndexShowType("8");
 		putByRequest("vipPrice", Constant.getVipPrice());
-		putByRequest("vipYearRebate", Constant.getVipYearRebate()*10);
+		putByRequest("vipYearRebate", Constant.getVipYearRebate() * 10);
 		putByRequest("receieveTaskDotRate", Constant.getReceieveTaskDotRate());
 		putTokenBySession();
 		return INPUT;
@@ -130,7 +130,7 @@ public class VipService extends BaseService {
 		}
 
 		Double money = 0D;
-		if (monthCount>12) {
+		if (monthCount > 12) {
 			money = monthCount * Constant.getVipYearRebate();
 		} else {
 			money = monthCount * Constant.getVipPrice();
@@ -153,7 +153,8 @@ public class VipService extends BaseService {
 			vipBidUserEntity.setEndDate(calendar.getTime());
 		}
 		userEntity.setMoney(ArithUtils.sub(userEntity.getMoney(), money));
-		logMoneyCapital(userDAO, 0-money, "续费"+monthCount+"个月的VIP", userEntity);
+		logMoneyCapital(userDAO, 0 - money, "续费" + monthCount + "个月的VIP",
+				userEntity);
 		updateUserLoginInfo(userEntity);
 		getLoginUser().setVipEndDate(vipBidUserEntity.getEndDate());
 		getLoginUser().setVipGrowValue(vipBidUserEntity.getGrowValue());

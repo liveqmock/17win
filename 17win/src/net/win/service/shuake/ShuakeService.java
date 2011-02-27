@@ -21,7 +21,7 @@ public class ShuakeService extends BaseService {
 	 * @throws Exception
 	 */
 	public String initShuakeIndex() throws Exception {
-		putIndexShowType("11");
+		putIndexShowType("10");
 		return "initShuakeIndex";
 	}
 

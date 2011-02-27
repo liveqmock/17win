@@ -81,7 +81,9 @@
 	</error-page>
 
 	<error-page>
-		<exception-type>net.win.exception.BuildingException</exception-type>
+		<exception-type>
+			net.win.exception.BuildingException
+		</exception-type>
 		<location>/weihuzhong.html</location>
 	</error-page>
 
@@ -92,6 +94,7 @@
 
 
 	<welcome-file-list>
+		<welcome-file>toIndex.html</welcome-file>
 		<welcome-file>index.html</welcome-file>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>

@@ -179,7 +179,7 @@ public class LogisticsService extends BaseService {
 	 * @throws Exception
 	 */
 	public String queryLogisticsLog(LogisticsVO logisticsVO) throws Exception {
-		putIndexShowType("13");
+		putIndexShowType("12");
 		StringBuffer resultHQL = new StringBuffer(
 				"select  _l ,_u.username from LogisticsEntity _l inner join _l.releaseUser as _u  where 1=1  and  _l.status='1'  ");
 		StringBuffer countHQL = new StringBuffer(

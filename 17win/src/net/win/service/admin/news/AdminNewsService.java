@@ -178,7 +178,7 @@ public class AdminNewsService extends BaseService {
 	 * @throws Exception
 	 */
 	public String showHelp(NewsVO newsVO) throws Exception {
-		putIndexShowType("10");
+		putIndexShowType("11");
 		List<NewsEntity> newses1 = newsDAO
 				.pageQuery(
 						"from NewsEntity as _news where _news.type.name='网站公告'  order by _news.sort asc,_news.date desc",

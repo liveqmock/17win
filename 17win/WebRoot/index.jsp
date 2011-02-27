@@ -38,6 +38,7 @@
 		<SCRIPT src="js/validater.js" type=text/javascript></SCRIPT>
 		<SCRIPT src="js/service.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="js/jquery.node.js" type="text/javascript"></SCRIPT>
+		<SCRIPT src="js/x_alt.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="index.js" type="text/javascript"></SCRIPT>
 	</HEAD>
 	<BODY>
@@ -436,36 +437,36 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 
 			<TABLE class=Regttkk cellSpacing=0 cellPadding=5 width="100%"
 				align=center border=0>
-				<TR align=left>
+				<TR align="center">
 					<TD>
-						<a href='http://www.17win.net' target='_blank' title=拍拍刷信誉><IMG
-								title=拍拍刷信誉 height=55 src=images/jieducm_04.gif width=109
-								border=0> </A>
+						<a href='http://china.alibaba.com/' target='_blank'
+							alt="此广告位招租，联系QQ:30756500，联系电话：13554783576（谢先生）"><IMG
+								height=55 src=images/jieducm_04.gif width=109 border=0> </A>
 					</TD>
 					<TD>
-						<a href='http://www.17win.net' target='_blank' title=拍拍刷信誉><IMG
-								title=拍拍刷信誉 height=55 src=images/jieducm_03.gif width=109
-								border=0> </A>
+						<a href='https://www.alipay.com/' target='_blank'
+							alt="此广告位招租，联系QQ:30756500，联系电话：13554783576（谢先生）"><IMG
+								height=55 src=images/jieducm_03.gif width=109 border=0> </A>
 					</TD>
 					<TD>
-						<a href='http://www.17win.net' target='_blank' title=刷钻网><IMG
-								title=刷钻网 height=55 src=images/jieducm_05.gif width=109 border=0>
-						</A>
+						<a href='https://www.alipay.com/' target='_blank'
+							alt="此广告位招租，联系QQ:30756500，联系电话：13554783576（谢先生）"><IMG
+								height=55 src=images/jieducm_05.gif width=109 border=0> </A>
 					</TD>
 					<TD>
-						<a href='http://www.17win.net' target='_blank' title=淘宝互刷><IMG
-								title=淘宝互刷 height=55 src=images/jieducm_06.gif width=109
-								border=0> </A>
+						<a href='http://www.chinabank.com.cn/' target='_blank'
+							alt="此广告位招租，联系QQ:30756500，联系电话：13554783576（谢先生）"><IMG
+								height=55 src=images/jieducm_06.gif width=109 border=0> </A>
 					</TD>
 					<TD>
-						<a href='http://www.17win.net' target='_blank' title=传媒><IMG
-								title=传媒 height=55 src=images/jieducm_011.gif width=109 border=0>
-						</A>
+						<a href='http://www.tenpay.com/' target='_blank'
+							alt="此广告位招租，联系QQ:30756500，联系电话：13554783576（谢先生）"><IMG
+								height=55 src=images/jieducm_011.gif width=109 border=0> </A>
 					</TD>
 					<TD>
-						<a href='http://www.17win.net' target='_blank' title=传媒><IMG
-								title=传媒 height=55 src=images/jieducm_022.gif width=109 border=0>
-						</A>
+						<a href='http://www.allbuy.cn/' target='_blank'
+							alt="此广告位招租，联系QQ:30756500，联系电话：13554783576（谢先生）"><IMG
+								height=55 src=images/jieducm_022.gif width=109 border=0> </A>
 					</TD>
 				</TR>
 			</TABLE>
@@ -477,42 +478,42 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 
 			<TABLE class=Regttkk cellSpacing=0 cellPadding=5 width="100%"
 				align=center border=0>
-				<TR align=left>
+				<TR align="center">
 					<TD>
-						<a href='http://www.sunwukong.cn/' target='_blank' title=孙悟空>[孙悟空]
-						</A>
+						<a href='http://www.taobao.cn/' target='_blank'
+							alt="此广告位招租，联系QQ:30756500，联系电话：13554783576（谢先生）">[淘宝网] </A>
 					</TD>
 					<TD>
-						<a href='http://www.at-lib.com' target='_blank' title=分类目录>[分类目录]
-						</A>
+						<a href='http://www.paipai.com/' target='_blank'
+							alt="此广告位招租，联系QQ:30756500，联系电话：13554783576（谢先生）">[拍拍网] </A>
 					</TD>
 					<TD>
-						<a href='http://www.all-list.cn' target='_blank' title=中文分类目录>[中文分类目录]
-						</A>
+						<a href='http://www.youa.com' target='_blank'
+							alt="此广告位招租，联系QQ:30756500，联系电话：13554783576（谢先生）">[有啊网] </A>
 					</TD>
 					<TD>
-						<a href='http://www.17win.net' target='_blank' title=淘宝刷信誉>[淘宝刷信誉]
-						</A>
+						<a href='https://www.alipay.com/' target='_blank'
+							alt="此广告位招租，联系QQ:30756500，联系电话：13554783576（谢先生）">[支付宝平台] </A>
 					</TD>
 					<TD>
-						<a href='http://www.17win.net' target='_blank' title=淘宝刷钻>[淘宝刷钻]
-						</A>
+						<a href='http://www.tenpay.com/' target='_blank'
+							alt="此广告位招租，联系QQ:30756500，联系电话：13554783576（谢先生）">[财付通平台] </A>
 					</TD>
 					<TD>
-						<a href='http://www.17win.net' target='_blank' title="刷钻平台">[刷钻平台]
-						</A>
+						<a href='http://www.17win.net' target='_blank'
+							alt="此广告位招租，联系QQ:30756500，联系电话：13554783576（谢先生）">[淘宝刷信誉] </A>
 					</TD>
 					<TD>
-						<a href='http://www.tenpay.com/' target='_blank' title="互刷平台">[互刷平台]
-						</A>
+						<a href='http://www.17win.net' target='_blank'
+							alt="此广告位招租，联系QQ:30756500，联系电话：13554783576（谢先生）">[淘宝刷钻] </A>
 					</TD>
 					<TD>
-						<a href='http://www.17win.net' target='_blank' title="免费刷钻">[免费刷钻]
-						</A>
+						<a href='http://www.17win.net' target='_blank'
+							alt="此广告位招租，联系QQ:30756500，联系电话：13554783576（谢先生）">[刷钻平台] </A>
 					</TD>
 					<TD>
-						<a href='http://www.paipai.com/' target='_blank' title="拍拍网">[拍拍网]
-						</A>
+						<a href='http://www.17win.net' target='_blank'
+							alt="此广告位招租，联系QQ:30756500，联系电话：13554783576（谢先生）">[免费刷钻] </A>
 					</TD>
 				</TR>
 			</TABLE>
@@ -524,13 +525,9 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 							<script language="javascript">Ofty="Left"</script>
 							<script src="../js/Foot.js" language="javascript"></script>
 							<a href="../help/about.asp">关于我们</a> |
-							<a href="../help/pay_introduce.asp">汇款方式</a> |
-							<a href="../help/link.asp">友情链接</a> |
-							<a href="../help/lianxi.asp">联系我们</a> |
-							<a href="../help/viewreturn.asp">建议留言</a> |
-							<a href="../help/">帮助中心</a> |
-							<a href="#">版权声明</a> |
-							<a href="#">服务条款</a>
+							<a href="mailto:service@17win.net">联系我们</a> |
+							<a href="mailto:service@17win.net">建议留言</a> |
+							<a href="/help/index.html">帮助中心</a>
 						</div>
 					</td>
 				</tr>
@@ -546,9 +543,9 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 							黔ICP备1020110
 							<br />
 							本站服务导航:
-							<a href="http://www.17win.net/" target="_blank">淘宝刷信誉</a>|
-							<a href="http://www.17win.net/" target="_blank">刷钻平台</a>|
-							<a href="http://www.17win.net/" target="_blank">淘宝刷钻</a>|
+							<a href="http://www.taobao.net/" target="_blank">淘宝网</a>|
+							<a href="http://www.paipai.net/" target="_blank">拍拍网</a>|
+							<a href="http://www.youa.net/" target="_blank">有啊网</a>|
 							<script
 								src="http://s16.cnzz.com/stat.php?id=2694599&web_id=2694599&show=pic"
 								language="JavaScript"></script>
