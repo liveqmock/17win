@@ -26,7 +26,7 @@ public class TaskLinkManEntity extends BaseEntity {
 	private Date lastUseTime;
 	// 使用次数
 	@Column(name = "USE_COUNT_", nullable = true)
-	private Integer useCount;
+	private Integer useCount=0;
 	// 所属人
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = UserEntity.class)
 	@JoinColumn(name = "USER_ID_")
