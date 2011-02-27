@@ -225,22 +225,10 @@
 				<tr>
 					<td valign="top" height="100" class="wenzi">
 						<div align="center">
-							<a href="../help/about.asp"><font color="#666666">关于我们</font>
-							</a> |
-							<a href="../help/pay_introduce.asp"><font color="#666666">汇款方式</font>
-							</a> |
-							<a href="../help/link.asp"><font color="#666666">友情链接</font>
-							</a> |
-							<a href="../help/lianxi.asp"><font color="#666666">联系我们</font>
-							</a>|
-							<a href="../help/index.asp"><font color="#666666">帮助中心</font>
-							</a>
-							<br>
-							QQ：
-							<a href="tencent://message/?uin=904555181">904555181</a> 电话：
-							<br>
-							Copyright 2008 - 2009 版权所有 沪ICP备09035337号
-							<br>
+							<a href="/help/about.html">关于我们</a> |
+							<a href="mailto:service@17win.net">联系我们</a> |
+							<a href="mailto:service@17win.net">建议留言</a> |
+							<a href="/help/index.html">帮助中心</a>
 						</div>
 					</td>
 				</tr>
