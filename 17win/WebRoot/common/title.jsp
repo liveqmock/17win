@@ -12,7 +12,7 @@
 							scrollAmount=2 direction=left height=18>
 
 							<a href='help/detail_61.html' target="_blank" title='公告'><FONT
-								color=#ff0000>推广送U盘+VIP+发布点</FONT> </a>
+								color=#ff0000>平台改版，不需要发布点就可以发布任务</FONT> </a>
 						</MARQUEE>
 					</TD>
 				</TR>

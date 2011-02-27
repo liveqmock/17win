@@ -362,11 +362,10 @@
 											</div>
 										</s:if>
 										<br>
-										<a
-											style="color: white; text-decoration: underline; cursor: pointer;"
-											alt="复制掌柜"
+										<a style="cursor: pointer;" alt="复制掌柜"
 											onclick="copyToClipboard('<s:property value="#task.sellname" />');"
-											href="javascript:void(0)"><font color="#FF0000"><s:property
+											href="javascript:void(0)"><font
+											style="text-decoration: underline;" color="#FF0000"><s:property
 													value="#task.sellname" /> </font> </a>
 
 									</td>
@@ -376,11 +375,10 @@
 											<s:date name="#task.receiveDate" format="yyyy-MM-dd HH:mm" />
 										</span>
 										<br>
-										<a
-											style="color: white; text-decoration: underline; cursor: pointer;"
-											alt="复制买号"
+										<a style="cursor: pointer;" alt="复制买号"
 											onclick="copyToClipboard('<s:property value="#task.buyername" />');"
-											href="javascript:void(0)"><font color="#FF0000"><s:property
+											href="javascript:void(0)"><font
+											style="text-decoration: underline;" color="#FF0000"><s:property
 													value="#task.buyername" /> </font> </a>
 									</td>
 									<td align="center" nowrap="nowrap">
@@ -641,8 +639,8 @@
 					<tr>
 						<td colspan="3" align="sleft">
 							<font style="font: 14px;" color="red"><b> 商品地址：</b> </font>
-							<img alt="打开全部商品地址" onclick="openAllItemUrl()" style="cursor: pointer;" border='0'
-								src='images/open.gif' />
+							<img alt="打开全部商品地址" onclick="openAllItemUrl()"
+								style="cursor: pointer;" border='0' src='images/open.gif' />
 						</td>
 					</tr>
 				</thead>

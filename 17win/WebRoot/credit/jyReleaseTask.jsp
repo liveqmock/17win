@@ -380,11 +380,10 @@
 													</div>
 												</s:if>
 												<br>
-												<a
-													style="color: white; text-decoration: underline; cursor: pointer;"
-													alt="复制买号"
+												<a style="cursor: pointer;" alt="复制买号"
 													onclick="copyToClipboard('<s:property value="#task.buyername" />');"
-													href="javascript:void(0)"><font color="#FF0000"><s:property
+													href="javascript:void(0)"><font color="#FF0000"
+													style="text-decoration: underline;"><s:property
 															value="#task.buyername" /> </font> </a>
 											</s:else>
 										</s:else>
@@ -411,12 +410,10 @@
 												<s:date name="#task.receiveDate" format="yyyy-MM-dd HH:mm" />
 											</span>
 											<br>
-											<a
-												style="color: white; text-decoration: underline; cursor: pointer;"
-												alt="复制掌柜"
+											<a style="cursor: pointer;" alt="复制掌柜"
 												href="javascript:copyToClipboard('<s:property value="#task.sellname" />');"><font
-												color="#FF0000"><s:property value="#task.sellname" />
-											</font> </a>
+												style="text-decoration: underline;" color="#FF0000"><s:property
+														value="#task.sellname" /> </font> </a>
 										</s:else>
 									</td>
 

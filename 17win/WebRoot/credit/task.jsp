@@ -130,7 +130,8 @@
 										<s:elseif test="#task.taskType==3">
 											<img src="images/tcType.jpg" alt="套餐任务" />
 										</s:elseif>
-										<s:property value="#task.testID" />
+										<span alt="任务ID"><s:property value="#task.testID" />
+										</span>
 										<br>
 										<s:if test="#task.assignUser!=null &&  #task.assignUser!=''">
 											<img src="images/tdTask.gif" alt="特定任务" />
@@ -138,7 +139,8 @@
 										<s:else>
 											<img src="images/ptTask.jpg" alt="普通任务" />
 										</s:else>
-										<s:date name="#task.releaseDate" format="yyyy-MM-dd HH:mm:ss" />
+										<span alt="任务发布时间"> <s:date name="#task.releaseDate"
+												format="yyyy-MM-dd HH:mm:ss" /> </span>
 									</td>
 									<td align="center" nowrap="nowrap">
 										<SPAN style="Z-INDEX: 20; POSITION: relative"> <a
@@ -150,13 +152,17 @@
 											alt="刷客经验积分：<s:property value="#task.fbUpgradeScore" />">
 									</td>
 									<td align="center" nowrap="nowrap">
-										<s:property value="#task.money" />
-										+
-										<s:property value="#task.addtionMoney" />
+										<span
+											alt="任务金额：<s:property value="#task.money" />，附加金额：<s:property
+												value="#task.addtionMoney" />"><s:property
+												value="#task.money" /> + <s:property
+												value="#task.addtionMoney" /> </span>
 										<br>
-										<s:property value="#task.releaseDot" />
-										+
-										<s:property value="#task.addtionReleaseDot" />
+										<span
+											alt="任务发布点：<s:property value="#task.money" />，附加发布点：<s:property
+												value="#task.addtionMoney" />">
+											<s:property value="#task.releaseDot" /> + <s:property
+												value="#task.addtionReleaseDot" /> </span>
 									</td>
 									<td align="center" nowrap="nowrap">
 										<s:if test="#task.updatePrice">
