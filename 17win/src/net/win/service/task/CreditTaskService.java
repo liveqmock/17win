@@ -596,7 +596,7 @@ public class CreditTaskService extends BaseService {
 			buyer.setScore(buyer.getScore() + 1);
 			if (buyer.getScore() >= Constant.getCreditValueLimit()) {
 				buyer.setEnable(false);
-			} 
+			}
 			// 更新信息
 			updateUserLoginInfo(releaseUser);
 			creditTask.setStatus(TaskMananger.STEP_SIX_STATUS);
@@ -1084,7 +1084,7 @@ public class CreditTaskService extends BaseService {
 		}
 		if (!StringUtils.isBlank(creditTaskVO.getSellname())) {
 			countSQL.append(" and _seller.name=:sellername ");
-			resultSQL.append(" and _jsuser.username=:sellername ");
+			resultSQL.append(" and _seller.name=:sellername ");
 			paramNames.add("sellername");
 			paramValues.add(creditTaskVO.getSellname());
 		}
@@ -1105,8 +1105,8 @@ public class CreditTaskService extends BaseService {
 			paramNames.add("fbStartDate");
 			paramValues.add(creditTaskVO.getFbStartDate());
 		} else if (creditTaskVO.getFbEndDate() != null) {
-			resultSQL.append(" and    _task.releaseDate>=:fbEndDate  ");
-			countSQL.append(" and   _task.releaseDate>=:fbEndDate  ");
+			resultSQL.append(" and    _task.releaseDate<=:fbEndDate  ");
+			countSQL.append(" and   _task.releaseDate<=:fbEndDate  ");
 			paramNames.add("fbEndDate");
 			paramValues.add(creditTaskVO.getFbEndDate());
 		}
@@ -1127,8 +1127,8 @@ public class CreditTaskService extends BaseService {
 			paramNames.add("jsStartDate");
 			paramValues.add(creditTaskVO.getJsStartDate());
 		} else if (creditTaskVO.getJsEndDate() != null) {
-			resultSQL.append(" and    _task.receiveDate>=:jsEndDate  ");
-			countSQL.append(" and   _task.receiveDate>=:jsEndDate  ");
+			resultSQL.append(" and    _task.receiveDate<=:jsEndDate  ");
+			countSQL.append(" and   _task.receiveDate<=:jsEndDate  ");
 			paramNames.add("jsEndDate");
 			paramValues.add(creditTaskVO.getJsEndDate());
 		}
@@ -1307,7 +1307,7 @@ public class CreditTaskService extends BaseService {
 		}
 		if (!StringUtils.isBlank(creditTaskVO.getSellname())) {
 			countSQL.append(" and _seller.name=:sellername ");
-			resultSQL.append(" and _jsuser.username=:sellername ");
+			resultSQL.append(" and _seller.name=:sellername ");
 			paramNames.add("sellername");
 			paramValues.add(creditTaskVO.getSellname());
 		}
@@ -1328,8 +1328,8 @@ public class CreditTaskService extends BaseService {
 			paramNames.add("fbStartDate");
 			paramValues.add(creditTaskVO.getFbStartDate());
 		} else if (creditTaskVO.getFbEndDate() != null) {
-			resultSQL.append(" and    _task.releaseDate>=:fbEndDate  ");
-			countSQL.append(" and   _task.releaseDate>=:fbEndDate  ");
+			resultSQL.append(" and    _task.releaseDate<=:fbEndDate  ");
+			countSQL.append(" and   _task.releaseDate<=:fbEndDate  ");
 			paramNames.add("fbEndDate");
 			paramValues.add(creditTaskVO.getFbEndDate());
 		}
@@ -1350,8 +1350,8 @@ public class CreditTaskService extends BaseService {
 			paramNames.add("jsStartDate");
 			paramValues.add(creditTaskVO.getJsStartDate());
 		} else if (creditTaskVO.getJsEndDate() != null) {
-			resultSQL.append(" and    _task.receiveDate>=:jsEndDate  ");
-			countSQL.append(" and   _task.receiveDate>=:jsEndDate  ");
+			resultSQL.append(" and    _task.receiveDate<=:jsEndDate  ");
+			countSQL.append(" and   _task.receiveDate<=:jsEndDate  ");
 			paramNames.add("jsEndDate");
 			paramValues.add(creditTaskVO.getJsEndDate());
 		}
@@ -1610,7 +1610,7 @@ public class CreditTaskService extends BaseService {
 					.getAddress()));
 			if (StringUtils.isBlank(creditTaskVO.getRespositoryName())) {
 				creditTaskRepository.setName(creditTask.getTestID());
-			}else{
+			} else {
 				creditTaskRepository.setName(creditTaskVO.getRespositoryName());
 			}
 			creditTaskRepositoryDAO.save(creditTaskRepository);
