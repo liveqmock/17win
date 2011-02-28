@@ -17,13 +17,16 @@ function validateForm() {
 		alert("金额格式不对！");
 		return false;
 	}
+	var buyername = $("#buyernameId").val();
 	var opertationCodeId = $("#opertationCodeId").val();
 	var verificationCodeID = $("#verificationCodeID").val();
 	if (Validater.isBlank(opertationCodeId)
-			|| Validater.isBlank(verificationCodeID)) {
+			|| Validater.isBlank(verificationCodeID)
+			|| Validater.isBlank(buyername)) {
 		alert("内容不能为空！");
 		return false;
 	}
+
 	$("#submitadd").attr("disabled", true);
 	return true;
 }

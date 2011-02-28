@@ -133,6 +133,9 @@ img {
 														充值金额
 													</th>
 													<th style="font-size: 12px" nowrap="nowrap">
+														淘宝买号
+													</th>
+													<th style="font-size: 12px" nowrap="nowrap">
 														状态
 													</th>
 												</tr>
@@ -147,6 +150,9 @@ img {
 															<s:property value="#pay.money" />
 														</td>
 														<td>
+															<s:property value="#pay.buyername" />
+														</td>
+														<td>
 															<s:if test="#pay.status==1">
 																充值已提交
 															</s:if>
@@ -159,7 +165,7 @@ img {
 											</tbody>
 											<s:if test="#request.result.size()==0">
 												<tr>
-													<th colspan="3" align="center">
+													<th colspan="4" align="center">
 														您当前没有充值记录！
 													</th>
 												</tr>
@@ -167,7 +173,7 @@ img {
 											<s:else>
 												<tfoot>
 													<tr>
-														<th colspan="3">
+														<th colspan="4">
 															<div style="float: left;">
 																<s:property value="payVO.nowPage" />
 																/

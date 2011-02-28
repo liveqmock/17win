@@ -46,6 +46,9 @@
 							用户名
 						</th>
 						<th nowrap="nowrap" style="font-size: 12px;">
+							淘宝买号
+						</th>
+						<th nowrap="nowrap" style="font-size: 12px;">
 							状态
 						</th>
 						<th nowrap="nowrap" style="font-size: 12px;">
@@ -64,6 +67,9 @@
 						<tr>
 							<td>
 								<s:property value="#payVO.username" />
+							</td>
+							<td>
+								<s:property value="#payVO.buyername" />
 							</td>
 							<td>
 								<s:if test="#payVO.status==1">
@@ -96,7 +102,7 @@
 				</tbody>
 				<s:if test="#request.result.size()==0">
 					<tr>
-						<th colspan="5" align="center">
+						<th colspan="6" align="center">
 							没有充值记录！
 						</th>
 					</tr>
@@ -104,7 +110,7 @@
 				<s:else>
 					<tfoot>
 						<tr>
-							<th colspan="5" style="font-size: 12px;">
+							<th colspan="6" style="font-size: 12px;">
 								<div style="float: left;">
 									<a href="javascript:firstPage()">首页</a>
 									<a href="javascript:prevPage()">上一页</a>&nbsp;

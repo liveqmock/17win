@@ -147,6 +147,14 @@ img {
 																		</tr>
 																		<tr>
 																			<td class="inputtext">
+																				淘宝买号：
+																			</td>
+																			<td>
+																				<s:textfield name="payVO.buyername" maxlength="24" id="buyernameId">	</s:textfield>
+																			</td>
+																		</tr>
+																		<tr>
+																			<td class="inputtext">
 																				操作码：
 																			</td>
 																			<td>
