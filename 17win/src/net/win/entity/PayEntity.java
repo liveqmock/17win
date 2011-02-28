@@ -26,6 +26,10 @@ public class PayEntity extends BaseEntity {
 	@Column(name = "Status_", columnDefinition = "CHAR(1)", nullable = false)
 	private String status;
 
+	// 购买人的名字
+	@Column(name = "BUYERNAME_", length = 25, nullable = false)
+	private String buyername;
+
 	public Double getMoney() {
 		return money;
 	}
@@ -56,5 +60,13 @@ public class PayEntity extends BaseEntity {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getBuyername() {
+		return buyername;
+	}
+
+	public void setBuyername(String buyername) {
+		this.buyername = buyername;
 	}
 }
