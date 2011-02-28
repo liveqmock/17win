@@ -15,6 +15,8 @@ public class PayVO extends BaseVO {
 	// 参数
 	private Date startDate;
 	private Date endDate;
+	// 购买人的名字
+	private String buyername;
 
 	public Date getStartDate() {
 		return startDate;
@@ -54,6 +56,14 @@ public class PayVO extends BaseVO {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getBuyername() {
+		return buyername;
+	}
+
+	public void setBuyername(String buyername) {
+		this.buyername = buyername;
 	}
 
 }

@@ -16,7 +16,16 @@ public class AdminPayVO extends BaseVO {
 	// 参数
 	private Date startDate;
 	private Date endDate;
-	
+
+	private String buyername;
+
+	public String getBuyername() {
+		return buyername;
+	}
+
+	public void setBuyername(String buyername) {
+		this.buyername = buyername;
+	}
 
 	public Date getStartDate() {
 		return startDate;
