@@ -84,28 +84,28 @@ public class TaskQuartzService {
 	 * 每星期任务
 	 */
 	public void quartzWeekTask() {
-		Query query;
-		Session session = null;
-		try {
-			session = creditTaskDAO.obtainSession();
-			// / 删除完成的任务
-			session.beginTransaction();
-			String sql1 = "delete from " + " Tb_CreditTask " + "   where"
-					+ "       STATUS_='6'   ";
-			query = session.createSQLQuery(sql1);
-			query.executeUpdate();
-			// 删除资产记录
-			Calendar calendarCapital = Calendar.getInstance();
-			calendarCapital.add(Calendar.DAY_OF_YEAR, -7);
-			String sql2 = "delete from   TB_CapitalLog  where LogTime_<=:logDate  ";
-			query = session.createSQLQuery(sql2);
-			query.setDate("logDate", calendarCapital.getTime());
-			query.executeUpdate();
-			session.getTransaction().commit();
-		} catch (Exception e) {
-			session.getTransaction().rollback();
-			LoggerUtils.error(" 每星期错误!", e);
-		}
+		//		Query query;
+		//		Session session = null;
+		//		try {
+		//			session = creditTaskDAO.obtainSession();
+		//			// / 删除完成的任务
+		//			session.beginTransaction();
+		//			String sql1 = "delete from " + " Tb_CreditTask " + "   where"
+		//					+ "       STATUS_='6'   ";
+		//			query = session.createSQLQuery(sql1);
+		//			query.executeUpdate();
+		//			// 删除资产记录
+		//			Calendar calendarCapital = Calendar.getInstance();
+		//			calendarCapital.add(Calendar.DAY_OF_YEAR, -7);
+		//			String sql2 = "delete from   TB_CapitalLog  where LogTime_<=:logDate  ";
+		//			query = session.createSQLQuery(sql2);
+		//			query.setDate("logDate", calendarCapital.getTime());
+		//			query.executeUpdate();
+		//			session.getTransaction().commit();
+		//		} catch (Exception e) {
+		//			session.getTransaction().rollback();
+		//			LoggerUtils.error(" 每星期错误!", e);
+		//		}
 	}
 
 	/**
