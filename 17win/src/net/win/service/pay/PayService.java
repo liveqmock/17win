@@ -95,6 +95,8 @@ public class PayService extends BaseService {
 		case 100:
 			toTaobao = "http://item.taobao.com/auction/item_detail.htm?item_num_id=9027716018";
 			break;
+		default:
+			toTaobao = "http://shop62179252.taobao.com/?order=&queryType=cat&browseType=grid&searchWord=im%C9%E7%C7%F8&price1=&price2=";
 		}
 		MailUtils.sendCommonMail(mailSender, freeMarkerCfj, "用户申请充值",
 				userEntity.getUsername()
