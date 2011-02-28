@@ -18,7 +18,7 @@ import javax.persistence.TemporalType;
  */
 public class TaskLinkManEntity extends BaseEntity {
 	// 用户名
-	@Column(name = "USERNAME_", length = 12, unique = true, nullable = false)
+	@Column(name = "USERNAME_", length = 12, nullable = false)
 	private String username;
 	// 最后一次使用日期
 	@Column(name = "LAST_USE_TIME", nullable = true)
@@ -26,7 +26,7 @@ public class TaskLinkManEntity extends BaseEntity {
 	private Date lastUseTime;
 	// 使用次数
 	@Column(name = "USE_COUNT_", nullable = true)
-	private Integer useCount=0;
+	private Integer useCount = 0;
 	// 所属人
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = UserEntity.class)
 	@JoinColumn(name = "USER_ID_")
