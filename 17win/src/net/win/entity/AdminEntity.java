@@ -22,7 +22,7 @@ public class AdminEntity extends BaseEntity {
 	 * 基本信息
 	 */
 	// 用户名
-	@Column(name = "Username_", length = 12, unique = true, nullable = false)
+	@Column(name = "Username_", length = 12,  nullable = false)
 	private String username;
 	// 登陆密码
 	@Column(name = "Password_", columnDefinition = "CHAR(24)", nullable = false)

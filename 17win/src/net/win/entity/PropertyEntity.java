@@ -21,7 +21,7 @@ public class PropertyEntity extends BaseEntity {
 	/**
 	 * 基本信息
 	 */
-	@Column(name = "NAME_", length = 255, unique = true, nullable = false)
+	@Column(name = "NAME_", length = 255,  nullable = false)
 	private String name;
 	@Column(name = "NUMBERVALUE_")
 	private Double numberValue;

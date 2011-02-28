@@ -19,7 +19,7 @@ import javax.persistence.Table;
 @Table(name = "Tb_CreditTaskReposotory")
 public class CreditTaskRepositoryEntity extends BaseEntity {
 	// 名字
-	@Column(name = "NAME_", length = 20, nullable = false, unique = true)
+	@Column(name = "NAME_", length = 20, nullable = false)
 	private String name;
 	// 类型 ( 1:淘宝，2：拍拍，3有啊)
 	@Column(name = "TYPE_", columnDefinition = "CHAR(1)", nullable = false)

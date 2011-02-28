@@ -29,7 +29,7 @@ public class UserEntity extends BaseEntity {
 	 * 基本信息
 	 */
 	// 用户名
-	@Column(name = "USERNAME_", length = 12, unique = true, nullable = false)
+	@Column(name = "USERNAME_", length = 12, nullable = false)
 	private String username;
 	// 登陆密码
 	@Column(name = "LOGIN_PASSWORD_", columnDefinition = "CHAR(24)", nullable = false)
