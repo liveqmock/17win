@@ -1494,7 +1494,7 @@ public class CreditTaskService extends BaseService {
 		if (creditTask.getMoney() + creditTask.getAddtionMoney() > userEntity
 				.getMoney()) {
 			creditTaskVO.setMoney(null);
-			putAlertMsg("您当前的余额为不够发布这个任务！");
+			putAlertMsg("您当前的余额不够发布这个任务！");
 			return JUMP;
 		}
 
