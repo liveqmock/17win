@@ -130,8 +130,7 @@
 										<s:elseif test="#task.taskType==3">
 											<img src="images/tcType.jpg" alt="套餐任务" />
 										</s:elseif>
-										<span alt="任务ID"><s:property value="#task.testID" />
-										</span>
+										<span alt="任务ID"><s:property value="#task.testID" /> </span>
 										<br>
 										<s:if test="#task.assignUser!=null &&  #task.assignUser!=''">
 											<img src="images/tdTask.gif" alt="特定任务" />
@@ -143,9 +142,7 @@
 												format="yyyy-MM-dd HH:mm:ss" /> </span>
 									</td>
 									<td align="center" nowrap="nowrap">
-										<SPAN style="Z-INDEX: 20; POSITION: relative"> <a
-											href="javascript:reply('<s:property value='#task.fbUsername' />');"
-											alt="发送站内信息"><s:property value="#task.fbUsername" /> </a> </SPAN>
+										<s:property value="#task.fbUsername" />
 										<br>
 										<img
 											src="images/<s:property value="@net.win.utils.StrategyUtils@getLevelImg(#task.fbUpgradeScore)" />"
@@ -262,11 +259,10 @@
 										<select id='toPageSelect' size='1' onchange="jumpPage()">
 											<s:iterator begin="1" end="creditTaskVO.pageCount" step="1"
 												var="index">
-												<option value="<s:property value="#index" />"  
-												<s:if test="creditTaskVO.nowPage==#index">
+												<option value="<s:property value="#index" />"
+													<s:if test="creditTaskVO.nowPage==#index">
 													selected='selected'
-												</s:if>
-												>
+												</s:if>>
 													第
 													<s:property value="#index" />
 													页
