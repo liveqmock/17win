@@ -262,7 +262,11 @@
 										<select id='toPageSelect' size='1' onchange="jumpPage()">
 											<s:iterator begin="1" end="creditTaskVO.pageCount" step="1"
 												var="index">
-												<option value="<s:property value="#index" />">
+												<option value="<s:property value="#index" />"  
+												<s:if test="creditTaskVO.nowPage==#index">
+													selected='selected'
+												</s:if>
+												>
 													第
 													<s:property value="#index" />
 													页

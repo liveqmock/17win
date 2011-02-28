@@ -22,8 +22,8 @@ $(document).ready(function() {
 	$("#buyerDIV").dialog({
 		autoOpen : false,
 		draggable : false,
-		height:200,
-		width:550,
+		height : 200,
+		width : 550,
 		hide : 'slide',
 		modal : true,
 		resizable : false,
@@ -44,7 +44,7 @@ $(document).ready(function() {
 
 });
 
-//刷新页面
+// 刷新页面
 function refreshPage() {
 	$("#mainForm").submit();
 }
@@ -144,11 +144,7 @@ function money500() {
 
 // 查询
 function query(page) {
-	var pageCount = parseInt($("#pageCount").val());
+	$("#nowPage").val(page);
 	var queryType = parseInt($("#queryType").val());
-	if (page < 1 || page > pageCount) {
-		alert("页数必须在1-" + pageCount + "之间！");
-		return;
-	}
 	$("#mainForm").submit();
 }
