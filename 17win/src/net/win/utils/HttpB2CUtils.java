@@ -174,8 +174,15 @@ public final class HttpB2CUtils {
 		}
 		// 拍拍
 		else if ("2".equals(type)) {
-			String[] temps = url.split("/", 0);
-			seller = temps[temps.length - 1];
+			Map nameSpaces = new HashMap();
+			nameSpaces.put("xmlns", "http://www.w3.org/1999/xhtml");
+			Element element  = (Element)getOneNodeByDom4j(
+					url,
+					"//xmlns:DIV[@class='fr_sidebar']/xmlns:DIV[1]",
+					nameSpaces);
+			if (element != null) {
+				seller =element.attributeValue("shopid");
+			}
 			// Pattern pattern = Pattern.compile(PAIPAI_USER_REGEX);
 			// Matcher matcher;
 			// OUTTER: while ((line = br.readLine()) != null) {
@@ -186,6 +193,8 @@ public final class HttpB2CUtils {
 			// break OUTTER;
 			// }
 			// }
+			
+//			shopID="909219625"
 		}
 		// 有啊
 		else if ("3".equals(type)) {
@@ -194,6 +203,9 @@ public final class HttpB2CUtils {
 			if (node != null) {
 				seller = node.getText().trim();
 			}
+		}
+		if(seller==null){
+			seller="";
 		}
 		return seller;
 	}

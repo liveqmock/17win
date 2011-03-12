@@ -86,10 +86,6 @@
 												<A href="userInfoManager/info!initExchange.php">我要兑换</A>
 											</LI>
 											<LI
-												style="BACKGROUND: url(images/jieducm_top_btn2.jpg) no-repeat">
-												<A href="userInfoManager/info!initBuyDot.php">买发布点</A>
-											</LI>
-											<LI
 												style="BACKGROUND: url(images/jieducm_top_btn1.jpg) no-repeat">
 												<A href="payManager/pay!initPay.php">账号充值</A>
 											</LI>

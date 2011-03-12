@@ -186,7 +186,7 @@ img {
 												</tbody>
 												<s:if test="#request.result.size()==0">
 													<tr>
-														<th colspan="10" align="center">
+														<th colspan="4" align="center">
 															没有记录！
 														</th>
 													</tr>
@@ -194,7 +194,7 @@ img {
 												<s:else>
 													<tfoot>
 														<tr>
-															<th colspan="10">
+															<th colspan="4">
 																<div style="float: left;">
 																	<s:property value="taskLinkManVO.nowPage" />
 																	/
