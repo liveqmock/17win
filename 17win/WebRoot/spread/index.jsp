@@ -68,8 +68,8 @@
 
 							<td>
 								直接联系QQ:
-								<a href="tencent://message/?uin=1632630010">1632630010</a>,获得更多推广经验,咨询你心中的疑惑:
-								<a href="tencent://message/?uin=1632630010"><img
+								<a href="tencent://message/?uin=1442418675">1442418675</a>,获得更多推广经验,咨询你心中的疑惑:
+								<a href="tencent://message/?uin=1442418675"><img
 										src="images/6_online.gif" width="68" height="29"
 										align="absmiddle" border="0" /> </a>
 							</td>
@@ -604,16 +604,16 @@
 							<a class="serviceA" href="tencent://message/?uin=1442418675">新手帮助</a>
 						</dd>
 						<dd>
-							<a class="serviceA" href="tencent://message/?uin=1632630010">客户帮助</a>
+							<a class="serviceA" href="tencent://message/?uin=1442418675">客户帮助</a>
 						</dd>
 						<dd>
-							<a href="tencent://message/?uin=1637708507">充值帮助</a>
+							<a href="tencent://message/?uin=1442418675">充值帮助</a>
 						</dd>
 						<dd>
-							<a href="tencent://message/?uin=1637708507">提现帮助</a>
+							<a href="tencent://message/?uin=1442418675">提现帮助</a>
 						</dd>
 						<dd class="esp_1">
-							<a href="tencent://message/?uin=1206418689">投诉建议</a>
+							<a href="tencent://message/?uin=1442418675">投诉建议</a>
 						</dd>
 						<dt>
 							QQ交流群

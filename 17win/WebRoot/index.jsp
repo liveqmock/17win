@@ -588,16 +588,16 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 							<a class="serviceA" href="tencent://message/?uin=1442418675">新手帮助</a>
 						</dd>
 						<dd>
-							<a class="serviceA" href="tencent://message/?uin=1632630010">客服帮助</a>
+							<a class="serviceA" href="tencent://message/?uin=1442418675">客服帮助</a>
 						</dd>
 						<dd>
-							<a href="tencent://message/?uin=1637708507">充值帮助</a>
+							<a href="tencent://message/?uin=1442418675">充值帮助</a>
 						</dd>
 						<dd>
-							<a href="tencent://message/?uin=1637708507">提现帮助</a>
+							<a href="tencent://message/?uin=1442418675">提现帮助</a>
 						</dd>
 						<dd class="esp_1">
-							<a href="tencent://message/?uin=1206418689">投诉建议</a>
+							<a href="tencent://message/?uin=1442418675">投诉建议</a>
 						</dd>
 						<dt>
 							QQ交流群
