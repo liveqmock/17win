@@ -382,12 +382,12 @@ public class CreditTaskService extends BaseService {
 		/**
 		 * 验证IP
 		 */
-		String ip = getIpAddr();
-		// 一月接一个IP,同一商品一次
+		String ip = WinUtils.getIPAddress(getRequset());
+		// 一月一个IP同一买号只能接同一商品一次
 		String hqlOne = "select count(*) from UserEntity  as  _buyer  inner join _buyer.receiveCreditTasks as _task where _buyer.id=:bid "
 				+ " and _task.receiveIP=:receiveIP  "
 				+ " and year(_task.receiveDate)=:year and month(_task.receiveDate)=:month  and  _task.itemUrl=:itemUrl";
-		// 一个月同一IP 接同一店铺 6次
+		// 一月一个IP同一买号只能接同一店铺六次
 		String hqlSix = "select count(*)   from UserEntity  as  _buyer  inner join _buyer.receiveCreditTasks as _task inner join _task.releasePerson.sellers as _seller "
 				+ "where _buyer.id=:bid "
 				+ "and _task.receiveIP=:receiveIP and year(_task.receiveDate)=:year and month(_task.receiveDate)=:month and  _seller.shopURL=:shopUrl";
@@ -407,7 +407,7 @@ public class CreditTaskService extends BaseService {
 							creditTask.getSeller().getShopURL() }) == 6;
 		}
 		if (refuseFlag) {
-			putAlertMsg("为了您和他人的安全，同一商品买号在一个月内只能接手一次，同一店铺的商品买号最多只能接手6次！");
+			putAlertMsg("为了您和他人的安全，一月一个IP同一买号只能接同一商品一次，一月一个IP同一买号只能接同一店铺六次！");
 			putJumpSelfPage("taskManager/task!initTask.php?platformType="
 					+ platformType);
 			return JUMP;
@@ -1908,21 +1908,4 @@ public class CreditTaskService extends BaseService {
 				.toString();
 	}
 
-	private String getIpAddr() {
-		HttpServletRequest request = getRequset();
-		String ip = request.getHeader("x-forwarded-for");
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("Proxy-Client-IP");
-		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("WL-Proxy-Client-IP");
-		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getRemoteAddr();
-		}
-		if (ip.indexOf(",") != -1) {
-			ip = ip.split(",", 2)[0];
-		}
-		return ip;
-	}
 }

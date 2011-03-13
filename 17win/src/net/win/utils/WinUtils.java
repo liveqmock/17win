@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import javax.servlet.http.HttpServletRequest;
+
 import net.win.UserLoginInfo;
 import net.win.exception.IllegalityException;
 import net.win.exception.NoPageException;
@@ -59,6 +61,27 @@ public final class WinUtils {
 			throw new NoPageException(e);
 		}
 		return "1";
+	}
+	/**
+	 * 获取IP
+	 * @param request
+	 * @return
+	 */
+	public static String getIPAddress(HttpServletRequest request) {
+		String ip = request.getHeader("x-forwarded-for");
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("Proxy-Client-IP");
+		}
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("WL-Proxy-Client-IP");
+		}
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getRemoteAddr();
+		}
+		if (ip.indexOf(",") != -1) {
+			ip = ip.split(",", 2)[0];
+		}
+		return ip;
 	}
 
 	/**
