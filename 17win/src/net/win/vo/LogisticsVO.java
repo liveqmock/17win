@@ -23,10 +23,12 @@ public class LogisticsVO extends BaseVO {
 	// 使用数
 	private Integer useCount = 0;
 	// 总收益
-	private Double releaseDotCount = 0D;
+	private Double moneyCount = 0D;
 	// 备注
 	private String remark;
-
+	//金额
+	private Double money;
+	//达到时间
 	private Date arrivalDate;
 
 	// 记录日期
@@ -37,8 +39,8 @@ public class LogisticsVO extends BaseVO {
 	private Date startDate;
 	private Date endDate;
 
-	private Integer startUseCount;
-	private Integer endUseCount;
+	private Double startMoney;
+	private Double endMoney;
 
 	private String releaseUsername;
 
@@ -122,14 +124,6 @@ public class LogisticsVO extends BaseVO {
 		this.releaseInfo = releaseInfo;
 	}
 
-	public Double getReleaseDotCount() {
-		return releaseDotCount;
-	}
-
-	public void setReleaseDotCount(Double releaseDotCount) {
-		this.releaseDotCount = releaseDotCount;
-	}
-
 	public Date getLogDate() {
 		return logDate;
 	}
@@ -162,20 +156,28 @@ public class LogisticsVO extends BaseVO {
 		this.deleteFlag = deleteFlag;
 	}
 
-	public Integer getStartUseCount() {
-		return startUseCount;
+	public Double getMoneyCount() {
+		return moneyCount;
 	}
 
-	public void setStartUseCount(Integer startUseCount) {
-		this.startUseCount = startUseCount;
+	public void setMoneyCount(Double moneyCount) {
+		this.moneyCount = moneyCount;
 	}
 
-	public Integer getEndUseCount() {
-		return endUseCount;
+	public Double getStartMoney() {
+		return startMoney;
 	}
 
-	public void setEndUseCount(Integer endUseCount) {
-		this.endUseCount = endUseCount;
+	public void setStartMoney(Double startMoney) {
+		this.startMoney = startMoney;
+	}
+
+	public Double getEndMoney() {
+		return endMoney;
+	}
+
+	public void setEndMoney(Double endMoney) {
+		this.endMoney = endMoney;
 	}
 
 	public String getStatus() {
@@ -184,6 +186,14 @@ public class LogisticsVO extends BaseVO {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public Double getMoney() {
+		return money;
+	}
+
+	public void setMoney(Double money) {
+		this.money = money;
 	}
 
 }

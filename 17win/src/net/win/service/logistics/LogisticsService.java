@@ -45,9 +45,6 @@ public class LogisticsService extends BaseService {
 		putByRequest("minDate", minDate);
 		putByRequest("maxDate1", maxDate1);
 		putByRequest("maxDate2", maxDate2);
-
-		putByRequest("logisticsDotCount", Constant.getLogisticsDotCount());
-
 		putTokenBySession();
 
 		return "initLogistics";
@@ -117,7 +114,6 @@ public class LogisticsService extends BaseService {
 	 * @throws Exception
 	 */
 	public String updateUseLogistics(LogisticsVO logisticsVO) throws Exception {
-		final double RELEASE_DOT = Constant.getLogisticsDotCount();
 		putJumpOutterPage("logisticsManager/logistics!queryLogisticsLog.php");
 		String logisticsID = getByParam("logisticsID");
 		UserEntity userEntity = getLoginUserEntity(userDAO);
@@ -135,15 +131,16 @@ public class LogisticsService extends BaseService {
 			putAlertMsg("您已经使用过该物流信息，去您的【个人中心】→【我使用的物流】可以查找到，本次操作不会扣除您的发布点！");
 			return JUMP;
 		} else {
+			LogisticsEntity logisticsEntity = logisticsDAO.get(logisticsIDLong);
 			if (userEntity.getStatus().equals("0")) {
 				putAlertMsg("您的账号还没激活！");
 				return JUMP;
 			}
-			if (userEntity.getReleaseDot() < RELEASE_DOT) {
-				putAlertMsg("您当前的发布点不够" + RELEASE_DOT + "，不能使用！");
+			if (userEntity.getMoney() < logisticsEntity.getMoney()) {
+				putAlertMsg("您当前的金额不够" + logisticsEntity.getMoney() + "，不能使用！");
 				return JUMP;
 			}
-			LogisticsEntity logisticsEntity = logisticsDAO.get(logisticsIDLong);
+
 			if (userEntity.getUsername().equalsIgnoreCase(
 					logisticsEntity.getReleaseUser().getUsername())) {
 				putAlertMsg("不能使用您自己的！");
@@ -151,20 +148,18 @@ public class LogisticsService extends BaseService {
 			}
 			logisticsEntity.addReceieveUser(userEntity);
 			logisticsEntity.setUseCount(logisticsEntity.getUseCount() + 1);
-			logisticsEntity.setReleaseDotCount(logisticsEntity
-					.getReleaseDotCount()
-					+ RELEASE_DOT);
-			userEntity.setReleaseDot(ArithUtils.sub(userEntity.getReleaseDot(),
-					RELEASE_DOT));
-			logisticsEntity.getReleaseUser().setReleaseDot(
+			userEntity.setMoney(ArithUtils.sub(userEntity.getMoney(),
+					logisticsEntity.getMoney()));
+			logisticsEntity.getReleaseUser().setMoney(
 					ArithUtils.add(logisticsEntity.getReleaseUser()
-							.getReleaseDot(), RELEASE_DOT));
+							.getMoney(), logisticsEntity.getMoney()));
 
 			updateUserLoginInfo(userEntity);
-			logDotCapital(userDAO, 0 - RELEASE_DOT, "获取物流（快递单号"
-					+ logisticsEntity.getWaybill() + "）扣发布点", userEntity);
-			logDotCapital(userDAO, RELEASE_DOT, logisticsEntity.getWaybill()
-					+ "物流被别人使用得到发布点", logisticsEntity.getReleaseUser());
+			logMoneyCapital(userDAO, 0 - logisticsEntity.getMoney(), "获取物流（快递单号"
+					+ logisticsEntity.getWaybill() + "）扣除金额", userEntity);
+			logMoneyCapital(userDAO, logisticsEntity.getMoney(), logisticsEntity.getWaybill()
+					+ "物流被别人使用得到金额",
+					logisticsEntity.getReleaseUser());
 			putJumpOutterPage("logisticsManager/logistics!useLogisticsLog.php");
 			putAlertMsg("使用成功！");
 			return JUMP;
@@ -187,27 +182,27 @@ public class LogisticsService extends BaseService {
 		List<String> paramNames = new ArrayList<String>();
 		List<Object> paramValues = new ArrayList<Object>();
 
-		// 使用次数
-		if (logisticsVO.getStartUseCount() != null
-				&& logisticsVO.getEndUseCount() != null) {
+		// MONEY
+		if (logisticsVO.getStartMoney() != null
+				&& logisticsVO.getEndMoney() != null) {
 			resultHQL
-					.append(" and (_l.useCount>=:startUseCount and _l.useCount<=:endUseCount) ");
+					.append(" and (_l.money>=:startMoney and _l.money<=:endMoney) ");
 			countHQL
-					.append(" and (_l.useCount>=:startUseCount and _l.useCount<=:endUseCount) ");
-			paramNames.add("startUseCount");
-			paramNames.add("endUseCount");
-			paramValues.add(logisticsVO.getStartUseCount());
-			paramValues.add(logisticsVO.getEndUseCount());
-		} else if (logisticsVO.getStartUseCount() != null) {
-			resultHQL.append(" and _l.useCount>=:startUseCount  ");
-			countHQL.append(" and  _l.useCount>=:startUseCount   ");
-			paramNames.add("startUseCount");
-			paramValues.add(logisticsVO.getStartUseCount());
-		} else if (logisticsVO.getEndUseCount() != null) {
-			resultHQL.append(" and   _l.useCount<=:endUseCount  ");
-			countHQL.append(" and   _l.useCount<=:endUseCount  ");
-			paramNames.add("endUseCount");
-			paramValues.add(logisticsVO.getEndUseCount());
+					.append(" and (_l.money>=:startMoney and _l.money<=:endMoney) ");
+			paramNames.add("startMoney");
+			paramNames.add("endMoney");
+			paramValues.add(logisticsVO.getStartMoney());
+			paramValues.add(logisticsVO.getEndMoney());
+		} else if (logisticsVO.getStartMoney() != null) {
+			resultHQL.append(" and _l.money>=:startMoney  ");
+			countHQL.append(" and  _l.money>=:startMoney   ");
+			paramNames.add("startMoney");
+			paramValues.add(logisticsVO.getStartMoney());
+		} else if (logisticsVO.getEndMoney() != null) {
+			resultHQL.append(" and   _l.money<=:endMoney  ");
+			countHQL.append(" and   _l.money<=:endMoney  ");
+			paramNames.add("endMoney");
+			paramValues.add(logisticsVO.getEndMoney());
 		}
 		// 时间
 		if (logisticsVO.getStartDate() != null

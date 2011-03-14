@@ -27,7 +27,7 @@ public class LogisticsEntity extends BaseEntity {
 	@Column(name = "WAYBILL_", length = 25, nullable = false)
 	private String waybill;
 	// 1 正常 2不能使用(处于纠纷中)
-	@Column(name = "STATUS_", columnDefinition = "char(1)",nullable=false)
+	@Column(name = "STATUS_", columnDefinition = "char(1)", nullable = false)
 	private String status = "1";
 	// 发货时间
 	@Temporal(TemporalType.DATE)
@@ -46,12 +46,13 @@ public class LogisticsEntity extends BaseEntity {
 	// 快递公司
 	@Column(name = "Express_Company_", length = 20, nullable = false)
 	private String expressCompany;
+
+	//单价
+	@Column(name = "Money_", nullable = false)
+	private Double money;
 	// 使用数
-	@Column(name = "USE_COUNT_", nullable = false)
+	@Column(name = "USE_COUNT_", nullable = true)
 	private Integer useCount = 0;
-	// 总收益
-	@Column(name = "ReleaseDot_Count_", nullable = false)
-	private Double releaseDotCount = 0D;
 	// 备注
 	@Column(name = "REMARK_")
 	private String remark;
@@ -108,14 +109,6 @@ public class LogisticsEntity extends BaseEntity {
 
 	public void setUseCount(Integer useCount) {
 		this.useCount = useCount;
-	}
-
-	public Double getReleaseDotCount() {
-		return releaseDotCount;
-	}
-
-	public void setReleaseDotCount(Double releaseDotCount) {
-		this.releaseDotCount = releaseDotCount;
 	}
 
 	public String getRemark() {
@@ -176,6 +169,14 @@ public class LogisticsEntity extends BaseEntity {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public Double getMoney() {
+		return money;
+	}
+
+	public void setMoney(Double money) {
+		this.money = money;
 	}
 
 }

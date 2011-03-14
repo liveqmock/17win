@@ -1150,7 +1150,8 @@ public class CreditTaskService extends BaseService {
 			paramNames.add("taskType");
 			paramValues.add(creditTaskVO.getTaskType());
 		}
-		resultSQL.append(" order by ABS(_task.status) asc, _task.releaseDate desc ");
+		resultSQL
+				.append(" order by ABS(_task.status) asc, _task.releaseDate desc ");
 		Long count = (Long) creditTaskDAO.uniqueResultObject(countSQL
 				.toString(), paramNames.toArray(paramNames
 				.toArray(new String[paramNames.size()])), paramValues
@@ -1373,7 +1374,8 @@ public class CreditTaskService extends BaseService {
 			paramNames.add("taskType");
 			paramValues.add(creditTaskVO.getTaskType());
 		}
-		resultSQL.append(" order by  ABS(_task.status) asc,_task.releaseDate desc ");
+		resultSQL
+				.append(" order by  ABS(_task.status) asc,_task.releaseDate desc ");
 		Long count = (Long) creditTaskDAO.uniqueResultObject(countSQL
 				.toString(), paramNames.toArray(paramNames
 				.toArray(new String[paramNames.size()])), paramValues
@@ -1462,7 +1464,7 @@ public class CreditTaskService extends BaseService {
 			creditTaskDot = StrategyUtils.generateCreditRDot(creditTaskVO
 					.getMoney(), creditTaskVO.getIntervalHour());
 		}
-		// 验证
+		//		 验证
 		if (!userEntity.getStatus().equals("1")) {
 			switch (Integer.parseInt(userEntity.getStatus())) {
 			case 0:
@@ -1772,7 +1774,8 @@ public class CreditTaskService extends BaseService {
 					.append("    order by  ABS(_task.status) asc,_vip.type desc ,_task.releaseDate desc ");
 		} else if ("2".equals(creditTaskVO.getMoneyFlag())) {
 			// 价低排列
-			resultSQL.append("   order ABS(_task.status) asc,_vip.type desc , _task.money asc ");
+			resultSQL
+					.append("   order ABS(_task.status) asc,_vip.type desc , _task.money asc ");
 		} else if ("3".equals(creditTaskVO.getMoneyFlag())) {
 			// 价高排列
 			resultSQL

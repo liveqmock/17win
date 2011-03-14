@@ -94,18 +94,10 @@ img {
 													</td>
 
 													<td align="left" class="borderc" nowrap="nowrap">
-														<Font color="#FF0000"><s:property
-																value="#session.userLogin.username"></s:property>(<s:if
-																test="#session.userLogin.vipEnable">
-																<img
-																	src="images/vip/<s:property value="@net.win.utils.StrategyUtils@getVipImg(#session.userLogin.vipType,#session.userLogin.vipEnable)" />" />
-															到期时间：<s:date name="#session.userLogin.vipEndDate"
-																	format="yyyy-MM-dd" />
-															当前成长值：<s:property value="#session.userLogin.vipGrowValue" />
-															</s:if> <s:else>
-														您还没有加入VIP
-														</s:else>)<b><br />(注册时间：<s:date format="yyyy-MM-dd hh:mm:ss"
-																	name="#session.userLogin.registerTime" />)</b> </Font>
+														<Font color="#FF0000"><b><s:property
+																	value="#session.userLogin.username"></s:property>
+														</b>(注册时间：<s:date format="yyyy-MM-dd hh:mm:ss"
+																name="#session.userLogin.registerTime" />) </Font>
 													</td>
 													<td width="63%" align="left" class="borderc">
 														&nbsp;
@@ -133,10 +125,7 @@ img {
 													<td colspan="2" align="left" class="borderc">
 														你的存款：
 														<font color="#FF0000"><s:property
-																value="#session.userLogin.money"></s:property> </font> 元； 发布点：
-														<font color="#FF0000"><s:property
-																value="#session.userLogin.releaseDot"></s:property> </font>点；
-														刷客级别：
+																value="#session.userLogin.money"></s:property> </font> 元； 刷客级别：
 														<img style="cursor: pointer;"
 															src="images/<s:property value="#session.userLogin.levelImg"/>"
 															alt="您的刷客级别为：<s:property value="#session.userLogin.level"/>,升级积分<s:property value="#session.userLogin.upgradeScore"/>"
@@ -218,7 +207,7 @@ img {
 																	<s:iterator value="selltask" id="task" status="indexJ">
 																		<td align="center" />
 																			<s:if test="#indexI.index<3 && #indexJ.index>0">
-																				<a href="#" buyer='buyer'  
+																				<a href="#" buyer='buyer'
 																					row='<s:property value="#indexI.index"/>'
 																					col='<s:property value="#indexJ.index"/>'><s:property
 																						value="task" /> </a>
@@ -279,7 +268,7 @@ img {
 																	<s:iterator value="buyTask" id="task" status="indexJ">
 																		<td align="center"">
 																			<s:if test="#indexI.index<3 && #indexJ.index>0">
-																				<a href="#" seller='seller'  
+																				<a href="#" seller='seller'
 																					row='<s:property value="#indexI.index"/>'
 																					col='<s:property value="#indexJ.index"/>'><s:property
 																						value="task" /> </a>

@@ -310,7 +310,7 @@ public class BaseService {
 	// 保存积分
 	protected void logScoreCapital(BaseDAO baseDAO, Double value, String desc,
 			UserEntity userEntity) throws Exception {
-		CapitalLogEntity capitalLogEntity = new CapitalLogEntity();
+				CapitalLogEntity capitalLogEntity = new CapitalLogEntity();
 		capitalLogEntity.setType("3");
 		capitalLogEntity.setValue(value);
 		capitalLogEntity.setRemainValue(userEntity.getConvertScore()
@@ -348,14 +348,14 @@ public class BaseService {
 	// 保存发布点记录
 	protected void logDotCapital(BaseDAO baseDAO, Double value, String desc,
 			UserEntity userEntity) throws Exception {
-		CapitalLogEntity capitalLogEntity = new CapitalLogEntity();
-		capitalLogEntity.setType("2");
-		capitalLogEntity.setValue(value);
-		capitalLogEntity.setRemainValue(userEntity.getReleaseDot());
-		capitalLogEntity.setDesc(desc);
-		capitalLogEntity.setUser(userEntity);
-		capitalLogEntity.setLogTime(new Date());
-		baseDAO.save(capitalLogEntity);
+		//		CapitalLogEntity capitalLogEntity = new CapitalLogEntity();
+		//		capitalLogEntity.setType("2");
+		//		capitalLogEntity.setValue(value);
+		//		capitalLogEntity.setRemainValue(userEntity.getReleaseDot());
+		//		capitalLogEntity.setDesc(desc);
+		//		capitalLogEntity.setUser(userEntity);
+		//		capitalLogEntity.setLogTime(new Date());
+		//		baseDAO.save(capitalLogEntity);
 	}
 
 	protected Boolean nullID(BaseEntity base) {

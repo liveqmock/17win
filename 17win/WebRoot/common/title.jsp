@@ -79,11 +79,7 @@
 										<ul>
 											<LI
 												style="BACKGROUND: url(images/jieducm_top_btn5.jpg) no-repeat">
-												<A href="shuake/index.html">刷客排行</A>
-											</LI>
-											<LI
-												style="BACKGROUND: url(images/jieducm_top_btn3.jpg) no-repeat">
-												<A href="userInfoManager/info!initExchange.php">我要兑换</A>
+												<A href="javascript:alert('暂不开放');">刷客排行</A>
 											</LI>
 											<LI
 												style="BACKGROUND: url(images/jieducm_top_btn1.jpg) no-repeat">
@@ -149,6 +145,14 @@
 					onmouseover="Mea(3);" testclass="">有啊互刷</A>
 			</LI>
 			<LI class=white>
+				<A class="li0 " href="javascript:alert('开发中，敬请期待！');"
+					onmouseover="Mea(7);" testclass="">淘宝流量</A>
+			</LI>
+			<LI class=white>
+				<A class="li0 " href="javascript:alert('开发中，敬请期待！');" 
+					onmouseover="Mea(8);" testclass="">拍拍流量</A>
+			</LI>
+			<LI class=white>
 				<A
 					<s:if test="#request.showIndexType==5">
 					class="li1 white"  	style="COLOR: #000000"
@@ -161,35 +165,13 @@
 			</LI>
 			<LI class=white>
 				<A
-					<s:if test="#request.showIndexType==8">
-					class="li1 white"  	style="COLOR: #000000"
-				</s:if>
-					<s:else>
-						class="li0 "
-				</s:else>
-					href="userInfoManager/info!referee.php" target="_blank" id="a7"
-					onmouseover="Mea(7);" testclass="">推广赚钱</A>
-			</LI>
-			<LI class=white>
-				<A
-					<s:if test="#request.showIndexType==9">
-					class="li1 white"  	style="COLOR: #000000"
-				</s:if>
-					<s:else>
-						class="li0 "
-				</s:else>
-					href="vipManager/vip!initVip.php" id="a8" onmouseover="Mea(8);"
-					testclass="">加入VIP</A>
-			</LI>
-			<LI class=white>
-				<A
 					<s:if test="#request.showIndexType==11">
 					class="li1 white"  	style="COLOR: #000000"
 				</s:if>
 					<s:else>
 						class="li0 "
 				</s:else>
-					href="shuake/index.html" id="a10" onmouseover="Mea(10);"
+					href="javascript:alert('暂不开放');" id="a10" onmouseover="Mea(10);"
 					testclass="">刷客排行</A>
 			</LI>
 			<LI class=white>

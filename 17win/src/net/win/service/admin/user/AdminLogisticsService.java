@@ -49,17 +49,16 @@ public class AdminLogisticsService extends BaseService {
 		UserEntity releaseUser = logisticsEntity.getReleaseUser();
 		List<UserEntity> reveieveUsers = logisticsEntity.getReceieveUsers();
 		if (reveieveUsers.size() > 0) {
-			// 如果有多余的发布点扣除，就扣发布点
-			if (releaseUser.getReleaseDot() > logisticsEntity
-					.getReleaseDotCount()) {
-				releaseUser
-						.setReleaseDot(ArithUtils.sub(releaseUser
-								.getReleaseDot(), logisticsEntity
-								.getReleaseDotCount()));
-				logDotCapital(userDAO,
-						0 - logisticsEntity.getReleaseDotCount(), "您发的快递单号为"
-								+ logisticsEntity.getWaybill()
-								+ "为虚假信息扣除您根据此单号获得的所有发布点", releaseUser);
+			// 如果有多余的发布点扣除，就扣金额 + 10(处罚)
+			if (releaseUser.getMoney() > (logisticsEntity.getUseCount()
+					* logisticsEntity.getMoney() + 10)) {
+				releaseUser.setMoney(ArithUtils.sub(releaseUser.getMoney(),
+						logisticsEntity.getUseCount()
+								* logisticsEntity.getMoney() + 10));
+				logMoneyCapital(userDAO, 0 - (logisticsEntity.getUseCount()
+						* logisticsEntity.getMoney() + 10), "您发的快递单号为"
+						+ logisticsEntity.getWaybill()
+						+ "为虚假信息扣除您根据此单号获得的所有获得的金额,并处罚10元", releaseUser);
 				logisticsDAO
 						.deleteBySQL(
 								"delete from tb_logistics_bid_user where Logistics_ID_=:logisticsID",
@@ -68,17 +67,14 @@ public class AdminLogisticsService extends BaseService {
 				logisticsDAO.deleteBySQL("delete from tb_logicstics",
 						new String[] { "logisticsID" },
 						new Object[] { logisticsEntity.getId() });
-				logisticsDAO.delete(logisticsEntity);
-
-				double logistics_dot = logisticsEntity.getReleaseDotCount()
-						/ reveieveUsers.size();
 				for (UserEntity userEntity : reveieveUsers) {
-					userEntity.setReleaseDot(ArithUtils.add(userEntity
-							.getReleaseDot(), logistics_dot));
-					logDotCapital(userDAO, logistics_dot,
+					userEntity.setMoney(ArithUtils.add(userEntity.getMoney(),
+							logisticsEntity.getMoney()));
+					logMoneyCapital(userDAO, logisticsEntity.getMoney(),
 							"经查实，因为" + releaseUser.getUsername()
-									+ "发送的物流信息是虚假的，所以退还发布点", userEntity);
+									+ "发送的物流信息是虚假的，所以退金额", userEntity);
 				}
+				logisticsDAO.delete(logisticsEntity);
 			} else {
 				releaseUser.setStatus("2");
 				releaseUser.setStatusDesc("您发送的快递单号为:"
@@ -117,27 +113,27 @@ public class AdminLogisticsService extends BaseService {
 				"select  count(*)  from LogisticsEntity _l inner join _l.releaseUser as _u  where 1=1  ");
 		List<String> paramNames = new ArrayList<String>();
 		List<Object> paramValues = new ArrayList<Object>();
-		// 使用次数
-		if (logisticsVO.getStartUseCount() != null
-				&& logisticsVO.getEndUseCount() != null) {
+		// MONEY
+		if (logisticsVO.getStartMoney() != null
+				&& logisticsVO.getEndMoney() != null) {
 			resultHQL
-					.append(" and (_l.useCount>=:startUseCount and _l.useCount<=:endUseCount) ");
+					.append(" and (_l.money>=:startMoney and _l.money<=:endMoney) ");
 			countHQL
-					.append(" and (_l.useCount>=:startUseCount and _l.useCount<=:endUseCount) ");
-			paramNames.add("startUseCount");
-			paramNames.add("endUseCount");
-			paramValues.add(logisticsVO.getStartUseCount());
-			paramValues.add(logisticsVO.getEndUseCount());
-		} else if (logisticsVO.getStartUseCount() != null) {
-			resultHQL.append(" and _l.useCount>=:startUseCount  ");
-			countHQL.append(" and  _l.useCount>=:startUseCount   ");
-			paramNames.add("startUseCount");
-			paramValues.add(logisticsVO.getStartUseCount());
-		} else if (logisticsVO.getEndUseCount() != null) {
-			resultHQL.append(" and   _l.useCount<=:endUseCount  ");
-			countHQL.append(" and   _l.useCount<=:endUseCount  ");
-			paramNames.add("endUseCount");
-			paramValues.add(logisticsVO.getEndUseCount());
+					.append(" and (_l.money>=:startMoney and _l.money<=:endMoney) ");
+			paramNames.add("startMoney");
+			paramNames.add("endMoney");
+			paramValues.add(logisticsVO.getStartMoney());
+			paramValues.add(logisticsVO.getEndMoney());
+		} else if (logisticsVO.getStartMoney() != null) {
+			resultHQL.append(" and _l.money>=:startMoney  ");
+			countHQL.append(" and  _l.money>=:startMoney   ");
+			paramNames.add("startMoney");
+			paramValues.add(logisticsVO.getStartMoney());
+		} else if (logisticsVO.getEndMoney() != null) {
+			resultHQL.append(" and   _l.money<=:endMoney  ");
+			countHQL.append(" and   _l.money<=:endMoney  ");
+			paramNames.add("endMoney");
+			paramValues.add(logisticsVO.getEndMoney());
 		}
 		// 时间
 		if (logisticsVO.getStartDate() != null

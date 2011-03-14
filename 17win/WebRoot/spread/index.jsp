@@ -338,23 +338,17 @@
 										cellspacing="0" class="bleak">
 										<tr>
 											<td>
-												<a href='../news.asp?/1412.html' target="_blank"
-													title='推广会员名单'><font><strong>推广会员名单</strong> </font> </a>
+												  希望大家把17win推广出去！
 											</td>
 										</tr>
-										<tr>
-											<td>
-												<a href='../news.asp?/1403.html' target="_blank"
-													title='推广本平台成功注册一名舍员即送5元'><font color=>推广本平台成功注册一名舍员即送5元</font>
-												</a>
-											</td>
-										</tr>
+										 
 									</table>
 								</td>
 
 							</tr>
 						</tbody>
 					</table>
+					<!-- 以后再改
 					<table width="260" border="0" cellpadding="0" cellspacing="0"
 						class="margin-bottom">
 						<tbody>
@@ -392,155 +386,7 @@
 									<table width="95%" height="28" border="0" align="center"
 										cellpadding="8" cellspacing="0">
 
-										<tr>
-											<td class="border_bottom_lan">
-												<div align="center">
-													ejianqin
-												</div>
-											</td>
-
-											<td class="border_bottom_lan">
-												<div align="center" class="yell_font">
-													380元
-												</div>
-											</td>
-										</tr>
-
-										<tr>
-											<td class="border_bottom_lan">
-												<div align="center">
-													13472291000
-												</div>
-											</td>
-											<td class="border_bottom_lan">
-												<div align="center" class="yell_font">
-													340元
-												</div>
-											</td>
-										</tr>
-
-										<tr>
-
-											<td class="border_bottom_lan">
-												<div align="center">
-													0610gf
-												</div>
-											</td>
-											<td class="border_bottom_lan">
-												<div align="center" class="yell_font">
-													280元
-												</div>
-											</td>
-										</tr>
-
-										<tr>
-											<td class="border_bottom_lan">
-												<div align="center">
-													262605736
-												</div>
-											</td>
-											<td class="border_bottom_lan">
-												<div align="center" class="yell_font">
-													250元
-												</div>
-											</td>
-										</tr>
-
-
-										<tr>
-											<td class="border_bottom_lan">
-												<div align="center">
-													ke288f
-												</div>
-											</td>
-											<td class="border_bottom_lan">
-												<div align="center" class="yell_font">
-													120元
-												</div>
-											</td>
-										</tr>
-
-										<tr>
-											<td class="border_bottom_lan">
-												<div align="center">
-													center
-												</div>
-											</td>
-											<td class="border_bottom_lan">
-												<div align="center" class="yell_font">
-													120元
-												</div>
-											</td>
-
-										</tr>
-
-										<tr>
-											<td class="border_bottom_lan">
-												<div align="center">
-													ainidexu
-												</div>
-											</td>
-											<td class="border_bottom_lan">
-												<div align="center" class="yell_font">
-													100元
-												</div>
-											</td>
-										</tr>
-
-										<tr>
-											<td class="border_bottom_lan">
-												<div align="center">
-													ttqsef
-												</div>
-											</td>
-
-											<td class="border_bottom_lan">
-												<div align="center" class="yell_font">
-													100元
-												</div>
-											</td>
-										</tr>
-
-										<tr>
-											<td class="border_bottom_lan">
-												<div align="center">
-													cuichuyan
-												</div>
-											</td>
-											<td class="border_bottom_lan">
-												<div align="center" class="yell_font">
-													80元
-												</div>
-											</td>
-										</tr>
-
-										<tr>
-
-											<td class="border_bottom_lan">
-												<div align="center">
-													yiyeguan
-												</div>
-											</td>
-											<td class="border_bottom_lan">
-												<div align="center" class="yell_font">
-													80元
-												</div>
-											</td>
-										</tr>
-
-										<tr>
-											<td class="border_bottom_lan">
-												<div align="center">
-													一夜皇冠
-												</div>
-											</td>
-											<td class="border_bottom_lan">
-												<div align="center" class="yell_font">
-													70元
-												</div>
-											</td>
-										</tr>
-
+										  
 
 										<tr>
 											<td class="border_bottom_lan">
@@ -554,16 +400,20 @@
 												</div>
 											</td>
 										</tr>
+										 
 
 									</table>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-
+									
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	 -->
 				</td>
 			</tr>
 		</table>
+
+
 		<table width="100%" height="100" border="0" cellpadding="0"
 			cellspacing="0" background="images/tg_bg.jpg">
 			<tr>

@@ -244,7 +244,7 @@
 									任务编号
 								</td>
 								<td nowrap="nowrap" align="center">
-									价格/发布点
+									附加金额
 								</td>
 								<td nowrap="nowrap" align="center">
 									商品信息
@@ -291,17 +291,12 @@
 												format="yyyy-MM-dd HH:mm:ss" /> </span>
 									</td>
 									<td align="center" nowrap="nowrap">
-										<span
-											alt="任务金额：<s:property value="#task.money" />，附加金额：<s:property
-												value="#task.addtionMoney" />"><s:property
-												value="#task.money" /> + <s:property
-												value="#task.addtionMoney" /> </span>
+										<span alt="任务金额：<s:property value="#task.money" />"><s:property
+												value="#task.money" />
+										</span>
 										<br>
-										<span
-											alt="任务发布点：<s:property value="#task.money" />，附加发布点：<s:property
-												value="#task.addtionMoney" />">
-											<s:property value="#task.releaseDot" /> + <s:property
-												value="#task.addtionReleaseDot" /> </span>
+										<span alt="附加金额：<s:property value="#task.addtionMoney" />">
+											<s:property value="#task.addtionMoney" /> </span>
 									</td>
 									<td align="center" valign="middle" nowrap="nowrap">
 										<a style="cursor: pointer;"
@@ -455,7 +450,7 @@
 												href="javascript:payMoney('<s:property value="#task.id"/>')"><span
 												class="anniu">已经支付</span> </a>
 											<br>
-											<a alt="退出任务，并且返回金钱和发布点给您"
+											<a alt="退出任务，并且返回金钱给您"
 												href="javascript:quitTask('<s:property value="#task.id"/>')"><span
 												class="anniu2">退出任务</span> </a>
 										</s:elseif>

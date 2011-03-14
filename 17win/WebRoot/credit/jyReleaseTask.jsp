@@ -249,7 +249,7 @@
 									任务编号
 								</td>
 								<td nowrap="nowrap" align="center">
-									价格/发布点
+									任务金额
 								</td>
 								<td nowrap="nowrap" align="center">
 									商品信息
@@ -296,17 +296,11 @@
 												format="yyyy-MM-dd HH:mm:ss" /> </span>
 									</td>
 									<td align="center" nowrap="nowrap">
-										<span
-											alt="任务金额：<s:property value="#task.money" />，附加金额：<s:property
-												value="#task.addtionMoney" />"><s:property
-												value="#task.money" /> + <s:property
-												value="#task.addtionMoney" /> </span>
+										<span alt="任务金额：<s:property value="#task.money" />"><s:property
+												value="#task.money" /> </span>
 										<br>
-										<span
-											alt="任务发布点：<s:property value="#task.money" />，附加发布点：<s:property
-												value="#task.addtionMoney" />">
-											<s:property value="#task.releaseDot" /> + <s:property
-												value="#task.addtionReleaseDot" /> </span>
+										<span alt="附加金额：<s:property value="#task.addtionMoney" />">
+											<s:property value="#task.addtionMoney" /> </span>
 									</td>
 									<td valign="middle" align="center" nowrap="nowrap">
 										<a style="cursor: pointer;"

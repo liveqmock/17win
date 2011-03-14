@@ -19,6 +19,8 @@ function validateForm() {
 	var startDate = $("#sendDate").val();
 	var endDate = $("#arrivalDate").val();
 
+	var money = $("#money").val();
+
 	if ($("select[name='logisticsVO.logistics.expressCompany']").val() == "-1"
 			&& Validater.isBlank(expressCompany)) {
 		alert("物流公司不能为空");
@@ -33,6 +35,10 @@ function validateForm() {
 		alert("发货时间不能为空");
 		return false;
 	}
+	if (Validater.isBlank(endDate)) {
+		alert("到达时间不能为空");
+		return false;
+	}
 	if (!Validater.isBlank(endDate)) {
 		if (Validater.compareDate(startDate, endDate)) {
 			alert("预计到达日期不能早于发货日期！");
@@ -40,6 +46,10 @@ function validateForm() {
 		}
 	}
 
+	if (Validater.isBlank(money) || isNaN(money)) {
+		alert("金额格式不对！");
+		return false;
+	}
 	// /
 	if (Validater.isBlank(fhdz)) {
 		alert("发货地址不能为空");
@@ -76,6 +86,7 @@ function validateForm() {
 		alert("收货电话不能为空");
 		return false;
 	}
+
 	// /
 	var releaseInfo = fhdz + " " + fhyb + " " + fhlxr + " " + fhdh;
 	var receieveInfo = shdz + " " + shyb + " " + shlxr + " " + shdh;

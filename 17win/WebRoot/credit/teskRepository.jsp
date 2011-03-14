@@ -60,7 +60,7 @@
 										id="pageCount">
 								</td>
 								<td nowrap="nowrap" align="center">
-									商品价格
+									任务金额
 								</td>
 								<td nowrap="nowrap" align="center">
 									商品信息
@@ -110,13 +110,11 @@
 
 									</td>
 									<td valign="middle" align="center" nowrap="nowrap">
-										<s:property value="#task.money" />
-										+
-										<s:property value="#task.addtionMoney" />
+										<span alt="任务金额：<s:property value="#task.money" />"><s:property
+												value="#task.money" /> </span>
 										<br>
-										<s:property value="#task.releaseDot" />
-										+
-										<s:property value="#task.addtionReleaseDot" />
+										<span alt="附加金额：<s:property value="#task.addtionMoney" />">
+											<s:property value="#task.addtionMoney" /> </span>
 									</td>
 									<td valign="middle" align="center" nowrap="nowrap">
 										<a style="cursor: pointer;"

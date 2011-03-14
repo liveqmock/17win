@@ -69,8 +69,6 @@ public final class Constant {
 
 	// 接任务所扣的发布点折扣率
 	private static Double receieveTaskDotRate;
-	// 物流发布点个数
-	private static Double logisticsDotCount;
 	// 信誉值上限
 	private static Double creditValueLimit;
 	// 发布点兑换成金额
@@ -144,9 +142,6 @@ public final class Constant {
 		return vipPrice;
 	}
 
-	public static Double getLogisticsDotCount() {
-		return logisticsDotCount;
-	}
 
 	public static Double getReceieveTaskDotRate() {
 		return receieveTaskDotRate;
@@ -344,10 +339,6 @@ public final class Constant {
 				// 接任务所得的发布点
 				else if ("receieveTaskDotRate".equalsIgnoreCase(name)) {
 					receieveTaskDotRate = numberValue;
-				}
-				// 物流发布点个数
-				else if ("logisticsDotCount".equalsIgnoreCase(name)) {
-					logisticsDotCount = numberValue;
 				}
 				// 信誉值上限
 				else if ("creditValueLimit".equalsIgnoreCase(name)) {

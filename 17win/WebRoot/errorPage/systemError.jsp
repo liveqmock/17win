@@ -23,7 +23,7 @@
 						<DIV
 							style="PADDING-RIGHT: 20px; PADDING-LEFT: 20px; PADDING-BOTTOM: 20px; WIDTH: 700px; PADDING-TOP: 20px; TEXT-ALIGN: left">
 							<DIV style="FONT-WEIGHT: bolder; FONT-SIZE: 18px; COLOR: red">
-								系统错误，请联系客服，有机会获得发布点哦！
+								系统错误，请联系客服，有机会获得奖品哦！
 							</DIV>
 						</DIV>
 					</DIV>

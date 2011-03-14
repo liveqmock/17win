@@ -15,12 +15,7 @@
 							<div>
 								<font color=#ff0000>${userLogin.username}</font>&nbsp; 您好！您拥有存款：
 								<font color=#ff0000> <s:property
-										value="#session.userLogin.money" /> </font> 元 &nbsp; 发布点：
-								<font color=#ff0000> <s:property
-										value="#session.userLogin.releaseDot"></s:property> </font>点 &nbsp;
-								积分：
-								<font color=#ff0000><s:property
-										value="#session.userLogin.convertScore"></s:property> </font>
+										value="#session.userLogin.money" /> </font> 元
 							</div>
 						</div>
 					</div>

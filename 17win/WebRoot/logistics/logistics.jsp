@@ -108,8 +108,13 @@ img {
 											</div>
 											<div>
 												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												<font color="red">注意：请认真填写以下信息，如果有人举报您填写的信息与真实信息不符合，我们将严惩！别人使用您的物流信息时，您会获得<s:property
-														value="#request.logisticsDotCount" />个发布点</font>
+												<font color="red">注意：请认真填写以下信息，如果有人举报您填写的信息与真实信息不符合，我们将严惩！别人使用您的物流信息时，您会获得相应的金额！
+
+
+
+
+
+												
 											</div>
 
 											<table width="99%" cellspacing="0" cellpadding="0" border="0"
@@ -192,7 +197,8 @@ img {
 													</tr>
 													<tr>
 														<td height="40" align="right" class="font12h">
-															预计到达时间
+															到达时间
+															<font color="red">(*)</font>
 															<font color="red"></font>：
 														</td>
 														<td align="left" class="red-bcolor">
@@ -206,6 +212,17 @@ img {
 															<font color="red" style="font-size: 12px">预计时间必须大于等于您的发货时间，小于发货时间+15天的日期</font>
 														</td>
 													</tr>
+													<tr>
+														<td height="40" align="right" class="font12h">
+															购买金额
+															<font color="red">(*)</font>：
+														</td>
+														<td align="left" class="red-bcolor">
+															<s:textfield maxlength="5" value="0.5"
+																name="logisticsVO.logistics.money" id="money"></s:textfield>
+															元
+														</td>
+													</tr>	
 													<tr>
 														<td height="40" align="right" class="font12h" valign="top">
 															发货信息

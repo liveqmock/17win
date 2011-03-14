@@ -103,7 +103,7 @@
 									发布人
 								</td>
 								<td nowrap="nowrap" align="center">
-									价格/发布点
+									任务金额
 								</td>
 								<td nowrap="nowrap" align="center">
 									改价/好评
@@ -149,17 +149,12 @@
 											alt="刷客经验积分：<s:property value="#task.fbUpgradeScore" />">
 									</td>
 									<td align="center" nowrap="nowrap">
-										<span
-											alt="任务金额：<s:property value="#task.money" />，附加金额：<s:property
-												value="#task.addtionMoney" />"><s:property
-												value="#task.money" /> + <s:property
-												value="#task.addtionMoney" /> </span>
+										<span alt="任务金额：<s:property value="#task.money" />"><s:property
+												value="#task.money" />
+										</span>
 										<br>
-										<span
-											alt="任务发布点：<s:property value="#task.money" />，附加发布点：<s:property
-												value="#task.addtionMoney" />">
-											<s:property value="#task.releaseDot" /> + <s:property
-												value="#task.addtionReleaseDot" /> </span>
+										<span alt="附加金额：<s:property value="#task.addtionMoney" />">
+											<s:property value="#task.addtionMoney" /> </span>
 									</td>
 									<td align="center" nowrap="nowrap">
 										<s:if test="#task.updatePrice">
@@ -194,12 +189,12 @@
 												</s:if>
 												<s:elseif
 													test="(#task.assignUser!='' &&  #task.assignUser!=null) && #task.assignUser==#session.userLogin.username ">
-													<a alt="接手，并完成任务可获得存款和发布点" style="CURSOR: pointer"
+													<a alt="接手，并完成任务可获得任务金额" style="CURSOR: pointer"
 														onClick="receiveTask('<s:property value="#task.id"/>')">
 														<img src="images/qiang.gif" /> </a>
 												</s:elseif>
 												<s:else>
-													<a alt="接手，并完成任务可获得存款和发布点" style="CURSOR: pointer"
+													<a alt="接手，并完成任务可获得任务金额" style="CURSOR: pointer"
 														onClick="receiveTask('<s:property value="#task.id"/>')">
 														<img src="images/qiang.gif" /> </a>
 												</s:else>

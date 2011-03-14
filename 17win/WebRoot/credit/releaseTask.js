@@ -22,22 +22,6 @@ $(document).ready(function() {
 			$("input[name='creditTaskVO.intervalHour']").attr("disabled", true);
 		}
 	});
-	// tip
-	$("#addtaskForm :input").tooltip({
-
-				// place tooltip on the right edge
-				position : "center right",
-
-				// a little tweaking of the position
-				offset : [-2, 10],
-
-				// use the built-in fadeIn/fadeOut effect
-				effect : "fade",
-
-				// custom opacity setting
-				opacity : 0.7
-
-			});
 	// 仓库
 	$("#respository").bind("click", function() {
 				if ($(this).attr("checked")) {
@@ -160,8 +144,8 @@ function validateForm() {
 	var itemUrlObjs = $("input[name='itemUrls']");
 	var money = $("#money").val();
 	var addtionMoney = $("#addtionMoneyId").val();
-	var addtionReleaseDot = $("#addtionReleaseDotId").val();
 	var updatePriceObj = $("input[name='creditTaskVO.updatePrice']:checked");
+	var assignUser = $("#assignUserID").val();
 	// 验证地址
 	for (var i = 0; i < itemUrlObjs.length; i++) {
 		var obj = itemUrlObjs.eq(i);
@@ -185,17 +169,16 @@ function validateForm() {
 		$("#addtionMoneyId").focus();
 		return false;
 	}
-	// 验证addtionReleaseDot
-	if (!Validater.isBlank(addtionReleaseDot) && isNaN(addtionReleaseDot)
-			&& parseFloat(addtionMoney) < 0) {
-		alert("追加发布点格式不对！");
-		$("#addtionReleaseDotId").focus();
+	// 验证指接手人
+	if (Validater.isBlank(assignUser)) {
+		alert("指定人不能为空！");
+		$("#assignUserID").focus();
 		return false;
 	}
+	// 修改价格
 	if (updatePriceObj == null || updatePriceObj.length == 0
 			|| updatePriceObj == "undefined") {
 		alert("请选择是否修改价格！");
-		$("#addtionReleaseDotId").focus();
 		return false;
 	}
 	$("#bgDIV").show();

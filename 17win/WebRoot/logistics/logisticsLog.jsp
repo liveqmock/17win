@@ -165,7 +165,7 @@ img {
 															使用数
 														</th>
 														<th style="font-size: 12px" nowrap="nowrap">
-															总收益(发布点)
+															购买金额
 														</th>
 														<th style="font-size: 12px" nowrap="nowrap">
 															备注
@@ -218,7 +218,7 @@ img {
 																<s:property value="#logistics.useCount" />
 															</td>
 															<td>
-																<s:property value="#logistics.releaseDotCount" />
+																<s:property value="#logistics.money" />
 															</td>
 															<td>
 																<s:property value="#logistics.remark" />

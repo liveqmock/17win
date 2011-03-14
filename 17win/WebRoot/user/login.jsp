@@ -141,13 +141,13 @@
 													href="userManager/base!initRegister.php">注册</A> </b>为本站会员，登陆系统。</TT>
 											<BR>
 											<IMG src="images/jieducm_b1.gif">
-											<TT>第二步：到刷钻中心接任务,接一个任务系统会自动为你增加发布点。</TT>
+											<TT>第二步：联系一个好友发一个互刷任务。</TT>
 											<BR>
 											<IMG src="images/jieducm_b2.gif">
 											<TT>第三步：对你刚才购买的宝贝进行"好评"</TT>
 											<BR>
 											<IMG src="images/jieducm_b3.gif">
-											<TT>第四步：拥有发布点后即可发布任务，平台担保价为用户自定。</TT>
+											<TT>第四步：得到金额，又重复第二部。</TT>
 										</TD>
 									</TR>
 								</TBODY>

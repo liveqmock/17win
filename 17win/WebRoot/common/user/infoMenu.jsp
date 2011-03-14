@@ -46,21 +46,6 @@
 															value="#session.userLogin.money"></s:property> </font> 元
 												</td>
 											</tr>
-
-											<tr>
-												<td height=20>
-													发布点：
-													<font color=#ff0000> <s:property
-															value="#session.userLogin.releaseDot"></s:property> </font> 点
-												</td>
-											</tr>
-											<tr>
-												<td height=20>
-													积&nbsp;&nbsp;&nbsp;&nbsp;分：
-													<font color=#ff0000> <s:property
-															value="#session.userLogin.convertScore"></s:property> </font>点
-												</td>
-											</tr>
 											<tr>
 												<td height=20>
 													状&nbsp;&nbsp;&nbsp;&nbsp;态：
@@ -146,7 +131,8 @@
 											</tr>
 											<tr>
 												<td height=20>
-													<A href="taskLinkManManager/taskLinkMan!queryLinkTaskMan.php">我的联系人</A>
+													<A
+														href="taskLinkManManager/taskLinkMan!queryLinkTaskMan.php">我的联系人</A>
 												</td>
 											</tr>
 											<tr>
@@ -168,14 +154,14 @@
 											</td>
 										</tr>
  -->
-
+											<!-- xgj 
 											<tr>
 												<td height=20>
 													<a href="vipManager/vip!initVip.php"><font
 														color="#FF0000">加入VIP</font> </a>
 												</td>
 											</tr>
-											<!-- xgj 
+									
 										<tr>
 
 											<td height=20>
@@ -264,6 +250,7 @@
 													<a href="payManager/pay!queryPay.php">充值记录</a>
 												</td>
 											</tr>
+											<!-- 
 											<tr>
 												<td height=20>
 													<a href="userInfoManager/info!initBuyDot.php">买发布点</a>
@@ -275,7 +262,7 @@
 													<a href="userInfoManager/info!initExchange.php">我要兑换</a>
 												</td>
 											</tr>
-
+										 -->
 											<tr>
 												<td height=20>
 													<a
@@ -340,11 +327,13 @@
 												</td>
 
 											</tr>
+											<!-- 
 											<tr>
 												<td height=20>
 													<a href="smsManager/sms!initSendTelphone.php">发送手机短信</a>
 												</td>
 											</tr>
+											 -->	
 										</table>
 									</div>
 								</td>

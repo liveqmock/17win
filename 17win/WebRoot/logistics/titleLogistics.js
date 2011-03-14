@@ -2,8 +2,8 @@ $(document).ready(function() {
 			$("#myTable").tablesorter();
 		});
 function validateForm() {
-	var startValue = $("#startUseCount").val();
-	var endValue = $("#endUseCount").val();
+	var startValue = $("#startMoney").val();
+	var endValue = $("#endMoney").val();
 	var startDate = $("input[name='logisticsVO.startDate']").val();
 	var endDate = $("input[name='logisticsVO.endDate']").val();
 	if (isNaN(startValue) || isNaN(endValue)) {

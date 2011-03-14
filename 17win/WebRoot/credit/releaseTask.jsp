@@ -36,8 +36,7 @@
 		</script>
 		<script type="text/javascript" src="credit/releaseTask.js">
 		</script>
-		<script
-			src="http://cdn.jquerytools.org/1.2.1/tiny/jquery.tools.min.js"></script>
+		<script src="js/x_alt.js" type="text/javascript"></script>
 		<script type="text/javascript">
 				function initTaskRep(){
 					<s:if test="#request.taskRep!=null">
@@ -125,11 +124,11 @@
 																	</td>
 																	<td colspan="4" valign="middle" class="itemClass">
 																		<span> <s:textfield name="itemUrls" size="70"
-																				title="填写正确的商品地址！" maxlength="100"></s:textfield> <img
-																				src="images/add.jpg" style="cursor: pointer;"
-																				onclick="addItem(this)" title="添加任务" /> <img
+																				alt="填写正确的商品地址,可填多个！" maxlength="100"></s:textfield>
+																			<img src="images/add.jpg" style="cursor: pointer;"
+																				onclick="addItem(this)" alt="添加商品地址" /> <img
 																				src="images/jian.jpg" style="cursor: pointer;"
-																				title="删除任务" onclick="removeItem(this)" /> </span>
+																				alt="删除商品地址" onclick="removeItem(this)" /> </span>
 																	</td>
 																</tr>
 																<tr>
@@ -139,8 +138,7 @@
 																	<td colspan="4">
 																		<s:if test="#request.sellers!=null">
 																			<s:select name="creditTaskVO.sellerID" listKey="id"
-																				title="选择掌柜！" listValue="name"
-																				list="#request.sellers">
+																				listValue="name" list="#request.sellers">
 																			</s:select>
 																		</s:if>
 																	</td>
@@ -161,7 +159,8 @@
 																		<input type="hidden" name="win17_token"
 																			value="<s:property value="#session.win17_token"/>">
 																		<s:textfield name="creditTaskVO.money" size="10"
-																			title="必须是大于等于1元的金额，单位是（元）！" id="money" maxlength="6"
+																			alt="必须是大于等于1元的金额（包括运费），单位是（元）！" id="money"
+																			maxlength="6"
 																			onkeyup="if(isNaN(value))execCommand('undo')"></s:textfield>
 																	</td>
 																</tr>
@@ -171,33 +170,22 @@
 																	</td>
 																	<td colspan="2">
 																		<s:textfield name="creditTaskVO.addtionMoney"
-																			size="10" title="在现有的金额的基础上，追加金额给接手方！" maxLength="3"
+																			size="10" alt="在现有的金额的基础上，追加金额给接手方！" maxLength="3"
 																			id="addtionMoneyId"></s:textfield>
 																	</td>
 																</tr>
 																<tr>
-																	<td align="right" nowrap="nowrap">
-																		追加发布点：
-																	</td>
-																	<td colspan="2">
-																		<s:textfield name="creditTaskVO.addtionReleaseDot"
-																			size="10"
-																			title="在现有的发布点的基础上，追加发布点给接手方，追加的发布点将全额给接手方，平台不扣取！"
-																			maxLength="3" id="addtionReleaseDotId"></s:textfield>
-																	</td>
-																</tr>
-																<tr>
 																	<td align="right">
-																		特定任务：
+																		接受人ID：
 																	</td>
 																	<td colspan="4">
 																		<s:textfield name="creditTaskVO.assignUser"
 																			onmouseout="moveOutCloseDisplay(event,'selectUserDiv');"
-																			onclick="selectAssignUser();"
-																			title="输入指定人的17win帐号，只有指定的人才可以接你的任务，发特定任务不需要发布点！"
+																			onclick="selectAssignUser();" alt="输入指定人的17win帐号！"
 																			id="assignUserID" maxlength="12"></s:textfield>
 																		<img src="images/tdTask.gif">
-																		<input type="checkbox" name="addLinkName" value="true" />
+																		<input type="checkbox" name="addLinkName" value="true"
+																			alt="加入到常用联系人，方便下次使用！" />
 																		加入到常用联系人
 																	</td>
 																</tr>
@@ -207,10 +195,10 @@
 																	</td>
 																	<td colspan="2">
 																		<s:textfield name="creditTaskVO.timeingTime"
-																			title="系统帮你自动发任务，可以把你一天的任务安排好，到时候等人接手即可！"
+																			alt="系统帮你自动发任务，可以把你一天的任务安排好，到时候等人接手即可！"
 																			onclick="WdatePicker({'minDate':'%y-%M-%d %H:%m:%s','alwaysUseStartDate':false,'el':'tasktimingDate','isShowClear':true,startDate:'%y-%M-%d %H:%m:%s',dateFmt:'yyyy-MM-dd HH:mm:ss','skin':'blue'})"
 																			readonly="true" id="tasktimingDate"></s:textfield>
-																		<img style="cursor: pointer;" title="只精确到分钟"
+																		<img style="cursor: pointer;" alt="只精确到分钟"
 																			onclick="WdatePicker({'minDate':'%y-%M-%d %H:%m:%s','alwaysUseStartDate':false,'el':'tasktimingDate','isShowClear':true,startDate:'%y-%M-%d %H:%m:%s',dateFmt:'yyyy-MM-dd HH:mm:ss','skin':'blue'})"
 																			src="js/My97DatePicker/skin/datePicker.gif"
 																			width="16" height="22 align="absmiddle">
@@ -222,12 +210,12 @@
 																	</td>
 																	<td>
 																		<input type="radio" name="creditTaskVO.updatePrice"
-																			title="任务的价格和淘宝上的商品价格（包含邮费）不一致时，需要修改价格！" value="true">
+																			alt="任务的价格和淘宝上的商品价格（包含邮费）不一致时，需要修改价格！" value="true">
 																		需修改价
 																	</td>
 																	<td>
 																		<input name="creditTaskVO.updatePrice" type="radio"
-																			title="任务的价格和淘宝上的商品价格（包含邮费）必须一致!" value="false">
+																			alt="任务的价格和淘宝上的商品价格（包含邮费）必须一致!" value="false">
 																		不需改价
 																	</td>
 																</tr>
@@ -239,19 +227,19 @@
 																		<input type="radio" name="creditTaskVO.taskType"
 																			id="xnTaskType_Id" onclick="hideTaskType(this)"
 																			checked="checked"
-																			title="任务的价格和淘宝上的商品价格（包含邮费）不一致时，需要修改价格" value="1">
+																			alt="任务的价格和淘宝上的商品价格（包含邮费）不一致时，需要修改价格" value="1">
 																		虚拟任务
 																		<img src="images/xnType.jpg" />
 																		&nbsp;&nbsp;
 																		<input type="radio" name="creditTaskVO.taskType"
 																			id="stTaskType_Id" onclick="hideTaskType(this)"
-																			title="任务的价格和淘宝上的商品价格（包含邮费）不一致时，需要修改价格" value="2">
+																			alt="任务的价格和淘宝上的商品价格（包含邮费）不一致时，需要修改价格" value="2">
 																		实物任务
 																		<img src="images/swType.jpg" />
 																		&nbsp;&nbsp;
 																		<input type="radio" name="creditTaskVO.taskType"
 																			id="tcTaskType_Id" onclick="hideTaskType(this)"
-																			title="任务的价格和淘宝上的商品价格（包含邮费）不一致时，需要修改价格" value="3">
+																			alt="任务的价格和淘宝上的商品价格（包含邮费）不一致时，需要修改价格" value="3">
 																		套餐任务
 																		<img src="images/tcType.jpg" />
 																	</td>
@@ -265,7 +253,7 @@
 																	<td nowrap="nowrap">
 																		<label>
 																			<input name="creditTaskVO.grade" type="radio"
-																				checked="checked" title="收到货后马上好评，并且要写好评内容！"
+																				checked="checked" alt="收到货后马上好评，并且要写好评内容！"
 																				value="马上带字好评" />
 																			马上带字好评
 																		</label>
@@ -274,7 +262,7 @@
 																		<label>
 																			<input name="creditTaskVO.grade" type="radio"
 																				withodCommmon="withodCommmon"
-																				title="收到货后马上好评，不用写好评内容！" value="马上不带字好评" />
+																				alt="收到货后马上好评，不用写好评内容！" value="马上不带字好评" />
 																			马上不带字好评
 																		</label>
 
@@ -287,7 +275,7 @@
 																		<label>
 																			<input name="creditTaskVO.grade" type="radio"
 																				withodCommmon="withodCommmon"
-																				title="即平台完成任务，淘宝不评价等待默认好评！" value="待系统默认好评" />
+																				alt="即平台完成任务，淘宝不评价等待默认好评！" value="待系统默认好评" />
 																			待系统默认好评
 																		</label>
 																	</td>
@@ -301,13 +289,13 @@
 																	<td nowrap="nowrap">
 																		<label>
 																			<input name="creditTaskVO.grade" type="radio"
-																				title="扣X*2个发布点(特定任务除外)！" value="一天后收货好评" />
+																				value="一天后收货好评" />
 																			一天后收货好评
 																		</label>
 																	</td>
 																	<td nowrap="nowrap">
 																		<input name="creditTaskVO.grade" type="radio"
-																			title="扣X*2+1个发布点(特定任务除外)！" value="二天后收货好评" />
+																			value="二天后收货好评" />
 																		二天后收货好评
 																	</td>
 																</tr>
@@ -317,15 +305,14 @@
 																	</td>
 																	<td nowrap="nowrap">
 																		<input name="creditTaskVO.grade" type="radio"
-																			title="扣X*2+2个发布点(特定任务除外)" value="三天后收货好评" />
+																			value="三天后收货好评" />
 																		三天后收货好评
 																	</td>
 																	<td>
 																		<input name="creditTaskVO.grade" type="radio"
 																			onclick="diyCommentTime('intervalHour1')"
-																			title="自定义时间好评！" value="自定义时间好评" />
+																			value="自定义时间好评" />
 																		<input type="text" maxlength="3" id="intervalHour1"
-																			title="0≤h＜24(扣x个发布点)，24≤h＜48(扣x*2个发布点)，48≤h＜72(扣x*2+1个发布点)，h≥72(扣x*2+2个发布点)(特定任务除外)！"
 																			name="creditTaskVO.intervalHour" style="width: 40px"
 																			disabled="disabled">
 																		<span>时后好评</span>
@@ -338,15 +325,14 @@
 																	<td nowrap="nowrap">
 																		<label>
 																			<input name="creditTaskVO.grade" type="radio"
-																				title="收到货后马上好评，并且要写好评内容！" value="马上带字好评" />
+																				value="马上带字好评" />
 																			马上带字好评
 																		</label>
 																	</td>
 																	<td nowrap="nowrap">
 																		<label>
 																			<input name="creditTaskVO.grade" type="radio"
-																				withodCommmon="withodCommmon"
-																				title="即平台完成任务，淘宝不评价等待默认好评！" value="待系统默认好评" />
+																				withodCommmon="withodCommmon" value="待系统默认好评" />
 																			待系统默认好评
 																		</label>
 																	</td>
@@ -357,13 +343,13 @@
 																	<td nowrap="nowrap">
 																		<label>
 																			<input name="creditTaskVO.grade" type="radio"
-																				title="扣X*2个发布点(特定任务除外)！" value="一天后收货好评" />
+																				value="一天后收货好评" />
 																			一天后收货好评
 																		</label>
 																	</td>
 																	<td nowrap="nowrap">
 																		<input name="creditTaskVO.grade" type="radio"
-																			title="扣X*2+1个发布点(特定任务除外)！" value="二天后收货好评" />
+																			value="二天后收货好评" />
 																		二天后收货好评
 																	</td>
 																</tr>
@@ -373,15 +359,14 @@
 																	</td>
 																	<td nowrap="nowrap">
 																		<input name="creditTaskVO.grade" type="radio"
-																			title="扣X*2+2个发布点(特定任务除外)！" value="三天后收货好评" />
+																			value="三天后收货好评" />
 																		三天后收货好评
 																	</td>
 																	<td>
 																		<input name="creditTaskVO.grade" type="radio"
 																			onclick="diyCommentTime('intervalHour2')"
-																			title="自定义时间好评！" value="自定义时间好评" />
+																			value="自定义时间好评" />
 																		<input type="text" maxlength="3"
-																			title="0≤h＜24(扣x个发布点)，24≤h＜48(扣x*2个发布点)，48≤h＜72(扣x*2+1个发布点)，h≥72(扣x*2+2个发布点)(特定任务除外)!"
 																			name="creditTaskVO.intervalHour" style="width: 40px"
 																			id="intervalHour2" disabled="disabled">
 																		<span>时后好评</span>
@@ -392,8 +377,8 @@
 																		任务保护：
 																	</td>
 																	<td colspan="2">
-																		<s:checkbox name="creditTaskVO.protect" value="true"
-																			title="接手人需要您审核过后才能发布任务，审核方式可以通过QQ进行一些特定的交流！对方同意你的要求时，你就可以同意他接任务，否则可以不准他接任务!"
+																		<s:checkbox name="creditTaskVO.protect"
+																			alt="接手人需要您审核过后才能发布任务，审核方式可以通过QQ进行一些特定的交流！对方同意你的要求时，你就可以同意他接任务，否则可以不准他接任务!"
 																			fieldValue="true" />
 																	</td>
 
@@ -405,10 +390,10 @@
 																	<td colspan="2">
 																		<span style="display: none" id="respositoryName">
 																			<s:textfield name="creditTaskVO.respositoryName"
-																				title="任务简单描述，默认为任务ID！" maxlength="20"></s:textfield>
+																				alt="任务简单描述，默认为任务ID！" maxlength="20"></s:textfield>
 																		</span>
 																		<s:checkbox name="creditTaskVO.repository"
-																			title="放入任务仓库下次方便使用！" id="respository" value="false"
+																			alt="放入任务仓库下次方便使用！" id="respository" value="false"
 																			fieldValue="true" />
 																	</td>
 																</tr>
@@ -418,7 +403,7 @@
 																	</td>
 																	<td colspan="2">
 																		<s:checkbox name="creditTaskVO.address"
-																			title="根据你的卖好的地址系统自动生成一个市区的地址，让你24小时收货更真实！"
+																			alt="根据你的卖好的地址系统自动生成一个市区的地址，让你24小时收货更真实！"
 																			fieldValue="true" />
 																	</td>
 																</tr>
@@ -429,9 +414,9 @@
 																	<td colspan="2" nowrap="nowrap">
 																		<s:textfield maxlength="255"
 																			name="creditTaskVO.comment"
-																			title="希望接手人在任务完成时对你的好评时的内容！" size="70"></s:textfield>
+																			alt="希望接手人在任务完成时对你的好评时的内容！" size="70"></s:textfield>
 																		<input value="true" name="commentByJS"
-																			id="commentByJSID" title="评论不能为空，要求接手人自己想！"
+																			id="commentByJSID" alt="评论不能为空，要求接手人自己想！"
 																			type="checkbox">
 																		接手人自己想
 																	</td>
@@ -442,10 +427,10 @@
 																	</td>
 																	<td colspan="2">
 																		<input type="submit" style="cursor: pointer;"
-																			id="submitBtnId" title="发布任务" value="发布任务">
+																			id="submitBtnId" value="发布任务">
 																		&nbsp;
 																		<input type="reset" style="cursor: pointer;"
-																			title="重置内容" value="重置内容">
+																			value="重置内容">
 																	</td>
 
 																</tr>

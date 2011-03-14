@@ -109,7 +109,7 @@ img {
 														<s:select listKey="key" listValue="value"
 															name="capitalLogVO.type" headerKey=""
 															headerValue="--请选择--"
-															list="#{'1':'金额记录','2':'发布点记录','3':'积分记录'}">
+															list="#{'1':'金额记录','3':'积分记录'}">
 														</s:select>
 													</td>
 													<td>
@@ -125,16 +125,16 @@ img {
 												</tr>
 												<tr>
 													<td>
-														记录日期：
+														操作时间：
 														<s:textfield name="capitalLogVO.startDate" id="startDate"
 															readonly="true"
-															onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd HH-mm-ss','skin':'blue'})"
+															onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})"
 															cssStyle="width:110px">
 														</s:textfield>
 														至
 														<s:textfield name="capitalLogVO.endDate" id="endDate"
 															readonly="true"
-															onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd HH-mm-ss','skin':'blue'})"
+															onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})"
 															cssStyle="width:110px">
 														</s:textfield>
 													</td>

@@ -27,7 +27,7 @@
 							</DIV>
 							<BR>
 							<DIV style="COLOR: #999900">
-								<FONT color=#ff0000>你必须输入操作密码才能继续操作，每次登陆都要输入一次才能发布任务，提现，赠送发布点、修改个人资料</FONT>
+								<FONT color=#ff0000>你必须输入操作密码才能继续操作，每次登陆都要输入一次才能发布任务，提现，修改个人资料</FONT>
 							</DIV>
 							<BR>
 							<DIV style="COLOR: red">

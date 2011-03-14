@@ -126,13 +126,13 @@ img {
 						</tr>
 						<tr>
 							<td>
-								使用次数：
-								<s:textfield name="logisticsVO.startUseCount" id="startUseCount"
-									cssStyle="width:80px">
+								使用金额：
+								<s:textfield name="logisticsVO.startMoney" id="startMoney"
+									maxlength="5" cssStyle="width:80px">
 								</s:textfield>
 								至
-								<s:textfield name="logisticsVO.endUseCount" id="endUseCount"
-									cssStyle="width:80px">
+								<s:textfield name="logisticsVO.endMoney" id="endMoney"
+									maxlength="5" cssStyle="width:80px">
 								</s:textfield>
 							</td>
 							<td>
