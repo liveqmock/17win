@@ -1,6 +1,6 @@
 var submitFlag = true;
 $(document).ready(function() {
-			$("#addBtn").button();
+			$(".classButton").button();
 			$("#addBtn").bind("click", function() {
 						$("#addtableDIV input[type='text']").val("");
 						$("#addtableDIV input[type='text']")
@@ -65,14 +65,6 @@ $(document).ready(function() {
 							$('.sellerClass').hide();
 						}
 					});
-
-			$("#shopURL").blur(function() {
-						obtainSellerByShop($("#platformType").val(), this);
-
-					}
-
-			);
-
 		});
 
 // 删除seller
@@ -129,53 +121,6 @@ function obtainBuyer(obj) {
 		}
 		changeStyle(obj, '1', '');
 	}
-}
-// 根据店铺地址获取到卖号
-function obtainSellerByShop(type, obj) {
-	// 去掉空格
-	$(obj).val($.trim($(obj).val()));
-	var shopURL = $(obj).val();
-	// 获取seller input
-	var input = $("#sellerName");
-	if (!Validater.isShop(shopURL, type)) {
-		submitFlag = false;
-		changeStyle(obj, '0', '您输入的格式不地址格式不正确（淘宝不要用二级域名地址），最好复制在浏览器地址栏里面复制后粘贴,如还有疑问，请联系客户！');
-		return;
-	}
-	if ($("input[platformType='" + type + "'][shopUrl='" + shopURL + "']")
-			.size() > 0) {
-		changeStyle(obj, '0', '已经存在该店铺！');
-		alert("已经存在该店铺！");
-		submitFlag = false;
-		return;
-	}
-	$("#huoquUser").show();
-	$("#huoquUser").text("(获取中...)");
-	// 获取用户地址
-	VhostAop.divAOP.ajax("ajaxManager/ajax!obtainSellerByShop.php", {
-				url : $(obj).val(),
-				type : type
-			}, function(data) {
-				if (data.seller == null || data.seller == "") {
-					submitFlag = false;
-					changeStyle(obj, '0', '您输入的地址不正确！');
-					$("#huoquUser").text("(失败)");
-
-				} else {
-					if ($("input[platformType='" + type + "'][sellerName='"
-							+ data.seller + "']").size() > 0) {
-						submitFlag = false;
-						changeStyle(obj, '0', '改店铺已经存在！');
-						alert("已经存在该店铺！");
-						$("#huoquUser").text("(失败)");
-					}
-					changeStyle(obj, '1', '该地址可以使用！');
-					input.val(data.seller);
-					$("#huoquUser").text("");
-					$("#huoquUser").hide();
-					changeStyle(input.get(0), '1', '成功！');
-				}
-			}, "json");
 }
 // 改变样式
 function changeStyle(obj, flag, msg) {

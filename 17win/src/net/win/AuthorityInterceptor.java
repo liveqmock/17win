@@ -71,6 +71,8 @@ public class AuthorityInterceptor extends AbstractInterceptor {
 				.add("userInfoManager/info!initUpdatePassword.php");
 		EXINCLUDE_ACTIVATE_PATH.add("userInfoManager/info!init.php");
 		EXINCLUDE_ACTIVATE_PATH.add("userInfoManager/info!initUpdateInfo.php");
+		EXINCLUDE_ACTIVATE_PATH.add("userInfoManager/info!refreshUser.php");
+		
 
 	}
 	/**

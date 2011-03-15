@@ -28,7 +28,7 @@ public final class StrategyUtils {
 	public static Integer getSellerCount(String type, Boolean vipEnable,
 			VipEntity vipEntity) {
 		if (!vipEnable) {
-			return 2;
+			return 5;
 		} else {
 			return vipEntity.getSellerCount();
 		}

@@ -1,7 +1,6 @@
 package net.win.service.task;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -12,11 +11,8 @@ import net.win.dao.CreditTaskRepositoryDAO;
 import net.win.dao.SellerDAO;
 import net.win.dao.UserDAO;
 import net.win.entity.CreditTaskRepositoryEntity;
-import net.win.entity.SellerEntity;
-import net.win.entity.UserEntity;
 import net.win.utils.WinUtils;
 import net.win.vo.CreditTaskRepositoryVO;
-import net.win.vo.CreditTaskVO;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -104,7 +100,7 @@ public class CreditTaskRepositoryService extends BaseService {
 					new Object[] { platformType, getLoginUser().getId() });
 			if (count > 0) {
 				String hql = "select _taskRe ,_taskRe.seller.name from CreditTaskRepositoryEntity as _taskRe "
-						+ " where    _taskRe.type=:platformType and _taskRe.user.id=:userId order by _taskRe.id asc";
+						+ " where    _taskRe.type=:platformType and _taskRe.user.id=:userId order by _taskRe.dispathCount desc";
 				List<Object[]> resultTemp = creditTaskRepositoryDAO.list(hql,
 						new String[] { "platformType", "userId" },
 						new Object[] { platformType, getLoginUser().getId() });

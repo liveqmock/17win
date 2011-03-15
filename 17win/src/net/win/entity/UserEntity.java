@@ -69,6 +69,9 @@ public class UserEntity extends BaseEntity {
 	@Column(name = "STATUS_", columnDefinition = "CHAR(1)", nullable = false)
 	private String status = "0";
 
+	// 用户类型(0,普通用户，1管理员)
+	@Column(name = "TYPE_", columnDefinition = "CHAR(1)", nullable = false)
+	private String type = "0";
 	// 状态描述
 	@Column(name = "STATUS_DESC_", length = 255)
 	private String statusDesc = "未激活";
@@ -84,6 +87,7 @@ public class UserEntity extends BaseEntity {
 	// 推广所得的金额
 	@Column(name = "Referee_Money_", nullable = false)
 	private Integer refereeMoney = 0;
+
 	/**
 	 * 可选选项
 	 */
@@ -545,6 +549,14 @@ public class UserEntity extends BaseEntity {
 
 	public void setCapitalLogs(List<CapitalLogEntity> capitalLogs) {
 		this.capitalLogs = capitalLogs;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 }

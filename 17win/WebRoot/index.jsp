@@ -540,7 +540,7 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 					<TD align=middle width=539>
 						<div align="center">
 							CopyRight 2010-2011, www.17win.net, Inc. All Rights Reserved
-							黔ICP备1020110
+							黔ICP备10201109号
 							<br />
 							本站服务导航:
 							<a href="http://www.taobao.net/" target="_blank">淘宝网</a>|

@@ -96,7 +96,7 @@ img {
 													<td align="left" class="borderc" nowrap="nowrap">
 														<Font color="#FF0000"><b><s:property
 																	value="#session.userLogin.username"></s:property>
-														</b>(注册时间：<s:date format="yyyy-MM-dd hh:mm:ss"
+														</b>(注册时间：<s:date format="yyyy-MM-dd HH:mm:ss"
 																name="#session.userLogin.registerTime" />) </Font>
 													</td>
 													<td width="63%" align="left" class="borderc">
@@ -112,7 +112,7 @@ img {
 													</td>
 													<td colspan="2" align="left" class="borderc">
 														你上次登陆的时间是：
-														<s:date format="yyyy-MM-dd hh:mm:ss"
+														<s:date format="yyyy-MM-dd HH:mm:ss"
 															name="#session.userLogin.lastLoginTime" />
 														<font color="#FF0000"></font>，如果你在这个时间没有登陆过，请联系客服。
 													</td>

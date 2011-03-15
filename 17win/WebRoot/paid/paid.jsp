@@ -191,7 +191,7 @@ img {
 														<td>
 															<a target="_blak"
 																href="http://shop62179252.taobao.com/?order=&queryType=cat&browseType=grid&searchWord=im%C9%E7%C7%F8&price1=&price2=">
-																淘宝充值连接：http://shop62179252.taobao.com/?order=&queryType=cat&browseType=grid&searchWord=im%C9%E7%C7%F8&price1=&price2=
+																淘宝充值地址点此处
 															</a>
 														</td>
 													</tr>

@@ -94,7 +94,7 @@ img {
 										<div class="pp8">
 											<strong>卖号/买号管理</strong>
 											<input type="button" value="新增" style="height: 25px"
-												id="addBtn">
+												class="classButton" id="addBtn">
 										</div>
 										<s:iterator value="#request.sellers.keys" id="type">
 											<table width="100%" cellspacing="0" cellpadding="0"
@@ -156,11 +156,10 @@ img {
 											<s:set name="platformName"
 												value="#type==1?'淘宝':#type==2?'拍拍':'有啊'"></s:set>
 											<table cellspacing="0" cellpadding="0" border="0"
-												style="table-layout: fixed" align="center">
+												width="100%" style="table-layout: fixed" align="center">
 												<thead id="buyerTable<s:property value="#type"/>">
 													<tr>
-														<td width="100%" colspan="4" height="40" align="left"
-															class="font14b2">
+														<td colspan="4" height="40" align="left" class="font14b2">
 															<s:property value="#platformName" />
 															买号资料：
 
@@ -286,6 +285,7 @@ img {
 							</select>
 						</td>
 					</tr>
+					<!-- 
 					<tr class="sellerClass">
 						<td valign="middle">
 							<font color="red">*</font>店铺地址：
@@ -295,15 +295,15 @@ img {
 								onfocus="beforeBlur(this)">
 						</td>
 					</tr>
+					 -->
 					<tr class="sellerClass">
 						<td valign="middle">
-							<font color="red">*</font>掌柜名字：
+							<font color="red">*</font>掌柜ID：
 						</td>
 						<td valign="middle">
-							<input type="text" id="sellerName" name="userVO.seller.name"
-								readonly="readonly">
+							<input type="text" id="sellerName" name="userVO.seller.name">
 							<span id="huoquUser" style="display: none"></span>
-							<font color="red">(系统自动获取)</font>
+							<font color="red">(QQ为QQ号码)</font>
 						</td>
 					</tr>
 					<tr class="sellerClass">
@@ -340,7 +340,7 @@ img {
 					</tr>
 					<tr>
 						<td valign="middle" colspan="2">
-							<input type="submit" value="增加">
+							<input type="submit" class="classButton" value="增加">
 						</td>
 					</tr>
 				</table>
@@ -380,7 +380,7 @@ img {
 					</tr>
 					<tr>
 						<td valign="middle" colspan="2">
-							<input type="submit" value="修改	">
+							<input type="submit" class="classButton" value="修改	">
 						</td>
 					</tr>
 				</table>

@@ -1,4 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
+<%@page import="net.win.utils.WinUtils"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <table width="100%" border="0" cellpadding="0" cellspacing="0"
 	background="images/index_top_bg.jpg">
@@ -49,6 +50,8 @@
 						<TABLE cellSpacing=0 cellPadding=0 width=535 align=right border=0>
 							<TR>
 								<TD height=32 align="right" id="userLoginId">
+									您当前的IP地址：
+									<%=WinUtils.getIPAddress(request)%>&nbsp;|&nbsp;
 									<s:if test="#session.userLogin==null">
 										<span class="yell_font">您还没登录！</span>
 										<A href="user/login.html" target="_top">登陆</A> |
@@ -149,7 +152,7 @@
 					onmouseover="Mea(7);" testclass="">淘宝流量</A>
 			</LI>
 			<LI class=white>
-				<A class="li0 " href="javascript:alert('开发中，敬请期待！');" 
+				<A class="li0 " href="javascript:alert('开发中，敬请期待！');"
 					onmouseover="Mea(8);" testclass="">拍拍流量</A>
 			</LI>
 			<LI class=white>

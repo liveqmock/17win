@@ -10,6 +10,9 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import net.win.entity.SellerEntity;
+
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
@@ -161,7 +164,7 @@ public final class HttpB2CUtils {
 					.getContent(), "GBK"));
 			Pattern pattern = Pattern.compile(TAOBAO_USER_REGEX);
 			Matcher matcher;
-			OUTTER: while ((line = br.readLine()) != null) {
+			OUTTER : while ((line = br.readLine()) != null) {
 				matcher = pattern.matcher(line);
 				while (matcher.find()) {
 					seller = URLDecoder.decode(matcher.group(1), "UTF-8");
@@ -176,25 +179,11 @@ public final class HttpB2CUtils {
 		else if ("2".equals(type)) {
 			Map nameSpaces = new HashMap();
 			nameSpaces.put("xmlns", "http://www.w3.org/1999/xhtml");
-			Element element  = (Element)getOneNodeByDom4j(
-					url,
-					"//xmlns:DIV[@class='fr_sidebar']/xmlns:DIV[1]",
-					nameSpaces);
+			Element element = (Element) getOneNodeByDom4j(url,
+					"//xmlns:DIV[@class='fr_sidebar']/xmlns:DIV[1]", nameSpaces);
 			if (element != null) {
-				seller =element.attributeValue("shopid");
+				seller = element.attributeValue("shopid");
 			}
-			// Pattern pattern = Pattern.compile(PAIPAI_USER_REGEX);
-			// Matcher matcher;
-			// OUTTER: while ((line = br.readLine()) != null) {
-			// line = StringUtils.replaceBlank(line.replaceAll("\"", "'"));
-			// matcher = pattern.matcher(line);
-			// while (matcher.find()) {
-			// seller = URLDecoder.decode(matcher.group(1), "UTF-8");
-			// break OUTTER;
-			// }
-			// }
-			
-//			shopID="909219625"
 		}
 		// 有啊
 		else if ("3".equals(type)) {
@@ -204,8 +193,8 @@ public final class HttpB2CUtils {
 				seller = node.getText().trim();
 			}
 		}
-		if(seller==null){
-			seller="";
+		if (seller == null) {
+			seller = "";
 		}
 		return seller;
 	}
@@ -231,7 +220,7 @@ public final class HttpB2CUtils {
 			String line;
 			Pattern pattern = Pattern.compile(TAOBAO_USER_REGEX);
 			Matcher matcher;
-			OUTTER: while ((line = br.readLine()) != null) {
+			OUTTER : while ((line = br.readLine()) != null) {
 				matcher = pattern.matcher(line);
 				while (matcher.find()) {
 					seller = URLDecoder.decode(matcher.group(1), "UTF-8");
@@ -318,7 +307,7 @@ public final class HttpB2CUtils {
 					.compile("<span tagvar='buyer'  score='(\\d+)' tag='userGrade' >");
 			Matcher matcher;
 			Matcher matcher2;
-			OUTTER: while ((line = br.readLine()) != null) {
+			OUTTER : while ((line = br.readLine()) != null) {
 				line = line.replaceAll("\"", "'");
 				matcher2 = scorePattern.matcher(line);
 				while (matcher2.find()) {
@@ -359,6 +348,68 @@ public final class HttpB2CUtils {
 		}
 	}
 
+	/**
+	 * 获取卖家是否皇冠，是否消保
+	 * 
+	 * @param url
+	 * @return
+	 */
+	public static SellerEntity getSellerInfo(SellerEntity sellerEntity,
+			String platformType) {
+		if ("1".equals(platformType)) {
+			//获取信誉 和消保
+			String sellerURL1 = "http://member1.taobao.com/member/user_profile.jhtml?userID="
+					+ sellerEntity.getName();
+			List<Element> nodes = (List) getMutliNodeByDom4j(
+					sellerURL1,
+					"//DIV[@class='infocard']/DL[1]/DD[1]/UL[1]/LI[3]/A[1] | //A[@class='shop-ensure']",
+					null);
+			if (nodes.size() == 2) {
+				//旺铺
+				sellerEntity.setSellerScore(Integer.parseInt(nodes.get(1)
+						.getTextTrim()));
+				sellerEntity.setIsEnsure(true);
+				//获取店铺地址
+				HttpClient httpClient = taobaoHttpClient;
+				HttpGet httpGet = new HttpGet(
+						"http://member1.taobao.com/member/user_profile.jhtml?userID="
+								+ sellerEntity.getName());
+				HttpResponse response;
+				try {
+					response = httpClient.execute(httpGet);
+					Header header = response.getFirstHeader("Location");
+					if (header != null) {
+						String url = header.getValue();
+						String shopURL = url.split("/shop")[0];
+						sellerEntity.setShopURL(shopURL);
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} else if (nodes.size() == 1) {
+				//非旺铺获取信誉
+				sellerEntity.setSellerScore(Integer.parseInt(nodes.get(0)
+						.getTextTrim()));
+				sellerEntity.setIsEnsure(false);
+			}
+		} else if ("2".equals(platformType)) {
+			sellerEntity.setShopURL("http://shop.paipai.com/"
+					+ sellerEntity.getName());
+			//获取信誉 和 消保
+			Map nameSpaces = new HashMap();
+			nameSpaces.put("xmlns", "http://www.w3.org/1999/xhtml");
+			Element node = (Element) getOneNodeByDom4j(
+					sellerEntity.getShopURL(),
+					"//xmlns:DIV[@class='pfhlkd_uinfo']/xmlns:UL[@class='ulist_rate']/xmlns:LI[1]/xmlns:A[1]",
+					nameSpaces);
+			if (node != null) {
+				sellerEntity.setSellerScore(Integer
+						.parseInt(node.getTextTrim()));
+				sellerEntity.setIsEnsure(true);
+			}
+		}
+		return sellerEntity;
+	}
 	/**
 	 * 获取内容
 	 * 
@@ -432,15 +483,11 @@ public final class HttpB2CUtils {
 		try {
 			parser.parse(url);
 		} catch (SAXException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		org.w3c.dom.Document doc = parser.getDocument();
-
-		// SAXReader reader = new SAXReader();
 		DOMReader domReader = new DOMReader();
 		Document document = domReader.read(doc);
 		return document;

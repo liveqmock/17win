@@ -29,6 +29,17 @@ public class SellerEntity extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_ID_")
 	private UserEntity user;
+	//是否消保
+	private Boolean isEnsure = false;
+	//信誉积分
+	private Integer sellerScore = 0;
+
+	public Integer getSellerScore() {
+		return sellerScore;
+	}
+	public void setSellerScore(Integer sellerScore) {
+		this.sellerScore = sellerScore;
+	}
 
 	public String getType() {
 		return type;
@@ -68,6 +79,12 @@ public class SellerEntity extends BaseEntity {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	public Boolean getIsEnsure() {
+		return isEnsure;
+	}
+	public void setIsEnsure(Boolean isEnsure) {
+		this.isEnsure = isEnsure;
 	}
 
 }

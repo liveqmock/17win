@@ -14,6 +14,8 @@ public class UserVO extends BaseVO {
 	private UserEntity userEntity = new UserEntity();
 	// 验证码
 	private String verificationCode;
+	//用户类型
+	private String type;
 	// 操作码
 	private String operationCode;
 	// 发布点
@@ -99,6 +101,14 @@ public class UserVO extends BaseVO {
 
 	public void setTelphone(String telphone) {
 		this.telphone = telphone;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 }
