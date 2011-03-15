@@ -25,20 +25,27 @@ public class SellerEntity extends BaseEntity {
 	// 发货地址
 	@Column(name = "Address_", length = 53)
 	private String address;
+
+	//是否消保
+	@Column(name = "Ensure_")
+	private Boolean ensure = false;
+	//信誉积分
+	@Column(name = "Score_")
+	private Integer score = 0;
+	//图片地址
+	@Column(name = "Img_")
+	private String img = "";
 	// 所属人
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_ID_")
 	private UserEntity user;
-	//是否消保
-	private Boolean isEnsure = false;
-	//信誉积分
-	private Integer sellerScore = 0;
 
-	public Integer getSellerScore() {
-		return sellerScore;
+	public Integer getScore() {
+		return score;
 	}
-	public void setSellerScore(Integer sellerScore) {
-		this.sellerScore = sellerScore;
+
+	public void setScore(Integer score) {
+		this.score = score;
 	}
 
 	public String getType() {
@@ -80,11 +87,21 @@ public class SellerEntity extends BaseEntity {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public Boolean getIsEnsure() {
-		return isEnsure;
+
+	public Boolean getEnsure() {
+		return ensure;
 	}
-	public void setIsEnsure(Boolean isEnsure) {
-		this.isEnsure = isEnsure;
+
+	public void setEnsure(Boolean ensure) {
+		this.ensure = ensure;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
 	}
 
 }

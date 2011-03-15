@@ -19,6 +19,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.conn.params.ConnManagerParams;
 import org.apache.http.conn.params.ConnPerRouteBean;
@@ -164,7 +165,7 @@ public final class HttpB2CUtils {
 					.getContent(), "GBK"));
 			Pattern pattern = Pattern.compile(TAOBAO_USER_REGEX);
 			Matcher matcher;
-			OUTTER : while ((line = br.readLine()) != null) {
+			OUTTER: while ((line = br.readLine()) != null) {
 				matcher = pattern.matcher(line);
 				while (matcher.find()) {
 					seller = URLDecoder.decode(matcher.group(1), "UTF-8");
@@ -220,7 +221,7 @@ public final class HttpB2CUtils {
 			String line;
 			Pattern pattern = Pattern.compile(TAOBAO_USER_REGEX);
 			Matcher matcher;
-			OUTTER : while ((line = br.readLine()) != null) {
+			OUTTER: while ((line = br.readLine()) != null) {
 				matcher = pattern.matcher(line);
 				while (matcher.find()) {
 					seller = URLDecoder.decode(matcher.group(1), "UTF-8");
@@ -307,7 +308,7 @@ public final class HttpB2CUtils {
 					.compile("<span tagvar='buyer'  score='(\\d+)' tag='userGrade' >");
 			Matcher matcher;
 			Matcher matcher2;
-			OUTTER : while ((line = br.readLine()) != null) {
+			OUTTER: while ((line = br.readLine()) != null) {
 				line = line.replaceAll("\"", "'");
 				matcher2 = scorePattern.matcher(line);
 				while (matcher2.find()) {
@@ -357,26 +358,31 @@ public final class HttpB2CUtils {
 	public static SellerEntity getSellerInfo(SellerEntity sellerEntity,
 			String platformType) {
 		if ("1".equals(platformType)) {
-			//获取信誉 和消保
+			//删除shopURL
+			//验证地址 http://store.taobao.com/shop/view_shop.htm?asker=wangwang&shop_nick=xgj1988
+
+			//获取信誉 和消保 和 IMG
 			String sellerURL1 = "http://member1.taobao.com/member/user_profile.jhtml?userID="
 					+ sellerEntity.getName();
 			List<Element> nodes = (List) getMutliNodeByDom4j(
 					sellerURL1,
-					"//DIV[@class='infocard']/DL[1]/DD[1]/UL[1]/LI[3]/A[1] | //A[@class='shop-ensure']",
+					"//DIV[@class='infocard']/DL[1]/DD[1]/UL[1]/LI[3]/A[1] | //A[@class='rank-icon']/IMG | //A[@class='shop-ensure'] ",
 					null);
-			if (nodes.size() == 2) {
+			if (nodes.size() == 3) {
+				sellerEntity.setImg(nodes.get(0).attributeValue("src"));
 				//旺铺
-				sellerEntity.setSellerScore(Integer.parseInt(nodes.get(1)
+				sellerEntity.setScore(Integer.parseInt(nodes.get(2)
 						.getTextTrim()));
-				sellerEntity.setIsEnsure(true);
+				sellerEntity.setEnsure(true);
+
 				//获取店铺地址
 				HttpClient httpClient = taobaoHttpClient;
-				HttpGet httpGet = new HttpGet(
+				HttpPost httpPost = new HttpPost(
 						"http://member1.taobao.com/member/user_profile.jhtml?userID="
 								+ sellerEntity.getName());
 				HttpResponse response;
 				try {
-					response = httpClient.execute(httpGet);
+					response = httpClient.execute(httpPost);
 					Header header = response.getFirstHeader("Location");
 					if (header != null) {
 						String url = header.getValue();
@@ -384,13 +390,14 @@ public final class HttpB2CUtils {
 						sellerEntity.setShopURL(shopURL);
 					}
 				} catch (Exception e) {
-					e.printStackTrace();
+					LoggerUtils.error(e);
 				}
 			} else if (nodes.size() == 1) {
+				/**http://store.taobao.com/shop/view_shop.htm?asker=wangwang&shop_nick=阿西娜服饰旗舰店*/
 				//非旺铺获取信誉
-				sellerEntity.setSellerScore(Integer.parseInt(nodes.get(0)
+				sellerEntity.setScore(Integer.parseInt(nodes.get(0)
 						.getTextTrim()));
-				sellerEntity.setIsEnsure(false);
+				sellerEntity.setEnsure(false);
 			}
 		} else if ("2".equals(platformType)) {
 			sellerEntity.setShopURL("http://shop.paipai.com/"
@@ -403,13 +410,13 @@ public final class HttpB2CUtils {
 					"//xmlns:DIV[@class='pfhlkd_uinfo']/xmlns:UL[@class='ulist_rate']/xmlns:LI[1]/xmlns:A[1]",
 					nameSpaces);
 			if (node != null) {
-				sellerEntity.setSellerScore(Integer
-						.parseInt(node.getTextTrim()));
-				sellerEntity.setIsEnsure(true);
+				sellerEntity.setScore(Integer.parseInt(node.getTextTrim()));
+				sellerEntity.setEnsure(true);
 			}
 		}
 		return sellerEntity;
 	}
+
 	/**
 	 * 获取内容
 	 * 
@@ -482,10 +489,8 @@ public final class HttpB2CUtils {
 		DOMParser parser = new DOMParser();
 		try {
 			parser.parse(url);
-		} catch (SAXException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
+		} catch (Exception e) {
+			LoggerUtils.error(e);
 		}
 		org.w3c.dom.Document doc = parser.getDocument();
 		DOMReader domReader = new DOMReader();

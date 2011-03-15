@@ -1,5 +1,7 @@
 package net.win.vo;
 
+import javax.persistence.Column;
+
 import net.win.BaseVO;
 
 public class SellerVO extends BaseVO {
@@ -11,6 +13,13 @@ public class SellerVO extends BaseVO {
 	private String shopURL;
 
 	private String address;
+
+	//是否消保
+	private Boolean ensure = false;
+	//信誉积分
+	private Integer sellerScore = 0;
+	//图片地址
+	private String img = "";
 
 	public String getAddress() {
 		return address;
@@ -42,5 +51,29 @@ public class SellerVO extends BaseVO {
 
 	public void setShopURL(String shopURL) {
 		this.shopURL = shopURL;
+	}
+
+	public Boolean getEnsure() {
+		return ensure;
+	}
+
+	public void setEnsure(Boolean ensure) {
+		this.ensure = ensure;
+	}
+
+	public Integer getSellerScore() {
+		return sellerScore;
+	}
+
+	public void setSellerScore(Integer sellerScore) {
+		this.sellerScore = sellerScore;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
 	}
 }
