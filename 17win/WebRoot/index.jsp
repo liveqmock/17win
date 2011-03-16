@@ -567,7 +567,7 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 				<div onclick="ClickSer();" class="service-button"></div>
 				<div class="service-inside">
 					<dl>
-						<dt>
+						<dt class='title'>
 							客服工作时间
 						</dt>
 						<dd class="esp_4">
@@ -579,40 +579,56 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 						<dd class="esp_5">
 							<!--<a href="#" target="_blank">自助服务</a>-->
 						</dd>
-						<dt>
+						<dt class='title'>
 							客服团队
 						</dt>
-						<dd>
+						<dt class="content">
 
 							<!-- 1348001415 -->
-							<a class="serviceA" href="tencent://message/?uin=1442418675">新手帮助</a>
-						</dd>
-						<dd>
-							<a class="serviceA" href="tencent://message/?uin=1442418675">客服帮助</a>
-						</dd>
-						<dd>
-							<a href="tencent://message/?uin=1442418675">充值帮助</a>
-						</dd>
-						<dd>
-							<a href="tencent://message/?uin=1442418675">提现帮助</a>
-						</dd>
-						<dd class="esp_1">
-							<a href="tencent://message/?uin=1442418675">投诉建议</a>
-						</dd>
-						<dt>
+							<a href="tencent://message/?uin=1442418675"> <img width="25"
+									height="17" border="0" class="qqConnection"
+									style="vertical-align: middle;" class="tip"
+									src="http://wpa.qq.com/pa?p=1:1442418675:17" /> 新手帮助</a>
+						</dt>
+						<dt class="content">
+							<a href="tencent://message/?uin=1442418675"> <img width="25"
+									height="17" border="0" class="qqConnection"
+									style="vertical-align: middle;" class="tip"
+									src="http://wpa.qq.com/pa?p=1:1442418675:17" />客服帮助</a>
+						</dt>
+						<dt class="content">
+							<a href="tencent://message/?uin=1442418675"> <img width="25"
+									height="17" border="0" class="qqConnection"
+									style="vertical-align: middle;" class="tip"
+									src="http://wpa.qq.com/pa?p=1:1442418675:17" />充值帮助</a>
+						</dt>
+						<dt class="content">
+							<a href="tencent://message/?uin=1442418675"> <img width="25"
+									height="17" border="0" class="qqConnection"
+									style="vertical-align: middle;" class="tip"
+									src="http://wpa.qq.com/pa?p=1:1442418675:17" /> 投诉建议</a>
+						</dt>
+						<dt class="content">
+							<a target="_blank"
+								href="http://amos1.taobao.com/msg.ww?v=2&uid=lxq380712448&s=1"><img
+									border="0"
+									src="http://amos1.taobao.com/online.ww?v=2&uid=lxq380712448&s=1"
+									alt="联系旺旺客服" /> </a>
+						</dt>
+						<dt class='title'>
 							QQ交流群
 						</dt>
 						<dd class="esp_3">
 							100103766
 						</dd>
-						<dt>
+						<dt class='title'>
 							我们的宗旨
 						</dt>
 						<dd class="esp_4">
 							安全第一
 						</dd>
 						<dd class="esp_4">
-							和谐刷钻
+							和谐互刷
 						</dd>
 						<dd class="esp_4">
 							大家互赢
@@ -622,41 +638,6 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 						</dd>
 					</dl>
 				</div>
-			</div>
-		</div>
-		<div id="newnotice"
-			style="width: 300px; border: solid #A1CFE6 1px; background-color: #A1CFE6;">
-			<p
-				style="font-size: 12px; margin: 1px; padding: 0px 2px 0px 5px; background-color: #73B8DA; font-weight: bold; color: #666666; height: 20px; line-height: 20px;">
-				<span style="float: left;">最新公告</span>
-				<span
-					style="display: block; float: right; width: 48px; height: 15px;">
-					<label id="tomin"
-						style="float: left; width: 15px; height: 15px; line-height: 15px; cursor: pointer; background-image: url(images/notice_button.gif); background-position: center;"
-						title="最小化">
-					</label> <label id="tomax"
-						style="float: left; width: 15px; height: 15px; line-height: 15px; cursor: pointer; background-image: url(images/notice_button.gif); background-position: bottom;"
-						title="最大化">
-					</label> <label id="toclose"
-						style="float: left; width: 15px; height: 15px; line-height: 15px; cursor: pointer; background-image: url(images/notice_button.gif);"
-						title="关闭">
-					</label> </span>
-			</p>
-			<div id="noticecon"
-				style="background-color: #EEF7FB; font-size: 12px; margin: 1px; padding: 0px 5px 0px 5px; height: 100px; line-height: 20px;">
-				<table width="100%" style="table-layout: fixed">
-					<s:iterator value="#request.ggResult" status="status" id="obj">
-						<tr>
-							<td nowrap="nowrap" width="100%
-								style="overflow:hidden; text-overflow:ellipsis;">
-								<a href='help/<s:property value="#obj.url"/>' target="_blank"
-									title='<s:property value="#obj.title"/>'><font color="red"
-									style="font-size: 12px"><s:property value="#obj.title" />
-								</font> </a>
-							</td>
-						</tr>
-					</s:iterator>
-				</table>
 			</div>
 		</div>
 	</BODY>

@@ -16,10 +16,14 @@ public class SellerVO extends BaseVO {
 
 	//是否消保
 	private Boolean ensure = false;
-	//信誉积分
-	private Integer sellerScore = 0;
 	//图片地址
 	private String img = "";
+	//是否旺铺
+	private Boolean winport = false;
+	//信誉值
+	private Integer score = 0;
+	//信誉地址
+	private String creditURL;
 
 	public String getAddress() {
 		return address;
@@ -61,19 +65,35 @@ public class SellerVO extends BaseVO {
 		this.ensure = ensure;
 	}
 
-	public Integer getSellerScore() {
-		return sellerScore;
-	}
-
-	public void setSellerScore(Integer sellerScore) {
-		this.sellerScore = sellerScore;
-	}
-
 	public String getImg() {
 		return img;
 	}
 
 	public void setImg(String img) {
 		this.img = img;
+	}
+
+	public Boolean getWinport() {
+		return winport;
+	}
+
+	public void setWinport(Boolean winport) {
+		this.winport = winport;
+	}
+
+	public Integer getScore() {
+		return score;
+	}
+
+	public void setScore(Integer score) {
+		this.score = score;
+	}
+
+	public String getCreditURL() {
+		return creditURL;
+	}
+
+	public void setCreditURL(String creditURL) {
+		this.creditURL = creditURL;
 	}
 }

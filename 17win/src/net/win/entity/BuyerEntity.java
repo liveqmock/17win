@@ -30,6 +30,10 @@ public class BuyerEntity extends BaseEntity {
 	@Column(name = "SCORE_", nullable = false)
 	private Integer score;
 
+	//图片地址
+	@Column(name = "Img_")
+	private String img;
+
 	// 所属人
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_ID_")
@@ -81,5 +85,13 @@ public class BuyerEntity extends BaseEntity {
 
 	public void setScore(Integer score) {
 		this.score = score;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
 	}
 }

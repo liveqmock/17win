@@ -10,8 +10,18 @@ public class BuyerVO extends BaseVO {
 	private Integer score = 0;
 
 	private Boolean enable;
-	
+
 	private String creditURL;
+
+	private String img;
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
+	}
 
 	public String getCreditURL() {
 		return creditURL;

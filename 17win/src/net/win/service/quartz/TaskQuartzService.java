@@ -6,10 +6,12 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import net.win.dao.BuyerDAO;
+import net.win.dao.SellerDAO;
 import net.win.dao.CreditTaskDAO;
 import net.win.dao.LogisticsDAO;
 import net.win.dao.UserDAO;
 import net.win.entity.BuyerEntity;
+import net.win.entity.SellerEntity;
 import net.win.entity.LogisticsEntity;
 import net.win.utils.Constant;
 import net.win.utils.HttpB2CUtils;
@@ -26,6 +28,8 @@ public class TaskQuartzService {
 	private LogisticsDAO logisticsDAO;
 	@Resource
 	private BuyerDAO buyerDAO;
+	@Resource
+	private SellerDAO sellerDAO;
 	@Resource
 	private UserDAO userDAO;
 
@@ -62,17 +66,16 @@ public class TaskQuartzService {
 		Query query;
 		Session session = null;
 		try {
-			// 买家信誉认证
+			// 卖号，卖号信息更改
 			List<BuyerEntity> buyers = buyerDAO
 					.list("from BuyerEntity where enable=true and  type in (1,2) ");
-			Integer value = 0;
+			List<SellerEntity> sellers = sellerDAO
+					.list("from SellerEntity where enable=true and  type in (1,2) ");
 			for (BuyerEntity buyerEntity : buyers) {
-				value = HttpB2CUtils.obtainCreditValue(buyerEntity
-						.getCreditURL(), buyerEntity.getType());
-				buyerEntity.setScore(value);
-				if (value > Constant.getCreditValueLimit()) {
-					buyerEntity.setEnable(false);
-				}
+				HttpB2CUtils.getBuyerInfo(buyerEntity, buyerEntity.getType(), false);
+			}
+			for (SellerEntity seller : sellers) {
+				HttpB2CUtils.getSellerInfo(seller, seller.getType());
 			}
 		} catch (Exception e) {
 			session.getTransaction().rollback();

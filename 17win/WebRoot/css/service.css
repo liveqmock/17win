@@ -1,38 +1,120 @@
 ﻿@charset "utf-8";
-/* CSS Document */
-/*客户*/  
-.service{top:110px;right:0; position:absolute;}
-.service-open{background:url(../images/service-open.png) no-repeat;width:143px;height:418px;}
-.service-close{background:url(../images/service-open.png) no-repeat;height:121px; width:31px;overflow:hidden;}
-	.service-button{width:34px;height:121px; float:left;cursor:pointer;}
-	.service-inside{width:103px;height:418px;float:right;}
-	.service-inside dl{padding:10px 0;}
-	.service-inside dl dt{ text-align:center; background:url(../images/dttitle.jpg) no-repeat;height:18px;line-height:18px;width:100px;margin-bottom:8px;color:#fff;}
-	.service-inside dl dd{ background:url(../images/qq_online.gif) no-repeat 3px 4px;height:27px; line-height:27px; text-indent:35px;}
-	.service-inside dl dd.esp_1 a{color:#f50;}
-	.service-inside dl dd.esp_2{color:#999; background:none; text-indent:0; text-align:center;height:20px; line-height:20px;}
-	.service-inside dl dd.esp_3{color:#f50;background:none;text-indent:0; text-align:center;height:20px; line-height:20px;}
-	.service-inside dl dd.esp_4{ text-align:center;color:#090; background:none;margin:0;height:16px;line-height:16px; text-indent:0;}
-	.service-inside dl dd.esp_5{ text-align:center;background:none;margin:0;text-indent:0;}
-	.service-inside dl dd.esp_5 a{ text-decoration:underline;
-	}
-	
 
-	
- 
+/* CSS Document */ /*客户*/
+.service {
+	top: 110px;
+	right: 0;
+	position: absolute;
+}
+
+.service-open {
+	background: url(../images/service-open.png) no-repeat;
+	width: 143px;
+	height: 418px;
+}
+
+.service-close {
+	background: url(../images/service-open.png) no-repeat;
+	height: 121px;
+	width: 31px;
+	overflow: hidden;
+}
+
+.service-button {
+	width: 34px;
+	height: 121px;
+	float: left;
+	cursor: pointer;
+}
+
+.service-inside {
+	width: 103px;
+	height: 418px;
+	float: right;
+}
+
+.service-inside dl {
+	padding: 10px 0;
+}
+
+.service-inside dl dt.title {
+	text-align: center;
+	background: url(../images/dttitle.jpg) no-repeat;
+	height: 18px;
+	line-height: 18px;
+	width: 100px;
+	margin-bottom: 8px;
+	color: #fff;
+}
+
+.service-inside dl dt.content {
+	height: 27px;
+	text-indent: 8px;
+	line-height: 27px;
+}
+
+.service-inside dl dd.esp_1 a {
+	color: #f50;
+}
+
+.service-inside dl dd.esp_2 {
+	color: #999;
+	background: none;
+	text-indent: 0;
+	text-align: center;
+	height: 20px;
+	line-height: 20px;
+}
+
+.service-inside dl dd.esp_3 {
+	color: #f50;
+	background: none;
+	text-indent: 0;
+	text-align: center;
+	height: 20px;
+	line-height: 20px;
+}
+
+.service-inside dl dd.esp_4 {
+	text-align: center;
+	color: #090;
+	background: none;
+	margin: 0;
+	height: 16px;
+	line-height: 16px;
+	text-indent: 0;
+}
+
+.service-inside dl dd.esp_5 {
+	text-align: center;
+	background: none;
+	margin: 0;
+	text-indent: 0;
+}
+
+.service-inside dl dd.esp_5 a {
+	text-decoration: underline;
+}
 
 /********** global **********/
 .serviceA {
-	font-family:Tahoma,Helvetica,Arial,'宋体',sans-serif;
-	font-size:12px; 
-	text-decoration:none;
-} 
-.serviceA a:hover{
-color:#f50;
-} 
-.serviceA a{
-  color:#3372a2; text-decoration:none;
-} 
-.serviceA *{
-  padding:0; margin:0;list-style:none;word-break:break-all;
-} 
+	font-family: Tahoma, Helvetica, Arial, '宋体', sans-serif;
+	font-size: 12px;
+	text-decoration: none;
+}
+
+.serviceA a:hover {
+	color: #f50;
+}
+
+.serviceA a {
+	color: #3372a2;
+	text-decoration: none;
+}
+
+.serviceA * {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	word-break: break-all;
+}

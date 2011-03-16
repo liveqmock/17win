@@ -70,7 +70,9 @@ public final class Constant {
 	// 接任务所扣的发布点折扣率
 	private static Double receieveTaskDotRate;
 	// 信誉值上限
-	private static Double creditValueLimit;
+	private static Double taobaoCreditValueLimit = 250D;
+	// 信誉值上限
+	private static Double paipaiCreditValueLimit = 100D;
 	// 发布点兑换成金额
 	private static Double releaseDotChangeMoney;
 	// 积分兑换发布点
@@ -142,13 +144,8 @@ public final class Constant {
 		return vipPrice;
 	}
 
-
 	public static Double getReceieveTaskDotRate() {
 		return receieveTaskDotRate;
-	}
-
-	public static Double getCreditValueLimit() {
-		return creditValueLimit;
 	}
 
 	public static Double getBuyReleaseDotRebateToRefree() {
@@ -340,10 +337,6 @@ public final class Constant {
 				else if ("receieveTaskDotRate".equalsIgnoreCase(name)) {
 					receieveTaskDotRate = numberValue;
 				}
-				// 信誉值上限
-				else if ("creditValueLimit".equalsIgnoreCase(name)) {
-					creditValueLimit = numberValue;
-				}
 				// 当购买发布点的时候，推广人所得金额为，他推荐人买的发布点的金额的0.01
 				else if ("buyReleaseDotRebateToRefree".equalsIgnoreCase(name)) {
 					buyReleaseDotRebateToRefree = numberValue;
@@ -442,6 +435,14 @@ public final class Constant {
 
 	public static Boolean getStopAll() {
 		return stopAll;
+	}
+
+	public static Double getTaobaoCreditValueLimit() {
+		return taobaoCreditValueLimit;
+	}
+
+	public static Double getPaipaiCreditValueLimit() {
+		return paipaiCreditValueLimit;
 	}
 
 }

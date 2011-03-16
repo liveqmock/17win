@@ -121,7 +121,7 @@
 					<s:else>
 						class="li0"
 				</s:else>
-					href="taskManager/task!initTask.php?platformType='taobaoHuShua'"
+					href="taskManager/task!initTask.php?platformType='1'"
 					onmouseover="Mea(this);">淘宝互刷</A>
 			</LI>
 			<LI class=white>
@@ -132,7 +132,7 @@
 					<s:else>
 						class="li0"
 				</s:else>
-					href="taskManager/task!initTask.php?platformType='paipaiHuShua'"
+					href="taskManager/task!initTask.php?platformType='2'"
 					onmouseover="Mea(this);">拍拍互刷</A>
 			</LI>
 			<LI class=white>

@@ -11,7 +11,7 @@ public class Win17Listener implements ServletContextListener {
 	public void contextDestroyed(ServletContextEvent arg0) {
 	}
 
-	public void contextInitialized(ServletContextEvent arg0) {
+	public void contextInitialized(ServletContextEvent event) {
 		try {
 			ConvertUtils.register(new DateConverter(), java.util.Date.class);
 			ConvertUtils.register(new DateConverter(), java.sql.Date.class);

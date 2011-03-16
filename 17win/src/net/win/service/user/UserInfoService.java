@@ -40,7 +40,7 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 import sun.misc.BASE64Encoder;
 
-@SuppressWarnings({"unchecked"})
+@SuppressWarnings( { "unchecked" })
 @Service("userInfoService")
 public class UserInfoService extends BaseService {
 	@Resource
@@ -74,8 +74,8 @@ public class UserInfoService extends BaseService {
 		UserEntity userEntity = userDAO
 				.uniqueResult(
 						" from UserEntity as _u where _u.username=:username  or _u.telephone =:telephone ",
-						new String[]{"username", "telephone"}, new Object[]{
-								userVO.getUsername(), userVO.getUsername()});
+						new String[] { "username", "telephone" }, new Object[] {
+								userVO.getUsername(), userVO.getUsername() });
 		if (userEntity == null) {
 			putAlertMsg("用户名或手机不存在！");
 			return "updateFindPassword";
@@ -121,14 +121,14 @@ public class UserInfoService extends BaseService {
 		Long userCount = (Long) userDAO
 				.uniqueResultObject(
 						"select count(*) from UserEntity as _user where _user.referee.id=:userId ",
-						new String[]{"userId"},
-						new Object[]{userEntity.getId()});
+						new String[] { "userId" }, new Object[] { userEntity
+								.getId() });
 		// 推广的VIP会员数
 		Long vipCount = (Long) userDAO
 				.uniqueResultObject(
 						"select count(*) from UserEntity as _user where _user.referee.id=:userId and _user.vipEnable=:vipEnable",
-						new String[]{"userId", "vipEnable"}, new Object[]{
-								userEntity.getId(), true});
+						new String[] { "userId", "vipEnable" }, new Object[] {
+								userEntity.getId(), true });
 
 		putByRequest("userCount", userCount);
 		putByRequest("refereeMoney", refereeMoney);
@@ -206,9 +206,10 @@ public class UserInfoService extends BaseService {
 			Boolean sellerExists = (0 == (Long) sellerDAO
 					.uniqueResultObject(
 							"select count(*) from  SellerEntity as _seller where _seller.name=:sellerName and _seller.type=:platformType and _seller.user.id=:userID",
-							new String[]{"sellerName", "platformType", "userID"},
-							new Object[]{sellerEntity.getName(),
-									platformTypeParam, userEntity.getId()}));
+							new String[] { "sellerName", "platformType",
+									"userID" }, new Object[] {
+									sellerEntity.getName(), platformTypeParam,
+									userEntity.getId() }));
 			if (!sellerExists) {
 				putAlertMsg(sellerEntity.getName() + "已被使用！");
 				return JUMP;
@@ -217,9 +218,10 @@ public class UserInfoService extends BaseService {
 			Boolean buyerExists = (0 == (Long) buyerDAO
 					.uniqueResultObject(
 							"select count(*) from  BuyerEntity as _buyer where _buyer.name=:buyerName and _buyer.type=:platformType and _buyer.user.id=:userID",
-							new String[]{"buyerName", "platformType", "userID"},
-							new Object[]{sellerEntity.getName(),
-									platformTypeParam, userEntity.getId()}));
+							new String[] { "buyerName", "platformType",
+									"userID" }, new Object[] {
+									sellerEntity.getName(), platformTypeParam,
+									userEntity.getId() }));
 			if (!buyerExists) {
 				putAlertMsg("不能绑定和买号相同的卖号！");
 				return JUMP;
@@ -229,9 +231,9 @@ public class UserInfoService extends BaseService {
 					.uniqueResultObject(
 							"select count(*) from SellerEntity as _seller "
 									+ "where _seller.user.id=:userId and type=:platformType ",
-							new String[]{"userId", "platformType"},
-							new Object[]{getLoginUser().getId(),
-									platformTypeParam});
+							new String[] { "userId", "platformType" },
+							new Object[] { getLoginUser().getId(),
+									platformTypeParam });
 			Integer sellerCountFlag = StrategyUtils.getSellerCount(
 					getLoginUser().getVipType(), getLoginUser().getVipEnable(),
 					userEntity.getVip());
@@ -248,7 +250,7 @@ public class UserInfoService extends BaseService {
 					platformTypeParam);
 			//判断是否没找到信息
 			if (sellerEntity == null) {
-				putAlertMsg("您输入的帐号错误，出现这样的原因可能是：\\n1:用户名错误（注意大小写！）。\\n2:您是商城卖家（本平台只为小卖家开放，不为商城卖家开发！）。\\n3:如还有问题请联系客户。");
+				putAlertMsg("您输入的帐号错误，出现这样的原因可能是：\\n1:用户不存在（注意大小写,拍拍必须为QQ号码！）。\\n2:您是商城卖家（本平台只为小卖家开放，不为商城卖家开发！）。\\n3:如还有问题请联系客户。");
 				return JUMP;
 			}
 			String sheng = getByParam("sheng").trim();
@@ -275,9 +277,10 @@ public class UserInfoService extends BaseService {
 			Boolean sellerExists = (0 == (Long) buyerDAO
 					.uniqueResultObject(
 							"select count(*) from  SellerEntity as _seller where _seller.name=:sellerName and _seller.type=:platformType and _seller.user.id=:userID",
-							new String[]{"sellerName", "platformType", "userID"},
-							new Object[]{buyerEntity.getName(),
-									platformTypeParam, userEntity.getId()}));
+							new String[] { "sellerName", "platformType",
+									"userID" }, new Object[] {
+									buyerEntity.getName(), platformTypeParam,
+									userEntity.getId() }));
 
 			if (!sellerExists) {
 				putAlertMsg("不能绑定和卖号相同的买号！");
@@ -286,42 +289,22 @@ public class UserInfoService extends BaseService {
 			Boolean buyerExists = (0 == (Long) buyerDAO
 					.uniqueResultObject(
 							"select count(*) from  BuyerEntity as _buyer where _buyer.name=:buyerName and _buyer.type=:platformType and _buyer.user.id=:userID",
-							new String[]{"buyerName", "platformType", "userID"},
-							new Object[]{buyerEntity.getName(),
-									platformTypeParam, userEntity.getId()}));
+							new String[] { "buyerName", "platformType",
+									"userID" }, new Object[] {
+									buyerEntity.getName(), platformTypeParam,
+									userEntity.getId() }));
 			if (!buyerExists) {
 				putAlertMsg(buyerEntity.getName() + "已被使用！");
 				return JUMP;
 			}
 			//添加买号
-			if ("1".equals(platformTypeParam)) {
-				// 淘宝
-				String creditURL = HttpB2CUtils
-						.getTaobaoBuyerCreditURL(buyerEntity.getName());
-				if (creditURL == null) {
-					putAlertMsg("用户不存在或则该号是掌柜（输入时请注意区分大小写！）");
-					return JUMP;
-				} else {
-					buyerEntity.setCreditURL(creditURL);
-				}
-			} else if ("2".equals(platformTypeParam)) {
-				// 拍拍
-				buyerEntity
-						.setCreditURL("http://shop1.paipai.com/cgi-bin/credit_info?uin="
-								+ buyerEntity.getName());
-			}
-			//有啊不取信誉值
-			Integer score = HttpB2CUtils.obtainCreditValue(buyerEntity
-					.getCreditURL(), platformTypeParam);
-			if (score == -1) {
-				putAlertMsg("获取信誉失败，出现这个错误有以下情况：1,QQ必须输入QQ号码。2,拍拍买家不能同时为掌柜。 3,注意区分大小写，前后空格。还有疑问请联系客户！");
+			buyerEntity = HttpB2CUtils.getBuyerInfo(buyerEntity,
+					platformTypeParam, true);
+
+			if (buyerEntity == null) {
+				putAlertMsg("添加失败，可能由一下原因造成：\\n\\n1:用户不存在（注意大小写，拍拍必须为QQ号码！）。\\n2:信誉值过高（淘宝最高为250，拍拍为100）。\\n3:添加的号码已是掌柜。\\n4:如还有问题请联系客户。");
 				return JUMP;
 			}
-			if (score > Constant.getCreditValueLimit()) {
-				putAlertMsg("您的买号级别过高，请换一个号！");
-				return JUMP;
-			}
-			buyerEntity.setScore(score);
 			buyerEntity.setType(platformTypeParam);
 			buyerEntity.setUser(userEntity);
 			buyerEntity.setEnable(true);
@@ -348,12 +331,10 @@ public class UserInfoService extends BaseService {
 		Map<String, List<SellerVO>> sellerResult = new TreeMap<String, List<SellerVO>>();
 		sellerResult.put("1", new ArrayList<SellerVO>());
 		sellerResult.put("2", new ArrayList<SellerVO>());
-		sellerResult.put("3", new ArrayList<SellerVO>());
 
 		Map<String, List<BuyerVO>> buyerResult = new TreeMap<String, List<BuyerVO>>();
 		buyerResult.put("1", new ArrayList<BuyerVO>());
 		buyerResult.put("2", new ArrayList<BuyerVO>());
-		buyerResult.put("3", new ArrayList<BuyerVO>());
 		// 解析
 		if (sellers.size() > 0) {
 			SellerVO sellerVO;
@@ -378,7 +359,6 @@ public class UserInfoService extends BaseService {
 			putAlertMsg("您还没有绑定卖号，请绑定！");
 		}
 		putByRequest("sellers", sellerResult);
-		putByRequest("creditValueLimit", Constant.getCreditValueLimit());
 		putByRequest("buyers", buyerResult);
 
 		return "initSellerAndBuyer";
@@ -983,7 +963,7 @@ public class UserInfoService extends BaseService {
 						} else if (TaskMananger.STEP_SIX_STATUS.equals(objs[1])) {
 							result2[1][8] = objs[2] + "";// 完成的
 						}
-					} 
+					}
 
 					//					else if ("3".equals(objs[0])) {
 					//						// 有啊
@@ -1019,8 +999,8 @@ public class UserInfoService extends BaseService {
 		Long smsCount = (Long) userDAO
 				.uniqueResultObject(
 						"select count(*) from SmsEntity  _sms where _sms.toUser.id=:userid and _sms.read=:read",
-						new String[]{"userid", "read"}, new Object[]{
-								userLoginInfo.getId(), false});
+						new String[] { "userid", "read" }, new Object[] {
+								userLoginInfo.getId(), false });
 		putByRequest("smsCount", smsCount);
 		putByRequest("sellTasks", result1);
 		putByRequest("buyTasks", result2);

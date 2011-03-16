@@ -429,66 +429,82 @@
 		</table>
 
 		<div class="service2  service serviceA " id="divSerWin">
-			<div class="service-open" id="divMySer">
-				<div onclick="ClickSer();" class="service-button"></div>
-				<div class="service-inside">
-					<dl>
-						<dt>
-							客服工作时间
-						</dt>
-						<dd class="esp_4">
-							周一至周五
-						</dd>
-						<dd class="esp_4">
-							9:00 - 18:30
-						</dd>
-						<dd class="esp_5">
-							<!--<a href="#" target="_blank">自助服务</a>-->
-						</dd>
-						<dt>
-							客服团队
-						</dt>
-						<dd>
+	<div class="service-open" id="divMySer">
+		<div onclick="ClickSer();" class="service-button"></div>
+		<div class="service-inside">
+			<dl>
+				<dt class='title'>
+					客服工作时间
+				</dt>
+				<dd class="esp_4">
+					周一至周五
+				</dd>
+				<dd class="esp_4">
+					9:00 - 18:30
+				</dd>
+				<dd class="esp_5">
+					<!--<a href="#" target="_blank">自助服务</a>-->
+				</dd>
+				<dt class='title'>
+					客服团队
+				</dt>
+				<dt class="content">
 
-							<!-- 1348001415 -->
-							<a class="serviceA" href="tencent://message/?uin=1442418675">新手帮助</a>
-						</dd>
-						<dd>
-							<a class="serviceA" href="tencent://message/?uin=1442418675">客户帮助</a>
-						</dd>
-						<dd>
-							<a href="tencent://message/?uin=1442418675">充值帮助</a>
-						</dd>
-						<dd>
-							<a href="tencent://message/?uin=1442418675">提现帮助</a>
-						</dd>
-						<dd class="esp_1">
-							<a href="tencent://message/?uin=1442418675">投诉建议</a>
-						</dd>
-						<dt>
-							QQ交流群
-						</dt>
-						<dd class="esp_3">
-							100103766
-						</dd>
-						<dt>
-							我们的宗旨
-						</dt>
-						<dd class="esp_4">
-							安全第一
-						</dd>
-						<dd class="esp_4">
-							和谐刷钻
-						</dd>
-						<dd class="esp_4">
-							大家互赢
-						</dd>
-						<dd class="esp_4">
-							互相监督
-						</dd>
-					</dl>
-				</div>
-			</div>
+					<!-- 1348001415 -->
+					<a href="tencent://message/?uin=1442418675"> <img width="25"
+							height="17" border="0" class="qqConnection"
+							style="vertical-align: middle;" class="tip"
+							src="http://wpa.qq.com/pa?p=1:1442418675:17" />	新手帮助</a>
+				</dt>
+				<dt class="content">
+					<a href="tencent://message/?uin=1442418675"> <img width="25"
+							height="17" border="0" class="qqConnection"
+							style="vertical-align: middle;" class="tip"
+							src="http://wpa.qq.com/pa?p=1:1442418675:17" />客服帮助</a>
+				</dt>
+				<dt class="content">
+					<a href="tencent://message/?uin=1442418675"> <img width="25"
+							height="17" border="0" class="qqConnection"
+							style="vertical-align: middle;" class="tip"
+							src="http://wpa.qq.com/pa?p=1:1442418675:17" />充值帮助</a>
+				</dt>
+				<dt class="content">
+					<a href="tencent://message/?uin=1442418675"> <img width="25"
+							height="17" border="0" class="qqConnection"
+							style="vertical-align: middle;" class="tip"
+							src="http://wpa.qq.com/pa?p=1:1442418675:17" /> 投诉建议</a>
+				</dt>
+				<dt class="content">
+					<a target="_blank"
+						href="http://amos1.taobao.com/msg.ww?v=2&uid=lxq380712448&s=1"><img
+							border="0"
+							src="http://amos1.taobao.com/online.ww?v=2&uid=lxq380712448&s=1"
+							alt="联系旺旺客服" /> </a>
+				</dt>
+				<dt class='title'>
+					QQ交流群
+				</dt>
+				<dd class="esp_3">
+					100103766
+				</dd>
+				<dt class='title'>
+					我们的宗旨
+				</dt>
+				<dd class="esp_4">
+					安全第一
+				</dd>
+				<dd class="esp_4">
+					和谐互刷
+				</dd>
+				<dd class="esp_4">
+					大家互赢
+				</dd>
+				<dd class="esp_4">
+					互相监督
+				</dd>
+			</dl>
 		</div>
+	</div>
+</div>
 	</BODY>
 </HTML>

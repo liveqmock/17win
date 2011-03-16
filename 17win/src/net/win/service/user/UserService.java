@@ -301,7 +301,7 @@ public class UserService extends BaseService {
 					+ Constant.getInitUserMoney() + "金额", userEntity);
 		}
 		userEntity.setReleaseDot(Constant.getInitUserReleaseDot());
-		userDAO.save(userEntity);
+
 		try {
 			MailUtils.sendCommonMail(mailSender, freeMarkerCfj, "注册成功",
 					userEntity.getUsername() + "：欢迎您注册www.17win.com(一起赢)平台。",
@@ -316,8 +316,17 @@ public class UserService extends BaseService {
 				+ "在"
 				+ DateUtils.format(new Date(), DateUtils.DATE_TIME_FORMAT)
 				+ "注册", Constant.getXgjEmail());
-		putAlertMsg("注册成功！");
-		putJumpSelfPage("user/userManager/base!initLogin.php");
+
+		//
+		userEntity.setLastLoginTime(new Date());
+		userEntity.setUpgradeScore(userEntity.getUpgradeScore()
+				+ Constant.getLoginScore().intValue());
+		userDAO.save(userEntity);
+		// 设置VIP
+		updateUserLoginInfo(userEntity);
+
+		putAlertMsg("注册成功，现在请激活您的帐号！");
+		putJumpSelfPage("userInfoManager/info!initActiave.php");
 		return JUMP;
 	}
 }

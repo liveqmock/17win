@@ -101,69 +101,85 @@ img {
 												style="table-layout: fixed" border="0" align="center">
 												<tbody id="sellerTable<s:property value="#type"/>">
 													<tr>
-														<td colspan="3" height="40" align="left" nowrap="nowrap"
-															class="font14b2">
-															<s:set name="platformName"
-																value="#type==1?'淘宝':#type==2?'拍拍':'有啊'"></s:set>
+														<td colspan="2" height="40" align="left" nowrap="nowrap">
+															<s:set name="platformName" value="#type==1?'淘宝':'拍拍'"></s:set>
 															<s:property value="#platformName" />
 															卖号资料：
 														</td>
 													</tr>
 													<tr style="background: #EDF6FF">
-														<th height="10" nowrap="nowrap" align="center" width="30%">
-															店铺地址
-														</th>
-														<th height="10" nowrap="nowrap" align="center" width="20%">
+														<th height="10" nowrap="nowrap" align="center">
 															卖号
 														</th>
-														<th height="10" nowrap="nowrap" align="center" width="30%">
-															发货地址
+														<th height="10" nowrap="nowrap" align="center">
+															是否加入消保
 														</th>
-														<th height="10" nowrap="nowrap" align="center" width="20%">
+														<th height="10" nowrap="nowrap" align="center">
+															是否旺铺
+														</th>
+														<th height="10" nowrap="nowrap" align="center">
+															信誉值
+														</th>
+														<th height="10" nowrap="nowrap" align="center">
+															信誉级别
+														</th>
+														<th height="10" nowrap="nowrap" align="center">
 															操作
 														</th>
 													</tr>
 													<s:iterator value="#request.sellers.get(#type)" id="seller">
-														<tr class="sellerTr">
-															<td align="left" nowrap="nowrap"
+														<tr class="sellerTr"
+															alt="
+														<table>
+															<tr>
+																<Td>
+																	发货地址：<s:property value="#seller.address" />
+																<td>
+															</tr>
+														</table>
+																												">
+															<td align="center" nowrap="nowrap"
 																style="overflow: hidden; text-overflow: ellipsis;"
 																width="100%">
-																<input type="hidden"
-																	platformType="<s:property value="#type"/>"
-																	shopUrl="<s:property value="#seller.shopURL" />" />
-																<s:property value="#seller.shopURL" />
+																<a href="<s:property value="#seller.shopURL" />"
+																	target="_blank"> <s:property value="#seller.name" />
+																</a>
 															</td>
 															<td align='center'>
-																<input type="hidden"
-																	platformType="<s:property value="#type"/>"
-																	sellerName="<s:property value="#seller.name" />" />
-																<s:property value="#seller.name" />
+																<s:property value="#seller.ensure?'是':'否'" />
+															</td>
+															<td align="center">
+																<s:property value="#seller.winport?'是':'否'" />
+															</td>
+															<td align="center">
+																<s:property value="#seller.score" />
 															</td>
 															<td align="center" nowrap="nowrap">
-																<s:property value="#seller.address" />
+																<a href="<s:property value="#seller.creditURL" />"
+																	target="_blank"> <img
+																		src="<s:property value="#seller.img" />" /> </a>
 															</td>
-															<td align="center" nowrap="nowrap">
+															<td align="center" nowrap="nowrap" title="修改发货地址">
 																<a
 																	href="javascript:showUpdateDIV('<s:property value="#seller.id" />')">
-																	<img src="images/edit_ico.gif" alt="修改发货地址"> </a>
+																	<img src="images/edit_ico.gif" /> </a>
 															</td>
 														</tr>
 													</s:iterator>
 												</tbody>
 											</table>
 										</s:iterator>
-										<hr color="#0082E0" style="height: 10px; background: #0082E0">
+										<hr>
 										<s:iterator value="#request.buyers.keys" id="type">
-											<s:set name="platformName"
-												value="#type==1?'淘宝':#type==2?'拍拍':'有啊'"></s:set>
+											<s:set name="platformName" value="#type==1?'淘宝':'拍拍''"></s:set>
 											<table cellspacing="0" cellpadding="0" border="0"
 												width="100%" style="table-layout: fixed" align="center">
 												<thead id="buyerTable<s:property value="#type"/>">
 													<tr>
-														<td colspan="4" height="40" align="left" class="font14b2">
+														<td colspan="4" height="40" align="left">
+															<s:set name="platformName" value="#type==1?'淘宝':'拍拍'"></s:set>
 															<s:property value="#platformName" />
 															买号资料：
-
 														</td>
 													</tr>
 													<tr style="background: #EDF6FF">
@@ -174,7 +190,7 @@ img {
 															信誉值
 														</th>
 														<th height="10" nowrap="nowrap" align="center">
-															信誉地址
+															信誉级别
 														</th>
 														<th height="10" nowrap="nowrap" align="center">
 															是否可用
@@ -184,42 +200,18 @@ img {
 												<tbody>
 													<s:iterator value="#request.buyers.get(#type)" id="buyer">
 														<tr class="buyerTr">
-															<td height="10" align="center" nowrap="nowrap">
-																<input type="hidden"
-																	platformType="<s:property value="#type"/>"
-																	buyerName="<s:property value="#buyer.name" />" />
+															<td align="center" nowrap="nowrap">
 																<s:property value="#buyer.name" />
 															</td>
-															<td height="10" align="center">
-																<s:if test="#buyer.score>=0 && #buyer.score<=100">
-																	<font style="color: #9ACD34; font-weight: bold;"
-																		title="此买号安全!"><s:property value="#buyer.score" />
-																	</font>
-																</s:if>
-																<s:elseif test="#buyer.score>100 && #buyer.score<=200">
-																	<font style="color: #FFCC01; font-weight: bold;"
-																		title="此买号还算安全！"><s:property
-																			value="#buyer.score" /> </font>
-																</s:elseif>
-																<s:else>
-																	<font style="color: #FE0001; font-weight: bold;"
-																		title="此买号已经要达到黄钻，建议换号！"> <s:property
-																			value="#buyer.score" /> </font>
-																</s:else>
-
+															<td align="center">
+																<s:property value="#buyer.score" />
 															</td>
-															<td height="10" align="left" nowrap="nowrap"
-																style="overflow: hidden; text-overflow: ellipsis;"
-																width="100%">
-																<s:if
-																	test="#buyer.creditURL==null  || #buyer.creditURL==''">
-																			N/A
-																</s:if>
-																<s:else>
-																	<s:property value="#buyer.creditURL" />
-																</s:else>
+															<td align="center">
+																<a href="<s:property value="#buyer.creditURL" />"
+																	target="_blank"> <img
+																		src="<s:property value="#buyer.img" />" /> </a>
 															</td>
-															<td height="10" align="center">
+															<td align="center">
 																<s:if test="#buyer.enable">
 																	是
 																</s:if>
@@ -239,9 +231,7 @@ img {
 											<tbody>
 												<tr>
 													<td width="100%" align="left" class="font12b2">
-														<font color="red">注意：为了您和他人的安全，买号信誉在<s:property
-																value="#request.creditValueLimit" />（包含<s:property
-																value="#request.creditValueLimit" />）以上的账号，我们将停用！</font>
+														<font color="red">注意：为了您和他人的安全，淘宝买号信誉在250以上，拍拍买号信誉在100以上的账号，我们将停用！</font>
 													</td>
 												</tr>
 											</tbody>
@@ -254,7 +244,7 @@ img {
 				</td>
 			</tr>
 		</table>
-		<div id="addtableDIV" title="卖号/买号增加">
+		<div id="addtableDIV" title="卖号/买号增加" style="display: none">
 			<s:form action="userInfoManager/info!sellerAndBuyer.php"
 				onsubmit="return validateForm();" theme="simple" id="addForm">
 				<table cellpadding="0" cellspacing="0" border="0">
@@ -279,9 +269,6 @@ img {
 								</option>
 								<option value="2">
 									拍拍
-								</option>
-								<option value="3">
-									有啊
 								</option>
 							</select>
 						</td>
@@ -352,7 +339,7 @@ img {
 		<!-- 
 			修改发货地址 xgj
 		 -->
-		<div id="updateDIV" title="修改发货地址">
+		<div id="updateDIV" title="修改发货地址" style="display: none">
 			<s:form action="userInfoManager/info!updateSeller.php" theme="simple"
 				id="updatewForm">
 				<table cellpadding="0" cellspacing="0" border="0">
