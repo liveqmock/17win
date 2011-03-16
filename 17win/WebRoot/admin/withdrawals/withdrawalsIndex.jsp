@@ -36,7 +36,7 @@
 						</s:select>
 
 						<span
-							<s:if test="withdrawalsVO.type!=1">style="display: none"</s:if>
+							<s:if test="withdrawalsVO.type!=1">style="display: none" </s:if>
 							id="shopType"> &nbsp;&nbsp;店铺类型：<s:select
 								name="withdrawalsVO.shopType" listKey="key" listValue="value"
 								headerKey="" headerValue="--请选择--"

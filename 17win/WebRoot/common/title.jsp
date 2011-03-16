@@ -31,7 +31,7 @@
 					<TD width=433>
 						<div style="width: 350px;" id="logo">
 							<a href="http://www.17win.net/" style="float: left;"><img
-									border="0" alt="刷钻网" src="images/logo.gif"> </a>
+									border="0" src="images/logo.gif"> </a>
 							<div style="float: left; padding-top: 14px; padding-left: 5px;">
 								<embed width="85" height="30" style="vertical-align: middle;"
 									wmode="transparent"
@@ -102,17 +102,16 @@
 
 <DIV class=index_menu style="MARGIN: 0px auto">
 	<DIV id=list>
-		<UL>
+		<UL id="showTitle">
 			<LI class=white>
 				<A
-					<s:if test="#request.showIndexType==1">
+					<s:if test="#request.showIndexType=='index'">
 					class="li1 white"  	style="COLOR: #000000"
 				</s:if>
 					<s:else>
-						class="li0 "
+						class="li0"
 				</s:else> href="index.html"
-					id="a0" onmouseover="Mea(0);" testclass=""><SPAN>首&nbsp;页</SPAN>
-				</A>
+					onmouseover="Mea(this);"><SPAN>首&nbsp;页</SPAN> </A>
 			</LI>
 			<LI class=white>
 				<A
@@ -120,10 +119,10 @@
 					class="li1 white"  	style="COLOR: #000000"
 				</s:if>
 					<s:else>
-						class="li0 "
+						class="li0"
 				</s:else>
-					href="taskManager/task!initTask.php?platformType=1" id="a1"
-					onmouseover="Mea(1);" testclass="">淘宝互刷</A>
+					href="taskManager/task!initTask.php?platformType='taobaoHuShua'"
+					onmouseover="Mea(this);">淘宝互刷</A>
 			</LI>
 			<LI class=white>
 				<A
@@ -131,29 +130,26 @@
 					class="li1 white"  	style="COLOR: #000000"
 				</s:if>
 					<s:else>
-						class="li0 "
+						class="li0"
 				</s:else>
-					href="taskManager/task!initTask.php?platformType=2" id="a2"
-					onmouseover="Mea(2);" testclass="">拍拍互刷</A>
+					href="taskManager/task!initTask.php?platformType='paipaiHuShua'"
+					onmouseover="Mea(this);">拍拍互刷</A>
 			</LI>
 			<LI class=white>
-				<A
-					<s:if test="#request.showIndexType==4">
-					class="li1 white"  	style="COLOR: #000000"
-				</s:if>
-					<s:else>
-						class="li0 "
-				</s:else>
-					href="taskManager/task!initTask.php?platformType=3" id="a3"
-					onmouseover="Mea(3);" testclass="">有啊互刷</A>
+				<A class="li0" href="javascript:alert('开发中，敬请期待！');"
+					onmouseover="Mea(this);">淘宝流量</A>
 			</LI>
 			<LI class=white>
-				<A class="li0 " href="javascript:alert('开发中，敬请期待！');"
-					onmouseover="Mea(7);" testclass="">淘宝流量</A>
+				<A class="li0" href="javascript:alert('开发中，敬请期待！');"
+					onmouseover="Mea(this);">拍拍流量</A>
 			</LI>
 			<LI class=white>
-				<A class="li0 " href="javascript:alert('开发中，敬请期待！');"
-					onmouseover="Mea(8);" testclass="">拍拍流量</A>
+				<A class="li0" href="javascript:alert('开发中，敬请期待！');"
+					onmouseover="Mea(this);">淘宝收藏</A>
+			</LI>
+			<LI class=white>
+				<A class="li0" href="javascript:alert('开发中，敬请期待！');"
+					onmouseover="Mea(this);">拍拍收藏</A>
 			</LI>
 			<LI class=white>
 				<A
@@ -161,10 +157,9 @@
 					class="li1 white"  	style="COLOR: #000000"
 				</s:if>
 					<s:else>
-						class="li0 "
+						class="li0"
 				</s:else>
-					href="payManager/pay!initPay.php" id="a5" onmouseover="Mea(5);"
-					testclass="">账号充值</A>
+					href="payManager/pay!initPay.php" onmouseover="Mea(this);">账号充值</A>
 			</LI>
 			<LI class=white>
 				<A
@@ -172,31 +167,30 @@
 					class="li1 white"  	style="COLOR: #000000"
 				</s:if>
 					<s:else>
-						class="li0 "
+						class="li0"
 				</s:else>
-					href="javascript:alert('暂不开放');" id="a10" onmouseover="Mea(10);"
-					testclass="">刷客排行</A>
+					href="javascript:alert('暂不开放');" onmouseover="Mea(this);">刷客排行</A>
 			</LI>
 			<LI class=white>
 				<A
-					<s:if test="#request.showIndexType==12">
+					<s:if test="#request.showIndexType=='help'">
 					class="li1 white"  	style="COLOR: #000000"
 				</s:if>
 					<s:else>
-						class="li0 "
+						class="li0"
 				</s:else> href="help/index.html"
-					id="a9" onmouseover="Mea(9);" testclass="">新手入门</A>
+					onmouseover="Mea(this);">新手入门</A>
 			</LI>
 			<LI class=white>
 				<A
-					<s:if test="#request.showIndexType==13">
+					<s:if test="#request.showIndexType=='logistics'">
 					class="li1 white"  	style="COLOR: #000000"
 				</s:if>
 					<s:else>
-						class="li0 "
+						class="li0"
 				</s:else>
-					href="logisticsManager/logistics!queryLogisticsLog.php" id="a11"
-					onmouseover="Mea(11);" testclass="">真实快递</A>
+					href="logisticsManager/logistics!queryLogisticsLog.php"
+					onmouseover="Mea(this);">真实快递</A>
 			</LI>
 		</UL>
 	</DIV>

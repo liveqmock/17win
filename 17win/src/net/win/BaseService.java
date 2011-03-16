@@ -109,7 +109,7 @@ public class BaseService {
 	 * @return
 	 */
 	protected void putIndexShowType(String showIndexType) {
-		putByRequest("showIndexType", Integer.parseInt(showIndexType) + 1 + "");
+		putByRequest("showIndexType", showIndexType);
 	}
 
 	/**
@@ -310,7 +310,7 @@ public class BaseService {
 	// 保存积分
 	protected void logScoreCapital(BaseDAO baseDAO, Double value, String desc,
 			UserEntity userEntity) throws Exception {
-				CapitalLogEntity capitalLogEntity = new CapitalLogEntity();
+		CapitalLogEntity capitalLogEntity = new CapitalLogEntity();
 		capitalLogEntity.setType("3");
 		capitalLogEntity.setValue(value);
 		capitalLogEntity.setRemainValue(userEntity.getConvertScore()

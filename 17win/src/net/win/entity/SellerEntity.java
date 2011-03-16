@@ -25,29 +25,25 @@ public class SellerEntity extends BaseEntity {
 	// 发货地址
 	@Column(name = "Address_", length = 53)
 	private String address;
-
 	//是否消保
 	@Column(name = "Ensure_")
 	private Boolean ensure = false;
-	//信誉积分
-	@Column(name = "Score_")
-	private Integer score = 0;
 	//图片地址
 	@Column(name = "Img_")
 	private String img = "";
+	//是否旺铺
+	@Column(name = "Winport_")
+	private Boolean winport = false;
+	//信誉值
+	@Column(name = "Score_")
+	private Integer score = 0;
+
+	@Column(name = "CREDIT_URL_", length = 255)
+	private String creditURL;
 	// 所属人
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_ID_")
 	private UserEntity user;
-
-	public Integer getScore() {
-		return score;
-	}
-
-	public void setScore(Integer score) {
-		this.score = score;
-	}
-
 	public String getType() {
 		return type;
 	}
@@ -102,6 +98,30 @@ public class SellerEntity extends BaseEntity {
 
 	public void setImg(String img) {
 		this.img = img;
+	}
+
+	public Boolean getWinport() {
+		return winport;
+	}
+
+	public void setWinport(Boolean winport) {
+		this.winport = winport;
+	}
+
+	public Integer getScore() {
+		return score;
+	}
+
+	public void setScore(Integer score) {
+		this.score = score;
+	}
+
+	public String getCreditURL() {
+		return creditURL;
+	}
+
+	public void setCreditURL(String creditURL) {
+		this.creditURL = creditURL;
 	}
 
 }

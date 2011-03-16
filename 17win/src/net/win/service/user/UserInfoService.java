@@ -173,7 +173,6 @@ public class UserInfoService extends BaseService {
 	}
 
 	public String initExchange(UserVO userVO) throws Exception {
-		putIndexShowType("7");
 		putByRequest("releaseDotChangeMoney", Constant
 				.getReleaseDotChangeMoney());
 
@@ -247,6 +246,11 @@ public class UserInfoService extends BaseService {
 			}
 			sellerEntity = HttpB2CUtils.getSellerInfo(sellerEntity,
 					platformTypeParam);
+			//判断是否没找到信息
+			if (sellerEntity == null) {
+				putAlertMsg("您输入的帐号错误，出现这样的原因可能是：\\n1:用户名错误（注意大小写！）。\\n2:您是商城卖家（本平台只为小卖家开放，不为商城卖家开发！）。\\n3:如还有问题请联系客户。");
+				return JUMP;
+			}
 			String sheng = getByParam("sheng").trim();
 			String shi = getByParam("shi").trim();
 			String qu = getByParam("qu").trim();
@@ -292,9 +296,8 @@ public class UserInfoService extends BaseService {
 			//添加买号
 			if ("1".equals(platformTypeParam)) {
 				// 淘宝
-				String creditURL = "http://member1.taobao.com/member/user_profile.jhtml?userID="
-						+ buyerEntity.getName();
-				creditURL = HttpB2CUtils.getTaobaoCreditURL(creditURL);
+				String creditURL = HttpB2CUtils
+						.getTaobaoBuyerCreditURL(buyerEntity.getName());
 				if (creditURL == null) {
 					putAlertMsg("用户不存在或则该号是掌柜（输入时请注意区分大小写！）");
 					return JUMP;
@@ -635,7 +638,6 @@ public class UserInfoService extends BaseService {
 	 * @throws Exception
 	 */
 	public String updateExchange(UserVO userVO) throws Exception {
-		putIndexShowType("5");
 		String flag = getByParam("flag");
 		UserEntity userEntity = getLoginUserEntity(userDAO);
 		String operaCode = userVO.getOperationCode();
@@ -846,11 +848,11 @@ public class UserInfoService extends BaseService {
 		/**
 		 * 买家
 		 */
-		String[][] result1 = new String[4][7];
+		String[][] result1 = new String[3][7];
 		/**
 		 * 卖家
 		 */
-		String[][] result2 = new String[4][10];
+		String[][] result2 = new String[3][10];
 		for (String[] r : result1) {
 			Arrays.fill(r, "0");
 		}
@@ -858,8 +860,8 @@ public class UserInfoService extends BaseService {
 			// 设置result1的初始值
 			result1[0][0] = "淘宝";
 			result1[1][0] = "拍拍";
-			result1[2][0] = "有啊";
-			result1[3][0] = "合计";
+			//			result1[2][0] = "有啊";
+			result1[2][0] = "合计";
 		}
 		for (String[] r : result2) {
 			Arrays.fill(r, "0");
@@ -868,8 +870,8 @@ public class UserInfoService extends BaseService {
 			// 设置result2的初始值
 			result2[0][0] = "淘宝";
 			result2[1][0] = "拍拍";
-			result2[2][0] = "有啊";
-			result2[3][0] = "合计";
+			//			result2[2][0] = "有啊";
+			result2[2][0] = "合计";
 		}
 		if (tmpResult1.size() > 0) {
 			for (int i = 0; i < tmpResult1.size(); i++) {
@@ -908,23 +910,24 @@ public class UserInfoService extends BaseService {
 						} else if (TaskMananger.STEP_SIX_STATUS.equals(objs[1])) {
 							result1[1][5] = objs[2] + "";// 完成的
 						}
-					} else if ("3".equals(objs[0])) {
-						// 拍拍
-						if (TaskMananger.STEP_TWO_STATUS.equals(objs[1])) {
-							result1[2][1] = objs[2] + "";// 等我付款
-						} else if (TaskMananger.STEP_THREE_STATUS
-								.equals(objs[1])) {
-							result1[2][2] = objs[2] + "";// 等待卖家发货
-						} else if (TaskMananger.STEP_FOUR_STATUS
-								.equals(objs[1])) {
-							result1[2][3] = objs[2] + "";// 等待我好评
-						} else if (TaskMananger.STEP_FIVE_STATUS
-								.equals(objs[1])) {
-							result1[2][4] = objs[2] + "";// 等待卖家好评
-						} else if (TaskMananger.STEP_SIX_STATUS.equals(objs[1])) {
-							result1[2][5] = objs[2] + "";// 完成的
-						}
 					}
+					//					else if ("3".equals(objs[0])) {
+					//						// 拍拍
+					//						if (TaskMananger.STEP_TWO_STATUS.equals(objs[1])) {
+					//							result1[2][1] = objs[2] + "";// 等我付款
+					//						} else if (TaskMananger.STEP_THREE_STATUS
+					//								.equals(objs[1])) {
+					//							result1[2][2] = objs[2] + "";// 等待卖家发货
+					//						} else if (TaskMananger.STEP_FOUR_STATUS
+					//								.equals(objs[1])) {
+					//							result1[2][3] = objs[2] + "";// 等待我好评
+					//						} else if (TaskMananger.STEP_FIVE_STATUS
+					//								.equals(objs[1])) {
+					//							result1[2][4] = objs[2] + "";// 等待卖家好评
+					//						} else if (TaskMananger.STEP_SIX_STATUS.equals(objs[1])) {
+					//							result1[2][5] = objs[2] + "";// 完成的
+					//						}
+					//					}
 				}
 			}
 		}
@@ -980,29 +983,31 @@ public class UserInfoService extends BaseService {
 						} else if (TaskMananger.STEP_SIX_STATUS.equals(objs[1])) {
 							result2[1][8] = objs[2] + "";// 完成的
 						}
-					} else if ("3".equals(objs[0])) {
-						// 有啊
-						if (TaskMananger.TIMING_STATUS.equals(objs[1])) {
-							result2[2][1] = objs[2] + "";// 定时任务
-						} else if (TaskMananger.STEP_ONE_STATUS.equals(objs[1])) {
-							result2[2][2] = objs[2] + "";// 等待接手
-						} else if (TaskMananger.AUDIT_STATUS.equals(objs[1])) {
-							result2[2][3] = objs[2] + "";// 等待审核
-						} else if (TaskMananger.STEP_TWO_STATUS.equals(objs[1])) {
-							result2[2][4] = objs[2] + ""; // 等待买家付款
-						} else if (TaskMananger.STEP_THREE_STATUS
-								.equals(objs[1])) {
-							result2[2][5] = objs[2] + "";// 等待我发货
-						} else if (TaskMananger.STEP_FOUR_STATUS
-								.equals(objs[1])) {
-							result2[2][6] = objs[2] + "";// 等待买家确认好评
-						} else if (TaskMananger.STEP_FIVE_STATUS
-								.equals(objs[1])) {
-							result2[2][7] = objs[2] + "";// 等待我好评
-						} else if (TaskMananger.STEP_SIX_STATUS.equals(objs[1])) {
-							result2[1][8] = objs[2] + "";// 完成的
-						}
-					}
+					} 
+
+					//					else if ("3".equals(objs[0])) {
+					//						// 有啊
+					//						if (TaskMananger.TIMING_STATUS.equals(objs[1])) {
+					//							result2[2][1] = objs[2] + "";// 定时任务
+					//						} else if (TaskMananger.STEP_ONE_STATUS.equals(objs[1])) {
+					//							result2[2][2] = objs[2] + "";// 等待接手
+					//						} else if (TaskMananger.AUDIT_STATUS.equals(objs[1])) {
+					//							result2[2][3] = objs[2] + "";// 等待审核
+					//						} else if (TaskMananger.STEP_TWO_STATUS.equals(objs[1])) {
+					//							result2[2][4] = objs[2] + ""; // 等待买家付款
+					//						} else if (TaskMananger.STEP_THREE_STATUS
+					//								.equals(objs[1])) {
+					//							result2[2][5] = objs[2] + "";// 等待我发货
+					//						} else if (TaskMananger.STEP_FOUR_STATUS
+					//								.equals(objs[1])) {
+					//							result2[2][6] = objs[2] + "";// 等待买家确认好评
+					//						} else if (TaskMananger.STEP_FIVE_STATUS
+					//								.equals(objs[1])) {
+					//							result2[2][7] = objs[2] + "";// 等待我好评
+					//						} else if (TaskMananger.STEP_SIX_STATUS.equals(objs[1])) {
+					//							result2[1][8] = objs[2] + "";// 完成的
+					//						}
+					//					}
 				}
 			}
 		}

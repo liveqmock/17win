@@ -36,7 +36,6 @@ public class VipService extends BaseService {
 	 * @throws Exception
 	 */
 	public String initVip(VipVO vipVO) throws Exception {
-		putIndexShowType("8");
 		putByRequest("vipPrice", Constant.getVipPrice());
 		putByRequest("vipYearRebate", Constant.getVipYearRebate() * 10);
 		putByRequest("receieveTaskDotRate", Constant.getReceieveTaskDotRate());

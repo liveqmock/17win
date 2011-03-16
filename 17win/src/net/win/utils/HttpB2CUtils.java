@@ -165,7 +165,7 @@ public final class HttpB2CUtils {
 					.getContent(), "GBK"));
 			Pattern pattern = Pattern.compile(TAOBAO_USER_REGEX);
 			Matcher matcher;
-			OUTTER: while ((line = br.readLine()) != null) {
+			OUTTER : while ((line = br.readLine()) != null) {
 				matcher = pattern.matcher(line);
 				while (matcher.find()) {
 					seller = URLDecoder.decode(matcher.group(1), "UTF-8");
@@ -221,7 +221,7 @@ public final class HttpB2CUtils {
 			String line;
 			Pattern pattern = Pattern.compile(TAOBAO_USER_REGEX);
 			Matcher matcher;
-			OUTTER: while ((line = br.readLine()) != null) {
+			OUTTER : while ((line = br.readLine()) != null) {
 				matcher = pattern.matcher(line);
 				while (matcher.find()) {
 					seller = URLDecoder.decode(matcher.group(1), "UTF-8");
@@ -308,7 +308,7 @@ public final class HttpB2CUtils {
 					.compile("<span tagvar='buyer'  score='(\\d+)' tag='userGrade' >");
 			Matcher matcher;
 			Matcher matcher2;
-			OUTTER: while ((line = br.readLine()) != null) {
+			OUTTER : while ((line = br.readLine()) != null) {
 				line = line.replaceAll("\"", "'");
 				matcher2 = scorePattern.matcher(line);
 				while (matcher2.find()) {
@@ -331,15 +331,17 @@ public final class HttpB2CUtils {
 	}
 
 	/**
-	 * 获取淘宝的信誉地址
+	 * 获取淘宝买家的信誉地址
 	 * 
 	 * @param url
 	 * @return
 	 */
-	public static String getTaobaoCreditURL(String url) {
+	public static String getTaobaoBuyerCreditURL(String name) {
 		Map nameSpaces = new HashMap();
 		nameSpaces.put("xmlns", "http://www.w3.org/1999/xhtml");
-		Element node = (Element) getOneNodeByDom4j(url,
+		Element node = (Element) getOneNodeByDom4j(
+				"http://member1.taobao.com/member/user_profile.jhtml?userID="
+						+ name,
 				"//xmlns:UL[@class='TabBarLevel1']/xmlns:LI[2]/xmlns:A",
 				nameSpaces);
 		if (node == null) {
@@ -350,73 +352,116 @@ public final class HttpB2CUtils {
 	}
 
 	/**
-	 * 获取卖家是否皇冠，是否消保
+	 * 获取卖家信息
 	 * 
 	 * @param url
 	 * @return
 	 */
 	public static SellerEntity getSellerInfo(SellerEntity sellerEntity,
 			String platformType) {
+		Map nameSpaces = new HashMap();
+		nameSpaces.put("xmlns", "http://www.w3.org/1999/xhtml");
 		if ("1".equals(platformType)) {
-			//删除shopURL
-			//验证地址 http://store.taobao.com/shop/view_shop.htm?asker=wangwang&shop_nick=xgj1988
-
-			//获取信誉 和消保 和 IMG
-			String sellerURL1 = "http://member1.taobao.com/member/user_profile.jhtml?userID="
-					+ sellerEntity.getName();
-			List<Element> nodes = (List) getMutliNodeByDom4j(
-					sellerURL1,
-					"//DIV[@class='infocard']/DL[1]/DD[1]/UL[1]/LI[3]/A[1] | //A[@class='rank-icon']/IMG | //A[@class='shop-ensure'] ",
-					null);
-			if (nodes.size() == 3) {
-				sellerEntity.setImg(nodes.get(0).attributeValue("src"));
-				//旺铺
-				sellerEntity.setScore(Integer.parseInt(nodes.get(2)
-						.getTextTrim()));
-				sellerEntity.setEnsure(true);
-
-				//获取店铺地址
-				HttpClient httpClient = taobaoHttpClient;
-				HttpPost httpPost = new HttpPost(
-						"http://member1.taobao.com/member/user_profile.jhtml?userID="
-								+ sellerEntity.getName());
-				HttpResponse response;
-				try {
-					response = httpClient.execute(httpPost);
-					Header header = response.getFirstHeader("Location");
-					if (header != null) {
-						String url = header.getValue();
-						String shopURL = url.split("/shop")[0];
-						sellerEntity.setShopURL(shopURL);
-					}
-				} catch (Exception e) {
-					LoggerUtils.error(e);
-				}
-			} else if (nodes.size() == 1) {
-				/**http://store.taobao.com/shop/view_shop.htm?asker=wangwang&shop_nick=阿西娜服饰旗舰店*/
-				//非旺铺获取信誉
-				sellerEntity.setScore(Integer.parseInt(nodes.get(0)
-						.getTextTrim()));
-				sellerEntity.setEnsure(false);
-			}
-		} else if ("2".equals(platformType)) {
-			sellerEntity.setShopURL("http://shop.paipai.com/"
-					+ sellerEntity.getName());
-			//获取信誉 和 消保
-			Map nameSpaces = new HashMap();
-			nameSpaces.put("xmlns", "http://www.w3.org/1999/xhtml");
-			Element node = (Element) getOneNodeByDom4j(
-					sellerEntity.getShopURL(),
-					"//xmlns:DIV[@class='pfhlkd_uinfo']/xmlns:UL[@class='ulist_rate']/xmlns:LI[1]/xmlns:A[1]",
+			/**
+			 * 淘宝
+			 */
+			//店铺地址
+			sellerEntity
+					.setShopURL("http://store.taobao.com/shop/view_shop.htm?asker=wangwang&shop_nick="
+							+ sellerEntity.getName());
+			//验证是否有这个店铺
+			Element node = (Element) getOneNodeByDom4j(sellerEntity
+					.getShopURL(), "//xmlns:DIV[@class='error-notice']",
 					nameSpaces);
 			if (node != null) {
-				sellerEntity.setScore(Integer.parseInt(node.getTextTrim()));
-				sellerEntity.setEnsure(true);
+				return null;
 			}
+			//验证是否是旺铺卖家
+			node = (Element) getOneNodeByDom4j(sellerEntity.getShopURL(),
+					"//xmlns:HTML", nameSpaces);
+			//没找到店铺
+			if (node != null && node.getName().equalsIgnoreCase("div")) {
+				return null;
+			}
+			List<Element> imgAndEnsureNodes = null;
+			//是否旺铺
+			if (node == null) {
+				sellerEntity.setWinport(true);
+				imgAndEnsureNodes = (List) getMutliNodeByDom4j(sellerEntity
+						.getShopURL(),
+						"//IMG[@class='rank'] | //A[@class='shop-ensure']",
+						null);
+			} else {
+				sellerEntity.setWinport(false);
+				imgAndEnsureNodes = (List) getMutliNodeByDom4j(
+						sellerEntity.getShopURL(),
+						"//xmlns:IMG[@class='rank'] | //xmlns:A[@class='shop-ensure']",
+						nameSpaces);
+			}
+			//消保和信誉图片和信誉地址
+			if (imgAndEnsureNodes.size() == 2) {
+				sellerEntity.setImg(imgAndEnsureNodes.get(0).attributeValue(
+						"src"));
+				sellerEntity.setEnsure(true);
+				sellerEntity.setCreditURL(imgAndEnsureNodes.get(0).getParent()
+						.attributeValue("href"));
+			} else if (imgAndEnsureNodes.size() == 1) {
+				sellerEntity.setImg(imgAndEnsureNodes.get(0).attributeValue(
+						"src"));
+				sellerEntity.setEnsure(false);
+				sellerEntity.setCreditURL(imgAndEnsureNodes.get(0).getParent()
+						.attributeValue("href"));
+			} else {
+				return null;
+			}
+			//获取信誉值
+			if (sellerEntity.getCreditURL() != null) {
+				node = (Element) getOneNodeByDom4j(sellerEntity.getCreditURL(),
+						"//xmlns:A[@id='J_SellerRate']", nameSpaces);
+				if (node != null) {
+					sellerEntity.setScore(Integer.parseInt(node.getTextTrim()));
+				}
+			}
+		} else if ("2".equals(platformType)) {
+			/**
+			 * 拍拍
+			 */
+			//店铺地址
+			sellerEntity.setShopURL("http://shop.paipai.com/"
+					+ sellerEntity.getName());
+			//验证是否有这个店铺 
+			Element node = (Element) getOneNodeByDom4j(sellerEntity
+					.getShopURL(),
+					"//xmlns:DIV[@class='pfhlkd_path']/xmlns:A[1]", nameSpaces);
+			if (node == null || "QQ商城".equalsIgnoreCase(node.getTextTrim())) {
+				return null;
+			}
+			//消保
+			sellerEntity.setWinport(true);
+			//旺铺
+			sellerEntity.setEnsure(true);
+			//图片 和 信誉 
+			List<Element> nodes = (List) getMutliNodeByDom4j(sellerEntity
+					.getShopURL(),
+					"//xmlns:UL[@class='ulist_rate']/xmlns:LI/xmlns:A",
+					nameSpaces);
+			if (nodes.size() == 2) {
+				//信誉值
+				sellerEntity.setScore(Integer.parseInt(nodes.get(0)
+						.getTextTrim()));
+				//信誉地址
+				sellerEntity.setCreditURL(nodes.get(0).attributeValue("href"));
+				//信誉图片
+				sellerEntity.setImg(nodes.get(1).element("IMG").attributeValue(
+						"src"));
+			} else {
+				return null;
+			}
+		} else {
+			return null;
 		}
 		return sellerEntity;
 	}
-
 	/**
 	 * 获取内容
 	 * 

@@ -19,8 +19,6 @@
 </script>
 <script type="text/javascript" src="js/validater.js">
 </script>
-<script type="text/javascript" src="js/jieducm_pupu.js">
-</script>
 <script type="text/javascript" src="js/service.js">
 </script>
 <script type="text/javascript" src="js/utils.js">

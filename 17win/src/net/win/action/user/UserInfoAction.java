@@ -198,7 +198,6 @@ public class UserInfoAction extends BaseAction {
 	 * @throws Exception
 	 */
 	public String refereeCode() throws Exception {
-		putIndexShowType("8");
 		return "refereeCode";
 	}
 
@@ -209,7 +208,6 @@ public class UserInfoAction extends BaseAction {
 	 * @throws Exception
 	 */
 	public String referee() throws Exception {
-		putIndexShowType("8");
 		return userInfoService.referee();
 	}
 

@@ -291,3 +291,10 @@ function refuseF5() {
 		refreshPage();
 	}
 }
+// 首页显示
+function Mea(obj) {
+	$("#showTitle").find("A").removeClass();
+	$("#showTitle").find("A").addClass("li0");
+	$(obj).removeClass();
+	$(obj).addClass("li1 white");
+}

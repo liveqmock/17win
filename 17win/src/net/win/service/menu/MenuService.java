@@ -28,7 +28,7 @@ public class MenuService extends BaseService {
 	 * @throws Exception
 	 */
 	public String toIndex() throws Exception {
-		ServletActionContext.getRequest().setAttribute("showIndexType", "1");
+		ServletActionContext.getRequest().setAttribute("showIndexType", "index");
 		List<NewsEntity> newses1 = newsDAO
 				.pageQuery(
 						"from NewsEntity as _news where _news.type.name='新手入门'  order by _news.sort asc,_news.date desc",

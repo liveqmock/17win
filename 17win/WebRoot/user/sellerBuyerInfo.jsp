@@ -144,7 +144,8 @@ img {
 															</td>
 															<td align="center" nowrap="nowrap">
 																<a
-																	href="javascript:showUpdateDIV('<s:property value="#seller.id" />')">修改发货地址</a>
+																	href="javascript:showUpdateDIV('<s:property value="#seller.id" />')">
+																	<img src="images/edit_ico.gif" alt="修改发货地址"> </a>
 															</td>
 														</tr>
 													</s:iterator>
