@@ -522,7 +522,7 @@
 												class="anniu">我已发货</span> </a>
 										</s:elseif>
 										<s:elseif test="#task.status==4">
-											<s:if test="#task.remainTime==0">
+											<s:if test="#task.remainTime<=0">
 													等待对方评价
 												</s:if>
 											<s:else>
