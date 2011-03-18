@@ -150,7 +150,9 @@ img {
 																				淘宝买号：
 																			</td>
 																			<td>
-																				<s:textfield name="payVO.buyername" maxlength="24" id="buyernameId">	</s:textfield>
+																				<s:textfield name="payVO.buyername" maxlength="24"
+																					id="buyernameId">
+																				</s:textfield>
 																			</td>
 																		</tr>
 																		<tr>
@@ -171,7 +173,7 @@ img {
 																				<input type="text" name="verificationCode"
 																					id="verificationCodeID" maxlength="4"
 																					style="width: 40px">
-																				<img src="verify/verificationCode.php"
+																				<img id="verificationCodeID"
 																					onclick="changeValidateCode(this)"
 																					title="点击图片刷新验证码" style="cursor: pointer;" />
 																			</td>
@@ -191,8 +193,7 @@ img {
 														<td>
 															<a target="_blak"
 																href="http://shop62179252.taobao.com/?order=&queryType=cat&browseType=grid&searchWord=im%C9%E7%C7%F8&price1=&price2=">
-																淘宝充值地址点此处
-															</a>
+																淘宝充值地址点此处 </a>
 														</td>
 													</tr>
 												</tbody>

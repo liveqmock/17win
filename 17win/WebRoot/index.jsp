@@ -38,6 +38,7 @@
 		<SCRIPT src="js/validater.js" type=text/javascript></SCRIPT>
 		<SCRIPT src="js/service.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="js/jquery.node.js" type="text/javascript"></SCRIPT>
+		<SCRIPT src="js/utils.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="js/x_alt.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="index.js" type="text/javascript"></SCRIPT>
 	</HEAD>
@@ -107,7 +108,7 @@
 														<input type="text" name="userVO.verificationCode"
 															size="30" maxlength="4" value="" id="verificationCode"
 															style="width: 60px;">
-														<img src="verify/verificationCode.php" id="verificationID"
+														<img id="verificationCodeID"
 															onclick="changeValidateCode(this)" title="点击图片刷新验证码"
 															style="cursor: pointer;">
 														<span> </span>

@@ -1,9 +1,6 @@
 package net.win.service.user;
 
-import java.net.URLDecoder;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -23,14 +20,13 @@ import net.win.utils.StringUtils;
 import net.win.vo.UserVO;
 
 import org.apache.struts2.ServletActionContext;
-import org.hibernate.Hibernate;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 import sun.misc.BASE64Decoder;
 
-@SuppressWarnings( { "unused", "deprecation" })
+@SuppressWarnings({"unused", "deprecation"})
 @Service("userService")
 public class UserService extends BaseService {
 	@Resource
@@ -135,11 +131,11 @@ public class UserService extends BaseService {
 		UserEntity userEntity = userDAO
 				.uniqueResult(
 						"from UserEntity  as _u where _u.username=:username and _u.loginPassword=:loginPassword",
-						new String[] { "username", "loginPassword" },
-						new Object[] {
+						new String[]{"username", "loginPassword"},
+						new Object[]{
 								userVO.getUserEntity().getUsername(),
 								StringUtils.processPwd(userVO.getUserEntity()
-										.getLoginPassword()) });
+										.getLoginPassword())});
 		if (userEntity == null) {
 			putAlertMsg("用户名或密码错误");
 			userVO.setVerificationCode(null);
@@ -218,6 +214,64 @@ public class UserService extends BaseService {
 		}
 	}
 
+	/**
+	 * 登陆ADMIN
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String updateAdminLogin(UserVO userVO) throws Exception {
+		if (userVO.getVerificationCode() == null
+				|| !userVO.getVerificationCode().equals(
+						getBySession(Constant.VERIFY_CODE))) {
+			putAlertMsg("验证码不正确！");
+			putJumpSelfPage("/admin");
+			return JUMP;
+		}
+		UserEntity userEntity = userDAO
+				.uniqueResult(
+						"from UserEntity  as _u where _u.username=:username and _u.loginPassword=:loginPassword  and _u.type=:type",
+						new String[]{"username", "loginPassword", "type"},
+						new Object[]{
+								userVO.getUserEntity().getUsername(),
+								StringUtils.processPwd(userVO.getUserEntity()
+										.getLoginPassword()), "1"});
+		if (userEntity == null) {
+			putAlertMsg("用户名或密码错误");
+			putJumpSelfPage("/admin");
+			return JUMP;
+		} else {
+			userEntity.setLastLoginTime(new Date());
+			updateUserLoginInfo(userEntity);
+			MailUtils.sendCommonMail(mailSender, freeMarkerCfj,
+					"admin登录17win后台", DateUtils.format(new Date(),
+							DateUtils.DATE_TIME_FORMAT)
+							+ "登录后台系统", Constant.getXgjEmail());
+			putJumpSelfPage("/admin/main.html");
+			return JUMP;
+		}
+	}
+	/**
+	 * 登陆ADMIN
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String updateAdminPassword(UserVO userVO) throws Exception {
+		String password = getByParam("password");
+		String verificationCode = getByParam("verificationCode");
+		putJumpSelfPage("/admin/adminInfo/index.jsp");
+		if (verificationCode == null
+				|| !verificationCode.equals(getBySession(Constant.VERIFY_CODE))) {
+			putAlertMsg("验证码不正确！");
+			return JUMP;
+		} else {
+			UserEntity userEntity = getLoginUserEntity(userDAO);
+			userEntity.setLoginPassword(StringUtils.processPwd(password));
+			putAlertMsg("修改密码成功！");
+			return JUMP;
+		}
+	}
 	/**
 	 * 初始化注册
 	 * 

@@ -1,16 +1,9 @@
-function changeValidateCode(obj) {
-	// 获取当前的时间作为参数，无具体意义
-	var timenow = new Date().getTime();
-	// 每次请求需要一个不同的参数，否则可能会返回同样的验证码
-	// 这和浏览器的缓存机制有关系，也可以把页面设置为不缓存，这样就不用这个参数了。
-	obj.src = "verify/verificationCode.php?time=" + timenow;
-}
 var submitFlag = true;
 var timer;
 $(document).ready(function() {
 			timer = setInterval(changeSutmitBtn, 1000);
 			$("#username").focus();
-			
+			$("#verificationCodeID").click();
 			intText("qq");
 			intText("telephone");
 			// 用户名
@@ -20,7 +13,7 @@ $(document).ready(function() {
 			// 用户名
 			$("#username").bind("blur", function() {
 						var obj = this;
-						if (Validater.isName($(this).val(),4,12)) {
+						if (Validater.isName($(this).val(), 4, 12)) {
 							// 去掉空格
 							$(obj).val($.trim($(obj).val()));
 							if ($(obj).data("nowData") == $(obj).val()) {

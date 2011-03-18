@@ -23,7 +23,7 @@ import org.springframework.stereotype.Controller;
 @Scope("prototype")
 @ParentPackage("17win-default")
 @Namespace("/userManager")
-@Results( {
+@Results({
 		@Result(name = "input", location = "/user/register.jsp"),
 		@Result(name = "inputLogin", location = "/user/login.jsp"),
 		@Result(name = "loginSuccess", type = "redirect", location = "/userInfoManager/info!init.php"),
@@ -32,7 +32,7 @@ import org.springframework.stereotype.Controller;
 		@Result(name = "initFindPassword", location = "/user/findPassword.jsp"),
 		@Result(name = "findPasswordSuccess", location = "/user/login.jsp"),
 		@Result(name = "initLogin", location = "/user/login.jsp"),
-		@Result(name = "loginOut", type = "redirect", location = "/index.html") })
+		@Result(name = "loginOut", type = "redirect", location = "/index.html")})
 public class UserAction extends BaseAction {
 	@Resource
 	private UserService userService;
@@ -71,7 +71,7 @@ public class UserAction extends BaseAction {
 	}
 
 	/**
-	 * 找回密码
+	 * 登录
 	 * 
 	 */
 	public String loginOut() throws Exception {
@@ -94,7 +94,6 @@ public class UserAction extends BaseAction {
 		return userService.initFindPassword(userVO);
 	}
 
-
 	/**
 	 * 登陆
 	 * 
@@ -103,6 +102,24 @@ public class UserAction extends BaseAction {
 	 */
 	public String login() throws Exception {
 		return userService.updateLogin(userVO);
+	}
+	/**
+	 * admin登陆
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String adminLogin() throws Exception {
+		return userService.updateAdminLogin(userVO);
+	}
+	/**
+	 * admin登陆
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String updateAdminPassword() throws Exception {
+		return userService.updateAdminPassword(userVO);
 	}
 
 	/**

@@ -7,7 +7,9 @@
 		<script type="text/javascript" src="adminInfo/index.js"></script>
 	</head>
 	<body>
-		<s:form theme="simple" action="/adminManager/admin!updatePassword.php" onsubmit="return validateform();">
+		<s:form theme="simple"
+			action="userManager/base!updateAdminPassword.php"
+			onsubmit="return validateform();">
 			<table>
 				<Tr>
 					<td>
@@ -30,10 +32,10 @@
 						验证码:
 					</td>
 					<td>
-						<input type="text" name="code" style="width: 60px" maxlength="4"  id="codeID"/>
-						<img src="verify/verificationCode.php"
-							onclick="changeValidateCode(this)" title="点击图片刷新验证码"
-							style="cursor: pointer;">
+						<input type="text" name="verificationCode" style="width: 60px"
+							maxlength="4" id="codeID" />
+						<img id="verificationCodeID" onclick="changeValidateCode(this)"
+							title="点击图片刷新验证码" style="cursor: pointer;">
 					</td>
 				</Tr>
 				<Tr>

@@ -221,7 +221,7 @@ td {
 										<s:textfield id="ww" name="userVO.verificationCode"
 											maxlength="4" id="verificationCode" size="30"
 											cssStyle="width:60px"></s:textfield>
-										<img src="verify/verificationCode.php"
+										<img id="verificationCodeID"
 											onclick="changeValidateCode(this)" title="点击图片刷新验证码"
 											style="cursor: pointer;" />
 									</td>

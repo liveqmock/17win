@@ -47,7 +47,7 @@ public class AuthorityInterceptor extends AbstractInterceptor {
 		EXINCLUDE_USER_LOGIN_PATH
 				.add("userInfoManager/info!initFindPassword.php");
 		EXINCLUDE_USER_LOGIN_PATH.add("userInfoManager/info!findPassword.php");
-
+		EXINCLUDE_USER_LOGIN_PATH.add("userManager/base!adminLogin.php");
 	}
 	/**
 	 * 不包含的激活路径
@@ -72,7 +72,6 @@ public class AuthorityInterceptor extends AbstractInterceptor {
 		EXINCLUDE_ACTIVATE_PATH.add("userInfoManager/info!init.php");
 		EXINCLUDE_ACTIVATE_PATH.add("userInfoManager/info!initUpdateInfo.php");
 		EXINCLUDE_ACTIVATE_PATH.add("userInfoManager/info!refreshUser.php");
-		
 
 	}
 	/**
