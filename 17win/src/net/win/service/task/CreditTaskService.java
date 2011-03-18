@@ -1713,51 +1713,51 @@ public class CreditTaskService extends BaseService {
 				"select count(*)"
 						+ " from CreditTaskEntity as _task inner join _task.releasePerson as _user where  _task.status not  in ('0','-1')  and   _task.type=:platformType");
 		StringBuffer resultSQL = new StringBuffer(
-				"select _task.testID , _task.releaseDate ,_user.username,_user.upgradeScore,_task.money,_task.updatePrice, " // 5
-						+ "_task.taskType,_task.releaseDot,_task.status ,_task.intervalHour,_task.id,_task.grade " // 11
-						+ ",_vip.type,_task.addtionMoney,_task.addtionReleaseDot,_task.assignUser" // index=15
-						+ " from CreditTaskEntity as _task inner join _task.releasePerson as _user  left join _user.vip as _vip "
+				"select _task.testID , _task.releaseDate ,_user.username,_user.upgradeScore,_task.money,_task.updatePrice, " // 6
+						+ " _task.taskType,_task.releaseDot,_task.status ,_task.intervalHour,_task.id,_task.grade " // 12
+						+ " ,_task.addtionMoney,_task.addtionReleaseDot,_task.assignUser" // index=15
+						+ " from CreditTaskEntity as _task inner join _task.releasePerson as _user    "
 						+ " where _task.status not  in ('0','-1')   and   _task.type=:platformType ");
 		paramNames.add("platformType");
 		paramValues.add(platformType);
 		if ("1".equals(creditTaskVO.getMoneyFlag())) {
 			// 默认时间排列
 			resultSQL
-					.append("    order by  ABS(_task.status) asc,_vip.type desc ,_task.releaseDate desc ");
+					.append("    order by  ABS(_task.status) asc,_task.releaseDate desc ");
 		} else if ("2".equals(creditTaskVO.getMoneyFlag())) {
 			// 价低排列
 			resultSQL
-					.append("   order ABS(_task.status) asc,_vip.type desc , _task.money asc ");
+					.append("   order ABS(_task.status) asc, _task.money asc ");
 		} else if ("3".equals(creditTaskVO.getMoneyFlag())) {
 			// 价高排列
 			resultSQL
-					.append(" order by ABS(_task.status) asc,_vip.type desc ,    _task.money desc ");
+					.append(" order by ABS(_task.status) asc,    _task.money desc ");
 		} else if ("4".equals(creditTaskVO.getMoneyFlag())) {
 			// 1-40
 			countSQL.append(" and  (_task.money>0 and _task.money<=40)  ");
 			resultSQL
-					.append(" and (_task.money>40 and _task.money<=100) order by    ABS(_task.status) asc,_vip.type desc ,_task.releaseDate desc,  _task.money asc ");
+					.append(" and (_task.money>40 and _task.money<=100) order by    ABS(_task.status) asc,_task.releaseDate desc,  _task.money asc ");
 		} else if ("5".equals(creditTaskVO.getMoneyFlag())) {
 			// 40-100
 			resultSQL.append(" and (_task.money>40 and _task.money<=100)");
 			resultSQL
-					.append(" and (_task.money>40 and _task.money<=100) order by    ABS(_task.status) asc,_vip.type desc ,_task.releaseDate desc,  _task.money asc ");
+					.append(" and (_task.money>40 and _task.money<=100) order by    ABS(_task.status) asc,_task.releaseDate desc,  _task.money asc ");
 		} else if ("6".equals(creditTaskVO.getMoneyFlag())) {
 			// 100-200
 			countSQL.append(" and   (_task.money>100 and _task.money<=200) ");
 			resultSQL
-					.append(" and   (_task.money>100 and _task.money<=200) order by  ABS(_task.status) asc,  _vip.type desc ,_task.releaseDate desc,  _task.money asc ");
+					.append(" and   (_task.money>100 and _task.money<=200) order by  ABS(_task.status) asc, _task.releaseDate desc,  _task.money asc ");
 		} else if ("7".equals(creditTaskVO.getMoneyFlag())) {
 			countSQL.append(" and   (_task.money>200 and _task.money<=500) ");
 			resultSQL
-					.append(" and   (_task.money>200 and _task.money<=500) order by   ABS(_task.status) asc, _vip.type desc ,_task.releaseDate desc,  _task.money asc ");
+					.append(" and   (_task.money>200 and _task.money<=500) order by   ABS(_task.status) asc ,_task.releaseDate desc,  _task.money asc ");
 		} else if ("8".equals(creditTaskVO.getMoneyFlag())) {
 			countSQL.append(" and     _task.money>500  ");
 			resultSQL
-					.append(" and     _task.money>500 order by  ABS(_task.status) asc,  _vip.type desc ,_task.releaseDate desc,  _task.money asc ");
+					.append(" and     _task.money>500 order by  ABS(_task.status) asc  ,_task.releaseDate desc,  _task.money asc ");
 		} else {
 			resultSQL
-					.append("    order by  ABS(_task.status) asc,_vip.type desc ,_task.releaseDate desc ");
+					.append("    order by  ABS(_task.status) asc,_task.releaseDate desc ");
 		}
 		Long count = (Long) creditTaskDAO.uniqueResultObject(countSQL
 				.toString(), paramNames.toArray(paramNames
@@ -1786,10 +1786,9 @@ public class CreditTaskService extends BaseService {
 				creditTaskVO2.setIntervalHour((Integer) objs[9]);
 				creditTaskVO2.setId((Long) objs[10]);
 				creditTaskVO2.setGrade((String) objs[11]);
-				creditTaskVO2.setFbVipType((String) objs[12]);
-				creditTaskVO2.setAddtionMoney((Double) objs[13]);
-				creditTaskVO2.setAddtionReleaseDot((Double) objs[14]);
-				creditTaskVO2.setAssignUser((String) objs[15]);
+				creditTaskVO2.setAddtionMoney((Double) objs[12]);
+				creditTaskVO2.setAddtionReleaseDot((Double) objs[13]);
+				creditTaskVO2.setAssignUser((String) objs[14]);
 				result.add(creditTaskVO2);
 			}
 		}

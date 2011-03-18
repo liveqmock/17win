@@ -97,12 +97,10 @@
 		<mapping class="net.win.entity.CreditTaskEntity" />
 		<mapping class="net.win.entity.WithdrawalsEntity" />
 		<mapping class="net.win.entity.CreditTaskRepositoryEntity" />
-		<mapping class="net.win.entity.VipEntity" />
 		<mapping class="net.win.entity.SmsEntity" />
 		<mapping class="net.win.entity.PayEntity" />
 		<mapping class="net.win.entity.NewsEntity" />
 		<mapping class="net.win.entity.NewsTypeEntity" />
-		<mapping class="net.win.entity.VipBidUserEntity" />
 		<mapping class="net.win.entity.CapitalLogEntity" />
 		<mapping class="net.win.entity.LogisticsEntity" />
 		<mapping class="net.win.entity.PropertyEntity" />

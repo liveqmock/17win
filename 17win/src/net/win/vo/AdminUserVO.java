@@ -34,12 +34,6 @@ public class AdminUserVO extends BaseVO {
 	// 接手任务数
 	private Integer startReceieveTaskCount;
 	private Integer endReceieveTaskCount;
-	// 是否VIP
-	private String vipEnable;
-	// VIP成长值
-	private Integer startVipGrowValue;
-	private Integer endVipGrowValue;
-	// VIP结束时间
 	private Date startOverDate;
 	private Date endOverDate;
 	// 最后一次登录时间
@@ -176,29 +170,6 @@ public class AdminUserVO extends BaseVO {
 		this.endReceieveTaskCount = endReceieveTaskCount;
 	}
 
-	public String getVipEnable() {
-		return vipEnable;
-	}
-
-	public void setVipEnable(String vipEnable) {
-		this.vipEnable = vipEnable;
-	}
-
-	public Integer getStartVipGrowValue() {
-		return startVipGrowValue;
-	}
-
-	public void setStartVipGrowValue(Integer startVipGrowValue) {
-		this.startVipGrowValue = startVipGrowValue;
-	}
-
-	public Integer getEndVipGrowValue() {
-		return endVipGrowValue;
-	}
-
-	public void setEndVipGrowValue(Integer endVipGrowValue) {
-		this.endVipGrowValue = endVipGrowValue;
-	}
 
 	public Date getStartOverDate() {
 		return startOverDate;

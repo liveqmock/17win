@@ -64,7 +64,6 @@ public class CreditTaskVO extends BaseVO {
 	private String buyername;
 	private String jsUsername;
 	private Integer jsUpgradeScore;
-	private String jsVipType;
 	private String jsQQ;
 	private String jsWW;
 	private String jsTelphone;
@@ -74,7 +73,6 @@ public class CreditTaskVO extends BaseVO {
 	private String fbUsername;
 	private String fbTelphone;
 	private Integer fbUpgradeScore;
-	private String fbVipType;
 
 	private Date fbStartDate;
 	private Date fbEndDate;
@@ -422,23 +420,6 @@ public class CreditTaskVO extends BaseVO {
 	public void setFbUpgradeScore(Integer fbUpgradeScore) {
 		this.fbUpgradeScore = fbUpgradeScore;
 	}
-
-	public String getJsVipType() {
-		return jsVipType;
-	}
-
-	public void setJsVipType(String jsVipType) {
-		this.jsVipType = jsVipType;
-	}
-
-	public String getFbVipType() {
-		return fbVipType;
-	}
-
-	public void setFbVipType(String fbVipType) {
-		this.fbVipType = fbVipType;
-	}
-
 	public Date getFbStartDate() {
 		return fbStartDate;
 	}

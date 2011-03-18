@@ -100,13 +100,6 @@
 						</s:textfield>
 					</td>
 					<td nowrap="nowrap">
-						是&nbsp;否&nbsp;VIP：
-						<s:select listKey="key" listValue="value"
-							name="adminUserVO.vipEnable" headerKey="" headerValue="--请选择--"
-							list="#{'true':'是','false':'不是'}">
-						</s:select>
-					</td>
-					<td nowrap="nowrap">
 						状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态：
 						<s:select listKey="key" listValue="value"
 							name="adminUserVO.status" headerKey="" headerValue="--请选择--"
@@ -127,7 +120,9 @@
 							cssStyle="width:80px">
 						</s:textfield>
 					</td>
+					<Td>
 
+					</Td>
 				</tr>
 				<tr>
 					<td colspan="4">
@@ -185,9 +180,6 @@
 						</th>
 						<th nowrap="nowrap" style="font-size: 12px;">
 							接任务数
-						</th>
-						<th nowrap="nowrap" style="font-size: 12px;">
-							是否VIP
 						</th>
 						<th nowrap="nowrap" style="font-size: 12px;">
 							操作

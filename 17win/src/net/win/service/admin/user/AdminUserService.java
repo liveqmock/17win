@@ -387,13 +387,6 @@ public class AdminUserService extends BaseService {
 			paramNames.add("endReceiveTaskCount");
 			paramValues.add(adminUserVO.getEndReceieveTaskCount());
 		}
-		// 是否VIP
-		if (!StringUtils.isBlank(adminUserVO.getVipEnable())) {
-			resultHQL.append(" and _user.vipEnable=:vipEnable ");
-			countHQL.append(" and _user.vipEnable=:vipEnable ");
-			paramNames.add("vipEnable");
-			paramValues.add(new Boolean(adminUserVO.getVipEnable()));
-		}
 		// 状态
 		if (!StringUtils.isBlank(adminUserVO.getStatus())) {
 			resultHQL.append(" and _user.status=:status ");
@@ -401,30 +394,6 @@ public class AdminUserService extends BaseService {
 			paramNames.add("status");
 			paramValues.add(adminUserVO.getStatus());
 		}
-		// // 成长值
-		// if (adminUserVO.getStartVipGrowValue() != null
-		// && adminUserVO.getEndVipGrowValue() != null) {
-		// resultHQL
-		// .append(" and (_user.vipGrowValue>=:startVipGrowValue and
-		// _user.operationDate<=:endVipGrowValue) ");
-		// countHQL
-		// .append(" and (_user.vipGrowValue>=:startVipGrowValue and
-		// _user.operationDate<=:endVipGrowValue) ");
-		// paramNames.add("startVipGrowValue");
-		// paramNames.add("endVipGrowValue");
-		// paramValues.add(adminUserVO.getStartVipGrowValue());
-		// paramValues.add(adminUserVO.getEndVipGrowValue());
-		// } else if (adminUserVO.getStartVipGrowValue() != null) {
-		// resultHQL.append(" and _user.vipGrowValue>=:startVipGrowValue ");
-		// countHQL.append(" and _user.vipGrowValue>=:startVipGrowValue ");
-		// paramNames.add("startVipGrowValue");
-		// paramValues.add(adminUserVO.getStartVipGrowValue());
-		// } else if (adminUserVO.getEndVipGrowValue() != null) {
-		// resultHQL.append(" and _user.vipGrowValue<=:endVipGrowValue ");
-		// countHQL.append(" and _user.vipGrowValue<=:endVipGrowValue ");
-		// paramNames.add("endVipGrowValue");
-		// paramValues.add(adminUserVO.getEndVipGrowValue());
-		// }
 		Long count = (Long) userDAO.uniqueResultObject(countHQL.toString(),
 				paramNames.toArray(paramNames.toArray(new String[paramNames
 						.size()])), paramValues.toArray(new Object[paramValues
