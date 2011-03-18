@@ -4,9 +4,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-import net.win.entity.UserEntity;
-import net.win.entity.VipEntity;
-
 /**
  * 策略工具。。用于生成 金额，发布点的策略工具 ,升级
  * 
@@ -25,142 +22,9 @@ public final class StrategyUtils {
 	 * @return
 	 * @throws Exception
 	 */
-	public static Integer getSellerCount(String type, Boolean vipEnable,
-			VipEntity vipEntity) {
-		if (!vipEnable) {
-			return 5;
-		} else {
-			return vipEntity.getSellerCount();
-		}
+	public static Integer getSellerCount() {
+		return 5;
 	}
-
-	/**
-	 * 会员升级
-	 * 
-	 * @param goodType
-	 * @return
-	 * @throws Exception
-	 */
-	public static String getVipType(Integer growValue) throws Exception {
-		// 如果vip失效或则没有vip
-		if (growValue == null) {
-			throw new IllegalArgumentException("会员升级错误！");
-		}
-		if (0 <= growValue && growValue < 1800) {
-			return "1";
-		}
-		if (1800 <= growValue && growValue < 5400) {
-			return "2";
-		}
-		if (5400 <= growValue) {
-			return "3";
-		}
-		return "1";
-	}
-
-	/**
-	 * 计算发任务会员成长值
-	 * 
-	 * @param goodType
-	 * @return
-	 * @throws Exception
-	 */
-	public static Integer getReleaseGrowValue(VipEntity vipEntity)
-			throws Exception {
-		// 如果vip失效或则没有vip
-		if (vipEntity == null) {
-			return 0;
-		}
-		if ("1".equals(vipEntity.getType())) {
-			return 1;
-		}
-		if ("2".equals(vipEntity.getType())) {
-			return 2;
-		}
-		if ("3".equals(vipEntity.getType())) {
-			return 3;
-		}
-		return 0;
-	}
-
-	/**
-	 * 计算接任务会员成长值
-	 * 
-	 * @param goodType
-	 * @return
-	 * @throws Exception
-	 */
-	public static Integer getReceieveGrowValue(VipEntity vipEntity)
-			throws Exception {
-		// 如果vip失效或则没有vip
-		if (vipEntity == null) {
-			return 0;
-		}
-		if ("1".equals(vipEntity.getType())) {
-			return 2;
-		}
-		if ("2".equals(vipEntity.getType())) {
-			return 3;
-		}
-		if ("3".equals(vipEntity.getType())) {
-			return 4;
-		}
-		return 0;
-	}
-
-	/**
-	 * 获取任务结束发布点比例
-	 * 
-	 * @param goodType
-	 * @return
-	 * @throws Exception
-	 */
-	public static Double getTaskOverDotRate(UserEntity userEntity,
-			VipEntity vipEntity, Boolean vipEnable) throws Exception {
-		// 如果vip失效或则没有vip
-		if (!vipEnable || vipEntity == null) {
-			if (getLevel(userEntity.getUpgradeScore()).equals(1)) {
-				return 1D;
-			} else {
-				return Constant.getReceieveTaskDotRate();
-			}
-		} else {
-			return 1D;
-		}
-	}
-
-	/**
-	 * 获取任务发送者的的积分
-	 * 
-	 * @param goodType
-	 * @return
-	 * @throws Exception
-	 */
-	public static Integer getReleaseUserTaskScore(VipEntity vipEntity,
-			Boolean vipEnable) throws Exception {
-		// 如果vip失效或则没有vip
-		if (!vipEnable || vipEntity == null) {
-			return 1;
-		}
-		return vipEntity.getReleaseScore();
-	}
-
-	/**
-	 * 获取任务接手者的的积分
-	 * 
-	 * @param goodType
-	 * @return
-	 * @throws Exception
-	 */
-	public static Integer getReceieveUserTaskScore(VipEntity vipEntity,
-			Boolean vipEnable) throws Exception {
-		// 如果vip失效或则没有vip
-		if (!vipEnable || vipEntity == null) {
-			return 2;
-		}
-		return vipEntity.getReceieveScore();
-	}
-
 	/**
 	 * 评价类型，一天，两天，三天
 	 * 
@@ -413,8 +277,8 @@ public final class StrategyUtils {
 		}
 
 		private static String makePhone() {
-			String[] prefix = new String[] { "130", "156", "135", "136", "139",
-					"138", "150", "151", "158" };
+			String[] prefix = new String[]{"130", "156", "135", "136", "139",
+					"138", "150", "151", "158"};
 			Random random = new Random();
 			StringBuffer result = new StringBuffer(prefix[random
 					.nextInt(prefix.length)]);

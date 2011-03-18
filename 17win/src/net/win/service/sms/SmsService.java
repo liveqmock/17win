@@ -19,7 +19,7 @@ import net.win.vo.SmsVO;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Service;
 
-@SuppressWarnings( { "unchecked" })
+@SuppressWarnings({"unchecked"})
 @Service("smsService")
 public class SmsService extends BaseService {
 	@Resource
@@ -55,7 +55,7 @@ public class SmsService extends BaseService {
 		Long[] sjxIds = smsVO.getSjSmsIDs();
 		for (Long id : sjxIds) {
 			smsDAO.deleteByHql("delete from SmsEntity where id=:smsID",
-					new String[] { "smsID" }, new Object[] { id });
+					new String[]{"smsID"}, new Object[]{id});
 		}
 		querySJXSms(smsVO);
 		putAlertMsg("删除成功！");
@@ -73,7 +73,7 @@ public class SmsService extends BaseService {
 		Long[] fjxIds = smsVO.getFjSmsIDs();
 		for (Long id : fjxIds) {
 			smsDAO.deleteByHql("delete from SmsEntity where id=:smsID",
-					new String[] { "smsID" }, new Object[] { id });
+					new String[]{"smsID"}, new Object[]{id});
 		}
 		queryFJXSms(smsVO);
 		putAlertMsg("删除成功！");
@@ -87,18 +87,6 @@ public class SmsService extends BaseService {
 	 * @throws Exception
 	 */
 	public String initSendTelphone() throws Exception {
-		UserEntity userEntity = getLoginUserEntity(userDAO);
-		if (userEntity.getVipEnable()) {
-			if (userEntity.getVipBidUserEntity().getRemainMsgCount() == 0) {
-				putByRequest("noMsgCount", "noMsgCount");
-			} else {
-				putByRequest("remainMsgCount", userEntity.getVipBidUserEntity()
-						.getRemainMsgCount());
-			}
-		} else {
-			putByRequest("notVIP", "noVIP");
-		}
-
 		putTokenBySession();
 		return "initSendTelphone";
 	}
@@ -162,17 +150,9 @@ public class SmsService extends BaseService {
 			String sendType = getByParam("sendType");
 			String opertaionCode = getByParam("opertaionCode");
 			UserEntity userEntity = getLoginUserEntity(userDAO);
-			if (content.trim().length() > 70) {
-				putAlertMsg("内容过长！");
-				return JUMP;
-			}
 			if (!userEntity.getOpertationCode().equals(
 					StringUtils.processPwd(opertaionCode))) {
 				putAlertMsg("操作码不正确！");
-				return JUMP;
-			}
-			if (!userEntity.getVipEnable()) {
-				putAlertMsg("发送失败，您不是会员！");
 				return JUMP;
 			}
 			if (sendType.equals("1")) {
@@ -184,20 +164,9 @@ public class SmsService extends BaseService {
 					telphone = toUser.getTelephone();
 				}
 			}
-			if (userEntity.getVipBidUserEntity().getRemainMsgCount() == 0) {
-				putAlertMsg("发送失败，您所剩的短信数量不够！");
-				return JUMP;
-			} else {
-				userEntity.getVipBidUserEntity()
-						.setRemainMsgCount(
-								userEntity.getVipBidUserEntity()
-										.getRemainMsgCount() - 1);
-			}
 			MsgUtils.sendMsg(telphone, content);
-			putAlertMsg("发送成功！您还剩余"
-					+ userEntity.getVipBidUserEntity().getRemainMsgCount()
-					+ "条短信");
-		} catch (RuntimeException e) {
+			putAlertMsg("发送成功");
+		} catch (Exception e) {
 			LoggerUtils.error(e);
 			putAlertMsg("发送失败，请联系管理员！");
 		}

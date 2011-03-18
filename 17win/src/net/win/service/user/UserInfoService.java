@@ -40,7 +40,7 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 import sun.misc.BASE64Encoder;
 
-@SuppressWarnings( { "unchecked" })
+@SuppressWarnings({"unchecked"})
 @Service("userInfoService")
 public class UserInfoService extends BaseService {
 	@Resource
@@ -74,8 +74,8 @@ public class UserInfoService extends BaseService {
 		UserEntity userEntity = userDAO
 				.uniqueResult(
 						" from UserEntity as _u where _u.username=:username  or _u.telephone =:telephone ",
-						new String[] { "username", "telephone" }, new Object[] {
-								userVO.getUsername(), userVO.getUsername() });
+						new String[]{"username", "telephone"}, new Object[]{
+								userVO.getUsername(), userVO.getUsername()});
 		if (userEntity == null) {
 			putAlertMsg("用户名或手机不存在！");
 			return "updateFindPassword";
@@ -121,14 +121,14 @@ public class UserInfoService extends BaseService {
 		Long userCount = (Long) userDAO
 				.uniqueResultObject(
 						"select count(*) from UserEntity as _user where _user.referee.id=:userId ",
-						new String[] { "userId" }, new Object[] { userEntity
-								.getId() });
+						new String[]{"userId"},
+						new Object[]{userEntity.getId()});
 		// 推广的VIP会员数
 		Long vipCount = (Long) userDAO
 				.uniqueResultObject(
 						"select count(*) from UserEntity as _user where _user.referee.id=:userId and _user.vipEnable=:vipEnable",
-						new String[] { "userId", "vipEnable" }, new Object[] {
-								userEntity.getId(), true });
+						new String[]{"userId", "vipEnable"}, new Object[]{
+								userEntity.getId(), true});
 
 		putByRequest("userCount", userCount);
 		putByRequest("refereeMoney", refereeMoney);
@@ -206,10 +206,9 @@ public class UserInfoService extends BaseService {
 			Boolean sellerExists = (0 == (Long) sellerDAO
 					.uniqueResultObject(
 							"select count(*) from  SellerEntity as _seller where _seller.name=:sellerName and _seller.type=:platformType and _seller.user.id=:userID",
-							new String[] { "sellerName", "platformType",
-									"userID" }, new Object[] {
-									sellerEntity.getName(), platformTypeParam,
-									userEntity.getId() }));
+							new String[]{"sellerName", "platformType", "userID"},
+							new Object[]{sellerEntity.getName(),
+									platformTypeParam, userEntity.getId()}));
 			if (!sellerExists) {
 				putAlertMsg(sellerEntity.getName() + "已被使用！");
 				return JUMP;
@@ -218,10 +217,9 @@ public class UserInfoService extends BaseService {
 			Boolean buyerExists = (0 == (Long) buyerDAO
 					.uniqueResultObject(
 							"select count(*) from  BuyerEntity as _buyer where _buyer.name=:buyerName and _buyer.type=:platformType and _buyer.user.id=:userID",
-							new String[] { "buyerName", "platformType",
-									"userID" }, new Object[] {
-									sellerEntity.getName(), platformTypeParam,
-									userEntity.getId() }));
+							new String[]{"buyerName", "platformType", "userID"},
+							new Object[]{sellerEntity.getName(),
+									platformTypeParam, userEntity.getId()}));
 			if (!buyerExists) {
 				putAlertMsg("不能绑定和买号相同的卖号！");
 				return JUMP;
@@ -231,12 +229,10 @@ public class UserInfoService extends BaseService {
 					.uniqueResultObject(
 							"select count(*) from SellerEntity as _seller "
 									+ "where _seller.user.id=:userId and type=:platformType ",
-							new String[] { "userId", "platformType" },
-							new Object[] { getLoginUser().getId(),
-									platformTypeParam });
-			Integer sellerCountFlag = StrategyUtils.getSellerCount(
-					getLoginUser().getVipType(), getLoginUser().getVipEnable(),
-					userEntity.getVip());
+							new String[]{"userId", "platformType"},
+							new Object[]{getLoginUser().getId(),
+									platformTypeParam});
+			Integer sellerCountFlag = StrategyUtils.getSellerCount();
 			if (sellerCountFlag != -1) {
 				if (count >= sellerCountFlag) {
 					String platform = WinUtils
@@ -277,10 +273,9 @@ public class UserInfoService extends BaseService {
 			Boolean sellerExists = (0 == (Long) buyerDAO
 					.uniqueResultObject(
 							"select count(*) from  SellerEntity as _seller where _seller.name=:sellerName and _seller.type=:platformType and _seller.user.id=:userID",
-							new String[] { "sellerName", "platformType",
-									"userID" }, new Object[] {
-									buyerEntity.getName(), platformTypeParam,
-									userEntity.getId() }));
+							new String[]{"sellerName", "platformType", "userID"},
+							new Object[]{buyerEntity.getName(),
+									platformTypeParam, userEntity.getId()}));
 
 			if (!sellerExists) {
 				putAlertMsg("不能绑定和卖号相同的买号！");
@@ -289,10 +284,9 @@ public class UserInfoService extends BaseService {
 			Boolean buyerExists = (0 == (Long) buyerDAO
 					.uniqueResultObject(
 							"select count(*) from  BuyerEntity as _buyer where _buyer.name=:buyerName and _buyer.type=:platformType and _buyer.user.id=:userID",
-							new String[] { "buyerName", "platformType",
-									"userID" }, new Object[] {
-									buyerEntity.getName(), platformTypeParam,
-									userEntity.getId() }));
+							new String[]{"buyerName", "platformType", "userID"},
+							new Object[]{buyerEntity.getName(),
+									platformTypeParam, userEntity.getId()}));
 			if (!buyerExists) {
 				putAlertMsg(buyerEntity.getName() + "已被使用！");
 				return JUMP;
@@ -999,8 +993,8 @@ public class UserInfoService extends BaseService {
 		Long smsCount = (Long) userDAO
 				.uniqueResultObject(
 						"select count(*) from SmsEntity  _sms where _sms.toUser.id=:userid and _sms.read=:read",
-						new String[] { "userid", "read" }, new Object[] {
-								userLoginInfo.getId(), false });
+						new String[]{"userid", "read"}, new Object[]{
+								userLoginInfo.getId(), false});
 		putByRequest("smsCount", smsCount);
 		putByRequest("sellTasks", result1);
 		putByRequest("buyTasks", result2);

@@ -10,29 +10,23 @@ import net.win.BaseService;
 import net.win.TaskMananger;
 import net.win.dao.CreditTaskDAO;
 import net.win.dao.UserDAO;
-import net.win.dao.VipDAO;
 import net.win.entity.CreditTaskEntity;
 import net.win.entity.UserEntity;
-import net.win.entity.VipBidUserEntity;
-import net.win.entity.VipEntity;
 import net.win.stragegy.ScoreStrategy;
 import net.win.utils.ArithUtils;
 import net.win.utils.Constant;
-import net.win.utils.StrategyUtils;
 import net.win.utils.StringUtils;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Service;
 
-@SuppressWarnings( { "unchecked" })
+@SuppressWarnings({"unchecked"})
 @Service("adminTaskService")
 public class AdminTaskService extends BaseService {
 	@Resource
 	private CreditTaskDAO creditTaskDAO;
 	@Resource
 	private UserDAO userDAO;
-	@Resource
-	private VipDAO vipDAO;
 
 	/**
 	 * 改变用户状态
@@ -119,8 +113,7 @@ public class AdminTaskService extends BaseService {
 		 * 任务
 		 */
 		Date currOperDate = creditTask.getReceiveDate();
-		Long minuties = ((System.currentTimeMillis() - currOperDate
-				.getTime()) / 1000 / 60);
+		Long minuties = ((System.currentTimeMillis() - currOperDate.getTime()) / 1000 / 60);
 		/**
 		 * 真正的逻辑 修改时间
 		 */
@@ -146,11 +139,11 @@ public class AdminTaskService extends BaseService {
 		/**
 		 * 验证
 		 */
-//		String goodType = creditTask.getGoodTimeType();
-//		if (!"1".equals(goodType)) {
-//			creditTask.setRemainTime(creditTask.getIntervalHour());
-//			creditTask.setDispatchDate(new Date());
-//		}
+		//		String goodType = creditTask.getGoodTimeType();
+		//		if (!"1".equals(goodType)) {
+		//			creditTask.setRemainTime(creditTask.getIntervalHour());
+		//			creditTask.setDispatchDate(new Date());
+		//		}
 		creditTask.setStatus(TaskMananger.STEP_FOUR_STATUS);
 		putAlertMsg("修改成功！");
 		return JUMP;
@@ -223,84 +216,39 @@ public class AdminTaskService extends BaseService {
 		/**
 		 * 修改积分发送人
 		 */
-		VipEntity releaseUserVip = releaseUser.getVip();
-		VipBidUserEntity releaseVipBidUser = releaseUser.getVipBidUserEntity();
-		Integer releaseScore = StrategyUtils.getReleaseUserTaskScore(
-				releaseUserVip, releaseUser.getVipEnable());
+		Integer releaseScore = 5;
 		releaseUser.setUpgradeScore(releaseUser.getUpgradeScore()
 				+ releaseScore);
 		releaseUser.setConvertScore(releaseUser.getConvertScore()
 				+ releaseScore);
 		logScoreCapital(userDAO, releaseScore + 0.0, "您发起的"
 				+ creditTask.getTestID() + "任务完成，获得积分", releaseUser);
-
-		// 是会员
-		if (releaseUser.getVipEnable() && releaseUserVip != null) {
-			releaseVipBidUser.setGrowValue(releaseVipBidUser.getGrowValue()
-					+ releaseUserVip.getReleaseGrowValue());
-		}
-
 		/**
 		 * 修改积分和钱 接手人 和 接手号
 		 */
-		VipEntity receiveUserVip = receiveUser.getVip();
-		VipBidUserEntity receiveVipBidUser = receiveUser.getVipBidUserEntity();
-		Integer receieveScore = StrategyUtils.getReleaseUserTaskScore(
-				receiveUserVip, receiveUser.getVipEnable());
+
+		Integer receieveScore = 5;
 		receiveUser.setMoney(ArithUtils.add(receiveUser.getMoney(), creditTask
 				.getMoney()
 				+ creditTask.getAddtionMoney()));
-		// 有会员
-		if (receiveUser.getVipEnable() && receiveUserVip != null) {
-			receiveVipBidUser.setGrowValue(receiveVipBidUser.getGrowValue()
-					+ receiveUserVip.getReceieveGrowValue());
-		}
-		/**
-		 * 发布点
-		 */
-		Double releaseDot = creditTask.getReleaseDot()
-				* StrategyUtils.getTaskOverDotRate(receiveUser, receiveUserVip,
-						receiveUser.getVipEnable());
-		receiveUser.setReleaseDot(ArithUtils.add(receiveUser.getReleaseDot(),
-				releaseDot + creditTask.getAddtionReleaseDot()));
-		/**
-		 * 计算积分
-		 */
 		receiveUser.setUpgradeScore(receiveUser.getUpgradeScore()
 				+ receieveScore);
 		receiveUser.setConvertScore(receiveUser.getConvertScore()
 				+ receieveScore);
 		logScoreCapital(userDAO, receieveScore + 0.0, "您接手的"
-				+ creditTask.getTestID() + "任务完成获得积分!", receiveUser);
+				+ creditTask.getTestID() + "任务完成，获得积分", receiveUser);
+		/**
+		 * 发布点
+		 */
+		Double releaseDot = 0D;
+		receiveUser.setReleaseDot(ArithUtils.add(receiveUser.getReleaseDot(),
+				releaseDot + creditTask.getAddtionReleaseDot()));
 		/**
 		 * 计算发布和任务数
 		 */
 		releaseUser.setReleaseTaskCount(releaseUser.getReleaseTaskCount() + 1);
 		receiveUser.setReceiveTaskCount(receiveUser.getReceiveTaskCount() + 1);
-		/**
-		 * 计算会员成长值 和升级
-		 */
-		if (releaseUserVip != null && releaseUser.getVipEnable()) {
-			releaseVipBidUser.setGrowValue(releaseVipBidUser.getGrowValue()
-					+ StrategyUtils.getReleaseGrowValue(releaseUserVip));
-			String vipType = StrategyUtils.getVipType(releaseVipBidUser
-					.getGrowValue());
-			if (!releaseUserVip.getType().equals(vipType)) {
-				releaseUser.setVip(vipDAO.getVIPByType(vipType));
-			}
-		}
-		if (receiveUserVip != null && receiveUser.getVipEnable()) {
-			receiveVipBidUser.setGrowValue(receiveVipBidUser.getGrowValue()
-					+ StrategyUtils.getReleaseGrowValue(receiveUserVip));
-			String vipType = StrategyUtils.getVipType(receiveVipBidUser
-					.getGrowValue());
-			if (!receiveUserVip.getType().equals(vipType)) {
-				receiveUser.setVip(vipDAO.getVIPByType(vipType));
-			}
-		}
-		/**
-		 * 会员升级
-		 */
+
 		creditTask.setStatus(TaskMananger.STEP_SIX_STATUS);
 		putAlertMsg("好评成功，任务完成！");
 
@@ -333,5 +281,4 @@ public class AdminTaskService extends BaseService {
 		updateUserLoginInfo(releaseUser);
 		return JUMP;
 	}
-
 }

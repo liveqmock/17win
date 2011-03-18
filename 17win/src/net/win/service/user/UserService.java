@@ -5,17 +5,12 @@ import java.util.Date;
 import javax.annotation.Resource;
 
 import net.win.BaseService;
-import net.win.UserLoginInfo;
 import net.win.dao.UserDAO;
-import net.win.dao.VipDAO;
 import net.win.entity.UserEntity;
-import net.win.entity.VipBidUserEntity;
-import net.win.entity.VipEntity;
 import net.win.stragegy.ScoreStrategy;
 import net.win.utils.Constant;
 import net.win.utils.DateUtils;
 import net.win.utils.MailUtils;
-import net.win.utils.StrategyUtils;
 import net.win.utils.StringUtils;
 import net.win.vo.UserVO;
 
@@ -33,8 +28,6 @@ public class UserService extends BaseService {
 	private UserDAO userDAO;
 	@Resource
 	private JavaMailSender mailSender;
-	@Resource
-	private VipDAO vipDAO;
 	@Resource
 	private FreeMarkerConfigurer freeMarkerCfj;
 
@@ -141,76 +134,28 @@ public class UserService extends BaseService {
 			userVO.setVerificationCode(null);
 			return "inputLogin";
 		} else {
-			boolean vipUpdate = false;
 			// 今天第一次登录
 			Date nowDate = new Date();
 			String oldDateStr = DateUtils.format(userEntity.getLastLoginTime(),
 					"yyyy-MM-dd");
 			String newDateStr = DateUtils.format(nowDate, "yyyy-MM-dd");
-			VipEntity vip = userEntity.getVip();
-			VipBidUserEntity vipBidUser = userEntity.getVipBidUserEntity();
-			// VIP有效
-			if (userEntity.getVipEnable()) {
-				// VIP过期
-				if (nowDate.getTime() > vipBidUser.getEndDate().getTime()) {
-					userEntity.setVipEnable(false);
-				} else {
-					// 判断是否第一次登录
-					if (!oldDateStr.equals(newDateStr)) {
-						// 设置成长值，判断会员是否升级
-						vipBidUser.setGrowValue(vip.getLoginGrowValue());
 
-						String vipType = StrategyUtils.getVipType(vipBidUser
-								.getGrowValue());
-						if (!vip.getType().equals(vipType)) {
-							vipUpdate = true;
-							userEntity.setVip(vipDAO.getVIPByType(vipType));
-							vip = userEntity.getVip();
-						}
-					}
-					UserLoginInfo userLoginInfo = getLoginUser();
-					userLoginInfo.setVipEndDate(userEntity
-							.getVipBidUserEntity().getEndDate());
-					userLoginInfo.setVipGrowValue(vipBidUser.getGrowValue());
-				}
-			}
-			if (userEntity.getVipEnable()) {
-				// 设置VIP的登录积分 和 成长值
-				if (!oldDateStr.equals(newDateStr)) {
-					userEntity.setUpgradeScore(userEntity.getUpgradeScore()
-							+ vip.getLoginScore());
-					userEntity.setConvertScore(userEntity.getConvertScore()
-							+ vip.getLoginScore());
-					logScoreCapital(userDAO, 0.0 + vip.getLoginScore(),
-							"每天登录一次获得积分,VIP" + vip.getType(), userEntity);
-				}
-			} else {
-				if (!oldDateStr.equals(newDateStr)) {
-					userEntity.setUpgradeScore(userEntity.getUpgradeScore()
-							+ LOGIN_SCORE);
-					userEntity.setConvertScore(userEntity.getConvertScore()
-							+ LOGIN_SCORE);
-					logScoreCapital(userDAO, 0.0 + LOGIN_SCORE, "每天登录一次",
-							userEntity);
-				}
+			if (!oldDateStr.equals(newDateStr)) {
+				userEntity.setUpgradeScore(userEntity.getUpgradeScore()
+						+ LOGIN_SCORE);
+				userEntity.setConvertScore(userEntity.getConvertScore()
+						+ LOGIN_SCORE);
+				logScoreCapital(userDAO, 0.0 + LOGIN_SCORE, "每天登录一次",
+						userEntity);
 			}
 
 			userEntity.setLastLoginTime(nowDate);
-			// 设置VIP
-			if (vip != null) {
-				getLoginUser().setVipType(vip.getType());
-			}
 			// 通过你的宣传链接注册的会员积分每上升1000
 			// 你的收益=N积分
 			ScoreStrategy.updateRefreeScoreByScore(userDAO, userEntity);
 			updateUserLoginInfo(userEntity);
-			if (vipUpdate) {
-				putAlertMsg("恭喜您，会员升级！");
-				putJumpSelfPage("/userInfoManager/info!init.php");
-				return JUMP;
-			} else {
-				return "loginSuccess";
-			}
+			putJumpSelfPage("/userInfoManager/info!init.php");
+			return JUMP;
 		}
 	}
 
@@ -376,9 +321,7 @@ public class UserService extends BaseService {
 		userEntity.setUpgradeScore(userEntity.getUpgradeScore()
 				+ Constant.getLoginScore().intValue());
 		userDAO.save(userEntity);
-		// 设置VIP
 		updateUserLoginInfo(userEntity);
-
 		putAlertMsg("注册成功，现在请激活您的帐号！");
 		putJumpSelfPage("userInfoManager/info!initActiave.php");
 		return JUMP;

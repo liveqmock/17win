@@ -10,7 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
@@ -102,10 +101,6 @@ public class UserEntity extends BaseEntity {
 	@Column(name = "RECEIVE_TASK_COUNT_")
 	private Integer receiveTaskCount = 0;
 
-	// VIP状态 true 表示没失效，false表示失效
-	@Column(name = "Vip_Enable_")
-	private Boolean vipEnable = false;
-
 	// 最后一次登陆时间
 	@Column(name = "LASTLOGINTIME_")
 	private Date lastLoginTime;
@@ -194,17 +189,6 @@ public class UserEntity extends BaseEntity {
 	@ManyToMany(mappedBy = "receieveUsers")
 	@Cascade(CascadeType.ALL)
 	private List<LogisticsEntity> receieveLogistics;
-
-	// VIP
-	@ManyToOne(targetEntity = VipEntity.class, fetch = FetchType.LAZY)
-	@JoinColumn(name = "VIP_ID_")
-	private VipEntity vip;
-
-	// VIP信息
-	@OneToOne(targetEntity = VipBidUserEntity.class, fetch = FetchType.LAZY)
-	@JoinColumn(name = "USER_VIPINFO_ID_")
-	@Cascade(CascadeType.ALL)
-	private VipBidUserEntity vipBidUserEntity;
 
 	// 任务联系人
 	@OneToMany(fetch = FetchType.LAZY)
@@ -447,22 +431,6 @@ public class UserEntity extends BaseEntity {
 		this.creditTaskRepositorys = creditTaskRepositorys;
 	}
 
-	public VipEntity getVip() {
-		return vip;
-	}
-
-	public void setVip(VipEntity vip) {
-		this.vip = vip;
-	}
-
-	public Boolean getVipEnable() {
-		return vipEnable;
-	}
-
-	public void setVipEnable(Boolean vipEnable) {
-		this.vipEnable = vipEnable;
-	}
-
 	public UserEntity getReferee() {
 		return referee;
 	}
@@ -493,14 +461,6 @@ public class UserEntity extends BaseEntity {
 
 	public void setToSms(List<SmsEntity> toSms) {
 		this.toSms = toSms;
-	}
-
-	public VipBidUserEntity getVipBidUserEntity() {
-		return vipBidUserEntity;
-	}
-
-	public void setVipBidUserEntity(VipBidUserEntity vipBidUserEntity) {
-		this.vipBidUserEntity = vipBidUserEntity;
 	}
 
 	public Integer getRefereeMoney() {

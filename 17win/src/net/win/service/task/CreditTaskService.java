@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 import net.win.BaseService;
 import net.win.TaskMananger;
@@ -17,15 +16,12 @@ import net.win.dao.CreditTaskRepositoryDAO;
 import net.win.dao.SellerDAO;
 import net.win.dao.TaskLinkManDAO;
 import net.win.dao.UserDAO;
-import net.win.dao.VipDAO;
 import net.win.entity.BuyerEntity;
 import net.win.entity.CreditTaskEntity;
 import net.win.entity.CreditTaskRepositoryEntity;
 import net.win.entity.SellerEntity;
 import net.win.entity.TaskLinkManEntity;
 import net.win.entity.UserEntity;
-import net.win.entity.VipBidUserEntity;
-import net.win.entity.VipEntity;
 import net.win.stragegy.ScoreStrategy;
 import net.win.utils.ArithUtils;
 import net.win.utils.Constant;
@@ -35,7 +31,6 @@ import net.win.utils.StrategyUtils;
 import net.win.utils.StringUtils;
 import net.win.utils.WinUtils;
 import net.win.vo.BuyerVO;
-import net.win.vo.CreditTaskRepositoryVO;
 import net.win.vo.CreditTaskVO;
 import net.win.vo.SellerVO;
 
@@ -49,7 +44,7 @@ import org.springframework.stereotype.Service;
  * @author xgj
  * 
  */
-@SuppressWarnings( { "unused", "unchecked" })
+@SuppressWarnings({"unused", "unchecked"})
 @Service("creditTaskService")
 public class CreditTaskService extends BaseService {
 	@Resource
@@ -64,9 +59,6 @@ public class CreditTaskService extends BaseService {
 	private CreditTaskDAO creditTaskDAO;
 	@Resource
 	private CreditTaskRepositoryDAO creditTaskRepositoryDAO;
-
-	@Resource
-	private VipDAO vipDAO;
 
 	/** ***************************买家操作********************************* */
 	/**
@@ -353,18 +345,18 @@ public class CreditTaskService extends BaseService {
 		}
 		if (!userEntity.getStatus().equals("1")) {
 			switch (Integer.parseInt(userEntity.getStatus())) {
-			case 0:
-				putAlertMsg("您当前的【状态】为【未激活状态】，请到个人中心激活！");
-				break;
-			case 2:
-				putAlertMsg("您当前的【状态】为【冻结状态】，不能发布任务！");
-				break;
-			case 3:
-				putAlertMsg("您当前的【状态】为【找密码状态】，可能有人试图盗取您的秘密，请联系管理员，不能发布任务！");
-				break;
-			default:
-				putAlertMsg("您当前的【状态】不是【正常状态】，不能发布任务！");
-				break;
+				case 0 :
+					putAlertMsg("您当前的【状态】为【未激活状态】，请到个人中心激活！");
+					break;
+				case 2 :
+					putAlertMsg("您当前的【状态】为【冻结状态】，不能发布任务！");
+					break;
+				case 3 :
+					putAlertMsg("您当前的【状态】为【找密码状态】，可能有人试图盗取您的秘密，请联系管理员，不能发布任务！");
+					break;
+				default :
+					putAlertMsg("您当前的【状态】不是【正常状态】，不能发布任务！");
+					break;
 			}
 			putJumpSelfPage("userInfoManager/info!initActiave.php");
 			return JUMP;
@@ -394,17 +386,16 @@ public class CreditTaskService extends BaseService {
 
 		Integer year = Calendar.getInstance().get(Calendar.YEAR);
 		Integer month = Calendar.getInstance().get(Calendar.MONTH);
-		Boolean refuseFlag = (Long) creditTaskDAO
-				.uniqueResultObject(hqlOne, new String[] { "bid", "receiveIP",
-						"year", "month", "itemUrl" }, new Object[] {
-						buyerEntitiy.getId(), ip, year, month,
-						creditTask.getItemUrl() }) == 1;
+		Boolean refuseFlag = (Long) creditTaskDAO.uniqueResultObject(hqlOne,
+				new String[]{"bid", "receiveIP", "year", "month", "itemUrl"},
+				new Object[]{buyerEntitiy.getId(), ip, year, month,
+						creditTask.getItemUrl()}) == 1;
 		if (!refuseFlag) {
-			refuseFlag = (Long) creditTaskDAO.uniqueResultObject(hqlSix,
-					new String[] { "bid", "receiveIP", "year", "month",
-							"shopUrl" }, new Object[] { buyerEntitiy.getId(),
-							ip, year, month,
-							creditTask.getSeller().getShopURL() }) == 6;
+			refuseFlag = (Long) creditTaskDAO
+					.uniqueResultObject(hqlSix, new String[]{"bid",
+							"receiveIP", "year", "month", "shopUrl"},
+							new Object[]{buyerEntitiy.getId(), ip, year, month,
+									creditTask.getSeller().getShopURL()}) == 6;
 		}
 		if (refuseFlag) {
 			putAlertMsg("为了您和他人的安全，一月一个IP同一买号只能接同一商品一次，一月一个IP同一买号只能接同一店铺六次！");
@@ -483,55 +474,33 @@ public class CreditTaskService extends BaseService {
 			/**
 			 * 修改积分发送人
 			 */
-			VipEntity releaseUserVip = releaseUser.getVip();
-			VipBidUserEntity releaseVipBidUser = releaseUser
-					.getVipBidUserEntity();
-			Integer releaseScore = StrategyUtils.getReleaseUserTaskScore(
-					releaseUserVip, releaseUser.getVipEnable());
+			Integer releaseScore = 5;
 			releaseUser.setUpgradeScore(releaseUser.getUpgradeScore()
 					+ releaseScore);
 			releaseUser.setConvertScore(releaseUser.getConvertScore()
 					+ releaseScore);
 			logScoreCapital(userDAO, releaseScore + 0.0, "您发起的"
 					+ creditTask.getTestID() + "任务完成，获得积分", releaseUser);
-			// 是会员
-			if (releaseUser.getVipEnable() && releaseUserVip != null) {
-				releaseVipBidUser.setGrowValue(releaseVipBidUser.getGrowValue()
-						+ releaseUserVip.getReleaseGrowValue());
-			}
 			/**
-			 * 修改积分和钱 接收人 和 接手号
+			 * 修改积分和钱 接手人 和 接手号
 			 */
-			VipEntity receiveUserVip = receiveUser.getVip();
-			VipBidUserEntity receiveVipBidUser = receiveUser
-					.getVipBidUserEntity();
-			Integer receieveScore = StrategyUtils.getReleaseUserTaskScore(
-					receiveUserVip, receiveUser.getVipEnable());
+
+			Integer receieveScore = 5;
 			receiveUser.setMoney(ArithUtils.add(receiveUser.getMoney(),
 					creditTask.getMoney() + creditTask.getAddtionMoney()));
-			// 有会员
-			if (receiveUser.getVipEnable() && receiveUserVip != null) {
-				receiveVipBidUser.setGrowValue(receiveVipBidUser.getGrowValue()
-						+ receiveUserVip.getReceieveGrowValue());
-			}
-			/**
-			 * 发布点
-			 */
-			Double releaseDot = creditTask.getReleaseDot()
-					* StrategyUtils.getTaskOverDotRate(receiveUser,
-							receiveUserVip, receiveUser.getVipEnable());
-			receiveUser.setReleaseDot(ArithUtils.add(receiveUser
-					.getReleaseDot(), releaseDot
-					+ creditTask.getAddtionReleaseDot()));
-			/**
-			 * 计算积分
-			 */
 			receiveUser.setUpgradeScore(receiveUser.getUpgradeScore()
 					+ receieveScore);
 			receiveUser.setConvertScore(receiveUser.getConvertScore()
 					+ receieveScore);
 			logScoreCapital(userDAO, receieveScore + 0.0, "您接手的"
-					+ creditTask.getTestID() + "任务完成获得积分!", receiveUser);
+					+ creditTask.getTestID() + "任务完成，获得积分", receiveUser);
+			/**
+			 * 发布点
+			 */
+			Double releaseDot = 0D;
+			receiveUser.setReleaseDot(ArithUtils.add(receiveUser
+					.getReleaseDot(), releaseDot
+					+ creditTask.getAddtionReleaseDot()));
 			/**
 			 * 计算发布和任务数
 			 */
@@ -539,30 +508,6 @@ public class CreditTaskService extends BaseService {
 					.setReleaseTaskCount(releaseUser.getReleaseTaskCount() + 1);
 			receiveUser
 					.setReceiveTaskCount(receiveUser.getReceiveTaskCount() + 1);
-			/**
-			 * 计算会员成长值 和升级
-			 */
-			if (releaseUserVip != null && releaseUser.getVipEnable()) {
-				releaseVipBidUser.setGrowValue(releaseVipBidUser.getGrowValue()
-						+ StrategyUtils.getReleaseGrowValue(releaseUserVip));
-				String vipType = StrategyUtils.getVipType(releaseVipBidUser
-						.getGrowValue());
-				if (!releaseUserVip.getType().equals(vipType)) {
-					releaseUser.setVip(vipDAO.getVIPByType(vipType));
-				}
-			}
-			if (receiveUserVip != null && receiveUser.getVipEnable()) {
-				receiveVipBidUser.setGrowValue(receiveVipBidUser.getGrowValue()
-						+ StrategyUtils.getReleaseGrowValue(receiveUserVip));
-				String vipType = StrategyUtils.getVipType(receiveVipBidUser
-						.getGrowValue());
-				if (!receiveUserVip.getType().equals(vipType)) {
-					receiveUser.setVip(vipDAO.getVIPByType(vipType));
-				}
-			}
-			/**
-			 * 会员升级
-			 */
 
 			/**
 			 * 计算推广
@@ -1474,18 +1419,18 @@ public class CreditTaskService extends BaseService {
 		//		 验证
 		if (!userEntity.getStatus().equals("1")) {
 			switch (Integer.parseInt(userEntity.getStatus())) {
-			case 0:
-				putAlertMsg("您当前的【状态】为【未激活状态】，请到个人中心激活！");
-				break;
-			case 2:
-				putAlertMsg("您当前的【状态】为【冻结状态】，不能发布任务！");
-				break;
-			case 3:
-				putAlertMsg("您当前的【状态】为【找密码状态】，可能有人试图盗取您的秘密，请联系管理员，不能发布任务！");
-				break;
-			default:
-				putAlertMsg("您当前的【状态】不是【正常状态】，不能发布任务！");
-				break;
+				case 0 :
+					putAlertMsg("您当前的【状态】为【未激活状态】，请到个人中心激活！");
+					break;
+				case 2 :
+					putAlertMsg("您当前的【状态】为【冻结状态】，不能发布任务！");
+					break;
+				case 3 :
+					putAlertMsg("您当前的【状态】为【找密码状态】，可能有人试图盗取您的秘密，请联系管理员，不能发布任务！");
+					break;
+				default :
+					putAlertMsg("您当前的【状态】不是【正常状态】，不能发布任务！");
+					break;
 			}
 			return JUMP;
 		}
@@ -1672,18 +1617,18 @@ public class CreditTaskService extends BaseService {
 			UserEntity userEntity = getLoginUserEntity(userDAO);
 			if (!userEntity.getStatus().equals("1")) {
 				switch (Integer.parseInt(userEntity.getStatus())) {
-				case 0:
-					putAlertMsg("您当前的【状态】为【未激活状态】，请到个人中心激活！");
-					break;
-				case 2:
-					putAlertMsg("您当前的【状态】为【冻结状态】，不能发布任务！");
-					break;
-				case 3:
-					putAlertMsg("您当前的【状态】为【找密码状态】，可能有人试图盗取您的秘密，请联系管理员，不能发布任务！");
-					break;
-				default:
-					putAlertMsg("您当前的【状态】不是【正常状态】，不能发布任务！");
-					break;
+					case 0 :
+						putAlertMsg("您当前的【状态】为【未激活状态】，请到个人中心激活！");
+						break;
+					case 2 :
+						putAlertMsg("您当前的【状态】为【冻结状态】，不能发布任务！");
+						break;
+					case 3 :
+						putAlertMsg("您当前的【状态】为【找密码状态】，可能有人试图盗取您的秘密，请联系管理员，不能发布任务！");
+						break;
+					default :
+						putAlertMsg("您当前的【状态】不是【正常状态】，不能发布任务！");
+						break;
 				}
 				putJumpSelfPage("userInfoManager/info!initActiave.php");
 				return JUMP;
@@ -1691,8 +1636,8 @@ public class CreditTaskService extends BaseService {
 			List<SellerEntity> sellers = sellerDAO
 					.list(
 							"select _s   from SellerEntity  as _s where _s.type=:type and _s.user.id=:userID",
-							new String[] { "type", "userID" }, new Object[] {
-									platformType, userEntity.getId() });
+							new String[]{"type", "userID"}, new Object[]{
+									platformType, userEntity.getId()});
 			List<SellerVO> resultSellers = new ArrayList<SellerVO>(sellers
 					.size());
 			if (sellers.size() > 0) {
@@ -1851,9 +1796,8 @@ public class CreditTaskService extends BaseService {
 		List<BuyerEntity> buyers = userDAO
 				.list(
 						" from BuyerEntity  as _b where _b.user.id=:userId  and  _b.type=:type and _b.enable=:enable",
-						new String[] { "userId", "type", "enable" },
-						new Object[] { getLoginUser().getId(), platformType,
-								true });
+						new String[]{"userId", "type", "enable"}, new Object[]{
+								getLoginUser().getId(), platformType, true});
 		List<BuyerVO> resultBuyers = new ArrayList<BuyerVO>(buyers.size());
 		for (BuyerEntity buyerEntity : buyers) {
 			BuyerVO buyerVO = new BuyerVO();
