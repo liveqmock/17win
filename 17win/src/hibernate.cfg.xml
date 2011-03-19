@@ -89,7 +89,6 @@
 
 		<!-- 配置信息 -->
 		<mapping package="net.win.entity" />
-		<mapping class="net.win.entity.AppealEntity" />
 		<mapping class="net.win.entity.BaseEntity" />
 		<mapping class="net.win.entity.UserEntity" />
 		<mapping class="net.win.entity.SellerEntity" />
