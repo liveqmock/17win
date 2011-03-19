@@ -140,18 +140,6 @@ public class UserEntity extends BaseEntity {
 	@Cascade(CascadeType.ALL)
 	private List<WithdrawalsEntity> withdrawalses;
 
-	// 我的申诉
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "APPEAL_USER_ID_")
-	@Cascade(CascadeType.ALL)
-	private List<AppealEntity> appeals;
-
-	// 我受到的申述
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "APPEALED_USER_ID_")
-	@Cascade(CascadeType.ALL)
-	private List<AppealEntity> appealeds;
-
 	// 介绍人
 	@ManyToOne(targetEntity = UserEntity.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "REFEREE_ID_")
@@ -404,22 +392,6 @@ public class UserEntity extends BaseEntity {
 
 	public void setWithdrawalses(List<WithdrawalsEntity> withdrawalses) {
 		this.withdrawalses = withdrawalses;
-	}
-
-	public List<AppealEntity> getAppeals() {
-		return appeals;
-	}
-
-	public void setAppeals(List<AppealEntity> appeals) {
-		this.appeals = appeals;
-	}
-
-	public List<AppealEntity> getAppealeds() {
-		return appealeds;
-	}
-
-	public void setAppealeds(List<AppealEntity> appealeds) {
-		this.appealeds = appealeds;
 	}
 
 	public List<CreditTaskRepositoryEntity> getCreditTaskRepositorys() {

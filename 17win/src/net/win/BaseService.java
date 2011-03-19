@@ -51,7 +51,8 @@ public class BaseService {
 		if (StringUtils.isBlank(platformType)) {
 			platformType = (String) getByRequest("platformType");
 		}
-		if (StringUtils.isBlank(platformType)) {
+		if (StringUtils.isBlank(platformType)
+				|| (!platformType.equals("1") && !platformType.equals("2"))) {
 			platformType = "1";
 		}
 		return platformType;
