@@ -31,9 +31,6 @@ public class CreditTaskRepositoryVO extends BaseVO {
 
 	private String taskType;
 
-	// 发布点
-	private Double releaseDot;
-
 	// 上次发布时间
 	private Date lastDispathDate;
 	// 发布次数
@@ -50,8 +47,6 @@ public class CreditTaskRepositoryVO extends BaseVO {
 
 	// 附加金额、
 	private Integer addtionMoney = 0;
-	// 附加发布点
-	private Integer addtionReleaseDot = 0;
 
 	public String getName() {
 		return name;
@@ -140,6 +135,7 @@ public class CreditTaskRepositoryVO extends BaseVO {
 	public void setGoodTimeType(String goodTimeType) {
 		this.goodTimeType = goodTimeType;
 	}
+
 	public Date getLastDispathDate() {
 		return lastDispathDate;
 	}
@@ -164,28 +160,12 @@ public class CreditTaskRepositoryVO extends BaseVO {
 		this.sellerName = sellerName;
 	}
 
-	public Double getReleaseDot() {
-		return releaseDot;
-	}
-
-	public void setReleaseDot(Double releaseDot) {
-		this.releaseDot = releaseDot;
-	}
-
 	public Integer getAddtionMoney() {
 		return addtionMoney;
 	}
 
 	public void setAddtionMoney(Integer addtionMoney) {
 		this.addtionMoney = addtionMoney;
-	}
-
-	public Integer getAddtionReleaseDot() {
-		return addtionReleaseDot;
-	}
-
-	public void setAddtionReleaseDot(Integer addtionReleaseDot) {
-		this.addtionReleaseDot = addtionReleaseDot;
 	}
 
 	public String getAssignUser() {

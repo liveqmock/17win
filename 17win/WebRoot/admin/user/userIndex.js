@@ -31,29 +31,6 @@ $(document).ready(function() {
 		}
 	});
 
-	$("#updateReleaseDotDIV").dialog({
-		autoOpen : false,
-		draggable : true,
-		hide : 'slide',
-		modal : true,
-		resizable : false,
-		show : 'slide',
-		width : 400,
-		buttons : {
-			"保存" : function() {
-				if (Validater.isBlank($("#releaseDotDescID").val())) {
-					alert("描述不能为空！");
-					return;
-				}
-				if (Validater.isBlank($("#releaseDotId").val())
-						|| isNaN($("#releaseDotId").val())) {
-					alert("发布点格式不对");
-				} else {
-					$("#releaseDotForm").submit();
-				}
-			}
-		}
-	});
 
 	$("#updateStatusDIV").dialog({
 				autoOpen : false,
@@ -205,16 +182,6 @@ function addMoney(id) {
 		$("#updateMoneyDIV").dialog("open");
 	}
 }
-// 充值发布点
-function addReleaseDot(id) {
-	$("#releaseDotId").val("");
-	$("#releaseDotDescID").val("");
-	if (confirm("确认是否充值？")) {
-		$("#releaseDotUserIdId").val(id);
-		$("#updateReleaseDotDIV").dialog("open");
-	}
-}
-addReleaseDot
 // 删除
 function deleteSms(id) {
 	if (confirm("您确认要删除此短信！")) {

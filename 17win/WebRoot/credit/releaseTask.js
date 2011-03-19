@@ -171,7 +171,7 @@ function validateForm() {
 	}
 	// 验证指接手人
 	if (Validater.isBlank(assignUser)) {
-		alert("指定人不能为空！");
+		alert("接手人ID不能为空！");
 		$("#assignUserID").focus();
 		return false;
 	}

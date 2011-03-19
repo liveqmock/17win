@@ -12,12 +12,8 @@ public class UserLoginInfo {
 	private String username;
 	// QQ
 	private String qq;
-	// 发布点
-	private Float releaseDot;
 	// 手机
 	private String telephone;
-	// 可以兑换发布点的积分
-	private Integer convertScore;
 	// 最后一次登陆时间
 	private Date lastLoginTime;
 	// 注册时间
@@ -65,28 +61,12 @@ public class UserLoginInfo {
 		this.qq = qq;
 	}
 
-	public Float getReleaseDot() {
-		return releaseDot;
-	}
-
-	public void setReleaseDot(Float releaseDot) {
-		this.releaseDot = releaseDot;
-	}
-
 	public String getTelephone() {
 		return telephone;
 	}
 
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
-	}
-
-	public Integer getConvertScore() {
-		return convertScore;
-	}
-
-	public void setConvertScore(Integer convertScore) {
-		this.convertScore = convertScore;
 	}
 
 	public String getLevelImg() {
@@ -184,6 +164,7 @@ public class UserLoginInfo {
 	public void setVipGrowValue(Integer vipGrowValue) {
 		this.vipGrowValue = vipGrowValue;
 	}
+
 	public Integer getUpgradeScore() {
 		return upgradeScore;
 	}

@@ -24,7 +24,7 @@
 						平台类型:
 						<s:select listKey="key" listValue="value"
 							name="adminCreditTaskVO.type" headerKey="" headerValue="--请选择--"
-							list="#{'1':'淘宝','2':'拍拍','3':'有啊'}">
+							list="#{'1':'淘宝','2':'拍拍'}">
 						</s:select>
 					</td>
 					<td nowrap="nowrap">
@@ -65,9 +65,6 @@
 							金额
 						</th>
 						<th nowrap="nowrap" style="font-size: 12px;">
-							发布点
-						</th>
-						<th nowrap="nowrap" style="font-size: 12px;">
 							发布人
 						</th>
 						<th nowrap="nowrap" style="font-size: 12px;">
@@ -93,10 +90,10 @@
 								<s:property value="#task.testID" />
 							</td>
 							<td
-								title="<s:if test="#task.type==1">淘宝</s:if><s:elseif test="#task.type==2">拍拍</s:elseif><s:elseif test="#task.type==3">有啊</s:elseif>">
+								title="<s:if test="#task.type==1">淘宝</s:if><s:elseif test="#task.type==2">拍拍</s:elseif>">
 								<s:if test="#task.type==1">淘宝</s:if>
 								<s:elseif test="#task.type==2">拍拍</s:elseif>
-								<s:elseif test="#task.type==3">有啊</s:elseif>
+								
 							</td>
 							<td
 								title="<s:if test="#task.status==-1">暂停</s:if><s:elseif test="#task.status==0">定时任务</s:elseif><s:elseif test="#task.status==1">等待接手</s:elseif><s:elseif test="#task.status==2">等待付款</s:elseif><s:elseif test="#task.status==3">等待发货</s:elseif><s:elseif test="#task.status==4">等待接受人确认</s:elseif><s:elseif test="#task.status==5">等待卖家确认</s:elseif><s:elseif test="#task.status==6">完成</s:elseif>">
@@ -115,14 +112,6 @@
 								+
 								<font color="red"> <s:property value="#task.addtionMoney" />
 								</font>
-							</td>
-
-							<td
-								title="<s:property value="#task.releaseDot" />+<s:property value="#task.addtionReleaseDot" />">
-								<s:property value="#task.releaseDot" />
-								+
-								<font color="red"> <s:property
-										value="#task.addtionReleaseDot" /> </font>
 							</td>
 							<td title="<s:property value="#task.releaseUser" />">
 								<s:property value="#task.releaseUser" />
@@ -171,7 +160,7 @@
 				</tbody>
 				<s:if test="#request.result.size()==0">
 					<tr>
-						<th colspan="10" align="center">
+						<th colspan="9" align="center">
 							没有数据！
 						</th>
 					</tr>
@@ -179,7 +168,7 @@
 				<s:else>
 					<tfoot>
 						<tr>
-							<th colspan="10" style="font-size: 12px;">
+							<th colspan="9" style="font-size: 12px;">
 								<div style="float: left;">
 									<a href="javascript:firstPage()">首页</a>
 									<a href="javascript:prevPage()">上一页</a>&nbsp;

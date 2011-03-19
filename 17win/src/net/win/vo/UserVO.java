@@ -18,8 +18,6 @@ public class UserVO extends BaseVO {
 	private String type;
 	// 操作码
 	private String operationCode;
-	// 发布点
-	private Double releaseDot;
 	// 赠送数量
 	private Double number;
 	// 用户名
@@ -53,14 +51,6 @@ public class UserVO extends BaseVO {
 
 	public void setOperationCode(String operationCode) {
 		this.operationCode = operationCode;
-	}
-
-	public Double getReleaseDot() {
-		return releaseDot;
-	}
-
-	public void setReleaseDot(Double releaseDot) {
-		this.releaseDot = releaseDot;
 	}
 
 	public Double getNumber() {

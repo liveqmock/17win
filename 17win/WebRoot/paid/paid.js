@@ -1,5 +1,5 @@
 $(document).ready(function() {
-			$("#opertationCodeId").focus();
+			$("#buyernameId").focus();
 			$("#verificationCodeID").click();
 		});
 

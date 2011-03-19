@@ -250,19 +250,6 @@
 													<a href="payManager/pay!queryPay.php">充值记录</a>
 												</td>
 											</tr>
-											<!-- 
-											<tr>
-												<td height=20>
-													<a href="userInfoManager/info!initBuyDot.php">买发布点</a>
-												</td>
-
-											</tr>
-											<tr>
-												<td height=20>
-													<a href="userInfoManager/info!initExchange.php">我要兑换</a>
-												</td>
-											</tr>
-										 -->
 											<tr>
 												<td height=20>
 													<a

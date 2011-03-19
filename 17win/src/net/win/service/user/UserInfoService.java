@@ -19,7 +19,6 @@ import net.win.dao.UserDAO;
 import net.win.entity.BuyerEntity;
 import net.win.entity.SellerEntity;
 import net.win.entity.UserEntity;
-import net.win.utils.ArithUtils;
 import net.win.utils.Constant;
 import net.win.utils.HttpB2CUtils;
 import net.win.utils.MailUtils;
@@ -40,7 +39,7 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 import sun.misc.BASE64Encoder;
 
-@SuppressWarnings({"unchecked"})
+@SuppressWarnings( { "unchecked" })
 @Service("userInfoService")
 public class UserInfoService extends BaseService {
 	@Resource
@@ -74,8 +73,8 @@ public class UserInfoService extends BaseService {
 		UserEntity userEntity = userDAO
 				.uniqueResult(
 						" from UserEntity as _u where _u.username=:username  or _u.telephone =:telephone ",
-						new String[]{"username", "telephone"}, new Object[]{
-								userVO.getUsername(), userVO.getUsername()});
+						new String[] { "username", "telephone" }, new Object[] {
+								userVO.getUsername(), userVO.getUsername() });
 		if (userEntity == null) {
 			putAlertMsg("用户名或手机不存在！");
 			return "updateFindPassword";
@@ -115,32 +114,13 @@ public class UserInfoService extends BaseService {
 	 */
 	public String referee() throws Exception {
 		UserEntity userEntity = getLoginUserEntity(userDAO);
-		// 推广 奖金
-		Integer refereeMoney = userEntity.getRefereeMoney();
 		// 推广的会员数
 		Long userCount = (Long) userDAO
 				.uniqueResultObject(
 						"select count(*) from UserEntity as _user where _user.referee.id=:userId ",
-						new String[]{"userId"},
-						new Object[]{userEntity.getId()});
-		// 推广的VIP会员数
-		Long vipCount = (Long) userDAO
-				.uniqueResultObject(
-						"select count(*) from UserEntity as _user where _user.referee.id=:userId and _user.vipEnable=:vipEnable",
-						new String[]{"userId", "vipEnable"}, new Object[]{
-								userEntity.getId(), true});
-
+						new String[] { "userId" }, new Object[] { userEntity
+								.getId() });
 		putByRequest("userCount", userCount);
-		putByRequest("refereeMoney", refereeMoney);
-		putByRequest("vipCount", vipCount);
-
-		// 当购买发布点的时候，推广人所得金额为，他推荐人买的发布点的金额的0.1倍
-		putByRequest("buyReleaseDotRebateToRefree", Constant
-				.getBuyReleaseDotRebateToRefree());
-		// 通过你的宣传链接注册的会员购买VIP，获得5元
-		putByRequest("refreeByVipMoney", Constant.getRefreeByVipMoney());
-		// 积累接手100个任务 推广人获取10元钱
-		putByRequest("task100RefreeMoney", Constant.getTask100RefreeMoney());
 		// 通过你的宣传链接注册的会员积分每上升1000 ，你的收益=100积分
 		putByRequest("score1000Refree", Constant.getScore1000Refree());
 		return "referee";
@@ -172,16 +152,6 @@ public class UserInfoService extends BaseService {
 		return "updateSeller";
 	}
 
-	public String initExchange(UserVO userVO) throws Exception {
-		putByRequest("releaseDotChangeMoney", Constant
-				.getReleaseDotChangeMoney());
-
-		putByRequest("scoreChangeReleaseDot", Constant
-				.getScoreChangeReleaseDot());
-
-		putTokenBySession();
-		return "initExchange";
-	}
 
 	/**
 	 * 增加买家或卖家
@@ -206,9 +176,10 @@ public class UserInfoService extends BaseService {
 			Boolean sellerExists = (0 == (Long) sellerDAO
 					.uniqueResultObject(
 							"select count(*) from  SellerEntity as _seller where _seller.name=:sellerName and _seller.type=:platformType and _seller.user.id=:userID",
-							new String[]{"sellerName", "platformType", "userID"},
-							new Object[]{sellerEntity.getName(),
-									platformTypeParam, userEntity.getId()}));
+							new String[] { "sellerName", "platformType",
+									"userID" }, new Object[] {
+									sellerEntity.getName(), platformTypeParam,
+									userEntity.getId() }));
 			if (!sellerExists) {
 				putAlertMsg(sellerEntity.getName() + "已被使用！");
 				return JUMP;
@@ -217,9 +188,10 @@ public class UserInfoService extends BaseService {
 			Boolean buyerExists = (0 == (Long) buyerDAO
 					.uniqueResultObject(
 							"select count(*) from  BuyerEntity as _buyer where _buyer.name=:buyerName and _buyer.type=:platformType and _buyer.user.id=:userID",
-							new String[]{"buyerName", "platformType", "userID"},
-							new Object[]{sellerEntity.getName(),
-									platformTypeParam, userEntity.getId()}));
+							new String[] { "buyerName", "platformType",
+									"userID" }, new Object[] {
+									sellerEntity.getName(), platformTypeParam,
+									userEntity.getId() }));
 			if (!buyerExists) {
 				putAlertMsg("不能绑定和买号相同的卖号！");
 				return JUMP;
@@ -229,9 +201,9 @@ public class UserInfoService extends BaseService {
 					.uniqueResultObject(
 							"select count(*) from SellerEntity as _seller "
 									+ "where _seller.user.id=:userId and type=:platformType ",
-							new String[]{"userId", "platformType"},
-							new Object[]{getLoginUser().getId(),
-									platformTypeParam});
+							new String[] { "userId", "platformType" },
+							new Object[] { getLoginUser().getId(),
+									platformTypeParam });
 			Integer sellerCountFlag = StrategyUtils.getSellerCount();
 			if (sellerCountFlag != -1) {
 				if (count >= sellerCountFlag) {
@@ -273,9 +245,10 @@ public class UserInfoService extends BaseService {
 			Boolean sellerExists = (0 == (Long) buyerDAO
 					.uniqueResultObject(
 							"select count(*) from  SellerEntity as _seller where _seller.name=:sellerName and _seller.type=:platformType and _seller.user.id=:userID",
-							new String[]{"sellerName", "platformType", "userID"},
-							new Object[]{buyerEntity.getName(),
-									platformTypeParam, userEntity.getId()}));
+							new String[] { "sellerName", "platformType",
+									"userID" }, new Object[] {
+									buyerEntity.getName(), platformTypeParam,
+									userEntity.getId() }));
 
 			if (!sellerExists) {
 				putAlertMsg("不能绑定和卖号相同的买号！");
@@ -284,9 +257,10 @@ public class UserInfoService extends BaseService {
 			Boolean buyerExists = (0 == (Long) buyerDAO
 					.uniqueResultObject(
 							"select count(*) from  BuyerEntity as _buyer where _buyer.name=:buyerName and _buyer.type=:platformType and _buyer.user.id=:userID",
-							new String[]{"buyerName", "platformType", "userID"},
-							new Object[]{buyerEntity.getName(),
-									platformTypeParam, userEntity.getId()}));
+							new String[] { "buyerName", "platformType",
+									"userID" }, new Object[] {
+									buyerEntity.getName(), platformTypeParam,
+									userEntity.getId() }));
 			if (!buyerExists) {
 				putAlertMsg(buyerEntity.getName() + "已被使用！");
 				return JUMP;
@@ -436,261 +410,6 @@ public class UserInfoService extends BaseService {
 	}
 
 	/**
-	 * 初始化买发布点
-	 * 
-	 * @param userVO
-	 * @return
-	 * @throws Exception
-	 */
-	public String initBuyDot() throws Exception {
-		// 皇冠
-		putByRequest("huangguanCount", Constant.getHuangguanNumber());
-		putByRequest("huangguanPrice", Constant.getHuangguanPrice());
-		// 一个发布点
-		putByRequest("fabudianPrice", Constant.getFabudianPrice());
-		// 双钻
-		putByRequest("shuangzuanPrice", Constant.getShuangzuanPrice());
-		putByRequest("shuangzuanCount", Constant.getShuangzuanNumber());
-
-		// 一钻
-		putByRequest("zuanshikaPrice", Constant.getZuanshiPrice());
-		putByRequest("zuanshiCount", Constant.getZuanshiNumber());
-
-		putTokenBySession();
-
-		return "initBuyDot";
-	}
-
-	/**
-	 * 购买发布点
-	 * 
-	 * @param userVO
-	 * @return
-	 * @throws Exception
-	 */
-	public String updateBuyDot(UserVO userVO) throws Exception {
-		putJumpSelfPage("userInfoManager/info!initBuyDot.php");
-		putAlertMsg("充值成功！");
-		String flag = getByParam("flag");
-		UserEntity userEntity = getLoginUserEntity(userDAO);
-		String operaCode = userVO.getOperationCode();
-		Double releaseDotCount = userVO.getReleaseDot();
-		// 判断操作码
-		if (!userEntity.getOpertationCode().equals(
-				StringUtils.processPwd(operaCode))) {
-			putAlertMsg("操作码不正确！");
-			return JUMP;
-		}
-		if ("1".equals(flag)) {
-			// 购买单个发布点
-			if (userEntity.getMoney() >= Constant.getFabudianPrice()
-					* releaseDotCount) {
-				userEntity.setMoney(ArithUtils.sub(userEntity.getMoney(),
-						Constant.getFabudianPrice() * releaseDotCount));
-				userEntity.setReleaseDot(ArithUtils.add(userEntity
-						.getReleaseDot(), releaseDotCount));
-				logMoneyCapital(userDAO,
-						0 - (Constant.getFabudianPrice() * releaseDotCount),
-						"购买发布点", userEntity);
-				logDotCapital(userDAO, releaseDotCount, "购买发布点", userEntity);
-				updateUserLoginInfo(userEntity);
-				// 推广人
-				if (userEntity.getReferee() != null) {
-					userEntity.getReferee().setMoney(
-							userEntity.getReferee().getMoney()
-									+ (Constant.getFabudianPrice()
-											* releaseDotCount * Constant
-											.getBuyReleaseDotRebateToRefree()));
-					logMoneyCapital(userDAO, (Constant.getFabudianPrice()
-							* releaseDotCount * Constant
-							.getBuyReleaseDotRebateToRefree()), "您推荐的"
-							+ userEntity.getUsername() + "用户购买了"
-							+ Constant.getFabudianPrice() * releaseDotCount
-							+ "多钱的发布点,您获得"
-							+ Constant.getBuyReleaseDotRebateToRefree()
-							+ "倍金额的回报", userEntity.getReferee());
-				}
-			} else {
-				putAlertMsg("您的钱不够支付购买" + releaseDotCount + "个发布点的费用!>");
-				return JUMP;
-			}
-		} else if ("2".equals(flag)) {
-			// 购买皇冠卡
-			Double money = Constant.getHuangguanPrice();
-			if (userEntity.getMoney() >= money) {
-				userEntity.setMoney(ArithUtils
-						.sub(userEntity.getMoney(), money));
-				userEntity.setReleaseDot(ArithUtils.add(userEntity
-						.getReleaseDot(), Constant.getHuangguanNumber()));
-				logMoneyCapital(userDAO, 0 - money, "购买皇冠卡", userEntity);
-				logDotCapital(userDAO, Constant.getHuangguanNumber()
-						.doubleValue(), "购买皇冠卡", userEntity);
-				updateUserLoginInfo(userEntity);
-				// 推广人
-				if (userEntity.getReferee() != null) {
-					userEntity.getReferee().setMoney(
-							userEntity.getReferee().getMoney()
-									+ (money * Constant
-											.getBuyReleaseDotRebateToRefree()));
-					logMoneyCapital(userDAO, money
-							* Constant.getBuyReleaseDotRebateToRefree(), "您推荐的"
-							+ userEntity.getUsername() + "用户购买了皇冠卡,您获得"
-							+ Constant.getBuyReleaseDotRebateToRefree()
-							+ "倍金额的回报", userEntity.getReferee());
-				}
-			} else {
-				putAlertMsg("您的钱不够支付购买皇冠卡!");
-				return JUMP;
-			}
-
-		} else if ("3".equals(flag)) {
-			// 购买双钻卡
-			Double money = Constant.getShuangzuanPrice();
-			if (userEntity.getMoney() >= money) {
-				userEntity.setMoney(ArithUtils
-						.sub(userEntity.getMoney(), money));
-				userEntity.setReleaseDot(ArithUtils.add(userEntity
-						.getReleaseDot(), Constant.getShuangzuanNumber()));
-				logMoneyCapital(userDAO, 0 - money, "购买双钻卡", userEntity);
-				logDotCapital(userDAO, Constant.getShuangzuanNumber()
-						.doubleValue(), "购买双钻卡", userEntity);
-				updateUserLoginInfo(userEntity);
-				// 推荐人
-				if (userEntity.getReferee() != null) {
-					userEntity.getReferee().setMoney(
-							userEntity.getReferee().getMoney()
-									+ (money * Constant
-											.getBuyReleaseDotRebateToRefree()));
-					logMoneyCapital(userDAO, money
-							* Constant.getBuyReleaseDotRebateToRefree(), "您推荐的"
-							+ userEntity.getUsername() + "用户购买了双钻卡,您获得"
-							+ Constant.getBuyReleaseDotRebateToRefree()
-							+ "倍金额的回报", userEntity.getReferee());
-				}
-			} else {
-				putAlertMsg("您的钱不够支付购买双钻卡!");
-				return JUMP;
-			}
-		} else if ("4".equals(flag)) {
-			// 购买一钻卡
-			Double money = Constant.getZuanshiPrice();
-			if (userEntity.getMoney() >= money) {
-				userEntity.setMoney(ArithUtils
-						.sub(userEntity.getMoney(), money));
-				userEntity.setReleaseDot(ArithUtils.add(userEntity
-						.getReleaseDot(), Constant.getZuanshiNumber()));
-				logMoneyCapital(userDAO, 0 - money, "购买一钻卡", userEntity);
-				logDotCapital(userDAO, Constant.getZuanshiNumber()
-						.doubleValue(), "购买一钻卡", userEntity);
-				updateUserLoginInfo(userEntity);
-				// 推荐人
-				if (userEntity.getReferee() != null) {
-					userEntity.getReferee().setMoney(
-							userEntity.getReferee().getMoney()
-									+ (money * Constant
-											.getBuyReleaseDotRebateToRefree()));
-					logMoneyCapital(userDAO, money
-							* Constant.getBuyReleaseDotRebateToRefree(), "您推荐的"
-							+ userEntity.getUsername() + "用户购买了钻石卡,您获得"
-							+ Constant.getBuyReleaseDotRebateToRefree()
-							+ "倍金额的回报", userEntity.getReferee());
-				}
-			} else {
-				putAlertMsg("您的钱不够支付购买一钻卡!");
-				return JUMP;
-			}
-		}
-		putAlertMsg("充值成功！");
-		return JUMP;
-	}
-
-	/**
-	 * 发布点兑换
-	 * 
-	 * @param userVO
-	 * @return
-	 * @throws Exception
-	 */
-	public String updateExchange(UserVO userVO) throws Exception {
-		String flag = getByParam("flag");
-		UserEntity userEntity = getLoginUserEntity(userDAO);
-		String operaCode = userVO.getOperationCode();
-		// 判断操作码
-		if (!userEntity.getOpertationCode().equals(
-				StringUtils.processPwd(operaCode))) {
-			putAlertMsg("操作码不正确！");
-			return "updateExchange";
-		}
-		if ("1".equals(flag)) {
-			// 兑换金额
-			Double releaseDot = userVO.getReleaseDot();
-			if (releaseDot < 10 || releaseDot > userEntity.getReleaseDot()) {
-				WinUtils.throwIllegalityException("违法的操作，试图越过兑换发布点验证");
-			}
-			userEntity.setReleaseDot(ArithUtils.sub(userEntity.getReleaseDot(),
-					releaseDot));
-			userEntity.setMoney(ArithUtils.add(userEntity.getMoney(),
-					ArithUtils.mul(releaseDot, Constant
-							.getReleaseDotChangeMoney())));
-
-			logDotCapital(userDAO, 0 - releaseDot, "发布点兑换金额", userEntity);
-			logMoneyCapital(userDAO, ArithUtils.mul(releaseDot, Constant
-					.getReleaseDotChangeMoney()), "发布点兑换金额", userEntity);
-		} else if ("2".equals(flag)) {
-			// 赠送
-			Double releaseDot = userVO.getReleaseDot();
-			String username = userVO.getUsername();
-			UserEntity touser = userDAO.uniqueResult(
-					"from  UserEntity where username=:username", "username",
-					username);
-			if (releaseDot > userEntity.getReleaseDot()) {
-				putAlertMsg("赠送的发布点不能大于您拥有的发布点！");
-				return "updateExchange";
-			}
-			if (username.equalsIgnoreCase(userEntity.getUsername())) {
-				putAlertMsg("不能赠送给自己！");
-				return "updateExchange";
-			}
-			if (touser == null) {
-				putAlertMsg(username + "用户不存在");
-				return "updateExchange";
-			}
-			userEntity.setReleaseDot(ArithUtils.sub(userEntity.getReleaseDot(),
-					releaseDot));
-			touser.setReleaseDot(ArithUtils.add(touser.getReleaseDot(),
-					releaseDot));
-			logDotCapital(userDAO, 0 - releaseDot, "赠送发布点给"
-					+ touser.getUsername(), userEntity);
-			logDotCapital(userDAO, releaseDot, userEntity.getUsername()
-					+ "赠送发布点给你的发布点", touser);
-		} else if ("3".equals(flag)) {
-			// 积分兑换
-			Double releaseDot = userVO.getReleaseDot();
-			if (releaseDot > userEntity.getReleaseDot()) {
-				WinUtils.throwIllegalityException("违法的操作，试图越过兑换发布点验证");
-			}
-			if (releaseDot * Constant.getScoreChangeReleaseDot() > userEntity
-					.getConvertScore()) {
-				putAlertMsg("兑换失败！您的积分不够" + releaseDot
-						* Constant.getScoreChangeReleaseDot());
-			}
-			userEntity.setReleaseDot(ArithUtils.add(userEntity.getReleaseDot(),
-					releaseDot));
-			Integer tempScore = ((Double) (releaseDot * Constant
-					.getScoreChangeReleaseDot())).intValue();
-			userEntity
-					.setConvertScore(userEntity.getConvertScore() - tempScore);
-
-			logScoreCapital(userDAO, 0.0 - tempScore, "积分兑换发布点", userEntity);
-			logDotCapital(userDAO, releaseDot, "积分兑换发布点", userEntity);
-		}
-		updateUserLoginInfo(userEntity);
-		putAlertMsg("操作成功！");
-		putJumpSelfPage("userInfoManager/info!initExchange.php");
-		return JUMP;
-	}
-
-	/**
 	 * 我的推广
 	 * 
 	 * @param userVO
@@ -714,8 +433,7 @@ public class UserInfoService extends BaseService {
 			UserInfoVO userInfoVO = new UserInfoVO(userEntity.getUsername(),
 					userEntity.getQq(), userEntity.getReleaseTaskCount(),
 					userEntity.getReceiveTaskCount(), userEntity
-							.getRegisterTime(), userEntity.getConvertScore(),
-					userEntity.getReleaseDot());
+							.getRegisterTime());
 			result1.add(userInfoVO);
 		}
 		// 设置我的推广
@@ -993,8 +711,8 @@ public class UserInfoService extends BaseService {
 		Long smsCount = (Long) userDAO
 				.uniqueResultObject(
 						"select count(*) from SmsEntity  _sms where _sms.toUser.id=:userid and _sms.read=:read",
-						new String[]{"userid", "read"}, new Object[]{
-								userLoginInfo.getId(), false});
+						new String[] { "userid", "read" }, new Object[] {
+								userLoginInfo.getId(), false });
 		putByRequest("smsCount", smsCount);
 		putByRequest("sellTasks", result1);
 		putByRequest("buyTasks", result2);

@@ -69,7 +69,7 @@
 											[个人中心] </A>|
 									</s:else>
 									<A
-										href="javascript:window.external.addFavorite('http://www.17win.net','淘宝,拍拍，有啊完全免费互刷信誉');"
+										href="javascript:window.external.addFavorite('http://www.17win.net','17win(一起赢)互刷平台');"
 										title="添加到收藏夹">[收藏本站]</A>
 									<!-- xgj|
 									<A href="help/link.asp" target="_top">广告服务</A>

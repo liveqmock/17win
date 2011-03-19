@@ -21,9 +21,6 @@ public class CreditTaskEntity extends BaseEntity {
 	// 任务ID 给用户看 格式yyymmddhhmmssis
 	@Column(name = "TESTID_", columnDefinition = "CHAR(17)", nullable = false, unique = true)
 	private String testID;
-	// 发布点
-	@Column(name = "RELEASE_DOT_", nullable = false)
-	private Double releaseDot;
 	// 发布时间
 	@Column(name = "RELEASE_DATE")
 	private Date releaseDate;
@@ -84,10 +81,6 @@ public class CreditTaskEntity extends BaseEntity {
 	// 附加金额、
 	@Column(name = "ADDTATION_MONEY", nullable = false)
 	private Double addtionMoney = 0d;
-	// 附加发布点
-	@Column(name = "ADDTATION_RELEASE_DOT", nullable = false)
-	private Double addtionReleaseDot = 0D;
-
 	// 定时任务时间(不能小于开始时间)
 	@Column(name = "TIMEING_TIME_")
 	private Date timeingTime;
@@ -109,7 +102,6 @@ public class CreditTaskEntity extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "BUYER_ID_")
 	private BuyerEntity buyer;
-
 
 	public String getType() {
 		return type;
@@ -255,14 +247,7 @@ public class CreditTaskEntity extends BaseEntity {
 		this.addtionMoney = addtionMoney;
 	}
 
-	public Double getAddtionReleaseDot() {
-		return addtionReleaseDot;
-	}
-
-	public void setAddtionReleaseDot(Double addtionReleaseDot) {
-		this.addtionReleaseDot = addtionReleaseDot;
-	}
-
+ 
 	public String getAssignUser() {
 		return assignUser;
 	}
@@ -277,14 +262,6 @@ public class CreditTaskEntity extends BaseEntity {
 
 	public void setTestID(String testID) {
 		this.testID = testID;
-	}
-
-	public Double getReleaseDot() {
-		return releaseDot;
-	}
-
-	public void setReleaseDot(Double releaseDot) {
-		this.releaseDot = releaseDot;
 	}
 
 	public Date getReleaseDate() {
@@ -318,6 +295,5 @@ public class CreditTaskEntity extends BaseEntity {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
-
 
 }

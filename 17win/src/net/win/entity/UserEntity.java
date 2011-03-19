@@ -39,18 +39,12 @@ public class UserEntity extends BaseEntity {
 	// QQ
 	@Column(name = "QQ_", length = 11, nullable = false)
 	private String qq;
-	// 发布点
-	@Column(name = "RELEASE_DOT_", nullable = false)
-	private Double releaseDot;
 	// 电子邮箱
 	@Column(name = "EMAIL_", length = 24, unique = true, nullable = false)
 	private String email;
 	// 手机
 	@Column(name = "TELPHONE_", unique = true, columnDefinition = "CHAR(11)", nullable = false)
 	private String telephone;
-	// 可以兑换发布点的积分
-	@Column(name = "CONVERT_SCORE_", nullable = false)
-	private Integer convertScore = 0;
 	// 升级用的积分，不能兑换发布点
 	@Column(name = "UPGRADE_SCORE_", nullable = false)
 	private Integer upgradeScore = 0;
@@ -83,10 +77,6 @@ public class UserEntity extends BaseEntity {
 	// 推广人数
 	@Column(name = "SPREAD_COUNT_", nullable = false)
 	private Integer spreadCount = 0;
-	// 推广所得的金额
-	@Column(name = "Referee_Money_", nullable = false)
-	private Integer refereeMoney = 0;
-
 	/**
 	 * 可选选项
 	 */
@@ -269,21 +259,6 @@ public class UserEntity extends BaseEntity {
 		this.ww = ww;
 	}
 
-	public Double getReleaseDot() {
-		return releaseDot;
-	}
-
-	public void setReleaseDot(Double releaseDot) {
-		this.releaseDot = releaseDot;
-	}
-
-	public Integer getConvertScore() {
-		return convertScore;
-	}
-
-	public void setConvertScore(Integer convertScore) {
-		this.convertScore = convertScore;
-	}
 
 	public Integer getUpgradeScore() {
 		return upgradeScore;
@@ -435,13 +410,6 @@ public class UserEntity extends BaseEntity {
 		this.toSms = toSms;
 	}
 
-	public Integer getRefereeMoney() {
-		return refereeMoney;
-	}
-
-	public void setRefereeMoney(Integer refereeMoney) {
-		this.refereeMoney = refereeMoney;
-	}
 
 	public List<LogisticsEntity> getReleaseLogistics() {
 		return releaseLogistics;

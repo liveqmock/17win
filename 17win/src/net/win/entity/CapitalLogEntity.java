@@ -18,7 +18,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "TB_CapitalLog")
 public class CapitalLogEntity extends BaseEntity {
-	// 类别， 1 金额 2 发布点  3积分
+	// 类别， 1 金额    3积分
 	@Column(name = "Type_", columnDefinition = "CHAR(1)", nullable = false)
 	private String type;
 	// 所属人

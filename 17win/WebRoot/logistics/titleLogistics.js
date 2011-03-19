@@ -23,7 +23,7 @@ function validateForm() {
 }
 
 function toUse(id) {
-	if (confirm("确认是否使用该物流信息，使用后将扣除您的0.2个发布点给提交人！")) {
+	if (confirm("确认是否使用该物流信息！")) {
 		window.location.href = "logisticsManager/logistics!useLogistics.php?logisticsID="+
 		id;
 	}

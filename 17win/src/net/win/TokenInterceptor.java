@@ -30,7 +30,6 @@ public class TokenInterceptor extends AbstractInterceptor {
 				.add("logisticsManager/logistics!insertLogistics.php");
 		INCLUDE_TOKEN_VALIDATION_URL.add("payManager/pay!addPaid.php");
 		INCLUDE_TOKEN_VALIDATION_URL.add("userInfoManager/info!buyDot.php");
-		INCLUDE_TOKEN_VALIDATION_URL.add("userInfoManager/info!exchange.php");
 		INCLUDE_TOKEN_VALIDATION_URL
 				.add("withdrawalsManager/withdrawals!withdrawals.php");
 		INCLUDE_TOKEN_VALIDATION_URL.add("smsManager/sms!sendTelphone.php");

@@ -14,7 +14,7 @@ import net.win.BaseVO;
  */
 @Entity
 public class CapitalLogVO extends BaseVO {
-	// 类别， 1 金额 2 发布点
+	// 类别， 1 金额 3 积分
 	private String type;
 	// 记录时间
 	private Date logTime;

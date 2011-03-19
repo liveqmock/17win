@@ -165,28 +165,6 @@ public class AdminUserService extends BaseService {
 	}
 
 	/**
-	 * 充值发布点
-	 * 
-	 * @param adminUserVO
-	 * @return
-	 * @throws Exception
-	 */
-	public String updateUserReleaseDot(AdminUserVO adminUserVO)
-			throws Exception {
-		Double releaseDot = Double.parseDouble(getByParam("releaseDot"));
-		String desc = getByParam("releaseDotDesc");
-		Long id = Long.parseLong(getByParam("userId"));
-		UserEntity userEntity = userDAO.get(id);
-		userEntity.setReleaseDot(ArithUtils.add(userEntity.getReleaseDot(),
-				releaseDot));
-		queryUser(adminUserVO);
-		logDotCapital(userDAO, releaseDot, desc, userEntity);
-		putAlertMsg("充值发布点成功！");
-		putJumpSelfPage("admin/adminUserManager/adminUser!queryUser.php");
-		return JUMP;
-	}
-
-	/**
 	 * 查询所有用户
 	 * 
 	 * @param userVO
@@ -195,9 +173,9 @@ public class AdminUserService extends BaseService {
 	 */
 	public String queryUser(AdminUserVO adminUserVO) throws Exception {
 		StringBuffer resultHQL = new StringBuffer(
-				"select  _user.username,_user.releaseDot,_user.money,_user.registerTime,_user.email,_user.telephone," // 5
-						+ "_user.spreadScore,_user.spreadScore,_user.releaseTaskCount,_user.receiveTaskCount,_user.vipEnable ,"// 10
-						+ " _user.status,_user.id,_user.statusDesc,_user.lastLoginTime" // 14
+				"select  _user.username,_user.money,_user.registerTime,_user.email,_user.telephone," // 4
+						+ "_user.spreadScore,_user.releaseTaskCount,_user.receiveTaskCount, "// 7
+						+ " _user.status,_user.id,_user.statusDesc,_user.lastLoginTime,_user.qq,_user.ww" // 13
 						+ " from UserEntity   as _user  where 1=1 ");
 		StringBuffer countHQL = new StringBuffer(
 				"select  count(*)  from UserEntity  as _user  where 1=1  ");
@@ -209,28 +187,6 @@ public class AdminUserService extends BaseService {
 			countHQL.append(" and _user.username like :username ");
 			paramNames.add("username");
 			paramValues.add("%" + adminUserVO.getUsername() + "%");
-		}
-		// 发布点
-		if (adminUserVO.getStartReleaseDot() != null
-				&& adminUserVO.getEndReleaseDot() != null) {
-			resultHQL
-					.append(" and (_user.releaseDot>=:startReleaseDot and _user.releaseDot<=:endReleaseDot) ");
-			countHQL
-					.append(" and (_user.releaseDot>=:startReleaseDot and _user.releaseDot<=:endReleaseDot) ");
-			paramNames.add("startReleaseDot");
-			paramNames.add("endReleaseDot");
-			paramValues.add(adminUserVO.getStartReleaseDot());
-			paramValues.add(adminUserVO.getEndReleaseDot());
-		} else if (adminUserVO.getStartReleaseDot() != null) {
-			resultHQL.append(" and _user.releaseDot>=:startReleaseDot  ");
-			countHQL.append(" and _user.releaseDot>=:startReleaseDot   ");
-			paramNames.add("startReleaseDot");
-			paramValues.add(adminUserVO.getStartReleaseDot());
-		} else if (adminUserVO.getEndReleaseDot() != null) {
-			resultHQL.append(" and   _user.releaseDot<=:endReleaseDot  ");
-			countHQL.append(" and   _user.releaseDot<=:endReleaseDot  ");
-			paramNames.add("endReleaseDot");
-			paramValues.add(adminUserVO.getEndReleaseDot());
 		}
 		// /钱
 		if (adminUserVO.getStartMoney() != null
@@ -398,14 +354,37 @@ public class AdminUserService extends BaseService {
 				paramNames.toArray(paramNames.toArray(new String[paramNames
 						.size()])), paramValues.toArray(new Object[paramValues
 						.size()]));
-		List<Object[]> result = new ArrayList<Object[]>();
+		List<Object[]> resultTemp = new ArrayList<Object[]>();
+		List<AdminUserVO> result = new ArrayList<AdminUserVO>(count.intValue());
 		if (count > 0) {
 			adminUserVO.setDataCount(count.intValue());
-			result = userDAO.pageQuery(resultHQL.toString(),
+			resultTemp = userDAO.pageQuery(resultHQL.toString(),
 					paramNames.toArray(paramNames.toArray(new String[paramNames
 							.size()])), paramValues
 							.toArray(new Object[paramValues.size()]),
 					adminUserVO.getStart(), adminUserVO.getLimit());
+			for (Object[] objs : resultTemp) {
+				adminUserVO = new AdminUserVO();
+				adminUserVO.setUsername((String) objs[0]);
+				adminUserVO.setMoney((Double) objs[1]);
+				adminUserVO.setRegeditDate((Date) objs[2]);
+				adminUserVO.setEmail((String) objs[3]);
+				adminUserVO.setTelphone((String) objs[4]);
+				adminUserVO.setSpreadScore((Integer) objs[5]);
+				adminUserVO.setReleaseTaskCount((Integer) objs[6]);
+				adminUserVO.setReceiveTaskCount((Integer) objs[7]);
+				adminUserVO.setStatus((String) objs[8]);
+				adminUserVO.setId((Long) objs[9]);
+				adminUserVO.setStatusDesc((String) objs[10]);
+				adminUserVO.setLastLoginTime((Date) objs[11]);
+				adminUserVO.setQq((String) objs[12]);
+				adminUserVO.setWw((String) objs[13]);
+				result.add(adminUserVO);
+//				"select  _user.username,_user.money,_user.registerTime,_user.email,_user.telephone," // 4
+//				+ "_user.spreadScore,_user.releaseTaskCount,_user.receiveTaskCount, "// 7
+//				+ " _user.status,_user.id,_user.statusDesc,_user.lastLoginTime,_user.qq,_user.ww" // 13
+//				+ " from UserEntity   as _user  where 1=1 ");
+			}
 		}
 		putByRequest("result", result);
 		return "queryUser";

@@ -12,12 +12,25 @@ public class AdminUserVO extends BaseVO {
 
 	// 用户名
 	private String username;
-	// 发布点
-	private Double startReleaseDot;
-	private Double endReleaseDot;
 	// 余额
 	private Double startMoney;
 	private Double endMoney;
+
+	private Double money;
+
+	private Date regeditDate;
+
+	private String qq;
+	private String ww;
+
+	private Integer spreadScore;
+
+	private String statusDesc;
+
+	private Date lastLoginTime;
+	private Integer releaseTaskCount;
+
+	private Integer receiveTaskCount;
 	// 注册日期
 	private Date regeditStartDate;
 	private Date regeditEndDate;
@@ -56,22 +69,6 @@ public class AdminUserVO extends BaseVO {
 
 	public void setUsername(String username) {
 		this.username = username;
-	}
-
-	public Double getStartReleaseDot() {
-		return startReleaseDot;
-	}
-
-	public void setStartReleaseDot(Double startReleaseDot) {
-		this.startReleaseDot = startReleaseDot;
-	}
-
-	public Double getEndReleaseDot() {
-		return endReleaseDot;
-	}
-
-	public void setEndReleaseDot(Double endReleaseDot) {
-		this.endReleaseDot = endReleaseDot;
 	}
 
 	public Double getStartMoney() {
@@ -170,7 +167,6 @@ public class AdminUserVO extends BaseVO {
 		this.endReceieveTaskCount = endReceieveTaskCount;
 	}
 
-
 	public Date getStartOverDate() {
 		return startOverDate;
 	}
@@ -203,6 +199,76 @@ public class AdminUserVO extends BaseVO {
 		this.endLastLoginTime = endLastLoginTime;
 	}
 
-	 
+	public Double getMoney() {
+		return money;
+	}
+
+	public void setMoney(Double money) {
+		this.money = money;
+	}
+
+	public Date getRegeditDate() {
+		return regeditDate;
+	}
+
+	public void setRegeditDate(Date regeditDate) {
+		this.regeditDate = regeditDate;
+	}
+
+	public Integer getSpreadScore() {
+		return spreadScore;
+	}
+
+	public void setSpreadScore(Integer spreadScore) {
+		this.spreadScore = spreadScore;
+	}
+
+	public Integer getReleaseTaskCount() {
+		return releaseTaskCount;
+	}
+
+	public void setReleaseTaskCount(Integer releaseTaskCount) {
+		this.releaseTaskCount = releaseTaskCount;
+	}
+
+	public Integer getReceiveTaskCount() {
+		return receiveTaskCount;
+	}
+
+	public void setReceiveTaskCount(Integer receiveTaskCount) {
+		this.receiveTaskCount = receiveTaskCount;
+	}
+
+	public String getStatusDesc() {
+		return statusDesc;
+	}
+
+	public void setStatusDesc(String statusDesc) {
+		this.statusDesc = statusDesc;
+	}
+
+	public Date getLastLoginTime() {
+		return lastLoginTime;
+	}
+
+	public void setLastLoginTime(Date lastLoginTime) {
+		this.lastLoginTime = lastLoginTime;
+	}
+
+	public String getQq() {
+		return qq;
+	}
+
+	public void setQq(String qq) {
+		this.qq = qq;
+	}
+
+	public String getWw() {
+		return ww;
+	}
+
+	public void setWw(String ww) {
+		this.ww = ww;
+	}
 
 }

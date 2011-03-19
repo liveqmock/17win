@@ -21,16 +21,6 @@
 						</s:textfield>
 					</td>
 					<td nowrap="nowrap">
-						发&nbsp;&nbsp;&nbsp;布&nbsp;&nbsp;&nbsp;点：
-						<s:textfield name="adminUserVO.startReleaseDot" id="startDate"
-							cssStyle="width:40px">
-						</s:textfield>
-						至
-						<s:textfield name="adminUserVO.endReleaseDot" id="endDate"
-							cssStyle="width:40px">
-						</s:textfield>
-					</td>
-					<td nowrap="nowrap">
 						余&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;额：
 						<s:textfield name="adminUserVO.startMoney" id="startDate"
 							cssStyle="width:40px">
@@ -49,6 +39,20 @@
 						至
 						<s:textfield name="adminUserVO.regeditEndDate" id="endDate"
 							readonly="true"
+							onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})"
+							cssStyle="width:80px">
+						</s:textfield>
+					</td>
+					<td nowrap="nowrap">
+						最后登录时间：
+						<s:textfield name="adminUserVO.startLastLoginTime"
+							id="startLastLoginDate"
+							onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})"
+							readonly="true" cssStyle="width:80px">
+						</s:textfield>
+						至
+						<s:textfield name="adminUserVO.endLastLoginTime"
+							id="endLastLoginDate" readonly="true"
 							onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})"
 							cssStyle="width:80px">
 						</s:textfield>
@@ -106,26 +110,8 @@
 							list="#{'0':'未激活','1':'正常','2':'冻结','3':'找密码中'}">
 						</s:select>
 					</td>
-					<td nowrap="nowrap">
-						最后登录时间：
-						<s:textfield name="adminUserVO.startLastLoginTime"
-							id="startLastLoginDate"
-							onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})"
-							readonly="true" cssStyle="width:80px">
-						</s:textfield>
-						至
-						<s:textfield name="adminUserVO.endLastLoginTime"
-							id="endLastLoginDate" readonly="true"
-							onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd','skin':'blue'})"
-							cssStyle="width:80px">
-						</s:textfield>
-					</td>
-					<Td>
 
-					</Td>
-				</tr>
-				<tr>
-					<td colspan="4">
+					<Td colspan="2">
 						<input type="submit" value="查&nbsp;&nbsp;询"
 							style="cursor: pointer;">
 						<input type="button" value="删&nbsp;&nbsp;除" onclick="deleteUser()"
@@ -134,7 +120,7 @@
 							style="cursor: pointer; color: red">
 						<input type="button" value="站内信" onclick="openSmsDiv()"
 							style="cursor: pointer; color: red">
-					</td>
+					</Td>
 				</tr>
 			</table>
 			<br>
@@ -152,6 +138,12 @@
 							用户名
 						</th>
 						<th nowrap="nowrap" style="font-size: 12px;">
+							QQ
+						</th>
+						<th nowrap="nowrap" style="font-size: 12px;">
+							旺旺
+						</th>
+						<th nowrap="nowrap" style="font-size: 12px;">
 							最后登录时间
 						</th>
 						<th nowrap="nowrap" style="font-size: 12px;">
@@ -162,9 +154,6 @@
 						</th>
 						<th nowrap="nowrap" style="font-size: 12px;">
 							余额
-						</th>
-						<th nowrap="nowrap" style="font-size: 12px;">
-							发布点
 						</th>
 						<th nowrap="nowrap" style="font-size: 12px;">
 							注册时间
@@ -191,95 +180,81 @@
 						<tr>
 							<td>
 								<input name="userIDs" type="checkbox"
-									value="<s:property value="#user[12]" />"
+									value="<s:property value="#user.id" />"
 									selectUserName="selectUserName" />
 							</td>
 							<td>
 								<s:property
 									value="(adminUserVO.nowPage-1)*adminUserVO.eachPage+#index.index+1" />
 							</td>
-							<td title="<s:property value="#user[0]" />">
-								<s:property value="#user[0]" />
+							<td title="<s:property value="#user.username" />">
+								<s:property value="#user.username" />
 							</td>
-							<td title="<s:date name="#user[14]" format="yyyy-MM-dd" />">
-								<s:date name="#user[14]" format="yyyy-MM-dd" />
+							<td title="<s:property value="#user.qq" />">
+								<s:property value="#user.qq" />
+							</td>
+							<td title="<s:property value="#user.ww" />">
+								<s:property value="#user.ww" />
+							</td>
+							<td
+								title="<s:date name="#user.lastLoginTime" format="yyyy-MM-dd" />">
+								<s:date name="#user.lastLoginTime" format="yyyy-MM-dd" />
 							</td>
 							<td
 								title="
-								<s:if test="#user[11]==0">
+								<s:if test="#user.status==0">
 									未激活
 								</s:if>
-								<s:elseif test="#user[11]==1">正常</s:elseif>
-								<s:elseif test="#user[11]==2">冻结</s:elseif>
-								<s:elseif test="#user[11]==3">找密码</s:elseif>
+								<s:elseif test="#user.status==1">正常</s:elseif>
+								<s:elseif test="#user.status==2">冻结</s:elseif>
+								<s:elseif test="#user.status==3">找密码</s:elseif>
 							">
-								<s:if test="#user[11]==0">
+								<s:if test="#user.status==0">
 									未激活
 								</s:if>
-								<s:elseif test="#user[11]==1">正常</s:elseif>
-								<s:elseif test="#user[11]==2">冻结</s:elseif>
-								<s:elseif test="#user[11]==3">找密码</s:elseif>
+								<s:elseif test="#user.status==1">正常</s:elseif>
+								<s:elseif test="#user.status==2">冻结</s:elseif>
+								<s:elseif test="#user.status==3">找密码</s:elseif>
 							</td>
-							<td title="<s:property value="#user[13]" />">
-								<s:property value="#user[13]" />
+							<td title="<s:property value="#user.statusDesc" />">
+								<s:property value="#user.statusDesc" />
 							</td>
 
-							<td title="<s:property value="#user[2]" />">
-								<s:property value="#user[2]" />
-							</td>
-							<td title="<s:property value="#user[1]" />">
-								<s:property value="#user[1]" />
-							</td>
-							<td title="<s:date name="#user[3]" format="yyyy-MM-dd" />">
-								<s:date name="#user[3]" format="yyyy-MM-dd" />
-							</td>
-							<td title="<s:property value="#user[4]" />">
-								<s:property value="#user[4]" />
-							</td>
-							<td title="<s:property value="#user[5]" />">
-								<s:property value="#user[5]" />
-							</td>
-							<td title="<s:property value="#user[8]" />">
-								<s:property value="#user[8]" />
-							</td>
-							<td title="<s:property value="#user[9]" />">
-								<s:property value="#user[9]" />
+							<td title="<s:property value="#user.money" />">
+								<s:property value="#user.money" />
 							</td>
 							<td
-								title="
-								<s:if test="#user[10]">
-									是
-								</s:if>
-								<s:else>
-									否
-								</s:else>
-							">
-								<s:if test="#user[10]">
-									是
-								</s:if>
-								<s:else>
-									否
-								</s:else>
+								title="<s:date name="#user.regeditDate" format="yyyy-MM-dd" />">
+								<s:date name="#user.regeditDate" format="yyyy-MM-dd" />
+							</td>
+							<td title="<s:property value="#user.email" />">
+								<s:property value="#user.email" />
+							</td>
+							<td title="<s:property value="#user.telphone" />">
+								<s:property value="#user.telphone" />
+							</td>
+							<td title="<s:property value="#user.releaseTaskCount" />">
+								<s:property value="#user.releaseTaskCount" />
+							</td>
+							<td title="<s:property value="#user.receiveTaskCount" />">
+								<s:property value="#user.receiveTaskCount" />
 							</td>
 							<td align="center">
-								<s:if test="#user[11]==0">
+								<s:if test="#user.status==0">
 									<a
-										href="javascript:updateStatus('<s:property value="#user[12]" />','1')">激活</a>
+										href="javascript:updateStatus('<s:property value="#user.id" />','1')">激活</a>
 								</s:if>
-								<s:elseif test="#user[11]==2">
+								<s:elseif test="#user.status==2">
 									<a
-										href="javascript:updateStatus('<s:property value="#user[12]" />','1')">解冻</a>
+										href="javascript:updateStatus('<s:property value="#user.id" />','1')">解冻</a>
 								</s:elseif>
-								<s:elseif test="#user[11]==1">
+								<s:elseif test="#user.status==1">
 									<a
-										href="javascript:updateStatus('<s:property value="#user[12]" />','2')">冻结</a>
+										href="javascript:updateStatus('<s:property value="#user.id" />','2')">冻结</a>
 								</s:elseif>
 								<br>
-								<a
-									href="javascript:addMoney('<s:property value="#user[12]" />')">充值金额</a>
+								<a href="javascript:addMoney('<s:property value="#user.id" />')">充值金额</a>
 								<br>
-								<a
-									href="javascript:addReleaseDot('<s:property value="#user[12]" />')">充值发布点</a>
 							</td>
 						</tr>
 					</s:iterator>
@@ -363,33 +338,6 @@
 			</s:form>
 		</div>
 
-		<div id="updateReleaseDotDIV" title="充值发布点" style="display: none">
-			<s:form action="adminUserManager/adminUser!addReleaseDot.php"
-				id="releaseDotForm" theme="simple">
-				<table cellpadding="0" cellspacing="0" border="0">
-					<tr class="sellerClass">
-						<td valign="middle" nowrap="nowrap">
-							发布点：
-						</td>
-						<td>
-							<input type="text" name="releaseDot" id="releaseDotId"
-								style="width: 80px">
-							<input type="hidden" name="userId" id="releaseDotUserIdId">
-						</td>
-					</tr>
-					<tr class="sellerClass">
-						<td valign="middle" nowrap="nowrap">
-							描述：
-						</td>
-						<td>
-							<input type="text" name="releaseDotDesc" id="releaseDotDescID"
-								maxlength="200" style="width: 400px">
-						</td>
-
-					</tr>
-				</table>
-			</s:form>
-		</div>
 
 		<div id="updateStatusDIV" title="状态切换" style="display: none">
 			<s:form action="adminUserManager/adminUser!updateStatus.php"

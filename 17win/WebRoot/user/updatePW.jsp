@@ -102,13 +102,15 @@ img {
 														</td>
 													</tr>
 													<tr>
-														<td width="146" height="40" align="right" class="font12h" valign="top"> 
+														<td width="146" height="40" align="right" class="font12h"
+															valign="top">
 															当前操作密码：
 														</td>
 														<td width="230">
 															<s:password id="oldPpertationCode"
 																name="userVO.operationCode" size="30"
-																cssStyle="width:210px"></s:password><font  color="red">（必填）</font>
+																cssStyle="width:210px"></s:password>
+															<font color="red">（必填）</font>
 															<br />
 															修改密码需要提供当前操作密码
 
@@ -137,7 +139,7 @@ img {
 																name="userVO.userEntity.loginPassword" size="30"
 																cssStyle="width:210px"></s:password>
 															<br />
-															留空则不修改
+															<SPAN class="red-bcolor"> 留空则不修改 </SPAN>
 														</td>
 
 														<td>

@@ -314,7 +314,7 @@ public class BaseService {
 		CapitalLogEntity capitalLogEntity = new CapitalLogEntity();
 		capitalLogEntity.setType("3");
 		capitalLogEntity.setValue(value);
-		capitalLogEntity.setRemainValue(userEntity.getConvertScore()
+		capitalLogEntity.setRemainValue(userEntity.getUpgradeScore()
 				.doubleValue());
 		capitalLogEntity.setDesc(desc);
 		capitalLogEntity.setUser(userEntity);
@@ -344,19 +344,6 @@ public class BaseService {
 		}
 		return getByParam(Constant.WIN17_TOKEN).equals(
 				getBySession(Constant.WIN17_TOKEN));
-	}
-
-	// 保存发布点记录
-	protected void logDotCapital(BaseDAO baseDAO, Double value, String desc,
-			UserEntity userEntity) throws Exception {
-		//		CapitalLogEntity capitalLogEntity = new CapitalLogEntity();
-		//		capitalLogEntity.setType("2");
-		//		capitalLogEntity.setValue(value);
-		//		capitalLogEntity.setRemainValue(userEntity.getReleaseDot());
-		//		capitalLogEntity.setDesc(desc);
-		//		capitalLogEntity.setUser(userEntity);
-		//		capitalLogEntity.setLogTime(new Date());
-		//		baseDAO.save(capitalLogEntity);
 	}
 
 	protected Boolean nullID(BaseEntity base) {

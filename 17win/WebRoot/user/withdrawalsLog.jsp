@@ -118,7 +118,7 @@ img {
 															id="shopType"> &nbsp;&nbsp;店铺类型：<s:select
 																name="withdrawalsVO.shopType" listKey="key"
 																listValue="value" headerKey="" headerValue="--请选择--"
-																list="#{'1':'淘宝','2':'拍拍','3':'有啊'}">
+																list="#{'1':'淘宝','2':'拍拍'}">
 															</s:select> </span>
 													</td>
 													<td>

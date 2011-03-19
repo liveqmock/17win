@@ -93,9 +93,6 @@
 								<s:if test="#capitalLog.type==1">
 																  金额
 																</s:if>
-								<s:elseif test="#capitalLog.type==2">
-																	发布点
-																</s:elseif>
 								<s:elseif test="#capitalLog.type==3">
 																	积分
 																</s:elseif>

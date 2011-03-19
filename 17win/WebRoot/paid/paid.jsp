@@ -171,7 +171,7 @@ img {
 																			</td>
 																			<td>
 																				<input type="text" name="verificationCode"
-																					id="verificationCodeID" maxlength="4"
+																					id="opertationCodeId" maxlength="4"
 																					style="width: 40px">
 																				<img id="verificationCodeID"
 																					onclick="changeValidateCode(this)"

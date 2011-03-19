@@ -48,52 +48,17 @@ public final class Constant {
 	private static String winEmailHost;
 	private static String winEmailPassword;
 	private static String winEmailUsername;
-	/**
-	 * 价格
-	 */
-	private static Double fabudian_P;
-	private static Double huangguan_P;
-	private static Double shuangzuan_P;
-	private static Double zuanshi_P;
-	/**
-	 * 数量
-	 */
-	private static Double huangguan_N;
-	private static Double shuangzuan_N;
-	private static Double zuanshi_N;
-	/**
-	 * vip
-	 */
-	private static Double vipPrice;
-	private static Double vipYearRebate;
 
-	// 接任务所扣的发布点折扣率
-	private static Double receieveTaskDotRate;
 	// 信誉值上限
-	private static Double taobaoCreditValueLimit = 250D;
+	private static Double taobaoCreditValueLimit;
 	// 信誉值上限
-	private static Double paipaiCreditValueLimit = 100D;
-	// 发布点兑换成金额
-	private static Double releaseDotChangeMoney;
-	// 积分兑换发布点
-	private static Double scoreChangeReleaseDot;
+	private static Double paipaiCreditValueLimit;
+
 	// 登录时获得的积分，非会员
 	private static Double loginScore;
-	// 通过你的宣传链接注册的会员购买VIP，你获得的金额
-	private static Double refreeByVipMoney;
 
-	// 当购买发布点的时候，推广人所得金额为，他推荐人买的发布点的金额的0.01
-	private static Double buyReleaseDotRebateToRefree;
-
-	// 积累接手100个任务 推广人获取10元钱
-	private static Double task100RefreeMoney;
 	// 通过你的宣传链接注册的会员积分每上升1000 ，你的收益=100积分
 	private static Double score1000Refree;
-
-	// 初始化用户金额
-	private static Double initUserMoney;
-	// 初始化用户发布点
-	private static Double initUserReleaseDot;
 	// 支付界面
 	private static String toPayPage;
 	// 最大注册数
@@ -107,81 +72,12 @@ public final class Constant {
 	public static Boolean stopTask = true;
 	public static Boolean stopAll = true;
 
-	public static Double getFabudianPrice() {
-		return fabudian_P;
-	}
-
-	public static Double getHuangguanPrice() {
-		return huangguan_P;
-	}
-
-	public static Double getShuangzuanPrice() {
-		return shuangzuan_P;
-	}
-
-	public static Double getZuanshiPrice() {
-		return zuanshi_P;
-	}
-
-	// //
-	public static Double getHuangguanNumber() {
-		return huangguan_N;
-	}
-
-	public static Double getShuangzuanNumber() {
-		return shuangzuan_N;
-	}
-
-	public static Double getZuanshiNumber() {
-		return zuanshi_N;
-	}
-
-	public static Double getVipYearRebate() {
-		return vipYearRebate;
-	}
-
-	public static Double getVipPrice() {
-		return vipPrice;
-	}
-
-	public static Double getReceieveTaskDotRate() {
-		return receieveTaskDotRate;
-	}
-
-	public static Double getBuyReleaseDotRebateToRefree() {
-		return buyReleaseDotRebateToRefree;
-	}
-
-	public static Double getReleaseDotChangeMoney() {
-		return releaseDotChangeMoney;
-	}
-
-	public static Double getScoreChangeReleaseDot() {
-		return scoreChangeReleaseDot;
-	}
-
 	public static Double getLoginScore() {
 		return loginScore;
 	}
 
-	public static Double getRefreeByVipMoney() {
-		return refreeByVipMoney;
-	}
-
-	public static Double getTask100RefreeMoney() {
-		return task100RefreeMoney;
-	}
-
 	public static Double getScore1000Refree() {
 		return score1000Refree;
-	}
-
-	public static Double getInitUserMoney() {
-		return initUserMoney;
-	}
-
-	public static Double getInitUserReleaseDot() {
-		return initUserReleaseDot;
 	}
 
 	public static String getWinEmail() {
@@ -297,82 +193,17 @@ public final class Constant {
 				name = rs.getString("name_");
 				numberValue = rs.getDouble("numberValue_");
 				stringValue = rs.getString("stringValue_");
-				// 发布点价格
-				if ("fabudianPrice".equalsIgnoreCase(name)) {
-					fabudian_P = numberValue;
-				}
-				// 皇冠价格
-				else if ("huangguanPrice".equalsIgnoreCase(name)) {
-					huangguan_P = numberValue;
-				}
-				// 双钻价格
-				else if ("shuangzuanPrice".equalsIgnoreCase(name)) {
-					shuangzuan_P = numberValue;
-				}
-				// 钻石价格
-				else if ("zuanshikaPrice".equalsIgnoreCase(name)) {
-					zuanshi_P = numberValue;
-				}
-				// 皇冠数量
-				else if ("huangguanCount".equalsIgnoreCase(name)) {
-					huangguan_N = numberValue;
-				}
-				// 双钻数量
-				else if ("shuangzuanCount".equalsIgnoreCase(name)) {
-					shuangzuan_N = numberValue;
-				}
-				// 钻石数量
-				else if ("zuanshiCount".equalsIgnoreCase(name)) {
-					zuanshi_N = numberValue;
-				}
-				// vip 一个月价格
-				else if ("vipPrice".equalsIgnoreCase(name)) {
-					vipPrice = numberValue;
-				}
-				// vip 一年的则扣率
-				else if ("vipYearRebate".equalsIgnoreCase(name)) {
-					vipYearRebate = numberValue;
-				}
-				// 接任务所得的发布点
-				else if ("receieveTaskDotRate".equalsIgnoreCase(name)) {
-					receieveTaskDotRate = numberValue;
-				}
-				// 当购买发布点的时候，推广人所得金额为，他推荐人买的发布点的金额的0.01
-				else if ("buyReleaseDotRebateToRefree".equalsIgnoreCase(name)) {
-					buyReleaseDotRebateToRefree = numberValue;
-				}
-				// 发布点兑换成金额
-				else if ("releaseDotChangeMoney".equalsIgnoreCase(name)) {
-					releaseDotChangeMoney = numberValue;
-				}
-				// 积分兑换成发布点
-				else if ("scoreChangeReleaseDot".equalsIgnoreCase(name)) {
-					scoreChangeReleaseDot = numberValue;
-				}
-				// 积分兑换成发布点
-				else if ("loginScore".equalsIgnoreCase(name)) {
+
+				// 登录时的积分
+				if ("loginScore".equalsIgnoreCase(name)) {
 					loginScore = numberValue;
 				}
-				// 通过你的宣传链接注册的会员购买VIP，获得n元
-				else if ("refreeByVipMoney".equalsIgnoreCase(name)) {
-					refreeByVipMoney = numberValue;
-				}
-				// 积累接手100个任务 推广人获取N元钱
-				else if ("task100RefreeMoney".equalsIgnoreCase(name)) {
-					task100RefreeMoney = numberValue;
-				}
+
 				// 通过你的宣传链接注册的会员积分每上升1000 ，你的收益=N积分
 				else if ("score1000Refree".equalsIgnoreCase(name)) {
 					score1000Refree = numberValue;
 				}
-				//
-				else if ("initUserMoney".equalsIgnoreCase(name)) {
-					initUserMoney = numberValue;
-				}
-				//
-				else if ("initUserReleaseDot".equalsIgnoreCase(name)) {
-					initUserReleaseDot = numberValue;
-				}
+
 				// 谢国俊监控邮箱
 				else if ("xgjEmail".equalsIgnoreCase(name)) {
 					xgjEmail = stringValue;
@@ -404,6 +235,14 @@ public final class Constant {
 				// 最大注册数
 				else if ("maxRegisterCount".equalsIgnoreCase(name)) {
 					maxRegisterCount = numberValue;
+				}
+				//淘宝信誉值
+				else if ("taobaoCreditValueLimit".equalsIgnoreCase(name)) {
+					taobaoCreditValueLimit = numberValue;
+				}
+				//拍拍信誉值
+				else if ("paipaiCreditValueLimit".equalsIgnoreCase(name)) {
+					paipaiCreditValueLimit = numberValue;
 				}
 				// 停止所有(不包括HTML)
 				else if ("stopAll".equalsIgnoreCase(name)) {

@@ -21,7 +21,7 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 import sun.misc.BASE64Decoder;
 
-@SuppressWarnings({"unused", "deprecation"})
+@SuppressWarnings( { "unused", "deprecation" })
 @Service("userService")
 public class UserService extends BaseService {
 	@Resource
@@ -124,11 +124,11 @@ public class UserService extends BaseService {
 		UserEntity userEntity = userDAO
 				.uniqueResult(
 						"from UserEntity  as _u where _u.username=:username and _u.loginPassword=:loginPassword",
-						new String[]{"username", "loginPassword"},
-						new Object[]{
+						new String[] { "username", "loginPassword" },
+						new Object[] {
 								userVO.getUserEntity().getUsername(),
 								StringUtils.processPwd(userVO.getUserEntity()
-										.getLoginPassword())});
+										.getLoginPassword()) });
 		if (userEntity == null) {
 			putAlertMsg("用户名或密码错误");
 			userVO.setVerificationCode(null);
@@ -142,8 +142,6 @@ public class UserService extends BaseService {
 
 			if (!oldDateStr.equals(newDateStr)) {
 				userEntity.setUpgradeScore(userEntity.getUpgradeScore()
-						+ LOGIN_SCORE);
-				userEntity.setConvertScore(userEntity.getConvertScore()
 						+ LOGIN_SCORE);
 				logScoreCapital(userDAO, 0.0 + LOGIN_SCORE, "每天登录一次",
 						userEntity);
@@ -176,11 +174,11 @@ public class UserService extends BaseService {
 		UserEntity userEntity = userDAO
 				.uniqueResult(
 						"from UserEntity  as _u where _u.username=:username and _u.loginPassword=:loginPassword  and _u.type=:type",
-						new String[]{"username", "loginPassword", "type"},
-						new Object[]{
+						new String[] { "username", "loginPassword", "type" },
+						new Object[] {
 								userVO.getUserEntity().getUsername(),
 								StringUtils.processPwd(userVO.getUserEntity()
-										.getLoginPassword()), "1"});
+										.getLoginPassword()), "1" });
 		if (userEntity == null) {
 			putAlertMsg("用户名或密码错误");
 			putJumpSelfPage("/admin");
@@ -196,6 +194,7 @@ public class UserService extends BaseService {
 			return JUMP;
 		}
 	}
+
 	/**
 	 * 登陆ADMIN
 	 * 
@@ -217,6 +216,7 @@ public class UserService extends BaseService {
 			return JUMP;
 		}
 	}
+
 	/**
 	 * 初始化注册
 	 * 
@@ -280,7 +280,6 @@ public class UserService extends BaseService {
 				.getLoginPassword()));
 		userEntity.setOpertationCode(StringUtils.processPwd(userEntity
 				.getOpertationCode()));
-
 		// 推广人
 		if (StringUtils.isBlank(userEntity.getReferee().getUsername())) {
 			userEntity.setReferee(null);
@@ -288,19 +287,6 @@ public class UserService extends BaseService {
 			userEntity.setReferee(userDAO.findUserByName(userEntity
 					.getReferee().getUsername()));
 		}
-		//
-		userEntity.setReleaseDot(Constant.getInitUserReleaseDot());
-		if (Constant.getInitUserReleaseDot() > 0.0) {
-			logDotCapital(userDAO, Constant.getInitUserReleaseDot(), "注册用户获得"
-					+ Constant.getInitUserReleaseDot() + "个发布点", userEntity);
-		}
-		userEntity.setMoney(Constant.getInitUserMoney());
-		if (Constant.getInitUserMoney() > 0.0) {
-			logMoneyCapital(userDAO, Constant.getInitUserMoney(), "注册用户获得"
-					+ Constant.getInitUserMoney() + "金额", userEntity);
-		}
-		userEntity.setReleaseDot(Constant.getInitUserReleaseDot());
-
 		try {
 			MailUtils.sendCommonMail(mailSender, freeMarkerCfj, "注册成功",
 					userEntity.getUsername() + "：欢迎您注册www.17win.com(一起赢)平台。",
@@ -315,7 +301,6 @@ public class UserService extends BaseService {
 				+ "在"
 				+ DateUtils.format(new Date(), DateUtils.DATE_TIME_FORMAT)
 				+ "注册", Constant.getXgjEmail());
-
 		//
 		userEntity.setLastLoginTime(new Date());
 		userEntity.setUpgradeScore(userEntity.getUpgradeScore()

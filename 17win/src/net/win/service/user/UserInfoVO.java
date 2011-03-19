@@ -7,15 +7,12 @@ import net.win.BaseVO;
 public class UserInfoVO extends BaseVO {
 
 	public UserInfoVO(String username, String qq, Integer releaseTaskCount,
-			Integer receiveTaskCount, Date registerTime, Integer convertScore,
-			Double releaseDot) {
+			Integer receiveTaskCount, Date registerTime) {
 		this.username = username;
 		this.qq = qq;
 		this.releaseTaskCount = releaseTaskCount;
 		this.receiveTaskCount = receiveTaskCount;
 		this.registerTime = registerTime;
-		this.convertScore = convertScore;
-		this.releaseDot = releaseDot;
 	}
 
 	public UserInfoVO(String username, Integer spreadCount, Integer spreadScore) {
@@ -28,15 +25,11 @@ public class UserInfoVO extends BaseVO {
 	private String username;
 	// QQ
 	private String qq;
-	// 发布点
-	private Double releaseDot = 2.0;
 	// 电子邮箱
 	private String email;
 	// 手机
 	private String telephone;
-	// 可以兑换发布点的积分
-	private Integer convertScore = 0;
-	// 升级用的积分，不能兑换发布点
+	// 升级用的积分， 
 	private Integer upgradeScore = 0;
 	// 注册时间
 	private Date registerTime = new Date();
@@ -65,14 +58,6 @@ public class UserInfoVO extends BaseVO {
 		this.qq = qq;
 	}
 
-	public Double getReleaseDot() {
-		return releaseDot;
-	}
-
-	public void setReleaseDot(Double releaseDot) {
-		this.releaseDot = releaseDot;
-	}
-
 	public String getEmail() {
 		return email;
 	}
@@ -89,13 +74,9 @@ public class UserInfoVO extends BaseVO {
 		this.telephone = telephone;
 	}
 
-	public Integer getConvertScore() {
-		return convertScore;
-	}
+ 
 
-	public void setConvertScore(Integer convertScore) {
-		this.convertScore = convertScore;
-	}
+	 
 
 	public Integer getUpgradeScore() {
 		return upgradeScore;

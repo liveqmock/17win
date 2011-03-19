@@ -39,15 +39,11 @@ public class CreditTaskVO extends BaseVO {
 	private String testID;
 	// 接手人IP
 	private String receiveIP;
-	// 发布点
-	private Double releaseDot;
 	// 评语
 	private String comment;
 
 	// 附加金额、
 	private Double addtionMoney;
-	// 附加发布点
-	private Double addtionReleaseDot;
 
 	// 任务保护
 	private Boolean protect;
@@ -285,13 +281,7 @@ public class CreditTaskVO extends BaseVO {
 		this.assignUser = assignUser;
 	}
 
-	public Double getReleaseDot() {
-		return releaseDot;
-	}
-
-	public void setReleaseDot(Double releaseDot) {
-		this.releaseDot = releaseDot;
-	}
+	 
 
 	public Double getAddtionMoney() {
 		return addtionMoney;
@@ -301,13 +291,6 @@ public class CreditTaskVO extends BaseVO {
 		this.addtionMoney = addtionMoney;
 	}
 
-	public Double getAddtionReleaseDot() {
-		return addtionReleaseDot;
-	}
-
-	public void setAddtionReleaseDot(Double addtionReleaseDot) {
-		this.addtionReleaseDot = addtionReleaseDot;
-	}
 
 	public String getTaskType() {
 		return taskType;
@@ -420,6 +403,7 @@ public class CreditTaskVO extends BaseVO {
 	public void setFbUpgradeScore(Integer fbUpgradeScore) {
 		this.fbUpgradeScore = fbUpgradeScore;
 	}
+
 	public Date getFbStartDate() {
 		return fbStartDate;
 	}

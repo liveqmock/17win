@@ -14,13 +14,12 @@ import net.win.entity.CreditTaskEntity;
 import net.win.entity.UserEntity;
 import net.win.stragegy.ScoreStrategy;
 import net.win.utils.ArithUtils;
-import net.win.utils.Constant;
 import net.win.utils.StringUtils;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Service;
 
-@SuppressWarnings({"unchecked"})
+@SuppressWarnings( { "unchecked" })
 @Service("adminTaskService")
 public class AdminTaskService extends BaseService {
 	@Resource
@@ -219,8 +218,6 @@ public class AdminTaskService extends BaseService {
 		Integer releaseScore = 5;
 		releaseUser.setUpgradeScore(releaseUser.getUpgradeScore()
 				+ releaseScore);
-		releaseUser.setConvertScore(releaseUser.getConvertScore()
-				+ releaseScore);
 		logScoreCapital(userDAO, releaseScore + 0.0, "您发起的"
 				+ creditTask.getTestID() + "任务完成，获得积分", releaseUser);
 		/**
@@ -233,16 +230,8 @@ public class AdminTaskService extends BaseService {
 				+ creditTask.getAddtionMoney()));
 		receiveUser.setUpgradeScore(receiveUser.getUpgradeScore()
 				+ receieveScore);
-		receiveUser.setConvertScore(receiveUser.getConvertScore()
-				+ receieveScore);
 		logScoreCapital(userDAO, receieveScore + 0.0, "您接手的"
 				+ creditTask.getTestID() + "任务完成，获得积分", receiveUser);
-		/**
-		 * 发布点
-		 */
-		Double releaseDot = 0D;
-		receiveUser.setReleaseDot(ArithUtils.add(receiveUser.getReleaseDot(),
-				releaseDot + creditTask.getAddtionReleaseDot()));
 		/**
 		 * 计算发布和任务数
 		 */
@@ -252,20 +241,6 @@ public class AdminTaskService extends BaseService {
 		creditTask.setStatus(TaskMananger.STEP_SIX_STATUS);
 		putAlertMsg("好评成功，任务完成！");
 
-		/**
-		 * 计算推广
-		 */
-		// 积累接手100个任务
-		if (receiveUser.getReceiveTaskCount() % 100 == 0) {
-			UserEntity refereeUser = receiveUser.getReferee();
-			if (refereeUser != null) {
-				refereeUser.setMoney(Constant.getTask100RefreeMoney()
-						+ refereeUser.getMoney());
-				logMoneyCapital(userDAO, Constant.getTask100RefreeMoney(),
-						"你推广的用户接手了100个任务你获得" + Constant.getTask100RefreeMoney()
-								+ "元！", refereeUser);
-			}
-		}
 		// 通过你的宣传链接注册的会员积分每上升1000
 		// 你的收益=100积分
 		ScoreStrategy.updateRefreeScoreByScore(userDAO, receiveUser);
@@ -273,9 +248,6 @@ public class AdminTaskService extends BaseService {
 
 		logMoneyCapital(userDAO, creditTask.getMoney()
 				+ creditTask.getAddtionMoney(), "接手任务获取金额", receiveUser);
-
-		logDotCapital(userDAO, releaseDot + creditTask.getAddtionReleaseDot(),
-				"接手任务获取发布点", receiveUser);
 
 		// 更新信息
 		updateUserLoginInfo(releaseUser);

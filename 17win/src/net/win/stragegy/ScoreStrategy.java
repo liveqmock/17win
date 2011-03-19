@@ -40,9 +40,6 @@ public final class ScoreStrategy {
 				userEntity.getReferee().setUpgradeScore(
 						userEntity.getReferee().getUpgradeScore()
 								+ REFREE_SCORE);
-				userEntity.getReferee().setConvertScore(
-						userEntity.getReferee().getConvertScore()
-								+ REFREE_SCORE);
 				updatScore(baseDAO, REFREE_SCORE + 0.0, "您推广的"
 						+ userEntity.getUsername() + "积分达到1000，您获得"
 						+ REFREE_SCORE + "点积分!", userEntity);
@@ -56,7 +53,7 @@ public final class ScoreStrategy {
 		CapitalLogEntity capitalLogEntity = new CapitalLogEntity();
 		capitalLogEntity.setType("3");
 		capitalLogEntity.setValue(value);
-		capitalLogEntity.setRemainValue(userEntity.getConvertScore().doubleValue());
+		capitalLogEntity.setRemainValue(userEntity.getUpgradeScore().doubleValue());
 		capitalLogEntity.setDesc(desc);
 		capitalLogEntity.setUser(userEntity);
 		capitalLogEntity.setLogTime(new Date());

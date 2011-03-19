@@ -31,7 +31,7 @@ $(document).ready(function() {
 						+ "			|    "
 						+ "			<a target='_self' href='userInfoManager/info!init.php'> "
 						+ "				[个人中心] </a>|  "
-						+ "		<a  href='javascript:window.external.addFavorite(\"http://www.17win.net\",\"淘宝,拍拍，有啊完全免费互刷信誉\");'	title='添加到收藏夹'>[收藏本站]</a>  ";
+						+ "		<a  href='javascript:window.external.addFavorite(\"http://www.17win.net\",\"17win(一起赢)互刷平台\");'	title='添加到收藏夹'>[收藏本站]</a>  ";
 				var tableYes = "<table width='100%' cellspacing='0' cellpadding='0' border='0' class='LeftNews'>  "
 						+ "			<tbody>  "
 						+ "			<tr> "
@@ -47,10 +47,7 @@ $(document).ready(function() {
 						+ "					您拥有： "
 						+ "					<font color='#ff0000'>"
 						+ user.money
-						+ "</font> 元 发布点： "
-						+ "					<font color='#ff0000'>"
-						+ user.releaseDot
-						+ "</font>点 "
+						+ "</font> 元   "
 						+ "				</td> "
 						+ "			</tr> "
 						+ "			<tr> "

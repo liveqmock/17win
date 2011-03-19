@@ -128,7 +128,7 @@ public class LogisticsService extends BaseService {
 						new String[] { "userID", "logistisID" }, new Object[] {
 								getLoginUser().getId(), logisticsIDLong });
 		if (count > 0) {
-			putAlertMsg("您已经使用过该物流信息，去您的【个人中心】→【我使用的物流】可以查找到，本次操作不会扣除您的发布点！");
+			putAlertMsg("您已经使用过该物流信息，去您的【个人中心】→【我使用的物流】可以查找到，本次操作不会扣除您的金额！");
 			return JUMP;
 		} else {
 			LogisticsEntity logisticsEntity = logisticsDAO.get(logisticsIDLong);

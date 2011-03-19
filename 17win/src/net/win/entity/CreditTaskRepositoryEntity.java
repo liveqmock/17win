@@ -59,11 +59,6 @@ public class CreditTaskRepositoryEntity extends BaseEntity {
 	// 间隔几个小时(x*24[勾选]或则X[自定义] 0为马上收货) 收货时间
 	@Column(name = "INTERVAL_HOUR_", nullable = false)
 	private Integer intervalHour;
-
-	// 发布点
-	@Column(name = "RELEASE_DOT_", nullable = false)
-	private Double releaseDot;
-
 	// 发布人的卖家号
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "SELLER_ID_")
@@ -75,9 +70,6 @@ public class CreditTaskRepositoryEntity extends BaseEntity {
 	// 附加金额、
 	@Column(name = "ADDTATION_MONEY", nullable = false)
 	private Double addtionMoney = 0d;
-	// 附加发布点
-	@Column(name = "ADDTATION_RELEASE_DOT", nullable = false)
-	private Double addtionReleaseDot = 0d;
 
 	// 所属人
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = UserEntity.class)
@@ -180,28 +172,12 @@ public class CreditTaskRepositoryEntity extends BaseEntity {
 		this.dispathCount = dispathCount;
 	}
 
-	public Double getReleaseDot() {
-		return releaseDot;
-	}
-
-	public void setReleaseDot(Double releaseDot) {
-		this.releaseDot = releaseDot;
-	}
-
 	public Double getAddtionMoney() {
 		return addtionMoney;
 	}
 
 	public void setAddtionMoney(Double addtionMoney) {
 		this.addtionMoney = addtionMoney;
-	}
-
-	public Double getAddtionReleaseDot() {
-		return addtionReleaseDot;
-	}
-
-	public void setAddtionReleaseDot(Double addtionReleaseDot) {
-		this.addtionReleaseDot = addtionReleaseDot;
 	}
 
 	public String getAssignUser() {

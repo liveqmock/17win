@@ -49,7 +49,7 @@ public class AdminLogisticsService extends BaseService {
 		UserEntity releaseUser = logisticsEntity.getReleaseUser();
 		List<UserEntity> reveieveUsers = logisticsEntity.getReceieveUsers();
 		if (reveieveUsers.size() > 0) {
-			// 如果有多余的发布点扣除，就扣金额 + 10(处罚)
+			// 如果有多余金额，就扣金额 + 10(处罚)
 			if (releaseUser.getMoney() > (logisticsEntity.getUseCount()
 					* logisticsEntity.getMoney() + 10)) {
 				releaseUser.setMoney(ArithUtils.sub(releaseUser.getMoney(),

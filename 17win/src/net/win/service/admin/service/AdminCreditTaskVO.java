@@ -35,8 +35,6 @@ public class AdminCreditTaskVO extends BaseVO {
 	private String testID;
 	// 接手人IP
 	private String receiveIP;
-	// 发布点
-	private Float releaseDot;
 	// 好评时间类型
 	private String goodTimeType;
 	// 描述
@@ -44,8 +42,6 @@ public class AdminCreditTaskVO extends BaseVO {
 
 	// 附加金额、
 	private Integer addtionMoney;
-	// 附加发布点
-	private Integer addtionReleaseDot;
 
 	// 任务保护
 	private Boolean protect;
@@ -159,14 +155,6 @@ public class AdminCreditTaskVO extends BaseVO {
 		this.receiveIP = receiveIP;
 	}
 
-	public Float getReleaseDot() {
-		return releaseDot;
-	}
-
-	public void setReleaseDot(Float releaseDot) {
-		this.releaseDot = releaseDot;
-	}
-
 	public Long getSellerID() {
 		return sellerID;
 	}
@@ -249,15 +237,6 @@ public class AdminCreditTaskVO extends BaseVO {
 		this.addtionMoney = addtionMoney;
 	}
 
-	public Integer getAddtionReleaseDot() {
-		if (addtionReleaseDot == null)
-			return 0;
-		return addtionReleaseDot;
-	}
-
-	public void setAddtionReleaseDot(Integer addtionReleaseDot) {
-		this.addtionReleaseDot = addtionReleaseDot;
-	}
 
 	public String getReleaseUser() {
 		return releaseUser;

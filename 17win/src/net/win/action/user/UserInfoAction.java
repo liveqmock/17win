@@ -27,7 +27,6 @@ import org.springframework.stereotype.Controller;
 		@Result(name = "referee", location = "/spread/index.jsp"),
 		@Result(name = "refereeCode", location = "/spread/code.jsp"),
 		@Result(name = "myRefee", location = "/user/mySpread.jsp"),
-		@Result(name = "initExchange", location = "/user/exchange.jsp"),
 		@Result(name = "initBuyDot", location = "/user/buyDot.jsp"),
 		@Result(name = "updateBuyDot", location = "/user/buyDot.jsp"),
 		@Result(name = "initActiave", location = "/user/activate.jsp"),
@@ -38,9 +37,7 @@ import org.springframework.stereotype.Controller;
 		@Result(name = "insertSellerAndBuyer", type = "chain", location = "/userInfoManager/info!initSellerAndBuyer.php"),
 		@Result(name = "initFindPassword", location = "/system/initFindPassword.jsp"),
 		@Result(name = "updateFindPassword", location = "/system/initFindPassword.jsp"),
-		@Result(name = "updateExchange", location = "/user/exchange.jsp"),
-		@Result(name = "refreshUser",type="redirect", location = "/userInfoManager/info!init.php")
-})
+		@Result(name = "refreshUser", type = "redirect", location = "/userInfoManager/info!init.php") })
 @Namespace("/userInfoManager")
 public class UserInfoAction extends BaseAction {
 	@Resource
@@ -141,45 +138,7 @@ public class UserInfoAction extends BaseAction {
 		return userInfoService.initActiave(userVO);
 	}
 
-	/**
-	 * 购买发布点
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	public String buyDot() throws Exception {
-		return userInfoService.updateBuyDot(userVO);
-	}
-
-	/**
-	 * 初始化购买发布点
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	public String initBuyDot() throws Exception {
-		return userInfoService.initBuyDot(); 
-	}
-
-	/**
-	 * 兑换发布点
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	public String exchange() throws Exception {
-		return userInfoService.updateExchange(userVO);
-	}
-
-	/**
-	 * 
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	public String initExchange() throws Exception {
-		return userInfoService.initExchange(userVO);
-	}
+ 
 
 	/**
 	 * 我的推广
