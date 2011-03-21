@@ -146,7 +146,6 @@ public class UserService extends BaseService {
 				logScoreCapital(userDAO, 0.0 + LOGIN_SCORE, "每天登录一次",
 						userEntity);
 			}
-
 			userEntity.setLastLoginTime(nowDate);
 			// 通过你的宣传链接注册的会员积分每上升1000
 			// 你的收益=N积分

@@ -12,8 +12,6 @@ public class CreditTaskRepositoryVO extends BaseVO {
 	private String type;
 	// 价格
 	private Double money;
-	// 任务保护
-	private Boolean protect;
 	// 商品地址
 	private String itemUrl;
 	// 是否修改价格
@@ -71,15 +69,6 @@ public class CreditTaskRepositoryVO extends BaseVO {
 	public void setMoney(Double money) {
 		this.money = money;
 	}
-
-	public Boolean getProtect() {
-		return protect;
-	}
-
-	public void setProtect(Boolean protect) {
-		this.protect = protect;
-	}
-
 	public String getItemUrl() {
 		return itemUrl;
 	}

@@ -119,7 +119,7 @@
 											</label>
 											<s:select listKey="key" listValue="value"
 												name="creditTaskVO.status"
-												list="#{'':'全部','-1':'申诉中的任务','0':'定时任务','1':'等待接手人','-2':'已经接手，等待我审核','2':'已经接手，等待对方支付','3':'已经支付，等待我发货','4':'已经发货，等待对方好评','5':'已经好评，等待我好评','6':'任务已完成'}">
+												list="#{'':'全部','-1':'申诉中的任务','0':'定时任务','1':'等待接手人','2':'已经接手，等待对方支付','3':'已经支付，等待我发货','4':'已经发货，等待对方好评','5':'已经好评，等待我好评','6':'任务已完成'}">
 											</s:select>
 										</td>
 									</tr>
@@ -209,9 +209,6 @@
 								</A>
 								<A href="javascript:sort('1');"><SPAN
 									class="taskAnniu<s:property value="#request.platformType"/>">等待接手</SPAN>
-								</A>
-								<A href="javascript:sort('-2');"><SPAN
-									class="taskAnniu<s:property value="#request.platformType"/>">等待审核</SPAN>
 								</A>
 								<A href="javascript:sort('2');"><SPAN
 									class="taskAnniu<s:property value="#request.platformType"/>">等待支付</SPAN>
@@ -423,18 +420,6 @@
 											<br>
 											没到时间
 										</s:elseif>
-										<s:elseif test="#task.status==-2">
-												等待审核<br>
-											<s:if test="#task.remainTime>0">
-											剩余
-											<font color="red"> <s:property
-														value="#task.remainTime" /> </font>
-											分钟
-											</s:if>
-											<s:else>
-												时间已到
-											</s:else>
-										</s:elseif>
 										<s:elseif test="#task.status==2">
 												等待付款<br>
 											<s:if test="#task.remainTime>0">
@@ -495,16 +480,6 @@
 												href="javascript:toFirstTask(<s:property value="#task.id"/>)"><span
 												class="anniu2">刷新排前</span> </a>
 												 -->
-										</s:elseif>
-										<s:elseif test="#task.status==-2">
-											<a alt="您对该人信任之后，可以允许他接您的任务！"
-												href="javascript:audiReceiver(<s:property value="#task.id"/>)"><span
-												class="anniu">审核对方</span> </a>
-											<br>
-											<a alt="如果对方没有被您审核过，可以清除买家！"
-												href="javascript:clearReceiver(<s:property value="#task.id"/>)"><span
-												class="anniu2">清除对方</span> </a>
-											<br>
 										</s:elseif>
 										<s:elseif test="#task.status==2">
 											<s:if test="#task.remainTime<=0">

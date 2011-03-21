@@ -104,7 +104,10 @@
 										<s:else>
 											<img src="images/ptTask.jpg" alt="普通任务" />
 										</s:else>
-										是否任务保护：
+											<span>
+										<s:date name="#task.lastDispathDate" format="yyyy-MM-dd HH:mm:ss"/>
+										</span>
+										是否修改价格：
 										<s:if test="#task.protect">是</s:if>
 										<s:else>否</s:else>
 

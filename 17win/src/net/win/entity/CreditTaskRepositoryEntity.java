@@ -34,10 +34,7 @@ public class CreditTaskRepositoryEntity extends BaseEntity {
 	// 任务类型(1 虚拟任务 2，实体任务 3，套餐任务)
 	@Column(name = "TASK_TYPE", columnDefinition = "CHAR(1)", nullable = false)
 	private String taskType;
-
-	// 任务保护
-	@Column(name = "PROTECT_", nullable = false)
-	private Boolean protect;
+ 
 	// 商品地址
 	@Column(name = "ITEM_URL_", length = 255, nullable = false)
 	private String itemUrl;
@@ -98,14 +95,6 @@ public class CreditTaskRepositoryEntity extends BaseEntity {
 
 	public void setMoney(Double money) {
 		this.money = money;
-	}
-
-	public Boolean getProtect() {
-		return protect;
-	}
-
-	public void setProtect(Boolean protect) {
-		this.protect = protect;
 	}
 
 	public String getItemUrl() {

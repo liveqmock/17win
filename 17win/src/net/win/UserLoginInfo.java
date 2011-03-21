@@ -31,16 +31,7 @@ public class UserLoginInfo {
 	// 钱
 	private Double money;
 
-	// vip结束日期
-	private Date vipEndDate;
-	// VIP 成长值
-	private Integer vipGrowValue;
 
-	// vip类型
-	private String vipType;
-
-	// VIP状态 true 表示没失效，false表示失效
-	private Boolean vipEnable;
 
 	// 是否发送手机验证
 	private Boolean sendMsgTOValiate = false;
@@ -133,38 +124,6 @@ public class UserLoginInfo {
 		this.registerTime = registerTime;
 	}
 
-	public String getVipType() {
-		return vipType;
-	}
-
-	public void setVipType(String vipType) {
-		this.vipType = vipType;
-	}
-
-	public Boolean getVipEnable() {
-		return vipEnable;
-	}
-
-	public void setVipEnable(Boolean vipEnable) {
-		this.vipEnable = vipEnable;
-	}
-
-	public Date getVipEndDate() {
-		return vipEndDate;
-	}
-
-	public void setVipEndDate(Date vipEndDate) {
-		this.vipEndDate = vipEndDate;
-	}
-
-	public Integer getVipGrowValue() {
-		return vipGrowValue;
-	}
-
-	public void setVipGrowValue(Integer vipGrowValue) {
-		this.vipGrowValue = vipGrowValue;
-	}
-
 	public Integer getUpgradeScore() {
 		return upgradeScore;
 	}
@@ -180,4 +139,5 @@ public class UserLoginInfo {
 	public void setSendMsgTOValiate(Boolean sendMsgTOValiate) {
 		this.sendMsgTOValiate = sendMsgTOValiate;
 	}
+
 }

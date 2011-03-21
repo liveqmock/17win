@@ -45,8 +45,6 @@ public class CreditTaskVO extends BaseVO {
 	// 附加金额、
 	private Double addtionMoney;
 
-	// 任务保护
-	private Boolean protect;
 	/**
 	 * 和entity无关的数据
 	 */
@@ -247,14 +245,6 @@ public class CreditTaskVO extends BaseVO {
 
 	public void setAddress(String address) {
 		this.address = address;
-	}
-
-	public Boolean getProtect() {
-		return protect;
-	}
-
-	public void setProtect(Boolean protect) {
-		this.protect = protect;
 	}
 
 	public String getRespositoryName() {

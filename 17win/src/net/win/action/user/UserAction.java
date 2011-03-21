@@ -6,6 +6,7 @@ import net.win.BaseAction;
 import net.win.UserLoginInfo;
 import net.win.service.user.UserService;
 import net.win.utils.Constant;
+import net.win.utils.WinUtils;
 import net.win.vo.UserVO;
 
 import org.apache.struts2.ServletActionContext;
@@ -39,6 +40,16 @@ public class UserAction extends BaseAction {
 
 	private UserLoginInfo loginInfo;
 
+	private String ip;
+
+	public String getIp() {
+		return ip;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
 	public UserLoginInfo getLoginInfo() {
 		return loginInfo;
 	}
@@ -67,9 +78,10 @@ public class UserAction extends BaseAction {
 	public String getLoginUser() throws Exception {
 		loginInfo = (UserLoginInfo) ServletActionContext.getRequest()
 				.getSession().getAttribute(Constant.USER_LOGIN_INFO);
+		ip = WinUtils.getIPAddress(ServletActionContext.getRequest());
+
 		return JSON;
 	}
-
 	/**
 	 * 登录
 	 * 

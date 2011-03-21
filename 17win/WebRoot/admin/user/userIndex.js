@@ -17,6 +17,11 @@ $(document).ready(function() {
 		width : 400,
 		buttons : {
 			"保存" : function() {
+
+				if (Validater.isBlank($("#taobaoBuyerID").val())) {
+					alert("淘宝买号不能为空！");
+					return;
+				}
 				if (Validater.isBlank($("#moneyDescID").val())) {
 					alert("描述不能为空！");
 					return;
@@ -30,7 +35,6 @@ $(document).ready(function() {
 			}
 		}
 	});
-
 
 	$("#updateStatusDIV").dialog({
 				autoOpen : false,

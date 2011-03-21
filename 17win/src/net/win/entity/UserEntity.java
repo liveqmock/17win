@@ -69,13 +69,13 @@ public class UserEntity extends BaseEntity {
 	@Column(name = "STATUS_DESC_", length = 255)
 	private String statusDesc = "未激活";
 	// 钱
-	@Column(name = "MONEY_", nullable = false)
-	private Double money;
+	@Column(name = "MONEY_")
+	private Double money = 0D;
 	// 推广积分
-	@Column(name = "SPREAD_SCORE_", nullable = false)
+	@Column(name = "SPREAD_SCORE_")
 	private Integer spreadScore = 0;
 	// 推广人数
-	@Column(name = "SPREAD_COUNT_", nullable = false)
+	@Column(name = "SPREAD_COUNT_")
 	private Integer spreadCount = 0;
 	/**
 	 * 可选选项
@@ -83,7 +83,7 @@ public class UserEntity extends BaseEntity {
 
 	// 旺旺
 	@Column(name = "WW_", length = 24)
-	private String ww;
+	private String ww="";
 	// 发布任务数
 	@Column(name = "RELEASE_TASK_COUNT_")
 	private Integer releaseTaskCount = 0;
@@ -259,7 +259,6 @@ public class UserEntity extends BaseEntity {
 		this.ww = ww;
 	}
 
-
 	public Integer getUpgradeScore() {
 		return upgradeScore;
 	}
@@ -409,7 +408,6 @@ public class UserEntity extends BaseEntity {
 	public void setToSms(List<SmsEntity> toSms) {
 		this.toSms = toSms;
 	}
-
 
 	public List<LogisticsEntity> getReleaseLogistics() {
 		return releaseLogistics;

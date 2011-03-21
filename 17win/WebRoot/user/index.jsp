@@ -241,9 +241,6 @@ img {
 																	等待接手
 																</th>
 																<th style="background: #D1ECF9">
-																	等待审核
-																</th>
-																<th style="background: #D1ECF9">
 																	等待买家付款
 																</th>
 																<th style="background: #D1ECF9">

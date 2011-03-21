@@ -374,17 +374,6 @@
 																</tr>
 																<tr>
 																	<td align="right">
-																		任务保护：
-																	</td>
-																	<td colspan="2">
-																		<s:checkbox name="creditTaskVO.protect"
-																			alt="接手人需要您审核过后才能发布任务，审核方式可以通过QQ进行一些特定的交流！对方同意你的要求时，你就可以同意他接任务，否则可以不准他接任务!"
-																			fieldValue="true" />
-																	</td>
-
-																</tr>
-																<tr>
-																	<td align="right">
 																		放入仓库：
 																	</td>
 																	<td colspan="2">

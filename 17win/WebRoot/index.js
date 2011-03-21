@@ -22,6 +22,8 @@ $(document).ready(function() {
 					return;
 				}
 				var user = data.loginInfo;
+				var ip = data.ip;
+				$("#ipAddress").text(ip);
 				var tdYes = "<span class='yell_font'>欢迎您！</span> "
 						+ "			<font color='red'><b>"
 						+ user.username

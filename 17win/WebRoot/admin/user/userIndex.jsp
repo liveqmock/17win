@@ -326,6 +326,16 @@
 					</tr>
 					<tr class="sellerClass">
 						<td valign="middle" nowrap="nowrap">
+							淘宝买号：
+						</td>
+						<td>
+							<input type="text" name="taobaoBuyer" id="taobaoBuyerID"
+								maxlength="20">
+						</td>
+
+					</tr>
+					<tr class="sellerClass">
+						<td valign="middle" nowrap="nowrap">
 							描述：
 						</td>
 						<td>

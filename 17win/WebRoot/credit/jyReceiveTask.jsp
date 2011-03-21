@@ -122,7 +122,7 @@
 											</label>
 											<s:select listKey="key" listValue="value"
 												name="creditTaskVO.status"
-												list="#{'':'全部','-1':'申诉中的任务','-2':'已经接手，等待对方审核','2':'已经接手，等待我支付','3':'已经支付，等待对方发货','4':'已经发货，等待我好评','5':'已经好评，等待对方好评','6':'任务已完成'}">
+												list="#{'':'全部','-1':'申诉中的任务','2':'已经接手，等待我支付','3':'已经支付，等待对方发货','4':'已经发货，等待我好评','5':'已经好评，等待对方好评','6':'任务已完成'}">
 											</s:select>
 										</td>
 									</tr>
@@ -204,9 +204,6 @@
 							<DIV style="MARGIN-TOP: 12px; FLOAT: left; MARGIN-LEFT: 10px">
 								<A href="javascript:sort('');"><SPAN
 									class="taskAnniu<s:property value="#request.platformType"/>">全部任务</SPAN>
-								</A>
-								<A href="javascript:sort('-2');"><SPAN
-									class="taskAnniu<s:property value="#request.platformType"/>">等待审核</SPAN>
 								</A>
 								<A href="javascript:sort('2');"><SPAN
 									class="taskAnniu<s:property value="#request.platformType"/>">等待支付</SPAN>
@@ -377,22 +374,9 @@
 													value="#task.buyername" /> </font> </a>
 									</td>
 									<td align="center" nowrap="nowrap">
-										<s:if test="#task.status==-2">
-												等待审核
-												<br>
-											<s:if test="#task.remainTime>0">
-											剩余
-											<font color="red"> <s:property
-														value="#task.remainTime" /> </font>
-											分钟
-											</s:if>
-											<s:else>
-												时间已到
-											</s:else>
-										</s:if>
-										<s:elseif test="#task.status==-1">
+										<s:if test="#task.status==-1">
 												任务被申诉中
-											</s:elseif>
+											</s:if>
 										<s:elseif test="#task.status==2">
 													等待付款<br>
 											<s:if test="#task.remainTime>0">
@@ -437,13 +421,9 @@
 											</s:elseif>
 									</td>
 									<td align="center" nowrap="nowrap">
-										<s:if test="#task.status==-2">
-											<a alt="退出任务" class="anniu"
-												href="javascript:quitTask('<s:property value="#task.id"/>')">退出任务</a>
-										</s:if>
-										<s:elseif test="#task.status==-1">
+										<s:if test="#task.status==-1">
 												此任务被申述中
-											</s:elseif>
+											</s:if>
 
 										<s:elseif test="#task.status==2">
 											<a alt="如果您已经付款，请确认支付"

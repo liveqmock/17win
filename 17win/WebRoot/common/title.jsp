@@ -51,7 +51,7 @@
 							<TR>
 								<TD height=32 align="right" id="userLoginId">
 									您当前的IP地址：
-									<%=WinUtils.getIPAddress(request)%>&nbsp;|&nbsp;
+									<span id="ipAddress"><%=WinUtils.getIPAddress(request)%></span>&nbsp;|&nbsp;
 									<s:if test="#session.userLogin==null">
 										<span class="yell_font">您还没登录！</span>
 										<A href="user/login.html" target="_top">登陆</A> |

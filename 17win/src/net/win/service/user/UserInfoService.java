@@ -39,7 +39,7 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 import sun.misc.BASE64Encoder;
 
-@SuppressWarnings( { "unchecked" })
+@SuppressWarnings({"unchecked"})
 @Service("userInfoService")
 public class UserInfoService extends BaseService {
 	@Resource
@@ -73,8 +73,8 @@ public class UserInfoService extends BaseService {
 		UserEntity userEntity = userDAO
 				.uniqueResult(
 						" from UserEntity as _u where _u.username=:username  or _u.telephone =:telephone ",
-						new String[] { "username", "telephone" }, new Object[] {
-								userVO.getUsername(), userVO.getUsername() });
+						new String[]{"username", "telephone"}, new Object[]{
+								userVO.getUsername(), userVO.getUsername()});
 		if (userEntity == null) {
 			putAlertMsg("用户名或手机不存在！");
 			return "updateFindPassword";
@@ -118,8 +118,8 @@ public class UserInfoService extends BaseService {
 		Long userCount = (Long) userDAO
 				.uniqueResultObject(
 						"select count(*) from UserEntity as _user where _user.referee.id=:userId ",
-						new String[] { "userId" }, new Object[] { userEntity
-								.getId() });
+						new String[]{"userId"},
+						new Object[]{userEntity.getId()});
 		putByRequest("userCount", userCount);
 		// 通过你的宣传链接注册的会员积分每上升1000 ，你的收益=100积分
 		putByRequest("score1000Refree", Constant.getScore1000Refree());
@@ -152,7 +152,6 @@ public class UserInfoService extends BaseService {
 		return "updateSeller";
 	}
 
-
 	/**
 	 * 增加买家或卖家
 	 * 
@@ -176,10 +175,9 @@ public class UserInfoService extends BaseService {
 			Boolean sellerExists = (0 == (Long) sellerDAO
 					.uniqueResultObject(
 							"select count(*) from  SellerEntity as _seller where _seller.name=:sellerName and _seller.type=:platformType and _seller.user.id=:userID",
-							new String[] { "sellerName", "platformType",
-									"userID" }, new Object[] {
-									sellerEntity.getName(), platformTypeParam,
-									userEntity.getId() }));
+							new String[]{"sellerName", "platformType", "userID"},
+							new Object[]{sellerEntity.getName(),
+									platformTypeParam, userEntity.getId()}));
 			if (!sellerExists) {
 				putAlertMsg(sellerEntity.getName() + "已被使用！");
 				return JUMP;
@@ -188,10 +186,9 @@ public class UserInfoService extends BaseService {
 			Boolean buyerExists = (0 == (Long) buyerDAO
 					.uniqueResultObject(
 							"select count(*) from  BuyerEntity as _buyer where _buyer.name=:buyerName and _buyer.type=:platformType and _buyer.user.id=:userID",
-							new String[] { "buyerName", "platformType",
-									"userID" }, new Object[] {
-									sellerEntity.getName(), platformTypeParam,
-									userEntity.getId() }));
+							new String[]{"buyerName", "platformType", "userID"},
+							new Object[]{sellerEntity.getName(),
+									platformTypeParam, userEntity.getId()}));
 			if (!buyerExists) {
 				putAlertMsg("不能绑定和买号相同的卖号！");
 				return JUMP;
@@ -201,9 +198,9 @@ public class UserInfoService extends BaseService {
 					.uniqueResultObject(
 							"select count(*) from SellerEntity as _seller "
 									+ "where _seller.user.id=:userId and type=:platformType ",
-							new String[] { "userId", "platformType" },
-							new Object[] { getLoginUser().getId(),
-									platformTypeParam });
+							new String[]{"userId", "platformType"},
+							new Object[]{getLoginUser().getId(),
+									platformTypeParam});
 			Integer sellerCountFlag = StrategyUtils.getSellerCount();
 			if (sellerCountFlag != -1) {
 				if (count >= sellerCountFlag) {
@@ -245,10 +242,9 @@ public class UserInfoService extends BaseService {
 			Boolean sellerExists = (0 == (Long) buyerDAO
 					.uniqueResultObject(
 							"select count(*) from  SellerEntity as _seller where _seller.name=:sellerName and _seller.type=:platformType and _seller.user.id=:userID",
-							new String[] { "sellerName", "platformType",
-									"userID" }, new Object[] {
-									buyerEntity.getName(), platformTypeParam,
-									userEntity.getId() }));
+							new String[]{"sellerName", "platformType", "userID"},
+							new Object[]{buyerEntity.getName(),
+									platformTypeParam, userEntity.getId()}));
 
 			if (!sellerExists) {
 				putAlertMsg("不能绑定和卖号相同的买号！");
@@ -257,10 +253,9 @@ public class UserInfoService extends BaseService {
 			Boolean buyerExists = (0 == (Long) buyerDAO
 					.uniqueResultObject(
 							"select count(*) from  BuyerEntity as _buyer where _buyer.name=:buyerName and _buyer.type=:platformType and _buyer.user.id=:userID",
-							new String[] { "buyerName", "platformType",
-									"userID" }, new Object[] {
-									buyerEntity.getName(), platformTypeParam,
-									userEntity.getId() }));
+							new String[]{"buyerName", "platformType", "userID"},
+							new Object[]{buyerEntity.getName(),
+									platformTypeParam, userEntity.getId()}));
 			if (!buyerExists) {
 				putAlertMsg(buyerEntity.getName() + "已被使用！");
 				return JUMP;
@@ -544,7 +539,7 @@ public class UserInfoService extends BaseService {
 		/**
 		 * 卖家
 		 */
-		String[][] result2 = new String[3][10];
+		String[][] result2 = new String[3][9];
 		for (String[] r : result1) {
 			Arrays.fill(r, "0");
 		}
@@ -603,23 +598,6 @@ public class UserInfoService extends BaseService {
 							result1[1][5] = objs[2] + "";// 完成的
 						}
 					}
-					//					else if ("3".equals(objs[0])) {
-					//						// 拍拍
-					//						if (TaskMananger.STEP_TWO_STATUS.equals(objs[1])) {
-					//							result1[2][1] = objs[2] + "";// 等我付款
-					//						} else if (TaskMananger.STEP_THREE_STATUS
-					//								.equals(objs[1])) {
-					//							result1[2][2] = objs[2] + "";// 等待卖家发货
-					//						} else if (TaskMananger.STEP_FOUR_STATUS
-					//								.equals(objs[1])) {
-					//							result1[2][3] = objs[2] + "";// 等待我好评
-					//						} else if (TaskMananger.STEP_FIVE_STATUS
-					//								.equals(objs[1])) {
-					//							result1[2][4] = objs[2] + "";// 等待卖家好评
-					//						} else if (TaskMananger.STEP_SIX_STATUS.equals(objs[1])) {
-					//							result1[2][5] = objs[2] + "";// 完成的
-					//						}
-					//					}
 				}
 			}
 		}
@@ -637,8 +615,6 @@ public class UserInfoService extends BaseService {
 							result2[0][1] = objs[2] + "";// 定时任务
 						} else if (TaskMananger.STEP_ONE_STATUS.equals(objs[1])) {
 							result2[0][2] = objs[2] + "";// 等待接手
-						} else if (TaskMananger.AUDIT_STATUS.equals(objs[1])) {
-							result2[0][3] = objs[2] + "";// 等待审核
 						} else if (TaskMananger.STEP_TWO_STATUS.equals(objs[1])) {
 							result2[0][4] = objs[2] + ""; // 等待买家付款
 						} else if (TaskMananger.STEP_THREE_STATUS
@@ -659,8 +635,6 @@ public class UserInfoService extends BaseService {
 							result2[1][1] = objs[2] + "";// 定时任务
 						} else if (TaskMananger.STEP_ONE_STATUS.equals(objs[1])) {
 							result2[1][2] = objs[2] + "";// 等待接手
-						} else if (TaskMananger.AUDIT_STATUS.equals(objs[1])) {
-							result2[1][3] = objs[2] + "";// 等待审核
 						} else if (TaskMananger.STEP_TWO_STATUS.equals(objs[1])) {
 							result2[1][4] = objs[2] + ""; // 等待买家付款
 						} else if (TaskMananger.STEP_THREE_STATUS
@@ -676,30 +650,6 @@ public class UserInfoService extends BaseService {
 							result2[1][8] = objs[2] + "";// 完成的
 						}
 					}
-
-					//					else if ("3".equals(objs[0])) {
-					//						// 有啊
-					//						if (TaskMananger.TIMING_STATUS.equals(objs[1])) {
-					//							result2[2][1] = objs[2] + "";// 定时任务
-					//						} else if (TaskMananger.STEP_ONE_STATUS.equals(objs[1])) {
-					//							result2[2][2] = objs[2] + "";// 等待接手
-					//						} else if (TaskMananger.AUDIT_STATUS.equals(objs[1])) {
-					//							result2[2][3] = objs[2] + "";// 等待审核
-					//						} else if (TaskMananger.STEP_TWO_STATUS.equals(objs[1])) {
-					//							result2[2][4] = objs[2] + ""; // 等待买家付款
-					//						} else if (TaskMananger.STEP_THREE_STATUS
-					//								.equals(objs[1])) {
-					//							result2[2][5] = objs[2] + "";// 等待我发货
-					//						} else if (TaskMananger.STEP_FOUR_STATUS
-					//								.equals(objs[1])) {
-					//							result2[2][6] = objs[2] + "";// 等待买家确认好评
-					//						} else if (TaskMananger.STEP_FIVE_STATUS
-					//								.equals(objs[1])) {
-					//							result2[2][7] = objs[2] + "";// 等待我好评
-					//						} else if (TaskMananger.STEP_SIX_STATUS.equals(objs[1])) {
-					//							result2[1][8] = objs[2] + "";// 完成的
-					//						}
-					//					}
 				}
 			}
 		}
@@ -711,8 +661,8 @@ public class UserInfoService extends BaseService {
 		Long smsCount = (Long) userDAO
 				.uniqueResultObject(
 						"select count(*) from SmsEntity  _sms where _sms.toUser.id=:userid and _sms.read=:read",
-						new String[] { "userid", "read" }, new Object[] {
-								userLoginInfo.getId(), false });
+						new String[]{"userid", "read"}, new Object[]{
+								userLoginInfo.getId(), false});
 		putByRequest("smsCount", smsCount);
 		putByRequest("sellTasks", result1);
 		putByRequest("buyTasks", result2);
