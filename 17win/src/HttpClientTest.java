@@ -1,4 +1,5 @@
 import java.io.InputStream;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -92,16 +93,18 @@ public class HttpClientTest {
 		nvps
 				.add(new BasicNameValuePair("tid",
 						"XOR_1_000000000000000000000000000000_63584452310E790579010679"));
-		nvps.add(new BasicNameValuePair("TPL_password", "881263"));
+		nvps.add(new BasicNameValuePair("TPL_password", "8868829xgj"));
 		nvps.add(new BasicNameValuePair("TPL_redirect_url", ""));
-		nvps.add(new BasicNameValuePair("TPL_username", "roub520"));
+		String username = URLEncoder.encode("随便_到处逛逛","gb2312");
+		username="随便_到处逛逛";
+		nvps.add(new BasicNameValuePair("TPL_username", username));
 		CookieStore cookieStore = new BasicCookieStore();
 		for (Entry<String, String> entry : cookies.entrySet()) {
 			cookieStore.addCookie(new BasicClientCookie(entry.getKey(), entry
 					.getValue()));
 		}
 		httpclient.setCookieStore(cookieStore);
-		httpPost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
+		httpPost.setEntity(new UrlEncodedFormEntity(nvps,"gb2312"));
 
 		response = httpclient.execute(httpPost);
 		System.out.println("状态------"
