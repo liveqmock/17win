@@ -1,10 +1,16 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
 
 import net.win.utils.LoggerUtils;
@@ -16,11 +22,11 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.HTTP;
 import org.cyberneko.html.parsers.DOMParser;
 import org.dom4j.Document;
 import org.dom4j.Element;
@@ -31,7 +37,7 @@ import org.dom4j.xpath.DefaultXPath;
 import org.jaxen.SimpleNamespaceContext;
 import org.xml.sax.InputSource;
 
-@SuppressWarnings({"unchecked", "unused"})
+@SuppressWarnings( { "unchecked", "unused" })
 public class HttpClientTest {
 	public static void main(String[] args) throws Exception {
 		Map nameSpaces = new HashMap();
@@ -44,18 +50,10 @@ public class HttpClientTest {
 		Header[] headers = response.getHeaders("Set-Cookie");
 		for (Header header : headers) {
 			for (HeaderElement he : header.getElements()) {
-				if (he.getName().equalsIgnoreCase("_lang")
-						|| he.getName().equalsIgnoreCase("_tb_token_")
-						|| he.getName().equalsIgnoreCase("cookie2")
-						|| he.getName().equalsIgnoreCase("t")
-						|| he.getName().equalsIgnoreCase("uc1")
-						|| he.getName().equalsIgnoreCase("v")) {
-
-					if (he.getName().equalsIgnoreCase("_tb_token_")) {
-						token = he.getValue();
-					}
-					cookies.put(he.getName(), he.getValue());
+				if (he.getName().equalsIgnoreCase("_tb_token_")) {
+					token = he.getValue();
 				}
+				cookies.put(he.getName(), he.getValue());
 			}
 		}
 		if (response.getEntity() != null) {
@@ -103,23 +101,37 @@ public class HttpClientTest {
 			cookieStore.addCookie(new BasicClientCookie(entry.getKey(), entry
 					.getValue()));
 		}
+
 		httpclient.setCookieStore(cookieStore);
 		httpPost.setEntity(new UrlEncodedFormEntity(nvps, "gbk"));
 
 		response = httpclient.execute(httpPost);
 		System.out.println("状态------"
 				+ response.getStatusLine().getStatusCode());
-		for (Header header : response.getHeaders("Set-Cookie")) {
-			System.out.println(header);
-		}
 		if (302 == response.getStatusLine().getStatusCode()) {
+			headers = response.getHeaders("Set-Cookie");
+			cookieStore = httpclient.getCookieStore();
+			for (Header header : headers) {
+				for (HeaderElement he : header.getElements()) {
+					cookieStore.addCookie(new BasicClientCookie(he.getName(),
+							he.getValue()));
+				}
+
+			}
+			System.out.println("cookie-----------------size:"
+					+ cookieStore.getCookies().size());
+			for (Cookie cookie : cookieStore.getCookies()) {
+				System.out.println(cookie.getName() + "-----------"
+						+ cookie.getValue());
+			}
+
 			response.getEntity().consumeContent();
 			nvps = new ArrayList<NameValuePair>();
 			nvps.add(new BasicNameValuePair("_tb_token_", token));
 			nvps.add(new BasicNameValuePair("action", "CollectionAction"));
 			nvps.add(new BasicNameValuePair("event_submit_do_save_add",
 					"anything"));
-			nvps.add(new BasicNameValuePair("id", "9465325994"));
+			nvps.add(new BasicNameValuePair("id", "9443495292"));
 			nvps.add(new BasicNameValuePair("isTmall", ""));
 			nvps.add(new BasicNameValuePair("tags", ""));
 			nvps.add(new BasicNameValuePair("type", "1"));
@@ -130,15 +142,37 @@ public class HttpClientTest {
 					+ response.getStatusLine().getStatusCode());
 
 			InputStream is = response.getEntity().getContent();
-			System.out.println(getDoc(response.getEntity().getContent())
-					.asXML());
+			writeFile("successCollage.html", is);
 		} else {
 			System.out.println(getDoc(response.getEntity().getContent())
 					.asXML());
 		}
 
 		httpclient.getConnectionManager().shutdown();
+		System.out.println("oever------");
 	}
+
+	/**
+	 * 输出文件
+	 * @param fileName
+	 * @param is
+	 * @throws Exception
+	 */
+	private static void writeFile(String fileName, InputStream is)
+			throws Exception {
+		File file = new File("d:\\" + fileName);
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(
+				new FileOutputStream(file), "gbk"));
+		BufferedReader br = new BufferedReader(new InputStreamReader(is, "gbk"));
+		String line = null;
+		while ((line = br.readLine()) != null) {
+			bw.write(line);
+		}
+		bw.close();
+		br.close();
+
+	}
+
 	/**
 	 * 获取多节点
 	 * 
