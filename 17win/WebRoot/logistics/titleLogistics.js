@@ -1,5 +1,14 @@
 $(document).ready(function() {
-			$("#myTable").tablesorter();
+			$("#myTable").tablesorter({
+						headers : {
+							3 : {
+								sorter : "dateFormat"
+							},
+							4 : {
+								sorter : "dateFormat"
+							}
+						}
+					});
 		});
 function validateForm() {
 	var startValue = $("#startMoney").val();
@@ -24,8 +33,8 @@ function validateForm() {
 
 function toUse(id) {
 	if (confirm("确认是否使用该物流信息！")) {
-		window.location.href = "logisticsManager/logistics!useLogistics.php?logisticsID="+
-		id;
+		window.location.href = "logisticsManager/logistics!useLogistics.php?logisticsID="
+				+ id;
 	}
 }
 

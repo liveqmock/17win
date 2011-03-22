@@ -276,21 +276,14 @@
 										</s:elseif>
 										<span alt="任务ID"><s:property value="#task.testID" /> </span>
 										<br>
-										<s:if test="#task.assignUser!=null && #task.assignUser!=''">
-											<img src="images/tdTask.gif"
-												alt="特定任务，发布人是<s:property value="#task.fbUsername"/>" />
-										</s:if>
-										<s:else>
-											<img src="images/ptTask.jpg"
-												alt="普通任务，发布人是<s:property value="#task.fbUsername"/>" />
-										</s:else>
+										<img src="images/tdTask.gif"
+											alt="发布人是<s:property value="#task.fbUsername"/>" />
 										<span alt="任务发布时间"> <s:date name="#task.releaseDate"
 												format="yyyy-MM-dd HH:mm:ss" /> </span>
 									</td>
 									<td align="center" nowrap="nowrap">
 										<span alt="任务金额：<s:property value="#task.money" />"><s:property
-												value="#task.money" />
-										</span>
+												value="#task.money" /> </span>
 										<br>
 										<span alt="附加金额：<s:property value="#task.addtionMoney" />">
 											<s:property value="#task.addtionMoney" /> </span>
@@ -452,7 +445,7 @@
 										<s:elseif test="#task.status==5">
 												已经好评
 												<br>
-												对方好评
+												等待好评
 											</s:elseif>
 										<s:elseif test="#task.status==6">
 												任务完成

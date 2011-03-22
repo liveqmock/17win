@@ -183,7 +183,7 @@ function getAreas(cid, areaObj) {
 }
 // 根据店铺得到seller
 /**
- * type 0 自动获取,1 淘宝 2拍拍  
+ * type 0 自动获取,1 淘宝 2拍拍
  * 
  * @param {}
  *            url
@@ -307,3 +307,4 @@ function changeValidateCode(obj) {
 	// 这和浏览器的缓存机制有关系，也可以把页面设置为不缓存，这样就不用这个参数了。
 	$(obj).attr("src", "verify/verificationCode.php?time=" + timenow);
 }
+

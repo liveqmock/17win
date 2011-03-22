@@ -1,6 +1,10 @@
 $(document).ready(function() {
 			$("#myTable").tablesorter({
-						widthFixed : true
+						headers : {
+							3 : {
+								sorter : "dateFormat"
+							}
+						}
 					});
 		});
 
@@ -10,7 +14,7 @@ function validateForm() {
 	var startDate = $("#startDate").val();
 	var endDate = $("#endDate").val();
 	try {
-		if(isNaN(startValue) || isNaN(endValue)){
+		if (isNaN(startValue) || isNaN(endValue)) {
 			alert("必须输入数值！");
 			return false;
 		}

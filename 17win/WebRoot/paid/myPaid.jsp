@@ -15,7 +15,6 @@
 		<LINK href="css/blue/style.css" type="text/css" rel="stylesheet">
 		<LINK href="css/Css.css" type="text/css" rel="stylesheet">
 		<LINK href="css/center.css" type="text/css" rel="stylesheet">
-		<SCRIPT src="js/jquery.tablesorter.min.js" type="text/javascript"></SCRIPT>
 		<script src="<%=basePath%>js/My97DatePicker/WdatePicker.js"
 			defer="defer" type="text/javascript"></script>
 		<script src="paid/myPaid.js" type="text/javascript"></script>

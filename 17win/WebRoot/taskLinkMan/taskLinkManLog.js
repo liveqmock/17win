@@ -1,5 +1,11 @@
 $(document).ready(function() {
-			$("#myTable").tablesorter();
+			$("#myTable").tablesorter({
+						headers : {
+							2 : {
+								sorter : "dateFormat"
+							}
+						}
+					});
 		});
 
 function validateForm() {

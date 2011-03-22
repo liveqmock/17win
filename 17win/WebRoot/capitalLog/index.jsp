@@ -13,13 +13,8 @@
 		<LINK href="css/index.css" type="text/css" rel="stylesheet">
 		<LINK href="css/top_bottom.css" type="text/css" rel="stylesheet">
 		<LINK href="css/Css.css" type="text/css" rel="stylesheet">
-
 		<LINK href="css/center.css" type="text/css" rel="stylesheet">
-
 		<LINK href="css/blue/style.css" type="text/css" rel="stylesheet">
-		<SCRIPT src="js/jquery.tablesorter.min.js" type="text/javascript"></SCRIPT>
-		<SCRIPT src="js/utils.js" type="text/javascript"></SCRIPT>
-		<SCRIPT src="js/validater.js" type="text/javascript"></SCRIPT>
 		<script src="<%=basePath%>js/My97DatePicker/WdatePicker.js"
 			defer="defer" type="text/javascript"></script>
 		<SCRIPT src="capitalLog/index.js" type="text/javascript"></SCRIPT>

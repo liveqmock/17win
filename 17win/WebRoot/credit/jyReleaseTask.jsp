@@ -281,14 +281,8 @@
 										</s:elseif>
 										<span alt="任务ID"><s:property value="#task.testID" /> </span>
 										<br>
-										<s:if test="#task.assignUser!=null && #task.assignUser!=''">
-											<img src="images/tdTask.gif"
-												alt="特定任务，接手人是<s:property value="#task.assignUser"/>" />
-										</s:if>
-										<s:else>
-											<img src="images/ptTask.jpg"
-												alt="普通任务，接手人是<s:property value="#task.jsUsername"/>" />
-										</s:else>
+										<img src="images/tdTask.gif"
+											alt="接手人是<s:property value="#task.assignUser"/>" />
 										<span alt="任务发布时间"> <s:date name="#task.releaseDate"
 												format="yyyy-MM-dd HH:mm:ss" /> </span>
 									</td>

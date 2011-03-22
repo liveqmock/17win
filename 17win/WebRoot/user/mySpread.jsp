@@ -10,7 +10,6 @@
 		<LINK href="css/Css.css" type="text/css" rel="stylesheet">
 
 		<LINK href="css/blue/style.css" type="text/css" rel="stylesheet">
-		<SCRIPT src="js/jquery.tablesorter.min.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="user/mySpread.js" type="text/javascript"></SCRIPT>
 
 		<style type="text/css">

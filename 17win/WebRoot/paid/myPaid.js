@@ -1,6 +1,12 @@
 $(document).ready(function() {
-			$("#myTable").tablesorter();
-});
+			$("#myTable").tablesorter({
+						headers : {
+							0 : {
+								sorter : "dateFormat"
+							}
+						}
+					});
+		});
 function validateForm() {
 	var startDate = $("#startDate").val();
 	var endDate = $("#endDate").val();

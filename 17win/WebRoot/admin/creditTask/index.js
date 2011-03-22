@@ -1,16 +1,19 @@
 var ckeditorObj = null;
 $(document).ready(function() {
-	$("#myTable").tablesorter({
-				headers : {
-					0 : {
-						sorter : false
-					}
-				}
-			});
-});
- 
+			$("#myTable").tablesorter({
+						headers : {
+							0 : {
+								sorter : false
+							},
+							7 : {
+								sorter : "dateFormat"
+							}
+						}
+					});
+		});
+
 function validateForm() {
-	 
+
 	return true;
 }
 

@@ -22,7 +22,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
-@SuppressWarnings( { "unchecked" })
+@SuppressWarnings({"unchecked"})
 @Service("adminUserService")
 public class AdminUserService extends BaseService {
 	@Resource
@@ -147,6 +147,7 @@ public class AdminUserService extends BaseService {
 
 		Double money = Double.parseDouble(getByParam("money"));
 		String desc = getByParam("moneyDesc");
+		String taobaoBuyer = getByParam("taobaoBuyer");
 		Long id = Long.parseLong(getByParam("userId"));
 		UserEntity userEntity = userDAO.get(id);
 		userEntity.setMoney(ArithUtils.add(userEntity.getMoney(), money));
@@ -157,6 +158,7 @@ public class AdminUserService extends BaseService {
 		payEntity.setMoney(money);
 		payEntity.setPayDate(new Date());
 		payEntity.setStatus("2");
+		payEntity.setBuyername(taobaoBuyer);
 		payDAO.save(payEntity);
 		payEntity.setUser(userEntity);
 		putAlertMsg("充值金额成功！");
@@ -380,10 +382,10 @@ public class AdminUserService extends BaseService {
 				adminUserVO.setQq((String) objs[12]);
 				adminUserVO.setWw((String) objs[13]);
 				result.add(adminUserVO);
-//				"select  _user.username,_user.money,_user.registerTime,_user.email,_user.telephone," // 4
-//				+ "_user.spreadScore,_user.releaseTaskCount,_user.receiveTaskCount, "// 7
-//				+ " _user.status,_user.id,_user.statusDesc,_user.lastLoginTime,_user.qq,_user.ww" // 13
-//				+ " from UserEntity   as _user  where 1=1 ");
+				//				"select  _user.username,_user.money,_user.registerTime,_user.email,_user.telephone," // 4
+				//				+ "_user.spreadScore,_user.releaseTaskCount,_user.receiveTaskCount, "// 7
+				//				+ " _user.status,_user.id,_user.statusDesc,_user.lastLoginTime,_user.qq,_user.ww" // 13
+				//				+ " from UserEntity   as _user  where 1=1 ");
 			}
 		}
 		putByRequest("result", result);

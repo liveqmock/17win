@@ -4,6 +4,12 @@ $(document).ready(function() {
 				headers : {
 					0 : {
 						sorter : false
+					},
+					5 : {
+						sorter : "dateFormat"
+					},
+					9 : {
+						sorter : "dateFormat"
 					}
 				}
 			});

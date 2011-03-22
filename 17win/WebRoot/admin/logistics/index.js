@@ -1,17 +1,22 @@
 $(document).ready(function() {
 			$("#myTable").tablesorter({
-						widthFixed : true,
-						sortList : [[0, 0]]
-
+						headers : {
+							4 : {
+								sorter : "dateFormat"
+							},
+							5 : {
+								sorter : "dateFormat"
+							}
+						}
 					});
 		});
 
 function redo(id) {
 	if (confirm("是否确认要撤销？")) {
-		window.location.href = "adminLogisticsManager/adminLogistics!redoLogistics.php?logisticsID="+
-		id;
+		window.location.href = "adminLogisticsManager/adminLogistics!redoLogistics.php?logisticsID="
+				+ id;
 	}
-} 
+}
 
 function validateForm() {
 	var startValue = $("#startValue").val();

@@ -1,7 +1,15 @@
 $(document).ready(function() {
-			$("#myTable").tablesorter();
+			$("#myTable").tablesorter({
+						headers : {
+							2 : {
+								sorter : "dateFormat"
+							},
+							3 : {
+								sorter : "dateFormat"
+							}
+						}
+					});
 		});
-
 
 function validateForm() {
 	var startDate = $("input[name='logisticsVO.startDate']").val();

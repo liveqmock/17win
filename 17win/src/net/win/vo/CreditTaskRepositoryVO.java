@@ -16,8 +16,6 @@ public class CreditTaskRepositoryVO extends BaseVO {
 	private String itemUrl;
 	// 是否修改价格
 	private Boolean updatePrice;
-	// 指定某人
-	private String assignUser;
 	// 动态评分(x:默认好评，x:全部5分 ...)
 	private String grade;
 	// 好评时间类型(1 马上 2:24小时 3:48小时 ，4：72小时，5 ：自定义)
@@ -157,13 +155,6 @@ public class CreditTaskRepositoryVO extends BaseVO {
 		this.addtionMoney = addtionMoney;
 	}
 
-	public String getAssignUser() {
-		return assignUser;
-	}
-
-	public void setAssignUser(String assignUser) {
-		this.assignUser = assignUser;
-	}
 
 	public String getTaskType() {
 		return taskType;

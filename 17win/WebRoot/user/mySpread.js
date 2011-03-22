@@ -1,10 +1,11 @@
- 
+
 
 $(document).ready(function() {
-	$("#myTable").tablesorter({
-				widthFixed : true,
-				sortList : [[0, 0]]
-			});
-		// 密码
-
-	});
+			$("#myTable").tablesorter({
+						headers : {
+							4 : {
+								sorter : "dateFormat"
+							}
+						}
+					});
+		});

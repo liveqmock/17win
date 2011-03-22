@@ -1,5 +1,11 @@
 $(document).ready(function() {
-	$("#myTable").tablesorter();
+	$("#myTable").tablesorter({
+				headers : {
+					4 : {
+						sorter : "dateFormat"
+					}
+				}
+			});
 	$("#updateMoneyDIV").dialog({
 		autoOpen : false,
 		draggable : true,

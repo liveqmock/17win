@@ -9,14 +9,13 @@ $(document).ready(function() {
 			numberText("startMoney");
 			numberText("endMoney");
 			$("#myTable").tablesorter({
-						widthFixed : true,
 						sortList : [[0, 0]],
 						headers : {
 							2 : {
 								sorter : false
 							},
 							4 : {
-								sorter : false
+								sorter : "dateFormat"
 							},
 							6 : {
 								sorter : false

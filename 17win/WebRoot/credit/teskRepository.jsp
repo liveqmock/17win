@@ -83,7 +83,7 @@
 							<s:iterator value="#request.result" status="status" id="task">
 								<tr onmouseover="this.className='over'"
 									onmouseout="this.className='out'">
-									<td valign="middle" align="center" nowrap="nowrap"
+									<td valign="middle" align="left" nowrap="nowrap"
 										style="overflow: hidden; text-overflow: ellipsis;">
 										<s:if test="#task.taskType==1">
 											<img src="images/xnType.jpg" alt="虚拟任务" />
@@ -97,20 +97,14 @@
 										<span alt="名称：<s:property value="#task.name" />"> <s:property
 												value="#task.name" /> </span>
 										<br>
-										<s:if test="#task.assignUser!=null && #task.assignUser!=''">
-											<img src="images/tdTask.gif"
-												alt="特定任务，接手人是<s:property value="#task.assignUser"/>" />
+										<img src="images/tdTask.gif" />
+										<s:if test="#task.lastDispathDate!=null">
+											<s:date name="#task.lastDispathDate"
+												format="yyyy-MM-dd HH-mm-ss" />
 										</s:if>
 										<s:else>
-											<img src="images/ptTask.jpg" alt="普通任务" />
-										</s:else>
-											<span>
-										<s:date name="#task.lastDispathDate" format="yyyy-MM-dd HH:mm:ss"/>
-										</span>
-										是否修改价格：
-										<s:if test="#task.protect">是</s:if>
-										<s:else>否</s:else>
-
+									该任务还没有发送过
+									</s:else>
 									</td>
 									<td valign="middle" align="center" nowrap="nowrap">
 										<span alt="任务金额：<s:property value="#task.money" />"><s:property
@@ -166,13 +160,6 @@
 									<td valign="middle" align="center" nowrap="nowrap">
 										<s:property value="#task.dispathCount" default="0" />
 										<br>
-										<s:if test="#task.lastDispathDate!=null">
-											<s:date name="#task.lastDispathDate"
-												format="yyyy-MM-dd HH-mm-ss" />
-										</s:if>
-										<s:else>
-									没发送过
-									</s:else>
 									</td>
 									<td valign="middle" align="center" nowrap="nowrap">
 										<a alt="发布任务！"
