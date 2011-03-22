@@ -31,7 +31,7 @@ import org.dom4j.xpath.DefaultXPath;
 import org.jaxen.SimpleNamespaceContext;
 import org.xml.sax.InputSource;
 
-@SuppressWarnings( { "unchecked", "unused" })
+@SuppressWarnings({"unchecked", "unused"})
 public class HttpClientTest {
 	public static void main(String[] args) throws Exception {
 		Map nameSpaces = new HashMap();
@@ -95,8 +95,8 @@ public class HttpClientTest {
 						"XOR_1_000000000000000000000000000000_63584452310E790579010679"));
 		nvps.add(new BasicNameValuePair("TPL_password", "8868829xgj"));
 		nvps.add(new BasicNameValuePair("TPL_redirect_url", ""));
-		String username = URLEncoder.encode("随便_到处逛逛","gb2312");
-		username="随便_到处逛逛";
+		String username = URLEncoder.encode("随便_到处逛逛", "gb2312");
+		username = "随便_到处逛逛";
 		nvps.add(new BasicNameValuePair("TPL_username", username));
 		CookieStore cookieStore = new BasicCookieStore();
 		for (Entry<String, String> entry : cookies.entrySet()) {
@@ -104,7 +104,7 @@ public class HttpClientTest {
 					.getValue()));
 		}
 		httpclient.setCookieStore(cookieStore);
-		httpPost.setEntity(new UrlEncodedFormEntity(nvps,"gb2312"));
+		httpPost.setEntity(new UrlEncodedFormEntity(nvps, "gbk"));
 
 		response = httpclient.execute(httpPost);
 		System.out.println("状态------"
@@ -128,6 +128,8 @@ public class HttpClientTest {
 					"http://favorite.taobao.com/popup/success.htm"));
 			System.out.println("状态------"
 					+ response.getStatusLine().getStatusCode());
+
+			InputStream is = response.getEntity().getContent();
 			System.out.println(getDoc(response.getEntity().getContent())
 					.asXML());
 		} else {
@@ -137,7 +139,6 @@ public class HttpClientTest {
 
 		httpclient.getConnectionManager().shutdown();
 	}
-
 	/**
 	 * 获取多节点
 	 * 
