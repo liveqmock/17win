@@ -462,7 +462,7 @@
 												class="anniu">取消任务</span> </a>
 											<br>
 											<font color="red">定时时间：<s:date
-													name="#task.timeingTime" format="yyyy-MM-dd HH-mm-ss" /> </font>
+													name="#task.timeingTime" format="yyyy-MM-dd HH:mm:ss" /> </font>
 										</s:if>
 										<s:elseif test="#task.status==1">
 											<a alt="取消任务！"

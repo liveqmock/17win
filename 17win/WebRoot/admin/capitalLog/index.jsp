@@ -5,7 +5,6 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<s:include value="/admin/common/header.jsp"></s:include>
-
 		<SCRIPT type="text/javascript" src="capitalLog/index.js"></SCRIPT>
 	</head>
 
@@ -23,7 +22,7 @@
 						记录类型：
 						<s:select listKey="key" listValue="value" name="capitalLogVO.type"
 							headerKey="" headerValue="--请选择--"
-							list="#{'1':'金额记录','2':'发布点记录','3':'积分记录'}">
+							list="#{'1':'金额记录','3':'积分记录'}">
 						</s:select>
 					</td>
 					<td>
@@ -42,13 +41,13 @@
 						记录日期：
 						<s:textfield name="capitalLogVO.startDate" id="startDate"
 							readonly="true"
-							onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd HH-mm-ss','skin':'blue'})"
+							onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd HH:mm:ss','skin':'blue'})"
 							cssStyle="width:110px">
 						</s:textfield>
 						至
 						<s:textfield name="capitalLogVO.endDate" id="endDate"
 							readonly="true"
-							onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd HH-mm-ss','skin':'blue'})"
+							onclick="WdatePicker({'isShowClear':true,dateFmt:'yyyy-MM-dd HH:mm:ss','skin':'blue'})"
 							cssStyle="width:110px">
 						</s:textfield>
 					</td>
@@ -104,7 +103,7 @@
 								<s:property value="#capitalLog.remainValue" />
 							</td>
 							<td>
-								<s:date name="#capitalLog.logTime" format="yyyy-MM-dd HH-mm-ss" />
+								<s:date name="#capitalLog.logTime" format="yyyy-MM-dd HH:mm:ss" />
 							</td>
 							<td>
 								<s:property value="#capitalLog.desc" />

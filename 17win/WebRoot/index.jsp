@@ -620,7 +620,7 @@ document.write('<embed src="images/bcastr3.swf" wmode="opaque" FlashVars="bcastr
 							QQ交流群
 						</dt>
 						<dd class="esp_3">
-							100103766
+							132533972
 						</dd>
 						<dt class='title'>
 							我们的宗旨

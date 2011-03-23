@@ -181,6 +181,9 @@ img {
 									收货信息
 								</th>
 								<th style="font-size: 12px" nowrap="nowrap">
+									购买金额
+								</th>
+								<th style="font-size: 12px" nowrap="nowrap">
 									使用次数
 								</th>
 								<th style="font-size: 12px" nowrap="nowrap">
@@ -216,6 +219,9 @@ img {
 										<s:property value="#logistics.receieveInfo" />
 									</td>
 									<td>
+										<s:property value="#logistics.money" />
+									</td>
+									<td>
 										<s:property value="#logistics.useCount" />
 									</td>
 									<td>
@@ -241,7 +247,7 @@ img {
 						</tbody>
 						<s:if test="#request.result.size()==0">
 							<tr>
-								<th colspan="10" align="center">
+								<th colspan="11" align="center">
 									没有记录！
 								</th>
 							</tr>
@@ -249,7 +255,7 @@ img {
 						<s:else>
 							<tfoot>
 								<tr>
-									<th colspan="10">
+									<th colspan="11">
 										<div style="float: left;">
 											<s:property value="logisticsVO.nowPage" />
 											/

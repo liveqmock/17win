@@ -17,7 +17,7 @@ import javax.persistence.TemporalType;
  * 任务常用联系人
  */
 public class TaskLinkManEntity extends BaseEntity {
-	// 用户名
+	// 指定人用户名
 	@Column(name = "USERNAME_", length = 12, nullable = false)
 	private String username;
 	// 最后一次使用日期

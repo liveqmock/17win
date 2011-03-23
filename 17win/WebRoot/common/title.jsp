@@ -82,7 +82,7 @@
 										<ul>
 											<LI
 												style="BACKGROUND: url(images/jieducm_top_btn5.jpg) no-repeat">
-												<A href="javascript:alert('暂不开放');">刷客排行</A>
+												<A href="logisticsManager/logistics!queryLogisticsLog.php">真实快递</A>
 											</LI>
 											<LI
 												style="BACKGROUND: url(images/jieducm_top_btn1.jpg) no-repeat">
@@ -161,6 +161,7 @@
 				</s:else>
 					href="payManager/pay!initPay.php" onmouseover="Mea(this);">账号充值</A>
 			</LI>
+			<!-- 
 			<LI class=white>
 				<A
 					<s:if test="#request.showIndexType==11">
@@ -171,16 +172,7 @@
 				</s:else>
 					href="javascript:alert('暂不开放');" onmouseover="Mea(this);">刷客排行</A>
 			</LI>
-			<LI class=white>
-				<A
-					<s:if test="#request.showIndexType=='help'">
-					class="li1 white"  	style="COLOR: #000000"
-				</s:if>
-					<s:else>
-						class="li0"
-				</s:else> href="help/index.html"
-					onmouseover="Mea(this);">新手入门</A>
-			</LI>
+			 -->
 			<LI class=white>
 				<A
 					<s:if test="#request.showIndexType=='logistics'">
@@ -191,6 +183,16 @@
 				</s:else>
 					href="logisticsManager/logistics!queryLogisticsLog.php"
 					onmouseover="Mea(this);">真实快递</A>
+			</LI>
+			<LI class=white>
+				<A
+					<s:if test="#request.showIndexType=='help'">
+					class="li1 white"  	style="COLOR: #000000"
+				</s:if>
+					<s:else>
+						class="li0"
+				</s:else> href="help/index.html"
+					onmouseover="Mea(this);">新手入门</A>
 			</LI>
 		</UL>
 	</DIV>

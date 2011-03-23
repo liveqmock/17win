@@ -11,6 +11,7 @@ import net.win.dao.TaskLinkManDAO;
 import net.win.dao.UserDAO;
 import net.win.entity.LogisticsEntity;
 import net.win.entity.TaskLinkManEntity;
+import net.win.entity.UserEntity;
 import net.win.utils.StringUtils;
 import net.win.vo.LogisticsVO;
 import net.win.vo.TaskLinkManVO;
@@ -18,7 +19,7 @@ import net.win.vo.TaskLinkManVO;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Service;
 
-@SuppressWarnings( { "unused", "unchecked" })
+@SuppressWarnings({"unused", "unchecked"})
 @Service("taskLinkManService")
 public class TaskLinkManService extends BaseService {
 	@Resource
@@ -41,8 +42,10 @@ public class TaskLinkManService extends BaseService {
 			putAlertMsg("添加失败，不能添加自己为联系人！");
 			return JUMP;
 		}
-		if (userDAO.findUserByName(taskLinkManEntity.getUsername()) == null) {
-			putAlertMsg("添加失败，该用户不存在！");
+		UserEntity assignUser = userDAO.findUserByName(taskLinkManEntity
+				.getUsername());
+		if (assignUser == null || "1".equals(assignUser.getType())) {
+			putAlertMsg("添加失败，该用户不存在(可能被系统删除)！");
 			return JUMP;
 		}
 		if (taskLinkManDAO.findLinkMan(taskLinkManEntity.getUsername(),
@@ -58,7 +61,6 @@ public class TaskLinkManService extends BaseService {
 		return JUMP;
 
 	}
-
 	/**
 	 * 查询联系人
 	 * 

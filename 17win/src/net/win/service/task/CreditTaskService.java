@@ -41,7 +41,13 @@ import org.springframework.stereotype.Service;
 
 /**
  * 
- * @author xgj
+ * @author xgj 1）如一方好评而另一方未评，在交易成功15天以后系统将自动默认给予评价方好评（因系统滞缓会有延后生效显示的情况）。
+ * 
+ * 2）如双方在评价期间内均未作出评价，则双方均不发生评价，无评价积分。（以上仅限个人交易平台，买家给予淘宝商城的商家有效店铺评分后，系统会默认给予买家一个好评）
+ * 
+ * 3）如一方在评价期间内作出“中评”或“差评”，另一方在评价期间内未评的，则系统不会给评价方默认评价。
+ * 
+ * 
  * 
  */
 @SuppressWarnings({"unused", "unchecked"})
@@ -375,30 +381,29 @@ public class CreditTaskService extends BaseService {
 		 * 验证IP
 		 */
 		String ip = WinUtils.getIPAddress(getRequset());
-		// 一月一个IP同一买号只能接同一商品一次
+		//		2）若14天内（以支付宝系统显示的交易创建的时间计算）相同买卖家之间就同一商品，有多笔支付宝交易，则多个好评只计1分，多个差评只记-1分。
+		Calendar calendar14 = Calendar.getInstance();
+		calendar14.add(Calendar.DAY_OF_YEAR, -14);
 		String hqlOne = "select count(*) from UserEntity  as  _buyer  inner join _buyer.receiveCreditTasks as _task where _buyer.id=:bid "
-				+ " and _task.receiveIP=:receiveIP  "
-				+ " and year(_task.receiveDate)=:year and month(_task.receiveDate)=:month  and  _task.itemUrl=:itemUrl";
-		// 一月一个IP同一买号只能接同一店铺六次
+				+ " and _task.receiveDate>=:startDate and _task.receiveDate<=:endDate  and  _task.itemUrl=:itemUrl";
+		//		1）每个自然月中，相同买家和卖家之间的评价计分不得超过6分（以支付宝系统显示的交易创建的时间计算）。超出计分规则范围的评价将不计分。
 		String hqlSix = "select count(*)   from UserEntity  as  _buyer  inner join _buyer.receiveCreditTasks as _task inner join _task.releasePerson.sellers as _seller "
 				+ "where _buyer.id=:bid "
-				+ "and _task.receiveIP=:receiveIP and year(_task.receiveDate)=:year and month(_task.receiveDate)=:month and  _seller.shopURL=:shopUrl";
-
+				+ "  and year(_task.receiveDate)=:year and month(_task.receiveDate)=:month and  _seller.shopURL=:shopUrl";
 		Integer year = Calendar.getInstance().get(Calendar.YEAR);
 		Integer month = Calendar.getInstance().get(Calendar.MONTH);
 		Boolean refuseFlag = (Long) creditTaskDAO.uniqueResultObject(hqlOne,
-				new String[]{"bid", "receiveIP", "year", "month", "itemUrl"},
-				new Object[]{buyerEntitiy.getId(), ip, year, month,
-						creditTask.getItemUrl()}) == 1;
+				new String[]{"bid", "startDate", "endDate", "itemUrl"},
+				new Object[]{buyerEntitiy.getId(), calendar14.getTime(),
+						new Date(), creditTask.getItemUrl()}) >= 1;
 		if (!refuseFlag) {
-			refuseFlag = (Long) creditTaskDAO
-					.uniqueResultObject(hqlSix, new String[]{"bid",
-							"receiveIP", "year", "month", "shopUrl"},
-							new Object[]{buyerEntitiy.getId(), ip, year, month,
-									creditTask.getSeller().getShopURL()}) == 6;
+			refuseFlag = (Long) creditTaskDAO.uniqueResultObject(hqlSix,
+					new String[]{"bid", "year", "month", "shopUrl"},
+					new Object[]{buyerEntitiy.getId(), year, month,
+							creditTask.getSeller().getShopURL()}) >= 6;
 		}
 		if (refuseFlag) {
-			putAlertMsg("为了您和他人的安全，一月一个IP同一买号只能接同一商品一次，一月一个IP同一买号只能接同一店铺六次！");
+			putAlertMsg("为了您和他人的安全，淘宝有如下规则:\\n（1）若14天内（以支付宝系统显示的交易创建的时间计算）相同买卖家之间就同一商品，有多笔支付宝交易，则多个好评只计1分，多个差评只记-1分。\\n（2）每个自然月中，相同买家和卖家之间的评价计分不得超过6分（以支付宝系统显示的交易创建的时间计算）。超出计分规则范围的评价将不计分。");
 			putJumpSelfPage("taskManager/task!initTask.php?platformType="
 					+ platformType);
 			return JUMP;
@@ -420,7 +425,6 @@ public class CreditTaskService extends BaseService {
 		putAlertMsg("恭喜您，你已经抢到了此任务！");
 		return JUMP;
 	}
-
 	/***************************************************************************
 	 * 卖家操作
 	 */
@@ -571,6 +575,20 @@ public class CreditTaskService extends BaseService {
 			if (creditTask.getIntervalHour() > 0) {
 				creditTask.setRemainTime(1L);
 			}
+
+			// 更新多久好评时间
+			Session session = creditTaskDAO.obtainSession();
+			String updateRemainTimeSql2 = "update"
+					+ " Tb_CreditTask as _task      "
+					+ "   set "
+					+ "     _task.REMAIN_TIME_= _task.INTERVAL_HOUR_*60-(UNIX_TIMESTAMP(sysdate())- UNIX_TIMESTAMP(_task.RECEIVE_DATE_))/60"
+					+ "   where      _task.STATUS_='4'     and _task.INTERVAL_HOUR_>0"
+					+ "   and _task.RELEASE_PERSON_=:userId and  _task.TYPE_=:platformType  and  _task.REMAIN_TIME_>0";
+			Query query = session.createSQLQuery(updateRemainTimeSql2);
+			query.setLong("userId", getLoginUser().getId());
+			query.setString("platformType", platformType);
+			query.executeUpdate();
+			session.flush();
 			creditTask.setStatus(TaskMananger.STEP_FOUR_STATUS);
 			putAlertMsg("发货成功！");
 			List<CreditTaskVO> result = queryReleaseData(creditTaskVO,
@@ -1435,8 +1453,9 @@ public class CreditTaskService extends BaseService {
 			creditTaskVO.setAssignUser(creditTaskVO.getAssignUser().trim());
 			UserEntity assignUser = userDAO.findUserByName(creditTaskVO
 					.getAssignUser());
-			if (assignUser == null) {
-				putAlertMsg("你指定的【" + creditTaskVO.getAssignUser() + "】用户不存在！");
+			if (assignUser == null || "1".equals(assignUser.getType())) {
+				putAlertMsg("你指定的【" + creditTaskVO.getAssignUser()
+						+ "】用户不存在（可能被系统删除）！");
 				return JUMP;
 			}
 			String adddLinkName = getByParam("addLinkName");
@@ -1453,6 +1472,9 @@ public class CreditTaskService extends BaseService {
 				linkMan.setLastUseTime(new Date());
 				linkMan.setUseCount(linkMan.getUseCount() + 1);
 			}
+		} else {
+			putAlertMsg("你指定的【" + creditTaskVO.getAssignUser() + "】用户不存在！");
+			return JUMP;
 		}
 		/**
 		 * 接手人自己想
@@ -1530,7 +1552,6 @@ public class CreditTaskService extends BaseService {
 		putAlertMsg("发布任务成功!");
 		return JUMP;
 	}
-
 	/**
 	 * 初始化发布任务
 	 * 

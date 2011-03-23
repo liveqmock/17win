@@ -23,7 +23,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
-@SuppressWarnings( { "unchecked" })
+@SuppressWarnings({"unchecked"})
 @Service("payService")
 public class PayService extends BaseService {
 	@Resource
@@ -82,27 +82,27 @@ public class PayService extends BaseService {
 		payDAO.save(payEntity);
 		String toTaobao = null;
 		switch (payVO.getMoney().intValue()) {
-		case 1:
-			toTaobao = "http://item.taobao.com/auction/item_detail.htm?item_num_id=9027703346";
-			break;
-		case 10:
-			toTaobao = "http://item.taobao.com/item.htm?id=9027758246";
-			break;
-		case 50:
-			toTaobao = "http://item.taobao.com/auction/item_detail.htm?item_num_id=9020022672";
-			break;
-		case 100:
-			toTaobao = "http://item.taobao.com/auction/item_detail.htm?item_num_id=9027716018";
-			break;
-		default:
-			toTaobao = "http://shop62179252.taobao.com/?order=&queryType=cat&browseType=grid&searchWord=im%C9%E7%C7%F8&price1=&price2=";
+			case 1 :
+				toTaobao = "http://item.taobao.com/auction/item_detail.htm?item_num_id=9027703346";
+				break;
+			case 10 :
+				toTaobao = "http://item.taobao.com/item.htm?id=9027758246";
+				break;
+			case 50 :
+				toTaobao = "http://item.taobao.com/auction/item_detail.htm?item_num_id=9020022672";
+				break;
+			case 100 :
+				toTaobao = "http://item.taobao.com/auction/item_detail.htm?item_num_id=9027716018";
+				break;
+			default :
+				toTaobao = "http://shop62179252.taobao.com/?order=&queryType=cat&browseType=grid&searchWord=im%C9%E7%C7%F8&price1=&price2=";
 		}
-		MailUtils.sendCommonMail(mailSender, freeMarkerCfj, "用户申请充值",
-				userEntity.getUsername()
-						+ "在"
-						+ DateUtils.format(new Date(),
-								DateUtils.DATE_TIME_FORMAT) + "提交充值", Constant
-						.getXgjEmail());
+		MailUtils.sendCommonMail(mailSender, freeMarkerCfj, userEntity
+				.getUsername()
+				+ "用户申请充值", userEntity.getUsername() + "在"
+				+ DateUtils.format(new Date(), DateUtils.DATE_TIME_FORMAT)
+				+ "用淘宝号:【" + payVO.getBuyername() + "】提交充值", Constant
+				.getXgjEmail());
 		putJumpOutterPage(toTaobao, false, true);
 		putAlertMsg("充值提交成功，现在到淘宝进行支付！");
 		return JUMP;

@@ -143,7 +143,7 @@ img {
 												<s:iterator value="#request.result" id="pay">
 													<tr>
 														<td>
-															<s:date name="#pay.payDate" format="yyyy-MM-dd HH-mm-ss" />
+															<s:date name="#pay.payDate" format="yyyy-MM-dd HH:mm:ss" />
 														</td>
 														<td>
 															<s:property value="#pay.money" />

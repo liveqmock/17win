@@ -225,7 +225,7 @@ img {
 															</td>
 															<td>
 																<s:date name="#withdrawals.operationDate"
-																	format="yyyy-MM-dd HH-mm-ss" />
+																	format="yyyy-MM-dd HH:mm:ss" />
 															</td>
 															<td>
 																<s:if test="#withdrawals.status==1">

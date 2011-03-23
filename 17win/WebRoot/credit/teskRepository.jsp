@@ -100,7 +100,7 @@
 										<img src="images/tdTask.gif" />
 										<s:if test="#task.lastDispathDate!=null">
 											<s:date name="#task.lastDispathDate"
-												format="yyyy-MM-dd HH-mm-ss" />
+												format="yyyy-MM-dd HH:mm:ss" />
 										</s:if>
 										<s:else>
 									该任务还没有发送过
