@@ -155,6 +155,18 @@ function validateForm() {
 			obj.focus();
 			return false;
 		}
+		for (var j = 0; j < itemUrlObjs.length; j++) {
+			var objTemp = itemUrlObjs.eq(j);
+			if (i == j) {
+				continue;
+			}
+			if (obj.val() == objTemp.val()) {
+				alert("有两个商品的地址相同！");
+				objTemp.focus();
+				objTemp.get(0).select();
+				return false;
+			}
+		}
 	}
 	// 验证money
 	if (!Validater.isNumber(money, "0+")) {

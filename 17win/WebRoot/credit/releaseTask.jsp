@@ -40,7 +40,7 @@
 		<script type="text/javascript">
 				function initTaskRep(){
 					<s:if test="#request.taskRep!=null">
-											// 初始化ITEM地址
+						// 初始化ITEM地址
 						 initItemUrl('<s:property value="creditTaskVO.itemUrl"/>');
 						// 初始化是否修改价格
 						 initUpdatePrice('<s:property value="creditTaskVO.updatePrice"/>');

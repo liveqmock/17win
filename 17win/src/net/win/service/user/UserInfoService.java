@@ -113,6 +113,7 @@ public class UserInfoService extends BaseService {
 	 * @throws Exception
 	 */
 	public String referee() throws Exception {
+		putIndexShowType("referee");
 		UserEntity userEntity = getLoginUserEntity(userDAO);
 		// 推广的会员数
 		Long userCount = (Long) userDAO
@@ -535,30 +536,28 @@ public class UserInfoService extends BaseService {
 		/**
 		 * 买家
 		 */
-		String[][] result1 = new String[3][7];
+		String[][] buyerInfos = new String[3][7];
 		/**
 		 * 卖家
 		 */
-		String[][] result2 = new String[3][9];
-		for (String[] r : result1) {
+		String[][] sellerInfos = new String[3][9];
+		for (String[] r : buyerInfos) {
 			Arrays.fill(r, "0");
 		}
 		{
 			// 设置result1的初始值
-			result1[0][0] = "淘宝";
-			result1[1][0] = "拍拍";
-			//			result1[2][0] = "有啊";
-			result1[2][0] = "合计";
+			buyerInfos[0][0] = "淘宝";
+			buyerInfos[1][0] = "拍拍";
+			buyerInfos[2][0] = "合计";
 		}
-		for (String[] r : result2) {
+		for (String[] r : sellerInfos) {
 			Arrays.fill(r, "0");
 		}
 		{
 			// 设置result2的初始值
-			result2[0][0] = "淘宝";
-			result2[1][0] = "拍拍";
-			//			result2[2][0] = "有啊";
-			result2[2][0] = "合计";
+			sellerInfos[0][0] = "淘宝";
+			sellerInfos[1][0] = "拍拍";
+			sellerInfos[2][0] = "合计";
 		}
 		if (tmpResult1.size() > 0) {
 			for (int i = 0; i < tmpResult1.size(); i++) {
@@ -568,34 +567,34 @@ public class UserInfoService extends BaseService {
 					if ("1".equals(objs[0])) {
 						// 淘宝的
 						if (TaskMananger.STEP_TWO_STATUS.equals(objs[1])) {
-							result1[0][1] = objs[2] + "";// 等我付款
+							buyerInfos[0][1] = objs[2] + "";// 等我付款
 						} else if (TaskMananger.STEP_THREE_STATUS
 								.equals(objs[1])) {
-							result1[0][2] = objs[2] + "";// 等待卖家发货
+							buyerInfos[0][2] = objs[2] + "";// 等待卖家发货
 						} else if (TaskMananger.STEP_FOUR_STATUS
 								.equals(objs[1])) {
-							result1[0][3] = objs[2] + "";// 等待我好评
+							buyerInfos[0][3] = objs[2] + "";// 等待我好评
 						} else if (TaskMananger.STEP_FIVE_STATUS
 								.equals(objs[1])) {
-							result1[0][4] = objs[2] + "";// 等待卖家好评
+							buyerInfos[0][4] = objs[2] + "";// 等待卖家好评
 						} else if (TaskMananger.STEP_SIX_STATUS.equals(objs[1])) {
-							result1[0][5] = objs[2] + "";// 完成的
+							buyerInfos[0][5] = objs[2] + "";// 完成的
 						}
 					} else if ("2".equals(objs[0])) {
 						// 拍拍
 						if (TaskMananger.STEP_TWO_STATUS.equals(objs[1])) {
-							result1[1][1] = objs[2] + "";// 等我付款
+							buyerInfos[1][1] = objs[2] + "";// 等我付款
 						} else if (TaskMananger.STEP_THREE_STATUS
 								.equals(objs[1])) {
-							result1[1][2] = objs[2] + "";// 等待卖家发货
+							buyerInfos[1][2] = objs[2] + "";// 等待卖家发货
 						} else if (TaskMananger.STEP_FOUR_STATUS
 								.equals(objs[1])) {
-							result1[1][3] = objs[2] + "";// 等待我好评
+							buyerInfos[1][3] = objs[2] + "";// 等待我好评
 						} else if (TaskMananger.STEP_FIVE_STATUS
 								.equals(objs[1])) {
-							result1[1][4] = objs[2] + "";// 等待卖家好评
+							buyerInfos[1][4] = objs[2] + "";// 等待卖家好评
 						} else if (TaskMananger.STEP_SIX_STATUS.equals(objs[1])) {
-							result1[1][5] = objs[2] + "";// 完成的
+							buyerInfos[1][5] = objs[2] + "";// 完成的
 						}
 					}
 				}
@@ -612,50 +611,50 @@ public class UserInfoService extends BaseService {
 					if ("1".equals(objs[0])) {
 						// 淘宝的
 						if (TaskMananger.TIMING_STATUS.equals(objs[1])) {
-							result2[0][1] = objs[2] + "";// 定时任务
+							sellerInfos[0][1] = objs[2] + "";// 定时任务
 						} else if (TaskMananger.STEP_ONE_STATUS.equals(objs[1])) {
-							result2[0][2] = objs[2] + "";// 等待接手
+							sellerInfos[0][2] = objs[2] + "";// 等待接手
 						} else if (TaskMananger.STEP_TWO_STATUS.equals(objs[1])) {
-							result2[0][4] = objs[2] + ""; // 等待买家付款
+							sellerInfos[0][3] = objs[2] + ""; // 等待买家付款
 						} else if (TaskMananger.STEP_THREE_STATUS
 								.equals(objs[1])) {
-							result2[0][5] = objs[2] + "";// 等待我发货
+							sellerInfos[0][4] = objs[2] + "";// 等待我发货
 						} else if (TaskMananger.STEP_FOUR_STATUS
 								.equals(objs[1])) {
-							result2[0][6] = objs[2] + "";// 等待买家确认好评
+							sellerInfos[0][5] = objs[2] + "";// 等待买家确认好评
 						} else if (TaskMananger.STEP_FIVE_STATUS
 								.equals(objs[1])) {
-							result2[0][7] = objs[2] + "";// 等待我好评
+							sellerInfos[0][6] = objs[2] + "";// 等待我好评
 						} else if (TaskMananger.STEP_SIX_STATUS.equals(objs[1])) {
-							result2[0][8] = objs[2] + "";// 完成的
+							sellerInfos[0][7] = objs[2] + "";// 完成的
 						}
 					} else if ("2".equals(objs[0])) {
 						// 拍拍
 						if (TaskMananger.TIMING_STATUS.equals(objs[1])) {
-							result2[1][1] = objs[2] + "";// 定时任务
+							sellerInfos[1][1] = objs[2] + "";// 定时任务
 						} else if (TaskMananger.STEP_ONE_STATUS.equals(objs[1])) {
-							result2[1][2] = objs[2] + "";// 等待接手
+							sellerInfos[1][2] = objs[2] + "";// 等待接手
 						} else if (TaskMananger.STEP_TWO_STATUS.equals(objs[1])) {
-							result2[1][4] = objs[2] + ""; // 等待买家付款
+							sellerInfos[1][3] = objs[2] + ""; // 等待买家付款
 						} else if (TaskMananger.STEP_THREE_STATUS
 								.equals(objs[1])) {
-							result2[1][5] = objs[2] + "";// 等待我发货
+							sellerInfos[1][4] = objs[2] + "";// 等待我发货
 						} else if (TaskMananger.STEP_FOUR_STATUS
 								.equals(objs[1])) {
-							result2[1][6] = objs[2] + "";// 等待买家确认好评
+							sellerInfos[1][5] = objs[2] + "";// 等待买家确认好评
 						} else if (TaskMananger.STEP_FIVE_STATUS
 								.equals(objs[1])) {
-							result2[1][7] = objs[2] + "";// 等待我好评
+							sellerInfos[1][6] = objs[2] + "";// 等待我好评
 						} else if (TaskMananger.STEP_SIX_STATUS.equals(objs[1])) {
-							result2[1][8] = objs[2] + "";// 完成的
+							sellerInfos[1][7] = objs[2] + "";// 完成的
 						}
 					}
 				}
 			}
 		}
 		// 合并数据
-		TotalUtils.totalAllByInt(result1);
-		TotalUtils.totalAllByInt(result2);
+		TotalUtils.totalAllByInt(buyerInfos);
+		TotalUtils.totalAllByInt(sellerInfos);
 
 		// 短信数
 		Long smsCount = (Long) userDAO
@@ -664,8 +663,8 @@ public class UserInfoService extends BaseService {
 						new String[]{"userid", "read"}, new Object[]{
 								userLoginInfo.getId(), false});
 		putByRequest("smsCount", smsCount);
-		putByRequest("sellTasks", result1);
-		putByRequest("buyTasks", result2);
+		putByRequest("sellTasks", buyerInfos);
+		putByRequest("buyTasks", sellerInfos);
 		return INPUT;
 	}
 }

@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	$("#tabs").tabs();
+	$("#tabs").show();
 	$(".buttonFlag").button();
 	// 获取用户地址
 	$("#realIdentity_1").bind("blur", function() {

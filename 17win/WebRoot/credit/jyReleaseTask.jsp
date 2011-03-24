@@ -279,7 +279,7 @@
 										<s:elseif test="#task.taskType==3">
 											<img src="images/tcType.jpg" alt="套餐任务" />
 										</s:elseif>
-										<span alt="任务ID"><s:property value="#task.testID" /> </span>
+										<span alt="任务ID，接手人:<s:property value="#task.jsUsername" /> "><s:property value="#task.testID" /> </span>
 										<br>
 										<img src="images/tdTask.gif"
 											alt="接手人是<s:property value="#task.assignUser"/>" />

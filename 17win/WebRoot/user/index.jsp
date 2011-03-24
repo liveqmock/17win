@@ -206,7 +206,7 @@ img {
 																<tr>
 																	<s:iterator value="selltask" id="task" status="indexJ">
 																		<td align="center" />
-																			<s:if test="#indexI.index<3 && #indexJ.index>0">
+																			<s:if test="#indexI.index<2 && #indexJ.index>0">
 																				<a href="#" buyer='buyer'
 																					row='<s:property value="#indexI.index"/>'
 																					col='<s:property value="#indexJ.index"/>'><s:property
@@ -264,7 +264,7 @@ img {
 																<tr>
 																	<s:iterator value="buyTask" id="task" status="indexJ">
 																		<td align="center"">
-																			<s:if test="#indexI.index<3 && #indexJ.index>0">
+																			<s:if test="#indexI.index<2 && #indexJ.index>0">
 																				<a href="#" seller='seller'
 																					row='<s:property value="#indexI.index"/>'
 																					col='<s:property value="#indexJ.index"/>'><s:property

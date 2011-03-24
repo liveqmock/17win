@@ -115,7 +115,7 @@
 			</LI>
 			<LI class=white>
 				<A
-					<s:if test="#request.showIndexType==2">
+					<s:if test="#request.showIndexType=='taobaoHuShua'">
 					class="li1 white"  	style="COLOR: #000000"
 				</s:if>
 					<s:else>
@@ -123,10 +123,10 @@
 				</s:else>
 					href="taskManager/task!initTask.php?platformType=1"
 					onmouseover="Mea(this);">淘宝互刷</A>
-			</LI>
+			</LI> 
 			<LI class=white>
 				<A
-					<s:if test="#request.showIndexType==3">
+					<s:if test="#request.showIndexType=='paipaiHuShua'">
 					class="li1 white"  	style="COLOR: #000000"
 				</s:if>
 					<s:else>
@@ -136,24 +136,50 @@
 					onmouseover="Mea(this);">拍拍互刷</A>
 			</LI>
 			<LI class=white>
-				<A class="li0" href="javascript:alert('开发中，敬请期待！');"
-					onmouseover="Mea(this);">淘宝流量</A>
-			</LI>
-			<LI class=white>
-				<A class="li0" href="javascript:alert('开发中，敬请期待！');"
-					onmouseover="Mea(this);">拍拍流量</A>
-			</LI>
-			<LI class=white>
-				<A class="li0" href="javascript:alert('开发中，敬请期待！');"
-					onmouseover="Mea(this);">淘宝收藏</A>
-			</LI>
-			<LI class=white>
-				<A class="li0" href="javascript:alert('开发中，敬请期待！');"
-					onmouseover="Mea(this);">拍拍收藏</A>
+				<A
+					<s:if test="#request.showIndexType=='referee'">
+					class="li1 white"  	style="COLOR: #000000"
+				</s:if>
+					<s:else>
+						class="li0"
+				</s:else>
+					href="userInfoManager/info!referee.php" onmouseover="Mea(this);">我要推广</A>
 			</LI>
 			<LI class=white>
 				<A
-					<s:if test="#request.showIndexType==5">
+					<s:if test="#request.showIndexType=='sms'">
+					class="li1 white"  	style="COLOR: #000000"
+				</s:if>
+					<s:else>
+						class="li0"
+				</s:else>
+					href="smsManager/sms!initSendSms.php" onmouseover="Mea(this);">发送站内信</A>
+			</LI>
+			<LI class=white>
+				<A
+					<s:if test="#request.showIndexType=='withdrawals'">
+					class="li1 white"  	style="COLOR: #000000"
+				</s:if>
+					<s:else>
+						class="li0"
+				</s:else>
+					href="withdrawalsManager/withdrawals!initWithdrawals.php"
+					onmouseover="Mea(this);">我要提现</A>
+			</LI>
+			<LI class=white>
+				<A
+					<s:if test="#request.showIndexType=='linkMan'">
+					class="li1 white"  	style="COLOR: #000000"
+				</s:if>
+					<s:else>
+						class="li0"
+				</s:else>
+					href="taskLinkManManager/taskLinkMan!initAddLinkTaskMan.php"
+					onmouseover="Mea(this);">添加联系人</A>
+			</LI>
+			<LI class=white>
+				<A
+					<s:if test="#request.showIndexType=='pay'">
 					class="li1 white"  	style="COLOR: #000000"
 				</s:if>
 					<s:else>

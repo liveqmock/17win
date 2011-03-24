@@ -274,7 +274,7 @@
 										<s:elseif test="#task.taskType==3">
 											<img src="images/tcType.jpg" alt="套餐任务" />
 										</s:elseif>
-										<span alt="任务ID"><s:property value="#task.testID" /> </span>
+										<span alt="任务ID，发布人:<s:property value="#task.fbUsername" /> "><s:property value="#task.testID" /> </span>
 										<br>
 										<img src="images/tdTask.gif"
 											alt="发布人是<s:property value="#task.fbUsername"/>" />

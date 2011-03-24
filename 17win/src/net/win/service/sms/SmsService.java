@@ -35,6 +35,7 @@ public class SmsService extends BaseService {
 	 * @throws Exception
 	 */
 	public String initSendSms(SmsVO smsVO) throws Exception {
+		putIndexShowType("sms");
 		String toUser = getByParam("toUser");
 		if (toUser != null) {
 			String toUsername = new String(getByParam("toUser"));

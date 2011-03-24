@@ -29,6 +29,7 @@ public class TaskLinkManService extends BaseService {
 
 	public String initAddLinkTaskMan(TaskLinkManVO taskLinkManVO)
 			throws Exception {
+		putIndexShowType("linkMan");
 		return "initAddLinkTaskMan";
 	}
 

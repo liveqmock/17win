@@ -24,7 +24,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
-@SuppressWarnings( { "unused", "unchecked" })
+@SuppressWarnings({"unused", "unchecked"})
 @Service("withdrawalsService")
 public class WithdrawalsService extends BaseService {
 	@Resource
@@ -153,6 +153,7 @@ public class WithdrawalsService extends BaseService {
 	 */
 	public String initWithdrawals(WithdrawalsVO withdrawalsVO) throws Exception {
 		putTokenBySession();
+		putIndexShowType("withdrawals");
 		return "initWithdrawals";
 	}
 
@@ -196,11 +197,12 @@ public class WithdrawalsService extends BaseService {
 			withDrawalsDAO.save(withdrawalsEntity);
 			putAlertMsg("操作成功，您的操作已经进入提现流程，我们会马上完成您的提现然后邮件通知您！");
 
-			MailUtils.sendCommonMail(mailSender, freeMarkerCfj,"用户申请提现", userEntity
-					.getUsername()
-					+ "在"
-					+ DateUtils.format(new Date(), DateUtils.DATE_TIME_FORMAT)
-					+ "申请提现", Constant.getXgjEmail());
+			MailUtils.sendCommonMail(mailSender, freeMarkerCfj, "用户申请提现",
+					userEntity.getUsername()
+							+ "在"
+							+ DateUtils.format(new Date(),
+									DateUtils.DATE_TIME_FORMAT) + "申请提现",
+					Constant.getXgjEmail());
 		}
 		return JUMP;
 	}

@@ -13,15 +13,9 @@ $(document).ready(function() {
 		}
 		$(this).attr("href", url);
 	});
-
 	$("[seller='seller']").each(function() {
 		var row = parseInt($(this).attr("row")) + 1;
 		var col = parseInt($(this).attr("col")) - 1;
-		if (col == 2) {
-			col = -2;
-		} else if (col > 2) {
-			col = col - 1;
-		}
 		if (col == 7) {
 			var url = "taskManager/task!initReleasedTast.php?platformType="
 					+ row + "&creditTaskVO.status=&creditTaskVO.nowPage=1";
