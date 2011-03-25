@@ -15,16 +15,12 @@ import org.dom4j.io.SAXReader;
 public final class Constant {
 	private Constant() {
 	}
-
-	static {
-		initJDBC();
-	}
 	/**
 	 * 数据库信息
 	 */
-	private static String jdbcUrl;
-	private static String jdbcUsername;
-	private static String jdbcPassword;
+	private static String jdbcUrl = "jdbc:mysql://localhost:3306/windb";
+	private static String jdbcUsername = "windb";
+	private static String jdbcPassword = "8868829xgj";
 
 	// 登陆用户的信息
 	public static final String USER_LOGIN_INFO = "userLogin";
@@ -42,35 +38,35 @@ public final class Constant {
 	/**
 	 * 邮箱
 	 */
-	private static String winEmail;
-	private static String xgjEmail;
-	private static Integer winEmailPort;
-	private static String winEmailHost;
+	private static String winEmail = "admin@17win.net";
+	private static String xgjEmail = "30756500@qq.com";
+	private static Integer winEmailPort = 25;
+	private static String winEmailHost = "smtp.qq.com";
 	private static String winEmailPassword;
-	private static String winEmailUsername;
+	private static String winEmailUsername = "admin@17win.net";
 
 	// 信誉值上限
-	private static Double taobaoCreditValueLimit;
+	private static Double taobaoCreditValueLimit = 250D;
 	// 信誉值上限
-	private static Double paipaiCreditValueLimit;
+	private static Double paipaiCreditValueLimit = 100D;
 
 	// 登录时获得的积分，非会员
-	private static Double loginScore;
+	private static Double loginScore = 5D;
 
 	// 通过你的宣传链接注册的会员积分每上升1000 ，你的收益=100积分
-	private static Double score1000Refree;
+	private static Double score1000Refree = 100D;
 	// 支付界面
-	private static String toPayPage;
+	private static String toPayPage = "http://item.taobao.com/auction/item_detail.htm?item_num_id=9020022672";
 	// 最大注册数
-	public static Double maxRegisterCount;
+	public static Double maxRegisterCount = 100D;
 
 	/**
 	 * 系统流程控制
 	 * 
 	 * @return
 	 */
-	public static Boolean stopTask = true;
-	public static Boolean stopAll = true;
+	public static Boolean stopTask = false;
+	public static Boolean stopAll = false;
 
 	public static Double getLoginScore() {
 		return loginScore;
@@ -179,6 +175,9 @@ public final class Constant {
 	 * 初始化
 	 */
 	public static void initMetatData() {
+		if (jdbcUrl == null) {
+			initJDBC();
+		}
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		Connection conn = null;
