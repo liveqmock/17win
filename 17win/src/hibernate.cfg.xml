@@ -11,15 +11,23 @@
 			com.mysql.jdbc.Driver
 			<!--		net.sourceforge.jtds.jdbc.Driver  -->
 		</property>
+		<!-- 
+			<property name="hibernate.connection.url">
+			jdbc:mysql://localhost:3306/windb
+			
+			</property>
+			<property name="hibernate.connection.username">root</property>
+			<property name="hibernate.connection.password">123456</property>
+		-->
 
 		<property name="hibernate.connection.url">
-			jdbc:mysql://localhost:3306/windb
-			<!-- 
-				jdbc:mysql://58.30.16.18:3306/windb   windb  8868829xgj
-				jdbc:jtds:sqlserver://localhost:1433/windb; -->
+			jdbc:mysql://58.30.16.18:3306/windb
+			<!-- jdbc:jtds:sqlserver://localhost:1433/windb; -->
 		</property>
-		<property name="hibernate.connection.username">root</property>
-		<property name="hibernate.connection.password">123456</property>
+		<property name="hibernate.connection.username">windb</property>
+		<property name="hibernate.connection.password">
+			8868829xgj
+		</property>
 		<!-- 方言  	-->
 		<property name="hibernate.dialect">
 			org.hibernate.dialect.MySQLDialect
