@@ -167,8 +167,9 @@ public final class Constant {
 			jdbcUsername = usernamElement.getTextTrim();
 			jdbcPassword = passwordElement.getTextTrim();
 		} catch (Exception e) {
-			e.printStackTrace();
+			LoggerUtils.error(e);
 		}
+		LoggerUtils.info("获取hibernate文件的数据库信息成功！");
 	}
 
 	/**
@@ -252,11 +253,12 @@ public final class Constant {
 					stopTask = Boolean.parseBoolean(stringValue);
 				}
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			LoggerUtils.error(e);
 		} finally {
 			closeJDBC(rs, st, conn);
 		}
+		LoggerUtils.info("数据库数据更新完成！！！");
 	}
 
 	public static String getToPayPage() {
