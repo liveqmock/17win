@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -265,7 +266,7 @@ public final class HttpB2CUtils {
 	 * @return
 	 */
 	public static SellerEntity getSellerInfo(SellerEntity sellerEntity,
-			String platformType) {
+			String platformType)throws Exception {
 		Map nameSpaces = new HashMap();
 		nameSpaces.put("xmlns", "http://www.w3.org/1999/xhtml");
 		if ("1".equals(platformType)) {
@@ -275,7 +276,7 @@ public final class HttpB2CUtils {
 			//店铺地址
 			sellerEntity
 					.setShopURL("http://store.taobao.com/shop/view_shop.htm?asker=wangwang&shop_nick="
-							+ sellerEntity.getName());
+							+URLEncoder.encode( sellerEntity.getName(),"GBK"));
 			//验证是否有这个店铺
 			Element node = (Element) getOneNodeByDom4j(sellerEntity
 					.getShopURL(), "//xmlns:DIV[@class='error-notice']",
