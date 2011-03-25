@@ -66,6 +66,8 @@ public class TaskQuartzService {
 		Query query;
 		Session session = null;
 		try {
+			session = creditTaskDAO.obtainSession();
+			session.beginTransaction();
 			// 卖号，卖号信息更改
 			List<BuyerEntity> buyers = buyerDAO
 					.list("from BuyerEntity where enable=true and  type in (1,2) ");
@@ -73,10 +75,13 @@ public class TaskQuartzService {
 					.list("from SellerEntity where enable=true and  type in (1,2) ");
 			for (BuyerEntity buyerEntity : buyers) {
 				HttpB2CUtils.getBuyerInfo(buyerEntity, buyerEntity.getType(), false);
+				session.update(buyerEntity);
 			}
 			for (SellerEntity seller : sellers) {
 				HttpB2CUtils.getSellerInfo(seller, seller.getType());
+				session.update(seller);
 			}
+			session.getTransaction().commit();
 		} catch (Exception e) {
 			session.getTransaction().rollback();
 			LoggerUtils.error(" 每晚24点任务!", e);
