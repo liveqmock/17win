@@ -72,7 +72,7 @@ public class TaskQuartzService {
 			List<BuyerEntity> buyers = buyerDAO
 					.list("from BuyerEntity where enable=true and  type in (1,2) ");
 			List<SellerEntity> sellers = sellerDAO
-					.list("from SellerEntity where enable=true and  type in (1,2) ");
+					.list("from SellerEntity where type in (1,2) ");
 			for (BuyerEntity buyerEntity : buyers) {
 				HttpB2CUtils.getBuyerInfo(buyerEntity, buyerEntity.getType(), false);
 				session.update(buyerEntity);
