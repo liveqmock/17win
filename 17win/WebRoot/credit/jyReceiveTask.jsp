@@ -38,7 +38,7 @@
 		<script type="text/javascript" src="js/jquery-ui-1.8.4.custom.min.js">
 		</script>
 		<script
-			src="http://cdn.jquerytools.org/1.2.1/tiny/jquery.tools.min.js"></script>
+			src="js/jquery.tools.min.js"></script>
 		<script src="<%=basePath%>js/My97DatePicker/WdatePicker.js"
 			defer="defer" type="text/javascript"></script>
 		<SCRIPT src="credit/jyReceiveTask.js" type="text/javascript"></SCRIPT>

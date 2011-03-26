@@ -37,7 +37,7 @@
 		<script src="<%=basePath%>js/My97DatePicker/WdatePicker.js"
 			defer="defer" type="text/javascript"></script>
 		<script
-			src="http://cdn.jquerytools.org/1.2.1/tiny/jquery.tools.min.js"></script>
+			src="js/jquery.tools.min.js"></script>
 		<script src="js/x_alt.js" type="text/javascript"></script>
 		<SCRIPT src="credit/jyReleaseTask.js" type="text/javascript"></SCRIPT>
 		<s:if test="creditTaskVO.refreshSec!=null">
