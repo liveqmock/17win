@@ -21,6 +21,7 @@ String.prototype.startWith = function(str) {
 }
 // 赋值到剪切板
 function copyToClipboard(txt, msg) {
+	txt=txt.replace(/(^\s*)|(\s*$)/g,""); 
 	if (window.clipboardData) {
 		window.clipboardData.clearData();
 		window.clipboardData.setData("Text", txt);
