@@ -44,10 +44,8 @@ $(document).ready(function() {
 			$("#addressDIV").dialog({
 						autoOpen : false,
 						draggable : false,
-						hide : 'slide',
 						modal : true,
 						resizable : false,
-						show : 'slide',
 						width : 400
 					});
 		});
@@ -60,10 +58,8 @@ function openTelephoneDiv(telphone, username) {
 	$("#sendSmsDIV").dialog({
 		autoOpen : false,
 		draggable : true,
-		hide : 'slide',
 		modal : true,
 		resizable : false,
-		show : 'slide',
 		width : 400,
 		title : '发送手机短信',
 		buttons : {

@@ -24,10 +24,8 @@ $(document).ready(function() {
 		draggable : false,
 		height : 200,
 		width : 550,
-		hide : 'slide',
 		modal : true,
 		resizable : false,
-		show : 'slide',
 		buttons : {
 			"确定" : function() {
 				var taskId = $("#currTaskId").val();;
