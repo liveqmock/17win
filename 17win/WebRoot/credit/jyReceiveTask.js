@@ -1,5 +1,11 @@
 $(document).ready(function() {
+	
+	
+	
 	$(".qqConnection").tooltip();
+	
+
+	
 	intText("autoreFresh");
 	$("#autoreFresh").focus(function() {
 				$(this).data("oldValue", $(this).val());
@@ -34,8 +40,7 @@ $(document).ready(function() {
 					$("#showTip").text(value.length);
 				}
 			});
-
-	$("#addressDIV").dialog({
+		$("#addressDIV").dialog({
 				autoOpen : false,
 				draggable : false,
 				modal : true,
@@ -54,6 +59,7 @@ $(document).ready(function() {
 
 				}
 			});
+	
 
 });
 

@@ -17,10 +17,6 @@
 		<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
 		<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
 		<META HTTP-EQUIV="Expires" CONTENT="0">
-		<s:if test="#request.autoRefresh!=null">
-			<meta http-equiv="refresh"
-				content="<s:property value="#request.autoRefresh"/>">
-		</s:if>
 		<s:include value="../common/header.jsp"></s:include>
 
 		<LINK href="css/Css.css" type=text/css rel=stylesheet />
@@ -30,8 +26,8 @@
 		<LINK href="css/top_bottom.css" type="text/css" rel="stylesheet" />
 		<script src="<%=basePath%>js/My97DatePicker/WdatePicker.js"
 			defer="defer" type="text/javascript"></script>
-		<script
-			src="js/jquery.tools.min.js"></script>
+		<script type="text/javascript" src="js/jquery.tools.min.js"></script>
+		<SCRIPT type="text/javascript" src="js/jquery-ui-1.8.4.custom.min.js"></SCRIPT>
 		<SCRIPT src="credit/jyReleaseTask.js" type="text/javascript"></SCRIPT>
 		<s:if test="creditTaskVO.refreshSec!=null">
 			<script type="text/javascript">
@@ -272,7 +268,8 @@
 										<s:elseif test="#task.taskType==3">
 											<img src="images/tcType.jpg" alt="套餐任务" />
 										</s:elseif>
-										<span alt="任务ID，接手人:<s:property value="#task.jsUsername" /> "><s:property value="#task.testID" /> </span>
+										<span alt="任务ID，接手人:<s:property value="#task.jsUsername" /> "><s:property
+												value="#task.testID" /> </span>
 										<br>
 										<img src="images/tdTask.gif"
 											alt="接手人是<s:property value="#task.assignUser"/>" />

@@ -19,22 +19,17 @@
 		<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
 		<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
 		<META HTTP-EQUIV="Expires" CONTENT="0">
-		<s:if test="#request.autoRefresh!=null">
-			<meta http-equiv="refresh"
-				content="<s:property value="#request.autoRefresh"/>">
-		</s:if>
 		<s:include value="../common/header.jsp"></s:include>
 
 		<LINK href="css/Css.css" type=text/css rel=stylesheet>
-		<LINK href="css/style.css" type=text/css rel=stylesheet>
 		<LINK href="css/header.css" type=text/css rel=stylesheet>
 		<LINK href="css/index.css" type=text/css rel=stylesheet>
-		<link href="css/excite-bike/jquery-ui-1.8.4.custom.css"
-			rel="stylesheet" type="text/css" />
-		<SCRIPT src="js/jieducm_pupu.js" type="text/javascript"></SCRIPT>
-		<script type="text/javascript" src="js/jquery.tools.min.js"></script>
+		<LINK href="css/style.css" type=text/css rel=stylesheet>
+		<LINK href="css/top_bottom.css" type="text/css" rel="stylesheet" />
 		<script src="<%=basePath%>js/My97DatePicker/WdatePicker.js"
 			defer="defer" type="text/javascript"></script>
+		<script type="text/javascript" src="js/jquery.tools.min.js"></script>
+		<SCRIPT type="text/javascript" src="js/jquery-ui-1.8.4.custom.min.js"></SCRIPT>
 		<SCRIPT src="credit/jyReceiveTask.js" type="text/javascript"></SCRIPT>
 		<s:if test="creditTaskVO.refreshSec!=null">
 			<script type="text/javascript">
