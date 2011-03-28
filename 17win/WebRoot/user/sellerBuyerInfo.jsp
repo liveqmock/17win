@@ -9,11 +9,7 @@
 		<LINK href="css/top_bottom.css" type="text/css" rel="stylesheet">
 		<LINK href="css/Css.css" type="text/css" rel="stylesheet">
 		<LINK href="css/center.css" type="text/css" rel="stylesheet">
-		<link href="css/excite-bike/jquery-ui-1.8.4.custom.css"
-			rel="stylesheet" type="text/css" />
-		<SCRIPT src="js/jquery-ui-1.8.4.custom.min.js" type="text/javascript"></SCRIPT>
-		<SCRIPT src="js/utils.js" type=text/javascript></SCRIPT>
-		<SCRIPT src="js/aop.js" type=text/javascript></SCRIPT>
+		
 		<SCRIPT src="user/sellerBuyerInfo.js" type=text/javascript></SCRIPT>
 
 		<style type="text/css">

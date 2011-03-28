@@ -31,18 +31,11 @@
 		<LINK href="css/index.css" type=text/css rel=stylesheet>
 		<link href="css/excite-bike/jquery-ui-1.8.4.custom.css"
 			rel="stylesheet" type="text/css" />
-		<LINK href="css/top_bottom.css" type="text/css" rel="stylesheet">
 		<SCRIPT src="js/jieducm_pupu.js" type="text/javascript"></SCRIPT>
-		<SCRIPT src="js/validater.js" type="text/javascript"></SCRIPT>
-		<SCRIPT src="js/utils.js" type="text/javascript"></SCRIPT>
-		<script type="text/javascript" src="js/jquery-ui-1.8.4.custom.min.js">
-		</script>
-		<script
-			src="js/jquery.tools.min.js"></script>
+		<script type="text/javascript" src="js/jquery.tools.min.js"></script>
 		<script src="<%=basePath%>js/My97DatePicker/WdatePicker.js"
 			defer="defer" type="text/javascript"></script>
 		<SCRIPT src="credit/jyReceiveTask.js" type="text/javascript"></SCRIPT>
-		<script src="js/x_alt.js" type="text/javascript"></script>
 		<s:if test="creditTaskVO.refreshSec!=null">
 			<script type="text/javascript">
 			setTimeout("refreshPage()",<s:property value='creditTaskVO.refreshSec'/>*1000);  
@@ -274,7 +267,8 @@
 										<s:elseif test="#task.taskType==3">
 											<img src="images/tcType.jpg" alt="套餐任务" />
 										</s:elseif>
-										<span alt="任务ID，发布人:<s:property value="#task.fbUsername" /> "><s:property value="#task.testID" /> </span>
+										<span alt="任务ID，发布人:<s:property value="#task.fbUsername" /> "><s:property
+												value="#task.testID" /> </span>
 										<br>
 										<img src="images/tdTask.gif"
 											alt="发布人是<s:property value="#task.fbUsername"/>" />

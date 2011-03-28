@@ -28,17 +28,10 @@
 		<LINK href="css/index.css" type=text/css rel=stylesheet />
 		<LINK href="css/style.css" type=text/css rel=stylesheet />
 		<LINK href="css/top_bottom.css" type="text/css" rel="stylesheet" />
-		<link href="css/excite-bike/jquery-ui-1.8.4.custom.css"
-			rel="stylesheet" type="text/css" />
-		<SCRIPT src="js/validater.js" type="text/javascript"></SCRIPT>
-		<SCRIPT src="js/utils.js" type="text/javascript"></SCRIPT>
-		<script src="js/jquery-ui-1.8.4.custom.min.js" type="text/javascript">
-		</script>
 		<script src="<%=basePath%>js/My97DatePicker/WdatePicker.js"
 			defer="defer" type="text/javascript"></script>
 		<script
 			src="js/jquery.tools.min.js"></script>
-		<script src="js/x_alt.js" type="text/javascript"></script>
 		<SCRIPT src="credit/jyReleaseTask.js" type="text/javascript"></SCRIPT>
 		<s:if test="creditTaskVO.refreshSec!=null">
 			<script type="text/javascript">

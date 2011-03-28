@@ -21,20 +21,16 @@ $(document).ready(function() {
 			$("#updateDIV").dialog({
 						autoOpen : false,
 						draggable : true,
-						hide : 'slide',
 						modal : true,
 						resizable : false,
-						show : 'slide',
 						width : 500
 
 					});
 			$("#addtableDIV").dialog({
 						autoOpen : false,
 						draggable : false,
-						hide : 'slide',
 						modal : true,
 						resizable : false,
-						show : 'slide',
 						width : 500
 
 					});

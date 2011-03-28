@@ -15,8 +15,11 @@
 	name="description" />
 <meta content="淘宝刷信誉,淘宝刷钻,刷钻平台,互刷平台,全球首个完全免费刷钻,真实快递" name="keywords" />
 <LINK href="css/service.css" type=text/css rel=stylesheet>
+<link href="css/excite-bike/jquery-ui-1.8.4.custom.css" rel="stylesheet"
+	type="text/css" />
 <script type="text/javascript" src="js/jquery-1.4.2.min.js">
 </script>
+<SCRIPT type="text/javascript" src="js/jquery-ui-1.8.4.custom.min.js"></SCRIPT>
 <SCRIPT type="text/javascript" src="js/jquery.tablesorter.min.js"></SCRIPT>
 <script type="text/javascript" src="js/jqueryPluginExt.js">
 </script>
@@ -26,4 +29,5 @@
 </script>
 <script type="text/javascript" src="js/utils.js">
 </script>
+<SCRIPT type="text/javascript" src="js/aop.js"></SCRIPT>
 <script type="text/javascript" src="js/x_alt.js"> </script>

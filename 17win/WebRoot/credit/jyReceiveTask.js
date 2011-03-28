@@ -26,6 +26,15 @@ $(document).ready(function() {
 				window.open(val, "_blank");
 
 			});
+	$("#contentID").keyup(function() {
+				var value = $(this).val();
+				if (value.length > 200) {
+					$(this).val(value.substring(0, 200));
+				} else {
+					$("#showTip").text(value.length);
+				}
+			});
+
 	$("#addressDIV").dialog({
 				autoOpen : false,
 				draggable : false,
@@ -43,14 +52,6 @@ $(document).ready(function() {
 						}
 					}
 
-				}
-			});
-	$("#contentID").keyup(function() {
-				var value = $(this).val();
-				if (value.length > 200) {
-					$(this).val(value.substring(0, 200));
-				} else {
-					$("#showTip").text(value.length);
 				}
 			});
 
