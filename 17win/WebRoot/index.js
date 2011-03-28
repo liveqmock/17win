@@ -1,6 +1,5 @@
 var submitFlag = true;
 $(document).ready(function() {
-	$("#newnotice").floatdiv("leftbottom");
 	$("#verificationCodeID").click();
 	$(window).load(function() {
 				$("#newnotice").slideDown("slow");

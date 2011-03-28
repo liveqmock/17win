@@ -4,12 +4,22 @@
 <HTML>
 	<HEAD>
 		<s:include value="../common/header.jsp"></s:include>
+		<%
+			//让浏览器不缓存jsp页面 
+			response.setHeader("Pragma", "No-cache");// http1.0 
+			response.setHeader("Cache-Control", "no-store,no-cache"); //http1.1 
+			response.setHeader("Expires", "0");
+			response.setDateHeader("Expires", 0);// 这个是针对代理的？但我设置后还是没达到效果。不解！！
+		%>
+		<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+		<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+		<META HTTP-EQUIV="Expires" CONTENT="0">
 		<LINK href="css/style.css" type="text/css" rel="stylesheet">
 		<LINK href="css/index.css" type="text/css" rel="stylesheet">
 		<LINK href="css/top_bottom.css" type="text/css" rel="stylesheet">
 		<LINK href="css/Css.css" type="text/css" rel="stylesheet">
 		<LINK href="css/center.css" type="text/css" rel="stylesheet">
-		
+
 		<SCRIPT src="user/sellerBuyerInfo.js" type=text/javascript></SCRIPT>
 
 		<style type="text/css">
@@ -151,9 +161,14 @@ img {
 																<s:property value="#seller.score" />
 															</td>
 															<td align="center" nowrap="nowrap">
-																<a href="<s:property value="#seller.creditURL" />"
-																	target="_blank"> <img
-																		src="<s:property value="#seller.img" />" /> </a>
+																<s:if test="#seller.img==null || #seller.img==''">
+																	你当前的信誉值为0
+																</s:if>
+																<s:else>
+																	<a href="<s:property value="#seller.creditURL" />"
+																		target="_blank"> <img
+																			src="<s:property value="#seller.img" />" /> </a>
+																</s:else>
 															</td>
 															<td align="center" nowrap="nowrap" title="修改发货地址">
 																<a
@@ -203,9 +218,15 @@ img {
 																<s:property value="#buyer.score" />
 															</td>
 															<td align="center">
-																<a href="<s:property value="#buyer.creditURL" />"
-																	target="_blank"> <img
-																		src="<s:property value="#buyer.img" />" /> </a>
+																<s:if test="#buyer.img==null || #buyer.img==''">
+																	你当前的信誉值为0
+																</s:if>
+																<s:else>
+																	<a href="<s:property value="#buyer.creditURL" />"
+																		target="_blank"> <img
+																			src="<s:property value="#buyer.img" />" /> </a>
+																</s:else>
+
 															</td>
 															<td align="center">
 																<s:if test="#buyer.enable">
