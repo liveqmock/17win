@@ -212,6 +212,7 @@ public class UserInfoService extends BaseService {
 					return JUMP;
 				}
 			}
+			sellerEntity.setName(sellerEntity.getName().trim());
 			sellerEntity = HttpB2CUtils.getSellerInfo(sellerEntity,
 					platformTypeParam);
 			//判断是否没找到信息
@@ -262,6 +263,7 @@ public class UserInfoService extends BaseService {
 				return JUMP;
 			}
 			//添加买号
+			buyerEntity.setName(buyerEntity.getName().trim());
 			buyerEntity = HttpB2CUtils.getBuyerInfo(buyerEntity,
 					platformTypeParam, true);
 
