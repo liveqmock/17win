@@ -21,12 +21,11 @@
 		-->
 
 		<property name="hibernate.connection.url">
-			jdbc:mysql://58.30.16.18:3306/windb
+			jdbc:mysql://localhost:3306/windb
 			<!-- jdbc:jtds:sqlserver://localhost:1433/windb; -->
 		</property>
-		<property name="hibernate.connection.username">windb</property>
-		<property name="hibernate.connection.password">
-			8868829xgj
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">123456
 		</property>
 		<!-- 方言  	-->
 		<property name="hibernate.dialect">

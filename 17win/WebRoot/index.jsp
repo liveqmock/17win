@@ -37,7 +37,6 @@
 		<SCRIPT src="js/jquery-ui-1.8.4.custom.min.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="js/validater.js" type=text/javascript></SCRIPT>
 		<SCRIPT src="js/service.js" type="text/javascript"></SCRIPT>
-		<SCRIPT src="js/jquery.node.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="js/utils.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="js/x_alt.js" type="text/javascript"></SCRIPT>
 		<SCRIPT src="index.js" type="text/javascript"></SCRIPT>
