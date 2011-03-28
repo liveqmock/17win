@@ -166,7 +166,7 @@ public final class HttpB2CUtils {
 					.getContent(), "GBK"));
 			Pattern pattern = Pattern.compile(TAOBAO_USER_REGEX);
 			Matcher matcher;
-			OUTTER: while ((line = br.readLine()) != null) {
+			OUTTER : while ((line = br.readLine()) != null) {
 				matcher = pattern.matcher(line);
 				while (matcher.find()) {
 					seller = URLDecoder.decode(matcher.group(1), "UTF-8");
@@ -222,7 +222,7 @@ public final class HttpB2CUtils {
 			String line;
 			Pattern pattern = Pattern.compile(TAOBAO_USER_REGEX);
 			Matcher matcher;
-			OUTTER: while ((line = br.readLine()) != null) {
+			OUTTER : while ((line = br.readLine()) != null) {
 				matcher = pattern.matcher(line);
 				while (matcher.find()) {
 					seller = URLDecoder.decode(matcher.group(1), "UTF-8");
@@ -266,7 +266,7 @@ public final class HttpB2CUtils {
 	 * @return
 	 */
 	public static SellerEntity getSellerInfo(SellerEntity sellerEntity,
-			String platformType)throws Exception {
+			String platformType) throws Exception {
 		Map nameSpaces = new HashMap();
 		nameSpaces.put("xmlns", "http://www.w3.org/1999/xhtml");
 		if ("1".equals(platformType)) {
@@ -276,7 +276,7 @@ public final class HttpB2CUtils {
 			//店铺地址
 			sellerEntity
 					.setShopURL("http://store.taobao.com/shop/view_shop.htm?asker=wangwang&shop_nick="
-							+URLEncoder.encode( sellerEntity.getName(),"GBK"));
+							+ URLEncoder.encode(sellerEntity.getName(), "GBK"));
 			//验证是否有这个店铺
 			Element node = (Element) getOneNodeByDom4j(sellerEntity
 					.getShopURL(), "//xmlns:DIV[@class='error-notice']",
@@ -385,33 +385,45 @@ public final class HttpB2CUtils {
 			/**
 			 * 淘宝
 			 */
-			List<Element> nodes = (List) getMutliNodeByDom4j(
+			Element element = getOneNodeByDom4j(
 					"http://member1.taobao.com/member/user_profile.jhtml?userID="
-							+ buyerEntity.getName(),
-					"//xmlns:IMG[@class='rank']", nameSpaces);
-			if (nodes.size() != 1) {
+							+ URLEncoder.encode(buyerEntity.getName(), "GBK"),
+					"//xmlns:UL[@class='TabBarLevel1']/xmlns:LI[2]/xmlns:A",
+					nameSpaces);
+			if (element == null) {
 				return null;
 			}
 			//信誉地址和图片
-			buyerEntity.setCreditURL(nodes.get(0).getParent().attributeValue(
-					"href"));
-			buyerEntity.setImg(nodes.get(0).attributeValue("src"));
-			//信誉值
-			Element node = getOneNodeByDom4j(buyerEntity.getCreditURL(),
-					"//xmlns:LI[@class='credit']/xmlns:A[1]", nameSpaces);
-			if (node == null
-					|| (Integer.parseInt(node.getTextTrim()) > Constant
-							.getTaobaoCreditValueLimit() && isAdd)) {
+			buyerEntity.setCreditURL(element.attributeValue("href"));
+			List<Element> elements = getMutliNodeByDom4j(buyerEntity
+					.getCreditURL(), "//xmlns:H4[@class='buyer']/xmlns:A",
+					nameSpaces);
+			if (elements == null || elements.size() == 0) {
 				return null;
+			}
+			//只有信誉值，没图片
+			if (elements.size() == 1) {
+				buyerEntity.setImg(null);
+				Element creditEle = elements.get(0);
+				buyerEntity.setScore(Integer.parseInt(creditEle.getTextTrim()));
 			} else {
-				buyerEntity.setScore(Integer.parseInt(node.getTextTrim()));
-				//如果不是添加，就判断信誉是否超出 
-				if (!isAdd
-						&& buyerEntity.getScore() > Constant
-								.getTaobaoCreditValueLimit()) {
-					buyerEntity.setEnable(false);
+				Element creditEle = elements.get(0);
+				buyerEntity.setImg(elements.get(1).element("IMG")
+						.attributeValue("src"));
+				if (Integer.parseInt(creditEle.getTextTrim()) > Constant
+						.getTaobaoCreditValueLimit()
+						&& isAdd) {
+					return null;
+				} else {
+					buyerEntity.setScore(Integer.parseInt(creditEle
+							.getTextTrim()));
+					//如果不是添加，就判断信誉是否超出 
+					if (!isAdd
+							&& buyerEntity.getScore() > Constant
+									.getTaobaoCreditValueLimit()) {
+						buyerEntity.setEnable(false);
+					}
 				}
-
 			}
 		} else if ("2".equals(platformType)) {
 			/**
@@ -449,7 +461,10 @@ public final class HttpB2CUtils {
 			}
 			//设置图片
 			//http://www.shangyi.org/news/kaidianzhishi/2011/0312/335.html 参考
-			if (buyerEntity.getScore() >= 0 && buyerEntity.getScore() <= 4) {
+			if (buyerEntity.getScore() == 0) {
+				buyerEntity.setImg(null);
+			} else if (buyerEntity.getScore() >= 1
+					&& buyerEntity.getScore() <= 4) {
 				buyerEntity.setImg("images/credit/paipai/xin_1.gif");
 			} else if (buyerEntity.getScore() >= 5
 					&& buyerEntity.getScore() <= 10) {
@@ -508,15 +523,15 @@ public final class HttpB2CUtils {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	private static List<Node> getMutliNodeByDom4j(String url, String xpathStr,
-			Map nameSpace) {
+	private static List<Element> getMutliNodeByDom4j(String url,
+			String xpathStr, Map nameSpace) {
 		if (nameSpace == null) {
 			nameSpace = new HashMap();
 		}
 		Document document = getDoc(url);// 获取document
 		XPath xpath = new DefaultXPath(xpathStr);
 		xpath.setNamespaceContext(new SimpleNamespaceContext(nameSpace));
-		List<Node> nodes = xpath.selectNodes(document);
+		List<Element> nodes = xpath.selectNodes(document);
 		return nodes;
 	}
 
