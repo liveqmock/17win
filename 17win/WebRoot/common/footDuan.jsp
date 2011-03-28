@@ -87,9 +87,6 @@
 	<tr>
 		<td height="32" align="middle" colspan="3">
 			<div align="center">
-				<script language="javascript">Ofty="Left"</script>
-
-				<script src="../js/Foot.js" language="javascript"></script>
 				<a href="/help/about.html">关于我们</a> |
 				<a href="mailto:service@17win.net">联系我们</a> |
 				<a href="mailto:service@17win.net">建议留言</a> |
